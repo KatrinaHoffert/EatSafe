@@ -7,6 +7,7 @@
 # activator and runs it.
 language: scala
 scala: 2.11.5
+install: cat /etc/sbt/sbtopts
 script: sbt test -v
 # Notify on build failure. We notify only when the success status changes. So if the build was
 # succeeding and suddenly fails, we notify. If the build was failing and now succeeds, we notify.
