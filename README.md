@@ -62,3 +62,14 @@ This means that everything worked and the server can be viewed in any web browse
 * `test` - Unit test files go here. They'll be automatically compiled and run when you run
   `./activator test`. The [CI server](https://magnum.travis-ci.com/MikeHoffert/EatSafe.svg?token=yXznwCPJBpA9S1h8k4E4&branch=master)
   will also run them.
+
+## Use with Scala IDE
+
+* Download and install [Scala IDE](http://scala-ide.org/).
+* Run `./activator ~run` in separate console. Scala IDE will be used only for editing and not
+  for building.
+* Import the project into Scala IDE with File > Import > Existing Project Into Workspace and choose
+  the folder containing this file.
+* In order to remove some compilation issues, you'll have to go to Project > Properties >
+  Java Build Path > Libraries > Add external class library and add the `target/scala-2.11/classes_managed`
+  folder. This ensures that Scala IDE can find the compiled templates.
