@@ -6,7 +6,7 @@
 # <https://gist.github.com/joscha/82cf74a6535407a43668>. It downloads the appropriate version of
 # activator and runs it.
 language: scala
-script: "cd $TRAVIS_BUILD_DIR && ./activator test"
+script: "cd $TRAVIS_BUILD_DIR && ./activator test -v"
 # Notify on build failure. We notify only when the success status changes. So if the build was
 # succeeding and suddenly fails, we notify. If the build was failing and now succeeds, we notify.
 # The reason to notify on change is so that if multiple people are trying to resolve a failure,
