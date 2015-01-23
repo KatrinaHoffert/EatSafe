@@ -223,7 +223,7 @@ run() {
 
   #check for jline terminal fixes on cygwin
   if is_cygwin; then
-    stty -icanon min 1 -echo > /dev/null 2>&1
+    #stty -icanon min 1 -echo > /dev/null 2>&1
     addJava "-Djline.terminal=jline.UnixTerminal"
     addJava "-Dsbt.cygwin=true"
   fi
