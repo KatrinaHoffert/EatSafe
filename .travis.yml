@@ -1,7 +1,12 @@
-language: scala
-scala:
-  - 2.11.5
+language: java
+env:
+- ACTIVATOR_VERSION=1.2.12 \
+ACTIVATOR_ZIP_FILE=typesafe-activator-${ACTIVATOR_VERSION}-minimal.zip \
+ACTIVATOR_ZIP_URL=http://downloads.typesafe.com/typesafe-activator/${ACTIVATOR_VERSION}/${ACTIVATOR_ZIP_FILE} \
+ACTIVATOR_BIN=${TRAVIS_BUILD_DIR}/activator-${ACTIVATOR_VERSION}-minimal/activator
+install:
+- wget ${ACTIVATOR_ZIP_URL}
+- unzip -q ${ACTIVATOR_ZIP_FILE}
 script:
-  - "cd $TRAVIS_BUILD_DIR"
-  - "sbt ++$TRAVIS_SCALA_VERSION test"
-  - "sbt ++$TRAVIS_SCALA_VERSION publish-local"
+- "cd $TRAVIS_BUILD_DIR && ${ACTIVATOR_BIN} test"
+notifications:
