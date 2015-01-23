@@ -40,3 +40,25 @@ Once SBT has compiled everything, you'll see a message like:
 
 This means that everything worked and the server can be viewed in any web browser at
 `http://localhost:9000/`.
+
+## Files
+
+* `app` - This is the folder where most of our development source code will be.
+* `app/assets` - These are additional resources that are processed in some way by the application.
+* `app/controllers` - These are the Scala [controllers](https://www.playframework.com/documentation/2.3.7/ScalaActions).
+* `app/views` - These are the Play Framework templates, which will generate HTML.
+* `app/models` - These are the Scala models (completing our MVC pattern).
+* `conf/application.conf` - Program configuration file. All conf here is globally accessible.
+  See [here](https://www.playframework.com/documentation/2.3.7/Configuration) for Play Framework
+  configuration and [here](http://stackoverflow.com/a/10534049/1968462) for accessing configuration
+  values programmatically.
+* `conf/routes` - The [routing file](https://www.playframework.com/documentation/2.3.7/ScalaRouting),
+  which maps URL patterns to controllers.
+* `project` - Contains a few SBT configuration files, most notably the plugins file, where we ca
+  specify libraries to include.
+* `public` - This folder will be fully accesible to the public. It's used for static resources such
+  as stylesheets, images, and JavaScript.
+* `target` - A completely automatically generated folder that contains the compiled code. Ignore it.
+* `test` - Unit test files go here. They'll be automatically compiled and run when you run
+  `./activator test`. The [CI server](https://magnum.travis-ci.com/MikeHoffert/EatSafe.svg?token=yXznwCPJBpA9S1h8k4E4&branch=master)
+  will also run them.
