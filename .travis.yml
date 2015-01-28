@@ -2,7 +2,12 @@
 # server will check compilation and unit tests.
 language: scala
 scala: 2.11.5
-script: sbt test
+# Workaround because Travis CI is giving a bad value to this and SBT expects it to be set with
+# actual options and not a path to a file containing options.
+install:
+  - export SBT_OPTS="-Xms512M -Xmx1536M -Xss1M -XX:+CMSClassUnloadingEnabled -XX:MaxPermSize=256M"
+# This is the command that Travis CI runs. 
+script: ./activator test -v
 # Notify on build failure. We notify only when the success status changes. So if the build was
 # succeeding and suddenly fails, we notify. If the build was failing and now succeeds, we notify.
 # The reason to notify on change is so that if multiple people are trying to resolve a failure,
