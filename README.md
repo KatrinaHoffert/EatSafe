@@ -68,6 +68,8 @@ This means that everything worked and the server can be viewed in any web browse
 * Download and install [Scala IDE](http://scala-ide.org/).
 * Run `./activator ~run` in separate console. Scala IDE will be used only for editing and not
   for building.
+* Run `./activator eclipse` before importing your project in order to generate a .classpath file 
+  that is right for you!
 * Import the project into Scala IDE with File > Import > Existing Project Into Workspace and choose
   the folder containing this file.
 * In order to remove some compilation issues, you'll have to go to Project > Properties >
