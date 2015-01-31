@@ -8,7 +8,7 @@ import java.sql.SQLException;
 
 public class Main {
 	private static final String TABLE_NAME = "importData";
-	private static final String FOLDER_PATH = "/Users/Doris/Downloads";
+	private static final String FOLDER_PATH = "/Users/Doris/Downloads/InspectionReport";
 	private static final String PASSWORD = "";
 	private static final String USER_NAME = "Doris";
 	// Both MySQL and PostgreSQL JDBC drivers are included.
