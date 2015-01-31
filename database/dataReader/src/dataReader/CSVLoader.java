@@ -106,8 +106,6 @@ public class CSVLoader {
 							ps.setDate(index++, new java.sql.Date(date
 									.getTime()));
 						} else {
-							string = string.replace("\"", "");
-							string = string.replace("\'", "\\\'");
 							ps.setString(index++, string);
 						}
 					}
