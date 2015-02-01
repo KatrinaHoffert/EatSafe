@@ -13,3 +13,5 @@ dist
 /.settings
 /bin/
 .cache
+.classpath
+.project
