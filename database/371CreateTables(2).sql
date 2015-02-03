@@ -11,11 +11,11 @@ DROP TABLE IF EXISTS categories CASCADE;
 DROP TABLE IF EXISTS category_description CASCADE;
 
     -- drop domain
-DROP DOMAIN IF EXISTS restaruant_name, address, postcode, city, province, rha, insDate, insType, insPriority, violationId, violationDes, violationPriority, rate, categoryId, categoryDes;
+DROP DOMAIN IF EXISTS restaurant_name, address, postcode, city, province, rha, insDate, insType, insPriority, violationId, violationDes, violationPriority, rate, categoryId, categoryDes;
 
     -- create domain
 
-CREATE DOMAIN restaruant_name varchar(1000);
+CREATE DOMAIN restaurant_name varchar(1000);
 CREATE DOMAIN address varchar(1000);
 CREATE DOMAIN postcode varchar(7);
 CREATE DOMAIN city varchar(100);
@@ -39,7 +39,7 @@ CREATE DOMAIN categoryDes varchar(1000);
 
 CREATE TABLE location(
     ID SERIAL PRIMARY KEY,
-    location_restaruant_name restaruant_name NOT NULL,
+    location_restaurant_name restaurant_name NOT NULL,
     location_Address address NOT NULL,
     location_Postcode postcode NOT NULL,
     location_City city NOT NULL,
