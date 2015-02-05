@@ -1,5 +1,7 @@
 package models
 
+import scala.util.{Try, Success, Failure}
+
 /**
  * TODO: Document me!
  */
