@@ -4,7 +4,7 @@ import org.junit.runner._
 
 import play.api.test._
 import play.api.test.Helpers._
-import assets.Violation
+import models.Violation
 
 /**
  * add your integration spec here.
@@ -12,11 +12,10 @@ import assets.Violation
  */
 @RunWith(classOf[JUnitRunner])
 class ViolationSpec extends Specification {
-
-    val x = new Violation("violation description", "priority")
+   val violation = new Violation(123, "name", "violation description", "priority")
   "Violation" should {
       "begin with violation" in {
-        x.description must startWith("violation");
+        violation.description must startWith("violation");
       }
     }
 }
