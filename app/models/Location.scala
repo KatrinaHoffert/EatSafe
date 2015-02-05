@@ -3,7 +3,9 @@ package models
 import scala.util.{Try, Success, Failure}
 
 /**
- * TODO: Document me.
+ * case class for each location (restaurant),
+ * ID: unique id of the location,
+ * inspections: a sequence of inspections of this location
  */
 case class Location (id: Int, name: String, address: String, postalCode: String, city: String,
   regionalHealthAuthority: String, inspections: Seq[Inspection])
