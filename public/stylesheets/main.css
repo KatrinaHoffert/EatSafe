@@ -45,3 +45,18 @@
 .faded {
   color: gray;
 }
+
+/* Override rounded accordions to make ours look flat. */
+.panel-default {
+  border-radius: 0 !important;
+  border-top: none;
+}
+
+/* Need a wee bit of trickery to avoid double borders. */
+.panel-group .panel-default:first-child {
+  border-top: 1px solid #DDD;
+}
+
+.panel-group .panel + .panel {
+  margin-top: 0;
+}
