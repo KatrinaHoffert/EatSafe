@@ -17,3 +17,11 @@
   padding: 0.25em;
   align-self: flex-end;
 }
+
+/* Smaller headings for other pages */
+.smallHeading {
+  background-color: #479432;
+  font-size: 2em;
+  padding: 0 0.25em;
+  color: white;
+}
