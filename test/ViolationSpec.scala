@@ -14,8 +14,8 @@ import models.Violation
 class ViolationSpec extends Specification {
    val violation = new Violation(123, "name", "violation description", "priority")
   "Violation" should {
-      "begin with violation" in {
-        violation.description must startWith("violation");
-      }
+    "begin with violation" in {
+      violation.description must startWith("violation");
     }
+  }
 }
