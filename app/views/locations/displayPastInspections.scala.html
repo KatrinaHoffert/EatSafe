@@ -8,7 +8,7 @@
 
 @if(location.inspections.size > 1) {
   <h2>@Messages("locations.view.pastInspectionsHeader")</h2>
-  <a class="showHideLink">@Messages("locations.view.pastInspectionsShow")</a>
+  <a class="pointer" id="showHideLink" style="margin-left: 1em;">@Messages("locations.view.pastInspectionsShow")</a>
 
   <div id="pastInspections" style="display: none;">
     @for(i <- 1 until location.inspections.size) {
@@ -20,15 +20,15 @@
   <script>
     var pastInspectionsHidden = true;
 
-    $(".showHideLink").on("click", function() {
+    $("#showHideLink").on("click", function() {
       // Need to change the text to "show" or "hide" based on current visibility
       if(pastInspectionsHidden) {
         $('#pastInspections').show("slow");
-        $('.showHideLink').text("@Messages("locations.view.pastInspectionsHide")");
+        $('#showHideLink').text("@Messages("locations.view.pastInspectionsHide")");
       }
       else {
         $('#pastInspections').hide("slow");
-        $('.showHideLink').text("@Messages("locations.view.pastInspectionsShow")");
+        $('#showHideLink').text("@Messages("locations.view.pastInspectionsShow")");
       }
 
       pastInspectionsHidden = !pastInspectionsHidden;
