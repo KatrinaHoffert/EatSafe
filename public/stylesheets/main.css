@@ -32,10 +32,9 @@
   }
 }
 
-/* Show/hide inspections link needs to act like a real link. */
-.showHideLink {
+/* For making the mouse into a pointer (showing that content can be clicked on). */
+.pointer {
   cursor: pointer;
-  margin-left: 1em;
 }
 
 #pastInspections {

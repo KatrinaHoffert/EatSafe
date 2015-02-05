@@ -19,11 +19,9 @@
   <div class="panel-group" id="inspection_accordion_@inspection.date" role="tablist">
     @for(violation <- inspection.violations) {
       <div class="panel panel-default">
-        <div class="panel-heading" role="tab">
+        <div class="panel-heading pointer" role="tab" data-parent="#inspection_accordion_@inspection.date" data-toggle="collapse" data-target="#collapse_@(inspection.date)_@violation.id">
           <h4 class="panel-title">
-            <a data-toggle="collapse" data-parent="#inspection_accordion_@inspection.date" href="#collapse_@(inspection.date)_@violation.id">
-              @violation.name
-            </a>
+            @violation.name
           </h4>
         </div>
         <div id="collapse_@(inspection.date)_@violation.id" class="panel-collapse collapse" role="tabpanel">
