@@ -1,2 +1,5 @@
+# General purpose messages that appear throughout the app
 general.applicationName=EatSafe Saskatchewan
-general.footerMessage=Copyright whatever
+
+# Messages in the display locations page
+locations.view.noViolations=No violations in this time period
