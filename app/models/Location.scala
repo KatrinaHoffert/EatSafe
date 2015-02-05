@@ -13,6 +13,7 @@ case class Location (id: Int, name: String, address: String, postalCode: String,
 object Location {
   /**
    * TODO: Document me.
+   * Possibly take the database connection as a parameter, for easier testing
    */
   def getLocationById(id: Int): Try[Location] = {
     // TODO -- returning dummy data right now
