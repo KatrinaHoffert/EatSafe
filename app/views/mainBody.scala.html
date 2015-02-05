@@ -27,13 +27,27 @@
 <html lang="en-us">
   <head>
     <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>@title</title>
+
+    @*
+       Link to necessary scripts and stylesheets. Note that everything linked here *will* slow
+       down perceived loading, as everything here will be loaded before the page is displayed.
+       so ideally only necessary stuff will be placed here and everything else will be inside
+       the `moreScripts` variable.
+    *@
+    <script src="@controllers.routes.Assets.at("javascripts/jquery.min.js")"></script>
+    <script src="@controllers.routes.Assets.at("javascripts/bootstrap.min.js")"></script>
+    <script src="@controllers.routes.Assets.at("javascripts/typeahead.bundle.js")"></script>
+
+    <link rel="stylesheet" href="@controllers.routes.Assets.at("stylesheets/bootstrap.min.css")" />
+    <link rel="stylesheet" href="@controllers.routes.Assets.at("stylesheets/main.css")" />
   </head>
   <body>
-    <!-- Here be ye right ol' content! -->
+    @* Here be ye right ol' content! *@
     @html
 
-    <!-- Any other scripts -->
+    @* Any other scripts *@
     @moreScripts
   </body>
 </html>
