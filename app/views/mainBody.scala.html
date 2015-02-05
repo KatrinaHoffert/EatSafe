@@ -1,0 +1,39 @@
+@**
+ * Creates the main body of a page. This is the top level HTML, heading, footer, nav bar, and title
+ * bar.
+ *
+ * @param title The HTML title of the page.
+ * @param moreScripts Additional JavaScript scripts to place on the page. These will be placed at
+ * the very bottom, below the regular scripts.
+ * @param html The body of the page.
+ *
+ * Recommended way of using:
+ *
+ * {{{
+ * @scripts = {
+ *   <script>
+ *     // Do stuff
+ *   </script>
+ * }
+ *
+ * @mainBody(title = "My title", moreScripts = scripts) {
+ *   <!-- HTML goes here -->
+ * }
+ * }}}
+ *@
+@(title: String, moreScripts: Html = Html(""))(html: Html)
+
+<!DOCTYPE html>
+<html lang="en-us">
+  <head>
+    <meta charset="utf-8" />
+    <title>@title</title>
+  </head>
+  <body>
+    <!-- Here be ye right ol' content! -->
+    @html
+
+    <!-- Any other scripts -->
+    @moreScripts
+  </body>
+</html>
