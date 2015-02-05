@@ -31,3 +31,18 @@
     font-size: 4em;
   }
 }
+
+/* Show/hide inspections link needs to act like a real link. */
+.showHideLink {
+  cursor: pointer;
+  margin-left: 1em;
+}
+
+#pastInspections {
+  padding: 1em;
+}
+
+/* Faded text */
+.faded {
+  color: gray;
+}

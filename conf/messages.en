@@ -3,3 +3,6 @@ general.applicationName=EatSafe Saskatchewan
 
 # Messages in the display locations page
 locations.view.noViolations=No violations in this time period
+locations.view.pastInspectionsHeader=Older inspections
+locations.view.pastInspectionsShow=[Show]
+locations.view.pastInspectionsHide=[Hide]
