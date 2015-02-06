@@ -34,7 +34,7 @@ class ModelSpec extends Specification {
    */
   def ViolationTests(violation: Violation, testName: String)
   {
-    testName should 
+    "Violations TEST" should 
     {
       "ID should be between 1-16" in 
       {  
@@ -43,6 +43,7 @@ class ModelSpec extends Specification {
       "description should not be empty" in 
       {
         violation.description must not have length(0);
+  
       }
       "severity of a violation should be 'Critial Item' or 'General Item' " in
       {
@@ -61,21 +62,13 @@ class ModelSpec extends Specification {
   {
     testName should
     {
-      "Date should be a valid date" in
-      {
-        true//todo
-      }
-      "Date should not be in the future" in
-      {
-        true//todo
-      }
       "Inspection type should be 'Routine', 'Follow-up', or 'Special'" in 
       {
-        true//todo
+        inspection.inspectionType must beEqualTo("Routine") or beEqualTo("Follow-up") or beEqualTo("Special")
       }
       "Reinspection Priority should be 'Low','Moderate' or 'High'" in 
       {
-        true//todo
+          inspection.reinspectionPriority must beEqualTo("Low") or beEqualTo("Moderate") or beEqualTo("High")
       }
       //my thinking is that an inspection might be clean and have
       //no violations, thus this could be empty.
@@ -106,15 +99,7 @@ class ModelSpec extends Specification {
     {
       "ID should be positive number" in
       {
-        true//todo
-      }
-      "name should not be null" in 
-      {
-        true//todo
-      }
-      "address should not be null" in 
-      {
-        true//todo
+        location.id must beGreaterThan(0)
       }
       "city should not be null and equal to city parameter(if its not null)" in 
       {
@@ -123,17 +108,9 @@ class ModelSpec extends Specification {
         //if city is null, dont do this extra stuff
         true//todo
       }
-      "rha should not be null" in 
-      {
-        true//todo
-      }
       "Postcode should be a real postcode" in 
       {
         true//todo some sort of regex or string parser      
-      }
-      "Province should be 'Saskatchewan'" in 
-      {
-        true//todo  
       }
       "Inspections should not be null and pass tests" in 
       {
@@ -150,7 +127,6 @@ class ModelSpec extends Specification {
      * run with good inputs, bad inputs, possibly without network connection.
      * find or create a database record with no violations perhaps. 
      */
-    
      val x = Location.getLocationById(123)
      x match {
        case Success(v) => this.LocationTests(v, "TestTest", "Saskatoon")
