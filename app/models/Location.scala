@@ -20,11 +20,11 @@ object Location {
    */
   
   
-  def getLocationById(id: Int): Try[Location] = {
-    // TODO -- returning dummy data right now
-    Try(Location(123, "Foo", "123 Fake St", "S1K 2N3", "Saskatoon", "Saskatoon Health Authority",
-        Seq.empty[Inspection]))
-  }
+//  def getLocationById(id: Int): Try[Location] = {
+//    // TODO -- returning dummy data right now
+//    Try(Location(123, "Foo", "123 Fake St", "S1K 2N3", "Saskatoon", "Saskatoon Health Authority",
+//        Seq.empty[Inspection]))
+//  }
   
   /**
    * Get a list of violations for a location's inspection
@@ -67,22 +67,25 @@ object Location {
            """    
         ).on("id" -> id)
         
-        query().map (            //TODO: error here: type mismatch; found : List[Any] required: Seq[models.Inspection]
-          row =>                //I think it is because of the way I handling try object
+        query().map (
+          row =>
             getViolations(id, row[String]("inspection_date")) match {
               case Success(violationsList) => 
                 Inspection(row[String]("inspection_date"), row[String]("inspection_type"), 
                 row[String]("reinspection_proority"), violationsList)
-              case Failure(e) = > println(s"Error when retrieve violations: ${e.getMessage}")
+              case Failure(e) => 
+                Inspection(row[String]("inspection_date"), row[String]("inspection_type"), 
+                row[String]("reinspection_proority"), Nil)
             }
         ).toList
       }
     }
   }
+
   /**
    * Get a location by id
    */ 
-  def getLocation(id:Int): Try[Location] = {
+  def getLocationById(id:Int): Try[Location] = {
     Try{
       DB.withConnection { implicit connection =>
         val query = SQL(
@@ -93,18 +96,51 @@ object Location {
            """    
         ).on("id" -> id)
         
-        query().map (                    //TODO: error here
+        query().map (
           row =>
             getInspection(id) match {
               case Success(inspectionList) =>
                 Location(id, row[String]("location_restaruant_name"), row[String]("location_address"),
                 row[String]("location_postcode"), row[String]("location_city"), row[String]("location_rha"),
                 inspectionList)
-              case Failure(e) = > println(s"Error when retrieve inspections: ${e.getMessage}") 
+              case Failure(e) => Location(id, row[String]("location_restaruant_name"), row[String]("location_address"),
+                row[String]("location_postcode"), row[String]("location_city"), row[String]("location_rha"),
+                Nil) 
+            }
+        ).toList.head
+      }
+    }
+  }
+
+  
+    /**
+   * Get a list of all the location in a city
+   */ 
+  def getLocationByCity(city:String): Try[Seq[Location]] = {
+    Try{
+      DB.withConnection { implicit connection =>
+        val query = SQL(
+           """
+             SELECT id, location_restaruant_name, location_address, location_postcode, location_city, location_rha
+             FROM location
+             WHERE city = {city};
+           """    
+        ).on("city" -> city)
+        
+        query().map (
+          row =>
+            getInspection(row[Int]("id")) match {
+              case Success(inspectionList) =>
+                Location(row[Int]("id"), row[String]("location_restaruant_name"), row[String]("location_address"),
+                row[String]("location_postcode"), row[String]("location_city"), row[String]("location_rha"),
+                inspectionList)
+              case Failure(e) => 
+                Location(row[Int]("id"), row[String]("location_restaruant_name"), row[String]("location_address"),
+                row[String]("location_postcode"), row[String]("location_city"), row[String]("location_rha"),
+                Nil) 
             }
         ).toList
       }
     }
   }
-
 }
