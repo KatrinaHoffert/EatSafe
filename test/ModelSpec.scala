@@ -6,6 +6,11 @@ import play.api.test._
 import play.api.test.Helpers._
 import models._
 import scala.util._
+import play.api.db._
+import java.sql._
+import play.api.Play.current
+
+import org.specs2.mock._
 
 /**
  * Because of the relative simplicity of the Violation and Inspection
@@ -16,125 +21,65 @@ import scala.util._
  * 
  */
 @RunWith(classOf[JUnitRunner])
-class ModelSpec extends Specification {
+class ModelSpec extends Specification with Mockito {
   
-  this.getLocationByIdTests();
-  
-   
-  /**
-   * This function tests the violation class, it has a few basic tests
-   * like making sure the ID is between 1 and 16, which it should be, and
-   * checking the description is not null/empty. As well, severity has
-   * only three possible values, so it should be one of those
-   * 
-   * violation:  the violation object to be put through tests
-   * testName: an incremental name like "Violation Test 1", "Violation Test 2"
-   *          to make it easier to see what tests are failing, instead of 
-   *          having every test called ViolationTest
-   */
-  def ViolationTests(violation: Violation, testName: String)
-  {
-    "Violations TEST" should 
-    {
-      "ID should be between 1-16" in 
-      {  
-        violation.id must beBetween(1,16);//this includes 1 and 16
-      }
-      "description should not be empty" in 
-      {
-        violation.description must not have length(0);
-  
-      }
-      "severity of a violation should be 'Critial Item' or 'General Item' " in
-      {
-        violation.severity must beEqualTo("Critial Item") or beEqualTo("General Item")
-      }
-      
-    }
-  }
-   /**
-    * Testing of the Inspection Class, much like Violation tests, 
-    * these are basically data acceptance tests
-    * note that this set of tests will call the ViolationTests for all
-    * the violations in the Violations array
-    */
-  def InspectionTests(inspection: Inspection, testName: String)
-  {
-    testName should
-    {
-      "Inspection type should be 'Routine', 'Follow-up', or 'Special'" in 
-      {
-        inspection.inspectionType must beEqualTo("Routine") or beEqualTo("Follow-up") or beEqualTo("Special")
-      }
-      "Reinspection Priority should be 'Low','Moderate' or 'High'" in 
-      {
-          inspection.reinspectionPriority must beEqualTo("Low") or beEqualTo("Moderate") or beEqualTo("High")
-      }
-      //my thinking is that an inspection might be clean and have
-      //no violations, thus this could be empty.
-      //but if it has stuff, it should be the right stuff
-      "If violations is not null, test each violation" in 
-      {
-        true//todo
-        /*
-          Will be something like 
-          if(inspection.violation not null)
-          {
-            for each violation
-              this.ViolationTests(violation, "test "+i)
-          }
-         */
-      }
-      
-    }
-  }
-  
-  /**
-   * Basic tests for locations
-   * will do more testing for the location Functions in another part
-   */
-  def LocationTests(location: Location, testName: String, city: String)
-  {
-    testName should
-    {
-      "ID should be positive number" in
-      {
-        location.id must beGreaterThan(0)
-      }
-      "city should not be null and equal to city parameter(if its not null)" in 
-      {
-        //used for testing of the getLocationsByCity, so you can make sure 
-        //all returned locatoins are from the specified city
-        //if city is null, dont do this extra stuff
-        true//todo
-      }
-      "Postcode should be a real postcode" in 
-      {
-        true//todo some sort of regex or string parser      
-      }
-      "Inspections should not be null and pass tests" in 
-      {
-        //run InspectionTests on all inspections
-        true//todo
-      }
-    }
-  }
-  
+    this.getLocationByIdTests();
+    
   def getLocationByIdTests()
   {
-    /*
-     * todo, run function in a number of senarios and do tests based on that
-     * run with good inputs, bad inputs, possibly without network connection.
-     * find or create a database record with no violations perhaps. 
-     */
-     val x = Location.getLocationById(123)
-     x match {
-       case Success(v) => this.LocationTests(v, "TestTest", "Saskatoon")
-       case Failure(e) => throw new IllegalStateException("ohno")
-     }
-     
-     
-     
+    
+    //currently, this gets the default database source, in future, we can
+    //easily add reference to a testing database in the play conf/application.conf
+    //as for now, they will be the same data anyway so i wont worry 
+    "getLocationById" should {
+      
+      "return a success with proper data when given good data" in new WithApplication{
+      //Test good data and expected results here
+       
+        val goodLoc = Location.getLocationById(1)
+        var pass = false
+         goodLoc match {
+           case Success(v) => pass = true
+           case Failure(e) => pass = false
+         }
+       pass mustEqual true
+      }
+      //data here is based off of the database files
+    "return good data when given a good ID" in new WithApplication
+    {
+        val goodLoc = Location.getLocationById(2)
+        var pass = false
+         goodLoc match
+         {
+           case Success(v) =>
+           {
+               v.id must beEqualTo(2)// cause thats what i passed in
+               v.name must beEqualTo("7 Eleven") .ignoreSpace //ignore space due to trailing whitespace
+               v.address must beEqualTo("835 A Broadway AVE") .ignoreSpace //ignore space due to trailing whitespace
+               v.postalCode must beEqualTo("S7N 1B5") .ignoreSpace //ignore space due to trailing whitespace   
+               pass = true
+           }
+           case Failure(e) => pass = false
+         } 
+        pass mustEqual true
+    }
+    "return failure with a bad id (empty result set)" in new WithApplication{
+      //Test good data and expected results here
+       
+        val goodLoc = Location.getLocationById(445)
+        var pass = false
+         goodLoc match {
+           case Success(v) => pass = false
+           case Failure(e) => pass = true
+         }
+        pass mustEqual true
+    }
+    
+    //TODO
+    //there should be a test where the database connection is not available, but we need some kind of test
+    //hook in order to do this, perhaps pass in the database connection or something, so it can be mocked out to throw
+    //errors   
+  }
   }
   
     def getLocationsByCityTests()
