@@ -23,7 +23,7 @@ import org.specs2.mock._
 @RunWith(classOf[JUnitRunner])
 class ModelSpec extends Specification with Mockito {
   
-    this.getLocationByIdTests();
+  //  this.getLocationByIdTests();
     
   def getLocationByIdTests()
   {
