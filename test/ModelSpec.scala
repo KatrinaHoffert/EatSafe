@@ -13,12 +13,11 @@ import play.api.Play.current
 import org.specs2.mock._
 
 /**
- * Because of the relative simplicity of the Violation and Inspection
- * Classes, they will be tested implicitly, during the testing of the more
- * complex, Location class, since the locationbyID method and locationsByCity
- * methods will both be returning Location objects that contain inspections
- * and violations.
- * 
+ * Test Suite of the current model, the tests being focused on the Locations class
+ * and its methods, mostly because the other classes (Inspection and Violation) are simple
+ * case classes with nothing to test but prebuilt getters and setters (we will assume scala knows
+ * what its doing) the sets of tests are wrapped in functions in order to make things more
+ * readable and reusable in the future.
  */
 @RunWith(classOf[JUnitRunner])
 class ModelSpec extends Specification with Mockito {
@@ -30,6 +29,11 @@ class ModelSpec extends Specification with Mockito {
   this.getLocationsByCityTests();
 
   
+  /**
+   * Run the set of tests to test the getLocationById method of the Locations class
+   * this suite tests, good inputs, bad inputs and that the good inputs pass something back
+   * that is what it was suppose to.
+   */
   def getLocationByIdTests()
   {
     
@@ -96,6 +100,12 @@ class ModelSpec extends Specification with Mockito {
   }
   }
   
+    /**
+   * Run the set of tests to test the getLocationbyCity method of the Locations class
+   * this suite tests, good inputs, bad inputs and that the good inputs pass something back
+   * that is what it was suppose to. in this case, Saskatoon is the only city currently in the system
+   * so the number of Locations passed back should line up with whats in the database
+   */
   def getLocationsByCityTests()
   {
     "GetLocationsByCity" should
@@ -154,7 +164,11 @@ class ModelSpec extends Specification with Mockito {
       }
     }   
   }
-  
+   /**
+   * Run the set of tests to test the getViolations method of the Locations class
+   * this suite tests, good inputs, bad inputs and that the good inputs pass something back
+   * that is what it was suppose to.
+   */
 def getViolationsTests()
 {
   "getViolations" should
@@ -214,7 +228,11 @@ def getViolationsTests()
       }
   }
 }
-
+  /**
+   * Run the set of tests to test the getInspections method of the Locations class
+   * this suite tests, good inputs, bad inputs and that the good inputs pass something back
+   * that is what it was suppose to.
+   */
 def getInspectionsTests()
 {
   "getInspections" should
