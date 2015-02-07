@@ -3,6 +3,7 @@ package dataReader;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.InputStreamReader;
+import java.io.Writer;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.util.Date;
@@ -19,36 +20,34 @@ public class CSVLoader {
 	private static final String KEYS_REGEX = "\\$\\{keys\\}";
 	private static final String VALUES_REGEX = "\\$\\{values\\}";
 
-	private Connection connection;
+	private Writer writer;
 	private char seprator;
 
 	/**
 	 * Public constructor to build CSVLoader object with
-	 * Connection details. The connection is closed on success
+	 * Writer details. The writer is closed on success
 	 * or failure.
-	 * @param connection
+	 * @param writer
 	 */
-	public CSVLoader(Connection connection) {
-		this.connection = connection;
+	public CSVLoader(Writer writer) {
+		this.writer = writer;
 		//Set default separator
 		this.seprator = ',';
 	}
 	
 	/**
 	 * Parse CSV file using OpenCSV library and load in 
-	 * given database table. 
+	 * given file, with correct location Id and inspection Id. 
 	 * @param csvFile Input CSV file
-	 * @param tableName Database table name to import data
-	 * @param truncateBeforeLoad Truncate the table before inserting 
-	 * 			new records.
+	 * @param location Id for this new location
+	 * @param the start of inspection Id for all the inspections
 	 * @throws Exception
 	 */
-	public void loadCSV(String csvFile, String tableName,
-			boolean truncateBeforeLoad) throws Exception {
+	public int loadCSV(String csvFile, int locationId, int inspectionId) throws Exception {
 
 		CSVReader csvReader = null;
-		if(null == this.connection) {
-			throw new Exception("Not a valid connection.");
+		if(null == this.writer) {
+			throw new Exception("Not a valid writer.");
 		}
 		try {
 			
@@ -73,7 +72,7 @@ public class CSVLoader {
 		questionmarks = (String) questionmarks.subSequence(0, questionmarks
 				.length() - 1);
 
-		String query = SQL_INSERT.replaceFirst(TABLE_REGEX, tableName);
+		String query = SQL_INSERT.replaceFirst(TABLE_REGEX, "location"); // table name needed
 		query = query
 				.replaceFirst(KEYS_REGEX, StringUtils.join(headerRow, ","));
 		query = query.replaceFirst(VALUES_REGEX, questionmarks);
@@ -83,15 +82,10 @@ public class CSVLoader {
 		String[] nextLine;
 		Connection con = null;
 		PreparedStatement ps = null;
+		
+		
 		try {
-			con = this.connection;
-			con.setAutoCommit(false);
 			ps = con.prepareStatement(query);
-
-			if(truncateBeforeLoad) {
-				//delete data from table before loading csv
-				con.createStatement().execute("DELETE FROM " + tableName);
-			}
 
 			final int batchSize = 1000;
 			int count = 0;
@@ -116,19 +110,20 @@ public class CSVLoader {
 				}
 			}
 			ps.executeBatch(); // insert remaining records
-			con.commit();
+			this.writer.write(ps.toString() + "\n");
+			
 		} catch (Exception e) {
-			con.rollback();
 			e.printStackTrace();
 			throw new Exception(
-					"Error occured while loading data from file to database."
+					"Error occured while loading data from file to files."
 							+ e.getMessage() + ps.toString());
 		} finally {
 			if (null != ps)
 				ps.close();
-
 			csvReader.close();
+			
 		}
+		return inspectionId;
 	}
 
 	public char getSeprator() {

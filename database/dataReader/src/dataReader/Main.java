@@ -1,53 +1,55 @@
 package dataReader;
 
+import java.io.BufferedWriter;
 import java.io.File;
+import java.io.FileOutputStream;
 import java.io.IOException;
-import java.sql.Connection;
-import java.sql.DriverManager;
-import java.sql.SQLException;
+import java.io.OutputStreamWriter;
+import java.io.Writer;
 
 public class Main {
-	private static final String TABLE_NAME = "importData";
+	
 	private static final String FOLDER_PATH = "/Users/Doris/Downloads/InspectionReport";
-	private static final String PASSWORD = "";
-	private static final String USER_NAME = "Doris";
-	// Both MySQL and PostgreSQL JDBC drivers are included.
-	//private static String JDBC_CONNECTION_URL = "jdbc:mysql://edjo.usask.ca/cmpt370_group09";
-	private static String JDBC_CONNECTION_URL = "jdbc:postgresql://localhost/project371";
+	private static final String FILE_NAME = "sql.txt";
 	
 	public static void main(String[] args) {
 		try {
-			//the folder location of all csv files, the connection to DB and the table name
-			readFolder(FOLDER_PATH,getConnection(), TABLE_NAME);
+			//the folder location of all csv files, and open a writer stream for output
+			readFolder(FOLDER_PATH,getWriterStream(FILE_NAME));
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
 	}
 
-	public static Connection getConnection() {
-		Connection connection = null;
+	public static Writer getWriterStream(String fileName) {
+		Writer writer = null;
 		try {
-			connection = DriverManager.getConnection(JDBC_CONNECTION_URL,USER_NAME,PASSWORD);
-		} catch (SQLException e) {
+			writer = new BufferedWriter(new OutputStreamWriter(new FileOutputStream("sql.txt"), "utf-8"));
+		} catch (Exception e) {
 			e.printStackTrace();
 		}
 
-		return connection;
+		return writer;
 	}
 	
 	//Read a folder of CSV files, with same start 
-	public static void readFolder(String folderPath, Connection connection, String tableName) {
+	public static void readFolder(String folderPath, Writer writer) {
 		File folder = new File(folderPath);
 		File[] listOfFiles = folder.listFiles();
 		if(listOfFiles == null){
 			System.err.print("NO FILES IN THIS FOLDER!");
 		}
+		
+		int locationId = 1;
+		int inspectionId = 1;
+		
 		for (int i = 0; i < listOfFiles.length; i++){
 			File file = listOfFiles[i];
 			if(file.isFile() && file.getName().startsWith("FoodInspectionReport")){
 				try {
-					CSVLoader loader = new CSVLoader(connection);
-					loader.loadCSV(folderPath + "/" + file.getName(), tableName, false);
+					CSVLoader loader = new CSVLoader(writer);
+					inspectionId = loader.loadCSV(folderPath + "/" + file.getName(), locationId, inspectionId) + 1;
+					locationId ++;
 				} catch (IOException e) {
 					e.printStackTrace();
 				} catch (Exception e) {
@@ -56,8 +58,8 @@ public class Main {
 			}
 		}
 		try {
-			connection.close();
-		} catch (SQLException e) {
+			writer.close();
+		} catch (Exception e) {
 			e.printStackTrace();
 		}
 	}
