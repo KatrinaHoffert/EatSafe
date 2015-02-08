@@ -18,6 +18,12 @@ import play.api.Play.current
 case class Violation(id: Int, name: String, description: String, severity: String)
 
 object Violation {
+  /**
+   * Gets a list of violations belonging to a given inspection.
+   *
+   * @param inspectionId The ID of the inspection we want the violations for.
+   * @returns List of violation objects representing the violations for that inspection.
+   */
   def getViolations(inspectionId: Int): Try[Seq[Violation]] = {
     Try {
       DB.withConnection { implicit connection =>
