@@ -7,140 +7,47 @@ import play.api.Play.current
 
 
 /**
- * case class for each location (restaurant),
- * ID: unique id of the location,
- * inspections: a sequence of inspections of this location
+ * Represents a location (which is anywhere that can be audited for health inspections, such as
+ * restaurants, cafeterias, and fast food places).
+ *
+ * @param id A unique ID for the location. This is used to refer to a specific location (eg, in
+ * URLs and function arguments).
+ * @param name The location name.
+ * @param address The street address.
+ * @param postalCode A 7 character postal code (3 characters, a space, and 3 more characters).
+ * @param city The city the location is in.
+ * @param regionalHealthAuthority The RHA that performs inspections for this location.
+ * @param inspections A list of inspections that have been done on the location.
  */
 case class Location (id: Int, name: String, address: String, postalCode: String, city: String,
   regionalHealthAuthority: String, inspections: Seq[Inspection])
 
 object Location {
-  /**
-   * To retrieve data from database.
-   */
-  
-  
-//  def getLocationById(id: Int): Try[Location] = {
-//    // TODO -- returning dummy data right now
-//    Try(Location(123, "Foo", "123 Fake St", "S1K 2N3", "Saskatoon", "Saskatoon Health Authority",
-//        Seq.empty[Inspection]))
-//  }
-  
-  /**
-   * Get a list of violations for a location's inspection
-   * The primary key a location's inspection is the combination of the id of location and inspection date
-   */
-  def getViolations(id:Int, inspectionDate:String): Try[Seq[Violation]] = {
-    Try{
+  def getLocationById(locationId: Int): Try[Location] = {
+    val tryLocation = Try {
       DB.withConnection { implicit connection =>
         val query = SQL(
            """
-             SELECT violation_id, violation_des, violation_des, violation_priority
-             FROM violations a, violation_types b
-             WHERE id = {id} AND violation_date = {inspectionDate} AND 
-             a.violation_id = b.violation_id;
-           """    
-        ).on("id" -> id, "inspectionDate" -> inspectionDate)
-        
-        query().map (
-          row =>
-            Violation(row[Int]("violation_id"), row[String]("violation_des"),
-                row[String]("violation_des"), row[String]("violation_priority"))
-        ).toList
-      }
-    }
-  }
-  
-  
-  /**
-   * Get a list of inspections for a location
-   * The primary key a location the id
-   */
-  def getInspection(id:Int): Try[Seq[Inspection]] = {
-    Try{
-      DB.withConnection { implicit connection =>
-        val query = SQL(
-           """
-             SELECT inspection_date, inspection_type, reinspection_priority
-             FROM inspections
-             WHERE id = {id};
-           """    
-        ).on("id" -> id)
-        
-        query().map (
-          row =>
-            getViolations(id, row[String]("inspection_date")) match {
-              case Success(violationsList) => 
-                Inspection(row[String]("inspection_date"), row[String]("inspection_type"), 
-                row[String]("reinspection_proority"), violationsList)
-              case Failure(e) => 
-                Inspection(row[String]("inspection_date"), row[String]("inspection_type"), 
-                row[String]("reinspection_proority"), Nil)
-            }
-        ).toList
-      }
-    }
-  }
-
-  /**
-   * Get a location by id
-   */ 
-  def getLocationById(id:Int): Try[Location] = {
-    Try{
-      DB.withConnection { implicit connection =>
-        val query = SQL(
-           """
-             SELECT location_restaruant_name, location_address, location_postcode, location_city, location_rha
+             SELECT id, name, address, postcode, city, rha
              FROM location
-             WHERE id = {id};
+             WHERE id = {locationId};
            """    
-        ).on("id" -> id)
+        ).on("locationId" -> locationId)
         
         query().map (
           row =>
-            getInspection(id) match {
-              case Success(inspectionList) =>
-                Location(id, row[String]("location_restaruant_name"), row[String]("location_address"),
-                row[String]("location_postcode"), row[String]("location_city"), row[String]("location_rha"),
-                inspectionList)
-              case Failure(e) => Location(id, row[String]("location_restaruant_name"), row[String]("location_address"),
-                row[String]("location_postcode"), row[String]("location_city"), row[String]("location_rha"),
-                Nil) 
+            Inspection.getInspections(row[Int]("id")) match {
+              case Success(inspections) =>
+                Success(Location(row[Int]("id"), row[String]("name"), row[String]("address"), row[String]("postcode"),
+                    row[String]("city"), row[String]("rha"), inspections))
+              case Failure(ex) => 
+                Failure(ex)
             }
         ).toList.head
       }
     }
-  }
 
-  
-    /**
-   * Get a list of all the location in a city
-   */ 
-  def getLocationByCity(city:String): Try[Seq[Location]] = {
-    Try{
-      DB.withConnection { implicit connection =>
-        val query = SQL(
-           """
-             SELECT id, location_restaruant_name, location_address, location_postcode, location_city, location_rha
-             FROM location
-             WHERE city = {city};
-           """    
-        ).on("city" -> city)
-        
-        query().map (
-          row =>
-            getInspection(row[Int]("id")) match {
-              case Success(inspectionList) =>
-                Location(row[Int]("id"), row[String]("location_restaruant_name"), row[String]("location_address"),
-                row[String]("location_postcode"), row[String]("location_city"), row[String]("location_rha"),
-                inspectionList)
-              case Failure(e) => 
-                Location(row[Int]("id"), row[String]("location_restaruant_name"), row[String]("location_address"),
-                row[String]("location_postcode"), row[String]("location_city"), row[String]("location_rha"),
-                Nil) 
-            }
-        ).toList
-      }
-    }
+    // We have a Try[Try[Location]], let's flatten that
+    tryLocation.flatten
   }
 }
