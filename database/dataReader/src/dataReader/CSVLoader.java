@@ -4,21 +4,12 @@ import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.InputStreamReader;
 import java.io.Writer;
-import java.sql.Connection;
-import java.sql.PreparedStatement;
+import java.util.ArrayList;
 import java.util.Date;
-
-import org.apache.commons.lang.StringUtils;
 
 import au.com.bytecode.opencsv.CSVReader;
 
 public class CSVLoader {
-
-	private static final 
-		String SQL_INSERT = "INSERT INTO ${table}(${keys}) VALUES(${values})";
-	private static final String TABLE_REGEX = "\\$\\{table\\}";
-	private static final String KEYS_REGEX = "\\$\\{keys\\}";
-	private static final String VALUES_REGEX = "\\$\\{values\\}";
 
 	private Writer writer;
 	private char seprator;
@@ -68,58 +59,71 @@ public class CSVLoader {
 					"Please check the CSV file format.");
 		}
 
-		String questionmarks = StringUtils.repeat("?,", headerRow.length);
-		questionmarks = (String) questionmarks.subSequence(0, questionmarks
-				.length() - 1);
-
-		String query = SQL_INSERT.replaceFirst(TABLE_REGEX, "location"); // table name needed
-		query = query
-				.replaceFirst(KEYS_REGEX, StringUtils.join(headerRow, ","));
-		query = query.replaceFirst(VALUES_REGEX, questionmarks);
-
-		System.out.println("Query: " + query);
-
 		String[] nextLine;
-		Connection con = null;
-		PreparedStatement ps = null;
-		
+
+		ArrayList<String[]> dataMatrix = new ArrayList<String[]>();
+		String str = "";
 		
 		try {
-			ps = con.prepareStatement(query);
-
-			final int batchSize = 1000;
-			int count = 0;
 			Date date = null;
 			while ((nextLine = csvReader.readNext()) != null) {
 
 				if (null != nextLine) {
-					int index = 1;
+					
+					String[] recordLine = new String[10];
+					int index = 0;
+					
 					for (String string : nextLine) {
 						date = DateUtil.convertToDate(string);
 						if (null != date) {
-							ps.setDate(index++, new java.sql.Date(date
-									.getTime()));
+							recordLine[index] = date + str;
 						} else {
-							ps.setString(index++, string);
+							recordLine[index] = string;
 						}
+						index++;
 					}
-					ps.addBatch();
-				}
-				if (++count % batchSize == 0) {
-					ps.executeBatch();
+					dataMatrix.add(recordLine);
 				}
 			}
-			ps.executeBatch(); // insert remaining records
-			this.writer.write(ps.toString() + "\n");
+					
+			// Insert location
+			this.writer.write(String.format("INSERT INTO location(id, name, address, postcode, city, rha)\n"
+					+ " VALUES (%d, %s, %s, %s, %s, %s)\n\n", 
+					locationId, dataMatrix.get(0)[1], dataMatrix.get(0)[3], dataMatrix.get(0)[5], dataMatrix.get(0)[5], dataMatrix.get(0)[7]));
 			
+			
+			for (int i = 0; i < dataMatrix.size(); i ++){
+				
+				if(i == 0 || !(dataMatrix.get(i)[2].equals(dataMatrix.get(i-1)[2]))){
+					
+					//Insert inspection
+					this.writer.write(String.format("INSERT INTO inspection(location_id, inspection_date, inspection_type, reinspection_priority)\n"
+							+ " VALUES (%d, %s, %s, %s)\n\n", 
+							inspectionId, dataMatrix.get(i)[2], dataMatrix.get(i)[4], dataMatrix.get(i)[6]));
+					inspectionId ++;
+					if(!dataMatrix.get(i)[9].equals("")){
+						//Insert violation
+						this.writer.write(String.format("INSERT INTO violation(inspection_id, violation_id)\n"
+								+ " VALUES (%d, %s)\n\n", 
+								inspectionId - 1, dataMatrix.get(i)[9]));
+					}
+					
+				}else{
+					if(!dataMatrix.get(i)[9].equals("")){
+						//Insert violation
+						this.writer.write(String.format("INSERT INTO violation(inspection_id, violation_id)\n"
+								+ " VALUES (%d, %s)\n\n", 
+								inspectionId - 1, dataMatrix.get(i)[9]));
+					}
+					System.err.println(dataMatrix.get(i)[9]);
+				}
+			}
 		} catch (Exception e) {
 			e.printStackTrace();
 			throw new Exception(
 					"Error occured while loading data from file to files."
-							+ e.getMessage() + ps.toString());
+							+ e.getMessage());
 		} finally {
-			if (null != ps)
-				ps.close();
 			csvReader.close();
 			
 		}
