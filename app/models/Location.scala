@@ -50,4 +50,32 @@ object Location {
     // We have a Try[Try[Location]], let's flatten that
     tryLocation.flatten
   }
+
+  def getLocationsByCity(cityName: String): Try[Seq[Location]] = {
+    Try {
+      DB.withConnection { implicit connection =>
+        val query = SQL(
+           """
+             SELECT id, name, address, postcode, city, rha
+             FROM location
+             WHERE city = {cityName};
+           """    
+        ).on("cityName" -> cityName)
+        
+        val tryLocations = query().map (
+          row =>
+            Inspection.getInspections(row[Int]("id")) match {
+              case Success(inspections) =>
+                Success(Location(row[Int]("id"), row[String]("name"), row[String]("address"), row[String]("postcode"),
+                    row[String]("city"), row[String]("rha"), inspections))
+              case Failure(ex) => 
+                Failure(ex)
+            }
+        ).toList
+
+        // We have a Seq[Try[Location]], convert it to a Seq[Location]
+        tryLocations.map(_.get)
+      }
+    }
+  }
 }
