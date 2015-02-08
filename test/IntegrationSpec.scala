@@ -29,14 +29,12 @@ class IntegrationSpec extends Specification {
   		  val result = controllers.LocationController.showLocation(1)(FakeRequest())
   			status(result) must equalTo(OK)
   			contentType(result) must beSome.which(_ == "text/html")
-  			contentAsString(result) must contain("display location")
   	  }
   
   	  "show find location page when findLocation is called" in {
   		  val result = controllers.LocationController.findLocation("Saskatoon")(FakeRequest())
   			status(result) must equalTo(OK)
   			contentType(result) must beSome.which(_ == "text/html")
-  			contentAsString(result) must contain("find location")
   	  }
     }
     
@@ -45,7 +43,7 @@ class IntegrationSpec extends Specification {
      */
     "showLocation" should {
   	  "display information for valid id" in {
-  		  val result = controllers.LocationController.showLocation(2)(FakeRequest())
+  		  val result = controllers.LocationController.showLocation(7)(FakeRequest())
         status(result) must equalTo(OK)
   			contentAsString(result) must contain("7 Eleven")
   			contentAsString(result) must contain("835 A Broadway AVE")
