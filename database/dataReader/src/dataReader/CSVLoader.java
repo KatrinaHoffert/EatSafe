@@ -96,7 +96,7 @@ public class CSVLoader {
 					+ " VALUES (%d, \'%s\', \'%s\', \'%s\', \'%s\', \'%s\');\n\n", 
 					locationId, WordUtils.capitalizeFully(dataMatrix.get(0)[1]).replaceAll("'","-"), // location ID in unique and increased by one, initial cap the location name
 					dataMatrix.get(0)[3], dataMatrix.get(0)[5].substring(dataMatrix.get(0)[5].length() - 7), //get the postcode, which is the last 7 char
-					dataMatrix.get(0)[5].substring(0, dataMatrix.get(0)[5].lastIndexOf(',')),  // get the city name, which is before the comma
+					WordUtils.capitalizeFully(dataMatrix.get(0)[5].substring(0, dataMatrix.get(0)[5].lastIndexOf(','))),  // get the city name, which is before the comma
 					dataMatrix.get(0)[7]));
 				//There is not a good way to escape single quote without using prepareStatement, So just use '-' for single quote
 			
