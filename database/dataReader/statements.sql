@@ -23,7 +23,7 @@ VALUES (1, 'Refrigeration/Cooling/Thawing (must be 4°C/40°F or lower)', 'Criti
 
 
 INSERT INTO location(id, name, address, postcode, city, rha)
- VALUES (1, '24 And 7 Convenience Store', '101 - 412 Willowgrove Square', 'S7W 0B1', 'SASKATOON', 'Saskatoon Health Authority');
+ VALUES (1, '24 And 7 Convenience Store', '101 - 412 Willowgrove Square', 'S7W 0B1', 'Saskatoon', 'Saskatoon Health Authority');
 
 INSERT INTO inspection(id, location_id, inspection_date, inspection_type, reinspection_priority)
  VALUES (1, 1, 'Mon Aug 25 00:00:00 CST 2014', 'Routine', 'Low');
@@ -458,7 +458,7 @@ INSERT INTO violation(inspection_id, violation_id)
  VALUES (60, 12);
 
 INSERT INTO location(id, name, address, postcode, city, rha)
- VALUES (22, '1 Stop Convenience & Dollar Store', '1631 29th Street W', 'S7L 0N6', 'SASKATOON', 'Saskatoon Health Authority');
+ VALUES (22, '1 Stop Convenience & Dollar Store', '1631 29th Street W', 'S7L 0N6', 'Saskatoon', 'Saskatoon Health Authority');
 
 INSERT INTO inspection(id, location_id, inspection_date, inspection_type, reinspection_priority)
  VALUES (61, 22, 'Fri Oct 24 00:00:00 CST 2014', 'Routine', 'Low');
