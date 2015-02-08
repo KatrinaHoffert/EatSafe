@@ -33,6 +33,7 @@ CREATE TABLE inspection(
 
 CREATE TABLE violation_type(
     id INT NOT NULL PRIMARY KEY,
+    name TEXT NOT NULL,
     description TEXT NOT NULL,
     priority TEXT NOT NULL
 );
