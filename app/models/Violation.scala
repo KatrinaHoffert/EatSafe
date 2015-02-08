@@ -25,9 +25,9 @@ object Violation {
            """
              SELECT violation_id, description, priority
              FROM violation v, violation_type vt
-             WHERE v.inspection_id = {id} v.violation_id = vt.violation_id;
+             WHERE v.inspection_id = {inspectionId} v.violation_id = vt.violation_id;
            """
-        ).on("id" -> inspectionId)
+        ).on("inspectionId" -> inspectionId)
         
         query().map (
           row =>
