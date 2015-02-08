@@ -20,7 +20,7 @@ import play.api.Play.current
  * @param inspections A list of inspections that have been done on the location.
  */
 case class Location (id: Int, name: String, address: String, postalCode: String, city: String,
-  regionalHealthAuthority: String, inspections: Seq[Inspection])
+    regionalHealthAuthority: String, inspections: Seq[Inspection])
 
 object Location {
   /**
