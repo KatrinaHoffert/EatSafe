@@ -17,20 +17,30 @@
       Rating: <span class="ratingNA">N/A</span>
     </div>
 
-    Most recent issues:<span class="faded floatRight">[@location.inspections(0).date]</span>
-    @displayInspection(location.inspections(0))
+    @if(location.hasInspections) {
+      Most recent issues:<span class="faded floatRight">[@location.inspections(0).date]</span>
+      @displayInspection(location.inspections(0))
 
-    @displayPastInspections(location)
+      @displayPastInspections(location)
 
-    <ul class="locationExtraData">
-      <li><b>Current re-inspection priority:</b></li>
-      <li>@location.inspections(0).reinspectionPriority</li>
+      <ul class="locationExtraData">
+        <li><b>@Messages("locations.view.reinspectionPriority"):</b></li>
+        <li>@location.inspections(0).reinspectionPriority</li>
 
-      <li><b>Previous inspection type:</b></li>
-      <li>@location.inspections(0).inspectionType</li>
+        <li><b>@Messages("locations.view.previousInspectionType"):</b></li>
+        <li>@location.inspections(0).inspectionType</li>
 
-      <li><b>Regional health authority:</b></li>
-      <li>@location.regionalHealthAuthority</li>
-    </ul>
+        <li><b>@Messages("locations.view.rha"):</b></li>
+        <li>@location.regionalHealthAuthority</li>
+      </ul>
+    } else {
+      <div class="panel panel-default" style="border-top: 1px solid #DDD;">
+        <div class="panel-heading">
+          <h4 class="panel-title">
+            @Messages("locations.view.noRecentInspections")
+          </h4>
+        </div>
+      </div>
+    }
   </div>
 }
