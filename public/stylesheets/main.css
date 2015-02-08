@@ -2,6 +2,50 @@
  * This is the custom CSS for our application.
  */
 
+/*******************************************************************************
+ ****************************** GENERAL PURPOSE ********************************
+ ******************************************************************************/
+
+/* Headings can't be too large, since restaurants can have long names */
+h1 {
+  font-size: 1.75em;
+}
+
+h2 {
+  font-size: 1.5em;
+}
+
+h3 {
+  font-size: 1.25em;
+}
+
+h4 {
+  font-size: 1em;
+}
+
+/* General purpose padding */
+.smallPadding {
+  padding: 0.5em;
+}
+
+.floatRight {
+  float: right;
+}
+
+/* Faded text */
+.faded {
+  color: gray;
+}
+
+/* For making the mouse into a pointer (showing that content can be clicked on). */
+.pointer {
+  cursor: pointer;
+}
+
+/*******************************************************************************
+ ********************************* SPECIFICS ***********************************
+ ******************************************************************************/
+
 /* The heading for the main page, where it takes up a larger portion of the screen. */
 .largeHeading {
   background-color: #479432;
@@ -32,18 +76,8 @@
   }
 }
 
-/* For making the mouse into a pointer (showing that content can be clicked on). */
-.pointer {
-  cursor: pointer;
-}
-
 #pastInspections {
   padding: 1em;
-}
-
-/* Faded text */
-.faded {
-  color: gray;
 }
 
 /* Override rounded accordions to make ours look flat. */
@@ -59,4 +93,27 @@
 
 .panel-group .panel + .panel {
   margin-top: 0;
+}
+
+/* Section for prominent ratings on a page */
+.ratingSection {
+  padding: 0.5em 0;
+  font-size: 1.2em;
+}
+
+/* Rating styles (mostly TODO) */
+.ratingNA {
+  color: gray;
+}
+
+/* Formatting the extra data at the bottom of the location view as a list */
+.locationExtraData {
+  margin-top: 1em;
+  list-style-type: none;
+  padding-left: 0;
+}
+
+/* Extra gap between every two items (which is a pairing of bolded title and value) */
+.locationExtraData li:nth-child(2n + 1) {
+  margin-top: 0.5em;
 }
