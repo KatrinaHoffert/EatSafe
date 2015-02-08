@@ -48,7 +48,7 @@ public class Main {
 			if(file.isFile() && file.getName().startsWith("FoodInspectionReport")){
 				try {
 					CSVLoader loader = new CSVLoader(writer);
-					inspectionId = loader.loadCSV(folderPath + "/" + file.getName(), locationId, inspectionId) + 1;
+					inspectionId = loader.loadCSV(folderPath + "/" + file.getName(), locationId, inspectionId);
 					locationId ++;
 				} catch (IOException e) {
 					e.printStackTrace();
@@ -62,5 +62,6 @@ public class Main {
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
+		System.out.println("Location #: " + (locationId -1) + "\nInspection #: " + (inspectionId - 1));
 	}
 }
