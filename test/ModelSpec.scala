@@ -42,7 +42,7 @@ class ModelSpec extends Specification with Mockito {
     //as for now, they will be the same data anyway so i wont worry 
     "getLocationById" should {
       
-      "return a success with proper data when given good data" in {
+      "return a success with proper data when given good data" in new WithApplication {
       //Test good data and expected results here
        
         val goodLoc = Location.getLocationById(1)
@@ -58,15 +58,15 @@ class ModelSpec extends Specification with Mockito {
        pass mustEqual true
       }
       //data here is based off of the database files
-    "return good data when given a good ID" in 
+    "return good data when given a good ID" in new WithApplication 
     {
-        val goodLoc = Location.getLocationById(2)
+        val goodLoc = Location.getLocationById(7)
         var pass = false
          goodLoc match
          {
            case Success(loc) =>
            {
-               loc.id must beEqualTo(2)// cause thats what i passed in
+               loc.id must beEqualTo(7)// cause thats what i passed in
                loc.name must beEqualTo("7 Eleven") .ignoreSpace //ignore space due to trailing whitespace
                loc.address must beEqualTo("835 A Broadway AVE") .ignoreSpace //ignore space due to trailing whitespace
                loc.postalCode must beEqualTo("S7N 1B5") .ignoreSpace //ignore space due to trailing whitespace   
@@ -81,7 +81,7 @@ class ModelSpec extends Specification with Mockito {
          } 
         pass mustEqual true
     }
-    "return failure with a bad id (empty result set)" in {
+    "return failure with a bad id (empty result set)" in new WithApplication {
       //Test good data and expected results here
        
         val goodLoc = Location.getLocationById(445)
@@ -110,11 +110,11 @@ class ModelSpec extends Specification with Mockito {
   {
     "GetLocationsByCity" should
     {
-      "return a success when given 'Saskatoon'" in 
+      "return a success when given 'Saskatoon'" in new WithApplication 
       {
       //Test good data and expected results here
        
-        val goodLocList = Location.getLocationByCity("Saskatoon")
+        val goodLocList = Location.getLocationsByCity("Saskatoon")
         var pass = false
          goodLocList match {
            case Success(locList) => pass = true
@@ -127,9 +127,9 @@ class ModelSpec extends Specification with Mockito {
        pass mustEqual true
       }
       //based on current database
-      "return a sequence of Locations with 22 values when given 'Saskatoon'" in 
+      "return a sequence of Locations with 22 values when given 'Saskatoon'" in new WithApplication 
       {
-        val goodLocList = Location.getLocationByCity("Saskatoon")
+        val goodLocList = Location.getLocationsByCity("Saskatoon")
         var pass = false
          goodLocList match {
            case Success(locList) => 
@@ -145,9 +145,9 @@ class ModelSpec extends Specification with Mockito {
          }
        pass mustEqual true
       }
-      "return failure when given anything but 'Saskatoon'" in 
+      "return failure when given anything but 'Saskatoon'" in new WithApplication 
       {
-        val goodLocList = Location.getLocationByCity("This City Does NOT Exist")
+        val goodLocList = Location.getLocationsByCity("This City Does NOT Exist")
         var pass = false
          goodLocList match {
            case Success(locList) => 
@@ -173,12 +173,12 @@ def getViolationsTests()
 {
   "getViolations" should
   {
-    "return success when given proper inputs" in
+    "return success when given proper inputs" in new WithApplication
       {
       //Test good data and expected results here
        
       //TODO get good data
-        val vioList = Location.getViolations(2, "TODODATE")
+        val vioList = Violation.getViolations(2)
         var pass = false
          vioList match {
            case Success(vio) => pass = true
@@ -191,15 +191,15 @@ def getViolationsTests()
        pass mustEqual true
       }
       //based on current database
-      "given a certian id, the number of returned violations should be correct" in 
+      "given a certian id, the number of returned violations should be correct" in new WithApplication 
       {
-        val vioList = Location.getViolations(2, "TODODATE")
+        val vioList = Violation.getViolations(1)
         var pass = false
          vioList match {
            case Success(vio) => 
            {
              pass = true
-             vio.length must beEqualTo(22)
+             vio.length must beEqualTo(2)
            }
            case Failure(e) => 
            {
@@ -209,9 +209,9 @@ def getViolationsTests()
          }
        pass mustEqual true
       }
-      "return failure when given bad data" in 
+      "return failure when given bad data" in new WithApplication 
       {
-        val vioList = Location.getViolations(9001, "2019-01-17")
+        val vioList = Violation.getViolations(9001)
         var pass = false
          vioList match {
            case Success(vio) => 
@@ -237,12 +237,12 @@ def getInspectionsTests()
 {
   "getInspections" should
   {
-    "return success when given proper inputs" in 
+    "return success when given proper inputs" in new WithApplication
       {
       //Test good data and expected results here
        
       
-        val InspList = Location.getInspection(2)
+        val InspList = Inspection.getInspections(2)
         var pass = false
          InspList match {
            case Success(insp) => pass = true
@@ -255,15 +255,15 @@ def getInspectionsTests()
        pass mustEqual true
       }
       //based on current database
-      "given a good id, return the right ammount of inspections" in 
+      "given a good id, return the right ammount of inspections" in new WithApplication 
       {
-        val InspList = Location.getInspection(2)
+        val InspList = Inspection.getInspections(15)
         var pass = false
          InspList match {
            case Success(insp) => 
            {
              pass = true
-             insp.length must beEqualTo(22/*TODO get the right number*/)
+             insp.length must beEqualTo(3)
            }
            case Failure(e) => 
            {
@@ -273,12 +273,12 @@ def getInspectionsTests()
          }
        pass mustEqual true
       }
-      "return failure when given bad data" in 
+      "return failure when given bad data" in new WithApplication 
       {
-        val vioList = Location.getInspection(9001)
+        val vioList = Inspection.getInspections(9001)
         var pass = false
          vioList match {
-           case Success(vio) => 
+           case Success(insp) => 
            {
              pass = false
            }
