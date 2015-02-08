@@ -29,7 +29,7 @@ object Violation {
       DB.withConnection { implicit connection =>
         val query = SQL(
            """
-             SELECT violation_id, description, priority
+             SELECT violation_id, name, description, priority
              FROM violation v, violation_type vt
              WHERE v.inspection_id = {inspectionId} AND v.violation_id = vt.id;
            """
@@ -37,8 +37,7 @@ object Violation {
         
         query().map (
           row =>
-            // TODO: Update once the violation type names are in the database
-            Violation(row[Int]("violation_id"), "VIOLATION NAMES NOT IN DB",
+            Violation(row[Int]("violation_id"), row[String]("name"),
                 row[String]("description"), row[String]("priority"))
         ).toList
       }
