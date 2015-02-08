@@ -27,7 +27,7 @@ object Inspection {
         val query = SQL(
            """
              SELECT id, inspection_date, inspection_type, reinspection_priority
-             FROM inspections
+             FROM inspection
              WHERE location_id = {locationId};
            """    
         ).on("locationId" -> locationId)
@@ -37,7 +37,7 @@ object Inspection {
         val tryInspections = query().map (
           row =>
             Violation.getViolations(row[Int]("id")).map { violations =>
-              Inspection(row[String]("inspection_date"), row[String]("inspection_type"),
+              Inspection(row[java.util.Date]("inspection_date").toString, row[String]("inspection_type"),
                 row[String]("reinspection_priority"), violations)
             }
         ).toList
