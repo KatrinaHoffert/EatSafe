@@ -75,3 +75,10 @@ This means that everything worked and the server can be viewed in any web browse
 * In order to remove some compilation issues, you'll have to go to Project > Properties >
   Java Build Path > Libraries > Add external class library and add the `target/scala-2.11/classes_managed`
   folder. This ensures that Scala IDE can find the compiled templates.
+
+## The database
+
+* Credentials are in `conf/application.conf`.
+* Can connect to the database with `psql -h 104.131.107.139 -U eatsafe` (download the Postgres client, first).
+* Since the database is shared, avoid breaking it. Communicate with others before making large changes. Consider making personal backups.
+* Currently hosted on Mike's VPS -- to be switched to the university VPS once we have credentials for it.
