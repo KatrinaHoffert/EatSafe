@@ -23,6 +23,13 @@ case class Location (id: Int, name: String, address: String, postalCode: String,
   regionalHealthAuthority: String, inspections: Seq[Inspection])
 
 object Location {
+  /**
+   * Gets a single location by its ID.
+   *
+   * @param locationId The ID of the desired location. Must exist in the database.
+   * @returns The location object with the desired ID. Will return Failure if no such ID exists in
+   * the database.
+   */
   def getLocationById(locationId: Int): Try[Location] = {
     val tryLocation = Try {
       DB.withConnection { implicit connection =>
@@ -34,16 +41,10 @@ object Location {
            """    
         ).on("locationId" -> locationId)
         
-        query().map (
-          row =>
-            Inspection.getInspections(row[Int]("id")) match {
-              case Success(inspections) =>
-                Success(Location(row[Int]("id"), row[String]("name"), row[String]("address"), row[String]("postcode"),
-                    row[String]("city"), row[String]("rha"), inspections))
-              case Failure(ex) => 
-                Failure(ex)
-            }
-        ).toList.head
+        val optionalLocation = query().map(locationRowToLocation).toList.headOption
+        optionalLocation.getOrElse {
+          throw new IllegalArgumentException("There is no location with ID " + locationId)
+        }
       }
     }
 
@@ -51,6 +52,14 @@ object Location {
     tryLocation.flatten
   }
 
+  /**
+   * Gets a list of locations in a city. Note that the location objects are complete (and thus the
+   * inspections and violations of all of them have been resolved). As a result, this is quite
+   * inefficient if we only need information about the location and not the inspections.
+   *
+   * @param cityName The city in question.
+   * @returns A list of location objects representing each object located in the city.
+   */
   def getLocationsByCity(cityName: String): Try[Seq[Location]] = {
     Try {
       DB.withConnection { implicit connection =>
@@ -62,20 +71,30 @@ object Location {
            """    
         ).on("cityName" -> cityName)
         
-        val tryLocations = query().map (
-          row =>
-            Inspection.getInspections(row[Int]("id")) match {
-              case Success(inspections) =>
-                Success(Location(row[Int]("id"), row[String]("name"), row[String]("address"), row[String]("postcode"),
-                    row[String]("city"), row[String]("rha"), inspections))
-              case Failure(ex) => 
-                Failure(ex)
-            }
-        ).toList
+        val tryLocations = query().map(locationRowToLocation).toList
 
         // We have a Seq[Try[Location]], convert it to a Seq[Location]
         tryLocations.map(_.get)
       }
+    }
+  }
+
+  /**
+   * Converts a row from the location table into a Location object. This will query other tables
+   * that contain data about the location (eg, the inspection table). The Anorm API does not provide
+   * any means of static typing for database rows, so you must ensure that the row that you pass in
+   * is indeed a row of the location table.
+   *
+   * @param row A row from the location table.
+   * @returns A location object created from that row, with the inspections from the database.
+   */
+  private def locationRowToLocation(row: Row): Try[Location] = {
+    Inspection.getInspections(row[Int]("id")) match {
+      case Success(inspections) =>
+        Success(Location(row[Int]("id"), row[String]("name"), row[String]("address"), row[String]("postcode"),
+            row[String]("city"), row[String]("rha"), inspections))
+      case Failure(ex) => 
+        Failure(ex)
     }
   }
 }
