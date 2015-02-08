@@ -2,17 +2,35 @@
 @import models._
 
 @**
- * TODO: Document me!
+ * Displays a location with inspection data, ratings, etc.
  *@
 @(location: Location)
 
-@scripts = {
-  <script>
-    // Do stuff
-  </script>
-}
-
-@mainBody(title = "TODO: Give me a kickass title", moreScripts = scripts) {
+@mainBody(title = "EatSafe: " + location.name + " [" + location.address + "]") {
   @headingSmall(Messages("general.applicationName"))
-  Reached the <b>display location</b> page.
+  <div class="smallPadding">
+    <h1>@location.name</h1>
+    @location.address<br />
+    @location.city, @location.postalCode
+
+    <div class="ratingSection">
+      Rating: <span class="ratingNA">N/A</span>
+    </div>
+
+    Most recent issues:<span class="faded floatRight">[@location.inspections(0).date]</span>
+    @displayInspection(location.inspections(0))
+
+    @displayPastInspections(location)
+
+    <ul class="locationExtraData">
+      <li><b>Current re-inspection priority:</b></li>
+      <li>@location.inspections(0).reinspectionPriority</li>
+
+      <li><b>Previous inspection type:</b></li>
+      <li>@location.inspections(0).inspectionType</li>
+
+      <li><b>Regional health authority:</b></li>
+      <li>@location.regionalHealthAuthority</li>
+    </ul>
+  </div>
 }
