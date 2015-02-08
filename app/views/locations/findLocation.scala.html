@@ -1,5 +1,6 @@
 @import general._
 @import models._
+@import controllers._
 
 @**
  * TODO: Document me!
@@ -14,5 +15,29 @@
 
 @mainBody(title = "Choose a location", moreScripts = scripts) {
   @headingSmall(Messages("general.applicationName"))
+  
+  <form id="locationSearchForm">
+    <select name="locationID">
+      @for(l <- locations) {
+        <option value=@l.id>@l.name</option>
+      }
+    </select>
+    <br />
+    <button id="submitButton">Submit</button>
+ 
+    <script>
+      $("#submitButton").on("click", function() {
+        // TODO: check if set, first, and handle case of not set
+        var locationId = $("#locationID").val();
+        var destUrl = jsRoutes.controllers.LocationController
+            .showLocation(locationID).url;
+        window.location(destUrl);
+      }
+    </script>
+  </form>
+
+  
   Reached the <b>find location</b> page.
 }
+
+
