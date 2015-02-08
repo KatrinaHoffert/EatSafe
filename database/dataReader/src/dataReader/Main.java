@@ -41,7 +41,7 @@ public class Main {
 	 * write comments at the beginning of the file
 	 * @param writer
 	 */
-	public static void writeComment(Writer writer){
+	public static void writeComment(Writer writer) {
 		try {
 			writer.write("-- EatSafe\n"
 					+ "-- This file will populate the database\n"
@@ -59,7 +59,7 @@ public class Main {
 	 * populate the violation_type table first
 	 * @param writer
 	 */
-	public static void insertViolationType(Writer writer){
+	public static void insertViolationType(Writer writer) {
 		try {
 			writer.write("INSERT INTO violation_type (id, description, name,  priority)\n"
 					+ "VALUES (1, \'Potentially hazardous foods and perishable foods must be stored at 4oC/40oF or below. Hazardous foods must be thawed in a refrigerator or under cold, running water.\', \'Refrigeration/Cooling/Thawing (must be 4°C/40°F or lower)\', \'Critical Item\'),"
@@ -128,16 +128,16 @@ public class Main {
 		insertViolationType(writer);
 		File folder = new File(folderPath);
 		File[] listOfFiles = folder.listFiles();
-		if(listOfFiles == null){
+		if (listOfFiles == null) {
 			System.err.print("NO FILES IN THIS FOLDER!");
 		}
 		
 		int locationId = 1;
 		int inspectionId = 1;
 		
-		for (int i = 0; i < listOfFiles.length; i++){
+		for (int i = 0; i < listOfFiles.length; i++) {
 			File file = listOfFiles[i];
-			if(file.isFile() && file.getName().startsWith("FoodInspectionReport")){
+			if (file.isFile() && file.getName().startsWith("FoodInspectionReport")) {
 				try {
 					CSVLoader loader = new CSVLoader(writer);
 					inspectionId = loader.loadCSV(folderPath + "/" + file.getName(), locationId, inspectionId);

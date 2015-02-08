@@ -362,7 +362,7 @@ INSERT INTO violation(inspection_id, violation_id)
  VALUES (46, 15);
 
 INSERT INTO location(id, name, address, postcode, city, rha)
- VALUES (17, '2x   St. Paul-s Hospital Kitchen', '1702 20th ST W', 'S7M 0Z9', 'Saskatoon', 'Saskatoon Health Authority');
+ VALUES (17, '2x   St. Paul''s Hospital Kitchen', '1702 20th ST W', 'S7M 0Z9', 'Saskatoon', 'Saskatoon Health Authority');
 
 INSERT INTO inspection(id, location_id, inspection_date, inspection_type, reinspection_priority)
  VALUES (47, 17, 'Mon Mar 17 00:00:00 CST 2014', 'Routine', 'Low');
