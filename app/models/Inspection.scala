@@ -15,6 +15,12 @@ case class Inspection(date: String, inspectionType: String, reinspectionPriority
     violations: Seq[Violation])
 
 object Inspection {
+  /**
+   * Gets a list of inspections belonging to a given location.
+   *
+   * @param locationId The ID of the location we want the inspections for.
+   * @returns List of inspection objects representing the inspections for that location.
+   */
   def getInspections(locationId: Int): Try[Seq[Inspection]] = {
     Try {
       DB.withConnection { implicit connection =>
