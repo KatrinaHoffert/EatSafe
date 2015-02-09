@@ -81,17 +81,7 @@ class ModelSpec extends Specification with Mockito {
          } 
         pass mustEqual true
     }
-    "return failure with a bad id (empty result set)" in new WithApplication {
-      //Test good data and expected results here
-       
-        val goodLoc = Location.getLocationById(445)
-        var pass = false
-         goodLoc match {
-           case Success(loc) => pass = false
-           case Failure(e) => pass = true
-         }
-        pass mustEqual true
-    }
+
     
     //TODO
     //there should be a test where the database connection is not available, but we need some kind of test
@@ -145,23 +135,7 @@ class ModelSpec extends Specification with Mockito {
          }
        pass mustEqual true
       }
-      "return failure when given anything but 'Saskatoon'" in new WithApplication 
-      {
-        val goodLocList = Location.getLocationsByCity("This City Does NOT Exist")
-        var pass = false
-         goodLocList match {
-           case Success(locList) => 
-           {
-             pass = false
-           }
-           case Failure(e) => 
-           {
-             pass = true
-           }
-         }
-       pass mustEqual true
-        
-      }
+      
     }   
   }
    /**
@@ -209,23 +183,6 @@ def getViolationsTests()
          }
        pass mustEqual true
       }
-      "return failure when given bad data" in new WithApplication 
-      {
-        val vioList = Violation.getViolations(9001)
-        var pass = false
-         vioList match {
-           case Success(vio) => 
-           {
-             pass = false
-           }
-           case Failure(e) => 
-           {
-             pass = true
-           }
-         }
-       pass mustEqual true
-        
-      }
   }
 }
   /**
@@ -272,23 +229,6 @@ def getInspectionsTests()
            }
          }
        pass mustEqual true
-      }
-      "return failure when given bad data" in new WithApplication 
-      {
-        val vioList = Inspection.getInspections(9001)
-        var pass = false
-         vioList match {
-           case Success(insp) => 
-           {
-             pass = false
-           }
-           case Failure(e) => 
-           {
-             pass = true
-           }
-         }
-       pass mustEqual true
-        
       }
   }
 }
