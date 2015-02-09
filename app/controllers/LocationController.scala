@@ -11,12 +11,11 @@ object LocationController extends Controller {
    * TODO: Document me.
    */
   def findLocation(city: String) = Action {
-    val locationlist = Location.getLocationsByCity(city) 
-    locationlist match{
-      case Success(v) => 
-        Ok(views.html.locations.findLocation(Seq.empty[Location]))
+    Location.getLocationsByCity(city) match{
+      case Success(cityLocations) => 
+        Ok(views.html.locations.findLocation(cityLocations))
       case Failure(e) => 
-        InternalServerError(e.toString)
+        InternalServerError("Encountered an error.\n\nDetails: " + e.toString)
     }
   }
 
