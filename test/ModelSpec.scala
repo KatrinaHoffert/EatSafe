@@ -13,18 +13,27 @@ import play.api.Play.current
 import org.specs2.mock._
 
 /**
- * Because of the relative simplicity of the Violation and Inspection
- * Classes, they will be tested implicitly, during the testing of the more
- * complex, Location class, since the locationbyID method and locationsByCity
- * methods will both be returning Location objects that contain inspections
- * and violations.
- * 
+ * Test Suite of the current model, the tests being focused on the Locations class
+ * and its methods, mostly because the other classes (Inspection and Violation) are simple
+ * case classes with nothing to test but prebuilt getters and setters (we will assume scala knows
+ * what its doing) the sets of tests are wrapped in functions in order to make things more
+ * readable and reusable in the future.
  */
 @RunWith(classOf[JUnitRunner])
 class ModelSpec extends Specification with Mockito {
   
-  //  this.getLocationByIdTests();
-    
+  //run test functions here
+  this.getViolationsTests();
+  this.getInspectionsTests();
+  this.getLocationByIdTests();
+  this.getLocationsByCityTests();
+
+  
+  /**
+   * Run the set of tests to test the getLocationById method of the Locations class
+   * this suite tests, good inputs, bad inputs and that the good inputs pass something back
+   * that is what it was suppose to.
+   */
   def getLocationByIdTests()
   {
     
@@ -33,47 +42,46 @@ class ModelSpec extends Specification with Mockito {
     //as for now, they will be the same data anyway so i wont worry 
     "getLocationById" should {
       
-      "return a success with proper data when given good data" in new WithApplication{
+      "return a success with proper data when given good data" in new WithApplication {
       //Test good data and expected results here
        
         val goodLoc = Location.getLocationById(1)
         var pass = false
          goodLoc match {
-           case Success(v) => pass = true
-           case Failure(e) => pass = false
+           case Success(loc) => pass = true
+           case Failure(e) =>
+           { 
+             pass = false;
+             "error message" mustEqual e.getMessage()
+           }
          }
        pass mustEqual true
       }
       //data here is based off of the database files
-    "return good data when given a good ID" in new WithApplication
+    "return good data when given a good ID" in new WithApplication 
     {
-        val goodLoc = Location.getLocationById(2)
+        val goodLoc = Location.getLocationById(7)
         var pass = false
          goodLoc match
          {
-           case Success(v) =>
+           case Success(loc) =>
            {
-               v.id must beEqualTo(2)// cause thats what i passed in
-               v.name must beEqualTo("7 Eleven") .ignoreSpace //ignore space due to trailing whitespace
-               v.address must beEqualTo("835 A Broadway AVE") .ignoreSpace //ignore space due to trailing whitespace
-               v.postalCode must beEqualTo("S7N 1B5") .ignoreSpace //ignore space due to trailing whitespace   
+               loc.id must beEqualTo(7)// cause thats what i passed in
+               loc.name must beEqualTo("7 Eleven") .ignoreSpace //ignore space due to trailing whitespace
+               loc.address must beEqualTo("835 A Broadway AVE") .ignoreSpace //ignore space due to trailing whitespace
+               loc.postalCode must beEqualTo("S7N 1B5") .ignoreSpace //ignore space due to trailing whitespace   
                pass = true
            }
-           case Failure(e) => pass = false
+           case Failure(e) =>
+           {
+             pass = false
+             //this prints the error message within the test
+             "error message" mustEqual e.getMessage()
+           }
          } 
         pass mustEqual true
     }
-    "return failure with a bad id (empty result set)" in new WithApplication{
-      //Test good data and expected results here
-       
-        val goodLoc = Location.getLocationById(445)
-        var pass = false
-         goodLoc match {
-           case Success(v) => pass = false
-           case Failure(e) => pass = true
-         }
-        pass mustEqual true
-    }
+
     
     //TODO
     //there should be a test where the database connection is not available, but we need some kind of test
@@ -82,15 +90,147 @@ class ModelSpec extends Specification with Mockito {
   }
   }
   
-    def getLocationsByCityTests()
+    /**
+   * Run the set of tests to test the getLocationbyCity method of the Locations class
+   * this suite tests, good inputs, bad inputs and that the good inputs pass something back
+   * that is what it was suppose to. in this case, Saskatoon is the only city currently in the system
+   * so the number of Locations passed back should line up with whats in the database
+   */
+  def getLocationsByCityTests()
   {
-    /*
-     * todo, run function in a number of senarios and do tests based on that
-     * run with good inputs, bad inputs, possibly without network connection.
-     * find or create a database record with no violations perhaps.
-     * 
-     */
+    "GetLocationsByCity" should
+    {
+      "return a success when given 'Saskatoon'" in new WithApplication 
+      {
+      //Test good data and expected results here
+       
+        val goodLocList = Location.getLocationsByCity("Saskatoon")
+        var pass = false
+         goodLocList match {
+           case Success(locList) => pass = true
+           case Failure(e) =>
+           { 
+             pass = false;
+             "error message" mustEqual e.getMessage()
+           }
+         }
+       pass mustEqual true
+      }
+      //based on current database
+      "return a sequence of Locations with 22 values when given 'Saskatoon'" in new WithApplication 
+      {
+        val goodLocList = Location.getLocationsByCity("Saskatoon")
+        var pass = false
+         goodLocList match {
+           case Success(locList) => 
+           {
+             pass = true
+             locList.length must beEqualTo(22)
+           }
+           case Failure(e) => 
+           {
+             "error message" mustEqual e.getMessage()
+             pass = false
+           }
+         }
+       pass mustEqual true
+      }
+      
+    }   
   }
-  
+   /**
+   * Run the set of tests to test the getViolations method of the Locations class
+   * this suite tests, good inputs, bad inputs and that the good inputs pass something back
+   * that is what it was suppose to.
+   */
+def getViolationsTests()
+{
+  "getViolations" should
+  {
+    "return success when given proper inputs" in new WithApplication
+      {
+      //Test good data and expected results here
+       
+      //TODO get good data
+        val vioList = Violation.getViolations(2)
+        var pass = false
+         vioList match {
+           case Success(vio) => pass = true
+           case Failure(e) =>
+           { 
+             pass = false;
+             "error message" mustEqual e.getMessage()
+           }
+         }
+       pass mustEqual true
+      }
+      //based on current database
+      "given a certian id, the number of returned violations should be correct" in new WithApplication 
+      {
+        val vioList = Violation.getViolations(1)
+        var pass = false
+         vioList match {
+           case Success(vio) => 
+           {
+             pass = true
+             vio.length must beEqualTo(2)
+           }
+           case Failure(e) => 
+           {
+             "error message" mustEqual e.getMessage()
+             pass = false
+           }
+         }
+       pass mustEqual true
+      }
+  }
+}
+  /**
+   * Run the set of tests to test the getInspections method of the Locations class
+   * this suite tests, good inputs, bad inputs and that the good inputs pass something back
+   * that is what it was suppose to.
+   */
+def getInspectionsTests()
+{
+  "getInspections" should
+  {
+    "return success when given proper inputs" in new WithApplication
+      {
+      //Test good data and expected results here
+       
+      
+        val InspList = Inspection.getInspections(2)
+        var pass = false
+         InspList match {
+           case Success(insp) => pass = true
+           case Failure(e) =>
+           { 
+             pass = false;
+             "error message" mustEqual e.getMessage()
+           }
+         }
+       pass mustEqual true
+      }
+      //based on current database
+      "given a good id, return the right ammount of inspections" in new WithApplication 
+      {
+        val InspList = Inspection.getInspections(15)
+        var pass = false
+         InspList match {
+           case Success(insp) => 
+           {
+             pass = true
+             insp.length must beEqualTo(3)
+           }
+           case Failure(e) => 
+           {
+             "error message" mustEqual e.getMessage()
+             pass = false
+           }
+         }
+       pass mustEqual true
+      }
+  }
+}
   
 }
