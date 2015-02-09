@@ -21,13 +21,16 @@ object LocationController extends Controller {
   }
 
   /**
-   * TODO: Document me.
+   * Displays information about the location with the given ID.
+   *
+   * @param locationId The ID of the location to show.
    */
   def showLocation(locationId: Int) = Action {
     Location.getLocationById(locationId) match {
       case Success(location) =>
         Ok(views.html.locations.displayLocation(location))
       case Failure(ex) =>
+        // TODO: Create a prettier error page
         InternalServerError("Encountered an error.\n\nDetails: " + ex.toString)
     }
   }
