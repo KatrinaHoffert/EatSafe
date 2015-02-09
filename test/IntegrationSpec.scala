@@ -25,13 +25,13 @@ class IntegrationSpec extends Specification {
      * Checks to make sure that a page is actually displayed when controller is called
      */
     "Controller" should {
-  	  "show display location page when showLocation is called" in {
-  		  val result = controllers.LocationController.showLocation(1)(FakeRequest())
+  	  "show display location page when showLocation is called" in new WithApplication{
+  		  val result = controllers.LocationController.showLocation(7)(FakeRequest())
   			status(result) must equalTo(OK)
   			contentType(result) must beSome.which(_ == "text/html")
   	  }
   
-  	  "show find location page when findLocation is called" in {
+  	  "show find location page when findLocation is called" in new WithApplication{
   		  val result = controllers.LocationController.findLocation("Saskatoon")(FakeRequest())
   			status(result) must equalTo(OK)
   			contentType(result) must beSome.which(_ == "text/html")
@@ -42,7 +42,7 @@ class IntegrationSpec extends Specification {
      * Dependent on the view actually displaying information
      */
     "showLocation" should {
-  	  "display information for valid id" in {
+  	  "display information for valid id" in new WithApplication{
   		  val result = controllers.LocationController.showLocation(7)(FakeRequest())
         status(result) must equalTo(OK)
   			contentAsString(result) must contain("7 Eleven")
@@ -50,7 +50,7 @@ class IntegrationSpec extends Specification {
   			contentAsString(result) must contain("S7N 1B5")
   	  } 
   
-  	  "diplay error for invalid id" in {
+  	  "diplay error for invalid id" in new WithApplication{
   		  val result = controllers.LocationController.showLocation(-1)(FakeRequest())
         status(result) must equalTo(OK)
   			contentAsString(result) must contain("WHATEVER ERROR PAGE GIVES IN THIS CASE")
@@ -61,14 +61,14 @@ class IntegrationSpec extends Specification {
      * Dependent on the view actually showing information
      */
     "findLocation" should {
-      "display information for valid city" in {
+      "display information for valid city" in new WithApplication{
         val result = controllers.LocationController.findLocation("Saskatoon")(FakeRequest())
         status(result) must equalTo(OK)
         contentAsString(result) must contain("Saskatoon")
         contentAsString(result) must contain("7 Eleven")
       }
       
-      "display error message for ivalid city" in {
+      "display error message for ivalid city" in new WithApplication{
         val result = controllers.LocationController.findLocation("#DOESNTEXIST")(FakeRequest())
         status(result) must equalTo(OK)
         contentAsString(result) must contain("WHATEVER ERROR PAGE GIVES IN THIS CASE")
