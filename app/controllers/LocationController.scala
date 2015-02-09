@@ -4,13 +4,14 @@ import scala.util.{Try, Success, Failure}
 import play.api._
 import play.api.mvc._
 import models._
+import models.Location
 
 object LocationController extends Controller {
   /**
    * TODO: Document me.
    */
   def findLocation(city: String) = Action {
-    val locationlist = models.Location.getLocationsByCity(city) 
+    val locationlist = Location.getLocationsByCity(city) 
     locationlist match{
       case Success(v) => 
         Ok(views.html.locations.findLocation(Seq.empty[Location]))
@@ -23,8 +24,11 @@ object LocationController extends Controller {
    * TODO: Document me.
    */
   def showLocation(locationId: Int) = Action {
-    val dummyLocation = Location(123, "Foo", "123 Fake St", "S1K 2N3", "Saskatoon",
-      "Saskatoon Health Authority", Seq.empty[Inspection])
-    Ok(views.html.locations.displayLocation(dummyLocation))
+    Location.getLocationById(locationId) match {
+      case Success(location) =>
+        Ok(views.html.locations.displayLocation(location))
+      case Failure(ex) =>
+        InternalServerError("Encountered an error.\n\nDetails: " + ex.toString)
+    }
   }
 }
