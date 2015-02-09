@@ -16,4 +16,64 @@ class IntegrationSpec extends Specification {
       browser.goTo("/")
     }
   }
+  
+  this.ControllerModelViewIntegration()
+  
+  def ControllerModelViewIntegration(){
+    /**
+     * Need to be updated as the view pages are developed
+     * Checks to make sure that a page is actually displayed when controller is called
+     */
+    "Controller" should {
+  	  "show display location page when showLocation is called" in {
+  		  val result = controllers.LocationController.showLocation(1)(FakeRequest())
+  			status(result) must equalTo(OK)
+  			contentType(result) must beSome.which(_ == "text/html")
+  	  }
+  
+  	  "show find location page when findLocation is called" in {
+  		  val result = controllers.LocationController.findLocation("Saskatoon")(FakeRequest())
+  			status(result) must equalTo(OK)
+  			contentType(result) must beSome.which(_ == "text/html")
+  	  }
+    }
+    
+    /**
+     * Dependent on the view actually displaying information
+     */
+    "showLocation" should {
+  	  "display information for valid id" in {
+  		  val result = controllers.LocationController.showLocation(7)(FakeRequest())
+        status(result) must equalTo(OK)
+  			contentAsString(result) must contain("7 Eleven")
+  			contentAsString(result) must contain("835 A Broadway AVE")
+  			contentAsString(result) must contain("S7N 1B5")
+  	  } 
+  
+  	  "diplay error for invalid id" in {
+  		  val result = controllers.LocationController.showLocation(-1)(FakeRequest())
+        status(result) must equalTo(OK)
+  			contentAsString(result) must contain("WHATEVER ERROR PAGE GIVES IN THIS CASE")
+  	  }     
+    }
+    
+    /**
+     * Dependent on the view actually showing information
+     */
+    "findLocation" should {
+      "display information for valid city" in {
+        val result = controllers.LocationController.findLocation("Saskatoon")(FakeRequest())
+        status(result) must equalTo(OK)
+        contentAsString(result) must contain("Saskatoon")
+        contentAsString(result) must contain("7 Eleven")
+      }
+      
+      "display error message for ivalid city" in {
+        val result = controllers.LocationController.findLocation("#DOESNTEXIST")(FakeRequest())
+        status(result) must equalTo(OK)
+        contentAsString(result) must contain("WHATEVER ERROR PAGE GIVES IN THIS CASE")
+      }
+    }
+  }
+  
 }
