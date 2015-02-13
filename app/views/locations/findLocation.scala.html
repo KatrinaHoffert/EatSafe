@@ -1,5 +1,6 @@
 @import general._
 @import models._
+@import controllers._
 
 @**
  * TODO: Document me!
@@ -14,5 +15,27 @@
 
 @mainBody(title = "Choose a location", moreScripts = scripts) {
   @headingSmall(Messages("general.applicationName"))
+
+  <select id="findLocationID">
+    @for(location <- locations) {
+      <option value=@location.id>@location.name</option>
+    }
+  </select>
+  <br />
+  <button id="submitButton" onclick="viewLocation()">Submit</button>
+  
+  <script>
+    function viewLocation() {
+      // TODO: check if set, first, and handle case of not set
+      var locationID = document.getElementById("findLocationID").value;
+      document.getElementById("locationIDOut").innerHTML = locationID;
+      var destURL = window.location.origin + "/view/" + locationID;
+      document.getElementById("URLOut").innerHTML = destURL;
+      window.location.assign(destURL);
+    }
+  </script>
+  <div id="locationIDOut"></div>
+  <div id="URLOut"></div>
+  <br />
   Reached the <b>find location</b> page.
 }
