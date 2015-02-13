@@ -1,3 +1,4 @@
+# Automatic Play stuff
 logs
 project/project
 project/target
@@ -13,8 +14,12 @@ dist
 /.settings
 /bin/
 .cache
+
+# Eclipse stuff
 .classpath
 .project
 *.classpath
-*.classpath
-*.classpath
+
+# Production server stuff
+errors.log
+nohup.out
