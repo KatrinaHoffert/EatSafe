@@ -11,6 +11,9 @@ import java.sql._
 import play.api.Play.current
 
 import org.specs2.mock._
+import globals.Globals.testDB
+import globals.ActiveDatabase
+
 
 /**
  * Test Suite of the current model, the tests being focused on the Locations class
@@ -60,6 +63,7 @@ class ModelSpec extends Specification with Mockito {
       //data here is based off of the database files
     "return good data when given a good ID" in new WithApplication 
     {
+       
         val goodLoc = Location.getLocationById(7)
         var pass = false
          goodLoc match
@@ -81,7 +85,23 @@ class ModelSpec extends Specification with Mockito {
          } 
         pass mustEqual true
     }
-
+     "throw error when it cannont connect to db" in new WithApplication 
+    {
+        val goodLoc = Location.getLocationById(7)((new ActiveDatabase("badDatabase")))
+        var pass = false
+         goodLoc match
+         {
+           case Success(loc) =>
+           {  
+               pass = false
+           }
+           case Failure(e) =>
+           {
+             pass = true
+           }
+         } 
+        pass mustEqual true
+    }
     
     //TODO
     //there should be a test where the database connection is not available, but we need some kind of test
@@ -135,7 +155,22 @@ class ModelSpec extends Specification with Mockito {
          }
        pass mustEqual true
       }
-      
+      "return a failure when given a bad database'" in new WithApplication 
+      {
+        val goodLocList = Location.getLocationsByCity("Saskatoon")((new ActiveDatabase("badDatabase")))
+        var pass = false
+         goodLocList match {
+           case Success(locList) => 
+           {
+             pass = false
+           }
+           case Failure(e) => 
+           {
+             pass = true
+           }
+         }
+       pass mustEqual true
+      }
     }   
   }
    /**
@@ -183,6 +218,22 @@ def getViolationsTests()
          }
        pass mustEqual true
       }
+       "return false if connection cannot be made" in new WithApplication 
+      {
+        val vioList = Violation.getViolations(1)((new ActiveDatabase("BadDatabase")))
+        var pass = false
+         vioList match {
+           case Success(vio) => 
+           {
+             pass = false
+           }
+           case Failure(e) => 
+           {
+             pass = true
+           }
+         }
+       pass mustEqual true
+      }
   }
 }
   /**
@@ -226,6 +277,22 @@ def getInspectionsTests()
            {
              "error message" mustEqual e.getMessage()
              pass = false
+           }
+         }
+       pass mustEqual true
+      }
+      "return a failure if there is a bad database" in new WithApplication 
+      {
+        val InspList = Inspection.getInspections(15)((new ActiveDatabase("badDatabase")))
+        var pass = false
+         InspList match {
+           case Success(insp) => 
+           {
+             pass = false
+           }
+           case Failure(e) => 
+           {
+             pass = true
            }
          }
        pass mustEqual true

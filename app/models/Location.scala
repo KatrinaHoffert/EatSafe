@@ -35,7 +35,7 @@ object Location {
    */
   def getLocationById(locationId: Int)(implicit db: ActiveDatabase): Try[Location] = {
     val tryLocation = Try {
-      DB.withConnection { implicit connection =>
+      DB.withConnection(db.name) { implicit connection =>
         val query = SQL(
            """
              SELECT id, name, address, postcode, city, rha
@@ -61,11 +61,12 @@ object Location {
    * inefficient if we only need information about the location and not the inspections.
    *
    * @param cityName The city in question.
+   * @param db this is a implicit parameter that is used to specify what database is to be accessed
    * @returns A list of location objects representing each object located in the city.
    */
-  def getLocationsByCity(cityName: String): Try[Seq[Location]] = {
+  def getLocationsByCity(cityName: String)(implicit db: ActiveDatabase): Try[Seq[Location]] = {
     Try {
-      DB.withConnection { implicit connection =>
+      DB.withConnection(db.name) { implicit connection =>
         val query = SQL(
            """
              SELECT id, name, address, postcode, city, rha
@@ -89,9 +90,10 @@ object Location {
    * is indeed a row of the location table.
    *
    * @param row A row from the location table.
+   * @param db this is a implicit parameter that is used to specify what database is to be accessed
    * @returns A location object created from that row, with the inspections from the database.
    */
-  private def locationRowToLocation(row: Row): Try[Location] = {
+  private def locationRowToLocation(row: Row)(implicit db: ActiveDatabase): Try[Location] = {
     Inspection.getInspections(row[Int]("id")) match {
       case Success(inspections) =>
         Success(Location(row[Int]("id"), row[String]("name"), row[String]("address"), row[String]("postcode"),
