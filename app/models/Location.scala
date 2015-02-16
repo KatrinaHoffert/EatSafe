@@ -4,7 +4,7 @@ import scala.util.{Try, Success, Failure}
 import anorm._
 import play.api.db.DB
 import play.api.Play.current
-import globals._
+import globals.ActiveDatabase
 
 /**
  * Represents a location (which is anywhere that can be audited for health inspections, such as
