@@ -4,7 +4,7 @@ import scala.util.{Try, Success, Failure}
 import anorm._
 import play.api.db.DB
 import play.api.Play.current
-
+import globals._
 
 /**
  * Represents a location (which is anywhere that can be audited for health inspections, such as
@@ -33,7 +33,7 @@ object Location {
    * @returns The location object with the desired ID. Will return Failure if no such ID exists in
    * the database.
    */
-  def getLocationById(locationId: Int): Try[Location] = {
+  def getLocationById(locationId: Int)(implicit db: ActiveDatabase): Try[Location] = {
     val tryLocation = Try {
       DB.withConnection { implicit connection =>
         val query = SQL(
