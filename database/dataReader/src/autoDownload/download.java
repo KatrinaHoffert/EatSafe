@@ -16,7 +16,6 @@ import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.firefox.FirefoxProfile;
-import org.openqa.selenium.firefox.internal.ProfilesIni;
 import org.openqa.selenium.support.ui.Select;
 
 public class download {
@@ -28,9 +27,15 @@ public class download {
   @Before
   public void setUp() throws Exception {
 
-	ProfilesIni profile = new ProfilesIni();
-	FirefoxProfile ffprofile = profile.getProfile("default");
-	driver = new FirefoxDriver(ffprofile);
+	FirefoxProfile profile = new FirefoxProfile();
+
+	profile.setPreference("browser.helperApps.neverAsk.saveToDisk", 
+			"application/msword,application/csv,text/csv,image/png ,image/jpeg, application/pdf, text/html,text/plain,application/octet-stream");
+	profile.setPreference("browser.download.manager.showWhenStarting",false);
+	profile.setPreference("browser.download.folderList", 2); 
+	profile.setPreference("browser.download.dir","/Users/Doris/Downloads/Inspections/"); 
+	  
+	driver = new FirefoxDriver(profile);
 	baseUrl = "http://orii.health.gov.sk.ca/";
 	driver.manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS);
   }
