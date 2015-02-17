@@ -1,11 +1,9 @@
 package autoDownload;
 
 import static org.junit.Assert.fail;
-
 import java.io.File;
 import java.util.List;
 import java.util.concurrent.TimeUnit;
-
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
@@ -25,6 +23,7 @@ public class download {
   private String baseUrl;
   private boolean acceptNextAlert = true;
   private StringBuffer verificationErrors = new StringBuffer();
+  private List<String> RHAList;
 
   @Before
   public void setUp() throws Exception {
@@ -41,57 +40,75 @@ public class download {
 	driver = new FirefoxDriver(profile);
 	baseUrl = "http://orii.health.gov.sk.ca/";
 	driver.manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS);
+	
+	RHAList.add("Cypress");
+	RHAList.add("Five Hills");
+	RHAList.add("Heartland");
+	RHAList.add("Kelsey Trail");
+	RHAList.add("Prairie North");
+	RHAList.add("Prince Albert Parkland");
+	RHAList.add("Regina Qu'Appelle");
+	RHAList.add("Saskatoon");
+	RHAList.add("Sun Country");
+	RHAList.add("Sunrise");
   }
 
   @Test
-  public void testIDE() throws Exception {
+  public void testdownload() throws Exception {
 	  
     driver.get(baseUrl + "/");
-    
+    int fileCount = 0;
     //select and click the RHA
-    driver.findElement(By.cssSelector("area[alt=\"Saskatoon\"]")).click();
+    driver.findElement(By.cssSelector("area[alt=\"" + RHAList.get(0) + "\"]")).click();
     
-    Select se = new Select(driver.findElement(By.id("ctl00_ContentPlaceHolder1_rvReport_ctl00_ctl05_ctl00")));
+    Select selectLocation = new Select(driver.findElement(By.id("ctl00_ContentPlaceHolder1_rvReport_ctl00_ctl05_ctl00")));
 
-    List<WebElement> l = se.getOptions();
-    System.out.print(l.size());
+    List<WebElement> locationList = selectLocation.getOptions();
+    System.out.print(locationList.size());
+    for(int j = 1; j < locationList.size(); j ++) {
     
-    //select a location
-    new Select(driver.findElement(By.id("ctl00_ContentPlaceHolder1_rvReport_ctl00_ctl05_ctl00"))).selectByValue("1");
-    
-    //click enter/return button to confirm selection
-    driver.findElement(By.id("ctl00_ContentPlaceHolder1_rvReport_ctl00_ctl05_ctl00")).sendKeys(Keys.RETURN);;
-    
-    Select selectRestaurant = new Select(driver.findElement(By.id("ctl00_ContentPlaceHolder1_rvReport_ctl00_ctl07_ctl00")));
-
-    List<WebElement> restaurantList = selectRestaurant.getOptions();
-    for(int i = 1; i < restaurantList.size(); i ++){ //start count from 1 because the option 0 is "<Select a value>"
-    	//select a premises name (name of restaurant)
-        new Select(driver.findElement(By.id("ctl00_ContentPlaceHolder1_rvReport_ctl00_ctl07_ctl00"))).selectByValue(i + "");
+    	 //select a location
+        new Select(driver.findElement(By.id("ctl00_ContentPlaceHolder1_rvReport_ctl00_ctl05_ctl00"))).selectByValue(j + "");
         
         //click enter/return button to confirm selection
-        driver.findElement(By.id("ctl00_ContentPlaceHolder1_rvReport_ctl00_ctl07_ctl00")).sendKeys(Keys.RETURN);;
+        driver.findElement(By.id("ctl00_ContentPlaceHolder1_rvReport_ctl00_ctl05_ctl00")).sendKeys(Keys.RETURN);;
+        
+        //get the number of premises (restaurants) in this location
+        Select selectRestaurant = new Select(driver.findElement(By.id("ctl00_ContentPlaceHolder1_rvReport_ctl00_ctl07_ctl00")));
+        List<WebElement> restaurantList = selectRestaurant.getOptions();
+        
+        for(int k = 1; k < restaurantList.size(); k ++) { //start count from 1 because the option 0 is "<Select a value>"
+        	fileCount ++;
+        	//select a premises name (name of restaurant)
+            new Select(driver.findElement(By.id("ctl00_ContentPlaceHolder1_rvReport_ctl00_ctl07_ctl00"))).selectByValue(k + "");
+            
+            //click enter/return button to confirm selection
+            driver.findElement(By.id("ctl00_ContentPlaceHolder1_rvReport_ctl00_ctl07_ctl00")).sendKeys(Keys.RETURN);;
 
-        //click "View Report" button to get the report
-        driver.findElement(By.id("ctl00_ContentPlaceHolder1_rvReport_ctl00_ctl00")).click();
-        
-        //select the "CSV(comma delimited)" in the format drop down list
-        new Select(driver.findElement(By.id("ctl00_ContentPlaceHolder1_rvReport_ctl01_ctl05_ctl00"))).selectByValue("CSV");
-       
-        //click enter/return button to confirm selection
-        driver.findElement(By.id("ctl00_ContentPlaceHolder1_rvReport_ctl01_ctl05_ctl00")).sendKeys(Keys.RETURN);
-        
-        //click "Export" button to start download
-        driver.findElement(By.id("ctl00_ContentPlaceHolder1_rvReport_ctl01_ctl05_ctl01")).click();
-       
-        File file = new File("/Users/Doris/Downloads/Inspections/FoodInspectionReport.csv");
-        while (!file.exists()) {
-            Thread.sleep(1000);
+            //click "View Report" button to get the report
+            driver.findElement(By.id("ctl00_ContentPlaceHolder1_rvReport_ctl00_ctl00")).click();
+            
+            //select the "CSV(comma delimited)" in the format drop down list
+            new Select(driver.findElement(By.id("ctl00_ContentPlaceHolder1_rvReport_ctl01_ctl05_ctl00"))).selectByValue("CSV");
+           
+            //click enter/return button to confirm selection
+            driver.findElement(By.id("ctl00_ContentPlaceHolder1_rvReport_ctl01_ctl05_ctl00")).sendKeys(Keys.RETURN);
+            
+            //click "Export" button to start download
+            driver.findElement(By.id("ctl00_ContentPlaceHolder1_rvReport_ctl01_ctl05_ctl01")).click();
+           
+            File fileNaming;
+            if(fileCount == 0) {
+                fileNaming = new File("/Users/Doris/Downloads/Inspections/FoodInspectionReport.csv");
+            }else {
+            	fileNaming = new File("/Users/Doris/Downloads/Inspections/FoodInspectionReport(" + fileCount + ").csv");
+            }
+            while (!fileNaming.exists()) {
+                Thread.sleep(1000);
+            	System.out.println("wait for the " + fileCount + "th file to download.\n");
+            }
         }
-    	System.out.println(i);
     }
-    
-   
   }
 
   @After
