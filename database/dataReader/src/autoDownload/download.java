@@ -1,9 +1,12 @@
 package autoDownload;
 
 import static org.junit.Assert.fail;
+
 import java.io.File;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.TimeUnit;
+
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
@@ -19,10 +22,16 @@ import org.openqa.selenium.firefox.FirefoxProfile;
 import org.openqa.selenium.support.ui.Select;
 
 public class download {
+
+  //the path of folder that stores all inspection report	
+  private static final String FOLDER_PATH = "/Users/Doris/Downloads/Inspections/";
+  
   private WebDriver driver;
   private String baseUrl;
   private boolean acceptNextAlert = true;
   private StringBuffer verificationErrors = new StringBuffer();
+  
+  //an array list of names of RHA
   private List<String> RHAList;
 
   @Before
@@ -41,6 +50,7 @@ public class download {
 	baseUrl = "http://orii.health.gov.sk.ca/";
 	driver.manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS);
 	
+	RHAList = new ArrayList<String>();
 	RHAList.add("Cypress");
 	RHAList.add("Five Hills");
 	RHAList.add("Heartland");
@@ -55,60 +65,80 @@ public class download {
 
   @Test
   public void testdownload() throws Exception {
-	  
-    driver.get(baseUrl + "/");
-    int fileCount = 0;
-    //select and click the RHA
-    driver.findElement(By.cssSelector("area[alt=\"" + RHAList.get(0) + "\"]")).click();
-    
-    Select selectLocation = new Select(driver.findElement(By.id("ctl00_ContentPlaceHolder1_rvReport_ctl00_ctl05_ctl00")));
-
-    List<WebElement> locationList = selectLocation.getOptions();
-    System.out.print(locationList.size());
-    for(int j = 1; j < locationList.size(); j ++) {
-    
-    	 //select a location
-        new Select(driver.findElement(By.id("ctl00_ContentPlaceHolder1_rvReport_ctl00_ctl05_ctl00"))).selectByValue(j + "");
-        
-        //click enter/return button to confirm selection
-        driver.findElement(By.id("ctl00_ContentPlaceHolder1_rvReport_ctl00_ctl05_ctl00")).sendKeys(Keys.RETURN);;
-        
-        //get the number of premises (restaurants) in this location
-        Select selectRestaurant = new Select(driver.findElement(By.id("ctl00_ContentPlaceHolder1_rvReport_ctl00_ctl07_ctl00")));
-        List<WebElement> restaurantList = selectRestaurant.getOptions();
-        
-        for(int k = 1; k < restaurantList.size(); k ++) { //start count from 1 because the option 0 is "<Select a value>"
-        	fileCount ++;
-        	//select a premises name (name of restaurant)
-            new Select(driver.findElement(By.id("ctl00_ContentPlaceHolder1_rvReport_ctl00_ctl07_ctl00"))).selectByValue(k + "");
-            
-            //click enter/return button to confirm selection
-            driver.findElement(By.id("ctl00_ContentPlaceHolder1_rvReport_ctl00_ctl07_ctl00")).sendKeys(Keys.RETURN);;
-
-            //click "View Report" button to get the report
-            driver.findElement(By.id("ctl00_ContentPlaceHolder1_rvReport_ctl00_ctl00")).click();
-            
-            //select the "CSV(comma delimited)" in the format drop down list
-            new Select(driver.findElement(By.id("ctl00_ContentPlaceHolder1_rvReport_ctl01_ctl05_ctl00"))).selectByValue("CSV");
-           
-            //click enter/return button to confirm selection
-            driver.findElement(By.id("ctl00_ContentPlaceHolder1_rvReport_ctl01_ctl05_ctl00")).sendKeys(Keys.RETURN);
-            
-            //click "Export" button to start download
-            driver.findElement(By.id("ctl00_ContentPlaceHolder1_rvReport_ctl01_ctl05_ctl01")).click();
-           
-            File fileNaming;
-            if(fileCount == 0) {
-                fileNaming = new File("/Users/Doris/Downloads/Inspections/FoodInspectionReport.csv");
-            }else {
-            	fileNaming = new File("/Users/Doris/Downloads/Inspections/FoodInspectionReport(" + fileCount + ").csv");
-            }
-            while (!fileNaming.exists()) {
-                Thread.sleep(1000);
-            	System.out.println("wait for the " + fileCount + "th file to download.\n");
-            }
-        }
+	//The count of files
+	int fileCount = 0;
+	//check if there is already a file with the name "FoodInspectionReport.csv"; if yes, delete it
+    File fileName = new File(FOLDER_PATH + "FoodInspectionReport.csv");
+    if(fileName.exists()) {
+    	fileName.delete();
     }
+
+	
+	for(int i = 0; i < RHAList.size(); i ++){
+		driver.get(baseUrl + "/");
+	    
+	    //select and click the RHA
+	    driver.findElement(By.cssSelector("area[alt=\"" + RHAList.get(i) + "\"]")).click();
+        String RHAName = RHAList.get(i);
+	    System.out.println("-RHA: " + RHAName);
+	    
+	    //get number of location in this RHA
+	    Select selectLocation = new Select(driver.findElement(By.id("ctl00_ContentPlaceHolder1_rvReport_ctl00_ctl05_ctl00")));
+	    List<WebElement> locationList = selectLocation.getOptions();
+	    
+	    for(int j = 1; j < locationList.size(); j ++) {
+	    
+	    	 //select a location
+	        new Select(driver.findElement(By.id("ctl00_ContentPlaceHolder1_rvReport_ctl00_ctl05_ctl00"))).selectByValue(j + "");
+            String locationName = driver.findElement(By.cssSelector("#ctl00_ContentPlaceHolder1_rvReport_ctl00_ctl05_ctl00 > option[value=\"" + j + "\"]")).getText();
+            System.out.println("---Location: " + locationName);
+            
+	        //click enter/return button to confirm selection
+	        driver.findElement(By.id("ctl00_ContentPlaceHolder1_rvReport_ctl00_ctl05_ctl00")).sendKeys(Keys.RETURN);;
+	        
+	        //get the number of premises (restaurants) in this location
+	        Select selectRestaurant = new Select(driver.findElement(By.id("ctl00_ContentPlaceHolder1_rvReport_ctl00_ctl07_ctl00")));
+	        List<WebElement> restaurantList = selectRestaurant.getOptions();
+	        
+	        for(int k = 1; k < restaurantList.size(); k ++) { //start count from 1 because the option 0 is "<Select a value>"
+	        	fileCount ++;
+	        	//select a premises name (name of restaurant)
+	            new Select(driver.findElement(By.id("ctl00_ContentPlaceHolder1_rvReport_ctl00_ctl07_ctl00"))).selectByValue(k + "");
+	            
+	            //click enter/return button to confirm selection
+	            driver.findElement(By.id("ctl00_ContentPlaceHolder1_rvReport_ctl00_ctl07_ctl00")).sendKeys(Keys.RETURN);;
+
+	            //click "View Report" button to get the report
+	            driver.findElement(By.id("ctl00_ContentPlaceHolder1_rvReport_ctl00_ctl00")).click();
+	            
+	            //select the "CSV(comma delimited)" in the format drop down list
+	            new Select(driver.findElement(By.id("ctl00_ContentPlaceHolder1_rvReport_ctl01_ctl05_ctl00"))).selectByValue("CSV");
+	           
+	            //click enter/return button to confirm selection
+	            driver.findElement(By.id("ctl00_ContentPlaceHolder1_rvReport_ctl01_ctl05_ctl00")).sendKeys(Keys.RETURN);
+	            
+	            //click "Export" button to start download
+	            driver.findElement(By.id("ctl00_ContentPlaceHolder1_rvReport_ctl01_ctl05_ctl01")).click();
+	           
+	            
+	            String restaurantName = driver.findElement(By.cssSelector("#ctl00_ContentPlaceHolder1_rvReport_ctl00_ctl07_ctl00 > option[value=\"" + k + "\"]")).getText();
+	            String newFileNameString = RHAName + "_" + locationName + "_" + restaurantName + ".csv";
+	            //rename file
+	            File newFileName = new File(FOLDER_PATH + newFileNameString);
+	            //check if download is successful
+	            while(!fileName.exists()) {
+	                Thread.sleep(1000);
+	            	System.out.println("-----wait for the " + fileCount + " th file: " + newFileNameString + " to download.");
+	            }
+	            //then rename the file
+	            if(!fileName.renameTo(newFileName)) {
+	                System.err.println("-----rename failed for " + fileCount + " th file: " + newFileNameString + ".");
+	                System.exit(-1);
+	             }
+	            
+	        }
+	    }
+	}
   }
 
   @After
