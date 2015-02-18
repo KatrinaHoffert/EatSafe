@@ -2,7 +2,9 @@ package autoDownload;
 
 import static org.junit.Assert.fail;
 
+import java.io.BufferedReader;
 import java.io.File;
+import java.io.InputStreamReader;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.TimeUnit;
@@ -23,7 +25,7 @@ import org.openqa.selenium.support.ui.Select;
 
 public class download {
 
-  //the path of folder that stores all inspection report	
+  //the path of folder that stores all inspection reports	
   private static final String FOLDER_PATH = "/Users/Doris/Downloads/Inspections/";
   
   private WebDriver driver;
@@ -37,6 +39,7 @@ public class download {
   @Before
   public void setUp() throws Exception {
 
+	//construct a new Firefox profile for the driver
 	FirefoxProfile profile = new FirefoxProfile();
 
 	//set the preference of the browser to handle the download pop-up window automatically
@@ -44,13 +47,13 @@ public class download {
 			"application/msword,application/csv,text/csv,image/png ,image/jpeg, application/pdf, text/html,text/plain,application/octet-stream");
 	profile.setPreference("browser.download.manager.showWhenStarting",false);
 	profile.setPreference("browser.download.folderList", 2); 
-	profile.setPreference("browser.download.dir","/Users/Doris/Downloads/Inspections/"); 
+	profile.setPreference("browser.download.dir",FOLDER_PATH); 
 	  
 	driver = new FirefoxDriver(profile);
-	baseUrl = "http://orii.health.gov.sk.ca/";
+	baseUrl = "http://orii.health.gov.sk.ca/"; //the URL for the "Saskatchewan Online Restaurant Inspection Information"
 	driver.manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS);
 	
-	RHAList = new ArrayList<String>();
+	RHAList = new ArrayList<String>(); //Ten RHA for Saskatchewan
 	RHAList.add("Cypress");
 	RHAList.add("Five Hills");
 	RHAList.add("Heartland");
@@ -73,25 +76,25 @@ public class download {
     	fileName.delete();
     }
 
-	
+	//loop for 10 RHAs
 	for(int i = 0; i < RHAList.size(); i ++){
 		driver.get(baseUrl + "/");
 	    
 	    //select and click the RHA
 	    driver.findElement(By.cssSelector("area[alt=\"" + RHAList.get(i) + "\"]")).click();
-        String RHAName = RHAList.get(i);
-	    System.out.println("-RHA: " + RHAName);
+        String RHAName = RHAList.get(i);//get the RHA name for naming the files
 	    
 	    //get number of location in this RHA
 	    Select selectLocation = new Select(driver.findElement(By.id("ctl00_ContentPlaceHolder1_rvReport_ctl00_ctl05_ctl00")));
 	    List<WebElement> locationList = selectLocation.getOptions();
-	    
-	    for(int j = 1; j < locationList.size(); j ++) {
+	    System.out.println("- " + (i + 1) + " RHA: " + RHAName + ": " + (locationList.size() - 1) + " locations. ");
+
+	    //loop for locations
+	    for(int j = 1; j < locationList.size(); j ++) {//start count from 1 because the option 0 is "<Select a value>"
 	    
 	    	 //select a location
 	        new Select(driver.findElement(By.id("ctl00_ContentPlaceHolder1_rvReport_ctl00_ctl05_ctl00"))).selectByValue(j + "");
             String locationName = driver.findElement(By.cssSelector("#ctl00_ContentPlaceHolder1_rvReport_ctl00_ctl05_ctl00 > option[value=\"" + j + "\"]")).getText();
-            System.out.println("---Location: " + locationName);
             
 	        //click enter/return button to confirm selection
 	        driver.findElement(By.id("ctl00_ContentPlaceHolder1_rvReport_ctl00_ctl05_ctl00")).sendKeys(Keys.RETURN);;
@@ -99,7 +102,9 @@ public class download {
 	        //get the number of premises (restaurants) in this location
 	        Select selectRestaurant = new Select(driver.findElement(By.id("ctl00_ContentPlaceHolder1_rvReport_ctl00_ctl07_ctl00")));
 	        List<WebElement> restaurantList = selectRestaurant.getOptions();
+            System.out.println("--- " + j + " Location: "  + locationName + ": " + (restaurantList.size() - 1) + " restaurants. ");
 	        
+	        //loop for premises (restaurant)
 	        for(int k = 1; k < restaurantList.size(); k ++) { //start count from 1 because the option 0 is "<Select a value>"
 	        	fileCount ++;
 	        	//select a premises name (name of restaurant)
@@ -122,23 +127,30 @@ public class download {
 	           
 	            
 	            String restaurantName = driver.findElement(By.cssSelector("#ctl00_ContentPlaceHolder1_rvReport_ctl00_ctl07_ctl00 > option[value=\"" + k + "\"]")).getText();
+	            System.out.println("----- " + k + ": " + restaurantName + ". ");
+
 	            String newFileNameString = RHAName + "_" + locationName + "_" + restaurantName + ".csv";
 	            //rename file
 	            File newFileName = new File(FOLDER_PATH + newFileNameString);
 	            //check if download is successful
 	            while(!fileName.exists()) {
 	                Thread.sleep(1000);
-	            	System.out.println("-----wait for the " + fileCount + " th file: " + newFileNameString + " to download.");
+	            	System.out.println("---------wait for the " + fileCount + " th file: " + newFileNameString + " to download.");
 	            }
 	            //then rename the file
 	            if(!fileName.renameTo(newFileName)) {
-	                System.err.println("-----rename failed for " + fileCount + " th file: " + newFileNameString + ".");
-	                System.exit(-1);
-	             }
-	            
+	                System.err.println("---------rename failed for " + fileCount + " th file: " + newFileNameString + ".");
+	                System.err.println("Please rename manually, then hit Enter to resume: ");
+	                BufferedReader br = new BufferedReader( new InputStreamReader(System.in));
+	                br.readLine();
+	            }
 	        }
 	    }
 	}
+	
+	System.out.println("Done\n");
+	System.out.println("Total number of files: " + fileCount + ".");
+
   }
 
   @After
