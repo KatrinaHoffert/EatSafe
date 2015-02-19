@@ -59,8 +59,8 @@ public class CSVLoader {
 		if (null == headerRow) {
 			csvReader.close();
 			throw new FileNotFoundException(
-					"No columns defined in given CSV file." +
-					"Please check the CSV file format.");
+					"No columns defined in given CSV file: " + csvFile + 
+					"\nPlease check the CSV file format. Continue...\n");
 		}
 
 		String[] nextLine;
@@ -91,13 +91,18 @@ public class CSVLoader {
 				}
 			}
 					
+			
+			String locationName = WordUtils.capitalizeFully(dataMatrix.get(0)[1]).replaceAll("'","''"); //initial cap the location name
+			String locationAddress = testNull(dataMatrix.get(0)[3]);
+			String locationPostcode = getPostcode(dataMatrix.get(0)[5]);
+			String locationCity = getCity(dataMatrix.get(0)[5]);
+			String locationRHA = dataMatrix.get(0)[7];
+			
 			// Insert location
 			this.writer.write(String.format("INSERT INTO location(id, name, address, postcode, city, rha)\n"
 					+ " VALUES (%d, \'%s\', \'%s\', \'%s\', \'%s\', \'%s\');\n\n", 
-					locationId, WordUtils.capitalizeFully(dataMatrix.get(0)[1]).replaceAll("'","''"), // location ID in unique and increased by one, initial cap the location name
-					dataMatrix.get(0)[3], dataMatrix.get(0)[5].substring(dataMatrix.get(0)[5].length() - 7), //get the postcode, which is the last 7 char
-					WordUtils.capitalizeFully(dataMatrix.get(0)[5].substring(0, dataMatrix.get(0)[5].lastIndexOf(','))),  // get the city name, which is before the comma
-					dataMatrix.get(0)[7]));
+					locationId, locationName, locationAddress, locationPostcode, locationCity, locationRHA));
+			// location ID in unique and increased by one
 			
 			for (int i = 0; i < dataMatrix.size(); i ++) {
 				
@@ -133,6 +138,49 @@ public class CSVLoader {
 			csvReader.close();
 		}
 		return inspectionId;
+	}
+
+	/**
+	 * get the city name, which is before the comma
+	 * @param string
+	 * @return string of city, or "DATA MISSING" if the pattern is not match
+	 */
+	private String getCity(String string) {
+		if(string.equals("") || string.length() < 7) {
+			return "DATA MISSING";
+		}else if(string.matches("^.+, .+ {5}[ABCEGHJKLMNPRSTVXY]{1}\\d{1}[A-Z]{1} \\d{1}[A-Z]{1}\\d{1}$")) {
+			return WordUtils.capitalizeFully(string.substring(0, string.lastIndexOf(',')));
+		}else {
+			return "DATA MISSING";
+		}
+	}
+
+	/**
+	 * get the postcode of a location, which is the last 7 characters of the string
+	 * @param string
+	 * @return string of postcode, or "DATA MISSING" if the pattern is not match
+	 */
+	private String getPostcode(String string) {
+		if(string.equals("") || string.length() < 7) {
+			return "DATA MISSING";
+		}else if(string.substring(string.length() - 7).matches("^[ABCEGHJKLMNPRSTVXY]{1}\\d{1}[A-Z]{1} \\d{1}[A-Z]{1}\\d{1}$")) {
+			return string.substring(string.length() - 7);
+		}else {
+			return "DATA MISSING";
+		}
+	}
+
+	/**
+	 * test if the string contains nothing
+	 * @param string
+	 * @return "DATA MISSING" if contains nothing, or the string itself otherwise
+	 */
+	private String testNull(String string) {
+		if(string.equals("")) {
+			return "DATA MISSING";
+		}else {
+			return string;
+		}
 	}
 
 	public char getSeprator() {
