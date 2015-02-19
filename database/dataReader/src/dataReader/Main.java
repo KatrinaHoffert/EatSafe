@@ -2,6 +2,7 @@ package dataReader;
 
 import java.io.BufferedWriter;
 import java.io.File;
+import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.OutputStreamWriter;
@@ -9,8 +10,8 @@ import java.io.Writer;
 
 public class Main {
 	
-	private static final String FOLDER_PATH = "../InspectionReport"; // path of inspection report folder
-	private static final String FILE_NAME = "../statements.sql"; // output file's name
+	private static final String FOLDER_PATH = "/Users/Doris/Downloads/Inspections/"; // path of inspection report folder
+	private static final String FILE_NAME = "/Users/Doris/Downloads/statements.sql"; // output file's name
 	
 	public static void main(String[] args) {
 		try {
@@ -137,11 +138,13 @@ public class Main {
 		
 		for (int i = 0; i < listOfFiles.length; i++) {
 			File file = listOfFiles[i];
-			if (file.isFile() && file.getName().startsWith("FoodInspectionReport")) {
+			if (file.isFile() && file.getName().endsWith("csv")) {
 				try {
 					CSVLoader loader = new CSVLoader(writer);
-					inspectionId = loader.loadCSV(folderPath + "/" + file.getName(), locationId, inspectionId);
+					inspectionId = loader.loadCSV(folderPath + file.getName(), locationId, inspectionId);
 					locationId ++;	//increase the location ID for the next location
+				} catch (FileNotFoundException e) {
+					System.out.println(e.getMessage());
 				} catch (IOException e) {
 					e.printStackTrace();
 				} catch (Exception e) {
