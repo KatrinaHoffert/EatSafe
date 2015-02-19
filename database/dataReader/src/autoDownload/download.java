@@ -112,6 +112,7 @@ public class download {
 	            System.out.print("----- " + k + ": " + restaurantName + ": ");
 
 	            String newFileNameString = RHAName + "_" + locationName + "_" + restaurantName + ".csv";
+	            newFileNameString = newFileNameString.replace('/', '-');//replace the /  in the file name with -
 	            //rename file
 	            File newFileName = new File(FOLDER_PATH + newFileNameString);
 	            if(newFileName.exists()) {
