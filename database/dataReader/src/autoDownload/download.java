@@ -107,43 +107,55 @@ public class download {
 	        //loop for premises (restaurant)
 	        for(int k = 1; k < restaurantList.size(); k ++) { //start count from 1 because the option 0 is "<Select a value>"
 	        	fileCount ++;
-	        	//select a premises name (name of restaurant)
-	            new Select(driver.findElement(By.id("ctl00_ContentPlaceHolder1_rvReport_ctl00_ctl07_ctl00"))).selectByValue(k + "");
-	            
-	            //click enter/return button to confirm selection
-	            driver.findElement(By.id("ctl00_ContentPlaceHolder1_rvReport_ctl00_ctl07_ctl00")).sendKeys(Keys.RETURN);;
-
-	            //click "View Report" button to get the report
-	            driver.findElement(By.id("ctl00_ContentPlaceHolder1_rvReport_ctl00_ctl00")).click();
-	            
-	            //select the "CSV(comma delimited)" in the format drop down list
-	            new Select(driver.findElement(By.id("ctl00_ContentPlaceHolder1_rvReport_ctl01_ctl05_ctl00"))).selectByValue("CSV");
-	           
-	            //click enter/return button to confirm selection
-	            driver.findElement(By.id("ctl00_ContentPlaceHolder1_rvReport_ctl01_ctl05_ctl00")).sendKeys(Keys.RETURN);
-	            
-	            //click "Export" button to start download
-	            driver.findElement(By.id("ctl00_ContentPlaceHolder1_rvReport_ctl01_ctl05_ctl01")).click();
-	           
-	            
-	            String restaurantName = driver.findElement(By.cssSelector("#ctl00_ContentPlaceHolder1_rvReport_ctl00_ctl07_ctl00 > option[value=\"" + k + "\"]")).getText();
-	            System.out.println("----- " + k + ": " + restaurantName + ". ");
+	        	
+	        	String restaurantName = driver.findElement(By.cssSelector("#ctl00_ContentPlaceHolder1_rvReport_ctl00_ctl07_ctl00 > option[value=\"" + k + "\"]")).getText();
+	            System.out.print("----- " + k + ": " + restaurantName + ": ");
 
 	            String newFileNameString = RHAName + "_" + locationName + "_" + restaurantName + ".csv";
 	            //rename file
 	            File newFileName = new File(FOLDER_PATH + newFileNameString);
-	            //check if download is successful
-	            while(!fileName.exists()) {
-	                Thread.sleep(1000);
-	            	System.out.println("---------wait for the " + fileCount + " th file: " + newFileNameString + " to download.");
-	            }
-	            //then rename the file
-	            if(!fileName.renameTo(newFileName)) {
-	                System.err.println("---------rename failed for " + fileCount + " th file: " + newFileNameString + ".");
-	                System.err.println("Please rename manually, then hit Enter to resume: ");
-	                BufferedReader br = new BufferedReader( new InputStreamReader(System.in));
-	                br.readLine();
-	            }
+	            if(newFileName.exists()) {
+	            	System.out.println("ALREADY EXISTS: the " + fileCount + " th file: " + newFileNameString + ".");
+	            }else {
+	            	//select a premises name (name of restaurant)
+		            new Select(driver.findElement(By.id("ctl00_ContentPlaceHolder1_rvReport_ctl00_ctl07_ctl00"))).selectByValue(k + "");
+		            
+		            //click enter/return button to confirm selection
+		            driver.findElement(By.id("ctl00_ContentPlaceHolder1_rvReport_ctl00_ctl07_ctl00")).sendKeys(Keys.RETURN);;
+		            
+		            //some restaurant don't have any report, and the export format drop list won't show if no report
+		            if(driver.findElements(By.cssSelector("#ctl00_ContentPlaceHolder1_rvReport_ctl00_ctl09_ctl00 > option[value=\"0\"]")).size() != 0) {
+		            	
+		            	//click "View Report" button to get the report
+			            driver.findElement(By.id("ctl00_ContentPlaceHolder1_rvReport_ctl00_ctl00")).click();
+			            
+		            	 //select the "CSV(comma delimited)" in the format drop down list
+			            new Select(driver.findElement(By.id("ctl00_ContentPlaceHolder1_rvReport_ctl01_ctl05_ctl00"))).selectByValue("CSV");
+			           
+			            //click enter/return button to confirm selection
+			            driver.findElement(By.id("ctl00_ContentPlaceHolder1_rvReport_ctl01_ctl05_ctl00")).sendKeys(Keys.RETURN);
+			            
+			            //click "Export" button to start download
+			            driver.findElement(By.id("ctl00_ContentPlaceHolder1_rvReport_ctl01_ctl05_ctl01")).click();
+			           
+			            
+			            //check if download is successful; if not, wait
+			            while(!fileName.exists()) {
+			                Thread.sleep(1000);
+			            }
+			            //then rename the file; pause when renaming failed, and manually rename, then hit enter to resume
+			            if(!fileName.renameTo(newFileName)) {
+			                System.err.println("\n---------rename failed for " + fileCount + " th file: " + newFileNameString + ".");
+			                System.err.println("Please rename manually, then hit Enter to resume: ");
+			                BufferedReader br = new BufferedReader( new InputStreamReader(System.in));
+			                br.readLine();//resume
+			            }
+		            	System.out.println("DOWNLOADED SUCCESSFUL: the " + fileCount + " th file: " + newFileNameString + ".");
+		            }else {
+		            	System.err.println("NO REPORT: the " + fileCount + " th file: " + newFileNameString + ".");
+		            	fileCount --; // no report, count decrease by one
+		            }
+	            }  	
 	        }
 	    }
 	}
