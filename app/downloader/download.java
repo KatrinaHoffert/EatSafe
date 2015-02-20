@@ -26,7 +26,7 @@ import org.openqa.selenium.support.ui.Select;
 public class download {
 
   //the path of folder that stores all inspection reports	
-  private static final String FOLDER_PATH = "/Users/Doris/Downloads/Inspections/";
+  private static final String FOLDER_PATH = "../../database/InspectionReport/";
   
   private WebDriver driver;
   private String baseUrl;

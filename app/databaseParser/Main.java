@@ -10,13 +10,12 @@ import java.io.Writer;
 
 public class Main {
 	
-	private static final String FOLDER_PATH = "/Users/Doris/Downloads/Inspections/"; // path of inspection report folder
-	private static final String FILE_NAME = "/Users/Doris/Downloads/statements.sql"; // output file's name
+	private static final String FOLDER_PATH = "../../database/InspectionReport";
+	private static final String FILE_NAME = "../../database/statements.sql";
 	
 	public static void main(String[] args) {
 		try {
-			//the folder location of all csv files, and open a writer stream for output
-			readFolder(FOLDER_PATH,getWriterStream(FILE_NAME));
+			readFolder(FOLDER_PATH, getWriterStream(FILE_NAME));
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
