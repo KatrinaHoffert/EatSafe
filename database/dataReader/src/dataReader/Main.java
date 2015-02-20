@@ -10,8 +10,8 @@ import java.io.Writer;
 
 public class Main {
 	
-	private static final String FOLDER_PATH = "/Users/Doris/Downloads/Inspections/"; // path of inspection report folder
-	private static final String FILE_NAME = "/Users/Doris/Downloads/statements.sql"; // output file's name
+	private static final String FOLDER_PATH = "../InspectionReport/"; // path of inspection report folder
+	private static final String FILE_NAME = "../NEWstatements.sql"; // output file's name
 	
 	public static void main(String[] args) {
 		try {

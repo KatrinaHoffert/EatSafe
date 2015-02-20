@@ -25,8 +25,9 @@ import org.openqa.selenium.support.ui.Select;
 
 public class download {
 
-  //the path of folder that stores all inspection reports	
-  private static final String FOLDER_PATH = "/Users/Doris/Downloads/Inspections/";
+  //the path of folder that stores all inspection reports
+  //need to be the exactly path; otherwise the firefox won't find it
+  private static final String FOLDER_PATH = "/Users/Doris/EatSafe/database/InspectionReport/";
   
   private WebDriver driver;
   private String baseUrl;
