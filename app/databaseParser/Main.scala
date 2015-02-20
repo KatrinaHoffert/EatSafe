@@ -9,7 +9,15 @@ import java.io.OutputStreamWriter
 import java.io.Writer
 
 object Main {
+  /**
+   * Folder containing the CSVs to parse. Only files with the *.csv extension in this folder will
+   * be parsed. The trailing slash is necessary. Path is relative to project directory.
+   */
   val FOLDER_PATH = "database/InspectionReport/"
+
+  /**
+   * Output SQL file name.
+   */
   val FILE_NAME = "database/statements.sql"
 
   def main(args: Array[String]): Unit = {
@@ -117,7 +125,7 @@ object Main {
     var inspectionId = 1
 
     for(file <- files) {
-      if(file.isFile && file.getName.endsWith("csv")) {
+      if(file.isFile && file.getName.toLowerCase.endsWith("csv")) {
         val loader = new CSVLoader(writer);
         inspectionId = loader.loadCSV(folderPath + file.getName, locationId, inspectionId);
         locationId += 1;

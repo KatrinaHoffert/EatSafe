@@ -6,9 +6,13 @@ import java.util.ArrayList
 import java.util.Date
 import java.util.List
 
+/**
+ * Has simple methods for attempting to convert dates.
+ */
 object DateUtil {
-  // List of all date formats that we want to parse.
-  // Add your own format here.
+  /**
+   * List of date formats that will be tried (in this order) to try and convert dates.
+   */
   val dateFormats = Seq(
     new SimpleDateFormat("M/dd/yyyy"),
     new SimpleDateFormat("dd.M.yyyy"),
@@ -20,10 +24,11 @@ object DateUtil {
   )
 
   /**
-   * Convert String with various formats into java.util.Date
+   * Convert String from various formats (defined in `dateFormats`) into a Date object. A null input
+   * is gracefully handled.
    *
-   * @param input Date as a string
-   * @return Date object if input string is parsed successfully else returns null.
+   * @param input A possible date as a string.
+   * @return Some Date object if input string is parsed successfully, otherwise None.
    */
   def convertToDate(input: String): Option[Date] = {
     if(input == null) {
@@ -36,7 +41,7 @@ object DateUtil {
           format.setLenient(false)
           date = Some(format.parse(input))
         } catch {
-          case ex: ParseException => // Do nothing
+          case ex: ParseException => // Do nothing (maybe a different format or not a date?)
         }
         
         if(date.isDefined) return date

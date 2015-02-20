@@ -10,15 +10,39 @@ import java.util.List
 import org.apache.commons.lang3.text.WordUtils
 import au.com.bytecode.opencsv.CSVReader
 
+/**
+ * Loads and interprets a CSV file, creating SQL ouput that can be run in the Postgres console.
+ * @param writer The writer to write the SQL output to.
+ */
 class CSVLoader(writer: Writer) {
   val separator = ','
 
   /**
-   * Parse CSV file using OpenCSV library and load in
-   * given file, with correct location Id and inspection Id.
-   * @param csvFile Input CSV file
-   * @param location Id for this new location
-   * @param the start of inspection Id for all the inspections
+   * Interprets a given CSV file, writing the appropriate SQL queries to the Writer that was
+   * passed to this object's constructor. The columns of the CSV file are as follows:
+   *
+   * 0. Download date (unused).
+   * 1. Location name.
+   * 2. Inspection date.
+   * 3. Location address.
+   * 4. Inspection type.
+   * 5. Location city and postal code.
+   * 6. Reinspection priority.
+   * 7. Location regional health authority.
+   * 8. Violation type priority (unused).
+   * 9. Violation ID and name (only ID is used).
+   *
+   * Each row of the CSV file represents either an inspection or a violation in an inspection. If
+   * there's no violations in an inspection, then we get a single row for the inspection with the
+   * violation columns left blank. If there has been violations, then there will be a row (with
+   * duplicate information) for each violation in the inspection.
+   *
+   * Note that there's a few places where fields are left blank in the source CSVs. The output
+   * will use "DATA MISSING" as a placeholder.
+   * @param csvFile Path to the CSV file to load.
+   * @param locationId The ID to use for the location.
+   * @param inspectionIdIn The first inspection ID to use.
+   * @return The next inspection ID that should be used.
    */
   def loadCSV(csvFile: String, locationId: Int, inspectionIdIn: Int): Int = {
     var inspectionId = inspectionIdIn
@@ -115,69 +139,63 @@ class CSVLoader(writer: Writer) {
   }
 
   /**
-   * get the violation ID, which is a integer
-   * For some reason, their reports don't have violation 9, but have violation 8a and 8b.
-   * To maintain consistency(also the database store ID as integer), will treat 8a as 8, 8b as 9,
-   * @param string
-   * @return integer of violation ID
+   * Get the violation ID, which is a integer uniquely identifying a violation. For some reason, th
+   * reports don't have violation 9, but have violation 8a and 8b. To maintain consistency we
+   * treat 8a as 8 and 8b as 9,
+   * @param string The CSV column for the violation name.
+   * @return Integer of violation ID.
    */
   def getViolationId(string: String): Int = {
-    val tempID = string.substring(0, string.lastIndexOf('-') - 1);
-    if(tempID.equals("8a")) {
-      return 8;
+    val tempID = string.substring(0, string.lastIndexOf('-') - 1)
+    if(tempID == "8a") {
+      8
     }
-    else if(tempID.equals("8b")) {
-      return 9;
+    else if(tempID == "8b") {
+      9
     }
     else {
-      return Integer.parseInt(tempID);
+      tempID.toInt
     }
   }
 
   /**
-   * get the city name, which is before the comma
-   * @param string
-   * @return string of city, or "DATA MISSING" if the pattern is not match
+   * Get the city name, which is before the comma in its column of the CSV file.
+   * @param string The full CSV column.
+   * @return City name, if it exists, or a placeholder if it does not.
    */
   def getCity(string: String): String = {
-    if(string.equals("") || string.length() < 7) {
-      return "DATA MISSING";
+    if(string == "" || string.length < 7) {
+      "DATA MISSING";
     }
     else if(string.matches("^.+, .+$")) {
-      return WordUtils.capitalizeFully(string.substring(0, string.lastIndexOf(',')));
+      WordUtils.capitalizeFully(string.substring(0, string.lastIndexOf(',')))
     }
     else {
-      return "DATA MISSING";
+      "DATA MISSING";
     }
   }
 
   /**
-   * get the postcode of a location, which is the last 7 characters of the string
-   * @param string
-   * @return string of postcode, or "DATA MISSING" if the pattern is not match
+   * Gets the postcode of a location, which is the last 7 characters of the string.
+   * @param string Full 
+   * @return string of postcode, or "DATA MISSING" if the pattern is not matched
    */
   def getPostcode(string: String): String = {
-    if(string.equals("") || string.length() < 7) {
-      return "DATA MISSING";
+    if(string == "" || string.length < 7) {
+      "DATA MISSING"
     }
-    else if(string.substring(string.length() - 7).matches("^[ABCEGHJKLMNPRSTVXY]{1}\\d{1}[A-Z]{1} \\d{1}[A-Z]{1}\\d{1}$")) {
-      return string.substring(string.length() - 7);
+    else if(string.substring(string.length - 7).matches("^[ABCEGHJKLMNPRSTVXY]{1}\\d{1}[A-Z]{1} \\d{1}[A-Z]{1}\\d{1}$")) {
+      string.substring(string.length - 7)
     }
     else {
-      return "DATA MISSING";
+      "DATA MISSING"
     }
   }
 
   /**
-   * test if the string contains nothing
-   * @param string
-   * @return "DATA MISSING" if contains nothing, or the string itself otherwise
+   * Tests if the string is empty, returning a placeholder if it is or the original data otherwise.
+   * @param string The full column from the CSV file.
+   * @return "DATA MISSING" if contains nothing or the string itself otherwise.
    */
-  def testNull(string: String): String = {
-    if(string.equals("")) {
-      return "DATA MISSING";
-    }else {
-      return string;
-    }
-  }
+  def testNull(string: String): String = if(string == "") "DATA MISSING" else string
 }
