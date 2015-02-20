@@ -4,6 +4,8 @@ import scala.util.{Try, Success, Failure}
 import anorm._
 import play.api.db.DB
 import play.api.Play.current
+import globals.ActiveDatabase
+
 
 /**
  * Represents a single inspection of a location.
@@ -19,11 +21,12 @@ object Inspection {
    * Gets a list of inspections belonging to a given location.
    *
    * @param locationId The ID of the location we want the inspections for.
+   * @param db this is a implicit parameter that is used to specify what database is to be accessed
    * @returns List of inspection objects representing the inspections for that location.
    */
-  def getInspections(locationId: Int): Try[Seq[Inspection]] = {
+  def getInspections(locationId: Int)(implicit db: ActiveDatabase): Try[Seq[Inspection]] = {
     Try {
-      DB.withConnection { implicit connection =>
+      DB.withConnection(db.name) { implicit connection =>
         val query = SQL(
            """
              SELECT id, inspection_date, inspection_type, reinspection_priority
