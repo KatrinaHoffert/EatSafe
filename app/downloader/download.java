@@ -8,6 +8,8 @@ import java.io.InputStreamReader;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.TimeUnit;
+import java.nio.file.Paths;
+import java.nio.file.Path;
 
 import org.junit.After;
 import org.junit.Before;
@@ -25,7 +27,8 @@ import org.openqa.selenium.support.ui.Select;
 
 public class Download {
   //the path of folder that stores all inspection reports
-  private static final String FOLDER_PATH = "../../database/InspectionReport/";
+  private static final String FOLDER_PATH = "database/InspectionReport/";
+  private static String fullPath = null;
 
   private WebDriver driver;
   private String baseUrl;
@@ -37,6 +40,8 @@ public class Download {
 
   @Before
   public void setUp() throws Exception {
+    Path workingDirectory = Paths.get(".").toFile().getCanonicalFile().toPath();
+    fullPath = workingDirectory.resolve(FOLDER_PATH).toString();
     //construct a new Firefox profile for the driver
     FirefoxProfile profile = new FirefoxProfile();
 
@@ -48,7 +53,7 @@ public class Download {
         "application/octet-stream");
     profile.setPreference("browser.download.manager.showWhenStarting", false);
     profile.setPreference("browser.download.folderList", 2);
-    profile.setPreference("browser.download.dir", FOLDER_PATH);
+    profile.setPreference("browser.download.dir", fullPath);
 
     driver = new FirefoxDriver(profile);
     baseUrl = "http://orii.health.gov.sk.ca/"; //the URL for the "Saskatchewan Online Restaurant Inspection Information"
@@ -72,7 +77,7 @@ public class Download {
     //The count of files
     int fileCount = 0;
     //check if there is already a file with the name "FoodInspectionReport.csv"; if yes, delete it
-    File fileName = new File(FOLDER_PATH + "FoodInspectionReport.csv");
+    File fileName = new File(fullPath + "/FoodInspectionReport.csv");
     if(fileName.exists()) {
       fileName.delete();
     }
