@@ -1,4 +1,4 @@
-package dataReader
+package databaseParser
 
 import java.text.ParseException
 import java.text.SimpleDateFormat

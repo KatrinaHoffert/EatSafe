@@ -1,4 +1,4 @@
-package dataReader
+package databaseParser
 
 import java.io.BufferedWriter
 import java.io.File
