@@ -6,6 +6,7 @@ import java.io.InputStreamReader;
 import java.io.Writer;
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
 import org.apache.commons.lang.WordUtils;
 
@@ -92,11 +93,11 @@ public class CSVLoader {
 			}
 					
 			
-			String locationName = WordUtils.capitalizeFully(dataMatrix.get(0)[1]).replaceAll("'","''"); //initial cap the location name
-			String locationAddress = testNull(dataMatrix.get(0)[3]);
+			String locationName = WordUtils.capitalizeFully(dataMatrix.get(0)[1]).replaceAll("'","''"); //initial cap the location name, replace the single quote with two single quotes
+			String locationAddress = testNull(dataMatrix.get(0)[3]).replaceAll("'","''");//address may contain single quote
 			String locationPostcode = getPostcode(dataMatrix.get(0)[5]);
-			String locationCity = getCity(dataMatrix.get(0)[5]);
-			String locationRHA = dataMatrix.get(0)[7];
+			String locationCity = getCity(dataMatrix.get(0)[5]).replaceAll("'","''");//city name may contain single quote
+			String locationRHA = testNull(dataMatrix.get(0)[7]);
 			
 			// Insert location
 			this.writer.write(String.format("INSERT INTO location(id, name, address, postcode, city, rha)\n"
@@ -104,28 +105,44 @@ public class CSVLoader {
 					locationId, locationName, locationAddress, locationPostcode, locationCity, locationRHA));
 			// location ID in unique and increased by one
 			
+			//this last ID is used because: their reports have duplicated records: a same violation under same inspection
+			//see "Regina Qu'Appelle_Pilot Butte_Pilot Butte Recreation Hall Kitchen [Pilot But...].csv"
+			List<Integer> lastViolationId = new ArrayList<Integer>();
+			
 			for (int i = 0; i < dataMatrix.size(); i ++) {
 				
-				if (i == 0 || !(dataMatrix.get(i)[2].equals(dataMatrix.get(i-1)[2]))) {
+				if (i == 0 || !(dataMatrix.get(i)[2].equals(dataMatrix.get(i-1)[2]))) {//test if this is a new inspection; if yes, insert; if no, just insert violations 
+					
+					String inspectionDate = testNull(dataMatrix.get(i)[2]);
+					String inspectionType = testNull(dataMatrix.get(i)[4]);
+					String reinspectionPriority = testNull(dataMatrix.get(i)[6]);
 					
 					//Insert inspection
 					this.writer.write(String.format("INSERT INTO inspection(id, location_id, inspection_date, inspection_type, reinspection_priority)\n"
 							+ " VALUES (%d, %d, \'%s\', \'%s\', \'%s\');\n\n", 
-							inspectionId, locationId, dataMatrix.get(i)[2], dataMatrix.get(i)[4], dataMatrix.get(i)[6]));
+							inspectionId, locationId, inspectionDate, inspectionType, reinspectionPriority));
 					inspectionId ++;// after insert the new inspection, should increase the inspectionId by one, to guarantee the uniqueness
+					
 					if (!dataMatrix.get(i)[9].equals("")) {
 						//Insert violation
+						int violationId = getViolationId(dataMatrix.get(i)[9]);
+						lastViolationId.clear();;
+						lastViolationId.add(violationId);
 						this.writer.write(String.format("INSERT INTO violation(inspection_id, violation_id)\n"
-								+ " VALUES (%d, %s);\n\n", 
-								inspectionId - 1, dataMatrix.get(i)[9].substring(0, dataMatrix.get(i)[9].lastIndexOf('-') - 1)));
+								+ " VALUES (%d, %d);\n\n", 
+								inspectionId - 1, violationId));
 					}
 					
 				} else {//a violation for the same inspection
 					if (!dataMatrix.get(i)[9].equals("")) {
 						//Insert violation
-						this.writer.write(String.format("INSERT INTO violation(inspection_id, violation_id)\n"
-								+ " VALUES (%d, %s);\n\n", 
-								inspectionId - 1, dataMatrix.get(i)[9].substring(0, dataMatrix.get(i)[9].lastIndexOf('-') - 1)));
+						int violationId = getViolationId(dataMatrix.get(i)[9]);
+						if(!lastViolationId.contains(violationId)) {
+							lastViolationId.add(violationId);
+							this.writer.write(String.format("INSERT INTO violation(inspection_id, violation_id)\n"
+									+ " VALUES (%d, %d);\n\n", 
+									inspectionId - 1, violationId));
+						}
 					}
 				}
 			}
@@ -138,6 +155,24 @@ public class CSVLoader {
 			csvReader.close();
 		}
 		return inspectionId;
+	}
+
+	/**
+	 * get the violation ID, which is a integer
+	 * For some reason, their reports don't have violation 9, but have violation 8a and 8b.
+	 * To maintain consistency(also the database store ID as integer), will treat 8a as 8, 8b as 9, 
+	 * @param string
+	 * @return integer of violation ID
+	 */
+	private int getViolationId(String string) {
+		String tempID = string.substring(0, string.lastIndexOf('-') - 1);
+		if(tempID.equals("8a")) {
+			return 8;
+		}else if(tempID.equals("8b")) {
+			return 9;
+		}else {
+			return Integer.parseInt(tempID);
+		}
 	}
 
 	/**
