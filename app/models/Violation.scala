@@ -4,6 +4,7 @@ import scala.util.{Try, Success, Failure}
 import anorm._
 import play.api.db.DB
 import play.api.Play.current
+import globals.ActiveDatabase
 
 /**
  * Represents a health and safety inspection violation.
@@ -22,11 +23,12 @@ object Violation {
    * Gets a list of violations belonging to a given inspection.
    *
    * @param inspectionId The ID of the inspection we want the violations for.
+   * @param db this is a implicit parameter that is used to specify what database is to be accessed
    * @returns List of violation objects representing the violations for that inspection.
    */
-  def getViolations(inspectionId: Int): Try[Seq[Violation]] = {
+  def getViolations(inspectionId: Int)(implicit db: ActiveDatabase): Try[Seq[Violation]] = {
     Try {
-      DB.withConnection { implicit connection =>
+      DB.withConnection(db.name) { implicit connection =>
         val query = SQL(
            """
              SELECT violation_id, name, description, priority
