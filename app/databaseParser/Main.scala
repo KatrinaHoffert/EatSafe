@@ -8,9 +8,9 @@ import java.io.IOException
 import java.io.OutputStreamWriter
 import java.io.Writer
 
-class Main {
-  val FOLDER_PATH = "../../database/InspectionReport"
-  val FILE_NAME = "../../database/statements.sql"
+object Main {
+  val FOLDER_PATH = "database/InspectionReport/"
+  val FILE_NAME = "database/statements.sql"
 
   def main(args: Array[String]): Unit = {
     readFolder(FOLDER_PATH, getWriterStream(FILE_NAME));
@@ -24,7 +24,6 @@ class Main {
       new BufferedWriter(new OutputStreamWriter(new FileOutputStream(fileName), "utf-8"))
   }
 
-
   /**
    * Creates the comments at the beginning of the file.
    */
@@ -33,7 +32,6 @@ class Main {
         + "-- This file will populate the database\n"
         + "-- Before running this file, run CreateTables.sql first\n")
   }
-
 
   /**
    * Creates the violation type table (which is hardcoded because it doesn't change).

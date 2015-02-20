@@ -56,7 +56,7 @@ class CSVLoader(writer: Writer) {
 
         dataMatrix.append(recordLine)
       }
-      
+
       nextLine = csvReader.readNext()
     }
 
@@ -77,7 +77,7 @@ class CSVLoader(writer: Writer) {
     //see "Regina Qu'Appelle_Pilot Butte_Pilot Butte Recreation Hall Kitchen [Pilot But...].csv"
     val lastViolationId = new ArrayList[Integer]
 
-    for(i <- 0 to dataMatrix.size) {
+    for(i <- 0 until dataMatrix.size) {
       // Test if this is a new inspection; if yes, insert; if no, just insert violations
       if(i == 0 || !(dataMatrix(i)(2) == (dataMatrix(i - 1)(2)))) {
         val inspectionDate = testNull(dataMatrix(i)(2));
