@@ -94,7 +94,7 @@ public class CSVLoader {
 					
 			
 			String locationName = WordUtils.capitalizeFully(dataMatrix.get(0)[1]).replaceAll("'","''"); //initial cap the location name, replace the single quote with two single quotes
-			String locationAddress = testNull(dataMatrix.get(0)[3]).replaceAll("'","''");//address may contain single quote
+			String locationAddress = WordUtils.capitalizeFully(testNull(dataMatrix.get(0)[3]).replaceAll("'","''"));//address may contain single quote
 			String locationPostcode = getPostcode(dataMatrix.get(0)[5]);
 			String locationCity = getCity(dataMatrix.get(0)[5]).replaceAll("'","''");//city name may contain single quote
 			String locationRHA = testNull(dataMatrix.get(0)[7]);
@@ -183,7 +183,7 @@ public class CSVLoader {
 	private String getCity(String string) {
 		if(string.equals("") || string.length() < 7) {
 			return "DATA MISSING";
-		}else if(string.matches("^.+, .+ {5}[ABCEGHJKLMNPRSTVXY]{1}\\d{1}[A-Z]{1} \\d{1}[A-Z]{1}\\d{1}$")) {
+		}else if(string.matches("^.+, .+$")) {
 			return WordUtils.capitalizeFully(string.substring(0, string.lastIndexOf(',')));
 		}else {
 			return "DATA MISSING";
