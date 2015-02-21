@@ -4,7 +4,7 @@ import scala.util.{Try, Success, Failure}
 import anorm._
 import play.api.db.DB
 import play.api.Play.current
-
+import globals.ActiveDatabase
 
 /**
  * Represents a location (which is anywhere that can be audited for health inspections, such as
@@ -19,7 +19,7 @@ import play.api.Play.current
  * @param regionalHealthAuthority The RHA that performs inspections for this location.
  * @param inspections A list of inspections that have been done on the location.
  */
-case class Location (id: Int, name: String, address: String, postalCode: String, city: String,
+case class Location(id: Int, name: String, address: String, postalCode: String, city: String,
     regionalHealthAuthority: String, inspections: Seq[Inspection]) {
   /** Returns true if the location has at least one inspection. */
   def hasInspections: Boolean = inspections.size != 0
@@ -33,9 +33,9 @@ object Location {
    * @returns The location object with the desired ID. Will return Failure if no such ID exists in
    * the database.
    */
-  def getLocationById(locationId: Int): Try[Location] = {
+  def getLocationById(locationId: Int)(implicit db: ActiveDatabase): Try[Location] = {
     val tryLocation = Try {
-      DB.withConnection { implicit connection =>
+      DB.withConnection(db.name) { implicit connection =>
         val query = SQL(
            """
              SELECT id, name, address, postcode, city, rha
@@ -61,23 +61,23 @@ object Location {
    * inefficient if we only need information about the location and not the inspections.
    *
    * @param cityName The city in question.
+   * @param db this is a implicit parameter that is used to specify what database is to be accessed
    * @returns A list of location objects representing each object located in the city.
    */
-  def getLocationsByCity(cityName: String): Try[Seq[Location]] = {
+  def getLocationsByCity(cityName: String)(implicit db: ActiveDatabase): Try[Seq[SlimLocation]] = {
     Try {
-      DB.withConnection { implicit connection =>
+      DB.withConnection(db.name) { implicit connection =>
         val query = SQL(
            """
-             SELECT id, name, address, postcode, city, rha
+             SELECT id, name, address
              FROM location
              WHERE city = {cityName};
            """    
         ).on("cityName" -> cityName)
         
-        val tryLocations = query().map(locationRowToLocation).toList
-
-        // We have a Seq[Try[Location]], convert it to a Seq[Location]
-        tryLocations.map(_.get)
+        query().map {
+          row => SlimLocation(row[Int]("id"), row[String]("name"), row[String]("address"))
+        }.toList
       }
     }
   }
@@ -89,9 +89,10 @@ object Location {
    * is indeed a row of the location table.
    *
    * @param row A row from the location table.
+   * @param db this is a implicit parameter that is used to specify what database is to be accessed
    * @returns A location object created from that row, with the inspections from the database.
    */
-  private def locationRowToLocation(row: Row): Try[Location] = {
+  private def locationRowToLocation(row: Row)(implicit db: ActiveDatabase): Try[Location] = {
     Inspection.getInspections(row[Int]("id")) match {
       case Success(inspections) =>
         Success(Location(row[Int]("id"), row[String]("name"), row[String]("address"), row[String]("postcode"),
@@ -101,3 +102,9 @@ object Location {
     }
   }
 }
+
+/**
+ * A slimmed down version of the Location class used to represent the data we need when selecting
+ * a location.
+ */
+case class SlimLocation(id: Int, name: String, address: String)
