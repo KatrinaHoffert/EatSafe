@@ -16,50 +16,59 @@ class IntegrationSpec extends Specification {
       browser.goTo("/")
     }
   }
-  
-  this.ControllerModelViewIntegration()
-  
-  def ControllerModelViewIntegration(){
+ 
+  this.generalControllerIntegration()
+  this.showLocationIntegration()
+  this.findLocationIntegration()
+
+ 
+  def generalControllerIntegration(){
     /**
      * Need to be updated as the view pages are developed
      * Checks to make sure that a page is actually displayed when controller is called
      */
     "Controller" should {
-  	  "show display location page when showLocation is called" in new WithApplication{
-  		  val result = controllers.LocationController.showLocation(7)(FakeRequest())
-  			status(result) must equalTo(OK)
-  			contentType(result) must beSome.which(_ == "text/html")
-  	  }
-  
-  	  "show find location page when findLocation is called" in new WithApplication{
-  		  val result = controllers.LocationController.findLocation("Saskatoon")(FakeRequest())
-  			status(result) must equalTo(OK)
-  			contentType(result) must beSome.which(_ == "text/html")
-  	  }
+
+      "show display location page when showLocation is called" in new WithApplication{
+        val result = controllers.LocationController.showLocation(7)(FakeRequest())
+        status(result) must equalTo(OK)
+        contentType(result) must beSome.which(_ == "text/html")
+      }
+      
+      "show find location page when findLocation is called" in new WithApplication{
+        val result = controllers.LocationController.findLocation("Saskatoon")(FakeRequest())
+        status(result) must equalTo(OK)
+        contentType(result) must beSome.which(_ == "text/html")
+      }
     }
-    
+  }
+  
+  def showLocationIntegration(){
     /**
      * Dependent on the view actually displaying information
      */
     "showLocation" should {
-  	  "display information for valid id" in new WithApplication{
-  		  val result = controllers.LocationController.showLocation(7)(FakeRequest())
+      "display information for valid id" in new WithApplication{
+        val result = controllers.LocationController.showLocation(7)(FakeRequest())
         status(result) must equalTo(OK)
-  			contentAsString(result) must contain("7 Eleven")
-  			contentAsString(result) must contain("835 A Broadway AVE")
-  			contentAsString(result) must contain("S7N 1B5")
-  	  } 
+        contentAsString(result) must contain("Burstall Curling Rink - Kitchen")
+        contentAsString(result) must contain("Maharg Ave")
+        contentAsString(result) must contain("S0N 0H0")
+      } 
   
-  	  "diplay error for invalid id" in new WithApplication{
+      "diplay error for invalid id" in new WithApplication{
         val result = controllers.LocationController.showLocation(-1)(FakeRequest())
         status(result) must equalTo(INTERNAL_SERVER_ERROR)
-  	  }     
+      }     
     }
+  }
+  
+  def findLocationIntegration(){
     
     /**
      * Dependent on the view actually showing information
      */
-    /*"findLocation" should {
+    "findLocation" should {
       "display information for valid city" in new WithApplication{
         val result = controllers.LocationController.findLocation("Saskatoon")(FakeRequest())
         status(result) must equalTo(OK)
@@ -67,11 +76,11 @@ class IntegrationSpec extends Specification {
         contentAsString(result) must contain("7 Eleven")
       }
       
-      "display error message for ivalid city" in new WithApplication{
+      "display nothing for ivalid city" in new WithApplication{
         val result = controllers.LocationController.findLocation("#DOESNTEXIST")(FakeRequest())
-        status(result) must equalTo(INTERNAL_SERVER_ERROR)
+        status(result) must equalTo(OK)
       }
-    }*/
+    }
   }
   
 }
