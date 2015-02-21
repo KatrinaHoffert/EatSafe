@@ -19,7 +19,7 @@ import globals.ActiveDatabase
  * @param regionalHealthAuthority The RHA that performs inspections for this location.
  * @param inspections A list of inspections that have been done on the location.
  */
-case class Location (id: Int, name: String, address: String, postalCode: String, city: String,
+case class Location(id: Int, name: String, address: String, postalCode: String, city: String,
     regionalHealthAuthority: String, inspections: Seq[Inspection]) {
   /** Returns true if the location has at least one inspection. */
   def hasInspections: Boolean = inspections.size != 0
@@ -64,21 +64,20 @@ object Location {
    * @param db this is a implicit parameter that is used to specify what database is to be accessed
    * @returns A list of location objects representing each object located in the city.
    */
-  def getLocationsByCity(cityName: String)(implicit db: ActiveDatabase): Try[Seq[Location]] = {
+  def getLocationsByCity(cityName: String)(implicit db: ActiveDatabase): Try[Seq[SlimLocation]] = {
     Try {
       DB.withConnection(db.name) { implicit connection =>
         val query = SQL(
            """
-             SELECT id, name, address, postcode, city, rha
+             SELECT id, name, address
              FROM location
              WHERE city = {cityName};
            """    
         ).on("cityName" -> cityName)
         
-        val tryLocations = query().map(locationRowToLocation).toList
-
-        // We have a Seq[Try[Location]], convert it to a Seq[Location]
-        tryLocations.map(_.get)
+        query().map {
+          row => SlimLocation(row[Int]("id"), row[String]("name"), row[String]("address"))
+        }.toList
       }
     }
   }
@@ -103,3 +102,9 @@ object Location {
     }
   }
 }
+
+/**
+ * A slimmed down version of the Location class used to represent the data we need when selecting
+ * a location.
+ */
+case class SlimLocation(id: Int, name: String, address: String)
