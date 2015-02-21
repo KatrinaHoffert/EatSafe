@@ -1,0 +1,35 @@
+@import general._
+@import models._
+@import controllers._
+
+@**
+ * TODO: Document me!
+ *@
+@(municipalities: Seq[String])
+
+@scripts = {
+  <script>
+    // Do stuff
+  </script>
+}
+
+@mainBody(title = "Choose a city", moreScripts = scripts) {
+  @headingSmall(Messages("general.applicationName"))
+
+  <select id="municipality">
+    @for(name <- municipalities) {
+      <option value=@name>@name</option>
+    }
+  </select>
+  <br />
+  <button id="submitButton" onclick="setCity()">Submit</button>
+  
+  <script>
+    function setCity() {
+      // TODO: check if set, first, and handle case of not set
+      var cityPicked = document.getElementById("municipality").value;
+      var destURL = window.location.origin + "/find/" + cityPicked;
+      window.location.assign(destURL);
+    }
+  </script>
+}

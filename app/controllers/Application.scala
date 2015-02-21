@@ -10,7 +10,7 @@ object Application extends Controller {
    * that will become the new index page.
    */
   def index = Action {
-    Redirect(routes.LocationController.findLocation("Saskatoon"))
+    Redirect(routes.LocationController.selectCity())
   }
 
   /**
