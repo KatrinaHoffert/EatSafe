@@ -137,7 +137,7 @@ class ModelSpec extends Specification with Mockito {
        pass mustEqual true
       }
       //based on current database
-      "return a sequence of Locations with 22 values when given 'Saskatoon'" in new WithApplication 
+      "return a sequence of Locations with 929 values when given 'Saskatoon'" in new WithApplication 
       {
         val goodLocList = Location.getLocationsByCity("Saskatoon")
         var pass = false
@@ -145,7 +145,7 @@ class ModelSpec extends Specification with Mockito {
            case Success(locList) => 
            {
              pass = true
-             locList.length must beEqualTo(22)
+             locList.length must beEqualTo(929)
            }
            case Failure(e) => 
            {
