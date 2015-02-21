@@ -45,9 +45,9 @@ class IntegrationSpec extends Specification {
   	  "display information for valid id" in new WithApplication{
   		  val result = controllers.LocationController.showLocation(7)(FakeRequest())
         status(result) must equalTo(OK)
-  			contentAsString(result) must contain("7 Eleven")
-  			contentAsString(result) must contain("835 A Broadway AVE")
-  			contentAsString(result) must contain("S7N 1B5")
+  			contentAsString(result) must contain("Burstall Curling Rink - Kitchen")
+  			contentAsString(result) must contain("Maharg Ave")
+  			contentAsString(result) must contain("S0N 0H0")
   	  } 
   
   	  "diplay error for invalid id" in new WithApplication{
@@ -69,7 +69,7 @@ class IntegrationSpec extends Specification {
       
       "display error message for ivalid city" in new WithApplication{
         val result = controllers.LocationController.findLocation("#DOESNTEXIST")(FakeRequest())
-        status(result) must equalTo(INTERNAL_SERVER_ERROR)
+        status(result) must equalTo(OK)
       }
     }*/
   }
