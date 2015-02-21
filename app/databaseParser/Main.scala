@@ -13,12 +13,12 @@ object Main {
    * Folder containing the CSVs to parse. Only files with the *.csv extension in this folder will
    * be parsed. The trailing slash is necessary. Path is relative to project directory.
    */
-  val FOLDER_PATH = "database/InspectionReport/"
+  var FOLDER_PATH = "database/InspectionReport/"
 
   /**
    * Output SQL file name.
    */
-  val FILE_NAME = "database/statements.sql"
+  var FILE_NAME = "database/statements.sql"
 
   def main(args: Array[String]): Unit = {
     readFolder(FOLDER_PATH, getWriterStream(FILE_NAME));
