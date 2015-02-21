@@ -71,9 +71,9 @@ class ModelSpec extends Specification with Mockito {
            case Success(loc) =>
            {
                loc.id must beEqualTo(7)// cause thats what i passed in
-               loc.name must beEqualTo("7 Eleven") .ignoreSpace //ignore space due to trailing whitespace
-               loc.address must beEqualTo("835 A Broadway AVE") .ignoreSpace //ignore space due to trailing whitespace
-               loc.postalCode must beEqualTo("S7N 1B5") .ignoreSpace //ignore space due to trailing whitespace   
+               loc.name must beEqualTo("Burstall Curling Rink - Kitchen") .ignoreSpace //ignore space due to trailing whitespace
+               loc.address must beEqualTo("Maharg Ave") .ignoreSpace //ignore space due to trailing whitespace
+               loc.postalCode must beEqualTo("S0N 0H0") .ignoreSpace //ignore space due to trailing whitespace   
                pass = true
            }
            case Failure(e) =>
@@ -202,13 +202,13 @@ def getViolationsTests()
       //based on current database
       "given a certian id, the number of returned violations should be correct" in new WithApplication 
       {
-        val vioList = Violation.getViolations(1)
+        val vioList = Violation.getViolations(31)
         var pass = false
          vioList match {
            case Success(vio) => 
            {
              pass = true
-             vio.length must beEqualTo(2)
+             vio.length must beEqualTo(3)
            }
            case Failure(e) => 
            {
