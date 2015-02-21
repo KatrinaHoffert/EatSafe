@@ -81,6 +81,26 @@ object Location {
       }
     }
   }
+  
+  /**
+   * 
+   */
+  def listCities()(implicit db:ActiveDatabase): Try[Seq[String]] = {
+    Try {
+      DB.withConnection(db.name) { implicit connection =>
+        val query = SQL(
+          """
+            SELECT DISTINCT city
+            FROM location;
+          """
+        )
+        
+        query().map {
+          row => row[String]("city")
+        }.toList
+      }
+    }
+  }
 
   /**
    * Converts a row from the location table into a Location object. This will query other tables

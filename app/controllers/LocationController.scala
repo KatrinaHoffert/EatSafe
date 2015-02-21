@@ -19,6 +19,15 @@ object LocationController extends Controller {
         InternalServerError("Encountered an error.\n\nDetails: " + e.toString)
     }
   }
+  
+  def selectCity() = Action {
+    Location.listCities() match{
+      case Success(cities) =>
+        Ok(views.html.locations.selectCity(cities))
+      case Failure(e) =>
+        InternalServerError("Encountered an error.\n\nDetails: " + e.toString)
+    }
+  }
 
   /**
    * Displays information about the location with the given ID.
