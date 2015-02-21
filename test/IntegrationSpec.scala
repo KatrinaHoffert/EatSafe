@@ -51,7 +51,7 @@ class IntegrationSpec extends Specification {
       "display information for valid id" in new WithApplication{
         val result = controllers.LocationController.showLocation(7)(FakeRequest())
         status(result) must equalTo(OK)
-<<<<<<< HEAD
+
         contentAsString(result) must contain("Burstall Curling Rink - Kitchen")
         contentAsString(result) must contain("Maharg Ave")
         contentAsString(result) must contain("S0N 0H0")
