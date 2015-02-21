@@ -91,7 +91,8 @@ object Location {
         val query = SQL(
           """
             SELECT DISTINCT city
-            FROM location;
+            FROM location
+            ORDER BY city;
           """
         )
         
