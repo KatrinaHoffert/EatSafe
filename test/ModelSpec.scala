@@ -11,6 +11,9 @@ import java.sql._
 import play.api.Play.current
 
 import org.specs2.mock._
+import globals.Globals.testDB
+import globals.ActiveDatabase
+
 
 /**
  * Test Suite of the current model, the tests being focused on the Locations class
@@ -60,6 +63,7 @@ class ModelSpec extends Specification with Mockito {
       //data here is based off of the database files
     "return good data when given a good ID" in new WithApplication 
     {
+       
         val goodLoc = Location.getLocationById(7)
         var pass = false
          goodLoc match
@@ -67,9 +71,9 @@ class ModelSpec extends Specification with Mockito {
            case Success(loc) =>
            {
                loc.id must beEqualTo(7)// cause thats what i passed in
-               loc.name must beEqualTo("7 Eleven") .ignoreSpace //ignore space due to trailing whitespace
-               loc.address must beEqualTo("835 A Broadway AVE") .ignoreSpace //ignore space due to trailing whitespace
-               loc.postalCode must beEqualTo("S7N 1B5") .ignoreSpace //ignore space due to trailing whitespace   
+               loc.name must beEqualTo("Burstall Curling Rink - Kitchen") .ignoreSpace //ignore space due to trailing whitespace
+               loc.address must beEqualTo("Maharg Ave") .ignoreSpace //ignore space due to trailing whitespace
+               loc.postalCode must beEqualTo("S0N 0H0") .ignoreSpace //ignore space due to trailing whitespace   
                pass = true
            }
            case Failure(e) =>
@@ -81,7 +85,23 @@ class ModelSpec extends Specification with Mockito {
          } 
         pass mustEqual true
     }
-
+     "throw error when it cannont connect to db" in new WithApplication 
+    {
+        val goodLoc = Location.getLocationById(7)((new ActiveDatabase("badDatabase")))
+        var pass = false
+         goodLoc match
+         {
+           case Success(loc) =>
+           {  
+               pass = false
+           }
+           case Failure(e) =>
+           {
+             pass = true
+           }
+         } 
+        pass mustEqual true
+    }
     
     //TODO
     //there should be a test where the database connection is not available, but we need some kind of test
@@ -117,7 +137,7 @@ class ModelSpec extends Specification with Mockito {
        pass mustEqual true
       }
       //based on current database
-      "return a sequence of Locations with 22 values when given 'Saskatoon'" in new WithApplication 
+      "return a sequence of Locations with 929 values when given 'Saskatoon'" in new WithApplication 
       {
         val goodLocList = Location.getLocationsByCity("Saskatoon")
         var pass = false
@@ -125,7 +145,7 @@ class ModelSpec extends Specification with Mockito {
            case Success(locList) => 
            {
              pass = true
-             locList.length must beEqualTo(22)
+             locList.length must beEqualTo(929)
            }
            case Failure(e) => 
            {
@@ -135,7 +155,22 @@ class ModelSpec extends Specification with Mockito {
          }
        pass mustEqual true
       }
-      
+      "return a failure when given a bad database'" in new WithApplication 
+      {
+        val goodLocList = Location.getLocationsByCity("Saskatoon")((new ActiveDatabase("badDatabase")))
+        var pass = false
+         goodLocList match {
+           case Success(locList) => 
+           {
+             pass = false
+           }
+           case Failure(e) => 
+           {
+             pass = true
+           }
+         }
+       pass mustEqual true
+      }
     }   
   }
    /**
@@ -167,18 +202,34 @@ def getViolationsTests()
       //based on current database
       "given a certian id, the number of returned violations should be correct" in new WithApplication 
       {
-        val vioList = Violation.getViolations(1)
+        val vioList = Violation.getViolations(31)
         var pass = false
          vioList match {
            case Success(vio) => 
            {
              pass = true
-             vio.length must beEqualTo(2)
+             vio.length must beEqualTo(3)
            }
            case Failure(e) => 
            {
              "error message" mustEqual e.getMessage()
              pass = false
+           }
+         }
+       pass mustEqual true
+      }
+       "return false if connection cannot be made" in new WithApplication 
+      {
+        val vioList = Violation.getViolations(1)((new ActiveDatabase("BadDatabase")))
+        var pass = false
+         vioList match {
+           case Success(vio) => 
+           {
+             pass = false
+           }
+           case Failure(e) => 
+           {
+             pass = true
            }
          }
        pass mustEqual true
@@ -226,6 +277,22 @@ def getInspectionsTests()
            {
              "error message" mustEqual e.getMessage()
              pass = false
+           }
+         }
+       pass mustEqual true
+      }
+      "return a failure if there is a bad database" in new WithApplication 
+      {
+        val InspList = Inspection.getInspections(15)((new ActiveDatabase("badDatabase")))
+        var pass = false
+         InspList match {
+           case Success(insp) => 
+           {
+             pass = false
+           }
+           case Failure(e) => 
+           {
+             pass = true
            }
          }
        pass mustEqual true
