@@ -9,24 +9,58 @@
 
 @scripts = {
   <script>
-    // Do stuff
+    var substringMatcher = function(strs) {
+      return function findMatches(q, cb) {
+        var matches, substrRegex;
+     
+        // an array that will be populated with substring matches
+        matches = [];
+     
+        // regex used to determine if a string contains the substring `q`
+        substrRegex = new RegExp(q, 'i');
+     
+        // iterate through the pool of strings and for any string that
+        // contains the substring `q`, add it to the `matches` array
+        $.each(strs, function(i, str) {
+          if (substrRegex.test(str)) {
+            // the typeahead jQuery plugin expects suggestions to a
+            // JavaScript object, refer to typeahead docs for more info
+            matches.push({ value: str });
+          }
+        });
+     
+        cb(matches);
+      };
+    };
+     
+    var places = @Html(util.TypeConversions.slimLocationsToJson(locations).toString);
+     
+    $('#the-basics .typeahead').typeahead({
+      hint: true,
+      highlight: true,
+      minLength: 1
+    },
+    {
+      name: 'places',
+      displayKey: 'name',
+      source: substringMatcher(places)
+    });
   </script>
 }
 
 @mainBody(title = "Choose a location", moreScripts = scripts) {
   @headingSmall(Messages("general.applicationName"))
-
-  <select id="findLocationID">
-    @for(location <- locations) {
-      <option value=@location.id>@location.name</option>
-    }
-  </select>
+  <h2>Choose a location</h2>
+  
+  <div id="the-basics">
+    <input class="typeahead" type="text" placeholder="Search for a Location"
+           id="findLocationID" onkeypress="if (event.keyCode == 13) { viewLocation() }">
+  </div>
   <br />
   <button id="submitButton" onclick="viewLocation()">Submit</button>
   
   <script>
     function viewLocation() {
-      // TODO: check if set, first, and handle case of not set
       var locationID = document.getElementById("findLocationID").value;
       var destURL = window.location.origin + "/view/" + locationID;
       window.location.assign(destURL);
