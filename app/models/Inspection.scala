@@ -22,7 +22,7 @@ object Inspection {
    *
    * @param locationId The ID of the location we want the inspections for.
    * @param db this is a implicit parameter that is used to specify what database is to be accessed
-   * @returns List of inspection objects representing the inspections for that location.
+   * @return List of inspection objects representing the inspections for that location.
    */
   def getInspections(locationId: Int)(implicit db: ActiveDatabase): Try[Seq[Inspection]] = {
     Try {
