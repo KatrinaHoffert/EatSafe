@@ -3,7 +3,7 @@
 @import controllers._
 
 @**
- * TODO: Document me!
+ * locations: A list of all the locations in the municipality specified.
  *@
 @(locations: Seq[SlimLocation])
 
@@ -28,14 +28,8 @@
     function viewLocation() {
       // TODO: check if set, first, and handle case of not set
       var locationID = document.getElementById("findLocationID").value;
-      document.getElementById("locationIDOut").innerHTML = locationID;
       var destURL = window.location.origin + "/view/" + locationID;
-      document.getElementById("URLOut").innerHTML = destURL;
       window.location.assign(destURL);
     }
   </script>
-  <div id="locationIDOut"></div>
-  <div id="URLOut"></div>
-  <br />
-  Reached the <b>find location</b> page.
 }
