@@ -3,30 +3,67 @@
 @import controllers._
 
 @**
- * TODO: Document me!
+ * municipalities: A list of all the municipalities the user may choose from.
  *@
 @(municipalities: Seq[String])
 
 @scripts = {
   <script>
-    // Do stuff
+    var substringMatcher = function(strs) {
+      return function findMatches(q, cb) {
+        var matches, substrRegex;
+     
+        // an array that will be populated with substring matches
+        matches = [];
+     
+        // regex used to determine if a string contains the substring `q`
+        substrRegex = new RegExp(q, 'i');
+     
+        // iterate through the pool of strings and for any string that
+        // contains the substring `q`, add it to the `matches` array
+        $.each(strs, function(i, str) {
+          if (substrRegex.test(str)) {
+            // the typeahead jQuery plugin expects suggestions to a
+            // JavaScript object, refer to typeahead docs for more info
+            matches.push({ value: str });
+          }
+        });
+     
+        cb(matches);
+      };
+    };
+     
+    var cities = []
+    @for(city <- municipalities) {
+      cities.push('@city');
+    }
+    
+    $('#the-basics .typeahead').typeahead({
+      hint: true,
+      highlight: true,
+      minLength: 1
+    },
+    {
+      name: 'cities',
+      displayKey: 'value',
+      source: substringMatcher(cities)
+    });
   </script>
 }
 
 @mainBody(title = "Choose a city", moreScripts = scripts) {
   @headingSmall(Messages("general.applicationName"))
+  <h2>Choose a city</h2>
 
-  <select id="municipality">
-    @for(name <- municipalities) {
-      <option value=@name>@name</option>
-    }
-  </select>
+  <div id="the-basics">
+    <input class="typeahead" type="text" placeholder="Enter a City"
+           id="municipality" onkeypress="if (event.keyCode==13){setCity()}">
+  </div>
   <br />
   <button id="submitButton" onclick="setCity()">Submit</button>
   
   <script>
     function setCity() {
-      // TODO: check if set, first, and handle case of not set
       var cityPicked = document.getElementById("municipality").value;
       var destURL = window.location.origin + "/find/" + cityPicked;
       window.location.assign(destURL);
