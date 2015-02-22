@@ -24,7 +24,7 @@ object Violation {
    *
    * @param inspectionId The ID of the inspection we want the violations for.
    * @param db this is a implicit parameter that is used to specify what database is to be accessed
-   * @returns List of violation objects representing the violations for that inspection.
+   * @return List of violation objects representing the violations for that inspection.
    */
   def getViolations(inspectionId: Int)(implicit db: ActiveDatabase): Try[Seq[Violation]] = {
     Try {

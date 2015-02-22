@@ -30,7 +30,7 @@ object Location {
    * Gets a single location by its ID.
    *
    * @param locationId The ID of the desired location. Must exist in the database.
-   * @returns The location object with the desired ID. Will return Failure if no such ID exists in
+   * @return The location object with the desired ID. Will return Failure if no such ID exists in
    * the database.
    */
   def getLocationById(locationId: Int)(implicit db: ActiveDatabase): Try[Location] = {
@@ -62,7 +62,7 @@ object Location {
    *
    * @param cityName The city in question.
    * @param db this is a implicit parameter that is used to specify what database is to be accessed
-   * @returns A list of location objects representing each object located in the city.
+   * @return A list of location objects representing each object located in the city.
    */
   def getLocationsByCity(cityName: String)(implicit db: ActiveDatabase): Try[Seq[SlimLocation]] = {
     Try {
@@ -83,7 +83,7 @@ object Location {
   }
   
   /**
-   * 
+   * Gets a list of city names from the locations in the database.
    */
   def listCities()(implicit db:ActiveDatabase): Try[Seq[String]] = {
     Try {
@@ -96,9 +96,7 @@ object Location {
           """
         )
         
-        query().map {
-          row => row[String]("city")
-        }.toList
+        query().map(_[String]("city")).toList
       }
     }
   }
@@ -111,7 +109,7 @@ object Location {
    *
    * @param row A row from the location table.
    * @param db this is a implicit parameter that is used to specify what database is to be accessed
-   * @returns A location object created from that row, with the inspections from the database.
+   * @return A location object created from that row, with the inspections from the database.
    */
   private def locationRowToLocation(row: Row)(implicit db: ActiveDatabase): Try[Location] = {
     Inspection.getInspections(row[Int]("id")) match {
