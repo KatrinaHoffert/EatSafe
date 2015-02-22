@@ -4,20 +4,25 @@ import org.junit.runner._
 
 import play.api.test._
 import play.api.test.Helpers._
+import globals.Globals.testDB
 import globals.ActiveDatabase
+
+import org.specs2.mock._
 
 /**
  * add your integration spec here.
  * An integration test will fire up a whole play application in a real (or headless) browser
  */
 @RunWith(classOf[JUnitRunner])
-class IntegrationSpec extends Specification {
+class IntegrationSpec extends Specification with Mockito {
+  
   "Application" should {
     "run in a browser" in new WithBrowser {
       browser.goTo("/")
     }
   }
  
+  /* each runs a set of tests implemented below */
   this.generalControllerIntegration()
   this.showLocationIntegration()
   this.findLocationIntegration()
@@ -42,12 +47,19 @@ class IntegrationSpec extends Specification {
         status(result) must equalTo(OK)
         contentType(result) must beSome.which(_ == "text/html")
       }
+      
+      "show find city page when selectCity is called" in new WithApplication {
+        val result = controllers.LocationController.selectCity()(FakeRequest())
+        status(result) must equalTo(OK)
+        contentType(result) must beSome.which(_ == "text/html")
+      }
+      
     }
   }
   
   def showLocationIntegration() {
     /**
-     * Dependent on the view actually displaying information
+     * Checks that controller sends appropriate action for showLocation
      */
     "showLocation" should {
       "display information for valid id" in new WithApplication {
@@ -69,7 +81,7 @@ class IntegrationSpec extends Specification {
   def findLocationIntegration() {
     
     /**
-     * Dependent on the view actually showing information
+     * Checks that controller displays appropriate pages for findLocation
      */
     "findLocation" should {
       "display information for valid city" in new WithApplication {
@@ -79,6 +91,7 @@ class IntegrationSpec extends Specification {
         contentAsString(result) must contain("7 Eleven")
       }
       
+      /* empty list displayed with an invalid city is entered*/
       "display nothing for ivalid city" in new WithApplication {
         val result = controllers.LocationController.findLocation("#DOESNTEXIST")(FakeRequest())
         status(result) must equalTo(OK)
@@ -95,5 +108,4 @@ class IntegrationSpec extends Specification {
       }
     }
   }
-  
 }
