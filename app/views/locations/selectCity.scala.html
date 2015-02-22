@@ -3,50 +3,29 @@
 @import controllers._
 
 @**
+ * Allows a user to select their city of interest from a list of municipalities in their
+ * current region. Currently the "region" is hard-coded to Saskatchewan, though this
+ * could be easily expanded as the system itself grows.
+ *
  * municipalities: A list of all the municipalities the user may choose from.
  *@
 @(municipalities: Seq[String])
 
 @scripts = {
   <script>
-    var substringMatcher = function(strs) {
-      return function findMatches(q, cb) {
-        var matches, substrRegex;
-     
-        // an array that will be populated with substring matches
-        matches = [];
-     
-        // regex used to determine if a string contains the substring `q`
-        substrRegex = new RegExp(q, 'i');
-     
-        // iterate through the pool of strings and for any string that
-        // contains the substring `q`, add it to the `matches` array
-        $.each(strs, function(i, str) {
-          if (substrRegex.test(str)) {
-            // the typeahead jQuery plugin expects suggestions to a
-            // JavaScript object, refer to typeahead docs for more info
-            matches.push({ value: str });
-          }
-        });
-     
-        cb(matches);
-      };
-    };
-     
     var cities = []
     @for(city <- municipalities) {
       cities.push('@city');
     }
     
-    $('#the-basics .typeahead').typeahead({
+    $('#municipality').typeahead({
+      minLength: 1,
+      maxItem: 8,
+      order: "asc",
       hint: true,
-      highlight: true,
-      minLength: 1
-    },
-    {
-      name: 'cities',
-      displayKey: 'value',
-      source: substringMatcher(cities)
+      source: {
+          data: cities
+      }
     });
   </script>
 }
@@ -54,13 +33,20 @@
 @mainBody(title = "Choose a city", moreScripts = scripts) {
   @headingSmall(Messages("general.applicationName"))
   <h2>Choose a city</h2>
+  <div class="typeahead-container">
+    <div class="typeahead-field">
 
-  <div id="the-basics">
-    <input class="typeahead" type="text" placeholder="Enter a City"
-           id="municipality" onkeypress="if (event.keyCode==13){setCity()}">
+      <span class="typeahead-query">
+        <input id="municipality" onkeypress="if (event.keyCode==13){setCity()}"
+               name="municipality[query]" type="search" placeholder="Search" autocomplete="off">
+      </span>
+      <span class="typeahead-button">
+        <button type="submit" id="submitButton" onclick="setCity()">
+          <i class="search-icon"></i>
+        </button>
+      </span>
+    </div>
   </div>
-  <br />
-  <button id="submitButton" onclick="setCity()">Submit</button>
   
   <script>
     function setCity() {

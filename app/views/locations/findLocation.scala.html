@@ -3,47 +3,33 @@
 @import controllers._
 
 @**
+ * This page is intended to allow users to get to a specific location page via a typeahead
+ * search bar. When a location is selected, the ID is set in a hidden field, which is
+ * then submitted to the JavaScript function that formats the URL and directs the browser.
+ *
  * locations: A list of all the locations in the municipality specified.
  *@
 @(locations: Seq[SlimLocation])
 
 @scripts = {
   <script>
-    var substringMatcher = function(strs) {
-      return function findMatches(q, cb) {
-        var matches, substrRegex;
-     
-        // an array that will be populated with substring matches
-        matches = [];
-     
-        // regex used to determine if a string contains the substring `q`
-        substrRegex = new RegExp(q, 'i');
-     
-        // iterate through the pool of strings and for any string that
-        // contains the substring `q`, add it to the `matches` array
-        $.each(strs, function(i, str) {
-          if (substrRegex.test(str)) {
-            // the typeahead jQuery plugin expects suggestions to a
-            // JavaScript object, refer to typeahead docs for more info
-            matches.push({ value: str });
-          }
-        });
-     
-        cb(matches);
-      };
-    };
-     
     var places = @Html(util.TypeConversions.slimLocationsToJson(locations).toString);
      
-    $('#the-basics .typeahead').typeahead({
-      hint: true,
-      highlight: true,
-      minLength: 1
-    },
-    {
-      name: 'places',
-      displayKey: 'name',
-      source: substringMatcher(places)
+    $("#location").typeahead({
+        minLength: 1,
+        maxItem: 8,
+        order: "asc",
+        hint: true,
+        display: "name",
+        template: '<span>{{name}} {{address}}</span>',
+        source: {
+            data: places
+        },
+        callback: {
+            onClick: function (node, a, obj, e) {
+                $("#findLocationID").val(obj.id);
+            }
+        }
     });
   </script>
 }
@@ -52,12 +38,22 @@
   @headingSmall(Messages("general.applicationName"))
   <h2>Choose a location</h2>
   
-  <div id="the-basics">
-    <input class="typeahead" type="text" placeholder="Search for a Location"
-           id="findLocationID" onkeypress="if (event.keyCode == 13) { viewLocation() }">
+  <div class="typeahead-container">
+    <div class="typeahead-field">
+
+      <span class="typeahead-query">
+        <input id="location" onkeypress="if (event.keyCode==13){viewLocation()}"
+               name="location[query]" type="search" placeholder="Search" autocomplete="off">
+      </span>
+      <span class="typeahead-button">
+        <button type="submit" id="submitButton" onclick="viewLocation()">
+          <i class="search-icon"></i>
+        </button>
+      </span>
+    </div>
   </div>
-  <br />
-  <button id="submitButton" onclick="viewLocation()">Submit</button>
+  
+  <input type="hidden" id="findLocationID" value="0"></input>
   
   <script>
     function viewLocation() {
