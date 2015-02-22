@@ -1,9 +1,12 @@
 import org.specs2.mutable._
 import org.specs2.runner._
 import org.junit.runner._
-
 import play.api.test._
 import play.api.test.Helpers._
+import org.fluentlenium.core.FluentPage
+import org.fluentlenium.core.filter.FilterConstructor._
+import org.openqa.selenium.WebDriver
+import org.openqa.selenium.By
 
 /**
  * Add your spec here.
@@ -13,6 +16,9 @@ import play.api.test.Helpers._
 @RunWith(classOf[JUnitRunner])
 class ApplicationSpec extends Specification {
   
+  /* 
+   * Basic check that all views are being rendered in html
+   */
   "Application" should {
     
     "send 404 on a bad request" in new WithApplication {
