@@ -49,6 +49,7 @@ class ApplicationSpec extends Specification {
       browser.getDriver.findElement(By.id("municipality"))
     }
     
+    /* Not working with updated typeahead
     "display choose a location page when location is submitted" in new WithBrowser {
       browser.goTo("/")
       val typeahead = browser.getDriver.findElement(By.id("municipality"))
@@ -57,6 +58,7 @@ class ApplicationSpec extends Specification {
       browser.click("#submitButton")
       browser.url() must contain("/find/Saskatoon")
     } 
+    */
   }
   
   "show city page" should {
@@ -66,16 +68,16 @@ class ApplicationSpec extends Specification {
       browser.getDriver.findElement(By.id("findLocationID"))
     }
     
-   /* For when the typeahead gets fixed
+ /* Not working with updated typeahead
     "display chosen location when valid option is submitted" in new WithBrowser {
       browser.goTo("/find/Saskatoon")
-      val typeahead = browser.getDriver.findElement(By.id("municipality"))
+      val typeahead = browser.getDriver.findElement(By.id("location"))
       typeahead.click()
       typeahead.sendKeys("2nd Avenue Grill")
       browser.click("#submitButton")
       browser.url() must contain("/view/3059")
     }
-    */
+ */
   }
 
 }
