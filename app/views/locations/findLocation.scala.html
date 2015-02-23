@@ -23,7 +23,11 @@
       order: "asc",
       hint: true,
       display: "name",
-      template: '<span>{{name}} {{address}}</span>',
+      template: '<span>' +
+          '<span class="locationTypeaheadName">{{name}}</span>' +
+          '<br />' +
+          '<span class="locationTypeaheadAddress">{{address}}</span>' +
+          '</span>',
       source: {
         data: places
       },
