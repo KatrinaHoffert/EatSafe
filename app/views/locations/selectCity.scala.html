@@ -1,22 +1,19 @@
 @import general._
 @import models._
 @import controllers._
+@import play.api.libs.json.Json
 
 @**
  * Allows a user to select their city of interest from a list of municipalities in their
- * current region. Currently the "region" is hard-coded to Saskatchewan, though this
- * could be easily expanded as the system itself grows.
+ * current region.
  *
- * municipalities: A list of all the municipalities the user may choose from.
+ * @param municipalities A list of all the municipalities the user may choose from.
  *@
 @(municipalities: Seq[String])
 
 @scripts = {
   <script>
-    var cities = []
-    @for(city <- municipalities) {
-      cities.push('@city');
-    }
+    var cities = @Html(Json.toJson(municipalities).toString)
     
     $('#municipality').typeahead({
       minLength: 1,
@@ -24,9 +21,15 @@
       order: "asc",
       hint: true,
       source: {
-          data: cities
+      data: cities
       }
     });
+
+   function setCity() {
+      var cityPicked = $("#municipality").val();
+      var destURL = "/find/" + cityPicked;
+      window.location.assign(destURL);
+    }
   </script>
 }
 
@@ -47,12 +50,4 @@
       </span>
     </div>
   </div>
-  
-  <script>
-    function setCity() {
-      var cityPicked = document.getElementById("municipality").value;
-      var destURL = window.location.origin + "/find/" + cityPicked;
-      window.location.assign(destURL);
-    }
-  </script>
 }
