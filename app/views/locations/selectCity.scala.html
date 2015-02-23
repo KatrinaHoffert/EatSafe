@@ -13,6 +13,8 @@
 
 @scripts = {
   <script>
+    "use strict";
+    
     var cities = @Html(Json.toJson(municipalities).toString)
     
     $('#municipality').typeahead({
