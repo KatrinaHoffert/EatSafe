@@ -8,6 +8,7 @@ import org.fluentlenium.core.filter.FilterConstructor._
 import org.openqa.selenium.WebDriver
 import org.openqa.selenium.By
 import org.openqa.selenium.htmlunit.HtmlUnitDriver
+import play.api.i18n.Messages
 
 /**
  * Add your spec here.
@@ -42,10 +43,10 @@ class ApplicationSpec extends Specification {
     }
   }
   
-  "find city page" should {
+  "select city page" should {
     "show a typeahead for cities" in new WithBrowser {
       browser.goTo("/")
-      browser.pageSource() must contain("Choose a city")
+      browser.pageSource() must contain(Messages("locations.selectCity.prompt"))
       browser.getDriver.findElement(By.id("municipality"))
     }
     
@@ -61,10 +62,10 @@ class ApplicationSpec extends Specification {
     */
   }
   
-  "show city page" should {
+  "select location page" should {
     "show a typeahead for locations" in new WithBrowser {
       browser.goTo("/find/Saskatoon")
-      browser.pageSource() must contain("Choose a location")
+      browser.pageSource() must contain(Messages("locations.selectLocation.prompt"))
       browser.getDriver.findElement(By.id("findLocationID"))
     }
     
