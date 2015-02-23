@@ -6,7 +6,7 @@
  *@
 @(location: Location)
 
-@mainBody(title = "EatSafe: " + location.name + " [" + location.address + "]") {
+@mainBody(title = Messages("locations.view.titleStart") + ": " + location.name + " [" + location.address + "]") {
   @headingSmall(Messages("general.applicationName"))
   <div class="smallPadding">
     <h1>@location.name</h1>

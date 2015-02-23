@@ -1,7 +1,16 @@
 # General purpose messages that appear throughout the app
 general.applicationName=EatSafe Saskatchewan
 
-# Messages in the display locations page
+# Select city page
+locations.selectCity.title=Select a city
+locations.selectCity.prompt=Where are you?
+
+# Select location page
+locations.selectLocation.title=Select a location
+locations.selectLocation.prompt=Where do you want to eat?
+
+# Display locations page
+locations.view.titleStart=EatSafe
 locations.view.noViolations=No violations in this time period
 locations.view.pastInspectionsHeader=Older inspections
 locations.view.pastInspectionsShow=[Show]

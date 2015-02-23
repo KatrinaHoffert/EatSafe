@@ -40,9 +40,9 @@
   </script>
 }
 
-@mainBody(title = "Choose a location", moreScripts = scripts) {
+@mainBody(title = Messages("locations.selectLocation.title"), moreScripts = scripts) {
   @headingSmall(Messages("general.applicationName"))
-  <h2>Choose a location</h2>
+  <h2>@Messages("locations.selectLocation.prompt")</h2>
   
   <div class="typeahead-container">
     <div class="typeahead-field">
