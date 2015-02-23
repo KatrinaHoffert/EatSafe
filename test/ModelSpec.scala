@@ -41,26 +41,18 @@ class ModelSpec extends Specification with Mockito {
         goodLoc.get
       }
 
-      // Data here is based off of the database files
+      // Based on current database
       "return good data when given a good ID" in new WithApplication {
         val goodLoc = Location.getLocationById(7)
-        var pass = false
-        goodLoc match {
-          case Success(loc) =>
-            loc.id must beEqualTo(7)
-            // Ignore space due to trailing whitespace
-            loc.name must beEqualTo("Burstall Curling Rink - Kitchen").ignoreSpace
-            loc.address must beEqualTo("Maharg Ave").ignoreSpace
-            loc.postalCode must beEqualTo("S0N 0H0").ignoreSpace
-            pass = true
-          case Failure(e) =>
-            pass = false
-            println("Error message: " + e.getMessage)
-        }
-      pass mustEqual true
+        val location = goodLoc.get
+        location.id must beEqualTo(7)
+        // Ignore space due to trailing whitespace
+        location.name must beEqualTo("Burstall Curling Rink - Kitchen").ignoreSpace
+        location.address must beEqualTo("Maharg Ave").ignoreSpace
+        location.postalCode must beEqualTo("S0N 0H0").ignoreSpace
       }
 
-      "throw error when it cannont connect to db" in new WithApplication {
+      "return a failure if there is a bad database" in new WithApplication {
         val goodLoc = Location.getLocationById(7)((new ActiveDatabase("badDatabase")))
         goodLoc.isFailure mustEqual true
       }
@@ -78,22 +70,12 @@ class ModelSpec extends Specification with Mockito {
         goodLocList.get
       }
 
-      // Based on current database
       "return a sequence of Locations with 929 values when given 'Saskatoon'" in new WithApplication {
         val goodLocList = Location.getLocationsByCity("Saskatoon")
-        var pass = false
-        goodLocList match {
-          case Success(locList) =>
-            pass = true
-            locList.length must beEqualTo(929)
-          case Failure(e) =>
-            pass = false
-            println("Error message: " + e.getMessage)
-        }
-        pass mustEqual true
+        goodLocList.get.length must beEqualTo(929)
       }
 
-      "return a failure when given a bad database'" in new WithApplication  {
+      "return a failure if there is a bad database" in new WithApplication  {
         val badLocList = Location.getLocationsByCity("Saskatoon")((new ActiveDatabase("badDatabase")))
         badLocList.isFailure mustEqual true
       }
@@ -110,19 +92,10 @@ class ModelSpec extends Specification with Mockito {
 
       "given a certain ID, the number of returned violations should be correct" in new WithApplication {
         val violationList = Violation.getViolations(31)
-        var pass = false
-        violationList match {
-          case Success(vio) =>
-            pass = true
-            vio.length must beEqualTo(3)
-          case Failure(e) =>
-            pass = false
-            println("Error message: " + e.getMessage)
-        }
-        pass mustEqual true
+        violationList.get.length must beEqualTo(3)
       }
 
-      "return false if connection cannot be made" in new WithApplication  {
+      "return a failure if there is a bad database" in new WithApplication  {
         val vioList = Violation.getViolations(1)((new ActiveDatabase("BadDatabase")))
         vioList.isFailure mustEqual true
       }
@@ -136,18 +109,9 @@ class ModelSpec extends Specification with Mockito {
         inspectionList.get
       }
 
-      "given a good id, return the right ammount of inspections" in new WithApplication {
+      "given a good id, return the right amount of inspections" in new WithApplication {
         val inspectionList = Inspection.getInspections(15)
-        var pass = false
-        inspectionList match {
-          case Success(insp) =>
-            pass = true
-            insp.length must beEqualTo(3)
-          case Failure(e) =>
-            pass = false
-            println("Error message: " + e.getMessage)
-        }
-        pass mustEqual true
+        inspectionList.get.size must beEqualTo(3)
       }
 
       "return a failure if there is a bad database" in new WithApplication  {
