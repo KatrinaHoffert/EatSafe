@@ -70,6 +70,17 @@ h4 {
   color: white;
 }
 
+/* Remove the over-done boreder around typeaheads. */
+.typeahead-container {
+  box-shadow: none;
+  padding: 0;
+}
+
+/* Fix case of typeaheads. */
+.typeahead-list {
+  text-transform: capitalize;
+}
+
 @media (min-width: 700px) {
   .smallHeading {
     font-size: 4em;
