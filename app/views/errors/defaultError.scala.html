@@ -1,19 +1,6 @@
 @import general._
-@import models._
-@import controllers._
 
-@**
- * This page is intended to allow users to get to a specific location page via a typeahead
- * search bar. When a location is selected, the ID is set in a hidden field, which is
- * then submitted to the JavaScript function that formats the URL and directs the browser.
- *
- * locations: A list of all the locations in the municipality specified.
- *@
 
-@scripts = {
-  <script>
-  </script>
-}
 
 @mainBody(title = "Error", moreScripts = scripts) {
   @headingSmall(Messages("general.applicationName"))
