@@ -35,19 +35,21 @@
 
 @mainBody(title = Messages("locations.selectCity.title"), moreScripts = scripts) {
   @headingSmall(Messages("general.applicationName"))
-  <h2>@Messages("locations.selectCity.prompt")</h2>
-  <div class="typeahead-container">
-    <div class="typeahead-field">
+  <div class="smallPadding">
+    <h2>@Messages("locations.selectCity.prompt")</h2>
+    <div class="typeahead-container">
+      <div class="typeahead-field">
 
-      <span class="typeahead-query">
-        <input id="municipality" onkeypress="if (event.keyCode==13){setCity()}"
-               name="municipality[query]" type="search" placeholder="Search" autocomplete="off">
-      </span>
-      <span class="typeahead-button">
-        <button type="submit" id="submitButton" onclick="setCity()">
-          <i class="search-icon"></i>
-        </button>
-      </span>
+        <span class="typeahead-query">
+          <input id="municipality" onkeypress="if (event.keyCode==13){setCity()}"
+                 name="municipality[query]" type="search" placeholder="Search" autocomplete="off">
+        </span>
+        <span class="typeahead-button">
+          <button type="submit" id="submitButton" onclick="setCity()">
+            <i class="search-icon"></i>
+          </button>
+        </span>
+      </div>
     </div>
   </div>
 }
