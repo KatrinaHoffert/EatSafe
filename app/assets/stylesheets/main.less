@@ -158,6 +158,22 @@ pre {
   text-align: center;
 }
 
+.panel-title-text::before {
+  margin-right: 0.25em;
+  color: #555;
+  font-size: 0.9em;
+  vertical-align: 20%;
+  font-family: Monaco, monospace;
+}
+
+.panel-heading .panel-title-text::before {
+  content: "[-]";
+}
+
+.panel-heading.collapsed .panel-title-text::before {
+  content: "[+]";
+}
+
 /*******************************************************************************
  ****************************** MEDIA QUERIES **********************************
  ******************************************************************************/
