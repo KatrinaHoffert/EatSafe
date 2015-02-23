@@ -9,22 +9,25 @@ import globals.Globals.defaultDB
 
 object LocationController extends Controller {
   /**
-   * TODO: Document me.
+   * Displays a means to select the city. This is the current index page.
+   */
+  def selectCity = Action {
+    Location.listCities() match{
+      case Success(cities) =>
+        Ok(views.html.locations.selectCity(cities))
+      case Failure(ex) =>
+        InternalServerError(views.html.errors.error500(ex))
+    }
+  }
+
+  /**
+   * Displays a means to select a location when we know the city.
    */
   def findLocation(city: String) = Action {
     Location.getLocationsByCity(city) match{
       case Success(cityLocations) => 
         Ok(views.html.locations.findLocation(cityLocations))
       case Failure(ex) => 
-        InternalServerError(views.html.errors.error500(ex))
-    }
-  }
-  
-  def selectCity() = Action {
-    Location.listCities() match{
-      case Success(cities) =>
-        Ok(views.html.locations.selectCity(cities))
-      case Failure(ex) =>
         InternalServerError(views.html.errors.error500(ex))
     }
   }
