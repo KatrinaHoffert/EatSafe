@@ -51,8 +51,8 @@ h4 {
   background-color: #479432;
   height: 30vh;
   display: flex;
-  min-height: 3em;
-  font-size: 3em;
+  min-height: 2em;
+  font-size: 2em;
   color: white;
 }
 
@@ -81,10 +81,10 @@ h4 {
   text-transform: capitalize;
 }
 
-@media (min-width: 700px) {
-  .smallHeading {
-    font-size: 4em;
-  }
+/* Fix weird positioning bug where the typeahead prompt has a gap between it
+   and the text input. */
+.typeahead-result {
+  top: inherit;
 }
 
 #pastInspections {
@@ -127,4 +127,14 @@ h4 {
 /* Extra gap between every two items (which is a pairing of bolded title and value) */
 .locationExtraData li:nth-child(2n + 1) {
   margin-top: 0.5em;
+}
+
+/*******************************************************************************
+ ****************************** MEDIA QUERIES **********************************
+ ******************************************************************************/
+
+@media (min-width: 700px) {
+  .smallHeading, .largeHeading {
+    font-size: 4em;
+  }
 }
