@@ -13,6 +13,8 @@
 
 @scripts = {
   <script>
+    "use strict";
+    
     var places = @Html(util.TypeConversions.slimLocationsToJson(locations).toString);
      
     $("#location").typeahead({
