@@ -42,6 +42,13 @@ h4 {
   cursor: pointer;
 }
 
+/* Default tab size is ridiculous. */
+pre {
+  tab-size: 2;
+  -moz-tab-size: 2;
+  -o-tab-size: 2;
+}
+
 /*******************************************************************************
  ********************************* SPECIFICS ***********************************
  ******************************************************************************/
@@ -135,6 +142,22 @@ h4 {
   margin-top: 0.5em;
 }
 
+/* Formatting for error pages. */
+.errorCode {
+  font-size: 5em;
+  font-family: Impact, Charcoal, sans-serif;
+  margin-bottom: 0.1em;
+  color: red;
+  .outlineText(black, 2px);
+  text-align: center;
+}
+
+.errorDescription {
+  font-size: 2em;
+  margin-top: 0;
+  text-align: center;
+}
+
 /*******************************************************************************
  ****************************** MEDIA QUERIES **********************************
  ******************************************************************************/
@@ -143,4 +166,16 @@ h4 {
   .smallHeading, .largeHeading {
     font-size: 4em;
   }
+}
+
+/*******************************************************************************
+ *********************************** MIXINS ************************************
+ ******************************************************************************/
+
+/* Simulates outlining text by creating solid shadows in every direction. The
+   results will be undefined if the width is greater than the text size. This
+   will not work for partially transparent colors. */
+.outlineText(@color: black; @width: 2) {
+  text-shadow: -@width 0 @color, 0 @width @color, @width 0 @color, 0 -@width @color,
+      -@width -@width @color, @width @width @color, -@width @width @color, @width -@width @color;
 }

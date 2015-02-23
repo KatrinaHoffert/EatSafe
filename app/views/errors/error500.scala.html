@@ -1,0 +1,18 @@
+@import general._
+@import models._
+@import controllers._
+@import org.apache.commons.lang3.exception.ExceptionUtils
+
+@(exception: Throwable)
+
+@mainBody(title = Messages("errors.error500Title")) {
+  @headingSmall(Messages("general.applicationName"))
+  <div class="smallPadding">
+    <h2 class="errorCode">@Messages("errors.error500Title")</h2>
+    <h3 class="errorDescription">@Messages("errors.error500Desc")</h3>
+    <p>@Messages("errors.error500Text")</p>
+
+    <h3>@Messages("errors.stackTraceHeading")</h3>
+    <pre>@ExceptionUtils.getStackTrace(exception)</pre>
+  </div>
+}

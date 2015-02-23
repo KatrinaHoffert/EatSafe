@@ -15,8 +15,8 @@ object LocationController extends Controller {
     Location.getLocationsByCity(city) match{
       case Success(cityLocations) => 
         Ok(views.html.locations.findLocation(cityLocations))
-      case Failure(e) => 
-        InternalServerError("Encountered an error.\n\nDetails: " + e.toString)
+      case Failure(ex) => 
+        InternalServerError(views.html.errors.error500(ex))
     }
   }
   
@@ -24,8 +24,8 @@ object LocationController extends Controller {
     Location.listCities() match{
       case Success(cities) =>
         Ok(views.html.locations.selectCity(cities))
-      case Failure(e) =>
-        InternalServerError("Encountered an error.\n\nDetails: " + e.toString)
+      case Failure(ex) =>
+        InternalServerError(views.html.errors.error500(ex))
     }
   }
 
@@ -39,8 +39,7 @@ object LocationController extends Controller {
       case Success(location) =>
         Ok(views.html.locations.displayLocation(location))
       case Failure(ex) =>
-        // TODO: Create a prettier error page
-        InternalServerError("Encountered an error.\n\nDetails: " + ex.toString)
+        InternalServerError(views.html.errors.error500(ex))
     }
   }
 }
