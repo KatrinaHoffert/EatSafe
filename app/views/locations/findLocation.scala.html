@@ -16,21 +16,27 @@
     var places = @Html(util.TypeConversions.slimLocationsToJson(locations).toString);
      
     $("#location").typeahead({
-        minLength: 1,
-        maxItem: 8,
-        order: "asc",
-        hint: true,
-        display: "name",
-        template: '<span>{{name}} {{address}}</span>',
-        source: {
-            data: places
-        },
-        callback: {
-            onClick: function (node, a, obj, e) {
-                $("#findLocationID").val(obj.id);
-            }
+      minLength: 1,
+      maxItem: 8,
+      order: "asc",
+      hint: true,
+      display: "name",
+      template: '<span>{{name}} {{address}}</span>',
+      source: {
+        data: places
+      },
+      callback: {
+        onClick: function (node, a, obj, e) {
+          $("#findLocationID").val(obj.id);
         }
+      }
     });
+
+    function viewLocation() {
+      var locationID = $("#findLocationID").val();
+      var destURL = "/view/" + locationID;
+      window.location.assign(destURL);
+    }
   </script>
 }
 
@@ -54,12 +60,4 @@
   </div>
   
   <input type="hidden" id="findLocationID" value="0"></input>
-  
-  <script>
-    function viewLocation() {
-      var locationID = document.getElementById("findLocationID").value;
-      var destURL = window.location.origin + "/view/" + locationID;
-      window.location.assign(destURL);
-    }
-  </script>
 }
