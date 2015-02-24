@@ -17,7 +17,7 @@
     
     var cities = @Html(Json.toJson(municipalities).toString)
     
-    $('#municipality').typeahead({
+    $("#municipality").typeahead({
       minLength: 1,
       maxItem: 8,
       order: "asc",
@@ -26,6 +26,7 @@
       data: cities
       }
     });
+    $("#municipality").focus();
 
    function setCity() {
       var cityPicked = $("#municipality").val();

@@ -20,7 +20,6 @@
     $("#location").typeahead({
       minLength: 1,
       maxItem: 8,
-      order: "asc",
       hint: true,
       display: "name",
       template: '<span>' +
@@ -37,6 +36,7 @@
         }
       }
     });
+    $("#location").focus();
 
     function viewLocation() {
       var locationID = $("#findLocationID").val();
