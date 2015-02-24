@@ -23,5 +23,9 @@ locations.view.rha=Regional health authority
 # Error pages
 errors.error500Title=Error 500
 errors.error500Desc=Internal server error
-errors.error500Text=That means it's (probably) us, not you. Assuming that you haven't been trying to break our software, you seem to have encountered a bug that couldn''t be handled or wasn''t expected. The stack trace below may help us solve the bug.
+errors.error500Text=That means it''s (probably) us, not you. Assuming that you haven''t been trying to break our software, you seem to have encountered a bug that couldn''t be handled or wasn''t expected. The stack trace below may help us solve the bug.
 errors.stackTraceHeading=Stack trace (for nerds)
+errors.emptyCityTitle=There's no locations in this city
+errors.emptyCityDesc=Uh oh...
+errors.emptyCityText=There''s no locations in "{0}". Perhaps you''ve mistyped a URL or there''s a bug in our software.
+errors.emptyCityTryAgain=Give the city selection another try?
