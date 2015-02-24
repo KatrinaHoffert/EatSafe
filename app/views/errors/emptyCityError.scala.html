@@ -1,0 +1,15 @@
+@import general._
+@import models._
+@import controllers._
+@import org.apache.commons.lang3.exception.ExceptionUtils
+
+@(cityName: String)
+
+@mainBody(title = Messages("errors.emptyCityTitle")) {
+  @headingSmall(Messages("general.applicationName"))
+  <div class="smallPadding">
+    <h3 class="errorDescription">@Messages("errors.emptyCityDesc")</h3>
+    <p>@Messages("errors.emptyCityText", cityName)</p>
+    <p><a href="@routes.LocationController.selectCity.url">@Messages("errors.emptyCityTryAgain")</a></p>
+  </div>
+}

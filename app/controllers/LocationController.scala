@@ -25,8 +25,10 @@ object LocationController extends Controller {
    */
   def findLocation(city: String) = Action {
     Location.getLocationsByCity(city) match{
-      case Success(cityLocations) => 
+      case Success(cityLocations) if !cityLocations.isEmpty => 
         Ok(views.html.locations.findLocation(cityLocations))
+      case Success(_) =>
+        Ok(views.html.errors.emptyCityError(city))
       case Failure(ex) => 
         InternalServerError(views.html.errors.error500(ex))
     }
