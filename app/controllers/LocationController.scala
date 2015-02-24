@@ -47,4 +47,6 @@ object LocationController extends Controller {
         InternalServerError(views.html.errors.error500(ex))
     }
   }
+
+  
 }
