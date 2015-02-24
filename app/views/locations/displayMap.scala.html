@@ -1,0 +1,28 @@
+@import general._
+@import models._
+@import controllers._
+
+@**
+ *
+ *@
+@(address: String, city: String)
+
+@mainBody(title = Messages("locations.displayMap.title")) {
+   @headingSmall(Messages("general.applicationName"))
+  <div class="smallPadding">
+    <h2></h2>
+    
+    <div class="typeahead-container">
+      <div class="typeahead-field">
+
+        	@address
+        	<br>
+        	@city
+
+      </div>
+    </div>
+    
+    <input type="hidden" id="findLocationID" value="-1"></input>
+  </div>
+
+}

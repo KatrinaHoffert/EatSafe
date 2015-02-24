@@ -20,6 +20,11 @@ locations.view.reinspectionPriority=Current re-inspection priority
 locations.view.previousInspectionType=Previous inspection type
 locations.view.rha=Regional health authority
 
+# Display map page
+locations.view.title=Map of Location
+locations.view.header=Map of Location
+
+
 # Error pages
 errors.error500Title=Error 500
 errors.error500Desc=Internal server error
