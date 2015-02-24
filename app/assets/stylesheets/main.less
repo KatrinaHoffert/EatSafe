@@ -84,7 +84,7 @@ pre {
 }
 
 /* Fix case of typeaheads. */
-.typeahead-list {
+.typeahead-list, .typeahead-query input {
   text-transform: capitalize;
 }
 
@@ -158,6 +158,9 @@ pre {
   text-align: center;
 }
 
+/* Create collapse/uncollapse indicators on the issue accordions to show that
+   they can be collapsed/uncollapsed. The style with the .collapsed class will
+   override the one without for elements that are collapsed. */
 .panel-title-text::before {
   margin-right: 0.25em;
   color: #555;
