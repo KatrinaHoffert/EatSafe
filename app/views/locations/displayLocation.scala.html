@@ -10,7 +10,7 @@
 @scripts = {
   <script>
     function showMap(){
-      var address = "@{location.name}"
+      var address = "@{location.address}"
       var city = "@{location.city}"
       var destURL = "/map?address=" + encodeURIComponent(address)+ "&city=" + encodeURIComponent(city);
       window.location.assign(destURL); 
