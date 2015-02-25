@@ -16,7 +16,7 @@
     geocoder = new google.maps.Geocoder();
     var latlng = new google.maps.LatLng(52.1333, -106.6833);
     var mapOptions = {
-      zoom: 5,
+      zoom: 3,
       center: latlng
     }
     map = new google.maps.Map(document.getElementById('map-canvas'), mapOptions);
@@ -25,7 +25,7 @@
 
   function codeAddress() {
     //Takes the address and city passed into this view and geocodes their location
-    var address = "@{address} , @{city}";
+    var address = "@{address}";
     geocoder.geocode( { 'address': address}, function(results, status) {
       if (status == google.maps.GeocoderStatus.OK) {
         map.setCenter(results[0].geometry.location);
