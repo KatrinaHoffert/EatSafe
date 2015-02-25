@@ -25,7 +25,7 @@
 
   function codeAddress() {
     //Takes the address and city passed into this view and geocodes their location
-    var address = "@{address}";
+    var address = "@{address} , @{city}";
     geocoder.geocode( { 'address': address}, function(results, status) {
       if (status == google.maps.GeocoderStatus.OK) {
         map.setCenter(results[0].geometry.location);
