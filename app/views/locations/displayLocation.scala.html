@@ -7,19 +7,7 @@
  *@
 @(location: Location)
 
-@scripts = {
-  <script>
-    function showMap(){
-      var address = "@{location.address}"
-      var city = "@{location.city}"
-      var destURL = "/map?address=" + encodeURIComponent(address)+ "&city=" + encodeURIComponent(city);
-      window.location.assign(destURL); 
-    }
-  </script>
-
-}
-
-@mainBody(title = Messages("locations.view.titleStart") + ": " + location.name + " [" + location.address + "]", moreScripts = scripts) {
+@mainBody(title = Messages("locations.view.titleStart") + ": " + location.name + " [" + location.address + "]") {
   @headingSmall(Messages("general.applicationName"))
   <div class="smallPadding">
     <h1>@location.name</h1>
@@ -52,8 +40,6 @@
         </div>
       </div>
     }
-    <span class="typeahead-button">
-          <button type="button" class="btn btn-default" onclick="showMap()">Show Map</button>
-        </span>
+    <a href="@routes.MapController.showMap(location.address, location.city)">@location.address</a><br />
   </div>
 }
