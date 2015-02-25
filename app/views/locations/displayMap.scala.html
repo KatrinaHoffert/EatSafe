@@ -24,6 +24,7 @@
   }
 
   function codeAddress() {
+    //Takes the address and city passed into this view and geocodes their location
     var address = "@{address} , @{city}";
     geocoder.geocode( { 'address': address}, function(results, status) {
       if (status == google.maps.GeocoderStatus.OK) {
@@ -47,17 +48,12 @@
 @mainBody(title = Messages("locations.displayMap.title"), moreScripts = scripts) {
    @headingSmall(Messages("general.applicationName"))
   <div class="smallPadding">
-    <h2>@{address}, @{city}</h2>
-    
-    
+    <h2 class="mapLocation-header">@{address}, @{city}</h2>
       <div class="container-fluid">
         <div class="row">
-             <div class="col-sm-12" id="map-canvas" style="min-height:500px"></div>
+             <div class="col-sm-10 mapLocation" id="map-canvas"></div>
         </div>
        </div>	
-      
-
-    
   </div>
 
 }

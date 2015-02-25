@@ -21,7 +21,7 @@ object MapController extends Controller {
 	
 			//replaces " " with "+" in the address for the get request
 			//I also plan to use the same format in URL
-			val addressEncoded = URLEncoder.encode(address, "UTF-8");
+			return URLEncoder.encode(address, "UTF-8");
 
 	}
 
@@ -57,4 +57,5 @@ object MapController extends Controller {
 	def showMap(address: String, city: String) = Action {
         Ok(views.html.locations.displayMap(address,city))
 	}
+
 }

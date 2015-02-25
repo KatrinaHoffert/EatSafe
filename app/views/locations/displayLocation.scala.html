@@ -1,12 +1,25 @@
 @import general._
 @import models._
+@import controllers._
 
 @**
  * Displays a location with inspection data, ratings, etc.
  *@
 @(location: Location)
 
-@mainBody(title = Messages("locations.view.titleStart") + ": " + location.name + " [" + location.address + "]") {
+@scripts = {
+  <script>
+    function showMap(){
+      var address = "@{location.name}, @{location.address}"
+      var city = "@{location.city}"
+      var destURL = "/map?address=" + encodeURIComponent(address)+ "&city=" + encodeURIComponent(city);
+      window.location.assign(destURL); 
+    }
+  </script>
+
+}
+
+@mainBody(title = Messages("locations.view.titleStart") + ": " + location.name + " [" + location.address + "]", moreScripts = scripts) {
   @headingSmall(Messages("general.applicationName"))
   <div class="smallPadding">
     <h1>@location.name</h1>
@@ -39,5 +52,8 @@
         </div>
       </div>
     }
+    <span class="typeahead-button">
+          <button type="button" class="btn btn-default" onclick="showMap()">Show Map</button>
+        </span>
   </div>
 }
