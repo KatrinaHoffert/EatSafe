@@ -36,6 +36,17 @@
       codeAddress();
     }
 
+    // Retain center when resizing map. Otherwise the resizing will retain the top left corner and
+    // we may end up hiding the marker from view, which is probably in the center of the window
+    // (although it doesn't have to be and this doesn't depend on the marker position). This
+    // helps ensure that resizing the map still looks at the same thing (assuming the thing is
+    // in fact in the center).
+    google.maps.event.addDomListener(window, "resize", function() {
+      var center = map.getCenter();
+      google.maps.event.trigger(map, "resize");
+      map.setCenter(center); 
+    });
+
     /**
      * Takes the address and city passed into this view and geocodes their location.
      */
