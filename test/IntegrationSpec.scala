@@ -38,20 +38,23 @@ class IntegrationSpec extends Specification with Mockito {
 
       "show display location page when showLocation is called" in new WithApplication {
         val result = controllers.LocationController.showLocation(7)(FakeRequest())
-        status(result) must equalTo(OK)
-        contentType(result) must beSome.which(_ == "text/html")
+        assert(status(result) == OK)
+        val resultString = contentType(result)
+        assert(resultString must beSome.which(_ == "text/html"))
       }
       
       "show find location page when findLocation is called" in new WithApplication {
         val result = controllers.LocationController.findLocation("Saskatoon")(FakeRequest())
-        status(result) must equalTo(OK)
-        contentType(result) must beSome.which(_ == "text/html")
+        assert(status(result) == OK)
+        val resultString = contentType(result)
+        assert(resultString must beSome.which(_ == "text/html"))
       }
       
       "show find city page when selectCity is called" in new WithApplication {
         val result = controllers.LocationController.selectCity()(FakeRequest())
-        status(result) must equalTo(OK)
-        contentType(result) must beSome.which(_ == "text/html")
+        assert(status(result) == OK)
+        val resultString = contentType(result)
+        assert(resultString must beSome.which(_ == "text/html"))
       }
       
     }
@@ -64,16 +67,17 @@ class IntegrationSpec extends Specification with Mockito {
     "showLocation" should {
       "display information for valid id" in new WithApplication {
         val result = controllers.LocationController.showLocation(7)(FakeRequest())
-        status(result) must equalTo(OK)
+        assert(status(result) == OK)
 
-        contentAsString(result) must contain("Burstall Curling Rink - Kitchen")
-        contentAsString(result) must contain("Maharg Ave")
-        contentAsString(result) must contain("S0N 0H0")
+        val resultString = contentAsString(result);
+        assert(contentAsString(result) must contain("Burstall Curling Rink - Kitchen"))
+        assert(contentAsString(result) must contain("Maharg Ave"))
+        assert(contentAsString(result) must contain("S0N 0H0"))
       } 
   
       "diplay error for invalid id" in new WithApplication {
         val result = controllers.LocationController.showLocation(-1)(FakeRequest())
-        status(result) must equalTo(INTERNAL_SERVER_ERROR)
+        assert(status(result) == INTERNAL_SERVER_ERROR)
       }     
     }
   }
@@ -86,15 +90,15 @@ class IntegrationSpec extends Specification with Mockito {
     "findLocation" should {
       "display information for valid city" in new WithApplication {
         val result = controllers.LocationController.findLocation("Saskatoon")(FakeRequest())
-        status(result) must equalTo(OK)
-        contentAsString(result) must contain("Saskatoon")
-        contentAsString(result) must contain("7 Eleven")
+        assert(status(result) == OK)
+        assert(contentAsString(result) must contain("Saskatoon"))
+        assert(contentAsString(result) must contain("7 Eleven"))
       }
       
       /* empty list displayed with an invalid city is entered*/
       "display nothing for ivalid city" in new WithApplication {
         val result = controllers.LocationController.findLocation("#DOESNTEXIST")(FakeRequest())
-        status(result) must equalTo(OK)
+        assert(status(result) == OK)
       }
     }
   }
@@ -103,8 +107,8 @@ class IntegrationSpec extends Specification with Mockito {
     "selectCity" should {
       "display list of cities" in new WithApplication {
         val result = controllers.LocationController.selectCity()(FakeRequest())
-        status(result) must equalTo(OK)
-        contentAsString(result) must contain("Saskatoon")
+        assert(status(result) == OK)
+        assert(contentAsString(result) must contain("Saskatoon"))
       }
     }
   }
