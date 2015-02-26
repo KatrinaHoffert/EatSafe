@@ -11,11 +11,16 @@
 @scripts = {
   <script src="https://maps.googleapis.com/maps/api/js?v=3.exp&signed_in=true"></script>
   <script>
-    // Set the map container size to fill the remaining space
-    var canvas = $("#map-canvas");
-    var canvasHeight = $(window).height() - canvas.offset().top;
-    canvas.css("height", canvasHeight + "px");
-    canvas.css("width", "100%");
+    function sizeMapCanvas() {
+      // Set the map container size to fill the remaining space
+      var canvas = $("#map-canvas");
+      var canvasHeight = $(window).height() - canvas.offset().top;
+      canvas.css("height", canvasHeight + "px");
+      canvas.css("width", "100%");
+    }
+
+    $(window).resize(sizeMapCanvas);
+    sizeMapCanvas();
 
     // Create the map
     var geocoder;
