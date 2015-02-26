@@ -18,19 +18,39 @@
     var cities = @Html(Json.toJson(municipalities).toString)
     
     $("#municipality").typeahead({
+      delay: 100,
       minLength: 1,
       maxItem: 8,
       hint: true,
       source: {
-      data: cities
+        data: cities
       }
     });
     $("#municipality").focus();
 
    function setCity() {
-      var cityPicked = $("#municipality").val();
+      var cityPicked = $("#firstGuessCity").val();
+      
+      cityPicked = toTitleCase(cityPicked);
+      
+      if(cityPicked == null) {
+        cityPicked = $("#municipality").val();
+      }
+      
       var destURL = "/find/" + cityPicked;
       window.location.assign(destURL);
+    }
+    
+    function setHint() {
+      var citySuggested = $(".typeahead-hint").val();
+      $("#firstGuessCity").val(citySuggested);
+    }
+    
+    // Via Greg Dean on stackoverflow
+    // http://stackoverflow.com/questions/196972/convert-string-to-title-case-with-javascript
+    function toTitleCase(str)
+    {
+      return str.replace(/\w\S*/g, function(txt){return txt.charAt(0).toUpperCase() + txt.substr(1).toLowerCase();});
     }
   </script>
 }
@@ -43,8 +63,10 @@
       <div class="typeahead-field">
 
         <span class="typeahead-query">
-          <input id="municipality" onkeypress="if (event.keyCode==13){setCity()}"
-                 name="municipality[query]" type="search" placeholder="Search" autocomplete="off">
+          <input id="municipality" onkeypress="if(event.keyCode==13){setCity()}else{window.setTimeout(setHint, 200)}"
+                 name="municipality[query]" type="search" placeholder="Search" autocomplete="on">
+                 
+          <input id="firstGuessCity" hidden>
         </span>
         <span class="typeahead-button">
           <button type="submit" id="submitButton" onclick="setCity()">
