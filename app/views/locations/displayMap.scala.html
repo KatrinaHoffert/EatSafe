@@ -48,15 +48,14 @@
   </script>
 }
 
-@mainBody(title = Messages("locations.displayMap.title"), moreScripts = scripts) {
-   @headingSmall(Messages("general.applicationName"))
+@mainBody(title = Messages("maps.displayAddress.title", address, city), moreScripts = scripts) {
+  @headingSmall(Messages("general.applicationName"))
   <div class="smallPadding">
     <h2 class="mapLocation-header">@{address}, @{city}</h2>
-      <div class="container-fluid">
-        <div class="row">
-             <div class="col-sm-10 mapLocation" id="map-canvas"></div>
-        </div>
-       </div>	
+    <div class="container-fluid">
+      <div class="row">
+        <div class="col-sm-10 mapLocation" id="map-canvas"></div>
+      </div>
+    </div>
   </div>
-
 }
