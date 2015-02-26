@@ -6,6 +6,11 @@
  ****************************** GENERAL PURPOSE ********************************
  ******************************************************************************/
 
+/* Height 100% only works if all containers are 100% height. */
+html, body {
+  height: 100%;
+}
+
 /* Headings can't be too large, since restaurants can have long names */
 h1 {
   font-size: 1.75em;
@@ -68,15 +73,11 @@ pre {
   padding: 0.25em;
   align-self: flex-end;
 }
-/* Map settings*/
-.mapLocation{
-  float: none;
-  margin: 0 auto;
-  min-height: 500px;
-}
 
-.mapLocation-header{
+/* Heading of the address map */
+.mapLocation-header {
   text-align: center;
+  margin-top: 0.25em;
 }
 
 /* Smaller headings for other pages */

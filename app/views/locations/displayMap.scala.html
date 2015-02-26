@@ -11,6 +11,13 @@
 @scripts = {
   <script src="https://maps.googleapis.com/maps/api/js?v=3.exp&signed_in=true"></script>
   <script>
+    // Set the map container size to fill the remaining space
+    var canvas = $("#map-canvas");
+    var canvasHeight = $(window).height() - canvas.offset().top;
+    canvas.css("height", canvasHeight + "px");
+    canvas.css("width", "100%");
+
+    // Create the map
     var geocoder;
     var map;
 
@@ -50,12 +57,6 @@
 
 @mainBody(title = Messages("maps.displayAddress.title", address, city), moreScripts = scripts) {
   @headingSmall(Messages("general.applicationName"))
-  <div class="smallPadding">
-    <h2 class="mapLocation-header">@{address}, @{city}</h2>
-    <div class="container-fluid">
-      <div class="row">
-        <div class="col-sm-10 mapLocation" id="map-canvas"></div>
-      </div>
-    </div>
-  </div>
+  <h2 class="mapLocation-header">@{address}, @{city}</h2>
+  <div id="map-canvas"></div>
 }
