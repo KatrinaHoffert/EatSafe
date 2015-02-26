@@ -16,20 +16,7 @@ import scala.concurrent.{ Await, Future }
 import scala.concurrent.duration._
 
 object MapController extends Controller {
-
-	def formatAddress(address: String){
-	
-			//replaces " " with "+" in the address for the get request
-			//I also plan to use the same format in URL
-			return URLEncoder.encode(address, "UTF-8");
-
-	}
-
-
-
-
-	def showMap(address: String, city: String) = Action {
-        Ok(views.html.locations.displayMap(address,city))
-	}
-
+  def showMap(address: String, city: String) = Action {
+    Ok(views.html.locations.displayMap(address, city))
+  }
 }

@@ -3,48 +3,51 @@
 @import controllers._
 
 @**
- *
+ * Displays an address on a map. The address should be the street address (preferably minimalistic,
+ * as unnecessary text in the address will break the map) and the city is obvious.
  *@
 @(address: String, city: String)
 
 @scripts = {
-<script src="https://maps.googleapis.com/maps/api/js?v=3.exp&signed_in=true"></script>
-<script>
+  <script src="https://maps.googleapis.com/maps/api/js?v=3.exp&signed_in=true"></script>
+  <script>
     var geocoder;
     var map;
+
     function initialize() {
-    geocoder = new google.maps.Geocoder();
-    var latlng = new google.maps.LatLng(52.1333, -106.6833);
-    var mapOptions = {
-      zoom: 3,
-      center: latlng
+      geocoder = new google.maps.Geocoder();
+      var latlng = new google.maps.LatLng(52.1333, -106.6833);
+      map = new google.maps.Map(document.getElementById("map-canvas"), {
+        zoom: 3,
+        center: latlng
+      });
+      codeAddress();
     }
-    map = new google.maps.Map(document.getElementById('map-canvas'), mapOptions);
-    codeAddress();
-  }
 
-  function codeAddress() {
-    //Takes the address and city passed into this view and geocodes their location
-    var address = "@{address} , @{city}";
-    geocoder.geocode( { 'address': address}, function(results, status) {
-      if (status == google.maps.GeocoderStatus.OK) {
-        map.setCenter(results[0].geometry.location);
-        map.setZoom(13);
-        var marker = new google.maps.Marker({
-          map: map,
-          position: results[0].geometry.location
-        });
-      } else {
-      alert('Geocode was not successful for the following reason: ' + status);
-      }
-    });
-  }
+    /**
+     * Takes the address and city passed into this view and geocodes their location.
+     */
+    function codeAddress() {
+      var address = "@{address} , @{city}";
+      geocoder.geocode( { "address": address }, function(results, status) {
+        if(status == google.maps.GeocoderStatus.OK) {
+          map.setCenter(results[0].geometry.location);
+          map.setZoom(15);
+          var marker = new google.maps.Marker({
+            map: map,
+            position: results[0].geometry.location
+          });
+        }
+        else {
+          alert("Geocoding failed: " + status);
+        }
+      });
+    }
 
-  google.maps.event.addDomListener(window, 'load', initialize);
-
-</script>
-
+    google.maps.event.addDomListener(window, 'load', initialize);
+  </script>
 }
+
 @mainBody(title = Messages("locations.displayMap.title"), moreScripts = scripts) {
    @headingSmall(Messages("general.applicationName"))
   <div class="smallPadding">
