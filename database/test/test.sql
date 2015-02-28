@@ -24,7 +24,7 @@ INSERT INTO location(id, name, address, postcode, city, rha)
  VALUES (1, 'Cabri Inn - Kitchen', '103 Railway Ave S', 'S0N 0J0', 'Cabri', 'Cypress Health Authority');
 
 INSERT INTO inspection(id, location_id, inspection_date, inspection_type, reinspection_priority)
- VALUES (1, 1, 'Mon Nov 10 00:00:00 CST 2014', 'Routine', 'Moderate');
+ VALUES (1, 1, 'Mon Nov 10 00:00:00 GMT-06:00 2014', 'Routine', 'Moderate');
 
 INSERT INTO violation(inspection_id, violation_id)
  VALUES (1, 1);
@@ -36,10 +36,10 @@ INSERT INTO violation(inspection_id, violation_id)
  VALUES (1, 15);
 
 INSERT INTO inspection(id, location_id, inspection_date, inspection_type, reinspection_priority)
- VALUES (2, 1, 'Fri Aug 29 00:00:00 CST 2014', 'Follow-up', 'Low');
+ VALUES (2, 1, 'Fri Aug 29 00:00:00 GMT-06:00 2014', 'Follow-up', 'Low');
 
 INSERT INTO inspection(id, location_id, inspection_date, inspection_type, reinspection_priority)
- VALUES (3, 1, 'Mon May 12 00:00:00 CST 2014', 'Routine', 'Moderate');
+ VALUES (3, 1, 'Mon May 12 00:00:00 GMT-06:00 2014', 'Routine', 'Moderate');
 
 INSERT INTO violation(inspection_id, violation_id)
  VALUES (3, 1);
