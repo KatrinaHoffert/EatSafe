@@ -31,18 +31,17 @@
         data: places
       },
       callback: {
-        onClick: function (node, a, obj, e) {
-          $("#findLocationID").val(obj.id);
+        onSubmit: function(node, form, obj, e) {
+          if(obj == null) {
+            alert("Gotta pick one, man");
+            return;
+          }
+
+          window.location.assign("/view/" + obj.id);
         }
       }
     });
     $("#location").focus();
-
-    function viewLocation() {
-      var locationID = $("#findLocationID").val();
-      var destURL = "/view/" + locationID;
-      window.location.assign(destURL);
-    }
   </script>
 }
 
@@ -51,21 +50,20 @@
   <div class="smallPadding">
     <h2>@Messages("locations.selectLocation.prompt")</h2>
     
-    <div class="typeahead-container">
-      <div class="typeahead-field">
+    <form id="form-location">
+      <div class="typeahead-container">
+        <div class="typeahead-field">
 
-        <span class="typeahead-query">
-          <input id="location" onkeypress="if (event.keyCode==13){viewLocation()}"
-                 name="location[query]" type="search" placeholder="Search" autocomplete="off">
-        </span>
-        <span class="typeahead-button">
-          <button type="submit" id="submitButton" onclick="viewLocation()">
-            <i class="search-icon"></i>
-          </button>
-        </span>
+          <span class="typeahead-query">
+            <input id="location" type="search" placeholder="Search" autocomplete="off">
+          </span>
+          <span class="typeahead-button">
+            <button type="submit">
+              <i class="search-icon"></i>
+            </button>
+          </span>
+        </div>
       </div>
-    </div>
-    
-    <input type="hidden" id="findLocationID" value="-1"></input>
+    </form>
   </div>
 }
