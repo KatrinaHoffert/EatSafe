@@ -189,17 +189,15 @@ pre {
 }
 
 /* Error message div displayed at the top of the page. It's actually at the top
-   of the viewport, so the user won't miss it if they've scrolled down a bit. It
-   should disappear after some time, otherwise it'll be annoying. */
+   of the viewport, so the user won't miss it if they've scrolled down a bit. */
 .topViewError {
   position: fixed;
   top: 0;
   left: 0;
   width: 100%;
-  background-color: red;
-  color: white;
-  font-size: 1.5em;
-  padding: 0.5em;
+  border-radius: 0;
+  font-size: 1.25em;
+  cursor: pointer;
 }
 
 /*******************************************************************************
