@@ -18,8 +18,16 @@ VALUES (1, 'Potentially hazardous foods and perishable foods must be stored at 4
 (14, 'All restaurants are to be free of vermin.', 'Insect/Rodent Control', 'General Item'),
 (15, 'Floors, walls and ceilings of all rooms in which food is stored, prepared or served or in which dishes, utensils and equipment are washed or stored should be kept clean and in good repair.', 'Construction/Maintenance and/or Cleaning of Premises', 'General Item'),
 (16, 'Approved plumbing must be installed and properly maintained to prevent food contamination.  Light shields or shatterproof bulbs are to be provided in every room in which food is prepared or stored. Unless otherwise approved, every restaurant is to have a ventilation system that prevents the accumulation of odours, smoke, grease/oils and condensation.', 'Plumbing/Lighting/Ventilation', 'General Item');
+--7 total locations
+--20 total inspections
+--20 total violations
 
 --Location 1
+/*
+Location Summary
+3 inspections
+0 violations
+*/
 INSERT INTO location(id, name, address, postcode, city, rha)
  VALUES (1, 'Andrews Kitchen', 'My Place', 'S0N 0H0', 'Town A', 'A Health Authority');
 
@@ -33,6 +41,11 @@ INSERT INTO inspection(id, location_id, inspection_date, inspection_type, reinsp
  VALUES (3, 1, 'Mon Dec 03 00:00:00 GMT-06:00 2012', 'Routine', 'Low');
 
  -- Location 2
+ /*
+ Location Summary
+ 3 inspections
+ 5 violations
+ */
 INSERT INTO location(id, name, address, postcode, city, rha)
  VALUES (2, 'Andrews Bathroom', 'My Place', 'S0N 0J0', 'Town A', 'A Health Authority');
 
@@ -61,6 +74,11 @@ INSERT INTO violation(inspection_id, violation_id)
  VALUES (6, 12);
 
  --Location 3
+  /*
+ Location Summary
+ 2 inspections
+ 2 violations
+ */
 INSERT INTO location(id, name, address, postcode, city, rha)
  VALUES (3, 'Ten Forward', 'Starship Enterprise', 'S0N 0P0', 'Space', 'Space Health Authority');
 
@@ -77,8 +95,13 @@ INSERT INTO violation(inspection_id, violation_id)
  VALUES (8, 15);
 
  --Location 4
+  /*
+ Location Summary
+ 3 inspections
+ 3 violations
+ */
 INSERT INTO location(id, name, address, postcode, city, rha)
- VALUES (4, 'Frontier Motel - Restaurant', 'Hwy 18 E', 'S0N 0W0', 'Frontier', 'Cypress Health Authority');
+ VALUES (4, 'Monks Cafe', 'Seinfeld Place', 'S0N 0W0', 'New York', 'York Health Authority');
 
 INSERT INTO inspection(id, location_id, inspection_date, inspection_type, reinspection_priority)
  VALUES (9, 4, 'Thu Oct 09 00:00:00 GMT-06:00 2014', 'Routine', 'Low');
@@ -99,8 +122,13 @@ INSERT INTO violation(inspection_id, violation_id)
  VALUES (11, 16);
 
  --location 5
+  /*
+ Location Summary
+ 3 inspections
+ 4 violations
+ */
 INSERT INTO location(id, name, address, postcode, city, rha)
- VALUES (5, 'Frontier Recreation Centre - Concession', '306 1st St E', 'S0N 0W0', 'Frontier', 'Cypress Health Authority');
+ VALUES (5, 'Panda Express', 'South Park Ave', 'S0N 0W0', 'South Park', 'SP Health Authority');
 
 INSERT INTO inspection(id, location_id, inspection_date, inspection_type, reinspection_priority)
  VALUES (12, 5, 'Wed Oct 23 00:00:00 GMT-06:00 2013', 'Routine', 'Low');
@@ -124,8 +152,13 @@ INSERT INTO violation(inspection_id, violation_id)
  VALUES (14, 15);
 
  --Location 6
+ /*
+ Location Summary
+ 3 inspections
+ 1 violations
+ */
 INSERT INTO location(id, name, address, postcode, city, rha)
- VALUES (6, 'Lorraine''s Kitchen', 'North Qu''appelle', 'DATA MISSING', 'DATA MISSING', 'Regina QuAppelle Health Authority');
+ VALUES (6, 'Insert TV Reference', '9001 place', 'H0H 0H0', 'Caprica City', 'Caprica Health Authority');
 
 INSERT INTO inspection(id, location_id, inspection_date, inspection_type, reinspection_priority)
  VALUES (15, 6, 'Wed Jul 16 00:00:00 GMT-06:00 2014', 'Routine', 'Low');
@@ -139,8 +172,14 @@ INSERT INTO violation(inspection_id, violation_id)
 INSERT INTO inspection(id, location_id, inspection_date, inspection_type, reinspection_priority)
  VALUES (17, 6, 'Thu Jun 28 00:00:00 GMT-06:00 2012', 'Routine', 'Low');
 
+ --Location 7
+  /*
+ Location Summary
+ 3 inspections
+ 5 violations
+ */
 INSERT INTO location(id, name, address, postcode, city, rha)
- VALUES (7, 'Imperial Family Restaurant', '214 Royal St.', 'S0G 2J0', 'Imperial', 'Regina QuAppelle Health Authority');
+ VALUES (7, 'Hogwarts Dining Hall', 'Hogwarts Place', 'S0G 2J0', 'Hogwarts', 'Wizard Health Authority');
 
 INSERT INTO inspection(id, location_id, inspection_date, inspection_type, reinspection_priority)
  VALUES (18, 7, 'Wed Dec 17 00:00:00 GMT-06:00 2014', 'Follow-up', 'Moderate');
