@@ -5,7 +5,7 @@ import play.api._
 import play.api.mvc._
 import models._
 import models.Location
-import globals.Globals.defaultDB
+import globals._
 
 object LocationController extends Controller {
   /**
