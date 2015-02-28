@@ -33,8 +33,12 @@
       },
       callback: {
         onSubmit: function(node, form, obj, e) {
+          if($("#location").val() == "") {
+            createPageError("@Messages("locations.selectLocation.noInput")");
+            return;
+          }
           if(obj == null) {
-            createPageError("I'm sorry, Dave, that not valid input.");
+            createPageError("@Messages("locations.selectLocation.badInput")");
             return;
           }
 
