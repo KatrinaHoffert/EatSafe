@@ -12,6 +12,7 @@
 @(locations: Seq[SlimLocation])
 
 @scripts = {
+  <script src="@controllers.routes.Assets.at("javascripts/common.js")"></script>
   <script>
     "use strict";
     
@@ -33,7 +34,7 @@
       callback: {
         onSubmit: function(node, form, obj, e) {
           if(obj == null) {
-            alert("Gotta pick one, man");
+            createPageError("I'm sorry, Dave, that not valid input.");
             return;
           }
 
