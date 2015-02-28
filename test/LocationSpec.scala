@@ -22,13 +22,12 @@ import globals.ActiveDatabase
  * readable and reusable in the future.
  */
 @RunWith(classOf[JUnitRunner])
-class ModelSpec extends Specification with Mockito {
+class LocationSpec extends Specification with Mockito {
 
   // Run test functions here
-  this.getViolationsTests
-  this.getInspectionsTests
   this.getLocationByIdTests
   this.getLocationsByCityTests
+  this.listCitiesTests
 
   def getLocationByIdTests = {
     // Currently, this gets the default database source, in future, we can
@@ -56,10 +55,6 @@ class ModelSpec extends Specification with Mockito {
         val goodLoc = Location.getLocationById(7)((new ActiveDatabase("badDatabase")))
         goodLoc.isFailure mustEqual true
       }
-
-      // TODO: There should be a test where the database connection is not available, but we need some
-      // kind of test hook in order to do this, perhaps pass in the database connection or
-      // something, so it can be mocked out to throw errors
     }
   }
 
@@ -81,43 +76,19 @@ class ModelSpec extends Specification with Mockito {
       }
     }
   }
-
-  def getViolationsTests = {
-    "getViolations" should {
-      "return success when given proper inputs" in new WithApplication {
-        // TODO get good data
-        val violationList = Violation.getViolations(2)
-        violationList.get
+  
+  def listCitiesTests = {
+    "listCities" should {
+      "list all cities with resteraunts in saskatchewan" in new WithApplication {
+        val listOfCities = Location.listCities();
+        listOfCities.get.length must beEqualTo(465)
       }
-
-      "given a certain ID, the number of returned violations should be correct" in new WithApplication {
-        val violationList = Violation.getViolations(31)
-        violationList.get.length must beEqualTo(3)
+      "list should be in alphabetical order" in new WithApplication {
+        val listOfCities = Location.listCities();
+        val citySeq = listOfCities.get
+        citySeq.indexOf("Denzil") must beLessThan(citySeq.indexOf("Saskatoon")) // Luseland should appear before Saskatoon in the list
       }
-
-      "return a failure if there is a bad database" in new WithApplication  {
-        val vioList = Violation.getViolations(1)((new ActiveDatabase("BadDatabase")))
-        vioList.isFailure mustEqual true
-      }
-    }
-  }
-
-  def getInspectionsTests = {
-    "getInspections" should {
-      "return success when given proper inputs" in new WithApplication {
-        val inspectionList = Inspection.getInspections(2)
-        inspectionList.get
-      }
-
-      "given a good id, return the right amount of inspections" in new WithApplication {
-        val inspectionList = Inspection.getInspections(15)
-        inspectionList.get.size must beEqualTo(3)
-      }
-
-      "return a failure if there is a bad database" in new WithApplication  {
-        val inspectionList = Inspection.getInspections(15)((new ActiveDatabase("badDatabase")))
-        inspectionList.isFailure mustEqual true
-      }
+      
     }
   }
 }
