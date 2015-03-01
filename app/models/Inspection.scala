@@ -31,7 +31,8 @@ object Inspection {
            """
              SELECT id, inspection_date, inspection_type, reinspection_priority
              FROM inspection
-             WHERE location_id = {locationId};
+             WHERE location_id = {locationId}
+             ORDER BY inspection_date DESC;
            """    
         ).on("locationId" -> locationId)
         

@@ -1,4 +1,4 @@
--- EatSafe
+-- EatSafe_test
 -- This file will populate the database
 -- Before running this file, run CreateTables.sql first
 INSERT INTO violation_type (id, description, name,  priority)
@@ -18,40 +18,39 @@ VALUES (1, 'Potentially hazardous foods and perishable foods must be stored at 4
 (14, 'All restaurants are to be free of vermin.', 'Insect/Rodent Control', 'General Item'),
 (15, 'Floors, walls and ceilings of all rooms in which food is stored, prepared or served or in which dishes, utensils and equipment are washed or stored should be kept clean and in good repair.', 'Construction/Maintenance and/or Cleaning of Premises', 'General Item'),
 (16, 'Approved plumbing must be installed and properly maintained to prevent food contamination.  Light shields or shatterproof bulbs are to be provided in every room in which food is prepared or stored. Unless otherwise approved, every restaurant is to have a ventilation system that prevents the accumulation of odours, smoke, grease/oils and condensation.', 'Plumbing/Lighting/Ventilation', 'General Item');
+--7 total locations
+--20 total inspections
+--20 total violations
 
-
+--Location 1
+/*
+Location Summary
+3 inspections
+0 violations
+*/
 INSERT INTO location(id, name, address, postcode, city, rha)
- VALUES (1, 'Burstall Arena - Kitchen', '615 Maharg Ave', 'S0N 0H0', 'Burstall', 'Cypress Health Authority');
+ VALUES (1, 'Andrews Kitchen', 'My Place', 'S0N 0H0', 'Town A', 'A Health Authority');
 
 INSERT INTO inspection(id, location_id, inspection_date, inspection_type, reinspection_priority)
- VALUES (1, 1, '2014-11-07', 'Routine', 'Low');
-
-INSERT INTO violation(inspection_id, violation_id)
- VALUES (1, 12);
-
-INSERT INTO violation(inspection_id, violation_id)
- VALUES (1, 15);
+ VALUES (1, 1, '2014-12-17', 'Routine', 'Low');
 
 INSERT INTO inspection(id, location_id, inspection_date, inspection_type, reinspection_priority)
- VALUES (2, 1, '2013-11-18', 'Routine', 'Low');
-
-INSERT INTO violation(inspection_id, violation_id)
- VALUES (2, 12);
-
-INSERT INTO violation(inspection_id, violation_id)
- VALUES (2, 15);
+ VALUES (2, 1, '2013-12-17', 'Routine', 'Low');
 
 INSERT INTO inspection(id, location_id, inspection_date, inspection_type, reinspection_priority)
- VALUES (3, 1, '2012-12-03', 'Routine', 'Low');
+ VALUES (3, 1, '2012-12-17', 'Routine', 'Low');
 
-INSERT INTO violation(inspection_id, violation_id)
- VALUES (3, 15);
-
+ -- Location 2
+ /*
+ Location Summary
+ 3 inspections
+ 5 violations
+ */
 INSERT INTO location(id, name, address, postcode, city, rha)
- VALUES (2, 'Cabri Inn - Kitchen', '103 Railway Ave S', 'S0N 0J0', 'Cabri', 'Cypress Health Authority');
+ VALUES (2, 'Andrews Bathroom', 'My Place', 'S0N 0J0', 'Town A', 'A Health Authority');
 
 INSERT INTO inspection(id, location_id, inspection_date, inspection_type, reinspection_priority)
- VALUES (4, 2, '2014-11-10', 'Routine', 'Moderate');
+ VALUES (4, 2, '2012-07-12', 'Routine', 'Moderate');
 
 INSERT INTO violation(inspection_id, violation_id)
  VALUES (4, 1);
@@ -63,10 +62,10 @@ INSERT INTO violation(inspection_id, violation_id)
  VALUES (4, 15);
 
 INSERT INTO inspection(id, location_id, inspection_date, inspection_type, reinspection_priority)
- VALUES (5, 2, '2014-08-29', 'Follow-up', 'Low');
+ VALUES (5, 2, '2014-01-01','Follow-up', 'Low');
 
 INSERT INTO inspection(id, location_id, inspection_date, inspection_type, reinspection_priority)
- VALUES (6, 2, '2014-05-12', 'Routine', 'Moderate');
+ VALUES (6, 2, '2013-11-09', 'Routine', 'Moderate');
 
 INSERT INTO violation(inspection_id, violation_id)
  VALUES (6, 1);
@@ -74,35 +73,47 @@ INSERT INTO violation(inspection_id, violation_id)
 INSERT INTO violation(inspection_id, violation_id)
  VALUES (6, 12);
 
+ --Location 3
+  /*
+ Location Summary
+ 2 inspections
+ 2 violations
+ */
 INSERT INTO location(id, name, address, postcode, city, rha)
- VALUES (3, 'Consul Saloon', '120 Railway Ave', 'S0N 0P0', 'Consul', 'Cypress Health Authority');
+ VALUES (3, 'Ten Forward', 'Starship Enterprise', 'S0N 0P0', 'Space', 'Space Health Authority');
 
 INSERT INTO inspection(id, location_id, inspection_date, inspection_type, reinspection_priority)
- VALUES (7, 3, '2014-09-23', 'Routine', 'Low');
+ VALUES (7, 3, '2013-08-12', 'Routine', 'Low');
 
 INSERT INTO violation(inspection_id, violation_id)
  VALUES (7, 15);
 
 INSERT INTO inspection(id, location_id, inspection_date, inspection_type, reinspection_priority)
- VALUES (8, 3, '2014-05-02', 'Routine', 'Low');
+ VALUES (8, 3, '2014-10-16', 'Routine', 'Low');
 
 INSERT INTO violation(inspection_id, violation_id)
  VALUES (8, 15);
 
+ --Location 4
+  /*
+ Location Summary
+ 3 inspections
+ 3 violations
+ */
 INSERT INTO location(id, name, address, postcode, city, rha)
- VALUES (4, 'Frontier Motel - Restaurant', 'Hwy 18 E', 'S0N 0W0', 'Frontier', 'Cypress Health Authority');
+ VALUES (4, 'Monks Cafe', 'Seinfeld Place', 'S0N 0W0', 'New York', 'York Health Authority');
 
 INSERT INTO inspection(id, location_id, inspection_date, inspection_type, reinspection_priority)
- VALUES (9, 4, '2014-10-09', 'Routine', 'Low');
+ VALUES (9, 4, '2012-11-15', 'Routine', 'Low');
 
 INSERT INTO inspection(id, location_id, inspection_date, inspection_type, reinspection_priority)
- VALUES (10, 4, '2013-10-23', 'Routine', 'Low');
+ VALUES (10, 4, '2013-01-07', 'Routine', 'Low');
 
 INSERT INTO violation(inspection_id, violation_id)
  VALUES (10, 16);
 
 INSERT INTO inspection(id, location_id, inspection_date, inspection_type, reinspection_priority)
- VALUES (11, 4, '2012-09-07', 'Routine', 'Low');
+ VALUES (11, 4, '2014-09-09', 'Routine', 'Low');
 
 INSERT INTO violation(inspection_id, violation_id)
  VALUES (11, 15);
@@ -110,23 +121,29 @@ INSERT INTO violation(inspection_id, violation_id)
 INSERT INTO violation(inspection_id, violation_id)
  VALUES (11, 16);
 
+ --location 5
+  /*
+ Location Summary
+ 3 inspections
+ 4 violations
+ */
 INSERT INTO location(id, name, address, postcode, city, rha)
- VALUES (5, 'Frontier Recreation Centre - Concession', '306 1st St E', 'S0N 0W0', 'Frontier', 'Cypress Health Authority');
+ VALUES (5, 'Panda Express', 'South Park Ave', 'S0N 0W0', 'South Park', 'SP Health Authority');
 
 INSERT INTO inspection(id, location_id, inspection_date, inspection_type, reinspection_priority)
- VALUES (12, 5, '2013-10-23', 'Routine', 'Low');
+ VALUES (12, 5, '2011-08-08', 'Routine', 'Low');
 
 INSERT INTO violation(inspection_id, violation_id)
  VALUES (12, 12);
 
 INSERT INTO inspection(id, location_id, inspection_date, inspection_type, reinspection_priority)
- VALUES (13, 5, '2012-10-25', 'Routine', 'Low');
+ VALUES (13, 5, '2013-06-20', 'Routine', 'Low');
 
 INSERT INTO violation(inspection_id, violation_id)
  VALUES (13, 12);
 
 INSERT INTO inspection(id, location_id, inspection_date, inspection_type, reinspection_priority)
- VALUES (14, 5, '2012-01-16', 'Routine', 'Low');
+ VALUES (14, 5, '2012-08-23', 'Routine', 'Low');
 
 INSERT INTO violation(inspection_id, violation_id)
  VALUES (14, 10);
@@ -134,23 +151,35 @@ INSERT INTO violation(inspection_id, violation_id)
 INSERT INTO violation(inspection_id, violation_id)
  VALUES (14, 15);
 
+ --Location 6
+ /*
+ Location Summary
+ 3 inspections
+ 1 violations
+ */
 INSERT INTO location(id, name, address, postcode, city, rha)
- VALUES (6, 'Lorraine''s Kitchen', 'North Qu''appelle', 'DATA MISSING', 'DATA MISSING', 'Regina QuAppelle Health Authority');
+ VALUES (6, 'Insert TV Reference', '9001 place', 'H0H 0H0', 'Caprica City', 'Caprica Health Authority');
 
 INSERT INTO inspection(id, location_id, inspection_date, inspection_type, reinspection_priority)
- VALUES (15, 6, '2014-07-16', 'Routine', 'Low');
+ VALUES (15, 6, '2014-12-19', 'Routine', 'Low');
 
 INSERT INTO inspection(id, location_id, inspection_date, inspection_type, reinspection_priority)
- VALUES (16, 6, '2013-06-25', 'Routine', 'Low');
+ VALUES (16, 6, '2014-05-17', 'Routine', 'Low');
 
 INSERT INTO violation(inspection_id, violation_id)
  VALUES (16, 1);
 
 INSERT INTO inspection(id, location_id, inspection_date, inspection_type, reinspection_priority)
- VALUES (17, 6, '2012-06-28', 'Routine', 'Low');
+ VALUES (17, 6, '2012-12-17', 'Routine', 'Low');
 
+ --Location 7
+  /*
+ Location Summary
+ 3 inspections
+ 5 violations
+ */
 INSERT INTO location(id, name, address, postcode, city, rha)
- VALUES (7, 'Imperial Family Restaurant', '214 Royal St.', 'S0G 2J0', 'Imperial', 'Regina QuAppelle Health Authority');
+ VALUES (7, 'Hogwarts Dining Hall', 'Hogwarts Place', 'S0G 2J0', 'Hogwarts', 'Wizard Health Authority');
 
 INSERT INTO inspection(id, location_id, inspection_date, inspection_type, reinspection_priority)
  VALUES (18, 7, '2014-12-17', 'Follow-up', 'Moderate');
@@ -159,13 +188,13 @@ INSERT INTO violation(inspection_id, violation_id)
  VALUES (18, 16);
 
 INSERT INTO inspection(id, location_id, inspection_date, inspection_type, reinspection_priority)
- VALUES (19, 7, '2014-10-24', 'Follow-up', 'Moderate');
+ VALUES (19, 7, '2014-04-17', 'Follow-up', 'Moderate');
 
 INSERT INTO violation(inspection_id, violation_id)
  VALUES (19, 16);
 
 INSERT INTO inspection(id, location_id, inspection_date, inspection_type, reinspection_priority)
- VALUES (20, 7, '2014-09-25', 'Routine', 'High');
+ VALUES (20, 7, '2013-12-17', 'Routine', 'High');
 
 INSERT INTO violation(inspection_id, violation_id)
  VALUES (20, 1);

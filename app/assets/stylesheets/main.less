@@ -188,6 +188,18 @@ pre {
   content: "[+]";
 }
 
+/* Error message div displayed at the top of the page. It's actually at the top
+   of the viewport, so the user won't miss it if they've scrolled down a bit. */
+.topViewError {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  border-radius: 0;
+  font-size: 1.25em;
+  cursor: pointer;
+}
+
 /*******************************************************************************
  ****************************** MEDIA QUERIES **********************************
  ******************************************************************************/

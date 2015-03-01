@@ -4,10 +4,14 @@ general.applicationName=EatSafe Saskatchewan
 # Select city page
 locations.selectCity.title=Select a city
 locations.selectCity.prompt=Where are you?
+locations.selectCity.noInput=You need to enter something.
+locations.selectCity.badInput=I''m sorry, Dave, that not valid input.
 
 # Select location page
 locations.selectLocation.title=Select a location
 locations.selectLocation.prompt=Where do you want to eat?
+locations.selectLocation.noInput=You need to enter something.
+locations.selectLocation.badInput=I''m sorry, Dave, that not valid input.
 
 # Display locations page
 locations.view.titleStart=EatSafe

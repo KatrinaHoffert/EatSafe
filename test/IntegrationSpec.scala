@@ -4,7 +4,6 @@ import org.junit.runner._
 
 import play.api.test._
 import play.api.test.Helpers._
-import globals.Globals.testDB
 import globals.ActiveDatabase
 
 import org.specs2.mock._
@@ -15,6 +14,7 @@ import org.specs2.mock._
  */
 @RunWith(classOf[JUnitRunner])
 class IntegrationSpec extends Specification with Mockito {
+  implicit lazy val db = new ActiveDatabase("test")
   
   "Application" should {
     "run in a browser" in new WithBrowser {

@@ -7,6 +7,7 @@ import java.io.Writer
 import java.util.ArrayList
 import java.util.Date
 import java.util.List
+import java.text.SimpleDateFormat
 import org.apache.commons.lang3.text.WordUtils
 import au.com.bytecode.opencsv.CSVReader
 
@@ -70,7 +71,8 @@ class CSVLoader(writer: Writer) {
         for (string <- nextLine) {
           val date = DateUtil.convertToDate(string) match {
             case Some(date) =>
-              recordLine(index) = date.toString
+              val formatter = new SimpleDateFormat("yyy-MM-dd")
+              recordLine(index) = formatter.format(date)
             case None =>
               recordLine(index) = string
           }
