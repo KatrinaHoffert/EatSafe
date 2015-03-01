@@ -12,6 +12,7 @@
 @(municipalities: Seq[String])
 
 @scripts = {
+  <script src="@controllers.routes.Assets.at("javascripts/common.js")"></script>
   <script>
     "use strict";
     
@@ -24,34 +25,23 @@
       hint: true,
       source: {
         data: cities
+      },
+      callback: {
+        onSubmit: function(node, form, obj, e) {
+          if($("#municipality").val() == "") {
+            createPageError("@Messages("locations.selectLocation.noInput")");
+            return;
+          }
+          if(obj == null) {
+            createPageError("@Messages("locations.selectLocation.badInput")");
+            return;
+          }
+
+          window.location.assign("/find/" + obj.display);
+        }
       }
     });
     $("#municipality").focus();
-
-   function setCity() {
-      var cityPicked = $("#firstGuessCity").val();
-      
-      cityPicked = toTitleCase(cityPicked);
-      
-      if(cityPicked == null) {
-        cityPicked = $("#municipality").val();
-      }
-      
-      var destURL = "/find/" + cityPicked;
-      window.location.assign(destURL);
-    }
-    
-    function setHint() {
-      var citySuggested = $(".typeahead-hint").val();
-      $("#firstGuessCity").val(citySuggested);
-    }
-    
-    // Via Greg Dean on stackoverflow
-    // http://stackoverflow.com/questions/196972/convert-string-to-title-case-with-javascript
-    function toTitleCase(str)
-    {
-      return str.replace(/\w\S*/g, function(txt){return txt.charAt(0).toUpperCase() + txt.substr(1).toLowerCase();});
-    }
   </script>
 }
 
@@ -59,21 +49,20 @@
   @headingLarge(Messages("general.applicationName"))
   <div class="smallPadding">
     <h2>@Messages("locations.selectCity.prompt")</h2>
-    <div class="typeahead-container">
-      <div class="typeahead-field">
 
-        <span class="typeahead-query">
-          <input id="municipality" onkeypress="if(event.keyCode==13){setCity()}else{window.setTimeout(setHint, 200)}"
-                 name="municipality[query]" type="search" placeholder="Search" autocomplete="on">
-                 
-          <input id="firstGuessCity" hidden>
-        </span>
-        <span class="typeahead-button">
-          <button type="submit" id="submitButton" onclick="setCity()">
-            <i class="search-icon"></i>
-          </button>
-        </span>
+    <form id="form-municipality">
+      <div class="typeahead-container">
+        <div class="typeahead-field">
+          <span class="typeahead-query">
+            <input id="municipality" type="search" placeholder="Search" autocomplete="off">
+          </span>
+          <span class="typeahead-button">
+            <button type="submit" id="submitButton">
+              <i class="search-icon"></i>
+            </button>
+          </span>
+        </div>
       </div>
-    </div>
+    </form>
   </div>
 }

@@ -23,3 +23,6 @@ dist
 # Production server stuff
 errors.log
 nohup.out
+
+# Sublime-workspace files are user specific
+*.sublime-workspace

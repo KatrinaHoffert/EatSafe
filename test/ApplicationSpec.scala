@@ -5,8 +5,7 @@ import play.api.test._
 import play.api.test.Helpers._
 import org.fluentlenium.core.FluentPage
 import org.fluentlenium.core.filter.FilterConstructor._
-import org.openqa.selenium.WebDriver
-import org.openqa.selenium.By
+import org.openqa.selenium._
 import org.openqa.selenium.htmlunit.HtmlUnitDriver
 import play.api.i18n.Messages
 
@@ -50,35 +49,30 @@ class ApplicationSpec extends Specification {
       browser.getDriver.findElement(By.id("municipality"))
     }
     
-    /* Not working with updated typeahead
     "display choose a location page when location is submitted" in new WithBrowser {
       browser.goTo("/")
       val typeahead = browser.getDriver.findElement(By.id("municipality"))
       typeahead.click()
       typeahead.sendKeys("Saskatoon")
-      browser.click("#submitButton")
+      typeahead.sendKeys(Keys.ENTER)
       browser.url() must contain("/find/Saskatoon")
-    } 
-    */
+    }
   }
   
   "select location page" should {
     "show a typeahead for locations" in new WithBrowser {
       browser.goTo("/find/Saskatoon")
       browser.pageSource() must contain(Messages("locations.selectLocation.prompt"))
-      browser.getDriver.findElement(By.id("findLocationID"))
+      browser.getDriver.findElement(By.id("location"))
     }
     
- /* Not working with updated typeahead
     "display chosen location when valid option is submitted" in new WithBrowser {
       browser.goTo("/find/Saskatoon")
       val typeahead = browser.getDriver.findElement(By.id("location"))
       typeahead.click()
       typeahead.sendKeys("2nd Avenue Grill")
-      browser.click("#submitButton")
+      typeahead.sendKeys(Keys.ENTER)
       browser.url() must contain("/view/3059")
     }
- */
   }
-
 }
