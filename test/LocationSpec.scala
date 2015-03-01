@@ -44,9 +44,9 @@ class LocationSpec extends Specification with Mockito {
         val location = goodLoc.get
         location.id must beEqualTo(7)
         // Ignore space due to trailing whitespace
-        location.name must beEqualTo("Burstall Curling Rink - Kitchen").ignoreSpace
-        location.address must beEqualTo("Maharg Ave").ignoreSpace
-        location.postalCode must beEqualTo("S0N 0H0").ignoreSpace
+        location.name must beEqualTo("Hogwarts Dining Hall").ignoreSpace
+        location.address must beEqualTo("Hogwarts Place").ignoreSpace
+        location.postalCode must beEqualTo("S0G 2J0").ignoreSpace
       }
 
       "return a failure if there is a bad database" in new WithApplication {
@@ -63,13 +63,13 @@ class LocationSpec extends Specification with Mockito {
         goodLocList.get
       }
 
-      "return a sequence of Locations with 929 values when given 'Saskatoon'" in new WithApplication {
-        val goodLocList = Location.getLocationsByCity("Saskatoon")
-        goodLocList.get.length must beEqualTo(929)
+      "return a sequence of Locations with 2 values when given 'Town A'" in new WithApplication {
+        val goodLocList = Location.getLocationsByCity("Town A")
+        goodLocList.get.length must beEqualTo(2)
       }
 
       "return a failure if there is a bad database" in new WithApplication  {
-        val badLocList = Location.getLocationsByCity("Saskatoon")((new ActiveDatabase("badDatabase")))
+        val badLocList = Location.getLocationsByCity("Town A")((new ActiveDatabase("badDatabase")))
         badLocList.isFailure mustEqual true
       }
     }
@@ -79,12 +79,12 @@ class LocationSpec extends Specification with Mockito {
     "listCities" should {
       "list all cities with resteraunts in saskatchewan" in new WithApplication {
         val listOfCities = Location.listCities();
-        listOfCities.get.length must beEqualTo(465)
+        listOfCities.get.length must beEqualTo(6)
       }
       "list should be in alphabetical order" in new WithApplication {
         val listOfCities = Location.listCities();
         val citySeq = listOfCities.get
-        citySeq.indexOf("Denzil") must beLessThan(citySeq.indexOf("Saskatoon")) // Luseland should appear before Saskatoon in the list
+        citySeq.indexOf("Space") must beLessThan(citySeq.indexOf("Town A")) // Luseland should appear before Saskatoon in the list
       }
       
     }
