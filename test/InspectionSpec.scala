@@ -34,7 +34,7 @@ class InspectionSpec extends Specification with Mockito {
 
       "given a good id, return the right amount of inspections" in new WithApplication {
         val inspectionList = Inspection.getInspections(15)
-        inspectionList.get.size must beEqualTo(3)
+        inspectionList.get.size must beEqualTo(0)
       }
 
       "return a failure if there is a bad database" in new WithApplication  {

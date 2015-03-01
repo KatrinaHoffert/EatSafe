@@ -34,8 +34,8 @@ class ViolationSpec extends Specification with Mockito {
       }
 
       "given a certain ID, the number of returned violations should be correct" in new WithApplication {
-        val violationList = Violation.getViolations(31)
-        violationList.get.length must beEqualTo(3)
+        val violationList = Violation.getViolations(16)
+        violationList.get.length must beEqualTo(1)
       }
 
       "return a failure if there is a bad database" in new WithApplication  {
