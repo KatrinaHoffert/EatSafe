@@ -16,14 +16,9 @@ object MapController extends Controller {
    * @param city The city the location is located within
    */
   def showMap(address: String, city: String) = Action {
-    assume((address != null) && (address.length > 0), "Invalid address supplied.")
-    assume((city != null) && (city.length > 0), "Invalid city supplied.")
-    
     // Remove bad parts of addresses. Currently we just know about "c/o", so we'll remove that here.
     val coMatcher = """[Cc][\\/][Oo]""".r // Case insensitive "c/o" and "c\o"
     val cleanAddress = coMatcher replaceAllIn(address, m => "")
-    
-    assert((cleanAddress != null) && (cleanAddress.length > 0), "Error in cleansing address.")
     
     Ok(views.html.locations.displayMap(cleanAddress, city))
   }

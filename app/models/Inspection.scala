@@ -26,6 +26,8 @@ object Inspection {
    */
   def getInspections(locationId: Int)(implicit db: ActiveDatabase): Try[Seq[Inspection]] = {
     Try {
+      require(locationId > 0, "Location IDs should be greater than 0.")
+    
       DB.withConnection(db.name) { implicit connection =>
         val query = SQL(
            """
@@ -51,5 +53,7 @@ object Inspection {
         tryInspections.map(_.get)
       }
     }
+    
+    
   }
 }
