@@ -35,6 +35,8 @@ object Location {
    */
   def getLocationById(locationId: Int)(implicit db: ActiveDatabase): Try[Location] = {
     val tryLocation = Try {
+      require(locationId > 0, "Location ID must be greater than 0.")
+      
       DB.withConnection(db.name) { implicit connection =>
         val query = SQL(
            """
@@ -66,6 +68,7 @@ object Location {
    */
   def getLocationsByCity(cityName: String)(implicit db: ActiveDatabase): Try[Seq[SlimLocation]] = {
     Try {
+      require(cityName.nonEmpty, "City name cannot be empty.")
       DB.withConnection(db.name) { implicit connection =>
         val query = SQL(
            """
@@ -83,7 +86,9 @@ object Location {
   }
   
   /**
-   * Gets a list of city names from the locations in the database.
+   * Gets a list of city names from the locations in the database. Currently takes no parameters.
+   *
+   * @return A sequence of Strings equal to every unique city in the DB, in alphabetical order.
    */
   def listCities()(implicit db:ActiveDatabase): Try[Seq[String]] = {
     Try {

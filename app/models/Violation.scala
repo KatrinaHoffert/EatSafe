@@ -28,6 +28,7 @@ object Violation {
    */
   def getViolations(inspectionId: Int)(implicit db: ActiveDatabase): Try[Seq[Violation]] = {
     Try {
+      require(inspectionId > 0, "Inspection ID must be greater than 0.")
       DB.withConnection(db.name) { implicit connection =>
         val query = SQL(
            """
