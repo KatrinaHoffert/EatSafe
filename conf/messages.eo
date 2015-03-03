@@ -1,0 +1,38 @@
+# General purpose messages that appear throughout the app
+general.applicationName=EatSafe Saskaĉevano
+
+# Select city page
+locations.selectCity.title=Elektu urbon
+locations.selectCity.prompt=Kie estas vi?
+locations.selectCity.noInput=Vi devas eniri io.
+locations.selectCity.badInput=Enigo estas nevalida.
+
+# Select location page
+locations.selectLocation.title=Elektu restoracio
+locations.selectLocation.prompt=Kie vi deziras manĝi?
+locations.selectLocation.noInput=Vi devas eniri io.
+locations.selectLocation.badInput=Enigo estas nevalida.
+
+# Display locations page
+locations.view.titleStart=EatSafe
+locations.view.noViolations=Neniu malobservoj en tiu periodo.
+locations.view.pastInspectionsHeader=Pli malnovaj inspektoj
+locations.view.pastInspectionsShow=[Montri]
+locations.view.pastInspectionsHide=[Kaŝi]
+locations.view.noRecentInspections=Tiu restoracio havas ne novaj inspektoj.
+locations.view.reinspectionPriority=Inspekton prioritato
+locations.view.previousInspectionType=Tipo de la lasta inspekto.
+locations.view.rha=Regiona sano aŭtoritato
+
+# Display address page
+maps.displayAddress.title=Karto: {0}, {1}
+
+# Error pages
+errors.error500Title=Eraro  500
+errors.error500Desc=Servila eraro  
+errors.error500Text=Interna eraro okazis. Ĉi tiu staka puroprotokolo devus klarigi ĝin.
+errors.stackTraceHeading=Staka puroprotokolo (por nerds)
+errors.emptyCityTitle=Tiu urbo havas ne restoraciojn
+errors.emptyCityDesc=Aj!
+errors.emptyCityText="{0}" havas ne restoraciojn. Ĉu la URL korekta?
+errors.emptyCityTryAgain=Provu alian serĉon?
