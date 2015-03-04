@@ -39,7 +39,7 @@ class CSVLoader(writer: Writer) {
    * duplicate information) for each violation in the inspection.
    *
    * Note that there's a few places where fields are left blank in the source CSVs. The output
-   * will use "DATA MISSING" as a placeholder.
+   * will use "Unknown" as a placeholder.
    * @param csvFile Path to the CSV file to load.
    * @param locationId The ID to use for the location.
    * @param inspectionIdIn The first inspection ID to use.
@@ -167,37 +167,37 @@ class CSVLoader(writer: Writer) {
    */
   def getCity(string: String): String = {
     if(string == "" || string.length < 7) {
-      "DATA MISSING";
+      "Unknown";
     }
     else if(string.matches("^.+, .+$")) {
       WordUtils.capitalizeFully(string.substring(0, string.lastIndexOf(',')))
     }
     else {
-      "DATA MISSING";
+      "Unknown";
     }
   }
 
   /**
    * Gets the postcode of a location, which is the last 7 characters of the string.
    * @param string Full 
-   * @return string of postcode, or "DATA MISSING" if the pattern is not matched
+   * @return string of postcode, or "Unknown" if the pattern is not matched
    */
   def getPostcode(string: String): String = {
     if(string == "" || string.length < 7) {
-      "DATA MISSING"
+      "Unknown"
     }
     else if(string.substring(string.length - 7).matches("^[ABCEGHJKLMNPRSTVXY]{1}\\d{1}[A-Z]{1} \\d{1}[A-Z]{1}\\d{1}$")) {
       string.substring(string.length - 7)
     }
     else {
-      "DATA MISSING"
+      "Unknown"
     }
   }
 
   /**
    * Tests if the string is empty, returning a placeholder if it is or the original data otherwise.
    * @param string The full column from the CSV file.
-   * @return "DATA MISSING" if contains nothing or the string itself otherwise.
+   * @return "Unknown" if contains nothing or the string itself otherwise.
    */
-  def testNull(string: String): String = if(string == "") "DATA MISSING" else string
+  def testNull(string: String): String = if(string == "") "Unknown" else string
 }
