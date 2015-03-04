@@ -113,10 +113,10 @@ object Location {
    * is indeed a row of the location table.
    *
    * @param row A row from the location table.
-   * @param db this is a implicit parameter that is used to specify what database is to be accessed
+   * @param connection this is a implicit parameter that is used to share the database connection to improve performance
    * @return A location object created from that row, with the inspections from the database.
    */
-  private def locationRowToLocation(row: Row)(implicit db: ActiveDatabase): Try[Location] = {
+  private def locationRowToLocation(row: Row)(implicit connection: java.sql.Connection): Try[Location] = {
     Inspection.getInspections(row[Int]("id")) match {
       case Success(inspections) =>
         Success(Location(row[Int]("id"), row[String]("name"), row[String]("address"), row[String]("postcode"),
