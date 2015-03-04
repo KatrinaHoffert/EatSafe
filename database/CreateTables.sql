@@ -1,7 +1,6 @@
  -- EatSafe 
  -- create tables
-
-    -- drop tables first
+ -- drop tables first
 DROP TABLE IF EXISTS location CASCADE;
 DROP TABLE IF EXISTS inspection CASCADE;
 DROP TABLE IF EXISTS violation CASCADE;
