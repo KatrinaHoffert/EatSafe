@@ -89,10 +89,10 @@ class CSVLoader(writer: Writer) {
 
     // Fix capitalization and escape single quotes
     val locationName = WordUtils.capitalizeFully(dataMatrix(0)(1)).replaceAll("'","''")
-    val locationAddress = WordUtils.capitalizeFully(testNull(dataMatrix(0)(3)).replaceAll("'","''"))
+    val locationAddress = WordUtils.capitalizeFully(getIfExists(dataMatrix(0)(3)).replaceAll("'","''"))
     val locationPostcode = getPostcode(dataMatrix(0)(5))
     val locationCity = getCity(dataMatrix(0)(5)).replaceAll("'","''")
-    val locationRha = testNull(dataMatrix(0)(7))
+    val locationRha = getIfExists(dataMatrix(0)(7))
 
     // Insert location
     writer.write("INSERT INTO location(id, name, address, postcode, city, rha)\n" +
@@ -106,9 +106,9 @@ class CSVLoader(writer: Writer) {
     for(i <- 0 until dataMatrix.size) {
       // Test if this is a new inspection; if yes, insert; if no, just insert violations
       if(i == 0 || !(dataMatrix(i)(2) == (dataMatrix(i - 1)(2)))) {
-        val inspectionDate = testNull(dataMatrix(i)(2));
-        val inspectionType = testNull(dataMatrix(i)(4));
-        val reinspectionPriority = testNull(dataMatrix(i)(6));
+        val inspectionDate = getIfExists(dataMatrix(i)(2));
+        val inspectionType = getIfExists(dataMatrix(i)(4));
+        val reinspectionPriority = getIfExists(dataMatrix(i)(6));
 
         // Insert inspection
         writer.write("INSERT INTO inspection(id, location_id, inspection_date, inspection_type, reinspection_priority)\n" +
@@ -200,5 +200,5 @@ class CSVLoader(writer: Writer) {
    * @param string The full column from the CSV file.
    * @return "Unknown" if contains nothing or the string itself otherwise.
    */
-  def testNull(string: String): String = if(string == "") "Unknown" else string
+  def getIfExists(string: String): String = if(string == "") "Unknown" else string
 }
