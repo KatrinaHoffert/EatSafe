@@ -21,52 +21,55 @@ VALUES (1, 'Potentially hazardous foods and perishable foods must be stored at 4
 
 
 INSERT INTO location(id, name, address, postcode, city, rha)
- VALUES (1, 'Burstall Arena - Kitchen', '615 Maharg Ave', 'S0N 0H0', 'Burstall', 'Cypress Health Authority');
+ VALUES (1, 'Tasty J''s', '305 Pacific Avenue', 'S0L 2A0', 'Luseland', 'Heartland Health Authority');
 
 INSERT INTO inspection(id, location_id, inspection_date, inspection_type, reinspection_priority)
- VALUES (1, 1, '2014-11-07', 'Routine', 'Low');
+ VALUES (1, 1, '2014-12-05', 'Routine', 'Moderate');
 
 INSERT INTO violation(inspection_id, violation_id)
- VALUES (1, 12);
+ VALUES (1, 4);
+
+INSERT INTO violation(inspection_id, violation_id)
+ VALUES (1, 10);
 
 INSERT INTO violation(inspection_id, violation_id)
  VALUES (1, 15);
 
 INSERT INTO inspection(id, location_id, inspection_date, inspection_type, reinspection_priority)
- VALUES (2, 1, '2013-11-18', 'Routine', 'Low');
+ VALUES (2, 1, '2014-02-18', 'Routine', 'Low');
 
 INSERT INTO violation(inspection_id, violation_id)
- VALUES (2, 12);
-
-INSERT INTO violation(inspection_id, violation_id)
- VALUES (2, 15);
+ VALUES (2, 10);
 
 INSERT INTO inspection(id, location_id, inspection_date, inspection_type, reinspection_priority)
- VALUES (3, 1, '2012-12-03', 'Routine', 'Low');
+ VALUES (3, 1, '2013-10-24', 'Routine', 'Moderate');
 
 INSERT INTO violation(inspection_id, violation_id)
- VALUES (3, 15);
+ VALUES (3, 10);
+
+INSERT INTO violation(inspection_id, violation_id)
+ VALUES (3, 12);
+
+INSERT INTO violation(inspection_id, violation_id)
+ VALUES (3, 14);
 
 INSERT INTO location(id, name, address, postcode, city, rha)
- VALUES (2, 'Cabri Inn - Kitchen', '103 Railway Ave S', 'S0N 0J0', 'Cabri', 'Cypress Health Authority');
+ VALUES (2, 'Water Front Lodge', 'Data Missing', 'DATA MISSING', 'DATA MISSING', 'Northern Health - Mamaw/Keewa/Athab');
 
 INSERT INTO inspection(id, location_id, inspection_date, inspection_type, reinspection_priority)
- VALUES (4, 2, '2014-11-10', 'Routine', 'Moderate');
-
-INSERT INTO violation(inspection_id, violation_id)
- VALUES (4, 1);
+ VALUES (4, 2, '2014-09-23', 'Routine', 'Low');
 
 INSERT INTO violation(inspection_id, violation_id)
  VALUES (4, 4);
 
+INSERT INTO inspection(id, location_id, inspection_date, inspection_type, reinspection_priority)
+ VALUES (5, 2, '2013-08-01', 'Routine', 'Low');
+
 INSERT INTO violation(inspection_id, violation_id)
- VALUES (4, 15);
+ VALUES (5, 11);
 
 INSERT INTO inspection(id, location_id, inspection_date, inspection_type, reinspection_priority)
- VALUES (5, 2, '2014-08-29', 'Follow-up', 'Low');
-
-INSERT INTO inspection(id, location_id, inspection_date, inspection_type, reinspection_priority)
- VALUES (6, 2, '2014-05-12', 'Routine', 'Moderate');
+ VALUES (6, 2, '2012-02-08', 'Routine', 'Low');
 
 INSERT INTO violation(inspection_id, violation_id)
  VALUES (6, 1);
@@ -75,335 +78,32 @@ INSERT INTO violation(inspection_id, violation_id)
  VALUES (6, 12);
 
 INSERT INTO location(id, name, address, postcode, city, rha)
- VALUES (3, 'Consul Saloon', '120 Railway Ave', 'S0N 0P0', 'Consul', 'Cypress Health Authority');
+ VALUES (3, 'Robinson Country Cookhouse & Saloon', 'Cupar', 'DATA MISSING', 'DATA MISSING', 'Regina QuAppelle Health Authority');
 
 INSERT INTO inspection(id, location_id, inspection_date, inspection_type, reinspection_priority)
- VALUES (7, 3, '2014-09-23', 'Routine', 'Low');
+ VALUES (7, 3, '2014-02-14', 'Routine', 'Low');
+
+INSERT INTO violation(inspection_id, violation_id)
+ VALUES (7, 10);
+
+INSERT INTO violation(inspection_id, violation_id)
+ VALUES (7, 12);
 
 INSERT INTO violation(inspection_id, violation_id)
  VALUES (7, 15);
 
 INSERT INTO inspection(id, location_id, inspection_date, inspection_type, reinspection_priority)
- VALUES (8, 3, '2014-05-02', 'Routine', 'Low');
+ VALUES (8, 3, '2013-02-25', 'Follow-up', 'Low');
 
 INSERT INTO violation(inspection_id, violation_id)
- VALUES (8, 15);
-
-INSERT INTO location(id, name, address, postcode, city, rha)
- VALUES (4, 'Frontier Motel - Restaurant', 'Hwy 18 E', 'S0N 0W0', 'Frontier', 'Cypress Health Authority');
+ VALUES (8, 4);
 
 INSERT INTO inspection(id, location_id, inspection_date, inspection_type, reinspection_priority)
- VALUES (9, 4, '2014-10-09', 'Routine', 'Low');
-
-INSERT INTO inspection(id, location_id, inspection_date, inspection_type, reinspection_priority)
- VALUES (10, 4, '2013-10-23', 'Routine', 'Low');
+ VALUES (9, 3, '2012-08-08', 'Routine', 'Moderate');
 
 INSERT INTO violation(inspection_id, violation_id)
- VALUES (10, 16);
-
-INSERT INTO inspection(id, location_id, inspection_date, inspection_type, reinspection_priority)
- VALUES (11, 4, '2012-09-07', 'Routine', 'Low');
+ VALUES (9, 4);
 
 INSERT INTO violation(inspection_id, violation_id)
- VALUES (11, 15);
-
-INSERT INTO violation(inspection_id, violation_id)
- VALUES (11, 16);
-
-INSERT INTO location(id, name, address, postcode, city, rha)
- VALUES (5, 'Frontier Recreation Centre - Concession', '306 1st St E', 'S0N 0W0', 'Frontier', 'Cypress Health Authority');
-
-INSERT INTO inspection(id, location_id, inspection_date, inspection_type, reinspection_priority)
- VALUES (12, 5, '2013-10-23', 'Routine', 'Low');
-
-INSERT INTO violation(inspection_id, violation_id)
- VALUES (12, 12);
-
-INSERT INTO inspection(id, location_id, inspection_date, inspection_type, reinspection_priority)
- VALUES (13, 5, '2012-10-25', 'Routine', 'Low');
-
-INSERT INTO violation(inspection_id, violation_id)
- VALUES (13, 12);
-
-INSERT INTO inspection(id, location_id, inspection_date, inspection_type, reinspection_priority)
- VALUES (14, 5, '2012-01-16', 'Routine', 'Low');
-
-INSERT INTO violation(inspection_id, violation_id)
- VALUES (14, 10);
-
-INSERT INTO violation(inspection_id, violation_id)
- VALUES (14, 15);
-
-INSERT INTO location(id, name, address, postcode, city, rha)
- VALUES (6, 'Swift Current Stockade - Kitchen', '1700 17th Ave Se', 'S9H 3V5', 'Swift Current', 'Cypress Health Authority');
-
-INSERT INTO inspection(id, location_id, inspection_date, inspection_type, reinspection_priority)
- VALUES (15, 6, '2014-03-12', 'Routine', 'Low');
-
-INSERT INTO violation(inspection_id, violation_id)
- VALUES (15, 12);
-
-INSERT INTO violation(inspection_id, violation_id)
- VALUES (15, 15);
-
-INSERT INTO violation(inspection_id, violation_id)
- VALUES (15, 16);
-
-INSERT INTO inspection(id, location_id, inspection_date, inspection_type, reinspection_priority)
- VALUES (16, 6, '2013-06-11', 'Routine', 'Low');
-
-INSERT INTO violation(inspection_id, violation_id)
- VALUES (16, 15);
-
-INSERT INTO inspection(id, location_id, inspection_date, inspection_type, reinspection_priority)
- VALUES (17, 6, '2013-03-08', 'Routine', 'Moderate');
-
-INSERT INTO violation(inspection_id, violation_id)
- VALUES (17, 4);
-
-INSERT INTO location(id, name, address, postcode, city, rha)
- VALUES (7, 'Taco Time', '#3 - 410 S Service Rd E', 'S9H 3T6', 'Swift Current', 'Cypress Health Authority');
-
-INSERT INTO inspection(id, location_id, inspection_date, inspection_type, reinspection_priority)
- VALUES (18, 7, '2014-12-01', 'Routine', 'Low');
-
-INSERT INTO inspection(id, location_id, inspection_date, inspection_type, reinspection_priority)
- VALUES (19, 7, '2014-07-08', 'Routine', 'Low');
-
-INSERT INTO inspection(id, location_id, inspection_date, inspection_type, reinspection_priority)
- VALUES (20, 7, '2013-10-10', 'Routine', 'Low');
-
-INSERT INTO location(id, name, address, postcode, city, rha)
- VALUES (8, 'The Daily Grind', '130 Jasper St', 'S0N 1N0', 'Swift Current', 'Cypress Health Authority');
-
-INSERT INTO inspection(id, location_id, inspection_date, inspection_type, reinspection_priority)
- VALUES (21, 8, '2014-08-26', 'Routine', 'Low');
-
-INSERT INTO violation(inspection_id, violation_id)
- VALUES (21, 15);
-
-INSERT INTO inspection(id, location_id, inspection_date, inspection_type, reinspection_priority)
- VALUES (22, 8, '2014-02-14', 'Routine', 'Low');
-
-INSERT INTO inspection(id, location_id, inspection_date, inspection_type, reinspection_priority)
- VALUES (23, 8, '2013-08-20', 'Routine', 'Low');
-
-INSERT INTO location(id, name, address, postcode, city, rha)
- VALUES (9, 'The Eagles - Restaurant', '1910 S Service Rd W', 'S9H 5J4', 'Swift Current', 'Cypress Health Authority');
-
-INSERT INTO inspection(id, location_id, inspection_date, inspection_type, reinspection_priority)
- VALUES (24, 9, '2014-09-10', 'Routine', 'Low');
-
-INSERT INTO inspection(id, location_id, inspection_date, inspection_type, reinspection_priority)
- VALUES (25, 9, '2014-02-12', 'Routine', 'Low');
-
-INSERT INTO inspection(id, location_id, inspection_date, inspection_type, reinspection_priority)
- VALUES (26, 9, '2013-02-25', 'Routine', 'Low');
-
-INSERT INTO location(id, name, address, postcode, city, rha)
- VALUES (10, 'The Lobby', '508 Cheadle St W', 'S9H 0B8', 'Swift Current', 'Cypress Health Authority');
-
-INSERT INTO inspection(id, location_id, inspection_date, inspection_type, reinspection_priority)
- VALUES (27, 10, '2014-11-07', 'Routine', 'Moderate');
-
-INSERT INTO violation(inspection_id, violation_id)
- VALUES (27, 7);
-
-INSERT INTO inspection(id, location_id, inspection_date, inspection_type, reinspection_priority)
- VALUES (28, 10, '2014-03-26', 'Routine', 'Low');
-
-INSERT INTO inspection(id, location_id, inspection_date, inspection_type, reinspection_priority)
- VALUES (29, 10, '2013-02-13', 'Routine', 'Low');
-
-INSERT INTO location(id, name, address, postcode, city, rha)
- VALUES (11, 'The Salvation Army - Kitchen', '780 1st Ave Nw', 'S9H 4M7', 'Swift Current', 'Cypress Health Authority');
-
-INSERT INTO inspection(id, location_id, inspection_date, inspection_type, reinspection_priority)
- VALUES (30, 11, '2014-02-19', 'Routine', 'Low');
-
-INSERT INTO inspection(id, location_id, inspection_date, inspection_type, reinspection_priority)
- VALUES (31, 11, '2013-04-23', 'Follow-up', 'Low');
-
-INSERT INTO violation(inspection_id, violation_id)
- VALUES (31, 11);
-
-INSERT INTO inspection(id, location_id, inspection_date, inspection_type, reinspection_priority)
- VALUES (32, 11, '2013-02-14', 'Routine', 'Moderate');
-
-INSERT INTO violation(inspection_id, violation_id)
- VALUES (32, 1);
-
-INSERT INTO violation(inspection_id, violation_id)
- VALUES (32, 11);
-
-INSERT INTO location(id, name, address, postcode, city, rha)
- VALUES (12, 'Tim Hortons - Downtown', '225 1st Ave Nw', 'S9H 0M9', 'Swift Current', 'Cypress Health Authority');
-
-INSERT INTO inspection(id, location_id, inspection_date, inspection_type, reinspection_priority)
- VALUES (33, 12, '2014-09-10', 'Routine', 'Low');
-
-INSERT INTO inspection(id, location_id, inspection_date, inspection_type, reinspection_priority)
- VALUES (34, 12, '2014-02-12', 'Routine', 'Low');
-
-INSERT INTO violation(inspection_id, violation_id)
- VALUES (34, 15);
-
-INSERT INTO inspection(id, location_id, inspection_date, inspection_type, reinspection_priority)
- VALUES (35, 12, '2013-09-20', 'Complaint', 'Low');
-
-INSERT INTO violation(inspection_id, violation_id)
- VALUES (35, 14);
-
-INSERT INTO location(id, name, address, postcode, city, rha)
- VALUES (13, 'Tim Hortons', '515 N Service Rd E', 'S9H 4W8', 'Swift Current', 'Cypress Health Authority');
-
-INSERT INTO inspection(id, location_id, inspection_date, inspection_type, reinspection_priority)
- VALUES (36, 13, '2014-12-16', 'Routine', 'Moderate');
-
-INSERT INTO violation(inspection_id, violation_id)
- VALUES (36, 4);
-
-INSERT INTO violation(inspection_id, violation_id)
- VALUES (36, 7);
-
-INSERT INTO violation(inspection_id, violation_id)
- VALUES (36, 12);
-
-INSERT INTO inspection(id, location_id, inspection_date, inspection_type, reinspection_priority)
- VALUES (37, 13, '2014-06-11', 'Follow-up', 'Low');
-
-INSERT INTO inspection(id, location_id, inspection_date, inspection_type, reinspection_priority)
- VALUES (38, 13, '2014-02-03', 'Routine', 'Moderate');
-
-INSERT INTO violation(inspection_id, violation_id)
- VALUES (38, 4);
-
-INSERT INTO location(id, name, address, postcode, city, rha)
- VALUES (14, 'Tj''s Pizza', '#3 - 1100 S Service Rd E', 'S9H 3Z4', 'Swift Current', 'Cypress Health Authority');
-
-INSERT INTO inspection(id, location_id, inspection_date, inspection_type, reinspection_priority)
- VALUES (39, 14, '2015-01-29', 'Follow-up', 'Low');
-
-INSERT INTO violation(inspection_id, violation_id)
- VALUES (39, 16);
-
-INSERT INTO inspection(id, location_id, inspection_date, inspection_type, reinspection_priority)
- VALUES (40, 14, '2014-10-07', 'Routine', 'Moderate');
-
-INSERT INTO violation(inspection_id, violation_id)
- VALUES (40, 7);
-
-INSERT INTO violation(inspection_id, violation_id)
- VALUES (40, 10);
-
-INSERT INTO violation(inspection_id, violation_id)
- VALUES (40, 15);
-
-INSERT INTO inspection(id, location_id, inspection_date, inspection_type, reinspection_priority)
- VALUES (41, 14, '2014-05-07', 'Follow-up', 'Low');
-
-INSERT INTO location(id, name, address, postcode, city, rha)
- VALUES (15, 'Tnt Family Restaurant', '83 N Service  Rd W', 'S9H 3S8', 'Swift Current', 'Cypress Health Authority');
-
-INSERT INTO inspection(id, location_id, inspection_date, inspection_type, reinspection_priority)
- VALUES (42, 15, '2015-01-20', 'Routine', 'Low');
-
-INSERT INTO inspection(id, location_id, inspection_date, inspection_type, reinspection_priority)
- VALUES (43, 15, '2014-08-05', 'Routine', 'Low');
-
-INSERT INTO violation(inspection_id, violation_id)
- VALUES (43, 10);
-
-INSERT INTO violation(inspection_id, violation_id)
- VALUES (43, 14);
-
-INSERT INTO violation(inspection_id, violation_id)
- VALUES (43, 15);
-
-INSERT INTO inspection(id, location_id, inspection_date, inspection_type, reinspection_priority)
- VALUES (44, 15, '2014-02-12', 'Routine', 'Low');
-
-INSERT INTO violation(inspection_id, violation_id)
- VALUES (44, 10);
-
-INSERT INTO violation(inspection_id, violation_id)
- VALUES (44, 15);
-
-INSERT INTO location(id, name, address, postcode, city, rha)
- VALUES (16, 'Transport City - Cafe', '2615 N Service Rd W', 'S9H 5L4', 'Swift Current', 'Cypress Health Authority');
-
-INSERT INTO inspection(id, location_id, inspection_date, inspection_type, reinspection_priority)
- VALUES (45, 16, '2014-09-26', 'Routine', 'Moderate');
-
-INSERT INTO violation(inspection_id, violation_id)
- VALUES (45, 3);
-
-INSERT INTO violation(inspection_id, violation_id)
- VALUES (45, 4);
-
-INSERT INTO violation(inspection_id, violation_id)
- VALUES (45, 10);
-
-INSERT INTO violation(inspection_id, violation_id)
- VALUES (45, 12);
-
-INSERT INTO violation(inspection_id, violation_id)
- VALUES (45, 15);
-
-INSERT INTO inspection(id, location_id, inspection_date, inspection_type, reinspection_priority)
- VALUES (46, 16, '2014-05-20', 'Complaint', 'Low');
-
-INSERT INTO violation(inspection_id, violation_id)
- VALUES (46, 15);
-
-INSERT INTO inspection(id, location_id, inspection_date, inspection_type, reinspection_priority)
- VALUES (47, 16, '2014-03-12', 'Follow-up', 'Low');
-
-INSERT INTO violation(inspection_id, violation_id)
- VALUES (47, 12);
-
-INSERT INTO violation(inspection_id, violation_id)
- VALUES (47, 15);
-
-INSERT INTO location(id, name, address, postcode, city, rha)
- VALUES (17, 'Lorraine''s Kitchen', 'North Qu''appelle', 'DATA MISSING', 'DATA MISSING', 'Regina QuAppelle Health Authority');
-
-INSERT INTO inspection(id, location_id, inspection_date, inspection_type, reinspection_priority)
- VALUES (48, 17, '2014-07-16', 'Routine', 'Low');
-
-INSERT INTO inspection(id, location_id, inspection_date, inspection_type, reinspection_priority)
- VALUES (49, 17, '2013-06-25', 'Routine', 'Low');
-
-INSERT INTO violation(inspection_id, violation_id)
- VALUES (49, 1);
-
-INSERT INTO inspection(id, location_id, inspection_date, inspection_type, reinspection_priority)
- VALUES (50, 17, '2012-06-28', 'Routine', 'Low');
-
-INSERT INTO location(id, name, address, postcode, city, rha)
- VALUES (18, 'Imperial Family Restaurant', '214 Royal St.', 'S0G 2J0', 'Imperial', 'Regina QuAppelle Health Authority');
-
-INSERT INTO inspection(id, location_id, inspection_date, inspection_type, reinspection_priority)
- VALUES (51, 18, '2014-12-17', 'Follow-up', 'Moderate');
-
-INSERT INTO violation(inspection_id, violation_id)
- VALUES (51, 16);
-
-INSERT INTO inspection(id, location_id, inspection_date, inspection_type, reinspection_priority)
- VALUES (52, 18, '2014-10-24', 'Follow-up', 'Moderate');
-
-INSERT INTO violation(inspection_id, violation_id)
- VALUES (52, 16);
-
-INSERT INTO inspection(id, location_id, inspection_date, inspection_type, reinspection_priority)
- VALUES (53, 18, '2014-09-25', 'Routine', 'High');
-
-INSERT INTO violation(inspection_id, violation_id)
- VALUES (53, 1);
-
-INSERT INTO violation(inspection_id, violation_id)
- VALUES (53, 4);
-
-INSERT INTO violation(inspection_id, violation_id)
- VALUES (53, 7);
+ VALUES (9, 11);
 
