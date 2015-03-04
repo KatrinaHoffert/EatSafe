@@ -166,14 +166,15 @@ class CSVLoader(writer: Writer) {
    * @return City name, if it exists, or a placeholder if it does not.
    */
   def getCity(string: String): String = {
-    if(string == "" || string.length < 7) {
+    if(string == "") {
       "Unknown";
     }
     else if(string.matches("^.+, .+$")) {
       WordUtils.capitalizeFully(string.substring(0, string.lastIndexOf(',')))
     }
     else {
-      "Unknown";
+      //if not match the above regex, then it only contains the city name
+      string;
     }
   }
 
