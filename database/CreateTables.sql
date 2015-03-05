@@ -1,11 +1,11 @@
  -- EatSafe 
  -- create tables
-
-    -- drop tables first
+ -- drop tables first
 DROP TABLE IF EXISTS location CASCADE;
 DROP TABLE IF EXISTS inspection CASCADE;
 DROP TABLE IF EXISTS violation CASCADE;
 DROP TABLE IF EXISTS violation_type CASCADE;
+DROP TABLE IF EXISTS coordinate CASCADE;
 
 
 CREATE TABLE location(
@@ -14,7 +14,9 @@ CREATE TABLE location(
     address TEXT NOT NULL,
     postcode TEXT NOT NULL,
     city TEXT NOT NULL,
-    rha TEXT NOT NULL
+    rha TEXT NOT NULL,
+    latitude DECIMAL(10,6),
+    longitude DECIMAL(10,6)
 );
 
   
@@ -53,3 +55,10 @@ CREATE TABLE violation(
             ON DELETE NO ACTION
 );
 
+
+CREATE TABLE coordinate(
+    city TEXT NOT NULL,
+    address TEXT NOT NULL,
+    latitude DECIMAL(10,6) NOT NULL,
+    longitude DECIMAL(10,6) NOT NULL
+)

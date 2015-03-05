@@ -11,6 +11,8 @@
  *
  * @note
  * Remove debug code: //\s?\{debug\}[\s\S]*?\{/debug\}
+ *
+ * As of 2015-03-01, there is now duplicated code at line 779. See comment for details.
  */
 ;(function (window, document, $, undefined)
 {
@@ -697,8 +699,8 @@
                             "border-color": "transparent",
                             "position": "absolute",
                             "z-index": 1,
-                            "-webkit-text-fill-color": "silver",
-                            "color": "silver",
+                            "-webkit-text-fill-color": "#707070",
+                            "color": "#707070",
                             "background-color": "transparent",
                             "user-select": "none",
                             "box-shadow": "none"
@@ -774,6 +776,30 @@
                 li = lis.siblings('.active');
 
             if (e.keyCode === 13) {
+			// Duplicated code from the tab/right arrow code block
+            	if (options.hint && hint.container && !li[0]) {
+                    node.val(hint.container.val());
+                    
+                    if (node.val().length >= 2) {
+                    	query = node.val();
+                    }
+                    console.log(node.val());
+                    if (query !== "") {
+                      result = [];
+                      search();
+                    }
+                }
+			
+                if (li[0]) {
+                    li.find('a').click();
+                } else {
+                    lis.filter('.active').find('a').click();
+                }
+                
+                if (node.val().length >= 2) {
+                	query = node.val();
+                }
+                // End dupicated code   
 
                 if (lis.filter('.active')[0]) {
 

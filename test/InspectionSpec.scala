@@ -20,7 +20,7 @@ import globals.ActiveDatabase
  */
 @RunWith(classOf[JUnitRunner])
 class InspectionSpec extends Specification with Mockito {
-  implicit lazy val db = new ActiveDatabase("test")
+ implicit lazy val connection = DB.getConnection("test") // Run test functions here
 
   // Run test functions here
   this.getInspectionsTests
@@ -28,19 +28,20 @@ class InspectionSpec extends Specification with Mockito {
   def getInspectionsTests = {
     "getInspections" should {
       "return success when given proper inputs" in new WithApplication {
-        val inspectionList = Inspection.getInspections(2)
+        val inspectionList = Inspection.getInspections(1)
         inspectionList.get
       }
 
       "given a good id, return the right amount of inspections" in new WithApplication {
-        val inspectionList = Inspection.getInspections(15)
-        inspectionList.get.size must beEqualTo(0)
+        val inspectionList = Inspection.getInspections(2)
+        inspectionList.get.size must beEqualTo(3)
       }
-
-      "return a failure if there is a bad database" in new WithApplication  {
-        val inspectionList = Inspection.getInspections(15)((new ActiveDatabase("badDatabase")))
-        inspectionList.isFailure mustEqual true
+      
+      "given bad input getInspection throws an error" in new WithApplication{
+        val inspectionList = Inspection.getInspections(-1)
+        inspectionList.get must throwA[IllegalArgumentException]
       }
+      
     }
   }
 }

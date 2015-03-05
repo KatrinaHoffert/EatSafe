@@ -21,12 +21,14 @@ object Inspection {
    * Gets a list of inspections belonging to a given location.
    *
    * @param locationId The ID of the location we want the inspections for.
-   * @param db this is a implicit parameter that is used to specify what database is to be accessed
+   * @param connection this is a implicit parameter that is used to share the database connection to improve performance
    * @return List of inspection objects representing the inspections for that location.
    */
-  def getInspections(locationId: Int)(implicit db: ActiveDatabase): Try[Seq[Inspection]] = {
+  def getInspections(locationId: Int)(implicit connection: java.sql.Connection): Try[Seq[Inspection]] = {
     Try {
-      DB.withConnection(db.name) { implicit connection =>
+      require(locationId > 0, "Location IDs should be greater than 0.")
+    
+      
         val query = SQL(
            """
              SELECT id, inspection_date, inspection_type, reinspection_priority
@@ -49,7 +51,6 @@ object Inspection {
         // And convert that into a Seq[Inspection] (which the outside Try will wrap into a
         // Try[Seq[Inspection]])
         tryInspections.map(_.get)
-      }
     }
   }
 }
