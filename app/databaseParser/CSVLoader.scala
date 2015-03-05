@@ -39,7 +39,7 @@ class CSVLoader(writer: Writer) {
    * duplicate information) for each violation in the inspection.
    *
    * Note that there's a few places where fields are left blank in the source CSVs. The output
-   * will use "DATA MISSING" as a placeholder.
+   * will use "Unknown" as a placeholder.
    * @param csvFile Path to the CSV file to load.
    * @param locationId The ID to use for the location.
    * @param inspectionIdIn The first inspection ID to use.
@@ -89,10 +89,10 @@ class CSVLoader(writer: Writer) {
 
     // Fix capitalization and escape single quotes
     val locationName = WordUtils.capitalizeFully(dataMatrix(0)(1)).replaceAll("'","''")
-    val locationAddress = WordUtils.capitalizeFully(testNull(dataMatrix(0)(3)).replaceAll("'","''"))
+    val locationAddress = WordUtils.capitalizeFully(getIfExists(dataMatrix(0)(3)).replaceAll("'","''"))
     val locationPostcode = getPostcode(dataMatrix(0)(5))
     val locationCity = getCity(dataMatrix(0)(5)).replaceAll("'","''")
-    val locationRha = testNull(dataMatrix(0)(7))
+    val locationRha = getIfExists(dataMatrix(0)(7))
 
     // Insert location
     writer.write("INSERT INTO location(id, name, address, postcode, city, rha)\n" +
@@ -106,9 +106,9 @@ class CSVLoader(writer: Writer) {
     for(i <- 0 until dataMatrix.size) {
       // Test if this is a new inspection; if yes, insert; if no, just insert violations
       if(i == 0 || !(dataMatrix(i)(2) == (dataMatrix(i - 1)(2)))) {
-        val inspectionDate = testNull(dataMatrix(i)(2));
-        val inspectionType = testNull(dataMatrix(i)(4));
-        val reinspectionPriority = testNull(dataMatrix(i)(6));
+        val inspectionDate = getIfExists(dataMatrix(i)(2));
+        val inspectionType = getIfExists(dataMatrix(i)(4));
+        val reinspectionPriority = getIfExists(dataMatrix(i)(6));
 
         // Insert inspection
         writer.write("INSERT INTO inspection(id, location_id, inspection_date, inspection_type, reinspection_priority)\n" +
@@ -166,38 +166,39 @@ class CSVLoader(writer: Writer) {
    * @return City name, if it exists, or a placeholder if it does not.
    */
   def getCity(string: String): String = {
-    if(string == "" || string.length < 7) {
-      "DATA MISSING";
+    if(string == "") {
+      "Unknown";
     }
     else if(string.matches("^.+, .+$")) {
       WordUtils.capitalizeFully(string.substring(0, string.lastIndexOf(',')))
     }
     else {
-      "DATA MISSING";
+      //if not match the above regex, then it only contains the city name
+      string;
     }
   }
 
   /**
    * Gets the postcode of a location, which is the last 7 characters of the string.
    * @param string Full 
-   * @return string of postcode, or "DATA MISSING" if the pattern is not matched
+   * @return string of postcode, or "Unknown" if the pattern is not matched
    */
   def getPostcode(string: String): String = {
     if(string == "" || string.length < 7) {
-      "DATA MISSING"
+      "Unknown"
     }
     else if(string.substring(string.length - 7).matches("^[ABCEGHJKLMNPRSTVXY]{1}\\d{1}[A-Z]{1} \\d{1}[A-Z]{1}\\d{1}$")) {
       string.substring(string.length - 7)
     }
     else {
-      "DATA MISSING"
+      "Unknown"
     }
   }
 
   /**
    * Tests if the string is empty, returning a placeholder if it is or the original data otherwise.
    * @param string The full column from the CSV file.
-   * @return "DATA MISSING" if contains nothing or the string itself otherwise.
+   * @return "Unknown" if contains nothing or the string itself otherwise.
    */
-  def testNull(string: String): String = if(string == "") "DATA MISSING" else string
+  def getIfExists(string: String): String = if(string == "") "Unknown" else string
 }
