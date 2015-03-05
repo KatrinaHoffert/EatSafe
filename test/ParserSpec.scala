@@ -1,4 +1,5 @@
 import org.specs2.mutable._
+import org.specs2.mutable._
 import org.specs2.runner._
 import org.junit.runner._
 
@@ -142,7 +143,7 @@ class ParserSpec extends Specification {
      robinsonRow[String]("name") must beEqualTo("Robinson Country Cookhouse & Saloon")
      robinsonRow[String]("address") must beEqualTo("Cupar")
      robinsonRow[String]("city") must beEqualTo("Cupar")
-     robinsonRow[String]("postcode") must beEqualTo("DATA MISSING")
+     robinsonRow[String]("postcode") must beEqualTo("Unknown")
      robinsonRow[String]("rha") must beEqualTo("Regina QuAppelle Health Authority")
      tastyRow[String]("name") must beEqualTo("Tasty J's")
      tastyRow[String]("address") must beEqualTo("305 Pacific Avenue")
@@ -150,9 +151,9 @@ class ParserSpec extends Specification {
      tastyRow[String]("postcode") must beEqualTo("S0L 2A0")
      tastyRow[String]("rha") must beEqualTo("Heartland Health Authority")
      waterRow[String]("name") must beEqualTo("Water Front Lodge")
-     waterRow[String]("address") must beEqualTo("DATA MISSING")
+     waterRow[String]("address") must beEqualTo("Unknown")
      waterRow[String]("city") must beEqualTo("#1 Johnson Street")
-     waterRow[String]("postcode") must beEqualTo("DATA MISSING")
+     waterRow[String]("postcode") must beEqualTo("Unknown")
      waterRow[String]("rha") must beEqualTo("Northern Health - Mamaw/Keewa/Athab")
   }
 }
