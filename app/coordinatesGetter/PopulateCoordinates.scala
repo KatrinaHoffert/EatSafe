@@ -1,6 +1,7 @@
 package coordinatesGetter
 
 import scala.concurrent.Future
+import play.api.libs.concurrent.Execution.Implicits.defaultContext
 import scala.util.{Try, Success, Failure} 
 import models._
 import anorm._
@@ -10,6 +11,7 @@ import play.api.libs.functional.syntax._
 import play.api.libs.json._
 import play.api.libs.ws._
 import globals.ActiveDatabase
+import play.api.mvc._
 
 /**
  * Represent a coordinate, which contains a latitude and longitude
@@ -46,9 +48,9 @@ object PopulateCoordinates {
    * Read a coordinate object from JSON
    * Only read the first result, which is index 0
    */
-  implicit val locationReads: Reads[Coordinate] = (
+  implicit val coordinateReads: Reads[Coordinate] = (
     (JsPath \\ "lat")(0).read[Double] and
-    (JsPath \\ "long")(0).read[Double]
+    (JsPath \\ "lng")(0).read[Double]
   )(Coordinate.apply _)
     
 
@@ -133,7 +135,8 @@ object PopulateCoordinates {
     DB.withConnection { implicit connection =>  
       
       //First, update the coordinates from the backup "coordinate" table
-      updateFromBackup()
+      //updateFromBackup()   
+      //dont run this for now, since there are fake coordinates in database
       
       //Then get a list of locations that don't have coordinates in backup table
       getNoCoordinateLocations() match {
@@ -150,18 +153,34 @@ object PopulateCoordinates {
             val parameterString = location.address + location.city;
             
             //Map the response JSON to a coordinate object
-            val futureResult : Future[JsResult[Coordinate]] = holder.withQueryString("address" -> parameterString).get().map{
-              response => (response.json \ "results").validate[Coordinate]
+            val futureResult : Future[Coordinate] = holder.withQueryString("address" -> parameterString).get().map{
+              response => (response.json \ "results")(0).as[Coordinate]
             }
             
-            //get the coordinate object from the futureResult
-            val coordinate: Coordinate = null
             
-            //update this location
-            updateCoordinate(location.id, coordinate)
+            //Try to get the coordinate object from the futureResult, which is a the asynchronous result
+            //NEED HELP THERE
+            //
             
-            //backup this new coordinate
-            backupCoordinate(location.id)
+            var coordinate: Coordinate = null
+            //this is not working
+            def index = Action.async {
+              futureResult.map(i => Ok("Got result: " + i))
+            }
+            
+            //OR...not working
+            futureResult.map(jsCoordinate => 
+              coordinate = jsCoordinate )
+              //OR futureResult.onSuccess...not working as well
+
+            
+            //don't run the following for now, since the coordinate is null
+            
+//            //update this location
+//            updateCoordinate(location.id, coordinate)
+//            
+//            //backup this new coordinate
+//            backupCoordinate(location.id)
             
             
           }
