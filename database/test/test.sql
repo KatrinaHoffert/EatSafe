@@ -54,7 +54,7 @@ INSERT INTO violation(inspection_id, violation_id)
  VALUES (3, 14);
 
 INSERT INTO location(id, name, address, postcode, city, rha)
- VALUES (2, 'Water Front Lodge', 'Data Missing', 'DATA MISSING', 'DATA MISSING', 'Northern Health - Mamaw/Keewa/Athab');
+ VALUES (2, 'Water Front Lodge', 'Unknown', 'Unknown', '#1 Johnson Street', 'Northern Health - Mamaw/Keewa/Athab');
 
 INSERT INTO inspection(id, location_id, inspection_date, inspection_type, reinspection_priority)
  VALUES (4, 2, '2014-09-23', 'Routine', 'Low');
@@ -78,7 +78,7 @@ INSERT INTO violation(inspection_id, violation_id)
  VALUES (6, 12);
 
 INSERT INTO location(id, name, address, postcode, city, rha)
- VALUES (3, 'Robinson Country Cookhouse & Saloon', 'Cupar', 'DATA MISSING', 'DATA MISSING', 'Regina QuAppelle Health Authority');
+ VALUES (3, 'Robinson Country Cookhouse & Saloon', 'Cupar', 'Unknown', 'Cupar', 'Regina QuAppelle Health Authority');
 
 INSERT INTO inspection(id, location_id, inspection_date, inspection_type, reinspection_priority)
  VALUES (7, 3, '2014-02-14', 'Routine', 'Low');
