@@ -55,8 +55,8 @@ object PopulateCoordinates extends Controller{
    * Only read the first result, which is index 0
    */
   implicit val coordinateReads: Reads[Coordinate] = (
-    (JsPath \ "lat")(0).read[Double] and
-    (JsPath \ "lng")(0).read[Double]
+    (JsPath \ "geometry" \\ "location" \ "lat").read[Double] and
+    (JsPath \ "geometry" \\ "location" \ "lng").read[Double]
   )(Coordinate.apply _)
     
 
@@ -70,12 +70,11 @@ object PopulateCoordinates extends Controller{
     val move = SQL(
         """
           UPDATE location
-          SET latitude = (SELECT latitude FROM coordinate 
+          SET latitude = coordinate.latitude,
+          longitude = coordinate.longitude
+          FROM coordinate
           WHERE location.address = coordinate.address
-          AND location.city = coordinate.city),
-          longitude = (SELECT longitude FROM coordinate
-          WHERE location.address = coordinate.address
-          AND location.city = coordinate.city);
+          AND location.city = coordinate.city;
         """
     ).execute()
   }
@@ -92,7 +91,7 @@ object PopulateCoordinates extends Controller{
     val update = SQL(
        """
          UPDATE location SET latitude = """ + coordinate.lat + """, 
-         longitude = """ + coordinate.long + """, 
+         longitude = """ + coordinate.long + """
          WHERE id = """ + id + """;
        """
     ).execute()
@@ -110,7 +109,7 @@ object PopulateCoordinates extends Controller{
          INSERT INTO coordinate(address, city, latitude, longitude)
          SELECT address, city, latitude, longitude
          FROM location
-         WHERE id = """ + id + """;
+         WHERE location.id = """ + id + """;
        """
     ).execute()
   }
@@ -141,14 +140,13 @@ object PopulateCoordinates extends Controller{
     DB.withConnection { implicit connection =>  
       
       //First, update the coordinates from the backup "coordinate" table
-      //updateFromBackup()   
-      //dont run this for now, since there are fake coordinates in database
+      updateFromBackup()
       
       //Then get a list of locations that don't have coordinates in backup table
       getNoCoordinateLocations() match {
         case Success(locations) => 
           locations.map { location =>
-            println(location.id + "*********" + location.address)
+            
             //Call the web service 
             val holder : WSRequestHolder = WS.url(GEOCODING_URL)
         
@@ -157,31 +155,34 @@ object PopulateCoordinates extends Controller{
             
             //The parameter for the HTTP get request
             //val parameterString = location.address + location.city;
-            val parameterString = "101 Cumberland Ave Saskatoon";
+            val parameterString = location.address + location.city;
+            
+            //for debug
+            println(location.id + "*********" + parameterString)
             
             //Map the response JSON to a coordinate object
-            val futureResult : Future[Seq[Coordinate]] = holder.withQueryString("address" -> parameterString).get().map{
-              response => (response.json \ "results" \ "geometry" \ "location").as[Seq[Coordinate]]
+            val futureResult : Future[Coordinate] = holder.withQueryString("address" -> parameterString).get().map{
+              response => (response.json \ "results" )(0).as[Coordinate]
             }
             
             
             futureResult.onComplete{
               case Success(coordinateResult) => 
-                println("Hi")
-              
-                val coordinate: Coordinate = coordinateResult.head
-                
-                println(coordinate==null)
-                //update this location
-                updateCoordinate(location.id, coordinate)
-                
-                //backup this new coordinate
-                backupCoordinate(location.id)
+                DB.withConnection { implicit connection =>  
+                  val coordinate: Coordinate = coordinateResult
+                  
+                  println("id" + location.id+ " lat: "+ coordinate.lat + " long:" + coordinate.long)
+                  //update this location
+                  updateCoordinate(location.id, coordinate)
+                  
+                  //backup this new coordinate
+                  backupCoordinate(location.id)
+                }
                 
               case Failure(ex) => println("Failed to get coordinate: "+ ex)
             } 
             println("waiting")
-            Await.result(futureResult,Duration(100, "second"))
+            Await.result(futureResult,Duration(99999999, "second"))
           }
         case Failure(ex) =>
           println("Failed to get no coordinates locations" + ex)
