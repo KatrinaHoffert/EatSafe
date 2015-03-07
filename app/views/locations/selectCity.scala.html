@@ -13,10 +13,12 @@
 
 @scripts = {
   <script src="@controllers.routes.Assets.at("javascripts/common.js")"></script>
+  <script src="http://maps.googleapis.com/maps/api/js?sensor=false"></script>
   <script>
     "use strict";
     
-    var cities = @Html(Json.toJson(municipalities).toString)
+    var cities = @Html(Json.toJson(municipalities).toString);
+    var selectedCity;
     
     $("#municipality").typeahead({
       delay: 100,
@@ -28,20 +30,91 @@
       },
       callback: {
         onSubmit: function(node, form, obj, e) {
-          if($("#municipality").val() == "") {
-            createPageError("@Messages("locations.selectLocation.noInput")");
-            return;
-          }
+          var municipalityFieldValue = $("#municipality").val();
+          
           if(obj == null) {
-            createPageError("@Messages("locations.selectLocation.badInput")");
-            return;
+            if(municipalityFieldValue == "") {
+              createPageError("@Messages("locations.selectLocation.noInput")");
+              return;
+            } else {
+              window.location.assign(jsRoutes.controllers.LocationController.findLocation(municipalityFieldValue).url);
+            }
+          } else {
+            window.location.assign(jsRoutes.controllers.LocationController.findLocation(obj.display).url);
           }
-
-          window.location.assign("/find/" + obj.display);
+        
+        
+          if($("#municipality").val() == "") {
+            
+          } else if(obj == null) {
+            if ($("#municipality").val() == "") {
+              createPageError("@Messages("locations.selectLocation.badInput")");
+              return;
+            } else {
+              selectedCity = $("#municipality").val();
+            }
+          } else {
+		        selectedCity = obj.display;
+		      }
+		      
+          console.log(selectedCity);
         }
       }
     });
     $("#municipality").focus();
+  </script>
+  <script>
+    // This is executed on page load.
+    if (navigator.geolocation) {
+      // Get the current lcoation of the user and pass it to the
+      // function we wrote to fill in the typeahead.
+      navigator.geolocation.getCurrentPosition(populateField);
+    }
+    
+    var municipality;
+    
+    // Made to populate the typeahead with a city name.
+    // 
+    // position: An object with coordinates from navigator.geolocation
+    function populateField(position) {
+      var lat = position.coords.latitude;
+      var long = position.coords.longitude;
+      
+      var geocoder = new google.maps.Geocoder();
+      var latLong = new google.maps.LatLng(lat, long);
+      
+      // Pass the lat/long combination to Google's Geocode API
+      geocoder.geocode({'latLng': latLong}, function (results, status) {
+        if (status == google.maps.GeocoderStatus.OK) {
+          
+          // A result has many components of many types, so we need
+          // to traverse through them to get what we want.
+          for (var i = 0; i < results[0].address_components.length; i++) {
+            for (var j = 0; j < results[0].address_components[i].types.length; j++) {
+            
+              // In Canada the result we need is usually tagged
+              // "locality". See API docs for more info.
+              if (results[0].address_components[i].types[j] == "locality") {
+                municipality = results[0].address_components[i];
+                
+                // Not elegant, but easier than the alternatives.
+                break;
+              } // End if
+            } // End types loop
+          } // End components loop
+          
+          // Set the search field to the current municipality.
+          $("#municipality").val(municipality.long_name);
+          
+          // Aaaaand log it
+          console.log("Got " + municipality.long_name);
+        } else {
+          // Log the result if it wasn't "OK"
+          console.log(status);
+        }
+      }) // End geocoder.geocode()
+        
+    } // End populateField()
   </script>
 }
 
