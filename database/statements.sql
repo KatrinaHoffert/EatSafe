@@ -3984,7 +3984,7 @@ INSERT INTO inspection(id, location_id, inspection_date, inspection_type, reinsp
  VALUES (547, 196, '2012-07-13', 'Routine', 'Low');
 
 INSERT INTO location(id, name, address, postcode, city, rha)
- VALUES (197, 'Ranch Hall - Kitchen', 'Maple Creek', 'Unknown', ', SASKATCHEWAN', 'Cypress Health Authority');
+ VALUES (197, 'Ranch Hall - Kitchen', 'Maple Creek', 'Unknown', 'Unknown', 'Cypress Health Authority');
 
 INSERT INTO inspection(id, location_id, inspection_date, inspection_type, reinspection_priority)
  VALUES (548, 197, '2015-01-21', 'Routine', 'Low');
@@ -32154,7 +32154,7 @@ INSERT INTO violation(inspection_id, violation_id)
  VALUES (4281, 7);
 
 INSERT INTO location(id, name, address, postcode, city, rha)
- VALUES (1558, 'Beach Side Store', 'North Battleford', 'S9A 1T7', ', SASKATCHEWAN     S9A 1T7', 'Prairie North Health Authority');
+ VALUES (1558, 'Beach Side Store', 'North Battleford', 'S9A 1T7', 'Unknown', 'Prairie North Health Authority');
 
 INSERT INTO inspection(id, location_id, inspection_date, inspection_type, reinspection_priority)
  VALUES (4282, 1558, '2014-05-30', 'Routine', 'Low');
@@ -35244,7 +35244,7 @@ INSERT INTO inspection(id, location_id, inspection_date, inspection_type, reinsp
  VALUES (4731, 1723, '2012-05-16', 'Routine', 'Low');
 
 INSERT INTO location(id, name, address, postcode, city, rha)
- VALUES (1724, 'Redberry Lake Regional Park', 'R.m. Of Redberry', 'Unknown', ', SASKATCHEWAN', 'PA Parkland Health Authority');
+ VALUES (1724, 'Redberry Lake Regional Park', 'R.m. Of Redberry', 'Unknown', 'Unknown', 'PA Parkland Health Authority');
 
 INSERT INTO inspection(id, location_id, inspection_date, inspection_type, reinspection_priority)
  VALUES (4732, 1724, '2014-06-26', 'Routine', 'Low');
@@ -35277,7 +35277,7 @@ INSERT INTO violation(inspection_id, violation_id)
  VALUES (4737, 7);
 
 INSERT INTO location(id, name, address, postcode, city, rha)
- VALUES (1726, 'River Lot Orchards Bistro', 'R L 13 45 - 27 W2m Rm 431', 'Unknown', ', SASKATCHEWAN', 'PA Parkland Health Authority');
+ VALUES (1726, 'River Lot Orchards Bistro', 'R L 13 45 - 27 W2m Rm 431', 'Unknown', 'Unknown', 'PA Parkland Health Authority');
 
 INSERT INTO inspection(id, location_id, inspection_date, inspection_type, reinspection_priority)
  VALUES (4738, 1726, '2014-08-01', 'Routine', 'Low');
@@ -35289,7 +35289,7 @@ INSERT INTO inspection(id, location_id, inspection_date, inspection_type, reinsp
  VALUES (4740, 1726, '2014-05-20', 'Routine', 'Low');
 
 INSERT INTO location(id, name, address, postcode, city, rha)
- VALUES (1727, 'River Lot Orchards Kitchen & Winery', 'R L 13 45 - 27 W2m Rm 431', 'Unknown', ', SASKATCHEWAN', 'PA Parkland Health Authority');
+ VALUES (1727, 'River Lot Orchards Kitchen & Winery', 'R L 13 45 - 27 W2m Rm 431', 'Unknown', 'Unknown', 'PA Parkland Health Authority');
 
 INSERT INTO inspection(id, location_id, inspection_date, inspection_type, reinspection_priority)
  VALUES (4741, 1727, '2014-05-20', 'Routine', 'Low');
@@ -44283,7 +44283,7 @@ INSERT INTO violation(inspection_id, violation_id)
  VALUES (5866, 15);
 
 INSERT INTO location(id, name, address, postcode, city, rha)
- VALUES (2134, 'K & S Accommodations Kitchen', 'Dufferin', 'Unknown', ', SASKATCHEWAN', 'Regina QuAppelle Health Authority');
+ VALUES (2134, 'K & S Accommodations Kitchen', 'Dufferin', 'Unknown', 'Unknown', 'Regina QuAppelle Health Authority');
 
 INSERT INTO inspection(id, location_id, inspection_date, inspection_type, reinspection_priority)
  VALUES (5867, 2134, '2014-09-11', 'Complaint', 'Low');
@@ -44325,7 +44325,7 @@ INSERT INTO violation(inspection_id, violation_id)
  VALUES (5871, 15);
 
 INSERT INTO location(id, name, address, postcode, city, rha)
- VALUES (2136, 'Over The Hill Orchards', 'Lumsden', 'Unknown', ', SASKATCHEWAN', 'Regina QuAppelle Health Authority');
+ VALUES (2136, 'Over The Hill Orchards', 'Lumsden', 'Unknown', 'Unknown', 'Regina QuAppelle Health Authority');
 
 INSERT INTO inspection(id, location_id, inspection_date, inspection_type, reinspection_priority)
  VALUES (5872, 2136, '2014-04-30', 'Routine', 'Low');
@@ -67266,7 +67266,7 @@ INSERT INTO inspection(id, location_id, inspection_date, inspection_type, reinsp
  VALUES (8979, 3252, '2013-07-03', 'Routine', 'Low');
 
 INSERT INTO location(id, name, address, postcode, city, rha)
- VALUES (3253, 'Leaning Maple Meats - Catering', 'Mckillop', 'Unknown', ', SASKATCHEWAN', 'Saskatoon Health Authority');
+ VALUES (3253, 'Leaning Maple Meats - Catering', 'Mckillop', 'Unknown', 'Unknown', 'Saskatoon Health Authority');
 
 INSERT INTO inspection(id, location_id, inspection_date, inspection_type, reinspection_priority)
  VALUES (8980, 3253, '2014-11-04', 'Routine', 'Low');
@@ -67326,7 +67326,7 @@ INSERT INTO violation(inspection_id, violation_id)
  VALUES (8989, 11);
 
 INSERT INTO location(id, name, address, postcode, city, rha)
- VALUES (3257, 'Salvation Army Beaver Creek Bible Camp', 'Rm 344 Se 6-35-5 W3m', 'Unknown', ', SASKATCHEWAN', 'Saskatoon Health Authority');
+ VALUES (3257, 'Salvation Army Beaver Creek Bible Camp', 'Rm 344 Se 6-35-5 W3m', 'Unknown', 'Unknown', 'Saskatoon Health Authority');
 
 INSERT INTO inspection(id, location_id, inspection_date, inspection_type, reinspection_priority)
  VALUES (8990, 3257, '2014-05-27', 'Routine', 'Low');
