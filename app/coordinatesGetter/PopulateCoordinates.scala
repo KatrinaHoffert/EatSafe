@@ -1,17 +1,23 @@
 package coordinatesGetter
 
 import scala.concurrent.Future
-import play.api.libs.concurrent.Execution.Implicits.defaultContext
-import scala.util.{Try, Success, Failure} 
-import models._
-import anorm._
+import scala.util.Failure
+import scala.util.Success
+import scala.util.Try
+import anorm.SQL
+import globals.ActiveDatabase
 import play.api.Play.current
 import play.api.db.DB
-import play.api.libs.functional.syntax._
-import play.api.libs.json._
-import play.api.libs.ws._
-import globals.ActiveDatabase
-import play.api.mvc._
+import play.api.libs.functional.syntax.functionalCanBuildApplicative
+import play.api.libs.functional.syntax.toFunctionalBuilderOps
+import play.api.libs.json.JsPath
+import play.api.libs.json.Reads
+import play.api.libs.ws.WS
+import play.api.libs.ws.WSRequestHolder
+import play.api.mvc.Controller
+import play.api.libs.json.JsResult
+import scala.concurrent.Await
+import scala.concurrent.duration.Duration
 
 /**
  * Represent a coordinate, which contains a latitude and longitude
@@ -32,7 +38,7 @@ case class NoCoordinateLocation(id: Int, address: String, city: String)
 
 
 
-object PopulateCoordinates {
+object PopulateCoordinates extends Controller{
 
   /**
    * The Google Map API URL that accept HTTP get request and return a JSON object that contains 
@@ -49,8 +55,8 @@ object PopulateCoordinates {
    * Only read the first result, which is index 0
    */
   implicit val coordinateReads: Reads[Coordinate] = (
-    (JsPath \\ "lat")(0).read[Double] and
-    (JsPath \\ "lng")(0).read[Double]
+    (JsPath \ "lat")(0).read[Double] and
+    (JsPath \ "lng")(0).read[Double]
   )(Coordinate.apply _)
     
 
@@ -142,7 +148,7 @@ object PopulateCoordinates {
       getNoCoordinateLocations() match {
         case Success(locations) => 
           locations.map { location =>
-            
+            println(location.id + "*********" + location.address)
             //Call the web service 
             val holder : WSRequestHolder = WS.url(GEOCODING_URL)
         
@@ -150,42 +156,35 @@ object PopulateCoordinates {
             implicit val context = scala.concurrent.ExecutionContext.Implicits.global
             
             //The parameter for the HTTP get request
-            val parameterString = location.address + location.city;
+            //val parameterString = location.address + location.city;
+            val parameterString = "101 Cumberland Ave Saskatoon";
             
             //Map the response JSON to a coordinate object
-            val futureResult : Future[Coordinate] = holder.withQueryString("address" -> parameterString).get().map{
-              response => (response.json \ "results")(0).as[Coordinate]
+            val futureResult : Future[Seq[Coordinate]] = holder.withQueryString("address" -> parameterString).get().map{
+              response => (response.json \ "results" \ "geometry" \ "location").as[Seq[Coordinate]]
             }
             
             
-            //Try to get the coordinate object from the futureResult, which is a the asynchronous result
-            //NEED HELP THERE
-            //
-            
-            var coordinate: Coordinate = null
-            //this is not working
-            def index = Action.async {
-              futureResult.map(i => Ok("Got result: " + i))
-            }
-            
-            //OR...not working
-            futureResult.map(jsCoordinate => 
-              coordinate = jsCoordinate )
-              //OR futureResult.onSuccess...not working as well
-
-            
-            //don't run the following for now, since the coordinate is null
-            
-//            //update this location
-//            updateCoordinate(location.id, coordinate)
-//            
-//            //backup this new coordinate
-//            backupCoordinate(location.id)
-            
-            
+            futureResult.onComplete{
+              case Success(coordinateResult) => 
+                println("Hi")
+              
+                val coordinate: Coordinate = coordinateResult.head
+                
+                println(coordinate==null)
+                //update this location
+                updateCoordinate(location.id, coordinate)
+                
+                //backup this new coordinate
+                backupCoordinate(location.id)
+                
+              case Failure(ex) => println("Failed to get coordinate: "+ ex)
+            } 
+            println("waiting")
+            Await.result(futureResult,Duration(100, "second"))
           }
         case Failure(ex) =>
-          println(ex)
+          println("Failed to get no coordinates locations" + ex)
       }
     }
   }  
