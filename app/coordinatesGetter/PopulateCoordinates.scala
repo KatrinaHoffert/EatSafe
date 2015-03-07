@@ -127,6 +127,7 @@ object PopulateCoordinates extends Controller{
            FROM location
            WHERE location.latitude IS NULL
            AND location.longitude IS NULL
+           ORDER BY id;
          """
       )
         
@@ -154,24 +155,19 @@ object PopulateCoordinates extends Controller{
             implicit val context = scala.concurrent.ExecutionContext.Implicits.global
             
             //The parameter for the HTTP get request
-            //val parameterString = location.address + location.city;
             val parameterString = location.address + location.city;
-            
-            //for debug
-            println(location.id + "*********" + parameterString)
             
             //Map the response JSON to a coordinate object
             val futureResult : Future[Coordinate] = holder.withQueryString("address" -> parameterString).get().map{
               response => (response.json \ "results" )(0).as[Coordinate]
             }
             
-            
             futureResult.onComplete{
               case Success(coordinateResult) => 
                 DB.withConnection { implicit connection =>  
                   val coordinate: Coordinate = coordinateResult
-                  
-                  println("id" + location.id+ " lat: "+ coordinate.lat + " long:" + coordinate.long)
+                  //for debugging
+                  println("id" + location.id + ": " + parameterString + " lat: "+ coordinate.lat + " long:" + coordinate.long)
                   //update this location
                   updateCoordinate(location.id, coordinate)
                   
@@ -179,10 +175,20 @@ object PopulateCoordinates extends Controller{
                   backupCoordinate(location.id)
                 }
                 
-              case Failure(ex) => println("Failed to get coordinate: "+ ex)
-            } 
-            println("waiting")
-            Await.result(futureResult,Duration(99999999, "second"))
+              case Failure(ex) => 
+                 DB.withConnection { implicit connection =>  
+                  val coordinate = Coordinate(0,0) //if fail to get coordinate, just use (0,0) for now
+                  //for debugging
+                  println("id" + location.id + ": " + parameterString + " Failed to get coordinate: " + ex)
+                  //update this location
+                  updateCoordinate(location.id, coordinate)
+                  
+                  //backup this new coordinate, or should backup (0,0)?
+                  backupCoordinate(location.id)
+                }
+                
+            }
+            Await.ready(futureResult,Duration(10000, "second"))
           }
         case Failure(ex) =>
           println("Failed to get no coordinates locations" + ex)
