@@ -2,11 +2,10 @@
  -- create tables
  -- drop tables first
 DROP TABLE IF EXISTS location CASCADE;
-DROP TABLE IF EXISTS inspection CASCADE;
+DROP TABLE IF EXISTS inspection CASCADE; 
 DROP TABLE IF EXISTS violation CASCADE;
 DROP TABLE IF EXISTS violation_type CASCADE;
 DROP TABLE IF EXISTS coordinate CASCADE;
-
 
 CREATE TABLE location(
     id SERIAL PRIMARY KEY,

@@ -172,8 +172,14 @@ class CSVLoader(writer: Writer) {
     else if(string.matches("^.+, .+$")) {
       WordUtils.capitalizeFully(string.substring(0, string.lastIndexOf(',')))
     }
+    else if(string.matches(", .+$")) {
+      //some files have this column as ", SASKATCHEWAN" 
+      //(see 'Saskatoon_Other Locations_Leaning Maple Meats - Catering [MCKILLOP].csv')
+      //need to return Unknown for this case 
+      "Unknown"
+    }
     else {
-      //if not match the above regex, then it only contains the city name
+      //if not match the above regexs, then it only contains the city name
       string;
     }
   }
