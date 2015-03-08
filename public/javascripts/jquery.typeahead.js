@@ -1922,24 +1922,22 @@
             if ($.isEmptyObject(this.table)) {
                 return false;
             }
-            if(console){
-	            if (console.group !== undefined || console.table !== undefined) {
-	
-	                console.groupCollapsed('--- jQuery Typeahead Debug ---');
-	
-	                if (console.table) {
-	                    console.table(this.table);
-	                } else {
-	                    $.each(this.table, function (index, data) {
-	                        console.log(data['Name'] + ': ' + data['Execution Time']+'ms');
-	                    });
-	                }
-	
-	                console.groupEnd();
-	
-	            } else {
-	                console.log('Debug is not available on your current browser, try the most recent version of Chrome or Firefox.');
-	            }
+            if (console.group !== undefined || console.table !== undefined) {
+
+                console.groupCollapsed('--- jQuery Typeahead Debug ---');
+
+                if (console.table) {
+                    console.table(this.table);
+                } else {
+                    $.each(this.table, function (index, data) {
+                        console.log(data['Name'] + ': ' + data['Execution Time']+'ms');
+                    });
+                }
+
+                console.groupEnd();
+
+            } else {
+                console.log('Debug is not available on your current browser, try the most recent version of Chrome or Firefox.');
             }
             this.table = {};
 
