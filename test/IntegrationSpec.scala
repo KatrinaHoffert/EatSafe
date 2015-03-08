@@ -6,56 +6,23 @@ import play.api.test._
 import play.api.test.Helpers._
 import globals.ActiveDatabase
 
+import org.specs2.matcher._
 import org.specs2.mock._
+
+import play.api.i18n.Messages
+
 
 /**
  * add your integration spec here.
  * An integration test will fire up a whole play application in a real (or headless) browser
  */
 @RunWith(classOf[JUnitRunner])
-class IntegrationSpec extends Specification with Mockito {
-  implicit lazy val db = new ActiveDatabase("test")
-  
-  "Application" should {
-    "run in a browser" in new WithBrowser {
-      browser.goTo("/")
-    }
-  }
+class IntegrationSpec extends Specification {
  
   /* each runs a set of tests implemented below */
-  this.generalControllerIntegration()
   this.showLocationIntegration()
   this.findLocationIntegration()
   this.selectCityIntegration()
-
- 
-  def generalControllerIntegration() {
-    /**
-     * Need to be updated as the view pages are developed
-     * Checks to make sure that a page is actually displayed when controller is called
-     */
-    "Controller" should {
-
-      "show display location page when showLocation is called" in new WithApplication {
-        val result = controllers.LocationController.showLocation(7)(FakeRequest())
-        status(result) must equalTo(OK)
-        contentType(result) must beSome.which(_ == "text/html")
-      }
-      
-      "show find location page when findLocation is called" in new WithApplication {
-        val result = controllers.LocationController.findLocation("Saskatoon")(FakeRequest())
-        status(result) must equalTo(OK)
-        contentType(result) must beSome.which(_ == "text/html")
-      }
-      
-      "show find city page when selectCity is called" in new WithApplication {
-        val result = controllers.LocationController.selectCity()(FakeRequest())
-        status(result) must equalTo(OK)
-        contentType(result) must beSome.which(_ == "text/html")
-      }
-      
-    }
-  }
   
   def showLocationIntegration() {
     /**
@@ -64,16 +31,18 @@ class IntegrationSpec extends Specification with Mockito {
     "showLocation" should {
       "display information for valid id" in new WithApplication {
         val result = controllers.LocationController.showLocation(7)(FakeRequest())
-        status(result) must equalTo(OK)
+        assert(status(result) == OK)
 
-        contentAsString(result) must contain("Burstall Curling Rink - Kitchen")
-        contentAsString(result) must contain("Maharg Ave")
-        contentAsString(result) must contain("S0N 0H0")
+        val resultString = contentAsString(result);
+
+        assert(contentAsString(result) must contain("Rating:"))
+        assert(contentAsString(result) must contain("Most recent issues:"))
+        assert(contentAsString(result) must contain(Messages("locations.view.pastInspectionsHeader")))
       } 
   
       "diplay error for invalid id" in new WithApplication {
-        val result = controllers.LocationController.showLocation(-1)(FakeRequest())
-        status(result) must equalTo(INTERNAL_SERVER_ERROR)
+        val result = controllers.LocationController.showLocation(1000000)(FakeRequest())
+        assert(status(result) == INTERNAL_SERVER_ERROR)
       }     
     }
   }
@@ -86,16 +55,17 @@ class IntegrationSpec extends Specification with Mockito {
     "findLocation" should {
       "display information for valid city" in new WithApplication {
         val result = controllers.LocationController.findLocation("Saskatoon")(FakeRequest())
-        status(result) must equalTo(OK)
-        contentAsString(result) must contain("Saskatoon")
-        contentAsString(result) must contain("7 Eleven")
+        assert(status(result) == OK)
+        assert(contentAsString(result) must contain("Saskatoon"))
+        assert(contentAsString(result) must contain("7 Eleven"))
+      }
+        
+      
+      "display error for incorrect city but remain on current page" in new WithApplication {
+        val result = controllers.LocationController.findLocation("#DOESNTEXIST")(FakeRequest())
+        assert(status(result) == OK)
       }
       
-      /* empty list displayed with an invalid city is entered*/
-      "display nothing for ivalid city" in new WithApplication {
-        val result = controllers.LocationController.findLocation("#DOESNTEXIST")(FakeRequest())
-        status(result) must equalTo(OK)
-      }
     }
   }
   
@@ -103,8 +73,8 @@ class IntegrationSpec extends Specification with Mockito {
     "selectCity" should {
       "display list of cities" in new WithApplication {
         val result = controllers.LocationController.selectCity()(FakeRequest())
-        status(result) must equalTo(OK)
-        contentAsString(result) must contain("Saskatoon")
+        assert(status(result) == OK)
+        assert(contentAsString(result) must contain("Saskatoon"))
       }
     }
   }
