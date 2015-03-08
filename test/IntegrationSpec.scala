@@ -23,8 +23,9 @@ class IntegrationSpec extends Specification {
   this.showLocationIntegration()
   this.findLocationIntegration()
   this.selectCityIntegration()
+  this.mapController()
   
-  def showLocationIntegration() {
+  def showLocationIntegration() = {
     /**
      * Checks that controller sends appropriate action for showLocation
      */
@@ -47,7 +48,7 @@ class IntegrationSpec extends Specification {
     }
   }
   
-  def findLocationIntegration() {
+  def findLocationIntegration() = {
     
     /**
      * Checks that controller displays appropriate pages for findLocation
@@ -69,7 +70,7 @@ class IntegrationSpec extends Specification {
     }
   }
   
-  def selectCityIntegration(){
+  def selectCityIntegration() = {
     "selectCity" should {
       "display list of cities" in new WithApplication {
         val result = controllers.LocationController.selectCity()(FakeRequest())
@@ -78,4 +79,15 @@ class IntegrationSpec extends Specification {
       }
     }
   }
+  
+  def mapController() = {
+    "showMap" should {
+      "show displayMap page" in new WithApplication {
+        val result = controllers.MapController.showMap("51st Street","Saskatoon")(FakeRequest())
+        assert(status(result) == OK)
+        assert(contentAsString(result) must contain(Messages("maps.displayAddress.title", "51st Street","Saskatoon")))
+      }
+    }
+  }
+  
 }
