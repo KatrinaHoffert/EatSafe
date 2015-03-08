@@ -18,9 +18,11 @@ import globals.ActiveDatabase
  * @param city The city the location is in.
  * @param regionalHealthAuthority The RHA that performs inspections for this location.
  * @param inspections A list of inspections that have been done on the location.
+ * @param latitude The latitude of the location. (-90 <= _ <= 90)
+ * @param longitude The longitude of the location (-180 < _ <= 180)
  */
-case class Location(id: Int, name: String, address: String, postalCode: String, city: String,
-    regionalHealthAuthority: String, inspections: Seq[Inspection]) {
+case class Location(id: Int, name: String, latitude: Double, longitude: Double, address: String,
+	postalCode: String, city: String, regionalHealthAuthority: String, inspections: Seq[Inspection]) {
   /** Returns true if the location has at least one inspection. */
   def hasInspections: Boolean = inspections.size != 0
 }
@@ -40,7 +42,7 @@ object Location {
       DB.withConnection(db.name) { implicit connection =>
         val query = SQL(
            """
-             SELECT id, name, address, postcode, city, rha
+             SELECT id, name, address, postcode, city, rha, latitude, longitude
              FROM location
              WHERE id = {locationId};
            """    
@@ -119,8 +121,8 @@ object Location {
   private def locationRowToLocation(row: Row)(implicit connection: java.sql.Connection): Try[Location] = {
     Inspection.getInspections(row[Int]("id")) match {
       case Success(inspections) =>
-        Success(Location(row[Int]("id"), row[String]("name"), row[String]("address"), row[String]("postcode"),
-            row[String]("city"), row[String]("rha"), inspections))
+        Success(Location(row[Int]("id"), row[String]("name"), row[Double]("latitude"), row[Double]("longitude"), 
+            row[String]("address"), row[String]("postcode"), row[String]("city"), row[String]("rha"),  inspections))
       case Failure(ex) => 
         Failure(ex)
     }

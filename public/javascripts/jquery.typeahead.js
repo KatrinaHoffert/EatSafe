@@ -710,7 +710,7 @@
 
                     hint.container = node.clone(false).attr({
                         "class": options.selector.hint,
-                        "readonly": true,
+                        "readonly": false,
                         "tabindex": -1
                     }).removeAttr("id placeholder name").css(hint.css).insertBefore(node);
 
