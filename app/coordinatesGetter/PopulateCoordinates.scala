@@ -55,13 +55,6 @@ object PopulateCoordinates{
    */
   var GEOCODING_URL = "https://maps.googleapis.com/maps/api/geocode/json"
   
-  /**
-   * Read a response from JSON
-   */
-  implicit val responseReads: Reads[Response] = (
-    (JsPath \ "results").read[Coordinate].orElse(Reads.pure(null)) and
-    (JsPath \ "status").read[String]
-  )(Response.apply _)
   
   /**
    * Read a coordinate object from JSON
@@ -70,6 +63,14 @@ object PopulateCoordinates{
     (JsPath \ "geometry" \\ "location" \ "lat").read[Double] and
     (JsPath \ "geometry" \\ "location" \ "lng").read[Double]
   )(Coordinate.apply _)
+  
+  /**
+   * Read a response from JSON
+   */
+  implicit val responseReads: Reads[Response] = (
+    (JsPath \ "results")(0).read[Coordinate].orElse(Reads.pure(Coordinate(0,0))) and
+    (JsPath \ "status").read[String]
+  )(Response.apply _)
     
 
   /**
@@ -153,7 +154,7 @@ object PopulateCoordinates{
     DB.withConnection { implicit connection =>  
       
       //First, update the coordinates from the backup "coordinate" table
-      require(updateFromBackup()==true, "could not update from the backup table")
+      updateFromBackup()
       
       //Then get a list of locations that don't have coordinates in backup table
       getNoCoordinateLocations() match {
@@ -180,7 +181,7 @@ object PopulateCoordinates{
                   val status = coordinateResult.status
                   val coordinate: Coordinate = coordinateResult.coordinate
                   //for debugging
-                  println("status")
+                  println("status" + status)
                   println("id" + location.id + ": " + parameterString + " lat: "+ coordinate.lat + " long:" + coordinate.long)
                   //update this location
                   updateCoordinate(location.id, coordinate)
@@ -195,10 +196,10 @@ object PopulateCoordinates{
                   //for debugging
                   println("id" + location.id + ": " + parameterString + " Failed to get coordinate: " + ex)
                   //update this location
-                  require(updateCoordinate(location.id, coordinate)==true, "failed to update the coordinate for ID:" + location.id)
+                  updateCoordinate(location.id, coordinate)
                   
                   //backup this new coordinate, or should backup (0,0)?
-                  require(backupCoordinate(location.id)==true, "falied to backup the coordinate for ID:" + location.id)
+                  backupCoordinate(location.id)
                 }
                 
             }
