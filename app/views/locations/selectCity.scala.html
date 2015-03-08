@@ -16,6 +16,18 @@
   <script src="http://maps.googleapis.com/maps/api/js?sensor=false"></script>
   <script>
     "use strict";
+ 	// Create fake console if one doesn't exist
+	// For compatibility with packages not including console object
+	if ( typeof ( console ) !== 'undefined' && console != null) {
+	  console.log("");
+	}
+	else {
+	  console = {
+		log: function () {},
+		warn: function () {},
+		error: function () {}
+	  }
+	}
     
     var cities = @Html(Json.toJson(municipalities).toString);
     var selectedCity;
@@ -56,8 +68,7 @@
           } else {
 		        selectedCity = obj.display;
 		      }
-		      
-          console.log(selectedCity);
+          	console.log(selectedCity);
         }
       }
     });
@@ -105,12 +116,11 @@
           
           // Set the search field to the current municipality.
           $("#municipality").val(municipality.long_name);
-          
-          // Aaaaand log it
-          console.log("Got " + municipality.long_name);
+          	// Aaaaand log it
+          	console.log("Got " + municipality.long_name);
         } else {
-          // Log the result if it wasn't "OK"
-          console.log(status);
+          	// Log the result if it wasn't "OK"
+          	console.log(status);
         }
       }) // End geocoder.geocode()
         

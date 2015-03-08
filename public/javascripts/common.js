@@ -36,7 +36,19 @@ function createPageError(errorMessage) {
 jQuery.fn.fadeAndRemove = function(duration, callback) {
   this.fadeOut(duration || "slow", function() {
     this.remove();
-
+    
+    // Create fake console if one doesn't exist
+	// For compatibility with packages not including console object
+    if ( typeof ( console ) !== 'undefined' && console != null) {
+	  console.log("");
+	  }
+	else {
+	  console = {
+	  log: function () {},
+	  warn: function () {},
+	  error: function () {}
+	  }
+	}
     // Sane error handling: provide stack traces for the dumb schmuck who did this.
     if(typeof(callback) == "function") {
       callback(this);
