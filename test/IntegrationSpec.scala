@@ -17,14 +17,7 @@ import play.api.i18n.Messages
  * An integration test will fire up a whole play application in a real (or headless) browser
  */
 @RunWith(classOf[JUnitRunner])
-class IntegrationSpec extends Specification with Mockito {
-  implicit lazy val db = new ActiveDatabase("test")
-  
-  "Application" should {
-    "run in a browser" in new WithBrowser {
-      browser.goTo("/")
-    }
-  }
+class IntegrationSpec extends Specification {
  
   /* each runs a set of tests implemented below */
   this.showLocationIntegration()
