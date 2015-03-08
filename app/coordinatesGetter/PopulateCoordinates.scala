@@ -44,7 +44,7 @@ case class NoCoordinateLocation(id: Int, address: String, city: String)
 
 
 
-object PopulateCoordinates extends Controller{
+object PopulateCoordinates{
 
   /**
    * The Google Map API URL that accept HTTP get request and return a JSON object that contains 
@@ -59,7 +59,7 @@ object PopulateCoordinates extends Controller{
    * Read a response from JSON
    */
   implicit val responseReads: Reads[Response] = (
-    (JsPath \ "results" \ "geometry" \ "location").read[Coordinate] and
+    (JsPath \ "results").read[Coordinate].orElse(Reads.pure(null)) and
     (JsPath \ "status").read[String]
   )(Response.apply _)
   
@@ -153,7 +153,7 @@ object PopulateCoordinates extends Controller{
     DB.withConnection { implicit connection =>  
       
       //First, update the coordinates from the backup "coordinate" table
-      updateFromBackup()
+      require(updateFromBackup()==true, "could not update from the backup table")
       
       //Then get a list of locations that don't have coordinates in backup table
       getNoCoordinateLocations() match {
@@ -195,14 +195,14 @@ object PopulateCoordinates extends Controller{
                   //for debugging
                   println("id" + location.id + ": " + parameterString + " Failed to get coordinate: " + ex)
                   //update this location
-                  updateCoordinate(location.id, coordinate)
+                  require(updateCoordinate(location.id, coordinate)==true, "failed to update the coordinate for ID:" + location.id)
                   
                   //backup this new coordinate, or should backup (0,0)?
-                  backupCoordinate(location.id)
+                  require(backupCoordinate(location.id)==true, "falied to backup the coordinate for ID:" + location.id)
                 }
                 
             }
-            Await.ready(futureResult,Duration(10000, "second"))
+            Await.ready(futureResult,Duration(100, "second"))
           }
         case Failure(ex) =>
           println("Failed to get no coordinates locations" + ex)
