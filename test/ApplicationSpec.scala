@@ -52,8 +52,8 @@ class ApplicationSpec extends Specification {
       browser.goTo("/find/octavia")
       val link = browser.webDriver.findElement(By.linkText(Messages("errors.emptyCityTryAgain")))
       link.click
-      browser.url must contain("/")
-      browser.pageSource must contain(Messages("locations.selectCity.title"))
+      assert(browser.url must contain("/"))
+      assert(browser.pageSource must contain(Messages("locations.selectCity.title")))
     }
   }
   
@@ -61,8 +61,8 @@ class ApplicationSpec extends Specification {
     
     "give error page when an invalid city url is requested" in new WithApplication {
       val error = route(FakeRequest(GET, "/find/octavia")).get
-      status(error) must equalTo(OK) 
-      contentAsString(error) must contain(Messages("errors.emptyCityDesc"))
+      assert(status(error) must equalTo(OK))
+      assert(contentAsString(error) must contain(Messages("errors.emptyCityDesc")))
     }
     
     "give error message when trying submit without input" in new WithBrowser {
@@ -70,7 +70,7 @@ class ApplicationSpec extends Specification {
       val typeahead = browser.getDriver.findElement(By.id("municipality"))
       typeahead.click
       typeahead.sendKeys(Keys.ENTER)
-      browser.$(".topViewError").getText must contain(Messages("locations.selectCity.noInput"))
+      assert(browser.$(".topViewError").getText must contain(Messages("locations.selectCity.noInput")))
     }
      
     "give error message when trying to search for invalid place" in new WithBrowser {
@@ -88,16 +88,16 @@ class ApplicationSpec extends Specification {
       typeahead.click
       typeahead.sendKeys("SASKATOON")
       typeahead.sendKeys(Keys.ENTER)
-      browser.url must contain("/find/Saskatoon")
+      assert(browser.url must contain("/find/Saskatoon"))
     }
     
-     "display choose location page when location is typed in all lowercase" in new WithBrowser {
+    "display choose location page when location is typed in all lowercase" in new WithBrowser {
       browser.goTo("/")
       val typeahead = browser.getDriver.findElement(By.id("municipality"))
       typeahead.click
       typeahead.sendKeys("saskatoon")
       typeahead.sendKeys(Keys.ENTER)
-      browser.url must contain("/find/Saskatoon")
+      assert(browser.url must contain("/find/Saskatoon"))
     }
     
     "display choose location page when location is fully typed and submitted with enter" in new WithBrowser {
@@ -106,7 +106,7 @@ class ApplicationSpec extends Specification {
       typeahead.click
       typeahead.sendKeys("Saskatoon")
       typeahead.sendKeys(Keys.ENTER)
-      browser.url must contain("/find/Saskatoon")
+      assert(browser.url must contain("/find/Saskatoon"))
     }
     
     "display choose location page when location is partially typed, hint is clicked and submitted with enter" in new WithBrowser {
@@ -121,21 +121,21 @@ class ApplicationSpec extends Specification {
       action.click
       action.perform
       typeahead.sendKeys(Keys.ENTER)
-      browser.url must contain("/find/Saskatoon")
+      assert(browser.url must contain("/find/Saskatoon"))
     }
   } 
 
   "select location page" should {
     "display 500 error page for id that is not assigned to a location" in new WithApplication {
       val error = route(FakeRequest(GET, "/view/1000000")).get
-      status(error) must equalTo(INTERNAL_SERVER_ERROR) 
-      contentAsString(error) must contain(Messages("errors.error500Desc"))
+      assert(status(error) must equalTo(INTERNAL_SERVER_ERROR))
+      assert(contentAsString(error) must contain(Messages("errors.error500Desc")))
     }
     
     "display 500 error page for id less than 0" in new WithApplication {
       val error = route(FakeRequest(GET, "/view/-100")).get
-      status(error) must equalTo(INTERNAL_SERVER_ERROR) 
-      contentAsString(error) must contain(Messages("errors.error500Desc"))      
+      assert(status(error) must equalTo(INTERNAL_SERVER_ERROR))
+      assert(contentAsString(error) must contain(Messages("errors.error500Desc")))      
     }
     
     "display chosen location when valid option is submitted" in new WithBrowser {
@@ -144,14 +144,14 @@ class ApplicationSpec extends Specification {
       typeahead.click()
       typeahead.sendKeys("2nd Avenue Grill")
       typeahead.sendKeys(Keys.ENTER)
-      browser.url() must contain("/view/")
+      assert(browser.url() must contain("/view/"))
     }
   }
   
   "404 page" should {
     "be loaded when an invalid url is entered" in new WithApplication {
       val error = route(FakeRequest(GET, "/bubblzzz")).get
-      status(error) must equalTo(404) 
+      assert(status(error) must equalTo(404)) 
     }
   }
 }
