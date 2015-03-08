@@ -6,7 +6,11 @@ import play.api.test._
 import play.api.test.Helpers._
 import globals.ActiveDatabase
 
+import org.specs2.matcher._
 import org.specs2.mock._
+
+import play.api.i18n.Messages
+
 
 /**
  * add your integration spec here.
@@ -23,42 +27,9 @@ class IntegrationSpec extends Specification with Mockito {
   }
  
   /* each runs a set of tests implemented below */
-  this.generalControllerIntegration()
   this.showLocationIntegration()
   this.findLocationIntegration()
   this.selectCityIntegration()
-
- 
-  def generalControllerIntegration() {
-    /**
-     * Need to be updated as the view pages are developed
-     * Checks to make sure that a page is actually displayed when controller is called
-     */
-    "Controller" should {
-
-      "show display location page when showLocation is called" in new WithApplication {
-        val result = controllers.LocationController.showLocation(7)(FakeRequest())
-        assert(status(result) == OK)
-        val resultString = contentType(result)
-        assert(resultString must beSome.which(_ == "text/html"))
-      }
-      
-      "show find location page when findLocation is called" in new WithApplication {
-        val result = controllers.LocationController.findLocation("Saskatoon")(FakeRequest())
-        assert(status(result) == OK)
-        val resultString = contentType(result)
-        assert(resultString must beSome.which(_ == "text/html"))
-      }
-      
-      "show find city page when selectCity is called" in new WithApplication {
-        val result = controllers.LocationController.selectCity()(FakeRequest())
-        assert(status(result) == OK)
-        val resultString = contentType(result)
-        assert(resultString must beSome.which(_ == "text/html"))
-      }
-      
-    }
-  }
   
   def showLocationIntegration() {
     /**
@@ -70,9 +41,10 @@ class IntegrationSpec extends Specification with Mockito {
         assert(status(result) == OK)
 
         val resultString = contentAsString(result);
-        assert(contentAsString(result) must contain("Burstall Curling Rink - Kitchen"))
-        assert(contentAsString(result) must contain("Maharg Ave"))
-        assert(contentAsString(result) must contain("S0N 0H0"))
+
+        assert(contentAsString(result) must contain("Rating:"))
+        assert(contentAsString(result) must contain("Most recent issues:"))
+        assert(contentAsString(result) must contain(Messages("locations.view.pastInspectionsHeader")))
       } 
   
       "diplay error for invalid id" in new WithApplication {
@@ -96,10 +68,11 @@ class IntegrationSpec extends Specification with Mockito {
       }
       
       /* empty list displayed with an invalid city is entered*/
-      "display nothing for ivalid city" in new WithApplication {
+      "display error for negative id city" in new WithApplication {
         val result = controllers.LocationController.findLocation("#DOESNTEXIST")(FakeRequest())
         assert(status(result) == OK)
       }
+      
     }
   }
   
