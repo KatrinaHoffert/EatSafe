@@ -48,7 +48,7 @@ class IntegrationSpec extends Specification with Mockito {
       } 
   
       "diplay error for invalid id" in new WithApplication {
-        val result = controllers.LocationController.showLocation(-1)(FakeRequest())
+        val result = controllers.LocationController.showLocation(1000000)(FakeRequest())
         assert(status(result) == INTERNAL_SERVER_ERROR)
       }     
     }
@@ -66,9 +66,9 @@ class IntegrationSpec extends Specification with Mockito {
         assert(contentAsString(result) must contain("Saskatoon"))
         assert(contentAsString(result) must contain("7 Eleven"))
       }
+        
       
-      /* empty list displayed with an invalid city is entered*/
-      "display error for negative id city" in new WithApplication {
+      "display error for incorrect city but remain on current page" in new WithApplication {
         val result = controllers.LocationController.findLocation("#DOESNTEXIST")(FakeRequest())
         assert(status(result) == OK)
       }

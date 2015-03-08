@@ -11,7 +11,6 @@ import org.openqa.selenium.htmlunit.HtmlUnitDriver
 import org.openqa.selenium.firefox._
 import org.openqa.selenium.interactions.Actions
 import org.openqa.selenium.WebDriver
-import org.openqa.selenium.JavascriptExecutor
 
 import play.api.i18n.Messages
 
@@ -48,21 +47,32 @@ class ApplicationSpec extends Specification {
     }
   }
   
+  "select city error page" should {
+    "return to select city page when option is selected" in new WithBrowser {
+      browser.goTo("/find/octavia")
+      val link = browser.webDriver.findElement(By.linkText(Messages("errors.emptyCityTryAgain")))
+      link.click
+      browser.url must contain("/")
+      browser.pageSource must contain(Messages("locations.selectCity.title"))
+    }
+  }
+  
   "select city page" should {
-    "show a typeahead for cities" in new WithBrowser {
-      browser.goTo("/")
-      browser.pageSource must contain(Messages("locations.selectCity.prompt"))
-      browser.getDriver.findElement(By.id("municipality"))
+    
+    "give error page when an invalid city url is requested" in new WithApplication {
+      val error = route(FakeRequest(GET, "/find/octavia")).get
+      status(error) must equalTo(OK) 
+      contentAsString(error) must contain(Messages("errors.emptyCityDesc"))
     }
     
     "give error message when trying submit without input" in new WithBrowser {
-      browser.goTo("http://localhost:" + port)
+      browser.goTo("/")
       val typeahead = browser.getDriver.findElement(By.id("municipality"))
       typeahead.click
       typeahead.sendKeys(Keys.ENTER)
       browser.$(".topViewError").getText must contain(Messages("locations.selectCity.noInput"))
     }
-    
+     
     "give error message when trying to search for invalid place" in new WithBrowser {
       browser.goTo("/")
       val typeahead = browser.getDriver.findElement(By.id("municipality"))
@@ -116,10 +126,16 @@ class ApplicationSpec extends Specification {
   } 
 
   "select location page" should {
-    "show a typeahead for locations" in new WithBrowser {
-      browser.goTo("/find/Saskatoon")
-      browser.pageSource() must contain(Messages("locations.selectLocation.prompt"))
-      browser.getDriver.findElement(By.id("location"))
+    "display 500 error page for id that is not assigned to a location" in new WithApplication {
+      val error = route(FakeRequest(GET, "/view/1000000")).get
+      status(error) must equalTo(INTERNAL_SERVER_ERROR) 
+      contentAsString(error) must contain(Messages("errors.error500Desc"))
+    }
+    
+    "display 500 error page for id less than 0" in new WithApplication {
+      val error = route(FakeRequest(GET, "/view/-100")).get
+      status(error) must equalTo(INTERNAL_SERVER_ERROR) 
+      contentAsString(error) must contain(Messages("errors.error500Desc"))      
     }
     
     "display chosen location when valid option is submitted" in new WithBrowser {
@@ -129,6 +145,13 @@ class ApplicationSpec extends Specification {
       typeahead.sendKeys("2nd Avenue Grill")
       typeahead.sendKeys(Keys.ENTER)
       browser.url() must contain("/view/")
+    }
+  }
+  
+  "404 page" should {
+    "be loaded when an invalid url is entered" in new WithApplication {
+      val error = route(FakeRequest(GET, "/bubblzzz")).get
+      status(error) must equalTo(404) 
     }
   }
 }
