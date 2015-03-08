@@ -11,6 +11,8 @@ import org.openqa.selenium.htmlunit.HtmlUnitDriver
 import org.openqa.selenium.firefox._
 import org.openqa.selenium.interactions.Actions
 import org.openqa.selenium.WebDriver
+import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.WebDriverWait;
 
 import play.api.i18n.Messages
 
@@ -123,6 +125,7 @@ class ApplicationSpec extends Specification {
       typeahead.sendKeys(Keys.ENTER)
       assert(browser.url must contain("/find/Saskatoon"))
     }
+   
   } 
 
   "select location page" should {
@@ -144,7 +147,34 @@ class ApplicationSpec extends Specification {
       typeahead.click()
       typeahead.sendKeys("2nd Avenue Grill")
       typeahead.sendKeys(Keys.ENTER)
-      assert(browser.url() must contain("/view/"))
+      assert(browser.url must contain("/view/"))
+    }
+  }
+  
+  "display location page" should {
+    "display show map page when address is clicked" in new WithBrowser {
+      browser.goTo("/view/1")
+      val action = new Actions(browser.getDriver)
+      action.moveToElement(browser.webDriver.findElement(By.tagName("a"))).perform
+      action.click.perform
+      assert(browser.url must contain("map"))
+      assert(browser.webDriver.findElement(By.className("mapLocation-header")).isDisplayed)
+    }
+    
+    "display regional health authority when link is clicked" in new WithBrowser {
+      //Find a place in the Saskatoon Health Region
+      browser.goTo("/find/Saskatoon")
+      val typeahead = browser.getDriver.findElement(By.id("location"))
+      typeahead.click()
+      typeahead.sendKeys("2nd Avenue Grill")
+      typeahead.sendKeys(Keys.ENTER)
+      assert(browser.url must contain("/view/"))
+      
+      //Find the link to the health region web page
+      val action = new Actions(browser.getDriver)
+      action.moveToElement(browser.webDriver.findElement(By.partialLinkText("Health"))).perform
+      action.click.perform
+      assert(browser.url must contain("saskatoonhealthregion"))
     }
   }
   
@@ -152,6 +182,20 @@ class ApplicationSpec extends Specification {
     "be loaded when an invalid url is entered" in new WithApplication {
       val error = route(FakeRequest(GET, "/bubblzzz")).get
       assert(status(error) must equalTo(404)) 
+    }
+  }
+  
+  "display map page" should {
+    "render a map on the page with a header" in new WithBrowser {
+      //Navigate to a page with a map (uses previously tested navigation)
+      browser.goTo("/view/1")
+      val action = new Actions(browser.getDriver)
+      action.moveToElement(browser.webDriver.findElement(By.tagName("a"))).perform
+      action.click.perform
+      
+      assert(browser.url must contain("map"))
+      assert(browser.webDriver.findElement(By.className("mapLocation-header")).isDisplayed)
+      assert(browser.pageSource must contain("maps.googleapis.com"))
     }
   }
 }
