@@ -42,16 +42,24 @@
             return;
           }
 
-          window.location.assign("/view/" + obj.id);
+          window.location.assign(jsRoutes.controllers.LocationController.showLocation(obj.id).url);
         }
       }
     });
     $("#location").focus();
+
+    // Typeahead friendly clearing
+    $("#reset-button").on("click", function() {
+      $("#location").val("");
+      $(".typeahead-hint").val("");
+      $(".typeahead-result").remove();
+    });
   </script>
 }
 
-@mainBody(title = Messages("locations.selectLocation.title"), moreScripts = scripts) {
+@mainBody(title = Messages("locations.selectLocation.title"), moreScripts = scripts, hasFooter = true) {
   @headingSmall(Messages("general.applicationName"))
+
   <div class="smallPadding">
     <h2>@Messages("locations.selectLocation.prompt")</h2>
     
@@ -62,6 +70,7 @@
           <span class="typeahead-query">
             <input id="location" type="search" placeholder="Search (ex: Subway)" autocomplete="off">
           </span>
+          <span class="glyphicon glyphicon-remove-sign btn-lg" id="reset-button"></span>
           <span class="typeahead-button">
             <button type="submit">
               <i class="search-icon"></i>
