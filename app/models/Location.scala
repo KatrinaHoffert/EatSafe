@@ -134,8 +134,9 @@ object Location {
   private def locationRowToLocation(row: Row)(implicit connection: java.sql.Connection): Try[Location] = {
     Inspection.getInspections(row[Int]("id")) match {
       case Success(inspections) =>
-        Success(Location(row[Int]("id"), row[String]("name"), row[Double]("latitude"), row[Double]("longitude"), 
-            row[String]("address"), row[String]("postcode"), row[String]("city"), row[String]("rha"),  inspections))
+        Success(Location(row[Int]("id"), row[String]("name"), row[Option[Double]]("latitude").getOrElse(0),
+            row[Option[Double]]("longitude").getOrElse(0), row[String]("address"), row[String]("postcode"),
+            row[String]("city"), row[String]("rha"),  inspections))
       case Failure(ex) => 
         Failure(ex)
     }
