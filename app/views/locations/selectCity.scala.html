@@ -75,12 +75,13 @@
     $("#municipality").focus();
   </script>
   <script>
-    // This is executed on page load.
     if (navigator.geolocation) {
       // Get the current lcoation of the user and pass it to the
       // function we wrote to fill in the typeahead.
       navigator.geolocation.getCurrentPosition(populateField);
     }
+    
+    var geoSet = false;
     
     var municipality;
     
@@ -110,21 +111,28 @@
                 
                 // Not elegant, but easier than the alternatives.
                 break;
-              } // End if
-            } // End types loop
-          } // End components loop
+              }
+            }
+          }
           
           // Set the search field to the current municipality.
           $("#municipality").val(municipality.long_name);
-          	// Aaaaand log it
-          	console.log("Got " + municipality.long_name);
+          geoSet = true;
+          $("#reset-button").show();
+          console.log("Got " + municipality.long_name);
         } else {
-          	// Log the result if it wasn't "OK"
           	console.log(status);
         }
-      }) // End geocoder.geocode()
-        
-    } // End populateField()
+      })
+    }
+    
+    function clearFieldIfGeolocated() {
+      if(geoSet == true) {
+        $("#municipality").val("");
+        $("#reset-button").hide();
+        geoSet = false;
+      }
+    }
   </script>
 }
 
@@ -139,11 +147,13 @@
           <span class="typeahead-query">
             <input id="municipality" type="search" placeholder="Search" autocomplete="off">
           </span>
+          <span class="glyphicon glyphicon-remove-sign btn-lg" onclick="clearFieldIfGeolocated()" id="reset-button"></span>
           <span class="typeahead-button">
             <button type="submit" id="submitButton">
               <i class="search-icon"></i>
             </button>
           </span>
+          <span class="glyphicon glyphicon-map-marker btn-lg" width="32" onclick="if(navigator.geolocation){navigator.geolocation.getCurrentPosition(populateField);}"></span>
         </div>
       </div>
     </form>
