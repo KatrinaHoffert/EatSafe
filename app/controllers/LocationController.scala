@@ -30,7 +30,7 @@ object LocationController extends Controller {
       case Success(cityLocations) if !cityLocations.isEmpty => 
         Ok(views.html.locations.findLocation(cityLocations))
       case Success(_) =>
-        Ok(views.html.errors.emptyCityError(city))
+        NotFound(views.html.errors.emptyCityError(city))
       case Failure(ex) => 
         InternalServerError(views.html.errors.error500(ex))
     }
