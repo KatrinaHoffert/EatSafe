@@ -19,7 +19,7 @@ import globals.ActiveDatabase
  * readable and reusable in the future.
  */
 @RunWith(classOf[JUnitRunner])
-class LocationSpec extends Specification with Mockito {
+class LocationSpecMainTest extends Specification with Mockito {
   implicit lazy val db = new ActiveDatabase("test")
 
   // Run test functions here

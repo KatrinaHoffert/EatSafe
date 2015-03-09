@@ -26,7 +26,7 @@ import play.api.Play.current
  * For more information, consult the wiki.
  */
 @RunWith(classOf[JUnitRunner])
-class ParserSpec extends Specification {
+class ParserSpecMainTest extends Specification {
   def createTableStatements(): Array[String]= {
    var sb = new StringBuffer();
    var s = new String();
