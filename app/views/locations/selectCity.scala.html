@@ -139,7 +139,10 @@
 @mainBody(title = Messages("locations.selectCity.title"), moreScripts = scripts) {
   @headingLarge(Messages("general.applicationName"))
   <div class="smallPadding">
-    <h2>@Messages("locations.selectCity.prompt")</h2>
+    <h2>
+      @Messages("locations.selectCity.prompt")
+      <span class="glyphicon glyphicon-map-marker btn-lg" onclick="if(navigator.geolocation){navigator.geolocation.getCurrentPosition(populateField);}"></span>
+    </h2>
 
     <form id="form-municipality">
       <div class="typeahead-container">
@@ -153,7 +156,6 @@
               <i class="search-icon"></i>
             </button>
           </span>
-          <span class="glyphicon glyphicon-map-marker btn-lg" width="32" onclick="if(navigator.geolocation){navigator.geolocation.getCurrentPosition(populateField);}"></span>
         </div>
       </div>
     </form>
