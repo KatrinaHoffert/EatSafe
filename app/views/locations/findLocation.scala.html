@@ -47,6 +47,13 @@
       }
     });
     $("#location").focus();
+
+    // Typeahead friendly clearing
+    $("#reset-button").on("click", function() {
+      $("#location").val("");
+      $(".typeahead-hint").val("");
+      $(".typeahead-result").remove();
+    });
   </script>
 }
 
@@ -62,6 +69,7 @@
           <span class="typeahead-query">
             <input id="location" type="search" placeholder="Search (ex: Subway)" autocomplete="off">
           </span>
+          <span class="glyphicon glyphicon-remove-sign btn-lg" id="reset-button"></span>
           <span class="typeahead-button">
             <button type="submit">
               <i class="search-icon"></i>
