@@ -42,7 +42,7 @@
             return;
           }
 
-          window.location.assign("/view/" + obj.id);
+          window.location.assign(jsRoutes.controllers.LocationController.showLocation(obj.id).url);
         }
       }
     });
