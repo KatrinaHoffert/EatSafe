@@ -15,25 +15,6 @@ if(typeof console == "undefined") {
 }
 
 /**
- * For resolution of 700px+, we need to stretch the central smallPadding (which is the main content
- * area) down to the footer. This is a pain in the ass to do in CSS without forcing more limitations
- * on us, so we'll do it with JS.
- */
-function resizeMainSection() {
-  if($(window).width() >= 700) {
-    var topOfMainSection = $(".smallPadding").offset().top;
-    var bottomOfMainSection = $(".footer").offset().top || $(document).height();
-
-    $(".smallPadding").css("height", bottomOfMainSection - topOfMainSection + "px");
-  }
-}
-
-resizeMainSection();
-$(window).resize(function() {
-  resizeMainSection();
-});
-
-/**
  * Displays an error message at the top of the user's viewport. This will last ~3 seconds before
  * disappearing on its own. Only one of these can be displayed at a time. Attempting to create another
  * will remove the previous.

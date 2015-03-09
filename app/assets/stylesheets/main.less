@@ -58,24 +58,23 @@ pre {
  ********************************* SPECIFICS ***********************************
  ******************************************************************************/
 
-/* Height of the footer. */
-@footerHeight: 1.5em;
-
-/* Wrapper for whole apge; used to support footer. */
-#pageWrapper {
-  min-height: 100%;
-  margin: 0 auto -@footerHeight;
+/* Allows the sticky footer. */
+body {
+  display: flex;
+  min-height: 100vh;
+  flex-direction: column;
 }
 
-/* Used to offset the footer. See: <http://ryanfait.com/sticky-footer/> */
-.footerPush {
-  height: @footerHeight;
+/* These are the "main" sections. */
+.smallPadding {
+  flex: 1;
+  width: 100%;
 }
 
 .footer {
   background-color: #479432;
   color: white;
-  height: @footerHeight;
+  height: 1.5em;
 }
 
 /* The heading for the main page, where it takes up a larger portion of the screen. */

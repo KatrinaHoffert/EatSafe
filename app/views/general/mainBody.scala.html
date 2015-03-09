@@ -48,11 +48,9 @@
     <link rel="stylesheet" href="@controllers.routes.Assets.at("stylesheets/main.css")" />
   </head>
   <body>
-    <div id="pageWrapper">
-      @* Here be ye right ol' content! *@
-      @html
-      @if(hasFooter) { <div class="footerPush"></div> }
-    </div>
+    @* Here be ye right ol' content! *@
+    @html
+    
     @if(hasFooter) { @footer() }
 
     @* Any other scripts *@
