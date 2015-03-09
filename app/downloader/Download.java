@@ -59,7 +59,7 @@ public class Download {
     baseUrl = "http://orii.health.gov.sk.ca/"; //the URL for the "Saskatchewan Online Restaurant Inspection Information"
     driver.manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS);
 
-    RHAList = new ArrayList<String>(); //Ten RHA for Saskatchewan
+    RHAList = new ArrayList<String>(); //13 RHAs for Saskatchewan
     RHAList.add("Cypress");
     RHAList.add("Five Hills");
     RHAList.add("Heartland");
@@ -70,6 +70,10 @@ public class Download {
     RHAList.add("Saskatoon");
     RHAList.add("Sun Country");
     RHAList.add("Sunrise");
+    RHAList.add("Athabasca Health Authority");
+    RHAList.add("Keewatin Yatthé");
+    RHAList.add("Mamawetan Churchill River");
+    //Northern Health includes: Athabasca Health Authority, Keewatin Yatthé, Mamawetan Churchill River
   }
 
   @Test

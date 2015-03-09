@@ -18,9 +18,11 @@ import globals.ActiveDatabase
  * @param city The city the location is in.
  * @param regionalHealthAuthority The RHA that performs inspections for this location.
  * @param inspections A list of inspections that have been done on the location.
+ * @param latitude The latitude of the location. (-90 <= _ <= 90)
+ * @param longitude The longitude of the location (-180 < _ <= 180)
  */
-case class Location(id: Int, name: String, address: String, postalCode: String, city: String,
-    regionalHealthAuthority: String, inspections: Seq[Inspection]) {
+case class Location(id: Int, name: String, latitude: Double, longitude: Double, address: String,
+	postalCode: String, city: String, regionalHealthAuthority: String, inspections: Seq[Inspection]) {
   /** Returns true if the location has at least one inspection. */
   def hasInspections: Boolean = inspections.size != 0
 }
@@ -35,10 +37,12 @@ object Location {
    */
   def getLocationById(locationId: Int)(implicit db: ActiveDatabase): Try[Location] = {
     val tryLocation = Try {
+      require(locationId > 0, "Location ID must be greater than 0.")
+      
       DB.withConnection(db.name) { implicit connection =>
         val query = SQL(
            """
-             SELECT id, name, address, postcode, city, rha
+             SELECT id, name, address, postcode, city, rha, latitude, longitude
              FROM location
              WHERE id = {locationId};
            """    
@@ -66,6 +70,7 @@ object Location {
    */
   def getLocationsByCity(cityName: String)(implicit db: ActiveDatabase): Try[Seq[SlimLocation]] = {
     Try {
+      require(cityName.nonEmpty, "City name cannot be empty.")
       DB.withConnection(db.name) { implicit connection =>
         val query = SQL(
            """
@@ -83,7 +88,9 @@ object Location {
   }
   
   /**
-   * Gets a list of city names from the locations in the database.
+   * Gets a list of city names from the locations in the database. Currently takes no parameters.
+   *
+   * @return A sequence of Strings equal to every unique city in the DB, in alphabetical order.
    */
   def listCities()(implicit db:ActiveDatabase): Try[Seq[String]] = {
     Try {
@@ -108,14 +115,14 @@ object Location {
    * is indeed a row of the location table.
    *
    * @param row A row from the location table.
-   * @param db this is a implicit parameter that is used to specify what database is to be accessed
+   * @param connection this is a implicit parameter that is used to share the database connection to improve performance
    * @return A location object created from that row, with the inspections from the database.
    */
-  private def locationRowToLocation(row: Row)(implicit db: ActiveDatabase): Try[Location] = {
+  private def locationRowToLocation(row: Row)(implicit connection: java.sql.Connection): Try[Location] = {
     Inspection.getInspections(row[Int]("id")) match {
       case Success(inspections) =>
-        Success(Location(row[Int]("id"), row[String]("name"), row[String]("address"), row[String]("postcode"),
-            row[String]("city"), row[String]("rha"), inspections))
+        Success(Location(row[Int]("id"), row[String]("name"), row[Double]("latitude"), row[Double]("longitude"), 
+            row[String]("address"), row[String]("postcode"), row[String]("city"), row[String]("rha"),  inspections))
       case Failure(ex) => 
         Failure(ex)
     }

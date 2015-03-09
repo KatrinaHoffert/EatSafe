@@ -20,9 +20,8 @@ import globals.ActiveDatabase
  */
 @RunWith(classOf[JUnitRunner])
 class ViolationSpec extends Specification with Mockito {
-  implicit lazy val db = new ActiveDatabase("test")
-
-  // Run test functions here
+  //implicit lazy val db = new ActiveDatabase("test")
+  implicit lazy val connection = DB.getConnection("test") // Run test functions here
   this.getViolationsTests
  
   def getViolationsTests = {
@@ -30,17 +29,17 @@ class ViolationSpec extends Specification with Mockito {
       "return success when given proper inputs" in new WithApplication {
         // TODO get good data
         val violationList = Violation.getViolations(2)
-        violationList.get
+        violationList.get //throws error if bad
       }
 
       "given a certain ID, the number of returned violations should be correct" in new WithApplication {
         val violationList = Violation.getViolations(16)
         violationList.get.length must beEqualTo(1)
       }
-
-      "return a failure if there is a bad database" in new WithApplication  {
-        val vioList = Violation.getViolations(1)((new ActiveDatabase("BadDatabase")))
-        vioList.isFailure mustEqual true
+      
+     "return error when given illegal inputs" in new WithApplication {
+        val violationList = Violation.getViolations(-1)
+        violationList.get must throwA[IllegalArgumentException]
       }
     }
   }
