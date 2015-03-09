@@ -29,37 +29,20 @@
       },
       callback: {
         onSubmit: function(node, form, obj, e) {
-          var selectedCity;
           var municipalityFieldValue = $("#municipality").val();
           
-          if(obj == null) {
-            if(municipalityFieldValue == "") {
-              createPageError("@Messages("locations.selectLocation.noInput")");
-              return;
-            } else {
-              window.location.assign(jsRoutes.controllers.LocationController.findLocation(municipalityFieldValue).url);
-            }
-          } else {
-            window.location.assign(jsRoutes.controllers.LocationController.findLocation(obj.display).url);
+          if(municipalityFieldValue == "") {
+            createPageError("@Messages("locations.selectLocation.noInput")");
+            return;
           }
-        
-          if($("#municipality").val() == "") {
-            
-          }
-          else if(obj == null) {
-            if ($("#municipality").val() == "") {
-              createPageError("@Messages("locations.selectLocation.badInput")");
-              return;
-            }
-            else {
-              selectedCity = $("#municipality").val();
-            }
+          else if(obj == null && $.inArray(municipalityFieldValue, cities) !== -1) {
+            createPageError("@Messages("locations.selectLocation.badInput")");
+            return;
           }
           else {
-            selectedCity = obj.display;
+            window.location.assign(jsRoutes.controllers.LocationController.findLocation(
+                municipalityFieldValue).url);
           }
-          
-          console.log("Selected: " + selectedCity);
         }
       }
     });
@@ -106,7 +89,7 @@
           // city
           for(i = 0; i < cities.length; i++) {
             if(cities[i].toLowerCase() == municipality.long_name.toLowerCase()) {
-              $("#municipality").val(municipality.long_name);
+              $("#municipality").val(municipality.long_name.toLowerCase());
               console.log("Found good city: " + municipality.long_name);
               return;
             }
