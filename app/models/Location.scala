@@ -76,7 +76,7 @@ object Location {
            """
              SELECT id, name, address
              FROM location
-             WHERE city = {cityName};
+             WHERE LOWER(city) = LOWER({cityName});
            """    
         ).on("cityName" -> cityName)
         
