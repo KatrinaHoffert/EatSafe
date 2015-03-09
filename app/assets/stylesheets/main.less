@@ -165,14 +165,28 @@ pre {
 
 /* Section for prominent ratings on a page */
 .ratingSection {
-  padding: 0.5em 0;
+  padding: 0.75em 0;
   font-size: 1.2em;
 }
 
-/* Rating styles (mostly TODO) */
-.ratingNA {
-  color: gray;
+/* Rating styles. These generate everything we need to make a "rating stamp". 
+   They set the text, too, so you just need an empty span with this class. The
+   class names correspond with the rating names (see the Rating enum). */
+.rating_good:before, .rating_fair:before, .rating_poor:before, .rating_unknown:before {
+    color: white;
+    text-shadow: -1px 0 black, 0 1px black, 1px 0 black, 0 -1px black,
+      -1px -1px black, 1px 1px black, -1px 1px black, 1px -1px black;
+    border-radius: 50%;
+    padding: 0.25em 0.5em;
+    font-family: Arial, "Sans Serif";
+    border: 1px solid black;
+    font-weight: bold;
 }
+
+.rating_good:before { background-color: green; content: "Good"; }
+.rating_fair:before { background-color: #fc0; content: "Fair"; }
+.rating_poor:before { background-color: red; content: "Poor"; }
+.rating_unknown:before { background-color: grey; content: "N/A"; }
 
 /* Formatting the extra data at the bottom of the location view as a list */
 .locationExtraData {
