@@ -9,7 +9,8 @@ if(typeof console == "undefined") {
   window.console = {
     log: function () {},
     warn: function () {},
-    error: function () {}
+    error: function () {},
+    trace: function () {}
   };
 }
 
@@ -47,7 +48,7 @@ jQuery.fn.fadeAndRemove = function(duration, callback) {
     this.remove();
     
     // Sane error handling: provide stack traces for the dumb schmuck who did this.
-    if(typeof(callback) == "function") {
+    if(callback != null && typeof(callback) == "function") {
       callback(this);
     }
     else {
