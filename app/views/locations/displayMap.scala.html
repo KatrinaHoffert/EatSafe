@@ -71,7 +71,8 @@
   </script>
 }
 
-@mainBody(title = Messages("maps.displayAddress.title", address, city), moreScripts = scripts) {
+@mainBody(title = Messages("maps.displayAddress.title", address, city), moreScripts = scripts,
+    hasFooter = false) {
   @headingSmall(Messages("general.applicationName"))
   <h2 class="mapLocation-header">@{address}, @{city}</h2>
   <div id="map-canvas"></div>

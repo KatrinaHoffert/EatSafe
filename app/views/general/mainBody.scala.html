@@ -21,7 +21,7 @@
  * }
  * }}}
  *@
-@(title: String, moreScripts: Html = Html(""))(html: Html)
+@(title: String, moreScripts: Html = Html(""), hasFooter: Boolean = false)(html: Html)
 
 <!DOCTYPE html>
 <html lang="en-us">
@@ -48,8 +48,12 @@
     <link rel="stylesheet" href="@controllers.routes.Assets.at("stylesheets/main.css")" />
   </head>
   <body>
-    @* Here be ye right ol' content! *@
-    @html
+    <div id="pageWrapper">
+      @* Here be ye right ol' content! *@
+      @html
+      @if(hasFooter) { <div class="footerPush"></div> }
+    </div>
+    @if(hasFooter) { @footer() }
 
     @* Any other scripts *@
     @moreScripts
