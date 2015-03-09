@@ -26,6 +26,7 @@ locations.view.rha=Regional health authority
 
 # Display address page
 maps.displayAddress.title=Map: {0}, {1}
+maps.displayCityMap.title=Map: {0}
 
 # Error pages
 errors.error500Title=Error 500
