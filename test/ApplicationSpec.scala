@@ -125,7 +125,7 @@ class ApplicationSpec extends Specification {
       typeahead.sendKeys(Keys.ENTER)
       assert(browser.url must contain("/find/Saskatoon"))
     }
-   
+
   } 
 
   "select location page" should {
