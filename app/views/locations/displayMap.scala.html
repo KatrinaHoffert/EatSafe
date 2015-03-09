@@ -51,7 +51,7 @@
      * Takes the address and city passed into this view and geocodes their location.
      */
     function codeAddress() {
-      var address = "@{address} , @{city}";
+      var address = "@{address} , @{city}, Saskatchewan, Canada";
       geocoder.geocode( { "address": address }, function(results, status) {
         if(status == google.maps.GeocoderStatus.OK) {
           map.setCenter(results[0].geometry.location);
