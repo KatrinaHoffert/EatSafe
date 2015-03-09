@@ -2,7 +2,7 @@
 # server will check compilation and unit tests.
 language: scala
 scala: 2.11.5
-script: sbt test
+script: sbt test-only *MainTest
 # Notify on build failure. We notify only when the success status changes. So if the build was
 # succeeding and suddenly fails, we notify. If the build was failing and now succeeds, we notify.
 # The reason to notify on change is so that if multiple people are trying to resolve a failure,
@@ -13,7 +13,6 @@ notifications:
       - m.l.hoffert@gmail.com # Mike
       - kjamieson098@gmail.com # Katherine
       - annduanlujie@gmail.com # Lujie
-      - danielblanche54@gmail.com # Daniel
       - Lys.jordan@gmail.com # Jordan
       - quentinjayp@gmail.com # Quentin
       - magnusandy@gmail.com # Andrew

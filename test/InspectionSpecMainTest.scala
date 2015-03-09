@@ -19,28 +19,29 @@ import globals.ActiveDatabase
  * readable and reusable in the future.
  */
 @RunWith(classOf[JUnitRunner])
-class ViolationSpec extends Specification with Mockito {
-  //implicit lazy val db = new ActiveDatabase("test")
-  implicit lazy val connection = DB.getConnection("test") // Run test functions here
-  this.getViolationsTests
- 
-  def getViolationsTests = {
-    "getViolations" should {
+class InspectionSpecMainTest extends Specification with Mockito {
+ implicit lazy val connection = DB.getConnection("test") // Run test functions here
+
+  // Run test functions here
+  this.getInspectionsTests
+  
+  def getInspectionsTests = {
+    "getInspections" should {
       "return success when given proper inputs" in new WithApplication {
-        // TODO get good data
-        val violationList = Violation.getViolations(2)
-        violationList.get //throws error if bad
+        val inspectionList = Inspection.getInspections(1)
+        inspectionList.get
       }
 
-      "given a certain ID, the number of returned violations should be correct" in new WithApplication {
-        val violationList = Violation.getViolations(16)
-        violationList.get.length must beEqualTo(1)
+      "given a good id, return the right amount of inspections" in new WithApplication {
+        val inspectionList = Inspection.getInspections(2)
+        inspectionList.get.size must beEqualTo(3)
       }
       
-     "return error when given illegal inputs" in new WithApplication {
-        val violationList = Violation.getViolations(-1)
-        violationList.get must throwA[IllegalArgumentException]
+      "given bad input getInspection throws an error" in new WithApplication{
+        val inspectionList = Inspection.getInspections(-1)
+        inspectionList.get must throwA[IllegalArgumentException]
       }
+      
     }
   }
 }
