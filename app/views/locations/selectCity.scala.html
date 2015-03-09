@@ -16,21 +16,8 @@
   <script src="http://maps.googleapis.com/maps/api/js?sensor=false"></script>
   <script>
     "use strict";
- 	// Create fake console if one doesn't exist
-	// For compatibility with packages not including console object
-	if ( typeof ( console ) !== 'undefined' && console != null) {
-	  console.log("");
-	}
-	else {
-	  console = {
-		log: function () {},
-		warn: function () {},
-		error: function () {}
-	  }
-	}
     
     var cities = @Html(Json.toJson(municipalities).toString);
-    var selectedCity;
     
     $("#municipality").typeahead({
       delay: 100,
@@ -42,6 +29,7 @@
       },
       callback: {
         onSubmit: function(node, form, obj, e) {
+          var selectedCity;
           var municipalityFieldValue = $("#municipality").val();
           
           if(obj == null) {
@@ -55,33 +43,33 @@
             window.location.assign(jsRoutes.controllers.LocationController.findLocation(obj.display).url);
           }
         
-        
           if($("#municipality").val() == "") {
             
-          } else if(obj == null) {
+          }
+          else if(obj == null) {
             if ($("#municipality").val() == "") {
               createPageError("@Messages("locations.selectLocation.badInput")");
               return;
-            } else {
+            }
+            else {
               selectedCity = $("#municipality").val();
             }
-          } else {
-		        selectedCity = obj.display;
-		      }
-          	console.log(selectedCity);
+          }
+          else {
+            selectedCity = obj.display;
+          }
+          
+          console.log("Selected: " + selectedCity);
         }
       }
     });
     $("#municipality").focus();
-  </script>
-  <script>
+    
     // If geolocation is enabled, try and populate the typeahead with the user's city. This will
     // ask for permission (which may fail), so will take some time to reach.
     if (navigator.geolocation) {
       navigator.geolocation.getCurrentPosition(populateField);
     }
-    
-    var municipality;
     
     /**
      * Populates city name with the user's current city. Uses Google Maps to lookup the address
@@ -90,6 +78,7 @@
      * @@param position Google maps position object with coordinates.
      */
     function populateField(position) {
+      var municipality;
       var lat = position.coords.latitude;
       var long = position.coords.longitude;
       
@@ -99,14 +88,11 @@
       // Pass the lat/long combination to Google's Geocode API
       geocoder.geocode({'latLng': latLong}, function (results, status) {
         if (status == google.maps.GeocoderStatus.OK) {
-          
-          // A result has many components of many types, so we need
-          // to traverse through them to get what we want.
+          // A result has many components of many types, so we need to traverse through them to
+          // get what we want.
           for (var i = 0; i < results[0].address_components.length; i++) {
             for (var j = 0; j < results[0].address_components[i].types.length; j++) {
-            
-              // In Canada the result we need is usually tagged
-              // "locality". See API docs for more info.
+              // In Canada the result we need is usually tagged "locality". See API docs for more info.
               if (results[0].address_components[i].types[j] == "locality") {
                 municipality = results[0].address_components[i];
                 
@@ -116,12 +102,19 @@
             }
           }
           
-          // Set the search field to the current municipality.
-          $("#municipality").val(municipality.long_name);
-          $("#reset-button").show();
-          console.log("Got " + municipality.long_name);
+          // Set the search field to the current municipality iff it's a valid
+          // city
+          for(i = 0; i < cities.length; i++) {
+            if(cities[i].toLowerCase() == municipality.long_name.toLowerCase()) {
+              $("#municipality").val(municipality.long_name);
+              console.log("Found good city: " + municipality.long_name);
+              return;
+            }
+          }
+
+          console.log("Found unknown city: " + municipality.long_name);
         } else {
-          console.log(status);
+          console.log("Bad request: " + status);
         }
       })
     }
@@ -133,7 +126,7 @@
       }
     });
 
-    
+    // Typeahead friendly clearing of the city
     $("#reset-button").on("click", function() {
       $("#municipality").val("");
       $(".typeahead-hint").val("");
