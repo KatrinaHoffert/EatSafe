@@ -81,8 +81,6 @@
       navigator.geolocation.getCurrentPosition(populateField);
     }
     
-    var geoSet = false;
-    
     var municipality;
     
     /**
@@ -120,7 +118,6 @@
           
           // Set the search field to the current municipality.
           $("#municipality").val(municipality.long_name);
-          geoSet = true;
           $("#reset-button").show();
           console.log("Got " + municipality.long_name);
         } else {
@@ -138,11 +135,9 @@
 
     
     $("#reset-button").on("click", function() {
-      if(geoSet == true) {
-        $("#municipality").val("");
-        $("#reset-button").hide();
-        geoSet = false;
-      }
+      $("#municipality").val("");
+      $(".typeahead-hint").val("");
+      $(".typeahead-result").remove();
     });
   </script>
 }
