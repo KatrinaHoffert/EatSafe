@@ -217,6 +217,17 @@ pre {
  ****************************** MEDIA QUERIES **********************************
  ******************************************************************************/
 
+@media (max-width: 700px) {
+  /* Need to be conservative with spacing for mobile. */
+  #reset-button {
+    padding: 0px 5px;
+  }
+
+  .typeahead-container input[type="search"] {
+    padding: 10px 5px;
+  }
+}
+
 @media (min-width: 700px) {
   .smallHeading, .largeHeading {
     font-size: 4em;
