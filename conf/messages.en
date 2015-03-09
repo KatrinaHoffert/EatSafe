@@ -27,6 +27,10 @@ locations.view.rha=Regional health authority
 # Display address page
 maps.displayAddress.title=Map: {0}, {1}
 
+# Footer stuff
+footer.aboutLink=About
+footer.copyright=Copyright Off By One 2015
+
 # Error pages
 errors.error500Title=Error 500
 errors.error500Desc=Internal server error
