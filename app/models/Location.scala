@@ -25,6 +25,19 @@ case class Location(id: Int, name: String, latitude: Double, longitude: Double, 
 	postalCode: String, city: String, regionalHealthAuthority: String, inspections: Seq[Inspection]) {
   /** Returns true if the location has at least one inspection. */
   def hasInspections: Boolean = inspections.size != 0
+
+  def rating: Rating.Value = {
+    if(inspections.isEmpty) {
+      Rating.Unknown
+    }
+    else {
+      inspections(0).reinspectionPriority match {
+        case "Low" => Rating.Good
+        case "Moderate" => Rating.Fair
+        case "High" => Rating.Poor
+      }
+    }
+  }
 }
 
 object Location {
@@ -76,7 +89,7 @@ object Location {
            """
              SELECT id, name, address
              FROM location
-             WHERE city = {cityName};
+             WHERE LOWER(city) = LOWER({cityName});
            """    
         ).on("cityName" -> cityName)
         
