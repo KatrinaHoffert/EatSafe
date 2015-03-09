@@ -12,10 +12,23 @@
  * @note
  * Remove debug code: //\s?\{debug\}[\s\S]*?\{/debug\}
  *
- * As of 2015-03-01, there is now duplicated code at line 779. See comment for details.
+ * As of 2015-03-01, there is now duplicated code at line 792. See comment for details.
+ * As of 2015-03-08, Check for console made for compatibility. Lines 20-31. 
  */
 ;(function (window, document, $, undefined)
 {
+	// Create fake console if one doesn't exist
+	// For compatibility with packages not including console object
+	if ( typeof ( console ) !== 'undefined' && console != null) {
+		console.log("");
+	}
+	else {
+		console = {
+			log: function () {},
+			warn: function () {},
+			error: function () {}
+	    }
+	}
 
     window.Typeahead = {
         source: {}
@@ -710,7 +723,7 @@
 
                     hint.container = node.clone(false).attr({
                         "class": options.selector.hint,
-                        "readonly": true,
+                        "readonly": false,
                         "tabindex": -1
                     }).removeAttr("id placeholder name").css(hint.css).insertBefore(node);
 
@@ -1909,7 +1922,6 @@
             if ($.isEmptyObject(this.table)) {
                 return false;
             }
-
             if (console.group !== undefined || console.table !== undefined) {
 
                 console.groupCollapsed('--- jQuery Typeahead Debug ---');
@@ -1927,7 +1939,6 @@
             } else {
                 console.log('Debug is not available on your current browser, try the most recent version of Chrome or Firefox.');
             }
-
             this.table = {};
 
         }

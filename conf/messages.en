@@ -3,7 +3,7 @@ general.applicationName=EatSafe Saskatchewan
 
 # Select city page
 locations.selectCity.title=Select a city
-locations.selectCity.prompt=Where are you?
+locations.selectCity.prompt=What city/town are you in?
 locations.selectCity.noInput=You need to enter something.
 locations.selectCity.badInput=I''m sorry, Dave, that not valid input.
 
