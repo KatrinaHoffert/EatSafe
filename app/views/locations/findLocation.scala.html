@@ -57,8 +57,9 @@
   </script>
 }
 
-@mainBody(title = Messages("locations.selectLocation.title"), moreScripts = scripts) {
+@mainBody(title = Messages("locations.selectLocation.title"), moreScripts = scripts, hasFooter = true) {
   @headingSmall(Messages("general.applicationName"))
+
   <div class="smallPadding">
     <h2>@Messages("locations.selectLocation.prompt")</h2>
     

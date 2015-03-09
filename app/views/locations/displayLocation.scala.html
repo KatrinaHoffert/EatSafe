@@ -7,8 +7,9 @@
  *@
 @(location: Location)
 
-@mainBody(title = Messages("locations.view.titleStart") + ": " + location.name + " [" + location.address + "]") {
+@mainBody(title = Messages("locations.view.titleStart") + ": " + location.name + " [" + location.address + "]", hasFooter = true) {
   @headingSmall(Messages("general.applicationName"))
+
   <div class="smallPadding">
     <h1>@location.name</h1>
     <a href="@routes.MapController.showMap(location.address, location.city)">@location.address</a><br />
