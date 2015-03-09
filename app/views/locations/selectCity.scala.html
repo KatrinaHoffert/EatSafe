@@ -75,9 +75,9 @@
     $("#municipality").focus();
   </script>
   <script>
+    // If geolocation is enabled, try and populate the typeahead with the user's city. This will
+    // ask for permission (which may fail), so will take some time to reach.
     if (navigator.geolocation) {
-      // Get the current lcoation of the user and pass it to the
-      // function we wrote to fill in the typeahead.
       navigator.geolocation.getCurrentPosition(populateField);
     }
     
@@ -85,9 +85,12 @@
     
     var municipality;
     
-    // Made to populate the typeahead with a city name.
-    // 
-    // position: An object with coordinates from navigator.geolocation
+    /**
+     * Populates city name with the user's current city. Uses Google Maps to lookup the address
+     * of the user based on their coordinates, and takes the city from there.
+     *
+     * @@param position Google maps position object with coordinates.
+     */
     function populateField(position) {
       var lat = position.coords.latitude;
       var long = position.coords.longitude;
@@ -121,18 +124,26 @@
           $("#reset-button").show();
           console.log("Got " + municipality.long_name);
         } else {
-          	console.log(status);
+          console.log(status);
         }
       })
     }
+
+    // Set the user's location when they click the locate button
+    $("#typeahead-locate").on("click", function() {
+      if(navigator.geolocation) {
+        navigator.geolocation.getCurrentPosition(populateField);
+      }
+    });
+
     
-    function clearFieldIfGeolocated() {
+    $("#reset-button").on("click", function() {
       if(geoSet == true) {
         $("#municipality").val("");
         $("#reset-button").hide();
         geoSet = false;
       }
-    }
+    });
   </script>
 }
 
@@ -141,7 +152,7 @@
   <div class="smallPadding">
     <h2>
       @Messages("locations.selectCity.prompt")
-      <span class="glyphicon glyphicon-map-marker btn-lg" onclick="if(navigator.geolocation){navigator.geolocation.getCurrentPosition(populateField);}"></span>
+      <span id="typeahead-locate" class="glyphicon glyphicon-map-marker"></span>
     </h2>
 
     <form id="form-municipality">
@@ -150,7 +161,7 @@
           <span class="typeahead-query">
             <input id="municipality" type="search" placeholder="Search" autocomplete="off">
           </span>
-          <span class="glyphicon glyphicon-remove-sign btn-lg" onclick="clearFieldIfGeolocated()" id="reset-button"></span>
+          <span class="glyphicon glyphicon-remove-sign btn-lg" id="reset-button"></span>
           <span class="typeahead-button">
             <button type="submit" id="submitButton">
               <i class="search-icon"></i>
