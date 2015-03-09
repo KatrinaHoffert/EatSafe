@@ -9,7 +9,7 @@
  *
  * locations: A list of all the locations in the municipality specified.
  *@
-@(locations: Seq[SlimLocation])
+@(locations: Seq[SlimLocation], city: String)
 
 @scripts = {
   <script src="@controllers.routes.Assets.at("javascripts/common.js")"></script>
@@ -48,7 +48,18 @@
     });
     $("#location").focus();
   </script>
+  <script src="https://maps.googleapis.com/maps/api/js?v=3.exp&signed_in=true"></script>
+  <script>
+      function showCityMap(){
+        window.location.assign("@routes.MapController.showCityMap(city)");
+      }
+  </script>
+  
 }
+  
+
+
+
 
 @mainBody(title = Messages("locations.selectLocation.title"), moreScripts = scripts) {
   @headingSmall(Messages("general.applicationName"))
@@ -70,5 +81,7 @@
         </div>
       </div>
     </form>
+    <br>
+    <button class="btn btn-default" onclick="showCityMap()" >Show Map of City</button>
   </div>
 }

@@ -22,4 +22,8 @@ object MapController extends Controller {
     
     Ok(views.html.locations.displayMap(cleanAddress, city))
   }
+
+  def showCityMap(city: String) = Action {
+    Ok(views.html.locations.displayCityMap(city))
+  }
 }
