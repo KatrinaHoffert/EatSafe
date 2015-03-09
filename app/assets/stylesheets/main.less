@@ -94,10 +94,14 @@ pre {
   align-self: flex-end;
 }
 
-/* Heading of the address map */
+/* Heading of the address map. It has to be able to apply a white background for
+   desktop viewers (who would otherwise see a gray background from the body). */
 .mapLocation-header {
   text-align: center;
-  margin-top: 0.25em;
+  background-color: white;
+  margin: 0;
+  padding-top: 0.5em;
+  padding-bottom: 0.5em;
 }
 
 /* Smaller headings for other pages */
