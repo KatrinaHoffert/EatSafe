@@ -4,7 +4,8 @@
 GET     /                           controllers.LocationController.selectCity
 GET     /find/:cityName             controllers.LocationController.findLocation(cityName: String)
 GET     /view/:locationId           controllers.LocationController.showLocation(locationId: Int)
-GET     /map 						controllers.MapController.showMap(address: String ?= "", city: String ?= "")
+GET     /map                        controllers.MapController.showMap(address: String, city: String)
+GET     /about                      controllers.Application.about
 
 # Programmatic access to resources (eg, via AJAX or for scripts)
 GET     /jsRoutes                   controllers.Application.javascriptRoutes

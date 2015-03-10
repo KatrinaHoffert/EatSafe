@@ -51,7 +51,7 @@
      * Takes the address and city passed into this view and geocodes their location.
      */
     function codeAddress() {
-      var address = "@{address} , @{city}";
+      var address = "@{address} , @{city}, Saskatchewan, Canada";
       geocoder.geocode( { "address": address }, function(results, status) {
         if(status == google.maps.GeocoderStatus.OK) {
           map.setCenter(results[0].geometry.location);
@@ -71,7 +71,8 @@
   </script>
 }
 
-@mainBody(title = Messages("maps.displayAddress.title", address, city), moreScripts = scripts) {
+@mainBody(title = Messages("maps.displayAddress.title", address, city), moreScripts = scripts,
+    hasFooter = false) {
   @headingSmall(Messages("general.applicationName"))
   <h2 class="mapLocation-header">@{address}, @{city}</h2>
   <div id="map-canvas"></div>

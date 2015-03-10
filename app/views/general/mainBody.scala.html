@@ -21,7 +21,7 @@
  * }
  * }}}
  *@
-@(title: String, moreScripts: Html = Html(""))(html: Html)
+@(title: String, moreScripts: Html = Html(""), hasFooter: Boolean = false)(html: Html)
 
 <!DOCTYPE html>
 <html lang="en-us">
@@ -50,8 +50,11 @@
   <body>
     @* Here be ye right ol' content! *@
     @html
+    
+    @if(hasFooter) { @footer() }
 
     @* Any other scripts *@
+    <script src="@controllers.routes.Assets.at("javascripts/common.js")"></script>
     @moreScripts
   </body>
 </html>

@@ -12,25 +12,11 @@
 @(municipalities: Seq[String])
 
 @scripts = {
-  <script src="@controllers.routes.Assets.at("javascripts/common.js")"></script>
   <script src="http://maps.googleapis.com/maps/api/js?sensor=false"></script>
   <script>
     "use strict";
- 	// Create fake console if one doesn't exist
-	// For compatibility with packages not including console object
-	if ( typeof ( console ) !== 'undefined' && console != null) {
-	  console.log("");
-	}
-	else {
-	  console = {
-		log: function () {},
-		warn: function () {},
-		error: function () {}
-	  }
-	}
     
     var cities = @Html(Json.toJson(municipalities).toString);
-    var selectedCity;
     
     $("#municipality").typeahead({
       delay: 100,
@@ -44,51 +30,37 @@
         onSubmit: function(node, form, obj, e) {
           var municipalityFieldValue = $("#municipality").val();
           
-          if(obj == null) {
-            if(municipalityFieldValue == "") {
-              createPageError("@Messages("locations.selectLocation.noInput")");
-              return;
-            } else {
-              window.location.assign(jsRoutes.controllers.LocationController.findLocation(municipalityFieldValue).url);
-            }
-          } else {
-            window.location.assign(jsRoutes.controllers.LocationController.findLocation(obj.display).url);
+          if(municipalityFieldValue == "") {
+            createPageError("@Messages("locations.selectLocation.noInput")");
+            return;
           }
-        
-        
-          if($("#municipality").val() == "") {
-            
-          } else if(obj == null) {
-            if ($("#municipality").val() == "") {
-              createPageError("@Messages("locations.selectLocation.badInput")");
-              return;
-            } else {
-              selectedCity = $("#municipality").val();
-            }
-          } else {
-		        selectedCity = obj.display;
-		      }
-          	console.log(selectedCity);
+          else if(obj == null && $.inArray(municipalityFieldValue, cities) !== -1) {
+            createPageError("@Messages("locations.selectLocation.badInput")");
+            return;
+          }
+          else {
+            window.location.assign(jsRoutes.controllers.LocationController.findLocation(
+                municipalityFieldValue).url);
+          }
         }
       }
     });
     $("#municipality").focus();
-  </script>
-  <script>
+    
+    // If geolocation is enabled, try and populate the typeahead with the user's city. This will
+    // ask for permission (which may fail), so will take some time to reach.
     if (navigator.geolocation) {
-      // Get the current lcoation of the user and pass it to the
-      // function we wrote to fill in the typeahead.
       navigator.geolocation.getCurrentPosition(populateField);
     }
     
-    var geoSet = false;
-    
-    var municipality;
-    
-    // Made to populate the typeahead with a city name.
-    // 
-    // position: An object with coordinates from navigator.geolocation
+    /**
+     * Populates city name with the user's current city. Uses Google Maps to lookup the address
+     * of the user based on their coordinates, and takes the city from there.
+     *
+     * @@param position Google maps position object with coordinates.
+     */
     function populateField(position) {
+      var municipality;
       var lat = position.coords.latitude;
       var long = position.coords.longitude;
       
@@ -98,14 +70,11 @@
       // Pass the lat/long combination to Google's Geocode API
       geocoder.geocode({'latLng': latLong}, function (results, status) {
         if (status == google.maps.GeocoderStatus.OK) {
-          
-          // A result has many components of many types, so we need
-          // to traverse through them to get what we want.
+          // A result has many components of many types, so we need to traverse through them to
+          // get what we want.
           for (var i = 0; i < results[0].address_components.length; i++) {
             for (var j = 0; j < results[0].address_components[i].types.length; j++) {
-            
-              // In Canada the result we need is usually tagged
-              // "locality". See API docs for more info.
+              // In Canada the result we need is usually tagged "locality". See API docs for more info.
               if (results[0].address_components[i].types[j] == "locality") {
                 municipality = results[0].address_components[i];
                 
@@ -115,31 +84,47 @@
             }
           }
           
-          // Set the search field to the current municipality.
-          $("#municipality").val(municipality.long_name);
-          geoSet = true;
-          $("#reset-button").show();
-          console.log("Got " + municipality.long_name);
+          // Set the search field to the current municipality iff it's a valid
+          // city
+          for(i = 0; i < cities.length; i++) {
+            if(cities[i].toLowerCase() == municipality.long_name.toLowerCase()) {
+              $("#municipality").val(municipality.long_name.toLowerCase());
+              console.log("Found good city: " + municipality.long_name);
+              return;
+            }
+          }
+
+          console.log("Found unknown city: " + municipality.long_name);
         } else {
-          	console.log(status);
+          console.log("Bad request: " + status);
         }
       })
     }
-    
-    function clearFieldIfGeolocated() {
-      if(geoSet == true) {
-        $("#municipality").val("");
-        $("#reset-button").hide();
-        geoSet = false;
+
+    // Set the user's location when they click the locate button
+    $("#typeahead-locate").on("click", function() {
+      if(navigator.geolocation) {
+        navigator.geolocation.getCurrentPosition(populateField);
       }
-    }
+    });
+
+    // Typeahead friendly clearing of the city
+    $("#reset-button").on("click", function() {
+      $("#municipality").val("");
+      $(".typeahead-hint").val("");
+      $(".typeahead-result").remove();
+    });
   </script>
 }
 
-@mainBody(title = Messages("locations.selectCity.title"), moreScripts = scripts) {
+@mainBody(title = Messages("locations.selectCity.title"), moreScripts = scripts, hasFooter = true) {
   @headingLarge(Messages("general.applicationName"))
+
   <div class="smallPadding">
-    <h2>@Messages("locations.selectCity.prompt")</h2>
+    <h2>
+      @Messages("locations.selectCity.prompt")
+      <span id="typeahead-locate" class="glyphicon glyphicon-map-marker"></span>
+    </h2>
 
     <form id="form-municipality">
       <div class="typeahead-container">
@@ -147,13 +132,12 @@
           <span class="typeahead-query">
             <input id="municipality" type="search" placeholder="Search" autocomplete="off">
           </span>
-          <span class="glyphicon glyphicon-remove-sign btn-lg" onclick="clearFieldIfGeolocated()" id="reset-button"></span>
+          <span class="glyphicon glyphicon-remove-sign btn-lg" id="reset-button"></span>
           <span class="typeahead-button">
             <button type="submit" id="submitButton">
               <i class="search-icon"></i>
             </button>
           </span>
-          <span class="glyphicon glyphicon-map-marker btn-lg" width="32" onclick="if(navigator.geolocation){navigator.geolocation.getCurrentPosition(populateField);}"></span>
         </div>
       </div>
     </form>
