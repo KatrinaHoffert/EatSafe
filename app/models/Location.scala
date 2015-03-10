@@ -55,37 +55,38 @@ object Location {
       
       DB.withConnection(db.name) { implicit connection =>
         val locationQuery = SQL(
-           """
-             SELECT id, name, address, postcode, city, rha
-             FROM location
-             WHERE id = {locationId};
-           """    
+         """
+          SELECT id, name, address, postcode, city, rha, longitude, latitude
+          FROM location INNER JOIN coordinate USING (address, city)
+           WHERE id = {locationId};
+         """
         ).on("locationId" -> locationId)
         
         val optionalLocation = locationQuery().map(locationRowToLocation).toList.headOption
-        val location = optionalLocation.getOrElse {
+        optionalLocation.getOrElse {
           throw new IllegalArgumentException("There is no location with ID " + locationId)
         }.get
+      }
+    }
+  }
 
-        // Hook up that location with some rad coordinates (if they exist)
-        val coordinateQuery = SQL(
-           """
-             SELECT latitude, longitude
-             FROM coordinate
-             WHERE address = {address} AND city = {city};
-           """    
-        ).on("address" -> location.address, "city" -> location.city)
+  /**
+   * Gets a list of all Locations with coordinates. These are full location objects.
+   */
+   def getAllLocationsWithCoordinates()(implicit db: ActiveDatabase): Try[Seq[Location]] = {
+    Try {
+      DB.withConnection(db.name) { implicit connection =>
+        val query = SQL(
+          """
+            SELECT id, name, address, postcode, city, rha, longitude, latitude
+            FROM location INNER JOIN coordinate USING (address, city);
+          """
+        )
 
-        val optionalCoordinates = coordinateQuery().map { row =>
-          (row[Option[Double]]("longitude"), row[Option[Double]]("latitude"))
-        }.toList.headOption
+        val tryLocations = query().map(locationRowToLocation).toList
 
-        optionalCoordinates match {
-          case Some((longitude, latitude)) =>
-            location.copy(longitude = longitude, latitude = latitude)
-          case _ =>
-            location
-        }
+        // We have a Seq[Try[Location]], convert it to a Seq[Location]
+        tryLocations.map(_.get)
       }
     }
   }
@@ -105,11 +106,11 @@ object Location {
       DB.withConnection(db.name) { implicit connection =>
         val query = if(cityName.toLowerCase != "unknown city") {
           SQL(
-             """
-               SELECT id, name, address
-               FROM location
-               WHERE LOWER(city) = LOWER({cityName});
-             """    
+           """
+             SELECT id, name, address
+             FROM location
+             WHERE LOWER(city) = LOWER({cityName});
+           """
           ).on("cityName" -> cityName)
         }
         else {
@@ -169,9 +170,10 @@ object Location {
   private def locationRowToLocation(row: Row)(implicit connection: java.sql.Connection): Try[Location] = {
     Inspection.getInspections(row[Int]("id")) match {
       case Success(inspections) =>
-        Success(Location(row[Int]("id"), row[String]("name"), None, None, row[Option[String]]("address"),
-            row[Option[String]]("postcode"), row[Option[String]]("city"), row[String]("rha"),  inspections))
-      case Failure(ex) => 
+        Success(Location(row[Int]("id"), row[String]("name"), row[Option[Double]]("latitude"),
+            row[Option[Double]]("longitude"), row[Option[String]]("address"), row[Option[String]]("postcode"),
+            row[Option[String]]("city"), row[String]("rha"),  inspections))
+      case Failure(ex) =>
         Failure(ex)
     }
   }
