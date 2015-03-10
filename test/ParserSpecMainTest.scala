@@ -5,7 +5,7 @@ import org.junit.runner._
 
 import play.api.test._
 import play.api.test.Helpers._
-import databaseParser._
+import csvParser._
 
 import java.io.BufferedWriter
 import java.io.File
@@ -27,7 +27,7 @@ import play.api.Play.current
  */
 @RunWith(classOf[JUnitRunner])
 class ParserSpecMainTest extends Specification {
-  def createTableStatements(): Array[String]= {
+ /* def createTableStatements(): Array[String]= {
    var sb = new StringBuffer();
    var s = new String();
    var fr = new FileReader(new File("database/CreateTables.sql"));
@@ -58,11 +58,6 @@ class ParserSpecMainTest extends Specification {
    var fr = new FileReader(new File("database/test/test.sql"));
    var br = new BufferedReader(fr);
    
-   //skip the first 3 lines of comments 
-   br.readLine()
-   br.readLine()
-   br.readLine()
-   
    //read all the lines into the stringBuffer
    (s = br.readLine())
    while(s != null)
@@ -73,7 +68,9 @@ class ParserSpecMainTest extends Specification {
    br.close()
    
    //split the file at the semi-colons
-   val queryArray = sb.toString().split(";")
+  
+   val queryArray = sb.toString().split("""\\.""")
+   System.out.println(queryArray(1))
    return queryArray
   }
   
@@ -105,10 +102,14 @@ class ParserSpecMainTest extends Specification {
        var j = 0
        while(j<insertStatementArray.length)
        {
+         //insertStatementArray(j) = insertStatementArray(j) + " \\."
+       //  System.out.println(insertStatementArray(j))
          val queryInsert = SQL(insertStatementArray(j)).execute();
          
          j = j + 1;
        }
+        /*
+       
        //Now that the database is filled we can go about getting data out and checking if it is correct
        //FIRST check if there is the right ammount of Locations
        val locationCount = SQL("SELECT count(id) FROM location")
@@ -133,7 +134,7 @@ class ParserSpecMainTest extends Specification {
        //get info from the "Water Front Lodge" and check it against what it should be from the csv
        val waterSQL = SQL("SELECT * FROM location WHERE name ='Water Front Lodge'")
        val waterResult = waterSQL()
-       waterRow = waterResult.head
+       waterRow = waterResult.head*/
        
        val queryRollback = SQL("rollback;").execute()
     }
@@ -156,7 +157,7 @@ class ParserSpecMainTest extends Specification {
      waterRow[Option[String]]("postcode") must beEqualTo(None)
      waterRow[String]("rha") must beEqualTo("Northern Health - Mamaw/Keewa/Athab")
   }
-}
+}*/
 
 
   
