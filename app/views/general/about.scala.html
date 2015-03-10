@@ -1,6 +1,7 @@
 @import general._
 @import models._
 @import controllers._
+@import play.api.Play.current
 
 @**
  * As the name implies, it displays cool information describing how kickass the project is. Also how
@@ -36,7 +37,7 @@
     @* In the future, we should have an "admin email" that is shared amongst devs or something.
        For now, I'm using a custom email that redirects to my main inbox (so it can be changed if
        it gets spammed to hell). *@
-    <p>@Html(Messages("about.paragraphHow4", "eatsafe@mike-hoffert.me"))</p>
+    <p>@Html(Messages("about.paragraphHow4", current.configuration.getString("email.primaryContact").get))</p>
 
     <h2>@Messages("about.headingTechnology")</h2>
     <p>@Html(Messages("about.paragraphTechnology"))</p>
