@@ -1152,6 +1152,7 @@ Lloydminster	161-5211 44th Street	53.276662	-110.012826
 Shellbrook	Box 754	53.223136	-106.388424
 Lloydminster	104, 7703 - 44th Street	53.278315	-109.998229
 Lloydminster	4715-57th Ave	53.281523	-110.021640
+Regina	2525 Broad St.	50.438637	-104.606313
 Lloydminster	4401  44th St	53.277846	-109.988638
 Emerald Park	22 Great Plains Road	50.446111	-104.408610
 Lloydminster	3708 - 50th Avenue,	53.271636	-110.005504
@@ -1355,6 +1356,7 @@ Meadow Lake	308 - 9th Street West,	54.129750	-108.452606
 Meadow Lake	600- 3rd Street East,	54.125962	-108.427979
 Moosomin	405 Mountain St.	50.144245	-101.663000
 Meadow Lake	115 - 8th Street West,	54.131741	-108.451032
+Kamsack	411 First St	51.562525	-101.901651
 Meadow Lake	305 - 9th Street Nw,	54.121819	-108.427803
 Meota	401 - 3rd Street East,	53.034685	-108.449495
 Mervin	12 Main Street,	53.334350	-108.875539
@@ -1772,7 +1774,6 @@ Prince Albert	819 Central Ave	53.205076	-105.754085
 Regina	1946 Hamilton St.	50.447948	-104.609405
 Regina	3859 Sherwood Drive	50.475073	-104.636443
 Allan	328 Main St	51.894719	-106.055033
-Regina	2525 Broad St.	50.438637	-104.606313
 Regina	2445 Broad Street	50.441222	-104.606303
 Regina	3710 Eastgate Drive	50.451084	-104.530869
 Colonsay	200 Rocher St	51.977012	-105.874460
@@ -3805,7 +3806,6 @@ Grayson	511 Railway Ave	50.720766	-102.646845
 Invermay	303 Fourth Ave N	51.808593	-103.152524
 Kamsack	558 Third Ave S	51.562814	-101.902456
 Kamsack	501 Third Ave S	51.562814	-101.902456
-Kamsack	411 First St	51.562525	-101.901651
 Langenburg	317 Carl Ave E	50.841279	-101.700757
 Melville	200 Heritage Dr	36.085796	-79.269287
 Melville	140 Third Ave W	50.928801	-102.807140
@@ -4360,360 +4360,17 @@ Aquadeo	1 Park Avenue,	53.138960	-108.418131
 Glentworth	2 Main St	53.421210	-0.520736
 Dorintosh	101 - 2nd Avenue S.e.,	54.355259	-108.626264
 Edam	1408 - 1st Avenue South,	53.184746	-108.767141
-#1 Johnson Street	Unknown	0.000000	0.000000
-Beauval	Unknown	0.000000	0.000000
-Creighton	Unknown	0.000000	0.000000
-La Loche	Unknown	0.000000	0.000000
-Pinehouse	Box 130	0.000000	0.000000
-Consul	120 Railway Ave	0.000000	0.000000
-Unknown	Excelsior	0.000000	0.000000
-Piapot	200 Mcdonald St	0.000000	0.000000
-Avonlea	Ne 19-12-22 W2m	0.000000	0.000000
-Craik	Box 314	0.000000	0.000000
-Eyebrow	96 Albert St.	0.000000	0.000000
-Mortlach	Coteau Street	0.000000	0.000000
-Davidson	Hwy 11 & Enterprise Lane	0.000000	0.000000
-Macklin Lake Regional Park	Eye Hill	0.000000	0.000000
-Macrorie	5th St. South	0.000000	0.000000
-#37 Gray Street	Unknown	0.000000	0.000000
-Courtney Lake	Unknown	0.000000	0.000000
-La Loche Avenue	Unknown	0.000000	0.000000
-La Loche	Unknown	0.000000	0.000000
-Barrier Lake	Nw-10-41-13-w2m  Rm Of Barrier Valley No. 397	0.000000	0.000000
-Greenwater Provincial Park	Ne-34-40-11-w2m  Rm Of Kelvington No. 366	0.000000	0.000000
-Kipabiskau Lake	Ne-35-41-16-w2m Rm Of Pleasantdale No. 398	0.000000	0.000000
-Unknown	Connaught	0.000000	0.000000
-Smeaton	Unknown	0.000000	0.000000
-Tisdale	Parcel Aa, Plan Bc533  Tisdale	0.000000	0.000000
-#12 Baska Street	Unknown	0.000000	0.000000
-Burbidge Lake	Unknown	0.000000	0.000000
-Deschambault Lake	Unknown	0.000000	0.000000
-La Loche	Northern Village Of La Loche	0.000000	0.000000
-Points North Landing	Unknown	0.000000	0.000000
-Goodsoil	204 Main Street,	0.000000	0.000000
-Greenstreet	2nd Street	0.000000	0.000000
-Lloydminster	Box 2292	0.000000	0.000000
-Lloydminster	Bay 10, 5405 - 44th Street,	0.000000	0.000000
-Makwa Lake Provincial Park	Nw 15-58-22-w3 Loon Lake, Makwa Lk Prov Park	0.000000	0.000000
-Unknown	Mervin	0.000000	0.000000
-Unknown	Nw 11-48-17-w3  Battlefords Provincial Park	0.000000	0.000000
-Unknown	Parcel A, Plan 67b1016  Ministikwan Lake Rm 561	0.000000	0.000000
-Unknown	Sw 1/4 / 33 / 43 / 16 / W3 Sask Hosp Grounds	0.000000	0.000000
-Unknown	Lot 12  Block 1 Plan Bq4721jumbo Beach Rm 561	0.000000	0.000000
-Unknown	Turtle River	0.000000	0.000000
-Big River	Box 428	0.000000	0.000000
-Big River	Box 488	0.000000	0.000000
-Candle Lake	Box 141	0.000000	0.000000
-Candle Lake	Box 107	0.000000	0.000000
-Christopher Lake	R.r. 1, Site 7, Comp 7	0.000000	0.000000
-Emma Lake	Murray Point, Emma Lake	0.000000	0.000000
 Kinistino	Meyers Street	52.955951	-105.032300
-Martins Lake Regional Park	Blaine Lake	0.000000	0.000000
-Unknown	Spiritwood	0.000000	0.000000
-Unknown	R L 13 45 - 27 W2m Rm 431	0.000000	0.000000
-Unknown	R.m. Of Round Hill #467	0.000000	0.000000
-Prince Albert	General Delivery	0.000000	0.000000
-Waskesiu	Box 130	0.000000	0.000000
-Balgonie	Balgonie Sports Grounds	0.000000	0.000000
-Grenfell	Elcapo	0.000000	0.000000
-Unknown	Lumsden	0.000000	0.000000
-Unknown	Lumsden	0.000000	0.000000
-Regina Beach	Main Street	0.000000	0.000000
-Regina	Mosaic Stadium At Taylor Field	0.000000	0.000000
 Regina	2400 - 13th Ave.	50.445688	-104.615745
-Regina	Tf09 2102 11th Avenue	0.000000	0.000000
-Regina	Mosaic Stadium At Taylor Field	0.000000	0.000000
 Regina	101 Hodsman Road	50.478449	-104.580085
-Regina	Mosaic Stadium At Taylor Field	0.000000	0.000000
-Regina	Mosaic Stadium At Taylor Field	0.000000	0.000000
-Regina	Mosaic Stadium At Taylor Field	0.000000	0.000000
-Regina	Regina Farmer's Market	0.000000	0.000000
-Vibank	103 - 1st Avenue	0.000000	0.000000
-Bruno	Bruno Sports Grounds	0.000000	0.000000
-Humboldt	2331 Quill Centre	0.000000	0.000000
-Lanigan	8 - 40 Downey Dr	0.000000	0.000000
-Unknown	Corman Park	0.000000	0.000000
-Unknown	Rm 344 Se 6-35-5 W3m	0.000000	0.000000
-Quill Lake	46 Oswald St	0.000000	0.000000
-Warman	Bay 4 - 619 S. Railway St W	0.000000	0.000000
-Warman	Bay 9 810 Centennial Blvd	0.000000	0.000000
-Moose Mountain Provincial Park	Moose Mountain Provincial Park	0.000000	0.000000
-Ogema	Block A Plan Dc3733	0.000000	0.000000
-Windthorst	Van Horne Avenue	0.000000	0.000000
-Carlton Trail Regional Park	Se 34-19-31 W1m, Rm Of Spy Hill No. 152	0.000000	0.000000
-Langenburg	201 Kaiser William Ave E	0.000000	0.000000
-Macnutt	1 Main St	0.000000	0.000000
-Rm 243 - Rural	Sw 26-25-3 W2m	0.000000	0.000000
-Rm 246 - Rural	Nw 21-25-11 W2m	0.000000	0.000000
-Rm 274 - Rural	Good Spirit Acres	0.000000	0.000000
-Rm 276 - Rural	Sw 07-33-11 W2m	0.000000	0.000000
-Spy Hill	310 Third Ave	0.000000	0.000000
-#12 Baska Street	Unknown	0.000000	0.000000
-Burbidge Lake	Unknown	0.000000	0.000000
-Deschambault Lake	Unknown	0.000000	0.000000
-La Loche	Northern Village Of La Loche	0.000000	0.000000
-Points North Landing	Unknown	0.000000	0.000000
-Consul	101 Pescod St.	0.000000	0.000000
-Unknown	Maple Creek	0.000000	0.000000
-Val Marie	201 Main St	0.000000	0.000000
-Claybank	Box 5	0.000000	0.000000
-Craik	229 3rd St	0.000000	0.000000
-Lafleche	Thomson Lake Regional Park	0.000000	0.000000
-Rockglen	Nw 20-4-3 W3m	0.000000	0.000000
-Lucky Lake	103 Railway Avenue	0.000000	0.000000
-Macklin	4803 - 57th Avenue	0.000000	0.000000
-Unity	Round Valley	0.000000	0.000000
-126B Dene Street	Unknown	0.000000	0.000000
-Creighton	Unknown	0.000000	0.000000
-La Loche	Unknown	0.000000	0.000000
 Regina	2660 E Quance St.	50.445825	-104.543852
-Lac La Plonge	Unknown	0.000000	0.000000
-Cumberland House	Kilometer 85, Highway 123	0.000000	0.000000
-Hudson Bay	Ne-33-44-3-w2m Rm Of Hudson Bay No. 394	0.000000	0.000000
-Marean Lake	Se-12-41-2-w2m  Rm Of Bjorkdale No. 426	0.000000	0.000000
-Pasquia Regional Park	Nw-32-48-11-w2m Rm Of Arborfield No. 456	0.000000	0.000000
-St. Brieux	Nw-24-42-21-w2m  Rm Lake Lenore No. 399	0.000000	0.000000
-White Fox	301 Eleanor Street	0.000000	0.000000
-#37 Gray Street	Unknown	0.000000	0.000000
-Courtney Lake	Unknown	0.000000	0.000000
-La Loche Avenue	Unknown	0.000000	0.000000
-La Loche	Unknown	0.000000	0.000000
-Brightsand Lake Regional Park	Sw 11-54-20 W3m Brightsand Lake Regional Park	0.000000	0.000000
-Goodsoil	Beaver River	0.000000	0.000000
-Hillmond	Parcel B Plan 101884901 Hillmond, Sk	0.000000	0.000000
-Lloydminster	Bay 130, 4410 - 52nd Avenue,	0.000000	0.000000
-Lloydminster	Bay 102, 4402 - 52nd Avenue	0.000000	0.000000
-Marwayne	Box 561	0.000000	0.000000
-Unknown	Parcel A Nw 17/63/18/w3 Greig Lake Mlpp	0.000000	0.000000
-Unknown	Ne1/4 29-63-25 W3 Sandy Beach Pierce Lake Mlpp	0.000000	0.000000
-Unknown	Part Of Sw 1/4 / 33 / 43 / 16 / W3 North B'ford	0.000000	0.000000
-Unknown	Nw 14/49/23/w3 Silver Lake Regional Park	0.000000	0.000000
-Unknown	Portion Of Nw32/62/19/w3 Kimball Lake Mlpp	0.000000	0.000000
-Rapid View	Lot 1 Block 2 Plan Ca3648 Rapid View Sk	0.000000	0.000000
-Big River	Box 351	0.000000	0.000000
-Big River	Box 548	0.000000	0.000000
-Candle Lake	000 Main Street Candle Lake	0.000000	0.000000
-Canwood	Box 9	0.000000	0.000000
-Christopher Lake	Box 405	0.000000	0.000000
-Emma Lake	Parcel A Emma Lake	0.000000	0.000000
-Leask	Box 364	0.000000	0.000000
-Unknown	Miniwaka Beach - Candle Lake	0.000000	0.000000
-Unknown	Hwy 263 Christopher Lake	0.000000	0.000000
-Unknown	R L 13 45 - 27 W2m Rm 431	0.000000	0.000000
-Unknown	Rm Of Big River	0.000000	0.000000
-Spiritwood	Box 395	0.000000	0.000000
-Waskesiu	Box 130	0.000000	0.000000
-Balgonie	302 Service Road	0.000000	0.000000
-Grenfell	Elcapo	0.000000	0.000000
-Unknown	Abernethy	0.000000	0.000000
-Unknown	South Qu'appelle	0.000000	0.000000
-Regina	Mosaic Stadium At Taylor Field	0.000000	0.000000
-Regina	Mosaic Stadium At Taylor Field	0.000000	0.000000
-Regina	Mosaic Stadium At Taylor Field	0.000000	0.000000
-Regina	Mosaic Stadium At Taylor Field	0.000000	0.000000
-Regina	Mosaic Stadium At Taylor Field	0.000000	0.000000
-Regina	88 Aa Cavendish St.	0.000000	0.000000
-Regina	Mosaic Stadium At Taylor Field	0.000000	0.000000
-Regina	Mosaic Stadium At Taylor Field	0.000000	0.000000
-Regina	Mosaic Stadium At Taylor Field	0.000000	0.000000
-Sedley	305 Railway Avenue	0.000000	0.000000
-Vibank	303 Railway Avenue	0.000000	0.000000
-Dafoe	Block Q Plan Bb3193 Dafoe	0.000000	0.000000
-Humboldt	2304 Quill Centre	0.000000	0.000000
-Leroy	Gps N51.59820 W104.50026	0.000000	0.000000
-Unknown	Mckillop	0.000000	0.000000
-Unknown	Rm 345 Sw 32-34-6 W3m	0.000000	0.000000
-Quill Lake	Quill St & Lally Cres	0.000000	0.000000
-Warman	Bay F - 110 Central Street East	0.000000	0.000000
 Wynyard	218 Ave B East	51.770798	-104.183231
-Moose Mountain Provincial Park	Moose Mountain Provincial Park	0.000000	0.000000
 Radville	134 Main Street	49.461175	-104.296383
-Yellow Grass	234 Couteau St	0.000000	0.000000
-Fishing Lake Regional Park	Ne 6-33-11 W2m, Rm Of Foam Lake No. 276	0.000000	0.000000
-Langenburg	215 Kaiser William Ave E	0.000000	0.000000
-Moose Bay	Ne 7-19-5 W2m; Rm Of Grayson No. 184	0.000000	0.000000
-Rm 244 - Rural	Ne 13-26-4 W2m	0.000000	0.000000
-Rm 271 - Rural	Duck Mountain Provincial Park	0.000000	0.000000
-Rm 274 - Rural	Good Spirit Lake Provincial Park	0.000000	0.000000
-Saltcoats Regional Park	Ne 36-23-2 W2m	0.000000	0.000000
-Togo	Lot 1 Block G Plan Ca5256	0.000000	0.000000
-#37 Gray Street	Unknown	0.000000	0.000000
 Pierceland	191 Main Street	54.345247	-109.777505
-Courtney Lake	Unknown	0.000000	0.000000
-La Loche Avenue	Unknown	0.000000	0.000000
-La Loche	Unknown	0.000000	0.000000
-Cadillac	Lac Pelletier	0.000000	0.000000
-Consul	116 Rouleau St	0.000000	0.000000
-Unknown	Gull Lake	0.000000	0.000000
-Assiniboia	Sw 1-8-30 W2m  Sk	0.000000	0.000000
 Shell Lake	Shell Lake	45.731690	-91.895239
-Coderre	Central Ave	0.000000	0.000000
-Craik	Ne 23-24-28 W2m	0.000000	0.000000
-Lafleche	Thomson Lake Regional Park	0.000000	0.000000
-Biggar	Ne 8-36-14 W3m	0.000000	0.000000
-Lucky Lake	Fourth Avenue	0.000000	0.000000
-Macklin	4805 - 57th Avenue	0.000000	0.000000
-#1 Johnson Street	Unknown	0.000000	0.000000
-Beauval	Unknown	0.000000	0.000000
 Regina	3610 Eastgate Drive	50.451116	-104.531057
-Creighton	Unknown	0.000000	0.000000
-La Loche	Unknown	0.000000	0.000000
-Points North Landing	Unknown	0.000000	0.000000
-Greenwater Provincial Park	Se-3-41-10-w2m  Rm Of Bjorkdale No. 426	0.000000	0.000000
-Kipabiskau Lake	Sw-1-42-16-w2m Rm Of Pleasantdale No. 398	0.000000	0.000000
-Unknown	Hudson Bay	0.000000	0.000000
-Pleasantdale	Lot/block/plan: 1/1/e  Pleasantdale Sk	0.000000	0.000000
-Tisdale	Sw-2-42-14-w2m Rm Of Barrier Valley No. 397	0.000000	0.000000
-#1 Johnson Street	Unknown	0.000000	0.000000
-Beauval	Unknown	0.000000	0.000000
-Creighton	Unknown	0.000000	0.000000
-La Loche	Unknown	0.000000	0.000000
-Pinehouse	Box 130	0.000000	0.000000
-Goodsoil	207 Main Street,	0.000000	0.000000
-Goodsoil	212 Main Street,	0.000000	0.000000
-Livelong	Lot 6 Blk 3 Plan 72b09981turtle Lake South Bay	0.000000	0.000000
-Lloydminster	Wilton	0.000000	0.000000
-Lone Rock	Lot 11 Block 2,plan Ag3026 Lone Rock Sk	0.000000	0.000000
-Unknown	Ne 33/44/20/w3 Atton's Lake Regional Park	0.000000	0.000000
-Unknown	Parcel A Plan 101589745 Rm Of Parkdale No 498	0.000000	0.000000
-Unknown	Britannia	0.000000	0.000000
-Unknown	Ne 36 - 51 - 28 W3 Sandy Beach Lake Regional Park	0.000000	0.000000
-Unknown	Mobile Concession 4215-70th Ave Lloydminster Ab	0.000000	0.000000
-Unknown	Parcel A Plan 101685034 Rm Of Mervin No 499	0.000000	0.000000
-Albertville	22 Unity Street	0.000000	0.000000
-Big River	Box 633	0.000000	0.000000
-Candle Lake	Box 141	0.000000	0.000000
-Candle Lake	Main Street Hwy #265	0.000000	0.000000
-Christopher Lake	R.r. 1, Site 7, Comp 7	0.000000	0.000000
 Debden	101 Main Street	53.524134	-106.883027
-Holbein	General Delivery	0.000000	0.000000
-Martins Lake Regional Park	Blaine Lake	0.000000	0.000000
-Unknown	Leask	0.000000	0.000000
-Unknown	Chitek Lake	0.000000	0.000000
-Unknown	Spiritwood	0.000000	0.000000
-Prince Albert	General Delivery	0.000000	0.000000
-Victoire	Box 19	0.000000	0.000000
-Balgonie	Balgonie Sports Grounds	0.000000	0.000000
-Balgonie	102 Service Road N	0.000000	0.000000
-Lumsden Beach	Resort Village Of Lumsden Beach	0.000000	0.000000
-Unknown	Lumsden	0.000000	0.000000
-Unknown	Carry The Kettle First Nations	0.000000	0.000000
-Regina	Mosaic Stadium At Taylor Field	0.000000	0.000000
-Regina	Mosaic Stadium At Taylor Field	0.000000	0.000000
-Regina	Mosaic Stadium At Taylor Field	0.000000	0.000000
-Regina	Mosaic Stadium At Taylor Field	0.000000	0.000000
 Regina	3622 Eastgate Drive	50.451506	-104.531203
-Regina	Mosaic Stadium At Taylor Field	0.000000	0.000000
-Regina	Mosaic Stadium At Taylor Field	0.000000	0.000000
-Regina	Mosaic Stadium At Taylor Field	0.000000	0.000000
-Regina	Mosaic Stadium At Taylor Field	0.000000	0.000000
-Vibank	101 - 2nd Avenue	0.000000	0.000000
-Annaheim	301 Doepker Ave	0.000000	0.000000
-Guernsey	105 D L'cart St	0.000000	0.000000
-Lanigan	500 Commercial Dr	0.000000	0.000000
-Unknown	Laird	0.000000	0.000000
-Unknown	Laird	0.000000	0.000000
-Quill Lake	Hwy 5 & Oswald St	0.000000	0.000000
-Wakaw Lake Regional Park	Hoodoo	0.000000	0.000000
-Warman	Bay F - 110 Central Ave	0.000000	0.000000
-Moose Mountain Provincial Park	Moose Mountain Provincial Park	0.000000	0.000000
-Nickle Lake	Nickle Lake Regional Park	0.000000	0.000000
-Storthoaks	409 Center St	0.000000	0.000000
-Canora	Block T Plan 97y02501	0.000000	0.000000
-Langenburg	421 Kaiser William Ave E	0.000000	0.000000
-Macnutt	First St	0.000000	0.000000
-Rm 211 - Rural	Ne 15-22-32 W1m	0.000000	0.000000
-Rm 244 - Rural	Sw 28-25-4 W2m	0.000000	0.000000
-RM 274 - Rural	Se 34-29-05 W2	0.000000	0.000000
-Rm 276 - Rural	Ne 31-30-11 W2m	0.000000	0.000000
-Sheho	608 Assiniboia Ave	0.000000	0.000000
 Saskatoon	1 - 1840 8th St E	52.114688	-106.627883
-126B Dene Street	Unknown	0.000000	0.000000
-Creighton	Unknown	0.000000	0.000000
-La Loche	Unknown	0.000000	0.000000
-Lac La Plonge	Unknown	0.000000	0.000000
-Consul	2 Nolan St	0.000000	0.000000
-Unknown	Maple Creek	0.000000	0.000000
-Unknown	Excelsior	0.000000	0.000000
-Avonlea	Se 18-12-22 W2	0.000000	0.000000
-Coderre	Ne 3-13-4 W3m	0.000000	0.000000
-Elbow	Nw 2-25-5 W3m	0.000000	0.000000
-Meyronne	Main Street	0.000000	0.000000
-Birsay	10 Main Street	0.000000	0.000000
-Lucky Lake	74 Fourth Avenue	0.000000	0.000000
-Macrorie	Box 102	0.000000	0.000000
-#12 Baska Street	Unknown	0.000000	0.000000
-Burbidge Lake	Unknown	0.000000	0.000000
-Deschambault Lake	Unknown	0.000000	0.000000
 Regina	23 Dixon Cres	50.440652	-104.567806
-La Loche	Northern Village Of La Loche	0.000000	0.000000
-Pinehouse	Box 130	0.000000	0.000000
-Greenwater Provincial Park	Se-3-40-10-w2m Rm Of Bjorkdale No. 426	0.000000	0.000000
-Hudson Bay	Sw-33-40-30-w1m Rm Of Hudson Bay No. 394	0.000000	0.000000
-Marean Lake	Se-12-41-2-w2m  Rm Of Bjorkdale No. 426	0.000000	0.000000
-Pleasantdale	Ne-21-42-16-w2m Rm Of Pleasantdale No. 398	0.000000	0.000000
-Star City	Nw-7-44-16-w2m  Rm Of Star City No. 428	0.000000	0.000000
-White Fox	301 Eleanor Street	0.000000	0.000000
-126B Dene Street	Unknown	0.000000	0.000000
-Creighton	Unknown	0.000000	0.000000
-La Loche	Unknown	0.000000	0.000000
-Lac La Plonge	Unknown	0.000000	0.000000
-Cut Knife	114 Steel St	0.000000	0.000000
-Goodsoil	114 Main Street,	0.000000	0.000000
-Little Loon Regional Park	Ne 34-50-16 W3, Little Loon Regional Park	0.000000	0.000000
-Lloydminster	Home Hardware Building	0.000000	0.000000
-Lloydminster	101 & 102 1401 50th Avenue	0.000000	0.000000
-Unknown	Ne 33/44/20/w3 Atton's Lake Regional Park	0.000000	0.000000
-Unknown	Parcel X Plan 92b02290 Frenchman Butte Sk	0.000000	0.000000
-Unknown	Lot 21 Blk 1 Plan 81b15838 Jumbo Beach  Rm 561	0.000000	0.000000
-Unknown	Wilton	0.000000	0.000000
-Unknown	Parcel A  Plan 80b11172 Rm Of Mervin No 499	0.000000	0.000000
-Unknown	Mervin	0.000000	0.000000
-Table Mountain Regional Park	Battle River	0.000000	0.000000
-Big River	Box 488	0.000000	0.000000
-Candle Lake	#1 Fairway Drive	0.000000	0.000000
-Candle Lake	Box 100	0.000000	0.000000
-Canwood	Box 345	0.000000	0.000000
-Christopher Lake	Box 405	0.000000	0.000000
-Holbein	General Delivery	0.000000	0.000000
-Leoville	106 Zimmer Avenue	0.000000	0.000000
-Unknown	#14, Hwy 265, Candle Lake	0.000000	0.000000
-Unknown	R.m. Of Redberry	0.000000	0.000000
-Unknown	Buckland	0.000000	0.000000
-Prince Albert	Rr 5, Site 16, Box 23	0.000000	0.000000
-Spruce Home	Box 269	0.000000	0.000000
-Whelan Bay	100 Whelan Drive	0.000000	0.000000
-Balgonie	Highway #1	0.000000	0.000000
-Kronau	1 Railway Avenue	0.000000	0.000000
-Unknown	Lumsden	0.000000	0.000000
-Unknown	Lumsden	0.000000	0.000000
-Regina	Mosaic Stadium At Taylor Field	0.000000	0.000000
-Regina	Mosaic Stadium At Taylor Field	0.000000	0.000000
-Regina	Mosaic Stadium At Taylor Field	0.000000	0.000000
-Regina	Mosaic Stadium At Taylor Field	0.000000	0.000000
-Regina	Mosaic Stadium At Taylor Field	0.000000	0.000000
-Regina	Mosaic Stadium At Taylor Field	0.000000	0.000000
-Regina	Mosaic Stadium At Taylor Field	0.000000	0.000000
 Regina	388 Mccarthy Blvd.	50.473038	-104.665774
-Regina	Mosaic Stadium At Taylor Field	0.000000	0.000000
-Simpson	Sports Grounds	0.000000	0.000000
-Vibank	205 - 1st Street W.	0.000000	0.000000
-Duke Lake	Box 340	0.000000	0.000000
-Humboldt	2303 Quill Centre	0.000000	0.000000
-Mcnab Regional Park	Hwy 6 S	0.000000	0.000000
-Unknown	Corman Park	0.000000	0.000000
-Unknown	Big Quill	0.000000	0.000000
-Wadena	96 Jim Headington Way	0.000000	0.000000
-Warman	Bay F - 110 Central Ave	0.000000	0.000000
-Ceylon Regional Park	Ceylon	0.000000	0.000000
-Moose Mountain Provincial Park	Moose Mountain Provincial Park	0.000000	0.000000
-Redvers	Sw 1/4 24-7-32 W1m  Lots C & D	0.000000	0.000000
-Bird's Point	64 Currie Ave	0.000000	0.000000
-Langenburg	135 Kaiser William Ave E	0.000000	0.000000
-Langenburg	227 Kaiser-william Ave	0.000000	0.000000
-Otthon	Avenue One	0.000000	0.000000
-Rm 244 - Rural	Ne 15-26-4 W2m	0.000000	0.000000
-Rm 271 - Rural	Nw 35-29-30 W1m, Rm Of Cote No. 271	0.000000	0.000000
-Rm 274 - Rural	Burgis Beach	0.000000	0.000000
-Sheho	101 Road Allowance	0.000000	0.000000
-WHITESAND REGIONAL PARK	Sw 11-29-7 W2m; Rm Of Insinger No. 275	0.000000	0.000000
