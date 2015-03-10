@@ -4,6 +4,16 @@
  * This file is part of EatSafe Saskatchewan.
  */
 
+// Create fake console if one doesn't exist. For compatibility with dumbass HtmlUnit.
+if(typeof console == "undefined") {
+  window.console = {
+    log: function () {},
+    warn: function () {},
+    error: function () {},
+    trace: function () {}
+  };
+}
+
 /**
  * Displays an error message at the top of the user's viewport. This will last ~3 seconds before
  * disappearing on its own. Only one of these can be displayed at a time. Attempting to create another
@@ -37,20 +47,8 @@ jQuery.fn.fadeAndRemove = function(duration, callback) {
   this.fadeOut(duration || "slow", function() {
     this.remove();
     
-    // Create fake console if one doesn't exist
-	// For compatibility with packages not including console object
-    if ( typeof ( console ) !== 'undefined' && console != null) {
-	  console.log("");
-	  }
-	else {
-	  console = {
-	  log: function () {},
-	  warn: function () {},
-	  error: function () {}
-	  }
-	}
     // Sane error handling: provide stack traces for the dumb schmuck who did this.
-    if(typeof(callback) == "function") {
+    if(callback != null && typeof(callback) == "function") {
       callback(this);
     }
     else {
