@@ -58,7 +58,7 @@ object Location {
         val locationQuery = SQL(
          """
           SELECT id, name, address, postcode, city, rha, longitude, latitude
-          FROM location INNER JOIN coordinate USING (address, city)
+          FROM location LEFT JOIN coordinate USING (address, city)
            WHERE id = {locationId};
          """
         ).on("locationId" -> locationId)
