@@ -1,4 +1,4 @@
-package databaseParser
+package csvParser
 
 import java.io.BufferedWriter
 import java.io.File
@@ -22,7 +22,7 @@ object Main {
 
   def main(args: Array[String]): Unit = {
     val writer = new OutputStreamWriter(new FileOutputStream(FILE_NAME), "utf-8")
-    val csvLoader = new CSVLoader(writer);
+    val csvLoader = new CsvLoader(writer);
 
     insertViolationTypes(writer)
     readFolder(FOLDER_PATH, csvLoader);
@@ -62,7 +62,7 @@ object Main {
    * @param folderPath The path to the folder containing the CSV files.
    * @param writer The writer to write SQL commands to.
    */
-  def readFolder(folderPath: String, csvLoader: CSVLoader): Unit = {
+  def readFolder(folderPath: String, csvLoader: CsvLoader): Unit = {
     val folder = new File(folderPath);
     val files = folder.listFiles();
 
@@ -73,7 +73,7 @@ object Main {
 
     for(file <- files) {
       if(file.isFile && file.getName.toLowerCase.endsWith("csv")) {
-        inspectionId = csvLoader.loadCSV(folderPath + file.getName, locationId, inspectionId);
+        inspectionId = csvLoader.loadCsv(folderPath + file.getName, locationId, inspectionId);
         locationId += 1;
       }
     }

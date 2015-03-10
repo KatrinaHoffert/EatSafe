@@ -1,4 +1,4 @@
-package databaseParser
+package csvParser
 
 import java.io.File
 import java.io.Writer
@@ -16,7 +16,7 @@ import java.nio.charset.StandardCharsets
  * Loads and interprets a CSV file, creating SQL ouput that can be run in the Postgres console.
  * @param writer The writer to write the SQL output to.
  */
-class CSVLoader(writer: Writer) {
+class CsvLoader(writer: Writer) {
   // Used in Postgres's COPY syntax to symbolize a NULL
   val SQL_NULL = """\N"""
 
@@ -37,7 +37,7 @@ class CSVLoader(writer: Writer) {
    * @param inspectionIdIn The first inspection ID to use.
    * @return The next inspection ID that should be used.
    */
-  def loadCSV(csvFile: String, locationId: Int, inspectionIdIn: Int): Int = {
+  def loadCsv(csvFile: String, locationId: Int, inspectionIdIn: Int): Int = {
     var inspectionId = inspectionIdIn
 
     val allLines = new CSVReader(new InputStreamReader(new FileInputStream(csvFile),
