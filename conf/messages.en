@@ -30,7 +30,7 @@ maps.displayAddress.title=Map: {0}, {1}
 # About page
 about.title=About EatSafe Saskatchewan
 about.headingWho=Who we are
-about.paragraphWho=We''re a group of computer science students at the University of Saskatchewan, working together as part of our CMPT 371 class (software maanagement).
+about.paragraphWho=We''re a group of computer science students at the University of Saskatchewan, working together as part of our CMPT 371 class (software management).
 about.creditsList=We are the Off By One group:
 about.headingWhat=What is EatSafe Saskatchewan?
 about.paragraphWhat1=EatSafe Saskatchewan was an idea pitched by Dr. Daniel Fuller. The provincial Ministry of Health maintains a <a href="http://orii.health.gov.sk.ca/">public site</a> that allows access to health inspection records of locations in the province.
