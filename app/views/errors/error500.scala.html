@@ -5,7 +5,7 @@
 
 @(exception: Throwable)
 
-@mainBody(title = Messages("errors.error500Title")) {
+@mainBody(title = Messages("errors.error500Title"), hasFooter = true) {
   @headingSmall(Messages("general.applicationName"))
   <div class="smallPadding">
     <h2 class="errorCode">@Messages("errors.error500Title")</h2>
