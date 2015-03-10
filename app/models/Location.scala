@@ -50,27 +50,44 @@ object Location {
    * the database.
    */
   def getLocationById(locationId: Int)(implicit db: ActiveDatabase): Try[Location] = {
-    val tryLocation = Try {
+    Try {
       require(locationId > 0, "Location ID must be greater than 0.")
       
       DB.withConnection(db.name) { implicit connection =>
-        val query = SQL(
+        val locationQuery = SQL(
            """
-             SELECT id, name, address, postcode, city, rha, latitude, longitude
+             SELECT id, name, address, postcode, city, rha
              FROM location
              WHERE id = {locationId};
            """    
         ).on("locationId" -> locationId)
         
-        val optionalLocation = query().map(locationRowToLocation).toList.headOption
-        optionalLocation.getOrElse {
+        val optionalLocation = locationQuery().map(locationRowToLocation).toList.headOption
+        val location = optionalLocation.getOrElse {
           throw new IllegalArgumentException("There is no location with ID " + locationId)
+        }.get
+
+        // Hook up that location with some rad coordinates (if they exist)
+        val coordinateQuery = SQL(
+           """
+             SELECT latitude, longitude
+             FROM coordinate
+             WHERE address = {address} AND city = {city};
+           """    
+        ).on("address" -> location.address, "city" -> location.city)
+
+        val optionalCoordinates = coordinateQuery().map { row =>
+          (row[Option[Double]]("longitude"), row[Option[Double]]("latitude"))
+        }.toList.headOption
+
+        optionalCoordinates match {
+          case Some((longitude, latitude)) =>
+            location.copy(longitude = longitude, latitude = latitude)
+          case _ =>
+            location
         }
       }
     }
-
-    // We have a Try[Try[Location]], let's flatten that
-    tryLocation.flatten
   }
 
   /**
@@ -143,6 +160,8 @@ object Location {
    * any means of static typing for database rows, so you must ensure that the row that you pass in
    * is indeed a row of the location table.
    *
+   * Note that the coordinates are not set here and will always be None in the returned Location.
+   *
    * @param row A row from the location table.
    * @param connection this is a implicit parameter that is used to share the database connection to improve performance
    * @return A location object created from that row, with the inspections from the database.
@@ -150,9 +169,8 @@ object Location {
   private def locationRowToLocation(row: Row)(implicit connection: java.sql.Connection): Try[Location] = {
     Inspection.getInspections(row[Int]("id")) match {
       case Success(inspections) =>
-        Success(Location(row[Int]("id"), row[String]("name"), row[Option[Double]]("latitude"),
-            row[Option[Double]]("longitude"), row[Option[String]]("address"), row[Option[String]]("postcode"),
-            row[Option[String]]("city"), row[String]("rha"),  inspections))
+        Success(Location(row[Int]("id"), row[String]("name"), None, None, row[Option[String]]("address"),
+            row[Option[String]]("postcode"), row[Option[String]]("city"), row[String]("rha"),  inspections))
       case Failure(ex) => 
         Failure(ex)
     }
