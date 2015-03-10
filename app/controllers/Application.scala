@@ -8,7 +8,7 @@ object Application extends Controller {
    * Displays information about how freaking cool we are.
    */
   def about = Action {
-    Ok("We be cool, like yo")
+    Ok(views.html.general.about())
   }
 
   /**
