@@ -21,30 +21,20 @@ object Main {
   var FILE_NAME = "database/statements.sql"
 
   def main(args: Array[String]): Unit = {
-    readFolder(FOLDER_PATH, getWriterStream(FILE_NAME));
-  }
+    val writer = new OutputStreamWriter(new FileOutputStream(FILE_NAME), "utf-8")
+    val csvLoader = new CSVLoader(writer);
 
-  /**
-   * Creates a Writer for the given file name.
-   * @param fileName The name of the file to use.
-   */
-  def getWriterStream(fileName: String): Writer = {
-      new BufferedWriter(new OutputStreamWriter(new FileOutputStream(fileName), "utf-8"))
-  }
+    insertViolationTypes(writer)
+    readFolder(FOLDER_PATH, csvLoader);
 
-  /**
-   * Creates the comments at the beginning of the file.
-   */
-  def writeComment(writer: Writer): Unit = {
-    writer.write("-- EatSafe\n"
-        + "-- This file will populate the database\n"
-        + "-- Before running this file, run CreateTables.sql first\n")
+    csvLoader.writeSqlFile
+    writer.close();
   }
 
   /**
    * Creates the violation type table (which is hardcoded because it doesn't change).
    */
-  def insertViolationType(writer: Writer): Unit = {
+  def insertViolationTypes(writer: Writer): Unit = {
     writer.write("INSERT INTO violation_type (id, description, name,  priority)\n"
         + "VALUES (1, \'Potentially hazardous foods and perishable foods must be stored at 4°C/40°F or below. Hazardous foods must be thawed in a refrigerator or under cold, running water.\', \'Refrigeration/Cooling/Thawing (must be 4°C/40°F or lower)\', \'Critical Item\'),"
         + "\n"
@@ -78,7 +68,7 @@ object Main {
         + "(6, \'Foods must be protected from contamination at all times. \', \'Food Protection\', \'Critical Item\'),"
         + "\n"
         + "(7, \' Proper dish washing procedures must be followed. "
-        + "Mechanical washing: dishwashers must be National Sanitation Foundation (NSF) approved or equivalent, designed to wash at 60oC (140oF) and utilize an approved sanitizing agent. "
+        + "Mechanical washing: dishwashers must be National Sanitation Foundation (NSF) approved or equivalent, designed to wash at 60°C (140°F) and utilize an approved sanitizing agent. "
         + "Manual washing: (wash/rinse/sanitize in a three-compartment sink): "
         + "first compartment - clean hot water 44°C (111°F) with detergent  "
         + "second compartment - clean hot water 44°C (111°F)  "
@@ -112,11 +102,7 @@ object Main {
    * @param folderPath The path to the folder containing the CSV files.
    * @param writer The writer to write SQL commands to.
    */
-  def readFolder(folderPath: String, writer: Writer): Unit = {
-    val csvLoader = new CSVLoader(writer);
-    writeComment(writer)
-    insertViolationType(writer)
-
+  def readFolder(folderPath: String, csvLoader: CSVLoader): Unit = {
     val folder = new File(folderPath);
     val files = folder.listFiles();
 
@@ -132,8 +118,7 @@ object Main {
       }
     }
 
-    csvLoader.writeSqlFile
-    writer.close();
-    println("Location: " + (locationId - 1) + "\nInspection: " + (inspectionId - 1));
+    println("Number of locations: " + (locationId - 1))
+    println("Number of inspections: " + (inspectionId - 1));
   }
 }
