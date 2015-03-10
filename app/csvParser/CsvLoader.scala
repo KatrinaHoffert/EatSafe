@@ -216,7 +216,7 @@ class CsvLoader(writer: Writer) {
       }
       else {
         // If not match the above regexs, then it only contains the city name
-        locationCityAndPostalCode;
+        locationCityAndPostalCode
       }
     }
 
