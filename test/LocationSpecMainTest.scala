@@ -45,8 +45,8 @@ class LocationSpecMainTest extends Specification with Mockito {
         location.id must beEqualTo(7)
         // Ignore space due to trailing whitespace
         location.name must beEqualTo("Hogwarts Dining Hall").ignoreSpace
-        location.address must beEqualTo("Hogwarts Place").ignoreSpace
-        location.postalCode must beEqualTo("S0G 2J0").ignoreSpace
+        location.address.get must beEqualTo("Hogwarts Place").ignoreSpace
+        location.postalCode.get must beEqualTo("S0G 2J0").ignoreSpace
       }
 
       "return a failure if there is a bad database" in new WithApplication {
@@ -79,7 +79,7 @@ class LocationSpecMainTest extends Specification with Mockito {
     "listCities" should {
       "list all cities with resteraunts in saskatchewan" in new WithApplication {
         val listOfCities = Location.listCities();
-        listOfCities.get.length must beEqualTo(6)
+        listOfCities.get.length must beEqualTo(6+1)//the plus 1 is for Unknown City
       }
       "list should be in alphabetical order" in new WithApplication {
         val listOfCities = Location.listCities();
