@@ -130,7 +130,9 @@ object Location {
           """
         )
         
-        query().map(_[String]("city")).toList :+ "Unknown city"
+        val cityList = query().map(_[String]("city")).toList
+
+        cityList ++ Seq("Unknown city")
       }
     }
   }

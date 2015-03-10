@@ -88,15 +88,26 @@ class CSVLoader(writer: Writer) {
 
 
     // Fix capitalization and escape single quotes
-    val locationName = WordUtils.capitalizeFully(dataMatrix(0)(1)).replaceAll("'","''")
-    val locationAddress = WordUtils.capitalizeFully(getIfExists(dataMatrix(0)(3)).replaceAll("'","''"))
-    val locationPostcode = getPostcode(dataMatrix(0)(5))
-    val locationCity = getCity(dataMatrix(0)(5)).replaceAll("'","''")
-    val locationRha = getIfExists(dataMatrix(0)(7))
+    var locationName = WordUtils.capitalizeFully(dataMatrix(0)(1))
+    var locationAddress = WordUtils.capitalizeFully(getIfExists(dataMatrix(0)(3)))
+    var locationPostcode = getPostcode(dataMatrix(0)(5))
+    var locationCity = getCity(dataMatrix(0)(5))
+    var locationRha = getIfExists(dataMatrix(0)(7))
+
+    // Must remove apostrophes from the places that can have them
+    if(locationName != null) locationName = locationName.replaceAll("'","''")
+    if(locationAddress != null) locationAddress = locationAddress.replaceAll("'","''")
+    if(locationCity != null) locationCity = locationCity.replaceAll("'","''")
+
+    // Now we need to add the quotes around the address, city, and postal code iff they aren't null
+    // The other values can't be null, so are quoted in the SQL below
+    if(locationAddress != null) locationAddress = "'" + locationAddress + "'"
+    if(locationCity != null) locationCity = "'" + locationCity + "'"
+    if(locationPostcode != null) locationPostcode = "'" + locationPostcode + "'"
 
     // Insert location
     writer.write("INSERT INTO location(id, name, address, postcode, city, rha)\n" +
-        " VALUES (%d, \'%s\', \'%s\', \'%s\', \'%s\', \'%s\');\n\n".format(locationId, locationName,
+        " VALUES (%d, \'%s\', %s, %s, %s, \'%s\');\n\n".format(locationId, locationName,
         locationAddress, locationPostcode, locationCity, locationRha))
 
     //this last ID is used because: their reports have duplicated records: a same violation under same inspection
@@ -167,7 +178,7 @@ class CSVLoader(writer: Writer) {
    */
   def getCity(string: String): String = {
     if(string == "") {
-      "Unknown";
+      null
     }
     else if(string.matches("^.+, .+$")) {
       WordUtils.capitalizeFully(string.substring(0, string.lastIndexOf(',')))
@@ -176,7 +187,7 @@ class CSVLoader(writer: Writer) {
       //some files have this column as ", SASKATCHEWAN" 
       //(see 'Saskatoon_Other Locations_Leaning Maple Meats - Catering [MCKILLOP].csv')
       //need to return Unknown for this case 
-      "Unknown"
+      null
     }
     else {
       //if not match the above regexs, then it only contains the city name
@@ -191,13 +202,13 @@ class CSVLoader(writer: Writer) {
    */
   def getPostcode(string: String): String = {
     if(string == "" || string.length < 7) {
-      "Unknown"
+      null
     }
     else if(string.substring(string.length - 7).matches("^[ABCEGHJKLMNPRSTVXY]{1}\\d{1}[A-Z]{1} \\d{1}[A-Z]{1}\\d{1}$")) {
       string.substring(string.length - 7)
     }
     else {
-      "Unknown"
+      null
     }
   }
 
@@ -206,5 +217,5 @@ class CSVLoader(writer: Writer) {
    * @param string The full column from the CSV file.
    * @return "Unknown" if contains nothing or the string itself otherwise.
    */
-  def getIfExists(string: String): String = if(string == "") "Unknown" else string
+  def getIfExists(string: String): String = if(string == "") null else string
 }

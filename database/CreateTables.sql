@@ -10,9 +10,9 @@ DROP TABLE IF EXISTS coordinate CASCADE;
 CREATE TABLE location(
     id SERIAL PRIMARY KEY,
     name TEXT NOT NULL,
-    address TEXT NOT NULL,
-    postcode TEXT NOT NULL,
-    city TEXT NOT NULL,
+    address TEXT,
+    postcode TEXT,
+    city TEXT,
     rha TEXT NOT NULL,
     latitude DECIMAL(10,6),
     longitude DECIMAL(10,6)
