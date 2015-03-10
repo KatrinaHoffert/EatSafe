@@ -113,6 +113,7 @@ object Main {
    * @param writer The writer to write SQL commands to.
    */
   def readFolder(folderPath: String, writer: Writer): Unit = {
+    val csvLoader = new CSVLoader(writer);
     writeComment(writer)
     insertViolationType(writer)
 
@@ -126,12 +127,12 @@ object Main {
 
     for(file <- files) {
       if(file.isFile && file.getName.toLowerCase.endsWith("csv")) {
-        val loader = new CSVLoader(writer);
-        inspectionId = loader.loadCSV(folderPath + file.getName, locationId, inspectionId);
+        inspectionId = csvLoader.loadCSV(folderPath + file.getName, locationId, inspectionId);
         locationId += 1;
       }
     }
 
+    csvLoader.writeSqlFile
     writer.close();
     println("Location: " + (locationId - 1) + "\nInspection: " + (inspectionId - 1));
   }
