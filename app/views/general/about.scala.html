@@ -1,0 +1,53 @@
+@import general._
+@import models._
+@import controllers._
+
+@**
+ * As the name implies, it displays cool information describing how kickass the project is. Also how
+ * to use it, in case they're dumb.
+ *@
+@()
+
+@mainBody(title = Messages("about.title"), hasFooter = true) {
+  @headingSmall(Messages("general.applicationName"))
+
+  <div class="smallPadding">
+    <h2>@Messages("about.headingWho")</h2>
+    <p>@Messages("about.paragraphWho")</p>
+    <p>@Messages("about.creditsList")</p>
+    <ul>
+      <li>Mike Hoffert</li>
+      <li>Andrew Magnus</li>
+      <li>Quentun Pelletier</li>
+      <li>Erik LaBine</li>
+      <li>Katherine Jamieson</li>
+      <li>Lujie Duan</li>
+      <li>Jordan Lys</li>
+    </ul>
+
+    <h2>@Messages("about.headingWhat")</h2>
+    <p>@Html(Messages("about.paragraphWhat1"))</p>
+    <p>@Html(Messages("about.paragraphWhat2"))</p>
+
+    <h2>@Messages("about.headingHow")</h2>
+    <p>@Html(Messages("about.paragraphHow1"))</p>
+    <p>@Html(Messages("about.paragraphHow2"))</p>
+    <p>@Html(Messages("about.paragraphHow3"))</p>
+    @* In the future, we should have an "admin email" that is shared amongst devs or something.
+       For now, I'm using a custom email that redirects to my main inbox (so it can be changed if
+       it gets spammed to hell). *@
+    <p>@Html(Messages("about.paragraphHow4", "eatsafe@mike-hoffert.me"))</p>
+
+    <h2>@Messages("about.headingTechnology")</h2>
+    <p>@Html(Messages("about.paragraphTechnology"))</p>
+    <ul>
+      <li><a href="http://www.scala-lang.org/">Scala</a></li>
+      <li><a href="https://www.playframework.com/">Play Framework</a></li>
+      <li><a href="http://www.postgresql.org/">PostgreSQL</a></li>
+      <li><a href="http://scalatest.org/">ScalaTest</a></li>
+      <li><a href="http://www.seleniumhq.org/">Selenium</a></li>
+      <li><a href="http://commons.apache.org/proper/commons-lang/">Apache Commons Lang</a></li>
+      <li><a href="http://opencsv.sourceforge.net/">OpenCSV</a></li>
+    </ul>
+  </div>
+}
