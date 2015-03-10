@@ -17,37 +17,21 @@ import java.nio.charset.StandardCharsets
  * @param writer The writer to write the SQL output to.
  */
 class CSVLoader(writer: Writer) {
-  val separator = ','
+  // Used in Postgres's COPY syntax to symbolize a NULL
+  val SQL_NULL = """\N"""
 
   // These string builders store the tab delimited content that will be used to create the COPY
   // input. It's a very simple, tab delimited format. As long as we insert them in the order that
   // is shown here, there's no foreign key violations.
-  var tabDelimitedLocations = scala.collection.mutable.StringBuilder
-  var tabDelimitedInspections = scala.collection.mutable.StringBuilder
-  var tabDelimitedViolations = scala.collection.mutable.StringBuilder
+  val tabDelimitedLocations = new collection.mutable.StringBuilder
+  val tabDelimitedInspections = new collection.mutable.StringBuilder
+  val tabDelimitedViolations = new collection.mutable.StringBuilder
 
   /**
-   * Interprets a given CSV file, writing the appropriate SQL queries to the Writer that was
-   * passed to this object's constructor. The columns of the CSV file are as follows:
-   *
-   * 0. Download date (unused).
-   * 1. Location name.
-   * 2. Inspection date.
-   * 3. Location address.
-   * 4. Inspection type.
-   * 5. Location city and postal code.
-   * 6. Reinspection priority.
-   * 7. Location regional health authority.
-   * 8. Violation type priority (unused).
-   * 9. Violation ID and name (only ID is used).
-   *
-   * Each row of the CSV file represents either an inspection or a violation in an inspection. If
-   * there's no violations in an inspection, then we get a single row for the inspection with the
-   * violation columns left blank. If there has been violations, then there will be a row (with
-   * duplicate information) for each violation in the inspection.
-   *
-   * Note that there's a few places where fields are left blank in the source CSVs. The output
-   * will use "Unknown" as a placeholder.
+   * Interprets a given CSV file and loads it into an internal format. Once all CSVs have been
+   * loaded, call writeSqlFile to write out the SQL commands that will insert the loaded content
+   * into our database.
+   * 
    * @param csvFile Path to the CSV file to load.
    * @param locationId The ID to use for the location.
    * @param inspectionIdIn The first inspection ID to use.
@@ -68,61 +52,73 @@ class CSVLoader(writer: Writer) {
 
     // Fix capitalization and escape single quotes
     var locationName = WordUtils.capitalizeFully(allRows(0).locationName)
-    var locationAddress = WordUtils.capitalizeFully(getIfExists(allRows(0).locationAddress))
-    var locationPostcode = getPostcode(allRows(0).locationCityAndPostalCode)
-    var locationCity = getCity(allRows(0).locationCityAndPostalCode)
-    var locationRha = getIfExists(allRows(0).locationRha)
+    var locationAddress = getNullable(WordUtils.capitalizeFully(allRows(0).locationAddress))
+    var locationPostalcode = allRows(0).postalCode
+    var locationCity = allRows(0).city
+    var locationRha = getNullable(allRows(0).locationRha)
 
-    // Must remove apostrophes from the places that can have them
-    if(locationName != null) locationName = locationName.replaceAll("'","''")
-    if(locationAddress != null) locationAddress = locationAddress.replaceAll("'","''")
-    if(locationCity != null) locationCity = locationCity.replaceAll("'","''")
+    tabDelimitedLocations.append(locationId)
+    tabDelimitedLocations.append("\t")
+    tabDelimitedLocations.append(locationName)
+    tabDelimitedLocations.append("\t")
+    tabDelimitedLocations.append(locationAddress)
+    tabDelimitedLocations.append("\t")
+    tabDelimitedLocations.append(locationPostalcode)
+    tabDelimitedLocations.append("\t")
+    tabDelimitedLocations.append(locationCity)
+    tabDelimitedLocations.append("\t")
+    tabDelimitedLocations.append(locationRha)
+    tabDelimitedLocations.append("\n")
 
-    // Now we need to add the quotes around the address, city, and postal code iff they aren't null
-    // The other values can't be null, so are quoted in the SQL below
-    if(locationAddress != null) locationAddress = "'" + locationAddress + "'"
-    if(locationCity != null) locationCity = "'" + locationCity + "'"
-    if(locationPostcode != null) locationPostcode = "'" + locationPostcode + "'"
-
-    // Insert location
-    writer.write("INSERT INTO location(id, name, address, postcode, city, rha)\n" +
-        " VALUES (%d, \'%s\', %s, %s, %s, \'%s\');\n\n".format(locationId, locationName,
-        locationAddress, locationPostcode, locationCity, locationRha))
-
-    //this last ID is used because: their reports have duplicated records: a same violation under same inspection
-    //see "Regina Qu'Appelle_Pilot Butte_Pilot Butte Recreation Hall Kitchen [Pilot But...].csv"
+    // Some reports have duplicated records: a same violation under same inspection
+    // see "Regina Qu'Appelle_Pilot Butte_Pilot Butte Recreation Hall Kitchen [Pilot But...].csv"
     val lastViolationId = new ArrayList[Integer]
+    var lastInspectionDate = "Anything that doesn't match the current inspection date :P"
 
-    for(i <- 0 until allRows.size) {
+    for(row <- allRows) {
       // Test if this is a new inspection; if yes, insert; if no, just insert violations
-      if(i == 0 || !(allRows(i).inspectionDate == (allRows(i - 1).inspectionDate))) {
-        val inspectionDate = getIfExists(allRows(i).inspectionDate);
-        val inspectionType = getIfExists(allRows(i).inspectionType);
-        val reinspectionPriority = getIfExists(allRows(i).reinspectionPriority);
+      if(row.inspectionDate != lastInspectionDate) {
+        lastInspectionDate = row.inspectionDate
 
-        // Insert inspection
-        writer.write("INSERT INTO inspection(id, location_id, inspection_date, inspection_type, reinspection_priority)\n" +
-            " VALUES (%d, %d, \'%s\', \'%s\', \'%s\');\n\n".format(inspectionId, locationId,
-            inspectionDate, inspectionType, reinspectionPriority))
+        tabDelimitedInspections.append(inspectionId)
+        tabDelimitedInspections.append("\t")
+        tabDelimitedInspections.append(locationId)
+        tabDelimitedInspections.append("\t")
+        tabDelimitedInspections.append(row.inspectionDate)
+        tabDelimitedInspections.append("\t")
+        tabDelimitedInspections.append(row.inspectionType)
+        tabDelimitedInspections.append("\t")
+        tabDelimitedInspections.append(row.reinspectionPriority)
+        tabDelimitedInspections.append("\n")
+
         inspectionId += 1
 
-        if(allRows(i).violation != "") {
-          // Insert violation
-          val violationId = getViolationId(allRows(i).violation)
-          lastViolationId.clear()
-          lastViolationId.add(violationId)
-          writer.write("INSERT INTO violation(inspection_id, violation_id)\n" +
-              " VALUES (%d, %d);\n\n".format(inspectionId - 1, violationId))
+        // Insert the first violation
+        if(row.violation != "") {
+          lastViolationId.clear
+          lastViolationId.add(row.violationId)
+
+          tabDelimitedViolations.append(inspectionId - 1) // Note inspection was previously incremented
+          tabDelimitedViolations.append("\t")
+          tabDelimitedViolations.append(row.violationId)
+          tabDelimitedViolations.append("\n")
         }
       }
-      else if(allRows(i).violation != "") {
-        // A violation for the same inspection
-        val violationId = getViolationId(allRows(i).violation)
+      // Otherwise it's a violation for the previous inspection
+      else if(row.violation != "") {
+        val violationId = row.violationId
         if(!lastViolationId.contains(violationId)) {
           lastViolationId.add(violationId)
-          writer.write("INSERT INTO violation(inspection_id, violation_id)\n" +
-              " VALUES (%d, %d);\n\n".format(inspectionId - 1, violationId))
+
+          tabDelimitedViolations.append(inspectionId - 1)
+          tabDelimitedViolations.append("\t")
+          tabDelimitedViolations.append(row.violationId)
+          tabDelimitedViolations.append("\n")
         }
+      }
+      else {
+        println("WARNING: Found row with no violation but not a new inspection")
+        println("         in file: " + csvFile)
       }
     }
 
@@ -130,99 +126,108 @@ class CSVLoader(writer: Writer) {
   }
 
   /**
-   * Get the violation ID, which is a integer uniquely identifying a violation. For some reason, th
-   * reports don't have violation 9, but have violation 8a and 8b. To maintain consistency we
-   * treat 8a as 8 and 8b as 9,
-   * @param string The CSV column for the violation name.
-   * @return Integer of violation ID.
+   * Writes out the SQL file. You must call this to get the results of having loaded in CSVs.
    */
-  def getViolationId(string: String): Int = {
-    val tempID = string.substring(0, string.lastIndexOf('-') - 1).trim
-    if(tempID == "8a") {
-      8
-    }
-    else if(tempID == "8b") {
-      9
-    }
-    else {
-      tempID.toInt
-    }
+  def writeSqlFile = {
+    writer.write("COPY location (id, name, address, postcode, city, rha) FROM STDIN;\n")
+    writer.write(tabDelimitedLocations.toString + "\\.\n\n")
+
+    writer.write("COPY inspection (id, location_id, inspectionDate, inspection_type, reinspection_priority) FROM STDIN;\n")
+    writer.write(tabDelimitedInspections.toString + "\\.\n\n")
+
+    writer.write("COPY violation (inspection_id, violation_id) FROM STDIN;\n")
+    writer.write(tabDelimitedViolations.toString + "\\.\n")
   }
 
   /**
-   * Get the city name, which is before the comma in its column of the CSV file.
-   * @param string The full CSV column.
-   * @return City name, if it exists, or a placeholder if it does not.
-   */
-  def getCity(string: String): String = {
-    if(string == "") {
-      null
-    }
-    else if(string.matches("^.+, .+$")) {
-      WordUtils.capitalizeFully(string.substring(0, string.lastIndexOf(',')))
-    }
-    else if(string.matches(", .+$")) {
-      //some files have this column as ", SASKATCHEWAN" 
-      //(see 'Saskatoon_Other Locations_Leaning Maple Meats - Catering [MCKILLOP].csv')
-      //need to return Unknown for this case 
-      null
-    }
-    else {
-      //if not match the above regexs, then it only contains the city name
-      string;
-    }
-  }
-
-  /**
-   * Gets the postcode of a location, which is the last 7 characters of the string.
-   * @param string Full 
-   * @return string of postcode, or "Unknown" if the pattern is not matched
-   */
-  def getPostcode(string: String): String = {
-    if(string == "" || string.length < 7) {
-      null
-    }
-    else if(string.substring(string.length - 7).matches("^[ABCEGHJKLMNPRSTVXY]{1}\\d{1}[A-Z]{1} \\d{1}[A-Z]{1}\\d{1}$")) {
-      string.substring(string.length - 7)
-    }
-    else {
-      null
-    }
-  }
-
-  /**
-   * Tests if the string is empty, returning a placeholder if it is or the original data otherwise.
+   * Tests if the string is empty, returning an SQL NULL if it is or the original data otherwise.
    * @param string The full column from the CSV file.
-   * @return "Unknown" if contains nothing or the string itself otherwise.
+   * @return "\N" if contains nothing or the string itself otherwise.
    */
-  def getIfExists(string: String): String = if(string == "") null else string
-}
+  private def getNullable(string: String): String = if(string == "") SQL_NULL else string
 
-/**
- * A more readable, internal representation of the CSV file, with unused fields removed. The columns
- * of the CSV file are:
- *
- * 0. Download date (unused).
- * 1. Location name.
- * 2. Inspection date.
- * 3. Location address.
- * 4. Inspection type.
- * 5. Location city and postal code.
- * 6. Reinspection priority.
- * 7. Location regional health authority.
- * 8. Violation type priority (unused).
- * 9. Violation ID and name (only ID is used).
- *
- * We skip the 0th column and 8th column, with everything else in this class represented in the order
- * they appear in the CSV.
- */
-case class InternalCsvFormat(
-  locationName: String,
-  inspectionDate: String,
-  locationAddress: String,
-  inspectionType: String,
-  locationCityAndPostalCode: String,
-  reinspectionPriority: String,
-  locationRha: String,
-  violation: String
-)
+  /**
+   * A more readable, internal representation of the CSV file, with unused fields removed. The columns
+   * of the CSV file are:
+   *
+   * 0. Download date (unused).
+   * 1. Location name.
+   * 2. Inspection date.
+   * 3. Location address.
+   * 4. Inspection type.
+   * 5. Location city and postal code.
+   * 6. Reinspection priority.
+   * 7. Location regional health authority.
+   * 8. Violation type priority (unused).
+   * 9. Violation ID and name (only ID is used).
+   *
+   * We skip the 0th column and 8th column, with everything else in this class represented in the order
+   * they appear in the CSV.
+   */
+  case class InternalCsvFormat(
+    locationName: String,
+    inspectionDate: String,
+    locationAddress: String,
+    inspectionType: String,
+    locationCityAndPostalCode: String,
+    reinspectionPriority: String,
+    locationRha: String,
+    violation: String
+  ) {
+    def postalCode: String = {
+      val strLength = locationCityAndPostalCode.size
+
+      // Obviously not a postal code (note that postal codes always have spaces in the CSVs)
+      if(locationCityAndPostalCode == "" || strLength < 7) {
+        SQL_NULL
+      }
+      // Possibly a postal code? Do a rough check to see if it looks like one. If it walks and talks
+      // like a duck, it's probably a duck.
+      else if(locationCityAndPostalCode.substring(strLength - 7).matches("""^[A-Z]\d[A-Z] \d[A-Z]\d$""")) {
+        locationCityAndPostalCode.substring(strLength - 7)
+      }
+      else {
+        SQL_NULL
+      }
+    }
+
+    def city: String = {
+      if(locationCityAndPostalCode == "") {
+        SQL_NULL
+      }
+      else if(locationCityAndPostalCode.matches("^.+, .+$")) {
+        WordUtils.capitalizeFully(locationCityAndPostalCode.substring(0,
+            locationCityAndPostalCode.lastIndexOf(',')))
+      }
+      else if(locationCityAndPostalCode.matches(", .+$")) {
+        // Some files have this column as ", SASKATCHEWAN" (see
+        // 'Saskatoon_Other Locations_Leaning Maple Meats - Catering [MCKILLOP].csv'
+        SQL_NULL
+      }
+      else {
+        // If not match the above regexs, then it only contains the city name
+        locationCityAndPostalCode;
+      }
+    }
+
+    /**
+     * Get the violation ID, which is a integer uniquely identifying a violation. For some reason, the
+     * reports don't have violation 9, but have violation 8a and 8b. To maintain consistency we
+     * treat 8a as 8 and 8b as 9,
+     * @param string The CSV column for the violation name.
+     * @return Integer of violation ID.
+     */
+    def violationId: Int = {
+      val tempID = violation.substring(0, violation.lastIndexOf('-') - 1).trim
+      if(tempID == "8a") {
+        8
+      }
+      else if(tempID == "8b") {
+        9
+      }
+      else {
+        tempID.toInt
+      }
+    }
+  }
+}
