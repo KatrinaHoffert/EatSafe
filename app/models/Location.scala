@@ -86,13 +86,24 @@ object Location {
     Try {
       require(cityName.nonEmpty, "City name cannot be empty.")
       DB.withConnection(db.name) { implicit connection =>
-        val query = SQL(
-           """
-             SELECT id, name, address
-             FROM location
-             WHERE LOWER(city) = LOWER({cityName});
-           """    
-        ).on("cityName" -> cityName)
+        val query = if(cityName.toLowerCase != "unknown city") {
+          SQL(
+             """
+               SELECT id, name, address
+               FROM location
+               WHERE LOWER(city) = LOWER({cityName});
+             """    
+          ).on("cityName" -> cityName)
+        }
+        else {
+          SQL(
+             """
+               SELECT id, name, address
+               FROM location
+               WHERE city IS NULL;
+             """
+          )
+        }
         
         query().map {
           row => SlimLocation(row[Int]("id"), row[String]("name"), row[String]("address"))
@@ -104,7 +115,8 @@ object Location {
   /**
    * Gets a list of city names from the locations in the database. Currently takes no parameters.
    *
-   * @return A sequence of Strings equal to every unique city in the DB, in alphabetical order.
+   * @return A sequence of Strings equal to every unique city in the DB, in alphabetical order. At
+   * the bottom will be "Unknown city", for locations without a city set.
    */
   def listCities()(implicit db:ActiveDatabase): Try[Seq[String]] = {
     Try {
@@ -113,11 +125,12 @@ object Location {
           """
             SELECT DISTINCT city
             FROM location
+            WHERE city IS NOT NULL
             ORDER BY city;
           """
         )
         
-        query().map(_[String]("city")).toList
+        query().map(_[String]("city")).toList :+ "Unknown city"
       }
     }
   }
