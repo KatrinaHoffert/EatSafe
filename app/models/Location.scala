@@ -5,6 +5,7 @@ import anorm._
 import play.api.db.DB
 import play.api.Play.current
 import globals.ActiveDatabase
+import play.api.cache.Cache
 
 /**
  * Represents a location (which is anywhere that can be audited for health inspections, such as
@@ -74,19 +75,21 @@ object Location {
    * Gets a list of all Locations with coordinates. These are full location objects.
    */
    def getAllLocationsWithCoordinates()(implicit db: ActiveDatabase): Try[Seq[Location]] = {
-    Try {
-      DB.withConnection(db.name) { implicit connection =>
-        val query = SQL(
-          """
-            SELECT id, name, address, postcode, city, rha, longitude, latitude
-            FROM location INNER JOIN coordinate USING (address, city);
-          """
-        )
+    Cache.getOrElse[Try[Seq[Location]]]("allLocations") {
+      Try {
+        DB.withConnection(db.name) { implicit connection =>
+          val query = SQL(
+            """
+              SELECT id, name, address, postcode, city, rha, longitude, latitude
+              FROM location INNER JOIN coordinate USING (address, city);
+            """
+          )
 
-        val tryLocations = query().map((locationRowToLocation(_, true))).toList
+          val tryLocations = query().map((locationRowToLocation(_, true))).toList
 
-        // We have a Seq[Try[Location]], convert it to a Seq[Location]
-        tryLocations.map(_.get)
+          // We have a Seq[Try[Location]], convert it to a Seq[Location]
+          tryLocations.map(_.get)
+        }
       }
     }
   }
