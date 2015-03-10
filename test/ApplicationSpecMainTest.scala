@@ -22,7 +22,7 @@ import play.api.i18n.Messages
  * For more information, consult the wiki.
  */
 @RunWith(classOf[JUnitRunner])
-class ApplicationSpec extends Specification {
+class ApplicationSpecMainTest extends Specification {
   
   /* 
    * Basic check that all views are being rendered in html

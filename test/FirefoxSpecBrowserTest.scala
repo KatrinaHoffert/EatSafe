@@ -23,7 +23,7 @@ import play.api.i18n.Messages
  * For more information, consult the wiki.
  */
 @RunWith(classOf[JUnitRunner])
-class FirefoxSpec extends Specification {
+class FirefoxSpecBrowserTest extends Specification {
   
     //Firefox drivers are build into Play I think and thus a path doesnt need to be set
     //System.setProperty("webdriver.chrome.driver", "chromedriver.exe");
