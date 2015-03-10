@@ -4993,7 +4993,7 @@ COPY location (id, name, address, postcode, city, rha) FROM STDIN;
 4973	Yorkton's Dari Best Scoops	37 Broadway St W	S3N 0L5	Yorkton	Sunrise Health Authority
 \.
 
-COPY inspection (id, location_id, inspectionDate, inspection_type, reinspection_priority) FROM STDIN;
+COPY inspection (id, location_id, inspection_date, inspection_type, reinspection_priority) FROM STDIN;
 1	1	2014-09-23	Routine	Low
 2	1	2013-08-01	Routine	Low
 3	1	2012-02-08	Routine	Low

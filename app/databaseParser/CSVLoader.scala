@@ -132,7 +132,7 @@ class CSVLoader(writer: Writer) {
     writer.write("COPY location (id, name, address, postcode, city, rha) FROM STDIN;\n")
     writer.write(tabDelimitedLocations.toString + "\\.\n\n")
 
-    writer.write("COPY inspection (id, location_id, inspectionDate, inspection_type, reinspection_priority) FROM STDIN;\n")
+    writer.write("COPY inspection (id, location_id, inspection_date, inspection_type, reinspection_priority) FROM STDIN;\n")
     writer.write(tabDelimitedInspections.toString + "\\.\n\n")
 
     writer.write("COPY violation (inspection_id, violation_id) FROM STDIN;\n")
