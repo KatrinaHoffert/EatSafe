@@ -13,9 +13,7 @@ CREATE TABLE location(
     address TEXT,
     postcode TEXT,
     city TEXT,
-    rha TEXT NOT NULL,
-    latitude DECIMAL(10,6),
-    longitude DECIMAL(10,6)
+    rha TEXT NOT NULL
 );
 
   
@@ -58,6 +56,6 @@ CREATE TABLE violation(
 CREATE TABLE coordinate(
     city TEXT NOT NULL,
     address TEXT NOT NULL,
-    latitude DECIMAL(10,6) NOT NULL,
-    longitude DECIMAL(10,6) NOT NULL
+    latitude DECIMAL(10,6),
+    longitude DECIMAL(10,6)
 )

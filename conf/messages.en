@@ -6,6 +6,7 @@ locations.selectCity.title=Select a city
 locations.selectCity.prompt=What city/town are you in?
 locations.selectCity.noInput=You need to enter something.
 locations.selectCity.badInput=I''m sorry, Dave, that not valid input.
+locations.selectCity.locateMeTooltip=Fills in the input with your current location
 
 # Select location page
 locations.selectLocation.title=Select a location
@@ -51,7 +52,7 @@ footer.copyright=Copyright Off By One 2015
 # Error pages
 errors.error500Title=Error 500
 errors.error500Desc=Internal server error
-errors.error500Text=That means it''s (probably) us, not you. Assuming that you haven''t been trying to break our software, you seem to have encountered a bug that couldn''t be handled or wasn''t expected. The stack trace below may help us solve the bug.
+errors.error500Text=That means it''s (probably) us, not you. Assuming that you haven''t been trying to break our software, you seem to have encountered a bug that couldn''t be handled or wasn''t expected. The stack trace below may help us solve the bug. Send it to {0}.
 errors.stackTraceHeading=Stack trace (for nerds)
 errors.emptyCityTitle=There's no locations in this city
 errors.emptyCityDesc=Uh oh...
