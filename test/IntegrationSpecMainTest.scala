@@ -64,7 +64,7 @@ class IntegrationSpecMainTest extends Specification {
       
       "display error for incorrect city but remain on current page" in new WithApplication {
         val result = controllers.LocationController.findLocation("#DOESNTEXIST")(FakeRequest())
-        assert(status(result) == OK)
+        assert(status(result) must beEqualTo (404))
       }
       
     }
