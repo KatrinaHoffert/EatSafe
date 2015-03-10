@@ -1,15 +1,16 @@
 package databaseParser
 
-import java.io.FileInputStream
-import java.io.FileNotFoundException
-import java.io.InputStreamReader
+import java.io.File
 import java.io.Writer
 import java.util.ArrayList
 import java.util.Date
-import java.util.List
 import java.text.SimpleDateFormat
 import org.apache.commons.lang3.text.WordUtils
+import java.io.InputStreamReader
+import java.io.FileInputStream
 import au.com.bytecode.opencsv.CSVReader
+import scala.collection.JavaConversions._
+import java.nio.charset.StandardCharsets
 
 /**
  * Loads and interprets a CSV file, creating SQL ouput that can be run in the Postgres console.
@@ -17,6 +18,13 @@ import au.com.bytecode.opencsv.CSVReader
  */
 class CSVLoader(writer: Writer) {
   val separator = ','
+
+  // These string builders store the tab delimited content that will be used to create the COPY
+  // input. It's a very simple, tab delimited format. As long as we insert them in the order that
+  // is shown here, there's no foreign key violations.
+  var tabDelimitedLocations = scala.collection.mutable.StringBuilder
+  var tabDelimitedInspections = scala.collection.mutable.StringBuilder
+  var tabDelimitedViolations = scala.collection.mutable.StringBuilder
 
   /**
    * Interprets a given CSV file, writing the appropriate SQL queries to the Writer that was
@@ -47,52 +55,23 @@ class CSVLoader(writer: Writer) {
    */
   def loadCSV(csvFile: String, locationId: Int, inspectionIdIn: Int): Int = {
     var inspectionId = inspectionIdIn
-    val csvReader = new CSVReader(new InputStreamReader(new FileInputStream(csvFile),
-        "UTF-16"), separator)
 
-    // Get rid of the header row (don't need it)
-    val headerRow = csvReader.readNext();
+    val allLines = new CSVReader(new InputStreamReader(new FileInputStream(csvFile),
+        StandardCharsets.UTF_16)).readAll.drop(1)
 
-    if (headerRow == null) {
-      csvReader.close()
-      throw new FileNotFoundException("No columns defined in given CSV file: " + csvFile +
-          "\nPlease check the CSV file format.")
+    // Read this into our representation (see documentation of InternalCsvFormat for the CSV format)
+    // For some reason, this goddamn CSV is so bad that libraries think it has extra rows.
+    val allRows: Seq[InternalCsvFormat] = allLines.map {
+      row =>
+        InternalCsvFormat(row(1), row(2), row(3), row(4), row(5), row(6), row(7), row(9))
     }
-
-    var nextLine = csvReader.readNext()
-    val dataMatrix = new scala.collection.mutable.ArrayBuffer[Array[String]]
-
-    // Read all rows into data matrix
-    while(nextLine != null) {
-      if(nextLine != null) {
-        val recordLine = new Array[String](10)
-        var index = 0;
-
-        for (string <- nextLine) {
-          val date = DateUtil.convertToDate(string) match {
-            case Some(date) =>
-              val formatter = new SimpleDateFormat("yyy-MM-dd")
-              recordLine(index) = formatter.format(date)
-            case None =>
-              recordLine(index) = string
-          }
-
-          index += 1
-        }
-
-        dataMatrix.append(recordLine)
-      }
-
-      nextLine = csvReader.readNext()
-    }
-
 
     // Fix capitalization and escape single quotes
-    var locationName = WordUtils.capitalizeFully(dataMatrix(0)(1))
-    var locationAddress = WordUtils.capitalizeFully(getIfExists(dataMatrix(0)(3)))
-    var locationPostcode = getPostcode(dataMatrix(0)(5))
-    var locationCity = getCity(dataMatrix(0)(5))
-    var locationRha = getIfExists(dataMatrix(0)(7))
+    var locationName = WordUtils.capitalizeFully(allRows(0).locationName)
+    var locationAddress = WordUtils.capitalizeFully(getIfExists(allRows(0).locationAddress))
+    var locationPostcode = getPostcode(allRows(0).locationCityAndPostalCode)
+    var locationCity = getCity(allRows(0).locationCityAndPostalCode)
+    var locationRha = getIfExists(allRows(0).locationRha)
 
     // Must remove apostrophes from the places that can have them
     if(locationName != null) locationName = locationName.replaceAll("'","''")
@@ -114,12 +93,12 @@ class CSVLoader(writer: Writer) {
     //see "Regina Qu'Appelle_Pilot Butte_Pilot Butte Recreation Hall Kitchen [Pilot But...].csv"
     val lastViolationId = new ArrayList[Integer]
 
-    for(i <- 0 until dataMatrix.size) {
+    for(i <- 0 until allRows.size) {
       // Test if this is a new inspection; if yes, insert; if no, just insert violations
-      if(i == 0 || !(dataMatrix(i)(2) == (dataMatrix(i - 1)(2)))) {
-        val inspectionDate = getIfExists(dataMatrix(i)(2));
-        val inspectionType = getIfExists(dataMatrix(i)(4));
-        val reinspectionPriority = getIfExists(dataMatrix(i)(6));
+      if(i == 0 || !(allRows(i).inspectionDate == (allRows(i - 1).inspectionDate))) {
+        val inspectionDate = getIfExists(allRows(i).inspectionDate);
+        val inspectionType = getIfExists(allRows(i).inspectionType);
+        val reinspectionPriority = getIfExists(allRows(i).reinspectionPriority);
 
         // Insert inspection
         writer.write("INSERT INTO inspection(id, location_id, inspection_date, inspection_type, reinspection_priority)\n" +
@@ -127,18 +106,18 @@ class CSVLoader(writer: Writer) {
             inspectionDate, inspectionType, reinspectionPriority))
         inspectionId += 1
 
-        if(dataMatrix(i)(9) != "") {
+        if(allRows(i).violation != "") {
           // Insert violation
-          val violationId = getViolationId(dataMatrix(i)(9))
+          val violationId = getViolationId(allRows(i).violation)
           lastViolationId.clear()
           lastViolationId.add(violationId)
           writer.write("INSERT INTO violation(inspection_id, violation_id)\n" +
               " VALUES (%d, %d);\n\n".format(inspectionId - 1, violationId))
         }
       }
-      else if(dataMatrix(i)(9) != "") {
+      else if(allRows(i).violation != "") {
         // A violation for the same inspection
-        val violationId = getViolationId(dataMatrix(i)(9))
+        val violationId = getViolationId(allRows(i).violation)
         if(!lastViolationId.contains(violationId)) {
           lastViolationId.add(violationId)
           writer.write("INSERT INTO violation(inspection_id, violation_id)\n" +
@@ -147,7 +126,6 @@ class CSVLoader(writer: Writer) {
       }
     }
 
-    csvReader.close()
     inspectionId
   }
 
@@ -159,7 +137,7 @@ class CSVLoader(writer: Writer) {
    * @return Integer of violation ID.
    */
   def getViolationId(string: String): Int = {
-    val tempID = string.substring(0, string.lastIndexOf('-') - 1)
+    val tempID = string.substring(0, string.lastIndexOf('-') - 1).trim
     if(tempID == "8a") {
       8
     }
@@ -219,3 +197,32 @@ class CSVLoader(writer: Writer) {
    */
   def getIfExists(string: String): String = if(string == "") null else string
 }
+
+/**
+ * A more readable, internal representation of the CSV file, with unused fields removed. The columns
+ * of the CSV file are:
+ *
+ * 0. Download date (unused).
+ * 1. Location name.
+ * 2. Inspection date.
+ * 3. Location address.
+ * 4. Inspection type.
+ * 5. Location city and postal code.
+ * 6. Reinspection priority.
+ * 7. Location regional health authority.
+ * 8. Violation type priority (unused).
+ * 9. Violation ID and name (only ID is used).
+ *
+ * We skip the 0th column and 8th column, with everything else in this class represented in the order
+ * they appear in the CSV.
+ */
+case class InternalCsvFormat(
+  locationName: String,
+  inspectionDate: String,
+  locationAddress: String,
+  inspectionType: String,
+  locationCityAndPostalCode: String,
+  reinspectionPriority: String,
+  locationRha: String,
+  violation: String
+)
