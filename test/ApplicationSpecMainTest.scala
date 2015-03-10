@@ -63,7 +63,7 @@ class ApplicationSpecMainTest extends Specification {
     
     "give error page when an invalid city url is requested" in new WithApplication {
       val error = route(FakeRequest(GET, "/find/octavia")).get
-      assert(status(error) must equalTo(OK))
+      assert(status(error) must equalTo(404))
       assert(contentAsString(error) must contain(Messages("errors.emptyCityDesc")))
     }
     
@@ -90,7 +90,8 @@ class ApplicationSpecMainTest extends Specification {
       typeahead.click
       typeahead.sendKeys("SASKATOON")
       typeahead.sendKeys(Keys.ENTER)
-      assert(browser.url must contain("/find/Saskatoon"))
+      assert(browser.url must contain("/find/SASKATOON"))
+      browser.title() must contain(Messages("locations.selectLocation.title"))//made it to not an aerror page
     }
     
     "display choose location page when location is typed in all lowercase" in new WithBrowser {
@@ -99,7 +100,8 @@ class ApplicationSpecMainTest extends Specification {
       typeahead.click
       typeahead.sendKeys("saskatoon")
       typeahead.sendKeys(Keys.ENTER)
-      assert(browser.url must contain("/find/Saskatoon"))
+      assert(browser.url must contain("/find/saskatoon"))
+      browser.title() must contain(Messages("locations.selectLocation.title"))
     }
     
     "display choose location page when location is fully typed and submitted with enter" in new WithBrowser {
@@ -153,7 +155,7 @@ class ApplicationSpecMainTest extends Specification {
   
   "display location page" should {
     "display show map page when address is clicked" in new WithBrowser {
-      browser.goTo("/view/1")
+      browser.goTo("/view/3675")
       val action = new Actions(browser.getDriver)
       action.moveToElement(browser.webDriver.findElement(By.tagName("a"))).perform
       action.click.perform
@@ -191,7 +193,7 @@ class ApplicationSpecMainTest extends Specification {
   "display map page" should {
     "render a map on the page with a header" in new WithBrowser {
       //Navigate to a page with a map (uses previously tested navigation)
-      browser.goTo("/view/1")
+      browser.goTo("/view/3675")//this page needs to have a map link
       val action = new Actions(browser.getDriver)
       action.moveToElement(browser.webDriver.findElement(By.tagName("a"))).perform
       action.click.perform
