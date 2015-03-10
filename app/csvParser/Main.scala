@@ -22,13 +22,13 @@ object Main {
 
   def main(args: Array[String]): Unit = {
     val writer = new OutputStreamWriter(new FileOutputStream(FILE_NAME), "utf-8")
-    val csvLoader = new CsvLoader(writer);
+    val csvLoader = new CsvLoader(writer)
 
     insertViolationTypes(writer)
-    readFolder(FOLDER_PATH, csvLoader);
+    readFolder(FOLDER_PATH, csvLoader)
 
     csvLoader.writeSqlFile
-    writer.close();
+    writer.close()
   }
 
   /**
@@ -63,8 +63,8 @@ object Main {
    * @param writer The writer to write SQL commands to.
    */
   def readFolder(folderPath: String, csvLoader: CsvLoader): Unit = {
-    val folder = new File(folderPath);
-    val files = folder.listFiles();
+    val folder = new File(folderPath)
+    val files = folder.listFiles()
 
     if(files == null) println("ERROR: No files in this folder <" + folderPath + ">")
 
@@ -73,12 +73,12 @@ object Main {
 
     for(file <- files) {
       if(file.isFile && file.getName.toLowerCase.endsWith("csv")) {
-        inspectionId = csvLoader.loadCsv(folderPath + file.getName, locationId, inspectionId);
-        locationId += 1;
+        inspectionId = csvLoader.loadCsv(folderPath + file.getName, locationId, inspectionId)
+        locationId += 1
       }
     }
 
     println("Number of locations: " + (locationId - 1))
-    println("Number of inspections: " + (inspectionId - 1));
+    println("Number of inspections: " + (inspectionId - 1))
   }
 }
