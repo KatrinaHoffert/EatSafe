@@ -84,7 +84,7 @@ class CSVLoader(writer: Writer) {
         tabDelimitedInspections.append("\t")
         tabDelimitedInspections.append(locationId)
         tabDelimitedInspections.append("\t")
-        tabDelimitedInspections.append(row.inspectionDate)
+        tabDelimitedInspections.append(convertToIso8601(row.inspectionDate))
         tabDelimitedInspections.append("\t")
         tabDelimitedInspections.append(row.inspectionType)
         tabDelimitedInspections.append("\t")
@@ -145,6 +145,16 @@ class CSVLoader(writer: Writer) {
    * @return "\N" if contains nothing or the string itself otherwise.
    */
   private def getNullable(string: String): String = if(string == "") SQL_NULL else string
+
+  /**
+   * Converts a date (as a string) from the format used in the CSV files to ISO 8601.
+   * 
+   * So "Monday, January 01, 1970" becomes "1970-01-01".
+   */
+  def convertToIso8601(input: String): String = {
+    val date = new SimpleDateFormat("EEEE, MMMM dd, yyyy").parse(input)
+    new SimpleDateFormat("yyy-MM-dd").format(date)
+  }
 
   /**
    * A more readable, internal representation of the CSV file, with unused fields removed. The columns
