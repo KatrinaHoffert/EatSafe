@@ -106,7 +106,7 @@ object Location {
         }
         
         query().map {
-          row => SlimLocation(row[Int]("id"), row[String]("name"), row[String]("address"))
+          row => SlimLocation(row[Int]("id"), row[String]("name"), row[Option[String]]("address"))
         }.toList
       }
     }
@@ -161,4 +161,4 @@ object Location {
  * A slimmed down version of the Location class used to represent the data we need when selecting
  * a location.
  */
-case class SlimLocation(id: Int, name: String, address: String)
+case class SlimLocation(id: Int, name: String, address: Option[String])

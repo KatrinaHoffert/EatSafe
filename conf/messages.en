@@ -57,3 +57,4 @@ errors.emptyCityTitle=There's no locations in this city
 errors.emptyCityDesc=Uh oh...
 errors.emptyCityText=There''s no locations in "{0}". Perhaps you''ve mistyped a URL or there''s a bug in our software.
 errors.emptyCityTryAgain=Give the city selection another try?
+errors.unknownAddress=Unknown address
