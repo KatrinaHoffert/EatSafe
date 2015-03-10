@@ -62,7 +62,7 @@ object Location {
          """
         ).on("locationId" -> locationId)
         
-        val optionalLocation = locationQuery().map(locationRowToLocation).toList.headOption
+        val optionalLocation = locationQuery().map(locationRowToLocation(_, false)).toList.headOption
         optionalLocation.getOrElse {
           throw new IllegalArgumentException("There is no location with ID " + locationId)
         }.get
@@ -83,7 +83,7 @@ object Location {
           """
         )
 
-        val tryLocations = query().map(locationRowToLocation).toList
+        val tryLocations = query().map((locationRowToLocation(_, true))).toList
 
         // We have a Seq[Try[Location]], convert it to a Seq[Location]
         tryLocations.map(_.get)
@@ -167,15 +167,14 @@ object Location {
    * @param connection this is a implicit parameter that is used to share the database connection to improve performance
    * @return A location object created from that row, with the inspections from the database.
    */
-  private def locationRowToLocation(row: Row)(implicit connection: java.sql.Connection): Try[Location] = {
-    Inspection.getInspections(row[Int]("id")) match {
-      case Success(inspections) =>
-        Success(Location(row[Int]("id"), row[String]("name"), row[Option[Double]]("latitude"),
-            row[Option[Double]]("longitude"), row[Option[String]]("address"), row[Option[String]]("postcode"),
-            row[Option[String]]("city"), row[String]("rha"),  inspections))
-      case Failure(ex) =>
-        Failure(ex)
-    }
+  private def locationRowToLocation(row: Row, firstRowOnly: Boolean)
+      (implicit connection: java.sql.Connection): Try[Location] = {
+    for {
+      inspections <- if(!firstRowOnly) Inspection.getInspections(row[Int]("id"))
+        else Inspection.getFirstInspection(row[Int]("id"))
+    } yield Location(row[Int]("id"), row[String]("name"), row[Option[Double]]("latitude"),
+        row[Option[Double]]("longitude"), row[Option[String]]("address"), row[Option[String]]("postcode"),
+        row[Option[String]]("city"), row[String]("rha"), inspections)
   }
 }
 
