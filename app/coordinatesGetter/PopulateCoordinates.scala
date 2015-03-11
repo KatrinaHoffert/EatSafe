@@ -44,7 +44,7 @@ case class NoCoordinateLocation(id: Int, address: String, city: String)
 
 
 
-object PopulateCoordinates extends Controller{
+object PopulateCoordinates{
 
   /**
    * The Google Map API URL that accept HTTP get request and return a JSON object that contains 
@@ -55,13 +55,6 @@ object PopulateCoordinates extends Controller{
    */
   var GEOCODING_URL = "https://maps.googleapis.com/maps/api/geocode/json"
   
-  /**
-   * Read a response from JSON
-   */
-  implicit val responseReads: Reads[Response] = (
-    (JsPath \ "results" \ "geometry" \ "location").read[Coordinate] and
-    (JsPath \ "status").read[String]
-  )(Response.apply _)
   
   /**
    * Read a coordinate object from JSON
@@ -70,6 +63,14 @@ object PopulateCoordinates extends Controller{
     (JsPath \ "geometry" \\ "location" \ "lat").read[Double] and
     (JsPath \ "geometry" \\ "location" \ "lng").read[Double]
   )(Coordinate.apply _)
+  
+  /**
+   * Read a response from JSON
+   */
+  implicit val responseReads: Reads[Response] = (
+    (JsPath \ "results")(0).read[Coordinate].orElse(Reads.pure(Coordinate(0,0))) and
+    (JsPath \ "status").read[String]
+  )(Response.apply _)
     
 
   /**
@@ -180,7 +181,7 @@ object PopulateCoordinates extends Controller{
                   val status = coordinateResult.status
                   val coordinate: Coordinate = coordinateResult.coordinate
                   //for debugging
-                  println("status")
+                  println("status" + status)
                   println("id" + location.id + ": " + parameterString + " lat: "+ coordinate.lat + " long:" + coordinate.long)
                   //update this location
                   updateCoordinate(location.id, coordinate)
@@ -202,7 +203,7 @@ object PopulateCoordinates extends Controller{
                 }
                 
             }
-            Await.ready(futureResult,Duration(10000, "second"))
+            Await.ready(futureResult,Duration(100, "second"))
           }
         case Failure(ex) =>
           println("Failed to get no coordinates locations" + ex)
