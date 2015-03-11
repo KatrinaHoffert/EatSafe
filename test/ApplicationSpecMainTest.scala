@@ -7,12 +7,8 @@ import org.fluentlenium.core.FluentPage
 import org.fluentlenium.core.filter.FilterConstructor._
 
 import org.openqa.selenium._
-import org.openqa.selenium.htmlunit.HtmlUnitDriver
-import org.openqa.selenium.firefox._
+
 import org.openqa.selenium.interactions.Actions
-import org.openqa.selenium.WebDriver
-import org.openqa.selenium.support.ui.ExpectedConditions;
-import org.openqa.selenium.support.ui.WebDriverWait;
 
 import play.api.i18n.Messages
 
@@ -51,6 +47,7 @@ class ApplicationSpecMainTest extends Specification {
   
   "select city error page" should {
     "return to select city page when option is selected" in new WithBrowser {
+      System.out.println("1");
       browser.goTo("/find/octavia")
       val link = browser.webDriver.findElement(By.linkText(Messages("errors.emptyCityTryAgain")))
       link.click
@@ -68,6 +65,7 @@ class ApplicationSpecMainTest extends Specification {
     }
     
     "give error message when trying submit without input" in new WithBrowser {
+      System.out.println("2");
       browser.goTo("/")
       val typeahead = browser.getDriver.findElement(By.id("municipality"))
       typeahead.click
@@ -76,6 +74,7 @@ class ApplicationSpecMainTest extends Specification {
     }
      
     "give error page when trying to search for invalid place" in new WithBrowser {
+      System.out.println("3");
       browser.goTo("/")
       val typeahead = browser.getDriver.findElement(By.id("municipality"))
       typeahead.click
@@ -85,6 +84,7 @@ class ApplicationSpecMainTest extends Specification {
     }
     
     "display choose location page when location is typed in all caps" in new WithBrowser {
+      System.out.println("4");
       browser.goTo("/")
       val typeahead = browser.getDriver.findElement(By.id("municipality"))
       typeahead.click
@@ -95,6 +95,7 @@ class ApplicationSpecMainTest extends Specification {
     }
     
     "display choose location page when location is typed in all lowercase" in new WithBrowser {
+      System.out.println("5");
       browser.goTo("/")
       val typeahead = browser.getDriver.findElement(By.id("municipality"))
       typeahead.click
@@ -105,6 +106,7 @@ class ApplicationSpecMainTest extends Specification {
     }
     
     "display choose location page when location is fully typed and submitted with enter" in new WithBrowser {
+      System.out.println("6");
       browser.goTo("/")
       val typeahead = browser.getDriver.findElement(By.id("municipality"))
       typeahead.click
@@ -114,6 +116,7 @@ class ApplicationSpecMainTest extends Specification {
     }
     
     "display choose location page when location is partially typed, hint is clicked and submitted with enter" in new WithBrowser {
+      System.out.println("7");
       browser.goTo("/")
       val typeahead = browser.getDriver.findElement(By.id("municipality"))
       val action = new Actions(browser.getDriver)
@@ -144,6 +147,7 @@ class ApplicationSpecMainTest extends Specification {
     }
     
     "display chosen location when valid option is submitted" in new WithBrowser {
+      System.out.println("8");
       browser.goTo("/find/Saskatoon")
       val typeahead = browser.getDriver.findElement(By.id("location"))
       typeahead.click()
@@ -155,6 +159,7 @@ class ApplicationSpecMainTest extends Specification {
   
   "display location page" should {
     "display show map page when address is clicked" in new WithBrowser {
+      System.out.println("9");
       browser.goTo("/view/3675")
       val action = new Actions(browser.getDriver)
       action.moveToElement(browser.webDriver.findElement(By.id("mapForLocation"))).perform
@@ -164,6 +169,7 @@ class ApplicationSpecMainTest extends Specification {
     }
     
     "display regional health authority when link is clicked" in new WithBrowser {
+      System.out.println("10");
       //Find a place in the Saskatoon Health Region
       browser.goTo("/find/Saskatoon")
       val typeahead = browser.getDriver.findElement(By.id("location"))
@@ -192,6 +198,7 @@ class ApplicationSpecMainTest extends Specification {
   
   "display map page" should {
     "render a map on the page with a header" in new WithBrowser {
+      System.out.println("11");
       //Navigate to a page with a map (uses previously tested navigation)
       browser.goTo("/view/3675")//this page needs to have a map link
       val action = new Actions(browser.getDriver)
