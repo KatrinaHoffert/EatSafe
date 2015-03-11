@@ -157,7 +157,7 @@ class ApplicationSpecMainTest extends Specification {
     "display show map page when address is clicked" in new WithBrowser {
       browser.goTo("/view/3675")
       val action = new Actions(browser.getDriver)
-      action.moveToElement(browser.webDriver.findElement(By.tagName("a"))).perform
+      action.moveToElement(browser.webDriver.findElement(By.id("mapForLocation"))).perform
       action.click.perform
       assert(browser.url must contain("map"))
       assert(browser.webDriver.findElement(By.className("mapLocation-header")).isDisplayed)
@@ -195,7 +195,7 @@ class ApplicationSpecMainTest extends Specification {
       //Navigate to a page with a map (uses previously tested navigation)
       browser.goTo("/view/3675")//this page needs to have a map link
       val action = new Actions(browser.getDriver)
-      action.moveToElement(browser.webDriver.findElement(By.tagName("a"))).perform
+      action.moveToElement(browser.webDriver.findElement(By.id("mapForLocation"))).perform
       action.click.perform
       
       assert(browser.url must contain("map"))
