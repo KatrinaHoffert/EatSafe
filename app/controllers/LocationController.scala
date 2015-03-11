@@ -6,6 +6,7 @@ import play.api.mvc._
 import models._
 import models.Location
 import globals._
+import play.api.Logger
 
 object LocationController extends Controller {
   /**
@@ -16,6 +17,7 @@ object LocationController extends Controller {
       case Success(cities) =>
         Ok(views.html.locations.selectCity(cities))
       case Failure(ex) =>
+        Logger.error("City selection failed", ex)
         InternalServerError(views.html.errors.error500(ex))
     }
   }
@@ -26,12 +28,14 @@ object LocationController extends Controller {
    * display a custom error page for that.
    */
   def findLocation(city: String) = Action {
-    Location.getLocationsByCity(city) match {
+    Location.getLocationsByCity(city.toLowerCase) match {
       case Success(cityLocations) if !cityLocations.isEmpty => 
         Ok(views.html.locations.findLocation(cityLocations, city))
       case Success(_) =>
-        Ok(views.html.errors.emptyCityError(city))
+        Logger.warn("User found empty city ('" + city + "')")
+        NotFound(views.html.errors.emptyCityError(city))
       case Failure(ex) => 
+        Logger.error("Location selection failed", ex)
         InternalServerError(views.html.errors.error500(ex))
     }
   }
@@ -45,6 +49,7 @@ object LocationController extends Controller {
       case Success(location) =>
         Ok(views.html.locations.displayLocation(location))
       case Failure(ex) =>
+        Logger.error("Showing location failed", ex)
         InternalServerError(views.html.errors.error500(ex))
     }
   }

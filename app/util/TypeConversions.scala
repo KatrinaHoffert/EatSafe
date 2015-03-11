@@ -3,6 +3,7 @@ package util
 import models._
 import scala.util.{Try, Success, Failure}
 import play.api.libs.json._
+import play.api.i18n.Messages
 
 /**
  * Contains methods for performing and simplifying type conversions.
@@ -23,9 +24,10 @@ object TypeConversions {
    */
   def slimLocationsToJson(locations: Seq[SlimLocation]): JsValue = {
     val jsObjects = locations.map { location =>
+      val address = location.address.getOrElse(Messages("errors.unknownAddress"))
       Json.obj(
         "name" -> location.name,
-        "address" -> location.address,
+        "address" -> address,
         "id" -> location.id
       )
     }

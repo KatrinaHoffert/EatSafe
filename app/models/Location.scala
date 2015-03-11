@@ -5,6 +5,7 @@ import anorm._
 import play.api.db.DB
 import play.api.Play.current
 import globals.ActiveDatabase
+import play.api.cache.Cache
 
 /**
  * Represents a location (which is anywhere that can be audited for health inspections, such as
@@ -21,10 +22,24 @@ import globals.ActiveDatabase
  * @param latitude The latitude of the location. (-90 <= _ <= 90)
  * @param longitude The longitude of the location (-180 < _ <= 180)
  */
-case class Location(id: Int, name: String, latitude: Double, longitude: Double, address: String,
-	postalCode: String, city: String, regionalHealthAuthority: String, inspections: Seq[Inspection]) {
+case class Location(id: Int, name: String, latitude: Option[Double], longitude: Option[Double],
+    address: Option[String], postalCode: Option[String], city: Option[String],
+    regionalHealthAuthority: String, inspections: Seq[Inspection]) {
   /** Returns true if the location has at least one inspection. */
   def hasInspections: Boolean = inspections.size != 0
+
+  def rating: Rating.Value = {
+    if(inspections.isEmpty) {
+      Rating.Unknown
+    }
+    else {
+      inspections(0).reinspectionPriority match {
+        case "Low" => Rating.Good
+        case "Moderate" => Rating.Fair
+        case "High" => Rating.Poor
+      }
+    }
+  }
 }
 
 object Location {
@@ -36,27 +51,47 @@ object Location {
    * the database.
    */
   def getLocationById(locationId: Int)(implicit db: ActiveDatabase): Try[Location] = {
-    val tryLocation = Try {
+    Try {
       require(locationId > 0, "Location ID must be greater than 0.")
       
       DB.withConnection(db.name) { implicit connection =>
-        val query = SQL(
-           """
-             SELECT id, name, address, postcode, city, rha, latitude, longitude
-             FROM location
-             WHERE id = {locationId};
-           """    
+        val locationQuery = SQL(
+         """
+          SELECT id, name, address, postcode, city, rha, longitude, latitude
+          FROM location LEFT JOIN coordinate USING (address, city)
+           WHERE id = {locationId};
+         """
         ).on("locationId" -> locationId)
         
-        val optionalLocation = query().map(locationRowToLocation).toList.headOption
+        val optionalLocation = locationQuery().map(locationRowToLocation(_, false)).toList.headOption
         optionalLocation.getOrElse {
           throw new IllegalArgumentException("There is no location with ID " + locationId)
+        }.get
+      }
+    }
+  }
+
+  /**
+   * Gets a list of all Locations with coordinates. These are full location objects.
+   */
+   def getAllLocationsWithCoordinates()(implicit db: ActiveDatabase): Try[Seq[Location]] = {
+    Cache.getOrElse[Try[Seq[Location]]]("allLocations") {
+      Try {
+        DB.withConnection(db.name) { implicit connection =>
+          val query = SQL(
+            """
+              SELECT id, name, address, postcode, city, rha, longitude, latitude
+              FROM location INNER JOIN coordinate USING (address, city);
+            """
+          )
+
+          val tryLocations = query().map((locationRowToLocation(_, true))).toList
+
+          // We have a Seq[Try[Location]], convert it to a Seq[Location]
+          tryLocations.map(_.get)
         }
       }
     }
-
-    // We have a Try[Try[Location]], let's flatten that
-    tryLocation.flatten
   }
 
   /**
@@ -72,16 +107,27 @@ object Location {
     Try {
       require(cityName.nonEmpty, "City name cannot be empty.")
       DB.withConnection(db.name) { implicit connection =>
-        val query = SQL(
+        val query = if(cityName.toLowerCase != "unknown city") {
+          SQL(
            """
              SELECT id, name, address
              FROM location
-             WHERE city = {cityName};
-           """    
-        ).on("cityName" -> cityName)
+             WHERE LOWER(city) = LOWER({cityName});
+           """
+          ).on("cityName" -> cityName)
+        }
+        else {
+          SQL(
+             """
+               SELECT id, name, address
+               FROM location
+               WHERE city IS NULL;
+             """
+          )
+        }
         
         query().map {
-          row => SlimLocation(row[Int]("id"), row[String]("name"), row[String]("address"))
+          row => SlimLocation(row[Int]("id"), row[String]("name"), row[Option[String]]("address"))
         }.toList
       }
     }
@@ -90,7 +136,8 @@ object Location {
   /**
    * Gets a list of city names from the locations in the database. Currently takes no parameters.
    *
-   * @return A sequence of Strings equal to every unique city in the DB, in alphabetical order.
+   * @return A sequence of Strings equal to every unique city in the DB, in alphabetical order. At
+   * the bottom will be "Unknown city", for locations without a city set.
    */
   def listCities()(implicit db:ActiveDatabase): Try[Seq[String]] = {
     Try {
@@ -99,11 +146,14 @@ object Location {
           """
             SELECT DISTINCT city
             FROM location
+            WHERE city IS NOT NULL
             ORDER BY city;
           """
         )
         
-        query().map(_[String]("city")).toList
+        val cityList = query().map(_[String]("city")).toList
+
+        cityList ++ Seq("Unknown city")
       }
     }
   }
@@ -114,18 +164,20 @@ object Location {
    * any means of static typing for database rows, so you must ensure that the row that you pass in
    * is indeed a row of the location table.
    *
+   * Note that the coordinates are not set here and will always be None in the returned Location.
+   *
    * @param row A row from the location table.
    * @param connection this is a implicit parameter that is used to share the database connection to improve performance
    * @return A location object created from that row, with the inspections from the database.
    */
-  private def locationRowToLocation(row: Row)(implicit connection: java.sql.Connection): Try[Location] = {
-    Inspection.getInspections(row[Int]("id")) match {
-      case Success(inspections) =>
-        Success(Location(row[Int]("id"), row[String]("name"), row[Double]("latitude"), row[Double]("longitude"), 
-            row[String]("address"), row[String]("postcode"), row[String]("city"), row[String]("rha"),  inspections))
-      case Failure(ex) => 
-        Failure(ex)
-    }
+  private def locationRowToLocation(row: Row, firstRowOnly: Boolean)
+      (implicit connection: java.sql.Connection): Try[Location] = {
+    for {
+      inspections <- if(!firstRowOnly) Inspection.getInspections(row[Int]("id"))
+        else Inspection.getFirstInspection(row[Int]("id"))
+    } yield Location(row[Int]("id"), row[String]("name"), row[Option[Double]]("latitude"),
+        row[Option[Double]]("longitude"), row[Option[String]]("address"), row[Option[String]]("postcode"),
+        row[Option[String]]("city"), row[String]("rha"), inspections)
   }
 }
 
@@ -133,4 +185,4 @@ object Location {
  * A slimmed down version of the Location class used to represent the data we need when selecting
  * a location.
  */
-case class SlimLocation(id: Int, name: String, address: String)
+case class SlimLocation(id: Int, name: String, address: Option[String])

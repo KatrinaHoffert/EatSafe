@@ -7,15 +7,39 @@
  *@
 @(location: Location)
 
-@mainBody(title = Messages("locations.view.titleStart") + ": " + location.name + " [" + location.address + "]") {
+@mainBody(title = Messages("locations.view.titleStart")+ ": "  + location.name +
+    location.address.map(" [" + _ + "]").getOrElse(""), hasFooter = true) {
   @headingSmall(Messages("general.applicationName"))
+
   <div class="smallPadding">
     <h1>@location.name</h1>
-    <a href="@routes.MapController.showMap(location.address, location.city)">@location.address</a><br />
-    @location.city, @location.postalCode
+
+    @* Note that if the city is not defined, the address probably isn't, either. *@
+    @if(location.address.isDefined && location.city.isDefined) {
+      <a href="@routes.MapController.showMap(location.address.get, location.city.get)">
+        @location.address.get
+      </a>
+      <br />
+    }
+
+    @* Display the city and address if both are set, one if one is set, or a default if neither.
+       As you can see, the template system has no else-if. *@
+    @if(location.city.isDefined && location.postalCode.isDefined) {
+      @location.city.get, @location.postalCode.get
+    } else {
+      @if(location.city.isDefined) {
+        @location.city.get
+      } else {
+        @if(location.postalCode.isDefined) {
+          @location.postalCode.get
+        } else {
+          @Messages("locations.view.unknownLocation")
+        }
+      }
+    }
 
     <div class="ratingSection">
-      Rating: <span class="ratingNA">N/A</span>
+      Rating: <span class="rating_@location.rating.toString"></span>
     </div>
 
     @if(location.hasInspections) {

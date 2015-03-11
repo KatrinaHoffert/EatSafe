@@ -5,7 +5,7 @@
 
 @(cityName: String)
 
-@mainBody(title = Messages("errors.emptyCityTitle")) {
+@mainBody(title = Messages("errors.emptyCityTitle"), hasFooter = true) {
   @headingSmall(Messages("general.applicationName"))
   <div class="smallPadding">
     <h3 class="errorDescription">@Messages("errors.emptyCityDesc")</h3>
