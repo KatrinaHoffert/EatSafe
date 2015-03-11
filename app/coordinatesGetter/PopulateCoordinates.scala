@@ -40,7 +40,7 @@ case class Response(coordinate: Coordinate, status: String)
  * @param address The address of this location
  * @param city The city this location is in
  */
-case class NoCoordinateLocation(id: Int, address: String, city: String)
+case class NoCoordinateLocation(id: Int, address: Option[String], city: Option[String])
 
 
 
@@ -72,63 +72,24 @@ object PopulateCoordinates{
     (JsPath \ "status").read[String]
   )(Response.apply _)
     
-
-  /**
-   * Update the coordinates of those locations that already have a corresponding coordinate stored in the 
-   * "coordinate" backup table. This will be run first after each time the database is re-created.
-   * @param connection The database connection 
-   */
-  def updateFromBackup()(implicit connection: java.sql.Connection): Boolean = {
-    
-    SQL(
-        """
-          UPDATE location
-          SET latitude = coordinate.latitude,
-          longitude = coordinate.longitude
-          FROM coordinate
-          WHERE location.address = coordinate.address
-          AND location.city = coordinate.city;
-        """
-    ).execute()
-  }
-  
-    
-   /**
-   * Update the coordinate in the location table
-   * @param id The id of the location that the coordinate need to be updated
-   * @param coordinate The coordinate for this location
-   * @param connection The database connection 
-   */
-  def updateCoordinate(id: Int, coordinate: Coordinate)(implicit connection: java.sql.Connection): Boolean = {
-    
-    SQL(
-       """
-         UPDATE location SET latitude = """ + coordinate.lat + """, 
-         longitude = """ + coordinate.long + """
-         WHERE id = """ + id + """;
-       """
-    ).execute()
-  }
   
    /**
-   * Backup the coordinate, address, and city to "coordinate" table, whenever a new coordinate 
+   * Insert the coordinate, address, and city to "coordinate" table, whenever a new coordinate 
    * is got from Google Map API. 
    * @param connection The database connection 
    */
-  def backupCoordinate(id: Int)(implicit connection: java.sql.Connection): Boolean = {
+  def insertCoordinate(address: String, city: String, coordinate: Coordinate)(implicit connection: java.sql.Connection): Boolean = {
     
     SQL(
        """
          INSERT INTO coordinate(address, city, latitude, longitude)
-         SELECT address, city, latitude, longitude
-         FROM location
-         WHERE location.id = """ + id + """;
+         VALUES({address}, {city}, {latitude}, {longitude})
        """
-    ).execute()
+    ).on("address" -> address, "city" -> city, "latitude" -> coordinate.lat, "longitude" -> coordinate.long).execute()
   }
 
   /**
-   * Get a list of locations that don't have a coordinate (the latitude and longitude is null)
+   * Get a list of locations that don't have a coordinate in coordinate table
    * @param connection The database connection
    */
   def getNoCoordinateLocations()(implicit connection: java.sql.Connection): Try[Seq[NoCoordinateLocation]] = {
@@ -137,26 +98,25 @@ object PopulateCoordinates{
       val query = SQL(
          """
            SELECT id, address, city
-           FROM location
-           WHERE location.latitude IS NULL
-           AND location.longitude IS NULL
+           FROM location WHERE id NOT IN (SELECT id
+           FROM location INNER JOIN coordinate USING (address, city))
            ORDER BY id;
          """
       )
         
       query().map{
-        row => NoCoordinateLocation(row[Int]("id"), row[String]("address"), row[String]("city"))
+        row => NoCoordinateLocation(row[Int]("id"), row[Option[String]]("address"), row[Option[String]]("city"))
       }.toList
     }
   }
   
+  /**
+   * The main method for getting coordinates from Google Geocoding API
+   * @param db The database that connected to 
+   */
   def main()(implicit db: ActiveDatabase): Unit = {
     DB.withConnection { implicit connection =>  
-      
-      //First, update the coordinates from the backup "coordinate" table
-      updateFromBackup()
-      
-      //Then get a list of locations that don't have coordinates in backup table
+      //Get a list of locations that don't have coordinates
       getNoCoordinateLocations() match {
         case Success(locations) => 
           locations.map { location =>
@@ -167,46 +127,41 @@ object PopulateCoordinates{
             //An execution context, required for Future.map:
             implicit val context = scala.concurrent.ExecutionContext.Implicits.global
             
-            //The parameter for the HTTP get request
-            val parameterString = location.address + ", " + location.city;
+            //get the address and city
+            val address = location.address.getOrElse("Unknown")
+            val city = location.city.getOrElse("Unknown")
+            //If both address and city are not available, should not look up on Google
+            //Because it will return the coordinate of "Saskatchewan, Canada"
+            if(address!="Unknown" && city!="Unknown"){
             
-            //Map the response JSON to a coordinate object
-            val futureResult : Future[Response] = holder.withQueryString("address" -> parameterString).get().map{
-              response => response.json.as[Response]
-            }
-            
-            futureResult.onComplete{
-              case Success(coordinateResult) => 
-                DB.withConnection { implicit connection =>  
+              //The parameter for the HTTP get request
+              val parameterString = address + ", " + city + ", Saskatchewan, Canada";
+              
+              //Map the response JSON to a coordinate object
+              val futureResult : Future[Response] = holder.withQueryString("address" -> parameterString).get().map{
+                response => response.json.as[Response]
+              }
+              
+              futureResult.onComplete{
+                case Success(coordinateResult) => 
                   val status = coordinateResult.status
                   val coordinate: Coordinate = coordinateResult.coordinate
-                  //for debugging
-                  println("status" + status)
-                  println("id" + location.id + ": " + parameterString + " lat: "+ coordinate.lat + " long:" + coordinate.long)
-                  //update this location
-                  updateCoordinate(location.id, coordinate)
+                  if(status=="OK") {
+                    println("id" + location.id + ": " + parameterString + " lat: "+ coordinate.lat + " long:" + coordinate.long)
+                    //store the coordinate
+                    insertCoordinate(address, city, coordinate)
+                  }else {
+                    //for debugging
+                    println("id" + location.id + ": " + parameterString + "status" + status)
+                  }
                   
-                  //backup this new coordinate
-                  backupCoordinate(location.id)
-                }
-                
-              case Failure(ex) => 
-                 DB.withConnection { implicit connection =>  
-                  val coordinate = Coordinate(0,0) //if fail to get coordinate, just use (0,0) for now
-                  //for debugging
-                  println("id" + location.id + ": " + parameterString + " Failed to get coordinate: " + ex)
-                  //update this location
-                  updateCoordinate(location.id, coordinate)
-                  
-                  //backup this new coordinate, or should backup (0,0)?
-                  backupCoordinate(location.id)
-                }
-                
+                case Failure(ex) => println("id" + location.id + ": " + parameterString + " Failed to get coordinate: " + ex)
+              }
+              Await.ready(futureResult,Duration(1000, "second"))
             }
-            Await.ready(futureResult,Duration(100, "second"))
           }
         case Failure(ex) =>
-          println("Failed to get no coordinates locations" + ex)
+          println("Failed to get no-coordinates-locations: " + ex)
       }
     }
   }  
