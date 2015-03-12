@@ -55,7 +55,7 @@ object TypeConversions {
    * @param locations A list of locations that MUST have coordinates. It's also assumed that addresses
    * all exist (otherwise coordinates shouldn't).
    */
-  def locationsToJsonWithRatingsAndCoords(locations: Seq[Location]): JsValue = {
+  def locationsToMultiMapJson(locations: Seq[Location]): JsValue = {
     val jsObjects = locations.map { location =>
       Json.obj(
         "name" -> location.name,

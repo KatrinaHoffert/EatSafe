@@ -15,7 +15,7 @@
 @scripts = {
   <script src="https://maps.googleapis.com/maps/api/js?v=3.exp&signed_in=true"></script>
   <script>
-    var locations = @Html(TypeConversions.locationsToJsonWithRatingsAndCoords(locations).toString);
+    var locations = @Html(TypeConversions.locationsToMultiMapJson(locations).toString);
 
     function sizeMapCanvas() {
       // Set the map container size to fill the remaining space
