@@ -16,7 +16,7 @@
 
     @* Note that if the city is not defined, the address probably isn't, either. *@
     @if(location.address.isDefined && location.city.isDefined) {
-      <a href="@routes.MapController.showMap(location.address.get, location.city.get)">
+      <a id="mapForLocation" href="@routes.MapController.showMap(location.address.get, location.city.get)">
         @location.address.get
       </a>
       <br />
