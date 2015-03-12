@@ -28,7 +28,11 @@ locations.view.unknownLocation=Unknown location
 
 # Display address page
 maps.displayAddress.title=Map: {0}, {1}
-maps.displayCityMap.title=Map: {0}
+
+# Multi-map
+maps.multiMap.title=Map: {0}
+maps.multiMap.nearbyLocationsHeading=Nearby:
+maps.multiMap.nearbyLocationsToggle=Toggle nearby locations
 
 # About page
 about.title=About EatSafe Saskatchewan

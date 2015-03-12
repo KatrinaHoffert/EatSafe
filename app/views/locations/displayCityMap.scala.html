@@ -79,12 +79,12 @@
   </script>
 }
 
-@mainBody(title = Messages("maps.displayCityMap.title", city), moreScripts = scripts) {
+@mainBody(title = Messages("maps.multiMap.title", city), moreScripts = scripts) {
 <link rel="stylesheet" href="@controllers.routes.Assets.at("stylesheets/simple-sidebar.css")" />
 <div id="wrapper">
   <div id="sidebar-wrapper">
     <ul class="sidebar-nav">
-      <br>
+      <h2 class="nearbyHeading">@Messages("maps.multiMap.nearbyLocationsHeading")</h2>
       <li>
         <a href="#">Location</a>
       </li>
@@ -108,11 +108,12 @@
       </li>
     </ul>
   </div>
-
-  @headingSmall(Messages("general.applicationName"))
-      <h2 class="mapLocation-header">@{city}</h2>
-        <a href="#menu-toggle" class="btn btn-default" id="menu-toggle">Toggle Nearby Locations</a>
-        <div id="map-canvas"></div>
+  <div id="page-content-wrapper">
+    @headingSmall(Messages("general.applicationName"))
+        <h2 class="mapLocation-header">@{city}</h2>
+          <a href="#menu-toggle" class="btn btn-default" id="menu-toggle">@Messages("maps.multiMap.nearbyLocationsToggle")</a>
+          <div id="map-canvas"></div>
+    </div>
 </div>
   
 }
