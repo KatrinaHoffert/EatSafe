@@ -24,6 +24,12 @@ object MapController extends Controller {
   }
 
   def showCityMap(city: String) = Action {
-    Ok(views.html.locations.displayCityMap(city))
+    Location.getAllLocationsWithCoordinates() match {
+      case Success(locations) =>
+        Ok(views.html.locations.displayCityMap(city, locations))
+      case Failure(ex) =>
+        Logger.error("Failed to list all locations", ex)
+        InternalServerError(views.html.errors.error500(ex))
+    }
   }
 }
