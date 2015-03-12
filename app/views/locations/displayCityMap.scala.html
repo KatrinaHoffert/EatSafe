@@ -111,7 +111,10 @@
   <div id="page-content-wrapper">
     @headingSmall(Messages("general.applicationName"))
         <h2 class="mapLocation-header">@{city}</h2>
-          <a href="#menu-toggle" class="btn btn-default" id="menu-toggle">@Messages("maps.multiMap.nearbyLocationsToggle")</a>
+          <a href="#menu-toggle" class="btn btn-default" id="menu-toggle">
+            <span class="glyphicon glyphicon-map-marker" aria-hidden="true"></span>
+            @Messages("maps.multiMap.nearbyLocationsToggle")
+          </a>
           <div id="map-canvas"></div>
     </div>
 </div>
