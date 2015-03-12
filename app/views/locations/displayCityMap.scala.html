@@ -4,8 +4,12 @@
 
 @**
  * Displays the multi-map.
+ *
+ * @param city The name of the city to center the map over, initially.
+ * @param locations All locations to be plotted. These don't have to be complete locations. They
+ * merely must have the coordinates and location.
  *@
-@(city: String)
+@(city: String, locations: Seq[Location])
 
 @scripts = {
   <script src="https://maps.googleapis.com/maps/api/js?v=3.exp&signed_in=true"></script>
