@@ -34,4 +34,39 @@ object TypeConversions {
 
     Json.toJson(jsObjects)
   }
+
+  /**
+   * Converts a list of Locations into JSON with everything the multi-map needs: names, coords,
+   * rating colors, and IDs.
+   *
+   * {{{
+   *   [
+   *     {
+   *       "name": "Tiny Tina's Badass Grill",
+   *       "address": "123 Fake St",
+   *       "ratingColor": "#ff0000",
+   *       "latitude": 52.1333,
+   *       "longitude": -106.6833,
+   *       "id": 123
+   *     }
+   *   ]
+   * }}}
+   *
+   * @param locations A list of locations that MUST have coordinates. It's also assumed that addresses
+   * all exist (otherwise coordinates shouldn't).
+   */
+  def locationsToJsonWithRatingsAndCoords(locations: Seq[Location]): JsValue = {
+    val jsObjects = locations.map { location =>
+      Json.obj(
+        "name" -> location.name,
+        "address" -> location.address.get,
+        "ratingColor" -> location.rating.color,
+        "latitude" -> location.latitude.get,
+        "longitude" -> location.longitude.get,
+        "id" -> location.id
+      )
+    }
+
+    Json.toJson(jsObjects)
+  }
 }
