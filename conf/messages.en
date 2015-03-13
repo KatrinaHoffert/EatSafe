@@ -33,6 +33,8 @@ maps.displayAddress.title=Map: {0}, {1}
 maps.multiMap.title=Map: {0}
 maps.multiMap.nearbyLocationsHeading=Nearby:
 maps.multiMap.nearbyLocationsToggle=Toggle nearby locations
+maps.multiMap.kmAway=km away
+maps.multiMap.sidebarLoading=Loading...
 
 # About page
 about.title=About EatSafe Saskatchewan
