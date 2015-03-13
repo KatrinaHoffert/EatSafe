@@ -126,6 +126,8 @@
               return loc1.distanceFromUser - loc2.distanceFromUser;
             }).slice(0, MAX_NEARBY);
 
+            // Goddamn does JS need some more succient FP. In Scala, this would be a much more
+            // readable: `closestLocations.map(_.distanceFromUser)`
             console.log("Distances of closest locations: " +
                 JSON.stringify(closestLocations.map(function(l){ return l.distanceFromUser; })));
             console.log("Coordinates of them: " +
@@ -162,25 +164,7 @@
       <h2 class="nearbyHeading">@Messages("maps.multiMap.nearbyLocationsHeading")</h2>
       <div id="nearbyList">
         <li>
-          <a href="#">Location</a>
-        </li>
-        <li>
-          <a href="#">Location</a>
-        </li>
-        <li>
-          <a href="#">Location</a>
-        </li>
-        <li>
-          <a href="#">Location</a>
-        </li>
-        <li>
-          <a href="#">Location</a>
-        </li>
-        <li>
-          <a href="#">Location</a>
-        </li>
-        <li>
-          <a href="#">Location</a>
+          <a href="#">Loading...</a>
         </li>
       </div>
     </ul>
