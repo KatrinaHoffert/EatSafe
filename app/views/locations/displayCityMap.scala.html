@@ -31,6 +31,12 @@
      */
     var DEFAULT_ZOOM = 13;
 
+    /**
+     * Viewport width at which below this, the sidebar opens closed and automatically closes when a
+     * location is selected. This should be kept consistent with the CSS.
+     */
+    var SIDEBAR_AUTOCLOSE_WIDTH = 700;
+
     var locations = @Html(TypeConversions.locationsToMultiMapJson(locations).toString);
 
     function sizeMapCanvas() {
@@ -125,6 +131,10 @@
       return Math.round(num * 100) / 100;
     }
 
+    /**
+     * Populates the list of nearby locations with a list of anchors that, when clicked, scroll the
+     * map to the coordinates of the location with the default zoom level.
+     */
     function populateNearbyList() {
       if("geolocation" in navigator) {
         navigator.geolocation.getCurrentPosition(function(position) {
@@ -188,11 +198,16 @@
     });
 
     /**
-     * Scrolls the map to a new location and resets the zoom.
+     * Scrolls the map to a new location and resets the zoom. If the viewport width is such that
+     * the sidebar is defaultly closed, we close the sidebar on selecting a location.
      */
     function goToCoords(lat, long) {
       map.setCenter(new google.maps.LatLng(lat, long));
       map.setZoom(DEFAULT_ZOOM);
+
+      if($(window).width() < SIDEBAR_AUTOCLOSE_WIDTH) {
+         $("#wrapper").toggleClass("toggled");
+      }
     }
   </script>
 }
