@@ -2021,3 +2021,2166 @@ Regina	1010  Pasqua St. N	50.494125	-104.642257
 Regina	1247 Albert St.	50.459025	-104.617876
 Regina	3614  Eastgate Drive	50.451116	-104.531057
 Regina	1700 Eliott St	50.451815	-104.586535
+Regina	1611 Victoria Ave.	50.447117	-104.603923
+Regina	1267 A Osler St.	50.458599	-104.604874
+Regina	#120 - 2201 - 11th Avenue	50.450298	-104.612762
+Regina	5650 Rochdale Blvd.	50.495805	-104.662673
+Regina	88 Aa Cavendish St.	50.455796	-104.557886
+Regina	8045 Kestral Drive	50.478375	-104.697926
+Regina	2599 E Quance St.	50.445838	-104.543766
+Regina	360 Albert St. N.	50.481433	-104.618308
+Regina	379 Albert St.	50.472480	-104.618030
+Regina	348 Broad St.	50.473107	-104.606922
+Regina	5064 - 4th Avenue	50.462933	-104.654554
+Regina	2401 1st Ave N.	50.470621	-104.615810
+Regina	55 Mcmurchy Avenue	50.482090	-104.623637
+Regina	5910 Rochdale Blvd.	50.496105	-104.666812
+Regina	820 Mccarthy Blvd.	50.466271	-104.672310
+Regina	565 Albert St.	50.469871	-104.617645
+Regina	3501 Dewdney Avenue	50.454833	-104.631390
+Regina	3998 Albert St.	50.415792	-104.618622
+Regina	624 Victoria Ave. E.	50.447253	-104.590231
+Regina	Sherwood	50.492210	-104.684885
+Regina	1165 Pasqua St.	50.460391	-104.640940
+Regina	1005 Pasqua St.	50.462571	-104.640769
+Regina	#100 - 3725 Pasqua St.	50.421782	-104.640909
+Regina	2125 Victoria Ave.	50.446996	-104.553974
+Regina	1427 - 11th Ave.	50.450354	-104.601705
+Regina	2903 Powerhouse Dr.	50.432896	-104.594529
+Regina	2228 Albert St.	50.443408	-104.618341
+Regina	2815 - 13th Avenue	50.445409	-104.621434
+Regina	1350 - 23rd Ave.	50.423691	-104.598012
+Regina	Wascana Park	50.417914	-104.594002
+Regina	4529 Gordon Rd.	50.405372	-104.638774
+Regina	1745 Broad St.	50.451172	-104.606313
+Regina	6823 Rochdale Blvd.	50.494779	-104.678627
+Regina	2705 Quance St.	50.445893	-104.543617
+Regina	200 Victoria Ave. E.	50.447337	-104.579752
+Regina	3138 Avonhurst Dr.	50.471947	-104.626311
+Regina	2625 - 29th Avenue	50.412100	-104.619426
+Regina	2330 Albert St.	50.441844	-104.618305
+Regina	438 Victoria Ave.	50.447555	-104.578315
+Regina	230 Winnipeg St. N.	50.479581	-104.595205
+Regina	2051 B Park St.	50.446262	-104.572157
+Regina	5544 Rochdale Blvd.	50.495808	-104.661363
+Regina	817 Victoria Avenue	50.447125	-104.573915
+Regina	534 University Park Dr.	50.441511	-104.549341
+Regina	3900 Arcola Ave. E	50.418045	-104.519707
+Regina	470 Albert St. N.	50.483433	-104.618384
+Regina	369 Victoria Ave.	50.447136	-104.586422
+Regina	1500 Royal St.	50.455027	-104.651059
+Regina	2760 Montague St.	50.435186	-104.629700
+Regina	4059 Albert St.	50.413899	-104.617925
+Regina	2747 E Quance St.	50.446080	-104.540393
+Regina	1835 Halifax St.	50.449758	-104.603426
+Regina	3 - 5950 Rochdale Blvd.	50.495804	-104.667232
+Regina	6340 Dewdney Avenue	50.455253	-104.671985
+Regina	924 Victoria Avenue E.	50.447249	-104.594599
+Regina	2150 Prince Of Wales Dr.	50.444514	-104.534823
+Regina	2620 Dewdney Avenue	50.455378	-104.618947
+Regina	4500 Gordon Road	50.408027	-104.646345
+Regina	4651 Albert St.	50.405896	-104.617130
+Regina	1105 Kramer Blvd.	50.415419	-104.596640
+Regina	6210 Rochdale Blvd.	50.496016	-104.669530
+Regina	3939 Rochdale Blvd.	50.494552	-104.637284
+Regina	1955 Prince Of Wales Dr.	50.449102	-104.531018
+Regina	4626 Albert St.	50.404778	-104.618238
+Regina	1711 Victoria Ave.	50.447115	-104.604967
+Regina	#200 - 3425 Quance Street	50.443266	-104.533906
+Regina	1943 Scarth St.	50.448017	-104.610645
+Regina	1341 Broadway Ave.	50.437700	-104.600252
+Regina	639 Victoria Ave.	50.446897	-104.590600
+Regina	229 Victoria Ave. E.	50.447135	-104.584774
+Regina	2655 Gordon Road	50.401903	-104.620409
+Regina	1800a Victoria Avenue East	50.448089	-104.558621
+Regina	4651 Gordon Road	50.405373	-104.639036
+Regina	1450 Wascana Highlands	50.424648	-104.541350
+Regina	2539 E Quance St.	50.445137	-104.544718
+Regina	100 Victoria Ave.	50.447257	-104.582256
+Regina	440 Mcdonald St.	50.471979	-104.582322
+Regina	460 Mccarthy Blvd. N.	50.484035	-104.664088
+Regina	4838 Dewdney Avenue	50.455193	-104.650901
+Regina	5970 Rochdale Blvd.	50.495803	-104.667531
+Regina	4409 Rochdale Blvd.	50.496589	-104.645048
+Regina	Rm 159	50.450817	-104.619615
+Regina	2065 Hamilton St.	50.446025	-104.609131
+Regina	2505 Broad St.	50.438871	-104.606135
+Regina	2224 - 14th Ave.	50.444076	-104.613136
+Regina	2332 - 11th Ave.	50.450431	-104.614957
+Regina	1439 - 11th Ave.	50.450277	-104.601854
+Regina	1310  Broad St.	50.458041	-104.606516
+Regina	3137 E Quance St.	50.444734	-104.537144
+Regina	1005 - 8th Avenue	50.456725	-104.594901
+Regina	1511 Ross Avenue E.	50.464636	-104.563062
+Regina	3040 - 5th Avenue	50.461408	-104.623960
+Regina	200 Broad St.	50.474946	-104.606534
+Regina	6831 Rochdale Blvd.	50.494142	-104.678880
+Regina	170 University Park Dr.	50.431760	-104.558149
+Regina	867 Argyle St. N.	50.491080	-104.631015
+Regina	4614 Gordon Rd.	50.405906	-104.646750
+Regina	3904 Gordon Road	50.405593	-104.637317
+Regina	3806 Albert St.	50.418419	-104.618546
+Regina	4400 - 4th Ave.	50.462951	-104.644211
+Regina	425 Broad St. N.	50.483455	-104.606319
+Regina	2534 E Quance St.	50.443586	-104.547742
+Regina	5548 Rochdale Blvd.	50.495807	-104.661413
+Regina	4055 Albert St.	50.413899	-104.617925
+Regina	2407 Park St.	50.440201	-104.572190
+Regina	4440 Albert St.	50.408917	-104.618239
+Regina	3037 Dewdney Ave.	50.454900	-104.625195
+Regina	3416 Hill Avenue	50.428208	-104.630624
+Regina	1653 Park St.	50.452479	-104.572174
+Regina	1850 Rose St.	50.449785	-104.608114
+Regina	1077 Angus St.	50.462601	-104.619563
+Regina	1800 Prince Of Wales Dr.	50.451281	-104.532824
+Regina	1759 Park St.	50.450818	-104.571873
+Regina	5510 - 7th Avenue	50.458390	-104.659703
+Regina	2525 E Quance St.	50.443382	-104.547866
+Regina	4505 Albert St.	50.407582	-104.617806
+Regina	354 Albert St. N.	50.481326	-104.618308
+Regina	303 -359 Albert Street N	50.481477	-104.617985
+Regina	#54 - 3806 Albert St	50.418419	-104.618546
+Regina	4355 Albert St.	50.409814	-104.617932
+Regina	1725 Dewdney Ave. E.	50.454758	-104.559073
+Regina	1412 Minto Street	50.456508	-104.657078
+Regina	2518 Quance St. E.	50.443593	-104.547824
+Regina	1101 D Kramer Blvd.	50.415586	-104.595360
+Regina	1425 College Ave.	50.440688	-104.601954
+Regina	833 Mcintosh St.	50.465438	-104.652324
+Regina	4115 Rochdale Blvd.	50.496565	-104.639492
+Regina	4160 Albert St.	50.412726	-104.618218
+Regina	2118 Prince Of Wales Dr.	50.447430	-104.533120
+Regina	4602 Gordon Rd.	50.405377	-104.646819
+Regina	305 Albert Street	50.473866	-104.618037
+Regina	445 - 14th Avenue	50.443458	-104.586632
+Regina	1440 - 14th Avenue	50.443986	-104.599128
+Regina	1822 Broad St.	50.450010	-104.606523
+Regina	1100 Victoria Ave.	50.447246	-104.596314
+Regina	4025 - 25th Avenue	50.417948	-104.638854
+Regina	2134 Winnipeg St.	50.444834	-104.595170
+Regina	4177 Albert Street	50.412978	-104.617478
+Regina	3155 Windsor Park Rd.	50.429518	-104.525986
+Regina	777 Albert St.	50.465850	-104.617159
+Regina	4101 Dewdney Avenue	50.455065	-104.640698
+Regina	1806 Albert St.	50.450977	-104.618225
+Regina	303 Park St.	50.473229	-104.580658
+Regina	3209 E Eastgate Drive	50.447765	-104.539270
+Regina	328 Victoria Avenue	50.447252	-104.585387
+Regina	3835 Albert St.	50.417814	-104.617941
+Regina	388 Mccarthy Blvd.	50.473038	-104.665774
+Regina	4555 Rochdale Blvd.	50.496415	-104.646568
+Regina	645 Broad St.	50.468784	-104.605817
+Regina	5360 Rochdale Blvd.	50.496006	-104.657990
+Regina	Courtney St. & Whelan Dr.	50.498469	-104.686874
+Regina	1000 Mcdonald St.	50.462874	-104.583621
+Regina	5401 - 11th Avenue	50.450547	-104.653474
+Regina	6859 Rochdale Blvd.	50.494781	-104.679490
+Regina	1840 Broad St.	50.449574	-104.606525
+Regina	2026 Winnipeg St.	50.446112	-104.595476
+Regina	2135 Albert  St.	50.444828	-104.618038
+Regina	1845 Osler St.	50.449515	-104.604872
+Regina	4500 Wascana Parkway	50.407981	-104.581623
+Regina	1120 Devonshire Dr. N.	50.495285	-104.672390
+Regina	2416 14th Ave.	50.443978	-104.615764
+Regina	#2 - 2118 Robinson St.	50.445120	-104.624123
+Regina	2925a E Quance St.	50.446016	-104.539052
+Regina	615 Winnipeg St. N	50.486452	-104.595123
+Regina	3801 Albert St.	50.418718	-104.617976
+Regina	1105 Empress St.	50.460749	-104.653945
+Regina	2237 Broad St.	50.443269	-104.606177
+Regina	368 Mccarthy Blvd. N.	50.473110	-104.665710
+Regina	211 Albert St. N.	50.478872	-104.617974
+Regina	2547 Quance St. East	50.445244	-104.544615
+Regina	3859 Sherwood Drive	50.475073	-104.636443
+Regina	4101 Rochdale Blvd.	50.494658	-104.639267
+Regina	4250 Albert St.	50.411622	-104.618224
+Regina	336 Mcdonald St.	50.473353	-104.580802
+Regina	3926 Gordon Road	50.405495	-104.637866
+Regina	3241 Saskatchewan Dr.	50.449520	-104.626832
+Regina	1825 Winnipeg St.	50.449844	-104.595146
+Regina	3233 Argyle Rd.	50.427316	-104.630320
+Regina	3000 Argyle Rd.	50.431304	-104.632907
+Regina	2627 Gordon Rd.	50.404513	-104.619093
+Regina	1620 - 9th Ave. E.	50.453790	-104.559182
+Regina	#1 - 4025 Albert St.	50.414833	-104.617222
+Regina	1621 Albert St.	50.452633	-104.617716
+Regina	6310 Dewdney Ave.	50.455250	-104.671426
+Regina	919 E Albert St. N.	50.484059	-104.618122
+Regina	2709 B Avonhurst Drive	50.470831	-104.618605
+Regina	1101 Kramer Blvd.	50.415586	-104.595360
+Regina	751 Victoria Ave. E.	50.447124	-104.574580
+Regina	1030 N. Pasqua St.	50.494342	-104.643885
+Regina	128 N. Mcdonald St.	50.478097	-104.576069
+Regina	1731 Dewdney Ave. E	50.455157	-104.559935
+Regina	2108 Albert St.	50.445529	-104.618219
+Regina	6 - 3710 Eastgate Dr.	50.451084	-104.530869
+Regina	2445 Broad Street	50.441222	-104.606303
+Regina	864 Victoria Ave. E	50.447260	-104.570057
+Regina	2615 Gordon Rd	50.404514	-104.619054
+Regina	2589 E Quance St.	50.443185	-104.547197
+Regina	3710 Eastgate Drive	50.451084	-104.530869
+Regina	1930 Prince Of Wales Dr.	50.449794	-104.533103
+Regina	2740 Avonhurst Dr.	50.470838	-104.619989
+Regina	1209 Albert St.	50.459474	-104.617756
+Regina	1464 Broadway Ave.	50.437721	-104.601485
+Regina	736 Victoria Avenue	50.447254	-104.592267
+Regina	500 - 3435 E Quance St.	50.443512	-104.534195
+Regina	10 Research Dr.	50.413085	-104.589516
+Regina	1047 N. Stockton Street	50.495958	-104.645461
+Regina	2317 Albert St.	50.441942	-104.617810
+Regina	1631 11th Ave.	50.450290	-104.604475
+Regina	1564 Angus St.	50.453861	-104.619731
+Regina	1834 Scarth St.	50.449655	-104.610916
+Regina	100 Albert St.	50.476974	-104.618245
+Regina	6111 1st Ave. North	50.472479	-104.669116
+Regina	2110 Prince Of Wales Dr.	50.447430	-104.533120
+Regina	4164 Albert St.	50.412645	-104.618220
+Regina	1852 Scarth St.	50.449655	-104.610916
+Regina	4114 Albert St.	50.413660	-104.618206
+Regina	127 Albert St. N.	50.477205	-104.618028
+Regina	641 Victoria Avenue E.	50.447122	-104.575831
+Regina	2476 Victoria Ave.	50.448041	-104.615924
+Regina	5542 Rochdale Blvd.	50.495808	-104.661339
+Regina	306 Albert St.	50.473788	-104.618239
+Regina	3000 Wascana Drive	50.431076	-104.606609
+Regina	530 Victoria Ave. E.	50.447251	-104.589008
+Regina	103 Albert St. N.	50.477140	-104.618031
+Regina	1490 Park St.	50.455078	-104.572380
+Regina	1800 - 11th Avenue	50.450396	-104.607271
+Regina	275 Albert St. N.	50.480449	-104.617987
+Regina	4225 Albert St.	50.411940	-104.617926
+Regina	4455 Rochdale Blvd.	50.496414	-104.644875
+Regina	4845 Harbour Landing Drive	50.402016	-104.647181
+Regina	970 Albert St.	50.463187	-104.618466
+Regina	3641 Sherwood Drive	50.475520	-104.634015
+Regina	862 Victoria Ave. E.	50.447260	-104.570135
+Regina	2775 Avonhurst Dr.	50.470793	-104.620745
+Regina	4450 Albert St.	50.408654	-104.618238
+Regina	3215 E Eastgate Drive	50.448122	-104.537776
+Regina	141 Albert St. N.	50.477662	-104.618007
+Regina	2024 Broad St.	50.446610	-104.606499
+Regina	6210 Dewdney Avenue	50.455232	-104.669749
+Regina	708 Victoria Avenue	50.447456	-104.591116
+Regina	917 B Albert St.	50.463721	-104.618028
+Regina	Armour Road	50.513378	-104.628251
+Regina	3121 Quance St.	50.444844	-104.537260
+Regina	#363 - 365 Broad St.	50.472677	-104.606337
+Regina	471 Broad St. N.	50.484099	-104.606309
+Regina	2207 Broad St.	50.443786	-104.606297
+Regina	1300 Victoria Ave.	50.447362	-104.599491
+Regina	1965 Hamilton St.	50.447240	-104.609368
+Regina	2080 Albert St.	50.445668	-104.618198
+Regina	1929 Albert St.	50.448603	-104.618029
+Regina	6330 Rochdale Blvd.	50.495069	-104.672339
+Regina	419 Broad St.	50.471995	-104.606337
+Regina	405 Broad St.	50.472325	-104.606337
+Regina	4350 Albert St.	50.410159	-104.618233
+Regina	2577 E Quance St.	50.445618	-104.544178
+Regina	462 Mccarthy Blvd. N.	50.484040	-104.664088
+Regina	1753 Broad St.	50.450985	-104.606314
+Regina	2180 - 23rd Avenue	50.423514	-104.606487
+Regina	205 Albert St.	50.475430	-104.618041
+Regina	2105 Victoria Ave. E.	50.446995	-104.554818
+Regina	2430 9th Ave N	50.484445	-104.616532
+Regina	1307 Broadway Ave.	50.437704	-104.598497
+Regina	2125 - 11th Ave.	50.450233	-104.611831
+Regina	1733 Dewdney Ave. E.	50.455157	-104.559934
+Regina	1023 Devonshire Dr. N.	50.494268	-104.671739
+Regina	2820 A Avonhurst Dr.	50.471051	-104.621535
+Regina	346 University Park Drive	50.434936	-104.554647
+Regina	3847 Albert St.	50.417494	-104.617928
+Regina	6320 Dewdney Ave.	50.455251	-104.671612
+Regina	439 Albert St.	50.471799	-104.617720
+Regina	1138 Dorothy St.	50.479883	-104.681658
+Regina	5255 Rochdale Blvd.	50.495532	-104.656560
+Regina	3963 Rochdale Blvd	50.496562	-104.638818
+Hague	305 Main Street	52.511095	-106.416236
+Regina	1729 Broad St.	50.451400	-104.606312
+Regina	#7 - 3710 Eastgate Drive	50.451084	-104.530869
+Regina	425 Victoria Ave E.	50.447137	-104.578017
+Regina	3618 E. Eastgate Dr.	50.451116	-104.531057
+Riceton	Main Street	50.112614	-104.326874
+Rocanville	113 Ellice St.	50.381944	-101.700466
+Rocanville	220 Qu'appelle Ave.	50.384543	-101.702485
+Rocanville	202 Garry St.	50.382196	-101.696923
+Rocanville	702 Francis Avenue	50.386244	-101.697733
+Rocanville	Highway # 8 East	50.409420	-101.707796
+Rocanville	202 Pelly St.	50.382779	-101.697677
+Saskatchewan Beach	249 Lakeview Ave	50.794117	-104.926633
+Sedley	Sedley, Sk	50.170146	-104.016684
+Sedley	305 Railway Avenue	50.169584	-104.011862
+Sedley	Main Street	50.170038	-104.013331
+Southey	60 Assiniboia Avenue	50.939610	-104.493970
+Southey	64 Assiniboia Avenue	50.939610	-104.493970
+Southey	Highway 6	50.944153	-104.496064
+Southey	124 Keats St.	50.938716	-104.498948
+Southey	395 Highway 6	50.944153	-104.496064
+Vibank	104 Main St.	50.338415	-103.939362
+Vibank	101 - 2nd Avenue	50.334130	-103.945811
+Vibank	103 - 1st Avenue	50.334130	-103.945811
+Vibank	Vibank, Sk	50.334130	-103.945811
+Vibank	101 Main St.	50.338415	-103.939362
+Welwyn	Dennis Street & Welwyn Avenue	50.324469	-101.515956
+White City	White City, Sk	50.439722	-104.306389
+Whitewood	702 Lalonde St.	50.329931	-102.266870
+Whitewood	209 Lalonde St.	50.335604	-102.266448
+Whitewood	Highways #1 & #9	50.329875	-102.266628
+Whitewood	1203 Highway #1	50.337410	-102.264620
+Whitewood	Gambetta Street & Highway #1	50.329875	-102.266628
+Whitewood	Gambetta St. & Service Road	50.336313	-102.266193
+Whitewood	617 Lalonde St.	50.330889	-102.266868
+Whitewood	738 Lalonde St.	50.329931	-102.266870
+Whitewood	Highway #1	50.337410	-102.264620
+Whitewood	921 Gambetta Street	50.326590	-102.261161
+Whitewood	Whitewood, Sk	50.334766	-102.275439
+Wilcox	Main Street	50.098274	-104.718112
+Wilcox	609 Railway Avenue	50.096031	-104.722000
+Wilcox	Allan Street	50.096713	-104.720056
+Wolseley	104 Front St.	50.426043	-103.281576
+Wolseley	104 Sherbrooke St.	50.422693	-103.269380
+Wolseley	Wolseley	50.422592	-103.271797
+Wolseley	111 Sherbrooke St.	50.422693	-103.269344
+Wolseley	109 Sherbrooke St.	50.422693	-103.269344
+Wolseley	2nd Avenue	50.427802	-103.278999
+Wolseley	406 Water Street	50.425900	-103.271708
+Wolseley	104 Balsam Street	50.424472	-103.284741
+Wolseley	300 Garnet Street	50.420350	-103.266506
+Aberdeen	202 Central Ave	50.460856	-104.658268
+Aberdeen	225 Central Ave	50.460856	-104.658268
+Aberdeen	401 Main St	52.324884	-106.285875
+Allan	328 Main St	51.894719	-106.055033
+Allan	516 Saskatchewan St	51.896099	-106.059523
+Allan	320 Main St	51.894719	-106.055033
+Alvena	200 1st St E	52.519633	-106.017812
+Annaheim	301 Doepker Ave	52.319380	-104.820703
+Annaheim	2nd Street	52.319375	-104.817183
+Asquith	493 Cory St	52.134754	-107.225023
+Asquith	570 Main St	52.135556	-107.229459
+Asquith	505 Main St	52.133401	-107.229414
+Asquith	Hwy 14	52.128881	-107.218383
+Bradwell	10 Struan Street	51.947725	-106.232897
+Bruno	513 Main St	52.264042	-105.523447
+Bruno	501 Main St	52.263681	-105.523747
+Bruno	Bruno Sports Grounds	52.263984	-105.525301
+Bruno	607 3rd St E	52.264020	-105.518217
+Bruno	650 Ursuline Ave	52.266112	-105.520979
+Bulyea	820 Assiniboia	50.984390	-104.862521
+Bulyea	204 Ashley Street	50.984898	-104.864776
+Bulyea	205 Withington Ave	50.984204	-104.862659
+Clavet	1 - 2nd Ave E	51.995179	-106.374545
+Colonsay	200 Rocher St	51.977012	-105.874460
+Colonsay	109 Torran St	51.977010	-105.874402
+Colonsay	305 Railway Ave	51.976629	-105.877919
+Cudworth	119 Main St	52.489284	-105.732255
+Cudworth	717-1st Avenue South	52.485967	-105.731440
+Cudworth	401 3rd Ave	52.491104	-105.734278
+Cudworth	605 1st Ave	52.487135	-105.731342
+Cudworth	216 Main St	52.489212	-105.734023
+Cudworth	Hoodoo	52.487424	-105.733051
+Cudworth	108 Main St	52.489265	-105.731818
+Dalmeny	124 3rd St	52.340692	-106.774569
+Dalmeny	121 3rd St	52.340600	-106.774599
+Delisle	300 3rd Ave W	51.925395	-107.136478
+Delisle	313 3rd Street West	51.924904	-107.137919
+Delisle	400 2nd Street East	51.926238	-107.130520
+Delisle	216 1st St W	51.923824	-107.134985
+Delisle	301 2nd St E	51.924481	-107.130426
+Delisle	102  2nd St W	51.921004	-107.136391
+Domremy	208 1st St N	52.789411	-105.728288
+Domremy	202 2nd Ave N	52.788728	-105.731384
+Duck Lake	244 Front St	52.813974	-106.224362
+Duck Lake	Hwy 11 & 12	52.811855	-106.226028
+Duke Lake	Box 340	52.939916	-106.450864
+Dundurn	Dundurn	51.810644	-106.504057
+Dundurn	214 3rd St E	51.811684	-106.503847
+Dundurn	211 3rd St E	51.811684	-106.503847
+Dundurn	315 2nd St	51.810651	-106.504766
+Dundurn	409 2nd St	51.810651	-106.504766
+Dundurn	101 Government Rd	51.809007	-106.500586
+Grandora	Vanscoy	52.019401	-107.034792
+Guernsey	105 D L'cart St	51.871451	-105.187678
+Guernsey	220 St. Sampson Street	51.871451	-105.187678
+Hague	99 - 4th St E	52.510366	-106.417738
+Hague	301 1st St	52.513731	-106.419587
+Hague	100 North Hague Access	52.510945	-106.416309
+Hague	100 Hague Access North (shell Service Ctr)	52.510945	-106.416309
+Hague	1 - 100 North Access Rd	52.510945	-106.416309
+Hanley	106 Lincoln St	51.627705	-106.440290
+Hanley	107 Lincoln St	51.627705	-106.440290
+Hanley	200 Washington Ave	51.629820	-106.439007
+Hanley	703 Lincoln Street	51.630732	-106.435346
+Hendon	5 Railway Ave	52.087686	-103.830919
+Hepburn	314 Main St	52.525230	-106.730327
+Hepburn	600 2nd St E	52.526349	-106.727871
+Hepburn	415 Main Street	52.525694	-106.731839
+Humboldt	515 14th Ave	52.212496	-105.121060
+Humboldt	740 Main St	52.201040	-105.122872
+Humboldt	1515 8th Ave	52.201969	-105.131654
+Humboldt	610 Main St	52.199001	-105.122834
+Humboldt	2019 8th Ave	52.201966	-105.152085
+Humboldt	1503 8th Ave	52.201969	-105.131654
+Humboldt	1520 - 8th Ave	52.201969	-105.131654
+Humboldt	115 Main St S	52.194143	-105.122926
+Humboldt	1300 1st St N	52.192406	-105.124212
+Humboldt	324 Main St	52.196336	-105.122870
+Humboldt	2304 Quill Centre	52.201979	-105.122866
+Humboldt	627 9th St	52.200929	-105.124897
+Humboldt	16-1715 8th Ave	52.201979	-105.120524
+Humboldt	637 7th St	52.202305	-105.121972
+Humboldt	1815 8th Ave	52.201969	-105.131654
+Humboldt	1409 - 8th Ave	52.201969	-105.131654
+Humboldt	203 Main St	52.194143	-105.122926
+Humboldt	2303 Quill Centre	52.201979	-105.122866
+Humboldt	526 Main St	52.198253	-105.122876
+Humboldt	818 6th Ave	52.198726	-105.124066
+Humboldt	619 17th Street	52.200111	-105.140335
+Jansen	110 Main St	51.786945	-104.714967
+Jansen	Main St	51.786517	-104.715165
+Kuroki	98 Main St	51.871047	-103.487271
+Laird	King Street	52.711213	-106.589373
+Laird	215 Main St	52.713955	-106.589069
+Laird	229 Main St	52.713789	-106.589992
+Lake Lenore	211 2nd Ave	52.393458	-104.986658
+Lake Lenore	102 Main St	52.394851	-104.984241
+Lake Lenore	107 Main St	52.394957	-104.984752
+Langham	120 Railway St	52.361276	-106.958931
+Langham	239 Main Street E	52.360146	-106.957057
+Langham	324 Park Ave	52.356320	-106.963809
+Lanigan	116 Railway Ave	51.845097	-105.032150
+Lanigan	71 Railway Ave	51.845097	-105.032150
+Lanigan	1840 Downing Dr	51.850805	-105.027043
+Lanigan	17 Hoover St	51.856519	-105.028789
+Lanigan	119 Downing Dr E	51.850828	-105.028387
+Lanigan	21 Downing Dr	51.850802	-105.027980
+Lanigan	500 Commercial Dr	51.848084	-105.028813
+Lanigan	28 Main St	51.847591	-105.032741
+Last Mountain Regional Park	Last Mountain Valley	51.354202	-105.216064
+Leroy	123 Aspen St	52.001272	-104.740079
+Leroy	116 Aspen St	52.001287	-104.740051
+Leroy	101 1st Ave Sw	52.000547	-104.737991
+Leroy	105 1st Ave	52.000649	-104.737801
+Leroy	Gps N51.59820 W104.50026	52.000212	-104.738597
+Leroy	4th Avenue & Willow	52.004610	-104.740907
+Leroy	302 Aspen St	52.002314	-104.741549
+Leslie	Saskatchewan St	51.697559	-103.709783
+Manitou Beach	305 Maclachlan Ave	51.720561	-105.443872
+Margo	200 Main Street	51.824907	-103.337710
+Martensville	61 Centennial Dr	52.287770	-106.670075
+Martensville	201 Centennial Dr S	52.287180	-106.669770
+Martensville	611 Centennial Drive South	52.283077	-106.670158
+Martensville	139 Centennial Drive	52.287770	-106.670075
+Martensville	Gps N52 19.984 W106 39.242	52.293121	-106.657838
+Martensville	711 Centennial Dr	52.279240	-106.670193
+Martensville	1 - 323 Centennial Dr S	52.290987	-106.670248
+Martensville	927 3rd St N	52.294964	-106.655119
+Martensville	421 Centennial Dr N	52.296968	-106.669769
+Martensville	Bay 2- #1 Fourth St	52.293121	-106.657838
+Martensville	41 Centennial Dr	52.287770	-106.670075
+Martensville	B - 715 Centennial Dr S	52.279240	-106.670193
+Martensville	Corman Park	52.301784	-106.648723
+Martensville	Bay 1 - 408 Centennial Dr S	52.290987	-106.670248
+Martensville	135 Centennial Dr	52.287784	-106.669870
+Martensville	30 Centennial Dr	52.290825	-106.670679
+Martensville	#5 - 7 Centennial Dr N	52.290987	-106.670248
+Meacham	113 1st Ave	52.103775	-105.760295
+Middle Lake	109 Center St	52.481399	-105.302798
+Muenster	202 Main Street	52.191084	-105.002371
+Muenster	St. Peter's College	52.185774	-104.988957
+Muenster	St. Peter's College Campus	52.189804	-104.995397
+Nokomis	208 Main St	51.508225	-105.008852
+Nokomis	105 3rd Ave W	51.508250	-105.007260
+Nokomis	111 Main Street	51.507665	-105.009418
+Nokomis	301 5th Avenue East	51.509160	-105.003160
+Osler	312 - 2nd Ave	52.366925	-106.532847
+Osler	206 1st Ave	52.368337	-106.535754
+Pilger	115 Centre St	52.422725	-105.266360
+Pilger	113 Centre St	52.422725	-105.266360
+Plunkett	Railway Ave	51.906662	-105.448813
+Prud'homme	13 A Government Rd	52.334195	-105.890490
+Prud'homme	41 Main St	52.337539	-105.892617
+Quill Lake	67 Main St	52.070856	-104.256431
+Quill Lake	Hwy 5 & Oswald St	52.069806	-104.256388
+Quill Lake	86 Main St	52.070856	-104.256431
+Rm Of St. Louis	River Lots 40-42 Twp 44 Range 1 Hwy 225	52.920633	-105.810627
+Rosthern	2016 2nd St	52.666581	-106.333266
+Rosthern	6051 Saskatchewan St	52.667722	-106.341685
+Rosthern	1024 6th St	52.662770	-106.333699
+Rosthern	801 2nd Ave	52.661946	-106.337688
+Rosthern	1018 6th St	52.662683	-106.333375
+Rosthern	Gps N52 40.389 W 106 13.175	52.662259	-106.331826
+Rosthern	1020 6th Street	52.662712	-106.333483
+Saint Isidore De Bellevue	716 Main St	52.783736	-105.921751
+Saskatoon	1631 29th Street W	52.137009	-106.695974
+Saskatoon	101 - 412 Willowgrove Square	52.148222	-106.553213
+Saskatoon	10 - 123 2nd Ave S	52.128243	-106.664119
+Saskatoon	701 Queen St	52.136178	-106.653244
+Saskatoon	103 Hospital Dr	52.130458	-106.641200
+Saskatoon	1702 20th St W	52.126181	-106.696053
+Saskatoon	3102 Louise Pl	52.103343	-106.606340
+Saskatoon	1624 33rd St W	52.144794	-106.695267
+Saskatoon	E-511 33rd St West	52.143836	-106.678273
+Saskatoon	1015 Mckercher Dr	52.115047	-106.586868
+Saskatoon	1930 8th St E	52.114688	-106.626158
+Saskatoon	3303 A 33rd St W	52.143803	-106.726890
+Saskatoon	1001 8th St E	52.114725	-106.646360
+Saskatoon	8 Assiniboine Dr	52.161172	-106.645632
+Saskatoon	835 A Broadway Ave	52.116844	-106.656672
+Saskatoon	234 Pendygrasse Rd	52.121635	-106.724482
+Saskatoon	Unit 10b 234 Primrose Dr	52.172121	-106.632818
+Saskatoon	1024 Louise Avenue	52.116208	-106.630927
+Saskatoon	2222 22nd St W	52.129603	-106.705232
+Saskatoon	35a - 201 1st Ave S	52.127340	-106.667096
+Saskatoon	290 - 3310 8th St E	52.113027	-106.600276
+Saskatoon	2133 - 134 Primrose Dr	52.168887	-106.639832
+Saskatoon	2512 8th St E	52.114546	-106.617572
+Saskatoon	9 Campus Dr	52.130941	-106.638124
+Saskatoon	3010 11th St	52.114667	-106.717519
+Saskatoon	618 48th St E	52.168132	-106.659722
+Saskatoon	3907 8th Street E	52.114764	-106.587401
+Saskatoon	1550 - 8th St E	52.114724	-106.632400
+Saskatoon	1739 Preston Ave	52.108033	-106.622592
+Saskatoon	Corman Park	52.000503	-106.462543
+Saskatoon	51 Campus Dr	52.132998	-106.630866
+Saskatoon	219 Primrose Dr	52.167950	-106.635725
+Saskatoon	414 Cumberland Ave N	52.128441	-106.635041
+Saskatoon	2616 Louise St	52.100217	-106.614259
+Saskatoon	3021 Louise Avenue	52.100249	-106.622875
+Saskatoon	806 Dufferin Ave	52.117555	-106.654252
+Saskatoon	15-7 Assiniboine Drive	52.161080	-106.645022
+Saskatoon	415 Circle Dr E	52.157895	-106.643356
+Saskatoon	146 22nd St W	52.129347	-106.671789
+Saskatoon	1a - 800 Central Ave	52.136574	-106.598951
+Saskatoon	2002 D 8th St E	52.114184	-106.625233
+Saskatoon	Bay 7 - 527 Nelson Rd	52.150788	-106.567192
+Saskatoon	320 Avenue C South	52.125346	-106.673296
+Saskatoon	16 - 2605 Broadway Ave	52.096387	-106.656624
+Saskatoon	6-270 Acadia Drive	52.124090	-106.595831
+Saskatoon	900 Central Ave	52.137659	-106.598941
+Saskatoon	106 - 111 Research Dr	52.141960	-106.628524
+Saskatoon	7 - 1945 Mckercher Drive	52.099304	-106.592362
+Saskatoon	265 3rd Ave South	52.125714	-106.663630
+Saskatoon	2404 8th St E	52.114683	-106.619604
+Saskatoon	243 2nd Avenue South	52.126383	-106.665004
+Saskatoon	4 - 415 115th St.	52.143494	-106.590789
+Saskatoon	2901 - 8th St E	52.115761	-106.613756
+Saskatoon	411 Confederation Dr	52.132557	-106.725607
+Saskatoon	315 Herold Rd	52.101755	-106.567342
+Saskatoon	3100 Preston Ave S	52.086407	-106.623368
+Saskatoon	300-415 Circle Drive East	52.157895	-106.643356
+Saskatoon	306 Shillington Cr	52.128413	-106.755900
+Saskatoon	110 Bowlt Cres	52.128324	-106.744974
+Saskatoon	10 - 210 Betts Ave	52.126416	-106.758931
+Saskatoon	4402 11th St West	52.115377	-106.770970
+Saskatoon	1002 Broadway Avenue	52.115668	-106.656780
+Saskatoon	1301 Ave P S	52.110608	-106.694480
+Saskatoon	223 2nd Ave S	52.126747	-106.665066
+Saskatoon	3010 8th St E	52.114698	-106.609267
+Saskatoon	2610 Lorne Ave	52.095114	-106.672491
+Saskatoon	E2 - 225 Betts Avenue	52.126291	-106.758926
+Saskatoon	101 - 626 Broadway Ave	52.119758	-106.656829
+Saskatoon	F18-201-1st Avenue South	52.127340	-106.667096
+Saskatoon	7 - 2210 Millar Ave	52.160639	-106.648206
+Saskatoon	1601 8th St E	52.114852	-106.631880
+Saskatoon	329 Herold Rd	52.098758	-106.567025
+Saskatoon	515 Nelson Road	52.150419	-106.567895
+Saskatoon	826 51st St E	52.173372	-106.650241
+Saskatoon	120 2nd Ave N	52.129142	-106.663414
+Saskatoon	2415 22nd St W	52.129061	-106.708552
+Saskatoon	814 Broadway Ave	52.117414	-106.656993
+Saskatoon	10 - 214 Stonebridge Blvd	52.083405	-106.642482
+Saskatoon	1747 Preston Ave N	52.149330	-106.616231
+Saskatoon	330 Circle Dr E	52.157951	-106.667496
+Saskatoon	806 Idylwyld Dr N	52.137115	-106.670106
+Saskatoon	140 Idylwyld Drive S	52.127385	-106.670206
+Saskatoon	1114 22nd St W	52.129330	-106.687256
+Saskatoon	2 - 157 2nd Ave N	52.130243	-106.663335
+Saskatoon	419 Brand Pl	52.088127	-106.650435
+Saskatoon	1235 Ave P S	52.111540	-106.694460
+Saskatoon	332 20th St W	52.126148	-106.674503
+Saskatoon	721 Broadway Ave	52.118276	-106.656669
+Saskatoon	116 Research Dr	52.142546	-106.626059
+Saskatoon	510 25th St E	52.133299	-106.655470
+Saskatoon	210 Ave H N	52.131303	-106.680927
+Saskatoon	123 Nelson Rd	52.148836	-106.585667
+Saskatoon	3510 8th Street East	52.114632	-106.593895
+Saskatoon	11 - 3000 Diefenbaker Dr	52.129566	-106.728178
+Saskatoon	1945 Mckercher Dr	52.099304	-106.592362
+Saskatoon	3366 Fairlight Dr	52.126720	-106.727495
+Saskatoon	210b - 3929  8th Street East	52.114766	-106.587069
+Saskatoon	2218 Ave C N	52.160322	-106.673255
+Saskatoon	1730 Preston Ave N	52.149449	-106.618308
+Saskatoon	481 2nd Ave N	52.135021	-106.661053
+Saskatoon	403 33rd St W	52.143753	-106.675472
+Saskatoon	1437 College Dr	52.129289	-106.636427
+Saskatoon	802 C Broadway Ave	52.117729	-106.656856
+Saskatoon	420 33rd St W	52.143848	-106.751846
+Saskatoon	3035 Preston Ave S	52.087820	-106.619740
+Saskatoon	18 23rd Street	52.131362	-106.668725
+Saskatoon	310 22nd St W	52.129348	-106.674168
+Saskatoon	20 - 15 Worobetz Place	52.130281	-106.726599
+Saskatoon	1602 Chappel Drive	52.114679	-106.744186
+Saskatoon	20 - 2325 Preston Avenue	52.101640	-106.620994
+Saskatoon	331 1st Ave N	52.132756	-106.663769
+Saskatoon	815 A Gray Ave	52.141967	-106.598243
+Saskatoon	220 20th St West	52.126284	-106.672631
+Saskatoon	1301 8th St E	52.114833	-106.636870
+Saskatoon	18 - 2625 Airport Dr	52.169969	-106.690802
+Saskatoon	160 - 1718 Preston Ave N	52.108459	-106.622784
+Saskatoon	4402 11th Street West	52.115377	-106.770970
+Saskatoon	28 34th St E	52.145543	-106.666705
+Saskatoon	115 Marquis Dr	52.194678	-106.676998
+Saskatoon	1 - 227 Pinehouse Dr	52.168220	-106.622401
+Saskatoon	18 - 2325 Preston Ave S	52.101640	-106.620994
+Saskatoon	2404 Melrose Ave	52.100100	-106.664993
+Saskatoon	135 Ave B South	52.127754	-106.671844
+Saskatoon	301 - 3515 Thatcher Ave	52.189118	-106.679150
+Saskatoon	315 Avenue M South	52.125797	-106.688802
+Saskatoon	416 21st St E	52.126556	-106.660249
+Saskatoon	702a 14th St E	52.121678	-106.651609
+Saskatoon	36 - 134 Primrose Dr	52.168967	-106.639202
+Saskatoon	T235 - 201 1st Ave S	52.127340	-106.667096
+Saskatoon	3 - 149 Pacific Ave	52.131026	-106.667506
+Saskatoon	213 - 2750 Faithfull Ave	52.172621	-106.663369
+Saskatoon	601 Spadina Cres	52.126296	-106.659394
+Saskatoon	310 Circle Drive West	52.158650	-106.673998
+Saskatoon	3850 Idylwyld Drive No.	52.195801	-106.668662
+Saskatoon	1517 11th St W	52.114602	-106.693722
+Saskatoon	8 - 527 Nelson Rd	52.150788	-106.567192
+Saskatoon	906 Central Ave	52.138080	-106.598940
+Saskatoon	2 - 3301 22nd St W	52.128712	-106.723033
+Saskatoon	212 - 294 Venture Cres	52.157655	-106.650428
+Saskatoon	2102 - 22nd St W	52.129558	-106.702884
+Saskatoon	10 - 302 Stonebridge Blvd	52.117789	-106.664947
+Saskatoon	414 Ludlow St	52.147193	-106.570615
+Saskatoon	339 Ave A South	52.124648	-106.670541
+Saskatoon	3322 Fairlight Dr	52.128118	-106.724182
+Saskatoon	616 10th St E	52.117600	-106.655678
+Saskatoon	411 Ave M N	52.134053	-106.689031
+Saskatoon	Unit 349, 3510 8th Street East	52.114632	-106.593895
+Saskatoon	28 Campus Dr	52.134268	-106.636106
+Saskatoon	102b Ave P S	52.129114	-106.694074
+Saskatoon	2814 8th St E	52.114516	-106.612782
+Saskatoon	1540 Idylwyld Dr N	52.149806	-106.669840
+Saskatoon	419 Slimmon Rd	52.099889	-106.561059
+Saskatoon	508 12th St E	52.119653	-106.658868
+Saskatoon	507 Nelson Road	52.150113	-106.569033
+Saskatoon	2228 Ave C N	52.160786	-106.673073
+Saskatoon	607 Dufferin Ave	52.119630	-106.653805
+Saskatoon	340 - 3310-8th Street East	52.113027	-106.600276
+Saskatoon	50 - 1 Campus Dr	52.130736	-106.636346
+Saskatoon	103 Fairmont Court	52.127090	-106.722935
+Saskatoon	3401 22nd St W	52.129318	-106.723348
+Saskatoon	10 - 1012 Taylor St E	52.107302	-106.645813
+Saskatoon	8 - 110 Wedge Rd	52.145082	-106.726281
+Saskatoon	Bay 13 - 7 Assiniboine Dr	52.161080	-106.645022
+Saskatoon	300 - 136 Primrose Dr	52.172877	-106.632695
+Saskatoon	F5 - 134 Primrose Dr	52.168887	-106.639832
+Saskatoon	2020 College Dr	52.129166	-106.621908
+Saskatoon	3415 Mcclocklin Rd	52.151602	-106.730954
+Saskatoon	259-2nd Avenue South	52.126220	-106.665318
+Saskatoon	3850 Idylwyld Dr N	52.195801	-106.668662
+Saskatoon	111 - 2750 Faithful Ave	52.172621	-106.663369
+Saskatoon	502 Webster St	52.145876	-106.585261
+Saskatoon	924 Spadina Crescent East	52.131649	-106.651949
+Saskatoon	20 - 7 Assiniboine Dr	52.161080	-106.645022
+Saskatoon	3 - 821 Central Ave	52.137507	-106.598139
+Saskatoon	619 20th St W	52.126052	-106.679039
+Saskatoon	2910 8th St E	52.114537	-106.612040
+Saskatoon	1335 Fletcher Rd	52.110442	-106.703879
+Saskatoon	685 Reid Road	52.149502	-106.601817
+Saskatoon	90 22nd St E	52.129158	-106.665603
+Saskatoon	414 Ave B South, Bay 34	52.124166	-106.671351
+Saskatoon	901d 22nd St W	52.128975	-106.683304
+Saskatoon	114 Science Pl	52.132168	-106.633860
+Saskatoon	1916 5th St E	52.111569	-106.635603
+Saskatoon	150 Nelson Road	52.148258	-106.579631
+Saskatoon	1904 Clarence Ave	52.107212	-106.646517
+Saskatoon	722 Bedford Rd	52.133530	-106.679848
+Saskatoon	31c - 2105 - 8th St E	52.115237	-106.627091
+Saskatoon	134 Primrose Drive	52.168887	-106.639832
+Saskatoon	447 3310 8th St E	52.113027	-106.600276
+Saskatoon	3 - 411 2nd Ave N	52.133852	-106.661458
+Saskatoon	105-475 2nd Ave S	52.123744	-106.666798
+Saskatoon	1501 Ave P South	52.108421	-106.693871
+Saskatoon	2105 8th St E	52.115237	-106.627091
+Saskatoon	100 - 810 Circle Dr E	52.159504	-106.650295
+Saskatoon	904 22nd St W	52.129336	-106.682989
+Saskatoon	1 - 844 51st St E	52.173302	-106.647676
+Saskatoon	100 - 350 3rd Ave N	52.132913	-106.659761
+Saskatoon	30 - 3310 8th St E	52.113027	-106.600276
+Saskatoon	K 112 - 2325 Preston Ave	52.101640	-106.620994
+Saskatoon	480 1st Ave N	52.135458	-106.662421
+Saskatoon	Grasswood Rd	52.056406	-106.604101
+Saskatoon	210 20th Street West	52.126229	-106.672306
+Saskatoon	302 22nd St W	52.129345	-106.673526
+Saskatoon	204 33rd St W	52.143860	-106.672034
+Saskatoon	718 2nd Ave N	52.138763	-106.658803
+Saskatoon	1347 Fletcher Rd	52.109722	-106.704103
+Saskatoon	1110 Idylwyld Drive North	52.142738	-106.670136
+Saskatoon	52 - 1 Campus Dr (lpr)	52.133214	-106.670046
+Saskatoon	3016 Arlington Ave	52.094155	-106.617348
+Saskatoon	1130 Idylwyld Dr N	52.142926	-106.669641
+Saskatoon	111-412 Willowgrove Square	52.139841	-106.609742
+Saskatoon	3 - 1005 Broadway Ave	52.115328	-106.656655
+Saskatoon	152 2nd Ave S	52.127793	-106.664011
+Saskatoon	107 Laronge Rd	52.168577	-106.627267
+Saskatoon	30-102-hampton Circle	52.153824	-106.713736
+Saskatoon	822 Victoria Avenue	52.116784	-106.662376
+Saskatoon	167a 2nd Ave S	52.127706	-106.664583
+Saskatoon	612 11th St E	52.118775	-106.656676
+Saskatoon	204 5th Ave N	52.130076	-106.657398
+Saskatoon	30 - 304 Stonebridge Blvd	52.083591	-106.640620
+Saskatoon	401 21st St E	52.126552	-106.661131
+Saskatoon	2422 Westwood Dr	52.133214	-106.670046
+Saskatoon	1 - 405 Circle Dr E	52.157797	-106.666049
+Saskatoon	315 Marquis Dr	52.193202	-106.687052
+Saskatoon	Unit D 3010 Arlington Ave	52.094156	-106.617332
+Saskatoon	307 21st St E	52.126762	-106.662402
+Saskatoon	325 Ave C S	52.125158	-106.673672
+Saskatoon	3 - 510 Circle Dr E	52.158113	-106.663808
+Saskatoon	3515 Thatcher Ave	52.189118	-106.679150
+Saskatoon	2301 Grasswood Rd	52.056482	-106.708770
+Saskatoon	Sunset Estates - Hwy 5	52.133214	-106.670046
+Saskatoon	29 - 844 51st St E	52.173302	-106.647676
+Saskatoon	1115 Grosvenor Ave	52.113134	-106.626040
+Saskatoon	51 - 1035 Boychuk Dr	52.115213	-106.574735
+Saskatoon	502 Circle Dr E	52.157991	-106.664834
+Saskatoon	706 A Central Ave	52.136104	-106.598949
+Saskatoon	1a -705 Central Ave	52.136417	-106.597991
+Saskatoon	2520 Jasper Ave	52.098445	-106.669633
+Saskatoon	30 Kenderdine Rd	52.145300	-106.575078
+Saskatoon	1013 Broadway Ave	52.114715	-106.656671
+Saskatoon	39 - 134 Primrose Dr	52.168996	-106.639441
+Saskatoon	T12a - 201 1st Ave S	52.127340	-106.667096
+Saskatoon	720 22nd St W	52.129440	-106.680926
+Saskatoon	3110 Diefenbaker Dr	52.131930	-106.727716
+Saskatoon	1405 Ave P S	52.108963	-106.693926
+Saskatoon	1820 Broadway Ave	52.107466	-106.656968
+Saskatoon	838 Spadina Crescent East	52.130246	-106.653545
+Saskatoon	204 Avenue H North	52.130871	-106.681265
+Saskatoon	F005 - 201 1st Ave N	52.127340	-106.667096
+Saskatoon	105 - 71st St West	52.202086	-106.671932
+Saskatoon	3 - 1025 Boychuk Dr	52.116366	-106.575052
+Saskatoon	123 2nd Ave S	52.128243	-106.664119
+Saskatoon	914 20th St W	52.126414	-106.683761
+Saskatoon	1635 Mckercher Dr	52.104713	-106.585543
+Saskatoon	53 - 1 Campus Dr	52.130736	-106.636346
+Saskatoon	112 20th Street W	52.126230	-106.670773
+Saskatoon	311 Ave A S	52.125562	-106.670409
+Saskatoon	316 Ave C S	52.125878	-106.673468
+Saskatoon	1701 11th Street W	52.114700	-106.695501
+Saskatoon	258 Avenue B South	52.126191	-106.671847
+Saskatoon	104a 3929 8th St	52.114766	-106.587069
+Saskatoon	2 - 303 Confederation Dr	52.130757	-106.723037
+Saskatoon	Unit 118 1824 Mcormond Drive	52.147521	-106.565880
+Saskatoon	93 Campus Dr	52.130025	-106.635829
+Saskatoon	602 Lenore Dr	52.177238	-106.619560
+Saskatoon	402 3rd Ave N	52.133502	-106.659692
+Saskatoon	10 - 102 Hampton Circle	52.153824	-106.713736
+Saskatoon	1-3730 Diefenbaker Drive	52.137385	-106.743328
+Saskatoon	708 Central Avenue	52.136113	-106.598949
+Saskatoon	103 Ruth St E	52.100344	-106.670385
+Saskatoon	2302 33rd St W	52.143913	-106.705844
+Saskatoon	430 Russell Rd	52.183830	-106.630091
+Saskatoon	431 Kenderdine Rd	52.135011	-106.575310
+Saskatoon	245 20th St W	52.126059	-106.673336
+Saskatoon	200 - 1820 8th St E	52.113763	-106.628777
+Saskatoon	2202 22nd St W	52.129669	-106.704547
+Saskatoon	20 - 110 Marquis Dr W	52.195481	-106.674215
+Saskatoon	122 - 1844 Mcormond Dr	52.150418	-106.565745
+Saskatoon	239 Idylwyld Dr S	52.126200	-106.670374
+Saskatoon	3815 Wanuskewin Rd	52.189081	-106.638298
+Saskatoon	750 Spadina Cres E	52.128742	-106.657023
+Saskatoon	503 Ruth St W	52.100285	-106.659480
+Saskatoon	97 Campus Drive	52.130121	-106.635932
+Saskatoon	600 45th St W	52.164071	-106.674975
+Saskatoon	2225 22nd St W	52.129036	-106.704682
+Saskatoon	905 51st St E	52.172674	-106.645158
+Saskatoon	1803 Idylwyld Dr N	52.153361	-106.670262
+Saskatoon	10 Kenderdine Rd	52.145812	-106.575796
+Saskatoon	1706 Preston Ave N	52.149972	-106.621472
+Saskatoon	1608 8th St E	52.114358	-106.631476
+Saskatoon	3035 Clarence Avenue	52.088633	-106.641549
+Saskatoon	225 Betts Ave	52.126291	-106.758926
+Saskatoon	618 Circle Dr	52.158096	-106.659949
+Saskatoon	5 - 811 51st St E	52.172890	-106.652234
+Saskatoon	2815 Wanuskewin Rd	52.175074	-106.640736
+Saskatoon	534 2nd Ave N	52.136448	-106.660034
+Saskatoon	212 - 2750 Faithful Ave	52.172621	-106.663369
+Saskatoon	70 - 2325 Preston Ave	52.101640	-106.620994
+Saskatoon	Unit A - 2115 22nd St W	52.129000	-106.703496
+Saskatoon	411 - E Herold Crt	52.097848	-106.567907
+Saskatoon	2 - 3303 33rd St W	52.143803	-106.726890
+Saskatoon	1510 8th  St E	52.114680	-106.634499
+Saskatoon	431 Nelson Rd	52.150541	-106.570304
+Saskatoon	2220 Rusholme Rd	52.133373	-106.704272
+Saskatoon	1605 29th St W	52.137009	-106.695974
+Saskatoon	3134 8th St E	52.114643	-106.605254
+Saskatoon	103 - 2105 8th Street E	52.115237	-106.627091
+Saskatoon	13-3000 Diefenbaker Drive	52.129566	-106.728178
+Saskatoon	1 - 1945 Mckercher Drive	52.099304	-106.592362
+Saskatoon	706 Idylwyld Dr N	52.136246	-106.669422
+Saskatoon	2 - 3401 8th St E	52.114750	-106.594597
+Saskatoon	730a Broadway Ave	52.118023	-106.657011
+Saskatoon	950 Spadina Cres. East	52.134851	-106.649075
+Saskatoon	115 - 128 4th Ave S	52.127033	-106.660544
+Saskatoon	209 - 3929 8th St E	52.114668	-106.666985
+Saskatoon	1036 Louise Ave	52.115015	-106.630919
+Saskatoon	134 English Cr	52.184333	-106.641681
+Saskatoon	727 22nd St W	52.128791	-106.680859
+Saskatoon	912 20th St W	52.126313	-106.683443
+Saskatoon	313 20th St W	52.125998	-106.674042
+Saskatoon	2036b Quebec Ave	52.157601	-106.662967
+Saskatoon	9 - 3310 Fairlight Dr	52.128321	-106.722791
+Saskatoon	801 Broadway Ave	52.117463	-106.656560
+Saskatoon	240 22nd St E	52.128668	-106.662375
+Saskatoon	803 - 2nd Ave North	52.139635	-106.658698
+Saskatoon	820 Broadway Ave	52.117257	-106.657065
+Saskatoon	5185 Strathcona Ave	52.071153	-106.694114
+Saskatoon	806 Broadway Ave	52.117594	-106.657000
+Saskatoon	411 11th St E	52.118796	-106.659717
+Saskatoon	2002 Arlington Ave	52.104962	-106.609705
+Saskatoon	40-831 51st Street E	52.174182	-106.654029
+Saskatoon	2311b 8th Street East	52.114842	-106.620524
+Saskatoon	F06 - 201 1st Avenue South	52.127340	-106.667096
+Saskatoon	310 - 3310 8th St E	52.113027	-106.600276
+Saskatoon	928 8th St E	52.114372	-106.646712
+Saskatoon	Unit A, 1515 - 8th St East	52.115237	-106.634134
+Saskatoon	839 51st Street E	52.172866	-106.646653
+Saskatoon	919 Broadway Ave	52.115737	-106.656646
+Saskatoon	227 2nd Ave S	52.126670	-106.665052
+Saskatoon	609 1st Ave North	52.136870	-106.661852
+Saskatoon	2a-1945 Mckercher Dr	52.099304	-106.592362
+Saskatoon	1 - 415 51st St E	52.172751	-106.662847
+Saskatoon	515 20th St W	52.126048	-106.677311
+Saskatoon	8 - 3311 8th St E	52.114769	-106.603103
+Saskatoon	1903 Forestry Farm Park Dr	52.156906	-106.582812
+Saskatoon	5 - 411 Confederation Dr	52.132557	-106.725607
+Saskatoon	1904 Lorne Ave	52.107298	-106.670445
+Saskatoon	402 51st St E	52.173049	-106.664845
+Saskatoon	A-924 Northumberland Avenue	52.139408	-106.717895
+Saskatoon	408 36th St E	52.148521	-106.664736
+Saskatoon	2311 8th St E	52.114842	-106.620524
+Saskatoon	510 Circle Drive	52.158113	-106.663808
+Saskatoon	Bay 2 - 602 22nd St W	52.129188	-106.674097
+Saskatoon	2115 22nd St W	52.129000	-106.703496
+Saskatoon	701 Central Avenue	52.136371	-106.598548
+Saskatoon	11 - 3110 8th St E	52.114618	-106.609531
+Saskatoon	3 - 601 8th St. East	52.114675	-106.656682
+Saskatoon	8 - 202 Primrose Dr	52.171399	-106.634325
+Saskatoon	1504b 22nd St W	52.129330	-106.692835
+Saskatoon	Booth #26	52.133214	-106.670046
+Saskatoon	538 Ave T S	52.120445	-106.700765
+Saskatoon	1162 Spadina Cr	52.141195	-106.644547
+Saskatoon	2020 Quebec Ave	52.157234	-106.663122
+Saskatoon	Booth #25	52.133214	-106.670046
+Saskatoon	423 20th St W	52.126027	-106.675930
+Saskatoon	250 Primrose Dr	52.172877	-106.632695
+Saskatoon	3 - 1840 8th St E	52.114688	-106.627883
+Saskatoon	126 - 1824 Mcormond Dr	52.147501	-106.568627
+Saskatoon	601 Taylor St W	52.107281	-106.677292
+Saskatoon	114 - 3102 Clarence Ave S	52.085334	-106.646841
+Saskatoon	Bay 1 - 1418 Central Ave	52.173005	-106.598837
+Saskatoon	138-1824 Mcormond Drive	52.147501	-106.568627
+Saskatoon	2407 Ave C N	52.164759	-106.674521
+Saskatoon	302 Pacific Ave	52.132664	-106.667136
+Saskatoon	40 - 102 Hampton Circle	52.153824	-106.713736
+Saskatoon	2501 8th St E	52.115144	-106.617770
+Saskatoon	101 B-2301 Avenue C North	52.161480	-106.674217
+Saskatoon	243 21st St E	52.126872	-106.663040
+Saskatoon	224 3rd Ave S	52.126273	-106.663052
+Saskatoon	310 Lenore Dr	52.173697	-106.627073
+Saskatoon	1715 Idylwyld Dr N	52.153124	-106.670279
+Saskatoon	Bay 51 & Bay 52	52.133214	-106.670046
+Saskatoon	101 C 20th Street West	52.126093	-106.670548
+Saskatoon	822 Avenue H. South	52.117340	-106.681511
+Saskatoon	645 Spadina Cr	52.118667	-106.679244
+Saskatoon	3180 Grasswood Rd	52.056482	-106.708704
+Saskatoon	102 - 1820 Mcormond Dr	52.147506	-106.567999
+Saskatoon	160 - 220 Betts Ave	52.126333	-106.758928
+Saskatoon	Bay 7-3110 8th Street E	52.150684	-106.648078
+Saskatoon	560 - 3310 8th St E	52.113027	-106.600276
+Saskatoon	3021 Louise St	52.101779	-106.607069
+Saskatoon	606 Spadina Crescent	52.126589	-106.659456
+Saskatoon	2 - 325 3rd Ave N	52.132460	-106.660289
+Saskatoon	5th Flr, 103 Hospital Dr	52.130458	-106.641200
+Saskatoon	2325 Preston Ave	52.101640	-106.620994
+Saskatoon	302 33rd St W	52.143866	-106.673578
+Saskatoon	Bay D 96 33rd St E	52.144170	-106.660860
+Saskatoon	69 24th St E	52.132303	-106.668972
+Saskatoon	1025 Louise Ave	52.116240	-106.630891
+Saskatoon	339 Ave C S	52.124732	-106.673686
+Saskatoon	375 Cornish Road	52.086339	-106.629122
+Saskatoon	418a 47th Street E	52.166481	-106.665895
+Saskatoon	136 2nd Ave S	52.128141	-106.663856
+Saskatoon	421 21st St E	52.126237	-106.659470
+Saskatoon	3370 Fairlight Dr	52.126710	-106.728148
+Saskatoon	106 Stonebridge Blvd.	52.084066	-106.643323
+Saskatoon	922 51st Street E	52.173092	-106.643274
+Saskatoon	1628 33rd St W	52.144109	-106.695866
+Saskatoon	311 Circle Dr W	52.157241	-106.677133
+Saskatoon	2 - 402 Ludlow Street	52.146684	-106.572227
+Saskatoon	3310 8th St E	52.113027	-106.600276
+Saskatoon	168 Wall St	52.130521	-106.669032
+Saskatoon	2002 Airport Dr	52.156045	-106.682761
+Saskatoon	101c - 2301 Ave C North	52.161480	-106.674217
+Saskatoon	450 - 20th St W	52.126165	-106.676707
+Saskatoon	221 Idylwyld Dr N	52.131545	-106.670629
+Saskatoon	Gps N52.18754 W106.57529	52.133214	-106.670046
+Saskatoon	140 1st Ave N	52.129195	-106.665427
+Saskatoon	1117 15th Street East	52.122853	-106.642953
+Saskatoon	102 Cardinal Cres	52.154874	-106.685897
+Saskatoon	18 Innovation Blvd	52.140218	-106.626960
+Saskatoon	334 20th St W	52.126275	-106.674540
+Saskatoon	623 2nd Ave N	52.137575	-106.660112
+Saskatoon	122 Bowlt Cres	52.128452	-106.746295
+Saskatoon	612 Spadina Cres	52.126663	-106.658790
+Saskatoon	743 7th Ave N	52.139338	-106.652160
+Saskatoon	214 Main Street	52.116539	-106.666773
+Saskatoon	702 Circle Dr E	52.158097	-106.656443
+Saskatoon	49 - 134 Primrose Dr	52.168884	-106.640146
+Saskatoon	46 - 2325 Preston Ave	52.101640	-106.620994
+Saskatoon	914 Ave J South	52.116521	-106.684444
+Saskatoon	3421 A 8th St E	52.115118	-106.597309
+Saskatoon	1550 8th St E	52.114724	-106.632400
+Saskatoon	605 Acadia Dr	52.120168	-106.597832
+Saskatoon	4 - 3401 8th St East	52.114750	-106.594597
+Saskatoon	113 3rd Ave S	52.127939	-106.662559
+Saskatoon	608 Spadina Cres E	52.126649	-106.659412
+Saskatoon	6 - 1501 8th St E	52.115862	-106.633842
+Saskatoon	503 Ruth St	52.100285	-106.659480
+Saskatoon	516 33rd St W	52.144010	-106.677091
+Saskatoon	1202 11th Street East	52.118812	-106.641307
+Saskatoon	115 Nelson Road	52.149946	-106.579249
+Saskatoon	3322 - 8th St E	52.114151	-106.600430
+Saskatoon	18-2625 Airport Drive	52.169969	-106.690802
+Saskatoon	1 - 134 Primrose Dr	52.169557	-106.642269
+Saskatoon	2311 A 8th St E	52.114842	-106.620524
+Saskatoon	1860 Mcormond Dr	52.149466	-106.567120
+Saskatoon	100 2nd Ave S	52.128548	-106.663614
+Saskatoon	10b - 201 1st Ave S	52.127340	-106.667096
+Saskatoon	F08 - 134 Primrose Dr	52.168887	-106.639832
+Saskatoon	#102-1844 Mcormond Drive	52.150418	-106.565745
+Saskatoon	1 Campus Dr	52.130736	-106.636346
+Saskatoon	6 - 475 2nd Ave S	52.123744	-106.666798
+Saskatoon	3043 Clarence Ave S	52.086301	-106.640421
+Saskatoon	3035 Clarence Ave S	52.088633	-106.641549
+Saskatoon	3-110 Wedge Rd	52.145082	-106.726281
+Saskatoon	100 - 219 Betts Ave	52.126341	-106.758928
+Saskatoon	4 - 1601 22nd St	52.128988	-106.694766
+Saskatoon	T71 - 201 1st Ave South	52.127340	-106.667096
+Saskatoon	A-801 A Broadway Ave	52.117463	-106.656560
+Saskatoon	1 - 1216 Idylwyld Dr N	52.144731	-106.670131
+Saskatoon	10 - 3815 Thatcher Ave	52.194823	-106.677583
+Saskatoon	100 - 3055 Clarence Ave	52.086236	-106.645868
+Saskatoon	101 - 3929 8th St E	52.114766	-106.587069
+Saskatoon	110a - 2600 8th St E	52.114684	-106.616687
+Saskatoon	212 22nd St E	52.128766	-106.662987
+Saskatoon	418 Cumberland Ave	52.128754	-106.634790
+Saskatoon	831 51st Street E	52.172866	-106.646653
+Saskatoon	87 - 2325 Preston Ave	52.101640	-106.620994
+Saskatoon	Blucher	52.133214	-106.670046
+Saskatoon	Unit #14 - 110 33rd St W	52.143860	-106.671751
+Saskatoon	2901 8th St E	52.115761	-106.613756
+Saskatoon	737 B Broadway Ave	52.117828	-106.656672
+Saskatoon	810 Central Ave	52.137213	-106.599267
+Saskatoon	141 Jessop Ave	52.128743	-106.596425
+Saskatoon	2107 22nd St W	52.129022	-106.702951
+Saskatoon	11-1501 8th St	52.115862	-106.633842
+Saskatoon	210 - 2600 8th St E	52.114527	-106.666955
+Saskatoon	270 - 3310 8th St E	52.113027	-106.600276
+Saskatoon	30 - 214 Stonebridge Blvd	52.083405	-106.642482
+Saskatoon	501 B Nelson Rd	52.150115	-106.569500
+Saskatoon	60 - 102 Hampton Circle	52.153824	-106.713736
+Saskatoon	600 22nd St W	52.129343	-106.679419
+Saskatoon	70 - 1010 Taylor Street	52.107302	-106.645932
+Saskatoon	85 - 2325 Preston Ave	52.101640	-106.620994
+Saskatoon	F13 - 201 1st Ave S	52.127340	-106.667096
+Saskatoon	30 - 220 Betts Ave	52.126333	-106.758928
+Saskatoon	8 - 1724 Quebec Ave	52.151671	-106.663339
+Saskatoon	219 - 21st St E	52.126927	-106.663958
+Saskatoon	35 22nd St E	52.129220	-106.667979
+Saskatoon	1630 Ave U S	52.113222	-106.700874
+Saskatoon	126 English Cr	52.183474	-106.642581
+Saskatoon	715 Circle Dr E	52.136812	-106.677008
+Saskatoon	1308 Temperance St	52.125598	-106.638375
+Saskatoon	300 - 3310 8th St E	52.113027	-106.600276
+Saskatoon	F09 - 201 1st Ave S	52.127340	-106.667096
+Saskatoon	830 Valley Rd	52.049234	-106.741740
+Saskatoon	333 Aerogreen Cres	52.161849	-106.685083
+Saskatoon	1320 A 20th St W	52.126395	-106.689942
+Saskatoon	2318 8th St E	52.114683	-106.619824
+Saskatoon	614 C Broadway Ave	52.120107	-106.657319
+Saskatoon	217 Fairmont Dr	52.125740	-106.722575
+Saskatoon	3150 Preston Ave South	52.085412	-106.622726
+Saskatoon	2720 8th St E	52.114698	-106.613933
+Saskatoon	134 1844 Mcormond Drive	52.150418	-106.565745
+Saskatoon	2806 8th St E	52.113804	-106.613148
+Saskatoon	10 - 2105 8th St E	52.115237	-106.627091
+Saskatoon	Unit 10 - 3311-8th Street East	52.114769	-106.603103
+Saskatoon	1-2155 Airport Dr	52.157406	-106.687279
+Saskatoon	334 Ave C S	52.124795	-106.673378
+Saskatoon	7 - 3730 Diefenbaker Dr	52.137385	-106.743328
+Saskatoon	301 Ontario Avenue	52.132920	-106.665790
+Saskatoon	1110 Grosvenor Avenue	52.113134	-106.626077
+Saskatoon	304 2nd Ave S	52.125430	-106.665166
+Saskatoon	167 3rd Ave S	52.127328	-106.662901
+Saskatoon	3502 11th St W	52.114776	-106.742410
+Saskatoon	15b - 234 Primrose Dr	52.172121	-106.632818
+Saskatoon	414 Ave B S	52.124166	-106.671351
+Saskatoon	3 - 402 Ludlow St	52.146684	-106.572227
+Saskatoon	629 B 1st Avenue North	52.138084	-106.661537
+Saskatoon	82 - 2325 Preston Ave	52.101640	-106.620994
+Saskatoon	1 - 510 Circle Drive E	52.158113	-106.663808
+Saskatoon	45 Rivers Edge Lane	52.219573	-106.553167
+Saskatoon	6-143 Gropper Cres	52.127791	-106.731835
+Saskatoon	417 21st St E	52.126303	-106.659819
+Saskatoon	865 Cartwright St W	52.085614	-106.689055
+Saskatoon	205 Apex St	52.192091	-106.679467
+Saskatoon	430 20th St W	52.126160	-106.676128
+Saskatoon	1806 Idylwyld Dr	52.153307	-106.670063
+Saskatoon	148 2nd Ave N	52.129935	-106.663111
+Saskatoon	718 Broadway Avenue	52.118249	-106.656856
+Saskatoon	123 3rd Ave S	52.127735	-106.662686
+Saskatoon	304 3rd Ave N	52.131682	-106.660446
+Saskatoon	856 - 51st St E	52.173021	-106.646464
+Saskatoon	1518 8th St E	52.114678	-106.633935
+Saskatoon	709 Circle Drive East	52.097089	-106.615354
+Saskatoon	229 Marquis Drive	52.194677	-106.678055
+Saskatoon	410 - 22nd St E	52.128236	-106.660098
+Saskatoon	619-22nd Street West	52.129344	-106.678777
+Saskatoon	1812 Mcormond Dr	52.146652	-106.568453
+Saskatoon	7 Assiniboine Dr	52.161080	-106.645022
+Saskatoon	10 - 3203 Preston Ave S	52.085415	-106.622543
+Saskatoon	230 Betts Ave	52.125467	-106.758303
+Saskatoon	6 - 3401 8th St E	52.114750	-106.594597
+Saskatoon	2921d - 8th St E	52.115246	-106.612016
+Saskatoon	4 - 702 22nd St W	52.129343	-106.679829
+Saskatoon	110 33rd St W	52.143860	-106.671751
+Saskatoon	205e - 3929 8th St E	52.114766	-106.587069
+Saskatoon	3 - 305 Idylwyld Dr N	52.128097	-106.670595
+Saskatoon	54 - 1 Campus Dr	52.130736	-106.636346
+Saskatoon	280 - 3310 8th St E	52.113027	-106.600276
+Saskatoon	331 Cornish Rd	52.086890	-106.630421
+Saskatoon	230-21st St East	52.127114	-106.663312
+Saskatoon	208 Ave H N	52.131237	-106.680953
+Saskatoon	12 - 3000 Diefenbaker Dr	52.129566	-106.728178
+Saskatoon	550 Brand Rd	52.086812	-106.653351
+Saskatoon	2102 Millar Ave	52.159146	-106.648296
+Saskatoon	B - 3750 Idylwyld Dr N	52.192791	-106.668714
+Saskatoon	135 20th Street W	52.125951	-106.671579
+Saskatoon	101 Administration Pl	52.130076	-106.632648
+Saskatoon	2124 B 22nd St W	52.129381	-106.704132
+Saskatoon	40-1 Campus Drive	52.130736	-106.636346
+Saskatoon	11 - 1301 8th St E	52.114833	-106.636870
+Saskatoon	102 - 3337 A 8th St E	52.114560	-106.670371
+Saskatoon	1610 11th St W	52.114721	-106.694260
+Saskatoon	706 C Central Ave	52.136104	-106.598949
+Saskatoon	520 Central Street	52.134516	-106.598964
+Saskatoon	1832 Mcormond Drive	52.147731	-106.569399
+Saskatoon	819 29th Street West	52.136843	-106.682743
+Saskatoon	305 Valley Rd	52.070350	-106.741837
+Saskatoon	200 - 3929 8th St E	52.114766	-106.587069
+Saskatoon	602 20th St W	52.126471	-106.678984
+Saskatoon	4 - 15 Worobetz Pl	52.130281	-106.726599
+Saskatoon	120- 3055 Clarence Ave S	52.086236	-106.645868
+Saskatoon	6 - 3311 8th St E	52.114769	-106.603103
+Saskatoon	130 - 220 Betts Ave	52.126333	-106.758928
+Saskatoon	1 - 15 Worobetz Pl	52.130281	-106.726599
+Saskatoon	17b 1501 8th St E	52.115862	-106.633842
+Saskatoon	K003 - 3310 8th St E	52.113027	-106.600276
+Saskatoon	36 - 2105 8th St E	52.115237	-106.627091
+Saskatoon	103-308 4th Avenue North	52.131642	-106.658476
+Semans	208 Main St	51.406742	-104.729662
+Shields	1 Waters Ave	51.823533	-106.402241
+St Benedict	253 Railway Ave	52.627352	-105.436587
+St. Denis	Main Street	52.158416	-106.099333
+St. Gregor	1st Avenue South	52.177333	-104.827608
+St. Isidore De Bellevue	407 Main St	52.783736	-105.921751
+Strasbourg	Hwy 20	51.062790	-104.956294
+Strasbourg	123 Mountain St	51.070527	-104.951786
+Strasbourg	132 Mountain St	51.070206	-104.953555
+Strasbourg	113 Pearson St	51.071334	-104.952575
+Strasbourg	Blackstock Street	51.068337	-104.953190
+Strasbourg	100 Mountain St	51.070549	-104.951797
+Vanscoy	101 Rayburn Ave	52.000256	-106.975220
+Viscount	212 Amherst St	51.946113	-105.647838
+Viscount	102 Drake Avenue	51.949200	-105.647479
+Viscount	306 Amhearst St	51.946144	-105.647470
+Vonda	401 Buffer Ave	52.322061	-106.092214
+Vonda	208 Main St	52.320952	-106.095173
+Vonda	403 Buffer Ave	52.322061	-106.092214
+Wadena	433 5th St Ne	51.950321	-103.794299
+Wadena	105 3rd St Nw	51.946081	-103.806025
+Wadena	109 2nd St Sw	51.942246	-103.804424
+Wadena	134 Main St	51.945842	-103.801507
+Wadena	254 Main St N	51.947562	-103.801540
+Wadena	73 Main Street North	51.945471	-103.801506
+Wadena	204 3rd St Ne	51.947785	-103.797166
+Wadena	600 6th Street	51.953918	-103.792805
+Wadena	96 Jim Headington Way	51.944507	-103.801470
+Wakaw	116 1st St S	52.649014	-105.737460
+Wadena	133 Main St	51.947095	-103.801537
+Wakaw	2 Osolinski Drive	52.648934	-105.740099
+Wakaw	201 Highway #2 South	52.652949	-105.746704
+Wakaw	133 1st St S	52.648950	-105.738268
+Wakaw	201 Main St	52.649934	-105.739303
+Wakaw Lake Regional Park	Hoodoo	52.939916	-106.450864
+Waldheim	502 1st Street North	52.623070	-106.657631
+Waldheim	413 Main St N	52.620905	-106.655891
+Waldheim	Laird	52.621354	-106.655742
+Waldheim	2002 3rd Avenue East	52.620343	-106.647965
+Waldheim	406 1st Street North	52.622734	-106.656261
+Warman	520 Central St W	52.318477	-106.582570
+Warman	810 Centennial Blvd	52.325369	-106.579864
+Warman	Bay F - 110 Central Ave	52.318762	-106.573754
+Warman	1 - 701 Centennial Blvd	52.325369	-106.579864
+Warman	415 Clubhouse Blvd	52.328818	-106.592449
+Warman	Bay 9 810 Centennial Blvd	52.319110	-106.579859
+Warman	101 Central St. East	52.318476	-106.574231
+Warman	112 North Railway Ave E	52.316075	-106.576283
+Watrous	212 - 1st Ave W	51.674623	-105.469460
+Watrous	102 Main St	51.672021	-105.469022
+Watrous	303 Main St	51.674676	-105.466591
+Watrous	203 Main St E	51.673224	-105.468152
+Watrous	101 Main St	51.672033	-105.469053
+Watrous	110 2nd Ave W	51.673196	-105.468913
+Watrous	302 Mclachlan Ave	51.720561	-105.443872
+Watrous	105 3rd Ave W	51.674567	-105.469534
+Watrous	305 Main St	51.674676	-105.466591
+Watrous	404 Main St	51.675141	-105.465828
+Watson	102 Highway 6 N	52.117041	-104.533287
+Watson	Hwy 5 & Hwy 6 Junction	52.131127	-104.530323
+Watson	Spalding	52.129100	-104.523800
+Watson	300 Main St	52.129776	-104.523279
+Watson	115 Main St	52.128795	-104.523978
+Watson	202 Pacific St	52.130915	-104.529005
+Wishart	1st St W	51.548220	-103.977165
+Wynyard	300 10th St	51.767502	-104.167510
+Wynyard	303 Service Rd	51.769068	-104.185822
+Wynyard	Big Quill	51.864448	-104.370081
+Wynyard	435 Bosworth St	51.766300	-104.185645
+Wynyard	101 South Service Road	51.769068	-104.185822
+Wynyard	701 Ave D W	51.767548	-104.195302
+Wynyard	105 Avenue B East	51.770578	-104.185231
+Wynyard	101 Avenue B East	51.770578	-104.185231
+Wynyard	202 3rd Street E	51.770198	-104.181502
+Wynyard	310 Ave D E	51.768103	-104.178080
+Young	115 Queen St	52.092981	-106.661663
+Acheson	26229 Township Rd 531 A Unit 216	52.939916	-106.450864
+Alida	Prairie Avenue	49.388519	-101.871075
+Alida	13 Center Street	49.389106	-101.872390
+Alida	113 Hwy 361	49.389787	-101.867451
+Antler	Main Street	48.973846	-101.282599
+Arcola	Box 416	49.639066	-102.492536
+Arcola	706 Balmoral Avenue	49.639015	-102.486410
+Arcola	201 B Main Street	49.635046	-102.491784
+Arcola	508 Main Street	49.638940	-102.492514
+Arcola	105 Main Street	49.633918	-102.491584
+Bengough	170 Main Street	49.396797	-105.128060
+Bengough	111 Main Street	49.396797	-105.128060
+Bienfait	434 Main Street	49.143617	-102.807782
+Bienfait	242 Carbon Avenue	49.141875	-102.803209
+Bienfait	424 Main St	49.143617	-102.807782
+Bienfait	420 Railway Street	49.142822	-102.800025
+Carievale	Antler Street	49.178331	-101.796674
+Carievale	403 Railway Avenue	49.176947	-101.626418
+Carlyle	110 Main Street	49.634793	-102.266383
+Carlyle	106 Main Street	49.632823	-102.267671
+Carlyle	Hwy 13 & 9	49.636577	-102.265271
+Carlyle	Hwy 13	49.645540	-102.300117
+Carlyle	Corner Stone Plaza	49.633965	-102.267081
+Carlyle	324 - 4th Street W	49.632708	-102.271834
+Carlyle	111 - 1st Street E	49.633376	-102.265918
+Carlyle	Carlyle	49.628356	-102.259505
+Carlyle	101 Railway Avenue W	49.635452	-102.266240
+Carlyle	211 Railway Ave West	49.636286	-102.269372
+Carnduff	107 Broadway Street	49.175132	-101.795371
+Carnduff	Carnduff	49.173938	-101.795810
+Carnduff	Spencer Street	49.177462	-101.793497
+Carnduff	Hwy 318	49.237092	-101.799077
+Carnduff	718 Railway Avenue	49.175722	-101.796887
+Carnduff	1020 Railway Avenue	49.175722	-101.796887
+Carnduff	113 Broadway Street	49.175132	-101.795371
+Carnduff	121 Diamond Rd	49.173938	-101.795810
+Ceylon	500 - 1st Ave W	49.459059	-104.600908
+Ceylon Regional Park	Ceylon	52.939916	-106.450864
+Coronach	101 - 1st Avenue S	49.110421	-105.516861
+Coronach	114 Centre Street	49.111288	-105.518263
+Coronach	10 1st Avenue W	49.110421	-105.516861
+Coronach	115 - 1st Avenue S	49.110885	-105.520873
+Coronach	127 Railway Ave W	49.111786	-105.518243
+Coronach	341 Railway Avenue	49.111973	-105.511292
+Coronach	228 Centre Street	49.109521	-105.518930
+Estevan	1210 - 7th St.	49.142676	-102.992198
+Estevan	1624 Grundeen Ave	49.150634	-102.997416
+Estevan	910 - 13th Avenue	49.146197	-102.992795
+Estevan	92 King Street	49.146782	-102.969148
+Estevan	1305 - 9th Street	49.145306	-102.993722
+Estevan	98 Souris Avenue	49.147725	-102.991735
+Estevan	1314 2nd St.	49.139865	-102.999203
+Estevan	1028 Hillcrest Drive	49.148133	-102.997575
+Estevan	4 Royal Heights	49.149041	-103.011632
+Estevan	125 - 4th Street	49.132313	-102.973348
+Estevan	1435 - 4th Street	49.142633	-103.000777
+Estevan	811 Souris Avenue	49.142495	-102.991540
+Estevan	1317 - 4th Street	49.141681	-102.997767
+Estevan	701 Souris Avenue	49.142495	-102.991540
+Estevan	Shand Power Station Access Road	49.102540	-102.902406
+Estevan	1117 - 5th Street	49.140887	-102.993035
+Estevan	517 - 4th Street	49.135386	-102.981499
+Estevan	537 - 4th Street	49.135778	-102.982539
+Estevan	421 Kensington Ave	49.145913	-102.969088
+Estevan	201 - 4th Street	49.132935	-102.974995
+Estevan	117 - 4th Street	49.131864	-102.971944
+Estevan	Hwy 39 W	49.139388	-102.992171
+Estevan	1310 - 6th Street	49.142649	-102.996206
+Estevan	413 Kensington Avenue	49.145379	-102.969077
+Estevan	120 King St.	49.146781	-102.971288
+Estevan	303 Kensington Ave	49.133705	-102.969020
+Estevan	419 Kensington Avenue	49.145780	-102.969085
+Estevan	601 - 4th Street	49.135856	-102.982745
+Estevan	Hwy 47 S	49.142830	-102.995620
+Estevan	532 Bourquin Rd	49.140850	-102.960155
+Estevan	826 - 4th Street	49.138067	-102.988707
+Estevan	421 - A Unit 2 Kensington Ave	49.145913	-102.969088
+Estevan	1418 - 3rd St	49.141141	-103.000615
+Estevan	134 - 2nd Avenue	49.133447	-102.973640
+Estevan	96 King St	49.146782	-102.969148
+Estevan	220 - 1175 Nicholson Road	49.151271	-103.011720
+Estevan	400 King Street	49.145332	-102.978349
+Estevan	1107 - 4th Street	49.139826	-102.993316
+Fairlight	56 Main Street	49.875097	-101.679670
+Fife Lake	Main Street	49.193367	-105.729601
+Fillmore	32 Wesley St	49.882082	-103.435687
+Fillmore	53 Railway Avenue	49.956774	-103.578709
+Forget	357 Main St	49.651397	-102.870117
+Frobisher	Frobisher	49.209711	-102.426780
+Gainsborough	Souris Avenue	49.175176	-101.451889
+Gainsborough	219 Railway Avenue	49.176881	-101.447355
+Glen Ewen	102 Ewen St	49.206812	-102.010125
+Glen Ewen	426 -4th Street	49.208649	-102.012800
+Heward	Main Street	49.736440	-103.152829
+Kennedy	300 Main Street	50.013033	-102.351069
+Kennedy	100 Main Street	50.014247	-102.349593
+Kenosee Lake	4a Lakeview St.	49.831497	-102.285135
+Kenosee Lake	16 Lakeview	49.831573	-102.285456
+Kenosee Lake	Kenosee Lake	49.820564	-102.296836
+Kenosee Lake	Moose Mountain	49.833831	-102.292156
+Kenosee Lake	Hwy 48 & 9	49.901692	-102.279195
+Kipling	411 - 4th Street S	50.098242	-102.630477
+Kipling	610 Railway Street	50.103404	-102.633083
+Kipling	608 Main Street	50.102398	-102.632857
+Kipling	503 Main St	50.102093	-102.630955
+Kipling	524 Railway Avenue	50.103371	-102.632875
+Lake Alma	2nd Street W	49.146208	-104.201677
+Lampman	312 Main Street	49.380097	-102.755532
+Lampman	5th Avenue E	49.379804	-102.751370
+Lampman	Main Street	49.379150	-102.754080
+Lang	306 Main Street	49.919963	-104.372066
+Lang	First Avenue	49.919412	-104.371514
+Midale	Box 202	49.395933	-103.411051
+Midale	90 Macoun Avenue	49.393135	-103.413345
+Midale	202 Main Street	49.394764	-103.412254
+Midale	128 Haslem Street	49.393294	-103.410526
+Midale	105 Stephen Street	49.395469	-103.415011
+Midale	Hwy 39	49.392971	-103.413842
+Midale	605 College Ave	49.398863	-103.412221
+Minton	Main Street	49.164898	-104.586658
+Moose Mountain Provincial Park	Moose Mountain Provincial Park	52.939916	-106.450864
+Ogema	Block A Plan Dc3733	49.574840	-104.917072
+Ogema	Railway Avenue	49.575231	-104.908419
+Ogema	113 Main Street	49.575327	-104.915855
+Ogema	202 Main Street	49.575327	-104.915855
+Ogema	306 Main Street	49.577489	-104.916728
+Ogema	114 Main St	49.575327	-104.915855
+Young	201 Main St	51.769714	-105.746318
+Oungre	Hwy 35	49.145834	-104.020868
+Oungre	Oungre	48.999592	-103.808397
+Oxbow	215 Main Street	49.228554	-102.174307
+Oxbow	210 Main Street	49.228953	-102.174270
+Oxbow	512 Railway Avenue	49.228535	-102.174339
+Oxbow	Oxbow	49.223800	-102.146000
+Oxbow	711 Gregson St	49.232958	-102.169218
+Oxbow	314 Railway Avenue	49.228535	-102.174339
+Pangman	109 Mergens Street	49.646682	-104.658435
+Radville	518 Main Street	49.459239	-104.300720
+Radville	502 Railway Avenue	49.465001	-104.299203
+Radville	134 Main Street	49.461175	-104.296383
+Radville	227 Main Street	49.460604	-104.297388
+Radville	Main Street	49.457376	-104.305257
+Radville	840 Conrad Avenue	49.460820	-104.297090
+Radville	521 Healey Avenue	49.460534	-104.295991
+Redvers	18 Broadway Street	49.566045	-101.699180
+Redvers	28 Railway Avenue	49.570093	-101.698270
+Redvers	55 Warren Street	49.574806	-101.700653
+Redvers	Box 369	49.577077	-101.699192
+Redvers	Sw 1/4 24-7-32 W1m  Lots C & D	49.577077	-101.699192
+Redvers	Hwy 13	49.577166	-101.702039
+Storthoaks	409 Center St	49.389000	-101.602000
+Storthoaks	Storthoaks	49.389000	-101.602000
+Stoughton	335 Main Street	49.679610	-103.026971
+Stoughton	800 Government Rd	49.677140	-103.022546
+Stoughton	315 Main St	49.679828	-103.026656
+Stoughton	600 Government Rd	49.677516	-103.022570
+Stoughton	Hwy 47 & 13	49.668269	-103.022543
+Stoughton	401 Main Street	49.677905	-103.029048
+Stoughton	Main Street	49.679411	-103.027192
+Wauchope	Wauchope	49.595316	-101.906178
+Wawota	201 - 2nd Street	49.902894	-102.021410
+Wawota	631 Choofoo Cr	49.904951	-102.018144
+Wawota	Hwy 48	49.903119	-102.029157
+Wawota	202 Railway Ave	49.903476	-102.026705
+Wawota	612 Railway Avenue	49.904500	-102.019985
+Wawota	201 - 1st Street	49.902557	-102.022896
+Wawota	417 Railway Avenue	49.903832	-102.024129
+Weyburn	20 - 1st Avenue Sw	49.658284	-103.858353
+Weyburn	35 Riverview Dr.	49.659714	-103.857396
+Weyburn	1015 Railway Ave	49.657468	-103.843000
+Weyburn	304 - 1st Avenue Se	49.658294	-103.854370
+Weyburn	20 Railway Avenue	49.660745	-103.857981
+Weyburn	44 Sims Avenue	49.658999	-103.860660
+Weyburn	13 - 1st Avenue Sw	49.658308	-103.858353
+Weyburn	207 Railway Ave	49.660414	-103.855420
+Weyburn	2 - 3rd Street Ne	49.660266	-103.854201
+Weyburn	112 Railway Avenue	49.660315	-103.856199
+Weyburn	39 - 2nd Ave Sw	49.657431	-103.858241
+Weyburn	208 Railway Avenue	49.660356	-103.855162
+Weyburn	Hwy 39 & 13	49.668312	-103.890363
+Weyburn	7 Allen Street	49.659850	-103.866738
+Weyburn	317 - 3rd Street	49.664899	-103.852789
+Weyburn	33 3rd Street	49.660898	-103.854031
+Weyburn	404 Ashford Street	49.664979	-103.842063
+Weyburn	88 Grace St	49.663196	-103.875669
+Weyburn	1101 Douglas Rd	49.672733	-103.841716
+Weyburn	1623 - 1st Avenue N	49.668361	-103.830383
+Weyburn	95 Government Road	49.661941	-103.858709
+Weyburn	238 Sims Avenue	49.660482	-103.866335
+Weyburn	75 Government Road	49.662549	-103.858277
+Weyburn	1794 - 1st Avenue Ne	49.668355	-103.835363
+Weyburn	301 Coteau Avenue W	49.664830	-103.861961
+Weyburn	24 - 4th Street	49.660858	-103.852470
+Weyburn	405 Souris Avenue	49.661582	-103.852337
+Weyburn	1060 Sims Avenue	49.663137	-103.875514
+Weyburn	72 - 3rd Street Ne	49.661570	-103.853787
+Weyburn	1612 - 1st Avenue Ne	49.668337	-103.830308
+Weyburn	8 2nd Avenue Sw	49.657375	-103.860881
+Weyburn	150 - 3rd Street Ne	49.662944	-103.853364
+Weyburn	5 - 1st Avenue Nw	49.668338	-103.858248
+Weyburn	888 - 1st Avenue Ne	49.668379	-103.848043
+Windthorst	104 Angus Street	50.108845	-102.835802
+Windthorst	Van Horne Avenue	50.107018	-102.837084
+Yellow Grass	234 Couteau St	49.805721	-104.158545
+Yellow Grass	103 Millet Street	49.807457	-104.159893
+Arran	Main St N	51.888313	-101.718663
+Arran	Main St	51.888313	-101.718663
+Buchanan	112 Third St W	51.702881	-102.757096
+Buchanan	320 First Ave W	51.702774	-102.757802
+Calder	16 Main St Ne	51.158502	-101.746703
+Canora	Po Box 2081	51.633945	-102.437007
+Canora	333 Canora Ave	51.634282	-102.425371
+Canora	1219 Main St	51.625560	-102.440850
+Canora	102 Main St	51.636619	-102.436044
+Canora	Nelson St	51.645998	-102.433770
+Canora	220 Main St	51.635458	-102.436448
+Canora	309 Main St	51.634735	-102.437082
+Canora	707 Norway Rd	51.629838	-102.432131
+Canora	Block T Plan 97y02501	51.633945	-102.437007
+Canora	140 Second Ave E	51.635714	-102.438612
+Canora	310 Second Ave E	51.634457	-102.432109
+Canora	203 First Ave N	51.636759	-102.438876
+Canora	316 Main St	51.634735	-102.437082
+Canora	107 Main St	51.636619	-102.436044
+Canora	714 Norway Road	51.629847	-102.430983
+Canora	701 Main St	51.631508	-102.438713
+Canora	932 Norway Rd S	51.624674	-102.428865
+Churchbridge	116 Vincent Ave W	50.897692	-101.893892
+Churchbridge	124 Prothero Ave W	50.898474	-101.893250
+Churchbridge	121 Bridger Ave	50.898111	-101.894626
+Endeavour	First St	52.158256	-102.657028
+Endeavour	1 Railway Ave	52.160257	-102.653421
+Esterhazy	1 Kennedy Dr	50.653941	-102.059489
+Esterhazy	465 Main St	50.654896	-102.078470
+Esterhazy	825 Park Ave	50.653264	-102.076640
+Esterhazy	804 Fourth Ave	50.658745	-102.076594
+Esterhazy	300 Second Ave	50.656962	-102.065699
+Esterhazy	521 Main St	50.655900	-102.078135
+Esterhazy	500 St Mary St	50.659086	-102.081149
+Esterhazy	473 Main St	50.655064	-102.078401
+Esterhazy	517 Main St	50.655799	-102.077754
+Esterhazy	800 Fourth Ave	50.658745	-102.076594
+Esterhazy	832 Railway Ave	50.653264	-102.076640
+Esterhazy	1020 Park Ave	50.653264	-102.076640
+Esterhazy	Po Box 550	50.656852	-102.075779
+Esterhazy	Highway 22 East	50.654314	-102.099837
+Esterhazy	1209 Park Ave.	50.653264	-102.076640
+Foam Lake	421 Alberta Ave E	51.639257	-103.536814
+Foam Lake	404 Royal St	51.642629	-103.532242
+Foam Lake	435 Broadway St	51.644404	-103.527603
+Foam Lake	501 Hwy 16 E	51.637471	-103.529438
+Foam Lake	421 Main St	51.643431	-103.533697
+Foam Lake	340 Main St	51.642502	-103.533744
+Gerald	Second St	50.666506	-101.793388
+Goodeve	Third Ave	51.061133	-103.181274
+Grayson	Railway Ave	50.720575	-102.645871
+Grayson	561 Railway Ave	50.720253	-102.644156
+Invermay	320 Fourth Ave N	51.808593	-103.152524
+Invermay	303 Fourth Ave N	51.808593	-103.152524
+Invermay	112 Main St	51.807091	-103.151733
+Invermay	Box 190	51.806974	-103.155211
+Invermay	118 Main St	51.807208	-103.152081
+Ituna	302 Main St N	51.170641	-103.495760
+Ituna	310 Main St N	51.170730	-103.495760
+Ituna	27 Second St Sw	51.165329	-103.498336
+Ituna	23 Second St Sw	51.169864	-103.492765
+Ituna	518 Main St N	51.172139	-103.495756
+Kamsack	Madge Lake - Duck Mountain Provincial Park	51.564884	-101.898415
+Kamsack	695 Railway St	51.554571	-101.891507
+Kamsack	207 Elizabeth Blvd. West	51.565010	-101.890228
+Kamsack	428 Dixon Ave	51.561407	-101.886296
+Kamsack	160 Queen Elizabeth St W	51.564858	-101.892818
+Kamsack	558 Third Ave S	51.562814	-101.902456
+Kamsack	407 Park St W	51.567976	-101.904052
+Kamsack	501 Third Ave S	51.562814	-101.902456
+Kamsack	509 Railway Ave	51.554571	-101.891507
+Langenburg	135 Kaiser William Ave E	50.842218	-101.700807
+Langenburg	421 Kaiser William Ave E	50.842218	-101.700807
+Langenburg	201 Kaiser William Ave E	50.842218	-101.700807
+Langenburg	Po Box 392	50.842218	-101.700807
+Langenburg	101 Carl Ave W	50.842925	-101.705613
+Langenburg	317 Carl Ave E	50.841279	-101.700757
+Langenburg	215 Kaiser William Ave E	50.842218	-101.700807
+Langenburg	227 Kaiser-william Ave	50.842218	-101.700807
+Macnutt	First St	51.083980	-101.604467
+Melville	302 Main St	50.928576	-102.805734
+Melville	101 Third Ave W	50.928653	-102.806667
+Melville	203 Third Ave E	50.926499	-102.798277
+Melville	109 Third Ave W	50.928629	-102.806961
+Melville	249 Main St	50.928262	-102.806121
+Melville	226 Third Ave	50.927660	-102.802766
+Melville	541 Second Ave W	50.930400	-102.817499
+Melville	Agri-park	50.929452	-102.804654
+Melville	200 Heritage Dr	50.938945	-102.820244
+Melville	800 Prince Edward St	50.931717	-102.796219
+Melville	1250 Prince Edward St	50.933457	-102.796192
+Melville	140 Third Ave W	50.928801	-102.807140
+Melville	Po Box 99	50.929452	-102.804654
+Melville	799 First Ave E	50.924177	-102.798002
+Melville	825 Seventh Ave W	50.936122	-102.818608
+Melville	136 Third Ave W	50.928788	-102.807090
+Melville	Hwy 10	50.948638	-102.769556
+Melville	729 Main St	50.932776	-102.803229
+Melville	100 Heritage Dr	50.938945	-102.820244
+Melville	143 Third Ave E	50.926513	-102.798328
+Melville	Po Box 29	50.929452	-102.804654
+Melville	145 Second Ave E	50.927300	-102.805458
+Melville	290 Prince William Dr	50.938548	-102.810162
+Melville	342 Third Avenue West	50.930333	-102.811704
+Moose Bay	Ne 7-19-5 W2m; Rm Of Grayson No. 184	50.615997	-102.691703
+Neudorf	503 Railway Ave	50.713580	-103.012010
+Neudorf	Railway Ave	50.713580	-103.012010
+Neudorf	202 Louis St	50.711997	-103.010512
+Neudorf	109 Main St	50.709004	-103.012170
+Neudorf	420 Main St	50.710183	-103.012094
+Norquay	45 Railway Ave E	51.885329	-102.086202
+Okla	Main St	52.012663	-103.107137
+Otthon	Avenue One	50.480964	-104.668398
+Pelly	109 Main St	51.855077	-101.925911
+Pelly	129 Main St	51.855077	-101.925911
+Pelly	120 Main St	51.855077	-101.925911
+Pelly	216 Main St	51.855077	-101.925911
+Pelly	101 Second St E	51.856900	-101.923147
+Pelly	121 Main St	51.855077	-101.925911
+Preeceville	207 Hwy Ave E	51.953841	-102.666696
+Preeceville	15 Main St	51.956440	-102.671206
+Preeceville	204 Second St Nw	51.959461	-102.674042
+Preeceville	712 Seventh Ave Ne	51.963828	-102.667373
+Preeceville	651 First Ave	51.955174	-102.657460
+Preeceville	23 Third Ave Nw	51.958563	-102.669913
+Preeceville	110 Main St N	51.956975	-102.670228
+Rama	Po Box 202	51.757668	-102.998585
+Rhein	4 Main St	51.351630	-102.192240
+Rm 211 - Rural	Ne 15-22-32 W1m	52.939916	-106.450864
+Rm 244 - Rural	Ne 15-26-4 W2m	52.939916	-106.450864
+Rm 244 - Rural	Sw 28-25-4 W2m	52.939916	-106.450864
+Rm 246 - Rural	Nw 21-25-11 W2m	52.939916	-106.450864
+Rm 271 - Rural	Duck Mountain Provincial Park	52.939916	-106.450864
+Rm 271 - Rural	Nw 35-29-30 W1m, Rm Of Cote No. 271	52.939916	-106.450864
+RM 274 - Rural	Se 34-29-05 W2	52.483753	-107.388223
+Rm 274 - Rural	Se 17 30 5 W 2	53.656861	-109.200217
+Rm 274 - Rural	Good Spirit Acres	52.939916	-106.450864
+Rm 274 - Rural	Good Spirit Lake Provincial Park	52.939916	-106.450864
+Rm 274 - Rural	Burgis Beach	52.939916	-106.450864
+Rm 276 - Rural	Sw 07-33-11 W2m	52.939916	-106.450864
+Rm 334 - Rural	Hwy 49	51.170570	-103.495758
+Saltcoats Regional Park	Ne 36-23-2 W2m	52.939916	-106.450864
+Saltcoats	117 High St	51.040410	-102.163230
+Saltcoats	203 Glasgow Ave	51.041157	-102.160646
+Saltcoats	403 York St	51.044014	-102.160150
+Saltcoats	301 York Rd	51.042960	-102.162832
+Saltcoats	401 York St	51.044014	-102.160150
+Saltcoats	101 Commercial St	51.039815	-102.161387
+Saltcoats	117 Allan Ave	51.039847	-102.161056
+Springside	421 Railway Ave	51.345277	-102.743799
+Springside	307 Railway Ave	51.344488	-102.742899
+Springside	217 Railway Ave	51.343705	-102.741812
+Spy Hill	Main St	50.537110	-101.842152
+Spy Hill	112 King St	50.603483	-101.685079
+Spy Hill	310 Third Ave	50.604577	-101.686905
+Stenen	Keys	51.899640	-102.379466
+Stenen	Po Box 224	51.899640	-102.379466
+Stockholm	Hwy 9 & 22	50.664220	-102.306351
+Sturgis	434 First Ave Se	51.934644	-102.535197
+Sturgis	250 Durham St	51.936767	-102.534907
+Sturgis	210 Rongue St	51.937931	-102.540010
+Sturgis	217 Rongve St	51.936682	-102.536563
+Tantallon	Lots 11-16 Block 2  Plan 55613	50.642528	-102.098732
+Theodore	100 Hwy 16 East	51.424430	-102.925285
+Theodore	213 Main St	51.426482	-102.917121
+Togo	Railway Ave	51.399153	-101.579750
+Togo	Main St	51.404161	-101.583430
+Togo	Lot 1 Block G Plan Ca5256	51.403531	-101.584498
+WHITESAND REGIONAL PARK	Sw 11-29-7 W2m; Rm Of Insinger No. 275	52.939916	-106.450864
+Yorkton	112 Broadway St W	51.210137	-102.470373
+Yorkton	39-277 Broadway Street East	51.212069	-102.442549
+Yorkton	57-277 Broadway St E	51.212069	-102.442549
+Yorkton	365 Broadway St W	51.210405	-102.485273
+Yorkton	455 Broadway St W	51.210932	-102.490165
+Yorkton	14 Second Ave N	51.210764	-102.461509
+Yorkton	366 Broadway St W	51.210136	-102.486059
+Yorkton	4 - 150 Broadway St E	51.210108	-102.462558
+Yorkton	191 York Rd E	51.225124	-102.451072
+Yorkton	392 Broadway St W	51.210090	-102.487627
+Yorkton	Unit C-5-275 Broadway Ave E	51.212146	-102.444769
+Yorkton	1-275 Broadway St E	51.212146	-102.444769
+Yorkton	670 Broadway St W	51.210052	-102.492374
+Yorkton	3 - 150 Broadway St E	51.210239	-102.462490
+Yorkton	34 Broadway St W	51.210093	-102.465187
+Yorkton	345 Broadway St W	51.210285	-102.484395
+Yorkton	21-259 Hamilton Rd	51.206671	-102.444434
+Yorkton	60 Fifth  Ave N	51.212500	-102.457421
+Yorkton	55-277 Broadway St E	51.212069	-102.442549
+Yorkton	177 Broadway St W	51.210204	-102.474279
+Yorkton	345 Darlington St. E	51.216844	-102.439206
+Yorkton	63-7th Ave North	51.213243	-102.454155
+Yorkton	506 Broadway St W	51.210089	-102.489146
+Yorkton	207 Broadway St E	51.210644	-102.450509
+Yorkton	395 Highway 9 South	51.217999	-102.447168
+Yorkton	#2-146 Broadway Street East	51.209860	-102.453131
+Yorkton	68 Foster St	51.207922	-102.462600
+Yorkton	32 Dracup Ave	51.211264	-102.451106
+Yorkton	94 Broadway St W	51.209889	-102.469008
+Yorkton	240 Hamilton Rd	51.204815	-102.446607
+Yorkton	516 Broadway St W	51.210089	-102.489146
+Yorkton	35-275 Broadway St E	51.212146	-102.444769
+Yorkton	10-146 Broadway St E	51.209860	-102.453131
+Yorkton	510 Broadway St W	51.210089	-102.489146
+Yorkton	9-275 Broadway St E	51.212146	-102.444769
+Yorkton	1-132 Broadway St W	51.210238	-102.462770
+Yorkton	125 Third Ave N	51.215259	-102.459793
+Yorkton	240 Wellington Ave	51.218860	-102.471596
+Yorkton	#5 275 Unit F Broadway St E	51.212146	-102.444769
+Yorkton	103 Gladstone Ave N	51.213866	-102.474461
+Yorkton	110 Broadway St E	51.210106	-102.454938
+Yorkton	15f - 275 Broadway Street East	51.212146	-102.444769
+Yorkton	69 Broadway St W	51.210212	-102.467412
+Yorkton	385 Broadway St E	51.210262	-102.438626
+Yorkton	186 Allanbrooke Dr	51.197775	-102.486560
+Yorkton	38 Bradbrooke Dr	51.208373	-102.486271
+Yorkton	11 Second Ave N	51.210594	-102.461281
+Yorkton	160 Broadway St E	51.210116	-102.452180
+Yorkton	328 Broadway St W	51.209906	-102.483387
+Yorkton	21 Betts Ave	51.211069	-102.463912
+Yorkton	200 Bradbrooke Dr	51.203770	-102.484148
+Yorkton	290 Broadway St W	51.209918	-102.481426
+Yorkton	270 Bradbrooke Dr	51.202246	-102.480612
+Regina	525 Albert St. N.	50.485336	-104.617525
+Regina	310 Magee Cres	50.487736	-104.633438
+Regina	910 Victoria Avenue	50.447315	-104.594120
+Regina	1505 Albert St.	50.454954	-104.618015
+Regina	370 Albert St.	50.472478	-104.618226
+Regina	3964 Albert St.	50.416085	-104.618283
+Regina	1810 Smith St.	50.450226	-104.615153
+Regina	600 - 3435 E Quance St	50.443512	-104.534195
+Regina	2517 - 25th Avenue	50.418553	-104.615618
+Regina	538 University Park Dr.	50.442472	-104.550605
+Regina	1847 Scarth St.	50.449655	-104.610916
+Regina	6310 Rochdale Blvd.	50.495518	-104.671777
+Regina	3475 Albert St.	50.424130	-104.618073
+Regina	909 Albert St.	50.463721	-104.618028
+Regina	890 Albert St.	50.464797	-104.618442
+Regina	2220 Victoria Ave. E.	50.447233	-104.550328
+Regina	3823 Sherwood Drive	50.475532	-104.636172
+Regina	190 Broad St. N.	50.478737	-104.606533
+Regina	1717 Saskatchewan Dr	50.451730	-104.605494
+Regina	3255 Quance St.	50.443881	-104.536180
+Regina	474 Mccarthy Blvd. N	50.484072	-104.664088
+Regina	1845 Victoria Ave.	50.446992	-104.557787
+Regina	2231 E. Quance St.	50.443966	-104.551222
+Regina	2115 Broad St.	50.445285	-104.606205
+Regina	1876 Wallace St.	50.448801	-104.593736
+Regina	1946 Hamilton St.	50.447948	-104.609405
+Regina	2201 Broad St.	50.443880	-104.606295
+Regina	2403 Park St.	50.440384	-104.572191
+Regina	2124 Albert St.	50.444699	-104.618640
+Regina	1110 Victoria Ave. E.	50.447245	-104.596692
+Regina	2931 - 13th Avenue	50.445499	-104.623516
+Regina	1836 Halifax St.	50.449735	-104.603631
+Regina	212 Logan Cres.	50.397921	-104.613285
+Regina	170 Sunset Dr.	50.408803	-104.629814
+Regina	1867 Victoria Ave. E.	50.446036	-104.557538
+Regina	4555 Gordon Road	50.403927	-104.647377
+Regina	2525 Broad St.	50.438637	-104.606313
+Regina	2528 E Quance St.	50.443591	-104.547797
+Regina	4738 Gordon Rd.	50.405551	-104.647920
+Regina	1851 Scarth St.	50.449655	-104.610916
+Regina	860 Victoria Avenue E.	50.447260	-104.570213
+Regina	4409 Albert St.	50.408592	-104.617933
+Regina	3414 - 13th Avenue	50.445609	-104.630305
+Regina	6330 Dewdney Ave.	50.455252	-104.671799
+Regina	2545 Broad St.	50.438637	-104.606313
+Regina	2936 - 13th Avenue	50.445566	-104.623795
+Regina	5522 - 7th Avenue	50.458546	-104.660447
+Regina	4245 Rochdale Blvd.	50.496602	-104.643953
+Regina	5510 Rochdale Blvd.	50.495810	-104.660943
+Regina	E - 1101 Kramer Blvd.	50.415586	-104.595360
+Regina	1960 Prince Of Wales Drive	50.448067	-104.533207
+Regina	1717 Elphinstone St.	50.451374	-104.630533
+Regina	166 University Park Dr.	50.431465	-104.558479
+Regina	353 B Albert St.	50.472995	-104.618028
+Regina	2010 12th Ave.	50.448960	-104.609707
+Regina	1737 St. John St.	50.451149	-104.601986
+Regina	1625 Montreal St.	50.453278	-104.597483
+Regina	451 Broad St. N.	50.483567	-104.606318
+Regina	1415 11th Ave.	50.450295	-104.601002
+Regina	232 A College Ave. E.	50.440876	-104.579627
+Regina	Regina Farmer's Market	50.454722	-104.606667
+Rocanville	702 Railway Avenue	50.381536	-101.699960
+Rocanville	214 Ellice Street	50.383971	-101.698160
+Rocanville	2015 Service Road	50.381837	-101.700626
+Rocanville	102 Ellice St.	50.381944	-101.700466
+Rocanville	802 Francis Avenue	50.386244	-101.697733
+Silton	Mckillop	50.986676	-104.866805
+Silton	Silton, Sk	50.807027	-104.911085
+Simpson	Sports Grounds	51.448615	-105.445199
+Simpson	416 George St.	51.448586	-105.445462
+Southey	254 Railway	50.938085	-104.498122
+Vibank	303 Railway Avenue	50.334130	-103.945811
+Vibank	205 - 1st Street W.	50.334130	-103.945811
+Wapella	6th Avenue N.	50.260366	-101.967972
+Wapella	1010 Qu'appelle St.	50.264018	-101.970997
+Whitewood	604 Lalonde St.	50.330893	-102.266984
+Whitewood	504 Park St.	50.331535	-102.271664
+Wolseley	201 Garnet Street	50.424324	-103.266163
+Wolseley	702 Front Street	50.422821	-103.268504
+Wolseley	106 Front St.	50.426043	-103.281576
+Allan	Princess Street	51.897562	-106.051469
+Asquith	560 Main St	52.135509	-107.229459
+Bellevue	102 Church St	42.255298	-90.421674
+Borden	303 1st Avenue	52.404849	-107.240036
+Bradwell	221 2nd Ave	51.947929	-106.231128
+Clavet	10 Main St	51.996507	-106.373511
+Clavet	5 Main St	51.996504	-106.373474
+Colonsay	509 Railway Ave	51.975997	-105.875832
+Colonsay	Hwy 2 & Hwy16	51.969121	-105.759055
+Dafoe	Block Q Plan Bb3193 Dafoe	51.752304	-104.521546
+Dalmeny	210 Railway Ave	52.340074	-106.774650
+Dalmeny	206 Railway Avenue East	52.339676	-106.770041
+Drake	320 Saskatchewan Ave	51.744480	-105.010266
+Drake	329 Howard Street	51.747044	-105.008332
+Duck Lake	255 Front St	52.813740	-106.224449
+Duck Lake	222 Front St	52.814488	-106.224357
+Govan	310 Monk St	51.309616	-104.991916
+Hague	96 North Service Road	52.510538	-106.411096
+Hague	99 4th Street	52.510366	-106.417738
+Hague	311 Main St	52.511129	-106.416375
+Hanley	108 Lincoln St	51.627705	-106.440290
+Hanley	101 Lincoln St	51.627705	-106.440290
+Humboldt	735 15th St	52.200481	-105.131814
+Humboldt	617 Main Street	52.199001	-105.122834
+Humboldt	2331 Quill Centre	52.201979	-105.122866
+Humboldt	2421 8th Avenue	52.200046	-105.147593
+Humboldt	522 Main Street	52.198253	-105.122876
+Jansen	Holloway St	51.787008	-104.717887
+Langham	320 Park Ave	52.356320	-106.963809
+Langham	101 Main St	52.360499	-106.959874
+Lanigan	Downing Drive	51.850805	-105.027043
+Lanigan	16 40 Downing Drive	51.850802	-105.027980
+Lanigan	8 - 40 Downey Dr	51.848084	-105.028813
+Lanigan	37 Shannon St	51.848184	-105.033846
+Lanigan	81 Railway Ave	51.845997	-105.038599
+Lucien Lake Regional Park	Three Lakes	52.939916	-106.450864
+Martensville	555 Main St	52.289474	-106.660230
+Martensville	100 Centennial Drive North	52.291014	-106.670285
+Martensville	901 3rd St N	52.294964	-106.655119
+Martensville	Bay 5  1 4th St S	52.293121	-106.657838
+Mcnab Regional Park	Hwy 6 S	52.939916	-106.450864
+Meacham	201 Queen St	52.102308	-105.762178
+Meacham	Hwy 2 & 5 Junction	52.193505	-105.765023
+Meacham	221 Main St	52.103928	-105.762745
+Osler	625 3rd St	52.365534	-106.535665
+Osler	508 1st St	52.365287	-106.541439
+Radisson	313 Main St	52.460242	-107.395471
+Radisson	500 William St	52.458083	-107.392243
+Radisson	300 Albert St	52.457004	-107.397052
+Rosthern	8016 Saskatchewan St	52.667722	-106.341685
+Rosthern	3010 4th St	52.665448	-106.336453
+Rosthern	702 Railway Ave	52.662934	-106.331420
+Rosthern	701 Railway Ave	52.662934	-106.331420
+Saskatoon	1528 22nd St W	52.129328	-106.694089
+Saskatoon	1100 A Central Ave	52.140262	-106.599175
+Saskatoon	3 - 100 2nd Ave S	52.128548	-106.663614
+Saskatoon	1410 Windsor St	52.149172	-106.640790
+Saskatoon	359 1st Ave N	52.133128	-106.663848
+Saskatoon	405 - 20th St E	52.124679	-106.661470
+Saskatoon	720 B 51st St E	52.173077	-106.655966
+Saskatoon	418 33rd Street West	52.143853	-106.675637
+Saskatoon	Bay #9 - 527 Nelson Road	52.150788	-106.567192
+Saskatoon	103 Baillie Cove	52.083827	-106.633724
+Saskatoon	231 Primrose Dr	52.170683	-106.633705
+Saskatoon	1a 215 Stonebridge Blvd	52.084439	-106.642029
+Saskatoon	501 A Nelson Rd	52.150115	-106.569500
+Saskatoon	F1 - 134 Primrose Dr	52.168887	-106.639832
+Saskatoon	817 Broadway Ave	52.117274	-106.656672
+Saskatoon	2809 Estey Dr	52.094037	-106.630772
+Saskatoon	3510 8th Street East (pad 3)	52.133214	-106.670046
+Saskatoon	101 Confederation Dr	52.130216	-106.722069
+Saskatoon	2121 - 11th St West	52.114705	-106.703443
+Saskatoon	101a 20th Street W	52.126093	-106.670548
+Saskatoon	244 1st Avenue N	52.132213	-106.663992
+Saskatoon	627 Brand Court	52.087541	-106.653351
+Saskatoon	801 7th Ave N	52.139494	-106.652160
+Saskatoon	130 - 1844 Mcormond Dr	52.150418	-106.565745
+Saskatoon	3030 Diefenbaker Drive	52.131618	-106.728173
+Saskatoon	3130 Laurier Drive	52.134599	-106.721527
+Saskatoon	3330 Fairlight Dr	52.127188	-106.725525
+Saskatoon	300 Confederation Dr	52.132539	-106.721043
+Saskatoon	215 - 2nd Ave S	52.126876	-106.664967
+Saskatoon	511 Wellman Cres	52.082723	-106.644136
+Saskatoon	100 - 3020 Preston Ave S	52.087724	-106.625596
+Saskatoon	1722 8th St E	52.114517	-106.629671
+Saskatoon	T069 - 201 1st Ave S	52.127340	-106.667096
+Saskatoon	8 - 15 Worobetz Pl	52.130281	-106.726599
+Saskatoon	114 - 294 Venture Cres	52.157655	-106.650428
+Saskatoon	110 - 220 3rd Ave S	52.126427	-106.662827
+Saskatoon	103 Stonebridge Blvd	52.084066	-106.643323
+Saskatoon	2 - 1301 8th St E	52.114833	-106.636870
+Saskatoon	102 - 3521 8th St E	52.114560	-106.670371
+Saskatoon	1370 Fletcher Road	52.108479	-106.705698
+Saskatoon	610 2nd Ave N	52.136699	-106.659920
+Saskatoon	3 - 820b 51st St E	52.174182	-106.654029
+Saskatoon	A-928 8th Street	52.114372	-106.646712
+Saskatoon	355 2 Ave S	52.124511	-106.665911
+Saskatoon	1 - 1840 8th St E	52.114688	-106.627883
+Saskatoon	106 Circle Dr W	52.158319	-106.671409
+Saskatoon	2 - 100 2nd Ave S	52.128548	-106.663614
+Saskatoon	347 2nd Avenue South	52.125094	-106.665630
+Saskatoon	2929 Louise St	52.100894	-106.607646
+Saskatoon	11 - 2625 Airport Dr	52.169969	-106.690802
+Saskatoon	410 Railway Avenue	52.142733	-106.641154
+Saskatoon	F2 - 134 Primrose Dr	52.168887	-106.639832
+Saskatoon	1 - 319 22nd St E	52.128030	-106.660791
+Saskatoon	286 Venture Cres	52.157635	-106.649494
+Saskatoon	1800 College Dr E	52.129166	-106.621908
+Saskatoon	1800 College Dr	52.129166	-106.621908
+Saskatoon	1106 Central Ave	52.140171	-106.599131
+Saskatoon	101 Pacific Ave	52.129417	-106.668089
+Saskatoon	2115 Mcewen Ave	52.104744	-106.615438
+Saskatoon	113 - 3501 8th St E	52.115111	-106.596352
+Saskatoon	382 Cartwright St E	52.077877	-106.655070
+Saskatoon	101 - 2100 8th St E	52.114767	-106.624324
+Saskatoon	3 - 15 Worobetz Place	52.130281	-106.726599
+Saskatoon	2033c Ave B N	52.157748	-106.671742
+Saskatoon	1 - 202 Primrose Dr	52.171399	-106.634325
+Saskatoon	1808 Mcormond Drive	52.146707	-106.568077
+Saskatoon	910 Melville	52.083777	-106.648149
+Saskatoon	Bay #11 - 325 Herold Rd	52.099214	-106.567070
+Saskatoon	910 Victoria Avenue	52.116222	-106.662378
+Saskatoon	815 Taylor St E	52.107322	-106.651401
+Saskatoon	T213-201 1st Aenue South	52.127340	-106.667096
+Saskatoon	32 - 2105 8th St E	52.115237	-106.627091
+Saskatoon	F07-201 1st Ave S	52.127340	-106.667096
+Saskatoon	97 Campus Dr	52.130121	-106.635932
+Saskatoon	930 Northumberland Ave	52.139408	-106.717895
+Saskatoon	1025 Ave F N	52.141813	-106.678309
+Saskatoon	902 33rd St W	52.143855	-106.682971
+Saskatoon	1605 A 33rd St W	52.143841	-106.694122
+Saskatoon	119 - 3rd Avenue South	52.127794	-106.662690
+Saskatoon	101 3rd Ave N	52.128778	-106.662224
+Saskatoon	4 - 1701 8th St E	52.114850	-106.630745
+Saskatoon	14 - 3000 Diefenbaker Dr	52.129566	-106.728178
+Saskatoon	F11-201 1st Ave S	52.127340	-106.667096
+Saskatoon	124 3rd Avenue North	52.129475	-106.661523
+Saskatoon	2-1702 Alexandra Ave	52.154251	-106.642065
+Saskatoon	345 - 3310 8th St E	52.113027	-106.600276
+Saskatoon	F08-201 1st Avenue South	52.127340	-106.667096
+Saskatoon	102 - 216 33rd St W	52.143860	-106.670379
+Saskatoon	222 2nd Ave S	52.127153	-106.664467
+Saskatoon	105 - 3929 8th St E	52.114766	-106.587069
+Saskatoon	5 - 1025 Boychuk Dr	52.116366	-106.575052
+Saskatoon	1403 Idylwyld Dr N	52.147516	-106.670305
+Saskatoon	3450 37th Street W	52.150907	-106.732805
+Saskatoon	5b - 1501 8th St E	52.115862	-106.633842
+Saskatoon	13 - 410 Ludlow St	52.147655	-106.570627
+Saskatoon	110 Spadina Cres E	52.164784	-106.614020
+Saskatoon	2917 Early Dr	52.108573	-106.611846
+Saskatoon	3130 8th St E	52.114643	-106.605254
+Saskatoon	2326 Millar Ave	52.163853	-106.647699
+Saskatoon	#7 415 115th Street East	52.143494	-106.590789
+Saskatoon	Unit I - 411 Herold Crt	52.097866	-106.566690
+Saskatoon	2033 Ave B N	52.157748	-106.671742
+Saskatoon	#1-303 Confederation Dr	52.130757	-106.723037
+Saskatoon	1 - 1416 Central Ave	52.143827	-106.598909
+Saskatoon	50 23rd St E	52.130899	-106.666087
+Saskatoon	102-1222 Alberta Ave	52.145384	-106.668083
+Saskatoon	69 Campus Dr	52.131630	-106.628362
+Saskatoon	102 Pinehouse Dr	52.169213	-106.631651
+Saskatoon	901 22nd St W	52.128975	-106.683304
+Saskatoon	340 - 2600 8th St E	52.114547	-106.662466
+Saskatoon	9 - 1620 Idylwyld Dr N	52.150740	-106.670117
+Saskatoon	160 Cartwright St E	52.084517	-106.669006
+Saskatoon	101 - 129 2nd Ave N	52.129520	-106.663698
+Saskatoon	222 - 3rd Ave N	52.130698	-106.660311
+Saskatoon	84 - 2325 Preston Ave	52.101640	-106.620994
+Saskatoon	Hwy 219 South	52.093592	-106.670547
+Saskatoon	2830 Millar Ave	52.173024	-106.646441
+Saskatoon	106b - 810 Circle Dr E	52.159504	-106.650295
+Saskatoon	454 Egbert Ave	52.133572	-106.604241
+Saskatoon	238 2nd Ave S	52.126412	-106.664726
+Saskatoon	106 - 110 Ruth St E	52.100245	-106.669621
+Saskatoon	1627 8th St E	52.115293	-106.631537
+Saskatoon	1402 B College Drive	52.128733	-106.635736
+Saskatoon	737 Broadway Ave	52.117828	-106.656672
+Saskatoon	1-3510 8th Street East	52.114632	-106.593895
+Saskatoon	1 - 3301 22nd St W	52.128712	-106.723033
+Saskatoon	618 B Circle Dr E	52.158096	-106.659949
+Saskatoon	15 - 410 Ludlow St	52.147655	-106.570627
+Saskatoon	234 Primrose Drive	52.172121	-106.632818
+Saskatoon	100 - 125 Idylwyld Dr N	52.130423	-106.670516
+Saskatoon	2102 22nd St W	52.129558	-106.702884
+Saskatoon	835 E Broadway Ave	52.116844	-106.656672
+Saskatoon	F3 - 134 Primrose Dr	52.168887	-106.639832
+Saskatoon	1212 Central Ave	52.141857	-106.598914
+Saskatoon	1 - 820b 51st St East	52.174182	-106.654029
+Saskatoon	A - 3027 Millar Ave	52.191099	-106.646466
+Saskatoon	1804 Broadway Ave	52.108097	-106.657009
+Saskatoon	B - 2508 8th Street E	52.114684	-106.617007
+Saskatoon	B3 - 202 4th Ave N	52.129861	-106.659093
+Saskatoon	2605 Broadway Ave	52.096387	-106.656624
+Saskatoon	109 - 1526 8 St E	52.113805	-106.633368
+Saskatoon	1213 7th Ave N	52.144427	-106.652117
+Saskatoon	1633 C Quebec Ave	52.151049	-106.663723
+Saskatoon	142 2nd Ave S	52.127973	-106.664061
+Saskatoon	154 2nd Ave S	52.127724	-106.664032
+Saskatoon	320 20th Street West	52.126260	-106.674261
+Saskatoon	1428 22nd St W	52.129520	-106.692446
+Saskatoon	107 - 810 Circle Dr E	52.159504	-106.650295
+Saskatoon	1101 Broadway Ave	52.114541	-106.656676
+Saskatoon	134 R Primrose Drive	52.168887	-106.639832
+Saskatoon	1619 Idylwyld Dr N	52.150887	-106.670603
+Saskatoon	1702 - 20th St W	52.126181	-106.696053
+Saskatoon	130 Bowlt Cr	52.128545	-106.747227
+Saskatoon	11 - 834 51st St E	52.173042	-106.649418
+Saskatoon	100 - 3007 Clarence Ave	52.087415	-106.644198
+Saskatoon	125 Circle Dr E	52.157786	-106.668229
+Saskatoon	C1-3510 8th St East	52.114632	-106.593895
+Saskatoon	F14 - 201 1st Ave S	52.127340	-106.667096
+Saskatoon	Unit 5 & 6	52.132184	-106.654742
+Saskatoon	5 - 821 Central Ave	52.137507	-106.598139
+Saskatoon	Bay 1 - 702 22nd St W	52.129343	-106.679829
+Saskatoon	6 - 215 Stonebridge Blvd	52.084439	-106.642029
+Saskatoon	1905 Preston Ave	52.107331	-106.622588
+Saskatoon	42 - 414 Ave B S	52.124166	-106.671351
+Saskatoon	4050 8th St E	52.114652	-106.582665
+Saskatoon	3322a Fairlight Dr	52.128118	-106.724182
+St .gregor	200 Railway Ave	52.177999	-104.824022
+Valley Regional Park	Rosthern	52.939916	-106.450864
+Vanscoy	331 Railway Ave	52.002122	-106.971305
+Vanscoy	Vanscoy	51.998315	-106.884422
+Vanscoy	103 1st Street West	52.001891	-106.972563
+Wadena	101 Main St N	51.945658	-103.801507
+Wadena	410 Main St N	51.950929	-103.801508
+Wadena	234 Main Street	51.947562	-103.801540
+Wadena	77 Main St N	51.945471	-103.801506
+Wadena	70 Main Street	51.945471	-103.801506
+Wakaw	300 6th St S	52.643884	-105.741101
+Warman	Bay 4 - 619 S. Railway St W	52.316394	-106.579955
+Warman	4 - 701 Centennial Blvd	52.319110	-106.579859
+Warman	23- 810 Centennial Blvd	52.319110	-106.579859
+Warman	106 Klassen St.	52.317851	-106.575916
+Warman	Bay F - 110 Central Street East	52.318762	-106.573754
+Warman	430 B Central St W	52.318477	-106.582570
+Warman	710 Centennial Blvd.	52.325369	-106.579864
+Warman	202 North Railway St E	52.315102	-106.578197
+Warman	201 Central Street	52.318479	-106.572620
+Watrous	107 2nd Ave W	51.673196	-105.468913
+Watrous	800 1st St E	51.674133	-105.464139
+Watson	101 Railway Ave Nw	52.127704	-104.526174
+Watson	209 Railway Avenue	52.128059	-104.527654
+Wynyard	141 South Service Rd	51.769068	-104.185822
+Wynyard	218 Ave B East	51.770798	-104.183231
+Wynyard	214 Bosworth St	51.769204	-104.185753
+Alameda	127 - 5th Street	49.266114	-102.280622
+Alameda	403 - 2nd Avenue	49.264712	-102.282590
+Alameda	200 - 6th Street	49.264573	-102.280953
+Bengough	Main Street	49.394473	-105.126865
+Bengough	421 Main Street	49.395480	-105.127425
+Carlyle	125 Main Street	49.634266	-102.266611
+Carlyle	110 Turriff Ave E	49.634709	-102.259884
+Carnduff	708 Spencer St	49.177238	-101.795845
+Carnduff	911 Hwy 18	49.179637	-101.819243
+Carnduff	103 - 3rd Street W	49.175104	-101.799716
+Ceylon	Main Street	49.458006	-104.603405
+Creelman	Railway Ave	49.819981	-103.307961
+Creelman	1 Main St	49.818961	-103.311051
+Estevan	122 - 4th Street	49.131657	-102.971226
+Estevan	1138 5th Street	49.141028	-102.994081
+Estevan	461 Peterson Drive	49.142850	-102.980226
+Estevan	76 Souris Avenue	49.146776	-102.991489
+Estevan	9 - 461 King Street	49.147510	-102.980207
+Estevan	913 - 13th Avenue	49.146770	-102.991998
+Estevan	123 - 4th Street	49.132191	-102.973005
+Estevan	440 King Street	49.146766	-102.980325
+Estevan	133 - 4th Street	49.132825	-102.974704
+Goodwater	1 Railway	49.396095	-103.699280
+Kipling	Kipling	50.100232	-102.614708
+Kipling	905 Industrial Drive	50.102289	-102.632301
+Kipling	102 - 6th Avenue	50.100326	-102.632898
+Kipling	401 6th Avenue	50.098735	-102.633483
+Kipling	519 Main Street	50.102139	-102.631245
+Manor	42 Main Street	49.604037	-102.085586
+Maryfield	132 Main Street	49.836531	-101.524399
+Maryfield	201 Main Street	49.836531	-101.524399
+Maryfield	804 Assiniboia Avenue	49.836710	-101.525950
+Oxbow	724 Railway Avenue	49.228535	-102.174339
+Oxbow	71 Broadway St	49.227223	-102.169534
+Redvers	Methuen Street	49.573190	-101.703371
+Redvers	13 Service Rd	49.577163	-101.692649
+Redvers	23 Meutheun St	49.572777	-101.703380
+Stoughton	600 A Government Rd	49.677516	-103.022570
+Stoughton	105 Cottonwood Rd	42.140420	-71.133899
+Torquay	301 Saskatchewan Avenue	49.140624	-103.496931
+Torquay	Miller Avenue	49.137472	-103.494648
+Torquay	Devon Street	49.140642	-103.492995
+Weyburn	118 - 3rd Street Ne	49.662094	-103.853528
+Weyburn	136 - 2nd St Ne	49.663394	-103.854638
+Weyburn	629 King St	49.671342	-103.858219
+Weyburn	207 - 3rd Street S	49.657353	-103.854633
+Weyburn	327 Mergens Street	49.665515	-103.859584
+Weyburn	132 3rd Street	49.662473	-103.853509
+Weyburn	1420 Sims Ave	49.664229	-103.880748
+Weyburn	43 Riverview Dr	49.659206	-103.855413
+Weyburn	126 - 4th Street Ne	49.662822	-103.851992
+Bredenbury	211 Third St	50.942594	-102.049454
+Bredenbury	331 Railway Ave	50.944115	-102.047357
+Bredenbury	221 First St	50.943722	-102.051663
+Bredenbury	111 Third St	50.943777	-102.047619
+Buchanan	323 Second Ave E	51.702099	-102.752729
+Canora	110 Main St	51.636619	-102.436044
+Canora	113 Main St	51.636583	-102.436065
+Carlton Trail Regional Park	Se 34-19-31 W1m, Rm Of Spy Hill No. 152	52.939916	-106.450864
+Churchbridge	133 Prothero Ave W	50.899352	-101.896367
+Esterhazy	Veteram Ave E At James St N	50.656464	-102.087263
+Foam Lake	414 Main St	51.643066	-103.533738
+Foam Lake	321 Chant St	51.641027	-103.521386
+Foam Lake	411 Main St	51.642930	-103.533702
+Foam Lake	507 Hwy 16 E	51.637471	-103.529438
+Grayson	Assiniboia Ave	50.718206	-102.642495
+Grayson	511 Railway Ave	50.720766	-102.646845
+Hazel Dell	Railway Ave	51.997168	-102.827270
+Invermay	211 Third Ave	51.806981	-103.148969
+Ituna	404 Main St N	51.171902	-103.495757
+Ituna	539 Main Street North	51.173200	-103.496104
+Kamsack	Hwy No 5	51.564866	-101.893318
+Kamsack	114 West Ave	51.559442	-101.894755
+Kamsack	358 Queen Elizabeth Blvd	51.565010	-101.890228
+Kamsack	411 First St	51.562525	-101.901651
+Kamsack	512 West Ave	51.561333	-101.894754
+Macnutt	1 Main St	51.083980	-101.604467
+Melvile	21 Mall Road	52.939916	-106.450864
+Melville	200 South Service Rd	50.940818	-102.808907
+Melville	121 Third Ave W	50.928742	-102.807290
+Melville	Hwy 47	50.954056	-102.802074
+Preeceville	873 Highway Ave E	51.954241	-102.654388
+Preeceville	23 First Ave N E	51.957248	-102.671665
+Preeceville	4 Main St N	51.956326	-102.671367
+Preeceville	108 Main St	51.957046	-102.670369
+Rm 243 - Rural	Sw 26-25-3 W2m	52.939916	-106.450864
+Rm 244 - Rural	Ne 13-26-4 W2m	52.939916	-106.450864
+Rm 276 - Rural	Ne 31-30-11 W2m	52.939916	-106.450864
+Sheho	608 Railway Ave	51.586638	-103.212617
+Sheho	718 Railway Ave E	51.585621	-103.210145
+Sheho	506 Railway Ave	51.586638	-103.212617
+Sturgis	325 First Ave Nw	51.934644	-102.535197
+Sturgis	80 Hudson St	51.932947	-102.530104
+Sturgis	Durham St	51.937357	-102.534884
+Tuffnell	Railway Ave	51.644033	-103.363023
+Tuffnell	Griggs St	51.644100	-103.371115
+Usherville	Hwy No 9	52.217041	-102.624924
+Waldron	Main St	50.852729	-102.511267
+Yorkton	226 Broadway St E	51.210144	-102.449738
+Yorkton	15 - 275 Broadway St E Unit B	51.212146	-102.444769
+Yorkton	10 First Ave N	51.210583	-102.462869
+Yorkton	12 Fourth Ave N	51.210249	-102.458597
+Yorkton	15-277 Broadway St E	51.212069	-102.442549
+Yorkton	249a Hamilton Rd	51.206671	-102.444434
+Yorkton	86 Broadway St E	51.210111	-102.457616
+Yorkton	56 - 277 Broadway St E	51.212069	-102.442549
+Yorkton	380 Broadway St W	51.210137	-102.486293
+Yorkton	107 York Rd E	51.224906	-102.454592
+Yorkton	375 Broadway St W	51.210145	-102.485495
+Yorkton	14 Dracup Ave N	51.210317	-102.451049
+Yorkton	35 First Ave N	51.211557	-102.462538
+Clavet	#2 - 2nd Ave	51.995198	-106.374525
+Duck Lake	208 Front St	52.814720	-106.224254
+Englefeld	155 1st Ave East	52.160611	-104.653561
+Englefeld	1st St N & 1st Ave E	52.160611	-104.653561
+Englefeld	220 1st Ave West	52.162175	-104.656589
+Humboldt	Hwy 5 & 15th St	52.201958	-105.131798
+Humboldt	804 Main St	52.202218	-105.122532
+Humboldt	708 13th Ave	52.209886	-105.121280
+Manitou Beach	315 Mclaughlan St	51.720561	-105.443872
+Manitou Beach	511 Lake Ave	51.718927	-105.433850
+Manitou Beach	Morris	51.719696	-105.443033
+Manitou Beach	302 Mclachlan Avenue	51.720561	-105.443872
+Martensville	727 Centennial Dr	52.279240	-106.670193
+Osler	120 1st St	52.368057	-106.539768
+Quill Lake	46 Oswald St	52.069806	-104.256388
+Quill Lake	73 Main St	52.070856	-104.256431
+Quill Lake	Quill St & Lally Cres	52.069806	-104.256388
+Saskatoon	380 2nd Ave N	52.133496	-106.661442
+Saskatoon	1435 Idylwyld Dr N	52.148495	-106.670303
+Saskatoon	1607 Idylwyld Dr N	52.150395	-106.670546
+Saskatoon	822 51st St E	52.173292	-106.652173
+Saskatoon	1623 8th St E	52.114851	-106.631239
+Saskatoon	14 - 2410 22nd St W	52.129413	-106.710087
+Saskatoon	329 3rd Ave N	52.132720	-106.660381
+Saskatoon	1120 20th St W	52.126187	-106.686631
+Saskatoon	102 Idylwyld Dr N	52.129329	-106.670169
+Saskatoon	820 9th Ave N	52.139475	-106.648962
+Saskatoon	119 Ave B S	52.128395	-106.671829
+Saskatoon	1105 22nd St W	52.129170	-106.686179
+Saskatoon	210 Primrose Dr	52.171049	-106.633511
+Saskatoon	119 33rd St W	52.143838	-106.671751
+Saskatoon	910 Broadway Avenue	52.116279	-106.656983
+Saskatoon	F010 - 201 1st Ave S	52.127340	-106.667096
+Saskatoon	2 & 3 - 1501 8th St E	52.114730	-106.674836
+Saskatoon	122-3126 Clarence Avenue South	52.085062	-106.648042
+Saskatoon	F 019 - 201 1st Avenue South	52.127340	-106.667096
+Saskatoon	14 Marlborough Cres	52.142649	-106.707151
+Saskatoon	618 2nd Ave N	52.137166	-106.659507
+Saskatoon	610 Idylwyld Dr N	52.135496	-106.669819
+Saskatoon	418 - 20th St W	52.126157	-106.675669
+Saskatoon	10-1010 Taylor St E	52.107302	-106.645932
+Saskatoon	11 Innovation Blvd	52.140303	-106.623091
+Saskatoon	10 - 3000 Diefenbaker Dr	52.129566	-106.728178
+Saskatoon	2002 8th St E	52.114184	-106.625233
+Saskatoon	1032 Louise Ave	52.115354	-106.630921
+Saskatoon	210 33rd St W	52.143962	-106.672446
+Saskatoon	15 - 510 Circle Dr E	52.158113	-106.663808
+Saskatoon	103 - 3120 8th St E	52.113777	-106.607841
+Saskatoon	4 - 820 B 51st St E	52.174182	-106.654029
+Saskatoon	145 3rd Ave S	52.127610	-106.662758
+Saskatoon	2 - 300 Confederation Drive	52.132539	-106.721043
+Saskatoon	1302 Ontario Ave	52.148359	-106.666128
+Saskatoon	3503 Kinnear Avenue	52.192169	-106.622766
+Saskatoon	250 - 3310 8th St E	52.113027	-106.600276
+Saskatoon	1002 22nd St W	52.129329	-106.684479
+Saskatoon	20d - 2605 Broadway Ave	52.096387	-106.656624
+Saskatoon	3339 Centennial Dr	52.133111	-106.732535
+Saskatoon	1-821 Central Ave	52.137507	-106.598139
+Saskatoon	3 - 202 Primrose Dr	52.171399	-106.634325
+Saskatoon	87 Campus Dr	52.129865	-106.635722
+Saskatoon	707 Circle Dr E	52.157931	-106.658348
+Saskatoon	2508 8th St E	52.114684	-106.617007
+Saskatoon	1527 Idylwyld Dr N	52.149961	-106.670294
+Saskatoon	3203 22nd St W	52.128745	-106.722073
+Saskatoon	16 33rd St E	52.143863	-106.668182
+Saskatoon	3134 Clarence Avenue South	52.084613	-106.646688
+Saskatoon	2401 D 22nd St W	52.129229	-106.707417
+Saskatoon	1515c 8th St E	52.115237	-106.634134
+Saskatoon	107 105th St East	52.133572	-106.598932
+Saskatoon	613 8th St E	52.114859	-106.655735
+Saskatoon	706 B Central Ave	52.136104	-106.598949
+Wakaw	Junction Of Hwy 2 & 41	52.633000	-105.746777
+Wakaw	213 2nd St S	52.647751	-105.740979
+Wakaw	314 Main St	52.649927	-105.742121
+Wakaw	100 1st Street South	52.648919	-105.737155
+Warman	116 North Railway Street East	52.316099	-106.576514
+Warman	5-810 Centennial Drive	52.319110	-106.579859
+Watrous	702 4th St E	51.674001	-105.455652
+Watrous	704 4th Ave E	51.669690	-105.452607
+Alameda	Hwy 9	49.319067	-102.275631
+Arcola	201 Main Street	49.635046	-102.491784
+Estevan	901 - 13th Avenue	49.145217	-102.992826
+Estevan	104 Souris Avenue	49.147476	-102.991743
+Estevan	1124 - 4th Street	49.139983	-102.993815
+Estevan	502 - 4th Street	49.135057	-102.980700
+Estevan	202 - 1133 4th Street	49.132914	-102.975014
+Glen Ewen	132 Railway Ave	49.205595	-102.014413
+Glenavon	105 - 1st Street W	50.195587	-103.140289
+Glenavon	313 - 1st Avenue N	50.196812	-103.138846
+Glenavon	307 Railway Avenue	50.195078	-103.137391
+Nickle Lake	Nickle Lake Regional Park	52.939916	-106.450864
+Weyburn	1360 Sims Ave	49.664180	-103.878895
+Weyburn	122 - 4th St Ne	49.662345	-103.851983
+Weyburn	110 Souris Avenue	49.662116	-103.856508
+Weyburn	215 - 2nd Street Ne	49.664940	-103.854188
+Weyburn	Weyburn	49.698055	-103.801109
+Weyburn	5 Government Road N	49.659415	-103.858253
+Weyburn	Hwy 35 S	49.663284	-103.853291
+Bird's Point	64 Currie Ave	50.548158	-102.357624
+Esterhazy	601 Veterans Ave	50.654715	-102.075361
+Melville	702 Third Ave W	50.931923	-102.819057
+Norquay	211 Third St E	51.883597	-102.079963
+Norquay	Hwy No 49	51.881985	-102.082058
+Sheho	101 Road Allowance	51.587998	-103.211164
+Sheho	608 Assiniboia Ave	51.587998	-103.211164
+Stockholm	303 Alberta Ave	50.659379	-102.301503
+Stockholm	Ohlen St	50.659338	-102.302792
+Sturgis	124 Main St	51.937660	-102.540418
+Yorkton	4-132 Broadway St W	51.210137	-102.470508
+Yorkton	16 Broadway St E	51.210111	-102.461697
+Yorkton	37 Broadway St W	51.210362	-102.465277
+Saskatoon	3005 Clarence Ave S	52.087036	-106.643573
+Saskatoon	615 Wiggins Ave	52.119363	-106.639392
+Saskatoon	1702 Idylwyld Dr N	52.151673	-106.670121
+Saskatoon	5a - 1501 8th St E	52.115862	-106.633842
+Saskatoon	1418 College Dr	52.128798	-106.634661
+Saskatoon	220 - 1820 8th St E	52.113763	-106.628777
+Saskatoon	F12 - 201 1st Ave S	52.127340	-106.667096
+Saskatoon	1 - 7 Assiniboine Dr	52.161080	-106.645022
+Saskatoon	102 103rd St	52.130054	-106.597583
+Saskatoon	1840 Mcormond Dr	52.147521	-106.565880
+Saskatoon	2-3401 8th Street E	52.114750	-106.594597
+Saskatoon	Bay 5 - 844 51st St E	52.173302	-106.647676
+Saskatoon	260, 3310 - 8th St E	52.112410	-106.599438
+Saskatoon	601 Spadina Cres. E	52.126296	-106.659394
+Saskatoon	401 22nd St E	52.128070	-106.660309
+Saskatoon	Unit 154 1824 Mcormond Dr	52.147521	-106.565880
+Shields	5 Waters Ave	51.823533	-106.402241
+Spalding	118 Centre St	52.330667	-104.497625
+Spalding	114 Center St	52.330614	-104.499832
+Edmonton	3790 - 98th St Nw	53.695129	-113.242558
+Estevan	6 Mehler Drive	49.139084	-102.991481
+Estevan	6 - 419 Kensington Ave	49.145780	-102.969085
+Ogema	115 Main Street	49.575327	-104.915855
+Ogema	Government Rd	49.572001	-104.916457
+Foam Lake	98 Main St S	51.637506	-103.533840
+Ituna	426 Main St S	51.166133	-103.495782
+Kamsack	328 First St	51.561316	-101.899740
+Kamsack	321 Third Ave	51.564070	-101.900420
+Yorkton	185 Broadway St W	51.210207	-102.474578
+Yorkton	227 Prystai Way	51.217701	-102.476297
+Yorkton	51 277 Broadway St E	51.212069	-102.442549
+Yorkton	15d - 275 Broadway Street East	51.212146	-102.444769
+Yorkton	150 Gladstone Ave N	51.219534	-102.474864
+Saskatoon	2 - 3414  8th Street East	52.114612	-106.598311
+Saskatoon	3a - 3602 Taylor St E	52.103897	-106.596897
+Saskatoon	1624 Lorne Ave	52.109180	-106.670450
+Saskatoon	1 - 2210 Millar Ave	52.160639	-106.648206
+Oxbow	Hwy 18 E	49.228048	-102.172516
+Tyvan	50 Division Ave	50.032695	-103.720851
+Weyburn	53 Government Road S	49.658541	-103.858233
+Esterhazy	Fourth Ave	50.658764	-102.074032
+Fishing Lake Regional Park	Ne 6-33-11 W2m, Rm Of Foam Lake No. 276	52.939916	-106.450864
