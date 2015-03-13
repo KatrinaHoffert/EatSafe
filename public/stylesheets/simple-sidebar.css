@@ -96,7 +96,16 @@
     background: none;
 }
 
-@media(min-width:768px) {
+/* At this resolution, the sidebar is open by default. The number is chosen because
+   700 pixels wide is the "desktop" resolution for most of the site, yet here
+   the sidebar takes up 250 pixels, so we don't auto-open it until the viewport
+   is 950 pixels. A large number is also necessary because we don't want the
+   sidebar taking up space the user can't afford.
+
+   Note that this must be kept consistent with the constant in the multi-map JS,
+   which is used to detect the width at which we auto-close on selecting a nearby
+   location. */
+@media(min-width:950px) {
     #wrapper {
         padding-left: 250px;
     }
