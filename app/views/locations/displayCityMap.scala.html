@@ -173,7 +173,7 @@
             $("#nearbyList a").on("click", function(event) {
               var latitude = $(event.target).attr("data-latitude");
               var longitude = $(event.target).attr("data-longitude");
-              goToCoords(latitude, longitude);
+              goToCoords(latitude, longitude, true);
             });
           }
           else {
@@ -191,21 +191,43 @@
     }
     populateNearbyList();
 
-    // currentValue toggle script for the show location sidebar
+    // Toggles display of the sidebar
     $("#menu-toggle").on("click", function(e) {
-        e.preventDefault();
-        $("#wrapper").toggleClass("toggled");
+      e.preventDefault();
+      $("#wrapper").toggleClass("toggled");
+    });
+
+    // Moves the map to the user's coordinates
+    $("#moveToMe").on("click", function() {
+      if("geolocation" in navigator) {
+        navigator.geolocation.getCurrentPosition(function(position) {
+          if(position.coords.accuracy <= MIN_ACCURACY_FOR_NEARBY) {
+            goToCoords(position.coords.latitude, position.coords.longitude, false);
+          }
+          else {
+            alert("@Messages("maps.multiMap.moveToMeInaccurate")")
+          }
+        },
+        function() {
+          alert("@Messages("maps.multiMap.moveToMeFailed")")
+        });
+      }
+      else {
+        alert("@Messages("maps.multiMap.moveToMeUnsupported")")
+      }
     });
 
     /**
      * Scrolls the map to a new location and resets the zoom. If the viewport width is such that
      * the sidebar is defaultly closed, we close the sidebar on selecting a location.
+     *
+     * @@param toggle If true, toggles the sidebar (which will close it if it's open).
      */
-    function goToCoords(lat, long) {
+    function goToCoords(lat, long, toggle) {
       map.setCenter(new google.maps.LatLng(lat, long));
       map.setZoom(DEFAULT_ZOOM);
 
-      if($(window).width() < SIDEBAR_AUTOCLOSE_WIDTH) {
+      if(toggle && $(window).width() < SIDEBAR_AUTOCLOSE_WIDTH) {
          $("#wrapper").toggleClass("toggled");
       }
     }
@@ -227,12 +249,15 @@
   </div>
   <div id="page-content-wrapper">
     @headingSmall(Messages("general.applicationName"))
-          <a href="#menu-toggle" class="btn btn-default" id="menu-toggle">
-            <span class="glyphicon glyphicon-map-marker" aria-hidden="true"></span>
-            @Messages("maps.multiMap.nearbyLocationsToggle")
-          </a>
-          <div id="map-canvas"></div>
-    </div>
+    <a href="#menu-toggle" class="btn btn-default" id="menu-toggle">
+      <span class="glyphicon glyphicon-map-marker" aria-hidden="true"></span>
+      @Messages("maps.multiMap.nearbyLocationsToggle")
+    </a>
+    <button class="btn btn-default" id="moveToMe">
+      @Messages("maps.multiMap.findMe")
+    </button>
+    <div id="map-canvas"></div>
+  </div>
 </div>
   
 }
