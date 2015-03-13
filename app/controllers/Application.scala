@@ -1,7 +1,11 @@
 package controllers
 
+import models._
 import play.api._
 import play.api.mvc._
+import play.api.Play.current
+import play.api.cache.Cache
+import scala.util.{Try, Success, Failure}
 
 object Application extends Controller {
   /**
@@ -33,5 +37,27 @@ object Application extends Controller {
         LocationController.showLocation
       )
     ).as("text/javascript")
+  }
+
+  def prepopulateCache = Action {
+    // Call poor performing, cached pieces of code here to pre-populate the cache. Can't call too
+    // many, though, as the cache filling up will result in older data being removed.
+    val success = for {
+      _ <- Location.getAllLocationsWithCoordinates
+    } yield Unit
+
+    success match {
+      case Success(_) =>
+        Ok("All caches populated")
+      case Failure(ex) =>
+        InternalServerError(ex.toString)
+    }
+  }
+
+  def clearCache = Action {
+    // Add cache keys here as they are used
+    Cache.remove("allLocations")
+
+    Ok("All caches cleared")
   }
 }
