@@ -26,6 +26,11 @@
      */
     var MIN_ACCURACY_FOR_NEARBY = 2000;
 
+    /**
+     * Default zoom level of the map and when being taken to a location. In Google Maps API's units.
+     */
+    var DEFAULT_ZOOM = 13;
+
     var locations = @Html(TypeConversions.locationsToMultiMapJson(locations).toString);
 
     function sizeMapCanvas() {
@@ -75,7 +80,7 @@
       geocoder.geocode( { "address": address }, function(results, status) {
         if(status == google.maps.GeocoderStatus.OK) {
           map.setCenter(results[0].geometry.location);
-          map.setZoom(13);
+          map.setZoom(DEFAULT_ZOOM);
         }
         else {
           alert("Geocoding failed: " + status);
@@ -147,13 +152,19 @@
 
             var sidebarHtml = closestLocations.map(function(location, index, array) {
               return "<li>" +
-                  "<a href='" + jsRoutes.controllers.LocationController.showLocation(location.id).url +
-                      "'>" + location.name + "<br />" + roundTo2DecimalPlaces(location.distanceFromUser) +
-                      " @Messages("maps.multiMap.kmAway")</a>" +
+                  "<a data-latitude='" + location.latitude +"' data-longitude='" + location.longitude +
+                  "' href='#'>" + location.name + "<br />" + roundTo2DecimalPlaces(location.distanceFromUser) +
+                  " @Messages("maps.multiMap.kmAway")</a>" +
                   "</li>";
             });
 
             $("#nearbyList").html(sidebarHtml.join("\n"));
+
+            $("#nearbyList a").on("click", function(event) {
+              var latitude = $(event.target).attr("data-latitude");
+              var longitude = $(event.target).attr("data-longitude");
+              goToCoords(latitude, longitude);
+            });
           }
           else {
             $("#nearbyList a").html("@Messages("maps.multiMap.locationInaccurate")");
@@ -175,6 +186,14 @@
         e.preventDefault();
         $("#wrapper").toggleClass("toggled");
     });
+
+    /**
+     * Scrolls the map to a new location and resets the zoom.
+     */
+    function goToCoords(lat, long) {
+      map.setCenter(new google.maps.LatLng(lat, long));
+      map.setZoom(DEFAULT_ZOOM);
+    }
   </script>
 }
 
