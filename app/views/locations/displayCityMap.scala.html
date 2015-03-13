@@ -155,13 +155,23 @@
 
             $("#nearbyList").html(sidebarHtml.join("\n"));
           }
+          else {
+            $("#nearbyList a").html("@Messages("maps.multiMap.locationInaccurate")");
+          }
+        },
+        // Callback for an error in getting user position
+        function() {
+          $("#nearbyList a").html("@Messages("maps.multiMap.locationFailed")");
         });
-      } 
+      }
+      else {
+        $("#nearbyList a").html("@Messages("maps.multiMap.locationNotSupported")");
+      }
     }
     populateNearbyList();
 
     // currentValue toggle script for the show location sidebar
-    $("#menu-toggle").click(function(e) {
+    $("#menu-toggle").on("click", function(e) {
         e.preventDefault();
         $("#wrapper").toggleClass("toggled");
     });
