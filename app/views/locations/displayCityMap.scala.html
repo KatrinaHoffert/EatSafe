@@ -25,7 +25,7 @@
      * Miniumum accuracy of geo-positioning in order to have nearby locations, in meters. If the
      * location system is too inaccurate, the nearby locations will be too inaccurate.
      */
-    var MIN_ACCURACY_FOR_NEARBY = 2000;
+    var MIN_ACCURACY = 2000;
 
     /**
      * Default zoom level of the map and when being taken to a location. In Google Maps API's units.
@@ -37,6 +37,9 @@
      * location is selected. This should be kept consistent with the sidebar CSS.
      */
     var SIDEBAR_AUTOCLOSE_WIDTH = 950;
+
+    // Used to store user coordinates once found
+    var userCoordinates;
 
     var locations = @Html(TypeConversions.locationsToMultiMapJson(locations).toString);
 
@@ -133,62 +136,97 @@
     }
 
     /**
+     * Enum for reasons that getting the coordinates could fail.
+     *
+     *  * UNSUPPORTED: User's browser doesn't support GeoLocation
+     *  * FAILED: Miscellanious failure. Either user blocked the app or something is stopping their
+     *            device. Or a timeout.
+     *  * INNACCURATE: Coordinates successfully found, but too innaccurate (based on MIN_ACCURACY).
+     */
+    var CoordinateFailureReason = {
+      UNSUPPORTED : 0,
+      FAILED : 1,
+      INNACCURATE : 2
+    };
+
+    /**
+     * Gets the user's coordinates.
+     *
+     * @@param successCallback Called with latitude and longitude if coordinates are found.
+     * @@param failureCallback Called with a CoordinateFailureReason if we couldn't find the
+     * user's coordinates.
+     */
+    function getUserCoordinates(successCallback, failureCallback) {
+      if("geolocation" in navigator) {
+        navigator.geolocation.getCurrentPosition(function(position) {
+          if(position.coords.accuracy <= MIN_ACCURACY) {
+            successCallback(position.coords.latitude, position.coords.longitude);
+          }
+          else {
+            failureCallback(CoordinateFailureReason.INNACCURATE);
+          }
+        },
+        function() {
+          failureCallback(CoordinateFailureReason.FAILED);
+        });
+      }
+      else {
+        failureCallback(CoordinateFailureReason.UNSUPPORTED);
+      }
+    }
+
+    /**
      * Populates the list of nearby locations with a list of anchors that, when clicked, scroll the
      * map to the coordinates of the location with the default zoom level.
      */
     function populateNearbyList() {
-      if("geolocation" in navigator) {
-        navigator.geolocation.getCurrentPosition(function(position) {
-          if(position.coords.accuracy <= MIN_ACCURACY_FOR_NEARBY) {
-            var userLatitude = position.coords.latitude;
-            var userLongitude = position.coords.longitude;
-            console.log("User coords: " + userLatitude + ", " + userLongitude);
+      getUserCoordinates(function(userLatitude, userLongitude) {
+        console.log("User coords: " + userLatitude + ", " + userLongitude);
 
-            var locationsWithDistance = locations.map(function(location, index, array) {
-              location.distanceFromUser = calculateDistances(userLatitude, userLongitude,
-                  location.latitude, location.longitude);
-              return location;
-            });
-            var closestLocations = locationsWithDistance.sort(function(loc1, loc2) {
-              return loc1.distanceFromUser - loc2.distanceFromUser;
-            }).slice(0, MAX_NEARBY);
-
-            // Goddamn does JS need some more succient FP. In Scala, this would be a much more
-            // readable: `closestLocations.map(_.distanceFromUser)`
-            console.log("Distances of closest locations: " +
-                JSON.stringify(closestLocations.map(function(l){ return l.distanceFromUser; })));
-            console.log("Coordinates of them: " +
-                JSON.stringify(closestLocations.map(function(l){ return "(" + l.latitude +
-                ", " + l.longitude + ")"; })));
-
-            var sidebarHtml = closestLocations.map(function(location, index, array) {
-              return "<li>" +
-                  "<a data-latitude='" + location.latitude +"' data-longitude='" + location.longitude +
-                  "' href='#'>" + location.name + "<br />" + roundTo2DecimalPlaces(location.distanceFromUser) +
-                  " @Messages("maps.multiMap.kmAway")</a>" +
-                  "</li>";
-            });
-
-            $("#nearbyList").html(sidebarHtml.join("\n"));
-
-            $("#nearbyList a").on("click", function(event) {
-              var latitude = $(event.target).attr("data-latitude");
-              var longitude = $(event.target).attr("data-longitude");
-              goToCoords(latitude, longitude, true);
-            });
-          }
-          else {
-            $("#nearbyList a").html("@Messages("maps.multiMap.locationInaccurate")");
-          }
-        },
-        // Callback for an error in getting user position
-        function() {
-          $("#nearbyList a").html("@Messages("maps.multiMap.locationFailed")");
+        var locationsWithDistance = locations.map(function(location, index, array) {
+          location.distanceFromUser = calculateDistances(userLatitude, userLongitude,
+              location.latitude, location.longitude);
+          return location;
         });
-      }
-      else {
-        $("#nearbyList a").html("@Messages("maps.multiMap.locationNotSupported")");
-      }
+        var closestLocations = locationsWithDistance.sort(function(loc1, loc2) {
+          return loc1.distanceFromUser - loc2.distanceFromUser;
+        }).slice(0, MAX_NEARBY);
+
+        // Goddamn does JS need some more succient FP. In Scala, this would be a much more
+        // readable: `closestLocations.map(_.distanceFromUser)`
+        console.log("Distances of closest locations: " +
+            JSON.stringify(closestLocations.map(function(l){ return l.distanceFromUser; })));
+        console.log("Coordinates of them: " +
+            JSON.stringify(closestLocations.map(function(l){ return "(" + l.latitude +
+            ", " + l.longitude + ")"; })));
+
+        var sidebarHtml = closestLocations.map(function(location, index, array) {
+          return "<li>" +
+              "<a data-latitude='" + location.latitude +"' data-longitude='" + location.longitude +
+              "' href='#'>" + location.name + "<br />" + roundTo2DecimalPlaces(location.distanceFromUser) +
+              " @Messages("maps.multiMap.kmAway")</a>" +
+              "</li>";
+        });
+
+        $("#nearbyList").html(sidebarHtml.join("\n"));
+
+        $("#nearbyList a").on("click", function(event) {
+          var latitude = $(event.target).attr("data-latitude");
+          var longitude = $(event.target).attr("data-longitude");
+          goToCoords(latitude, longitude, true);
+        });
+      },
+      function(error) {
+        if(error === CoordinateFailureReason.INNACCURATE) {
+          $("#nearbyList a").html("@Messages("maps.multiMap.locationInaccurate")");
+        }
+        else if(error === CoordinateFailureReason.FAILED) {
+          $("#nearbyList a").html("@Messages("maps.multiMap.locationFailed")");
+        }
+        else {
+          $("#nearbyList a").html("@Messages("maps.multiMap.locationNotSupported")");
+        }
+      });
     }
     populateNearbyList();
 
@@ -221,26 +259,22 @@
       };
       var spinner = new Spinner(spinnerOpts).spin($("body")[0]);
 
-      if("geolocation" in navigator) {
-        navigator.geolocation.getCurrentPosition(function(position) {
-          if(position.coords.accuracy <= MIN_ACCURACY_FOR_NEARBY) {
-            goToCoords(position.coords.latitude, position.coords.longitude, false);
-            spinner.stop();
-          }
-          else {
-            alert("@Messages("maps.multiMap.moveToMeInaccurate")");
-            spinner.stop();
-          }
-        },
-        function() {
-          alert("@Messages("maps.multiMap.moveToMeFailed")");
-          spinner.stop();
-        });
-      }
-      else {
-        alert("@Messages("maps.multiMap.moveToMeUnsupported")");
+      getUserCoordinates(function(latitude, longitude) {
+        goToCoords(latitude, longitude, false);
         spinner.stop();
-      }
+      },
+      function(error) {
+        if(error === CoordinateFailureReason.INNACCURATE) {
+          alert("@Messages("maps.multiMap.moveToMeInaccurate")");
+        }
+        else if(error === CoordinateFailureReason.FAILED) {
+          alert("@Messages("maps.multiMap.moveToMeInaccurate")");
+        }
+        else {
+          alert("@Messages("maps.multiMap.moveToMeUnsupported")");
+        }
+        spinner.stop();
+      });
     });
 
     /**
