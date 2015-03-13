@@ -127,15 +127,6 @@
     }
 
     /**
-     * Formats a distance in meters as one in kilometers, with rounding.
-     *
-     * @@return meters rounded to 2 decimal places, in kilometers.
-     */
-    function roundTo2DecimalPlaces(num) {
-      return Math.round(num * 100) / 100;
-    }
-
-    /**
      * Enum for reasons that getting the coordinates could fail.
      *
      *  * UNSUPPORTED: User's browser doesn't support GeoLocation
@@ -191,30 +182,18 @@
         var closestLocations = locationsWithDistance.sort(function(loc1, loc2) {
           return loc1.distanceFromUser - loc2.distanceFromUser;
         }).slice(0, MAX_NEARBY);
-
-        // Goddamn does JS need some more succient FP. In Scala, this would be a much more
-        // readable: `closestLocations.map(_.distanceFromUser)`
-        console.log("Distances of closest locations: " +
-            JSON.stringify(closestLocations.map(function(l){ return l.distanceFromUser; })));
-        console.log("Coordinates of them: " +
-            JSON.stringify(closestLocations.map(function(l){ return "(" + l.latitude +
-            ", " + l.longitude + ")"; })));
-
+        
         var sidebarHtml = closestLocations.map(function(location, index, array) {
-          return "<li>" +
-              "<a data-latitude='" + location.latitude +"' data-longitude='" + location.longitude +
-              "' href='#'>" + location.name + "<br />" + roundTo2DecimalPlaces(location.distanceFromUser) +
-              " @Messages("maps.multiMap.kmAway")</a>" +
-              "</li>";
+          // Rounded to 2 decimal places
+          var roundedDistance = Math.round(location.distanceFromUser * 100) / 100;
+          return ("<li>" +
+              "  <a href='#' onclick='goToCoords({0}, {1}, true);'>" +
+              "    {2}<br />{3} @Messages("maps.multiMap.kmAway")" +
+              "  </a>" +
+              "</li>").format(location.latitude, location.longitude, location.name, roundedDistance);
         });
 
         $("#nearbyList").html(sidebarHtml.join("\n"));
-
-        $("#nearbyList a").on("click", function(event) {
-          var latitude = $(event.target).attr("data-latitude");
-          var longitude = $(event.target).attr("data-longitude");
-          goToCoords(latitude, longitude, true);
-        });
       },
       function(error) {
         if(error === CoordinateFailureReason.INNACCURATE) {

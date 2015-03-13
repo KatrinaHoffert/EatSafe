@@ -57,3 +57,23 @@ jQuery.fn.fadeAndRemove = function(duration, callback) {
     }
   });
 }
+
+/**
+ * String formatting for JS. Replaces {0}, {1}, etc with the numbered argument.
+ *
+ * Example:
+ *   "Hello, {0}, I am {1}!".format("Mike", "Joe the Plumber")
+ * Results in:
+ *   "Hello, Mike, I am Joe the Plumber!"
+ *
+ * @return A new string with the replacements made.
+ */
+String.prototype.format = function() {
+  var args = arguments;
+  return this.replace(/{(\d+)}/g, function(match, number) { 
+    return typeof args[number] != 'undefined'
+      ? args[number]
+      : match
+    ;
+  });
+};
