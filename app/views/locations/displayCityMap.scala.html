@@ -212,7 +212,7 @@
   </script>
 }
 
-@mainBody(title = Messages("maps.multiMap.title", city), moreScripts = scripts) {
+@mainBody(title = Messages("maps.multiMap.title"), moreScripts = scripts) {
 <link rel="stylesheet" href="@controllers.routes.Assets.at("stylesheets/simple-sidebar.css")" />
 <div id="wrapper">
   <div id="sidebar-wrapper">
@@ -227,7 +227,6 @@
   </div>
   <div id="page-content-wrapper">
     @headingSmall(Messages("general.applicationName"))
-        <h2 class="mapLocation-header">@{city}</h2>
           <a href="#menu-toggle" class="btn btn-default" id="menu-toggle">
             <span class="glyphicon glyphicon-map-marker" aria-hidden="true"></span>
             @Messages("maps.multiMap.nearbyLocationsToggle")

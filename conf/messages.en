@@ -30,7 +30,7 @@ locations.view.unknownLocation=Unknown location
 maps.displayAddress.title=Map: {0}, {1}
 
 # Multi-map
-maps.multiMap.title=Map: {0}
+maps.multiMap.title=Multi-map
 maps.multiMap.nearbyLocationsHeading=Nearby:
 maps.multiMap.nearbyLocationsToggle=Toggle nearby locations
 maps.multiMap.kmAway=km away
