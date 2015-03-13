@@ -92,6 +92,8 @@
      * Calculates distances between two coordinates.
      * 
      * Uses code from <http://www.movable-type.co.uk/scripts/latlong.html>
+     *
+     * @@return Distance between the two points in meters.
      */
     function calculateDistances(lat1, long1, lat2, long2) {
         var R = 6371; // km
@@ -107,6 +109,15 @@
         var d = R * c;
         
         return d;
+    }
+
+    /**
+     * Formats a distance in meters as one in kilometers, with rounding.
+     *
+     * @@return meters rounded to 2 decimal places, in kilometers.
+     */
+    function roundTo2DecimalPlaces(num) {
+      return Math.round(num * 100) / 100;
     }
 
     function populateNearbyList() {
@@ -137,7 +148,8 @@
             var sidebarHtml = closestLocations.map(function(location, index, array) {
               return "<li>" +
                   "<a href='" + jsRoutes.controllers.LocationController.showLocation(location.id).url +
-                      "'>" + location.name + "</a>" +
+                      "'>" + location.name + "<br />" + roundTo2DecimalPlaces(location.distanceFromUser) +
+                      " @Messages("maps.multiMap.kmAway")</a>" +
                   "</li>";
             });
 
@@ -164,7 +176,7 @@
       <h2 class="nearbyHeading">@Messages("maps.multiMap.nearbyLocationsHeading")</h2>
       <div id="nearbyList">
         <li>
-          <a href="#">Loading...</a>
+          <a href="#">@Messages("maps.multiMap.sidebarLoading")</a>
         </li>
       </div>
     </ul>
