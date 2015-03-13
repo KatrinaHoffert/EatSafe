@@ -15,6 +15,17 @@
 @scripts = {
   <script src="https://maps.googleapis.com/maps/api/js?v=3.exp&signed_in=true"></script>
   <script>
+    /**
+     * Maximum number of nearby locations listed.
+     */
+    var MAX_NEARBY = 8;
+
+    /**
+     * Miniumum accuracy of geo-positioning in order to have nearby locations, in meters. If the
+     * location system is too inaccurate, the nearby locations will be too inaccurate.
+     */
+    var MIN_ACCURACY_FOR_NEARBY = 2000;
+
     var locations = @Html(TypeConversions.locationsToMultiMapJson(locations).toString);
 
     function sizeMapCanvas() {
@@ -41,6 +52,7 @@
       });
       codeAddress();
     }
+    google.maps.event.addDomListener(window, 'load', initialize);
 
     // Retain center when resizing map. Otherwise the resizing will retain the top left corner and
     // we may end up hiding the marker from view, which is probably in the center of the window
@@ -48,9 +60,11 @@
     // helps ensure that resizing the map still looks at the same thing (assuming the thing is
     // in fact in the center).
     google.maps.event.addDomListener(window, "resize", function() {
-      var center = map.getCenter();
-      google.maps.event.trigger(map, "resize");
-      map.setCenter(center); 
+      if(map != null) {
+        var center = map.getCenter();
+        google.maps.event.trigger(map, "resize");
+        map.setCenter(center);
+      }
     });
 
     /**
@@ -69,9 +83,70 @@
       });
     }
 
-    google.maps.event.addDomListener(window, 'load', initialize);
+    /** Extend Number object with method to convert numeric degrees to radians */
+    if (typeof Number.prototype.toRadians == 'undefined') {
+      Number.prototype.toRadians = function() { return this * Math.PI / 180; };
+    }
 
-    // Menu toggle script for the show location sidebar
+    /**
+     * Calculates distances between two coordinates.
+     * 
+     * Uses code from <http://www.movable-type.co.uk/scripts/latlong.html>
+     */
+    function calculateDistances(lat1, long1, lat2, long2) {
+        var R = 6371; // km
+        var φ1 = lat1.toRadians();
+        var φ2 = lat2.toRadians();
+        var Δφ = (lat2-lat1).toRadians();
+        var Δλ = (long2-long1).toRadians();
+        
+        var a = Math.sin(Δφ/2) * Math.sin(Δφ/2) +
+                Math.cos(φ1) * Math.cos(φ2) *
+                Math.sin(Δλ/2) * Math.sin(Δλ/2);
+        var c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1-a));
+        var d = R * c;
+        
+        return d;
+    }
+
+    function populateNearbyList() {
+      if("geolocation" in navigator) {
+        navigator.geolocation.getCurrentPosition(function(position) {
+          if(position.coords.accuracy <= MIN_ACCURACY_FOR_NEARBY) {
+            var userLatitude = position.coords.latitude;
+            var userLongitude = position.coords.longitude;
+            console.log("User coords: " + userLatitude + ", " + userLongitude);
+
+            var locationsWithDistance = locations.map(function(location, index, array) {
+              location.distanceFromUser = calculateDistances(userLatitude, userLongitude,
+                  location.latitude, location.longitude);
+              return location;
+            });
+            var closestLocations = locationsWithDistance.sort(function(loc1, loc2) {
+              return loc1.distanceFromUser - loc2.distanceFromUser;
+            }).slice(0, MAX_NEARBY);
+
+            console.log("Distances of closest locations: " +
+                JSON.stringify(closestLocations.map(function(l){ return l.distanceFromUser; })));
+            console.log("Coordinates of them: " +
+                JSON.stringify(closestLocations.map(function(l){ return "(" + l.latitude +
+                ", " + l.longitude + ")"; })));
+
+            var sidebarHtml = closestLocations.map(function(location, index, array) {
+              return "<li>" +
+                  "<a href='" + jsRoutes.controllers.LocationController.showLocation(location.id).url +
+                      "'>" + location.name + "</a>" +
+                  "</li>";
+            });
+
+            $("#nearbyList").html(sidebarHtml.join("\n"));
+          }
+        });
+      } 
+    }
+    populateNearbyList();
+
+    // currentValue toggle script for the show location sidebar
     $("#menu-toggle").click(function(e) {
         e.preventDefault();
         $("#wrapper").toggleClass("toggled");
@@ -85,27 +160,29 @@
   <div id="sidebar-wrapper">
     <ul class="sidebar-nav">
       <h2 class="nearbyHeading">@Messages("maps.multiMap.nearbyLocationsHeading")</h2>
-      <li>
-        <a href="#">Location</a>
-      </li>
-      <li>
-        <a href="#">Location</a>
-      </li>
-      <li>
-        <a href="#">Location</a>
-      </li>
-      <li>
-        <a href="#">Location</a>
-      </li>
-      <li>
-        <a href="#">Location</a>
-      </li>
-      <li>
-        <a href="#">Location</a>
-      </li>
-      <li>
-        <a href="#">Location</a>
-      </li>
+      <div id="nearbyList">
+        <li>
+          <a href="#">Location</a>
+        </li>
+        <li>
+          <a href="#">Location</a>
+        </li>
+        <li>
+          <a href="#">Location</a>
+        </li>
+        <li>
+          <a href="#">Location</a>
+        </li>
+        <li>
+          <a href="#">Location</a>
+        </li>
+        <li>
+          <a href="#">Location</a>
+        </li>
+        <li>
+          <a href="#">Location</a>
+        </li>
+      </div>
     </ul>
   </div>
   <div id="page-content-wrapper">

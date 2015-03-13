@@ -292,6 +292,19 @@ body {
   margin-bottom: 0.25em;
 }
 
+/* The line height being set in the sidebar causes wrapping of long lines to
+   look weird. Use padding on the anchors to get a better effect. */
+.sidebar-nav li {
+  line-height: 1 !important;
+
+  a {
+    padding: 1em 1em;
+  }
+
+  /* Also, the text indent caused wrapped lines to indent differntly. */
+  text-indent: 0 !important;
+}
+
 /*******************************************************************************
  ****************************** MEDIA QUERIES **********************************
  ******************************************************************************/
