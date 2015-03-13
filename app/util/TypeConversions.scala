@@ -43,7 +43,6 @@ object TypeConversions {
    *   [
    *     {
    *       "name": "Tiny Tina's Badass Grill",
-   *       "address": "123 Fake St",
    *       "ratingColor": "#ff0000",
    *       "latitude": 52.1333,
    *       "longitude": -106.6833,
@@ -59,7 +58,6 @@ object TypeConversions {
     val jsObjects = locations.map { location =>
       Json.obj(
         "name" -> location.name,
-        "address" -> location.address.get,
         "ratingColor" -> location.rating.color,
         "latitude" -> location.latitude.get,
         "longitude" -> location.longitude.get,
