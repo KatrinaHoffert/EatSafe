@@ -38,9 +38,6 @@
      */
     var SIDEBAR_AUTOCLOSE_WIDTH = 950;
 
-    // Used to store user coordinates once found
-    var userCoordinates;
-
     var locations = @Html(TypeConversions.locationsToMultiMapJson(locations).toString);
 
     function sizeMapCanvas() {
@@ -140,6 +137,9 @@
       INNACCURATE : 2
     };
 
+    // Used to store user coordinates once found
+    var userCoordinates;
+
     /**
      * Gets the user's coordinates.
      *
@@ -148,21 +148,31 @@
      * user's coordinates.
      */
     function getUserCoordinates(successCallback, failureCallback) {
-      if("geolocation" in navigator) {
-        navigator.geolocation.getCurrentPosition(function(position) {
-          if(position.coords.accuracy <= MIN_ACCURACY) {
-            successCallback(position.coords.latitude, position.coords.longitude);
-          }
-          else {
-            failureCallback(CoordinateFailureReason.INNACCURATE);
-          }
-        },
-        function() {
-          failureCallback(CoordinateFailureReason.FAILED);
-        });
+      if(userCoordinates == null) {
+        if("geolocation" in navigator) {
+          navigator.geolocation.getCurrentPosition(function(position) {
+            if(position.coords.accuracy <= MIN_ACCURACY) {
+              userCoordinates = {
+                latitude: position.coords.latitude,
+                longitude: position.coords.longitude
+              };
+
+              successCallback(position.coords.latitude, position.coords.longitude);
+            }
+            else {
+              failureCallback(CoordinateFailureReason.INNACCURATE);
+            }
+          },
+          function() {
+            failureCallback(CoordinateFailureReason.FAILED);
+          });
+        }
+        else {
+          failureCallback(CoordinateFailureReason.UNSUPPORTED);
+        }
       }
       else {
-        failureCallback(CoordinateFailureReason.UNSUPPORTED);
+        successCallback(userCoordinates.latitude, userCoordinates.longitude);
       }
     }
 
@@ -182,7 +192,7 @@
         var closestLocations = locationsWithDistance.sort(function(loc1, loc2) {
           return loc1.distanceFromUser - loc2.distanceFromUser;
         }).slice(0, MAX_NEARBY);
-        
+
         var sidebarHtml = closestLocations.map(function(location, index, array) {
           // Rounded to 2 decimal places
           var roundedDistance = Math.round(location.distanceFromUser * 100) / 100;
