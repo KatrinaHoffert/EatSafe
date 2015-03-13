@@ -220,7 +220,7 @@
     populateNearbyList();
 
     // Toggles display of the sidebar
-    $("#menu-toggle").on("click", function(e) {
+    $("#menu-toggle, #sidebar-close").on("click", function(e) {
       e.preventDefault();
       $("#wrapper").toggleClass("toggled");
     });
@@ -288,7 +288,12 @@
   <div id="wrapper">
     <div id="sidebar-wrapper">
       <ul class="sidebar-nav">
-        <h2 class="nearbyHeading">@Messages("maps.multiMap.nearbyLocationsHeading")</h2>
+        <h2 class="nearbyHeading">
+          @Messages("maps.multiMap.nearbyLocationsHeading")
+          <button class="btn btn-default" id="sidebar-close">
+            <span class="glyphicon glyphicon-menu-left"></span>
+          </button>
+        </h2>
         <div id="nearbyList">
           <li>
             <a href="#">@Messages("maps.multiMap.sidebarLoading")</a>
