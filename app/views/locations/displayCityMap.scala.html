@@ -273,7 +273,7 @@
      * @@param toggle If true, toggles the sidebar (which will close it if it's open).
      */
     function goToCoords(lat, long, toggle) {
-      map.setCenter(new google.maps.LatLng(lat, long));
+      map.panTo(new google.maps.LatLng(lat, long));
       map.setZoom(DEFAULT_ZOOM);
 
       if(toggle && $(window).width() < SIDEBAR_AUTOCLOSE_WIDTH) {
