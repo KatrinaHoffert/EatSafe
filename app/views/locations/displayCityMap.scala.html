@@ -284,29 +284,28 @@
 }
 
 @mainBody(title = Messages("maps.multiMap.title"), moreScripts = scripts) {
-<link rel="stylesheet" href="@controllers.routes.Assets.at("stylesheets/simple-sidebar.css")" />
-<div id="wrapper">
-  <div id="sidebar-wrapper">
-    <ul class="sidebar-nav">
-      <h2 class="nearbyHeading">@Messages("maps.multiMap.nearbyLocationsHeading")</h2>
-      <div id="nearbyList">
-        <li>
-          <a href="#">@Messages("maps.multiMap.sidebarLoading")</a>
-        </li>
-      </div>
-    </ul>
+  <link rel="stylesheet" href="@controllers.routes.Assets.at("stylesheets/simple-sidebar.css")" />
+  <div id="wrapper">
+    <div id="sidebar-wrapper">
+      <ul class="sidebar-nav">
+        <h2 class="nearbyHeading">@Messages("maps.multiMap.nearbyLocationsHeading")</h2>
+        <div id="nearbyList">
+          <li>
+            <a href="#">@Messages("maps.multiMap.sidebarLoading")</a>
+          </li>
+        </div>
+      </ul>
+    </div>
+    <div id="page-content-wrapper">
+      @headingSmall(Messages("general.applicationName"))
+      <a href="#menu-toggle" class="btn btn-default" id="menu-toggle">
+        <span class="glyphicon glyphicon-map-marker" aria-hidden="true"></span>
+        @Messages("maps.multiMap.nearbyLocationsToggle")
+      </a>
+      <button class="btn btn-default" id="moveToMe">
+        @Messages("maps.multiMap.findMe")
+      </button>
+      <div id="map-canvas"></div>
+    </div>
   </div>
-  <div id="page-content-wrapper">
-    @headingSmall(Messages("general.applicationName"))
-    <a href="#menu-toggle" class="btn btn-default" id="menu-toggle">
-      <span class="glyphicon glyphicon-map-marker" aria-hidden="true"></span>
-      @Messages("maps.multiMap.nearbyLocationsToggle")
-    </a>
-    <button class="btn btn-default" id="moveToMe">
-      @Messages("maps.multiMap.findMe")
-    </button>
-    <div id="map-canvas"></div>
-  </div>
-</div>
-  
 }
