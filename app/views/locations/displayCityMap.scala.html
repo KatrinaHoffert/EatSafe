@@ -296,11 +296,14 @@
     }
 
     
+    
+
 
     /**
      *
      */
     function showMarkers(){
+          deleteMarkers();
           console.log('Map is now idle');
 
           console.log(map.getBounds().getNorthEast().k);
@@ -312,13 +315,54 @@
           var NELng = map.getBounds().getNorthEast().D;          
           var SWLat = map.getBounds().getSouthWest().k;
           var SWLng = map.getBounds().getSouthWest().D;
+          var testLat = 0.0;
+          var testLng = 0.0;
 
-          var testLat = 52.3380437;
-          var testLng = -106.588297;
+          for(var i = 0; i < locations.length; i += 1){
+            
+            testLat = parseFloat(locations[i].latitude);
+            testLng = parseFloat(locations[i].longitude);
 
-          if(testLat < NELat && testLat > SWLat && testLng < NELng && testLng > SWLng){
-              console.log("It's there!");
-          }else{ console.log("It's Not!");}
+            if(testLat < NELat && testLat > SWLat && testLng < NELng && testLng > SWLng){
+                
+                console.log('test');
+                console.log(locations[i].name);
+                console.log(testLat);
+                console.log(testLng);
+                console.log(locations[i].id);
+                
+                
+
+            }
+          }
+
+          setAllMap(map);
+    }
+
+    function addMarker(lat, lng ){
+
+      var marker = new google.maps.marker({
+
+                  position: {lat: (lat), lng: lng},
+                  map: map
+
+                });
+
+                markers.push(marker);
+    }
+
+
+    // Sets the map on all markers in the array.
+    function setAllMap(map) {
+      for (var i = 0; i < markers.length; i++) {
+        markers[i].setMap(map);
+      }
+    }
+
+
+    function deleteMarkers(){
+      setAllMap(null);
+      markers = [];
     }
 
 
