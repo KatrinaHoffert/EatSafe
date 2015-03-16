@@ -157,3 +157,14 @@ INSERT INTO violation(inspection_id, violation_id)
 INSERT INTO violation(inspection_id, violation_id)
  VALUES (20, 7);
 
+ --more test information
+ 
+ --a location with very little data, to check the null capabilites of the system
+ INSERT INTO location(id, name, rha)
+ VALUES (8, '???', 'Questionable Health Authority');
+ 
+ INSERT INTO coordinate (city, address, latitude, longitude)
+ VALUES ('Town A', 'My Place', 1.0, 1.0);
+ 
+  INSERT INTO coordinate (city, address, latitude, longitude)
+ VALUES ('South Park', 'South Park Ave', 26.696545, 2.988281)
