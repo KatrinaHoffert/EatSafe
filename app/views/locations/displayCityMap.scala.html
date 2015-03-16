@@ -311,6 +311,7 @@
           console.log(map.getBounds().getSouthWest().k);
           console.log(map.getBounds().getSouthWest().D);
 
+          //the latlong values for Northwest and South east respectively
           var NELat = map.getBounds().getNorthEast().k;
           var NELng = map.getBounds().getNorthEast().D;          
           var SWLat = map.getBounds().getSouthWest().k;
@@ -320,12 +321,14 @@
 
           for(var i = 0; i < locations.length; i += 1){
             
+
             testLat = parseFloat(locations[i].latitude);
             testLng = parseFloat(locations[i].longitude);
 
+            //gets rid of the '#'
             var cords = new google.maps.LatLng(testLat, testLng);
 
-
+            //This tests to see if the given location is located in the current view of the map
             if(testLat < NELat && testLat > SWLat && testLng < NELng && testLng > SWLng){
                 
                 console.log('test');
