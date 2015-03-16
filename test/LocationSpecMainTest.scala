@@ -47,6 +47,13 @@ class LocationSpecMainTest extends Specification with Mockito {
         location.name must beEqualTo("Hogwarts Dining Hall").ignoreSpace
         location.address.get must beEqualTo("Hogwarts Place").ignoreSpace
         location.postalCode.get must beEqualTo("S0G 2J0").ignoreSpace
+        
+        val locWithNulls = Location.getLocationById(8).get
+        locWithNulls.name must beEqualTo("???")
+        locWithNulls.address must beEqualTo(None)
+        locWithNulls.city must beEqualTo(None)
+        locWithNulls.postalCode must beEqualTo(None)
+        
       }
 
       "return a failure if there is a bad database" in new WithApplication {
