@@ -323,6 +323,9 @@
             testLat = parseFloat(locations[i].latitude);
             testLng = parseFloat(locations[i].longitude);
 
+            var cords = new google.maps.LatLng(testLat, testLng);
+
+
             if(testLat < NELat && testLat > SWLat && testLng < NELng && testLng > SWLng){
                 
                 console.log('test');
@@ -330,6 +333,15 @@
                 console.log(testLat);
                 console.log(testLng);
                 console.log(locations[i].id);
+
+                var marker = new google.maps.Marker({
+
+                  position: cords,
+                  map: map
+
+                });
+
+                markers.push(marker);
                 
                 
 
@@ -343,7 +355,7 @@
 
       var marker = new google.maps.marker({
 
-                  position: {lat: (lat), lng: lng},
+                  position: {lat: parseFloat(lat), lng: parseFloat(lng)},
                   map: map
 
                 });
