@@ -40,6 +40,11 @@
 
     var locations = @Html(TypeConversions.locationsToMultiMapJson(locations).toString);
 
+    /**
+     *  An aray that stores all of the markers currently displayed on the map.
+     */
+    var markers = [];
+
     function sizeMapCanvas() {
       // Set the map container size to fill the remaining space
       var canvas = $("#map-canvas");
@@ -63,8 +68,19 @@
         center: latlng
       });
       codeAddress();
+
+      google.maps.event.addListener(map, 'idle', function() {
+          console.log('Map is now idle');
+          console.log(map.getBounds().getNorthEast().D);
+          console.log(map.getBounds().getNorthEast().k);
+          console.log(map.getBounds().getSouthWest().D);
+          console.log(map.getBounds().getSouthWest().k);
+      });
     }
     google.maps.event.addDomListener(window, 'load', initialize);
+    
+
+
 
     // Retain center when resizing map. Otherwise the resizing will retain the top left corner and
     // we may end up hiding the marker from view, which is probably in the center of the window
@@ -78,6 +94,10 @@
         map.setCenter(center);
       }
     });
+
+
+
+    
 
     /**
      * Takes the address and city passed into this view and geocodes their location.
@@ -280,6 +300,18 @@
          $("#wrapper").toggleClass("toggled");
       }
     }
+
+    
+
+    /**
+     *
+     */
+    function showMarkers(){
+      var ne = rectangle.getBounds().getNorthEast();
+      var sw = rectangle.getBounds().getSouthWest();
+    }
+
+
   </script>
 }
 
