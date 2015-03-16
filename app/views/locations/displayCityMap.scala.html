@@ -69,13 +69,7 @@
       });
       codeAddress();
 
-      google.maps.event.addListener(map, 'idle', function() {
-          console.log('Map is now idle');
-          console.log(map.getBounds().getNorthEast().D);
-          console.log(map.getBounds().getNorthEast().k);
-          console.log(map.getBounds().getSouthWest().D);
-          console.log(map.getBounds().getSouthWest().k);
-      });
+      google.maps.event.addListener(map, 'idle', showMarkers);
     }
     google.maps.event.addDomListener(window, 'load', initialize);
     
@@ -307,8 +301,24 @@
      *
      */
     function showMarkers(){
-      var ne = rectangle.getBounds().getNorthEast();
-      var sw = rectangle.getBounds().getSouthWest();
+          console.log('Map is now idle');
+
+          console.log(map.getBounds().getNorthEast().k);
+          console.log(map.getBounds().getNorthEast().D);          
+          console.log(map.getBounds().getSouthWest().k);
+          console.log(map.getBounds().getSouthWest().D);
+
+          var NELat = map.getBounds().getNorthEast().k;
+          var NELng = map.getBounds().getNorthEast().D;          
+          var SWLat = map.getBounds().getSouthWest().k;
+          var SWLng = map.getBounds().getSouthWest().D;
+
+          var testLat = 52.3380437;
+          var testLng = -106.588297;
+
+          if(testLat < NELat && testLat > SWLat && testLng < NELng && testLng > SWLng){
+              console.log("It's there!");
+          }else{ console.log("It's Not!");}
     }
 
 
