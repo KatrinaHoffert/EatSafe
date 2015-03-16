@@ -26,7 +26,29 @@ class LocationSpecMainTest extends Specification with Mockito {
   this.getLocationByIdTests
   this.getLocationsByCityTests
   this.listCitiesTests
+  this.getAllLocationsWithCoordinatesTests
 
+  def getAllLocationsWithCoordinatesTests = {
+    "getAllLocationsWithCoordinates" should {
+      "get all locations that have coords" in new WithApplication {
+        val locsWithCorrds = Location.getAllLocationsWithCoordinates().get
+        locsWithCorrds.length must beEqualTo(3);
+        locsWithCorrds.foreach { x =>
+          if(x.address.get == "South Park Ave")
+          {
+            x.latitude.get must beEqualTo(26.696545)
+            x.longitude.get must beEqualTo(2.988281)
+          }
+          else
+          {
+            x.latitude.get must beEqualTo(1.0)
+            x.longitude.get must beEqualTo(1.0)
+          }
+        }
+        
+      }
+    }
+  }
   def getLocationByIdTests = {
     // Currently, this gets the default database source, in future, we can
     // easily add reference to a testing database in the play conf/application.conf
