@@ -300,7 +300,7 @@
 
 
     /**
-     *
+     *  
      */
     function showMarkers(){
           deleteMarkers();
@@ -333,10 +333,15 @@
                 console.log(testLat);
                 console.log(testLng);
                 console.log(locations[i].id);
+                console.log(locations[i].ratingColor);
+
+                
+                var color = locations[i].ratingColor.slice(1);
 
                 var marker = new google.maps.Marker({
 
-                  position: cords,
+                  position: cords,                  
+                  icon: "http://chart.apis.google.com/chart?chst=d_map_pin_letter&chld=•|" + color,
                   map: map
 
                 });
@@ -351,17 +356,6 @@
           setAllMap(map);
     }
 
-    function addMarker(lat, lng ){
-
-      var marker = new google.maps.marker({
-
-                  position: {lat: parseFloat(lat), lng: parseFloat(lng)},
-                  map: map
-
-                });
-
-                markers.push(marker);
-    }
 
 
     // Sets the map on all markers in the array.
