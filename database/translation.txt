@@ -1,0 +1,16 @@
+{
+  "locations" : [
+    {
+      "name": "11 Seven - Springfield",
+      "city": "Saskatoon",
+      "address": "123 Fake St",
+      "newName": "11 Seven"
+    },
+    {
+      "name": "Seven - Springfield",
+      "city": "Saskatoon",
+      "address": "123 Fake St",
+      "newName": "11 Seven"
+    }
+  ]
+}
