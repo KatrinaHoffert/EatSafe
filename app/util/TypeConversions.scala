@@ -4,6 +4,8 @@ import models._
 import scala.util.{Try, Success, Failure}
 import play.api.libs.json._
 import play.api.i18n.Messages
+import play.api._
+import play.api.mvc._
 
 /**
  * Contains methods for performing and simplifying type conversions.

@@ -7,16 +7,8 @@ import models._
 import models.Location
 import globals._
 import play.api.Logger
-import play.api.i18n.Lang
 
-object LocationController extends Controller {
-  implicit def getLangFromRequest(implicit request: RequestHeader): Lang = {
-    request.cookies.get("lang") match {
-      case Some(cookie) => Lang(cookie.value)
-      case None => Lang("en") // Default
-    }
-  }
-
+object LocationController extends DetectLangController {
   /**
    * Displays a means to select the city. This is the current index page.
    */
