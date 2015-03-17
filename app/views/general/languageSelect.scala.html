@@ -4,12 +4,12 @@
 @**
  * A language selection input. Allows the user to manually change languages.
  *@
-@()
+@(currentLanguageCode: String)(implicit lang: Lang)
 
 <img src="@routes.Assets.at("images/language_icon.png")" class="footerImage" />
 <select id="languageSelect">
   @for(language <- Language.getSupportedLanguages.getOrElse(Seq.empty[Language])) {
-    <option value="@language.code" @if(language.code == "en") { selected }>
+    <option value="@language.code" @if(language.code == currentLanguageCode) { selected }>
       @language.name
     </option>
   }
@@ -34,5 +34,6 @@
   $("#languageSelect").on("change", function() {
     var selectedLang = $("#languageSelect option:selected").val();
     console.log("Switching to language " + selectedLang);
+    window.location.assign(jsRoutes.controllers.Application.setLanguage(selectedLang).url);
   });
 </script>

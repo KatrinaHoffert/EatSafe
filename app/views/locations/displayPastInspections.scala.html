@@ -4,7 +4,7 @@
 @**
  * TODO: Document me!
  *@
-@(location: Location)
+@(location: Location)(implicit lang: Lang)
 
 @if(location.inspections.size > 1) {
   <h2>@Messages("locations.view.pastInspectionsHeader")</h2>

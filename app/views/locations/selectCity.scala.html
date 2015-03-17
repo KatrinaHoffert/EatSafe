@@ -9,7 +9,7 @@
  *
  * @param municipalities A list of all the municipalities the user may choose from.
  *@
-@(municipalities: Seq[String])
+@(municipalities: Seq[String])(implicit lang: Lang)
 
 @scripts = {
   <script src="http://maps.googleapis.com/maps/api/js?sensor=false"></script>

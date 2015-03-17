@@ -5,7 +5,7 @@
 @**
  * Displays a location with inspection data, ratings, etc.
  *@
-@(location: Location)
+@(location: Location)(implicit lang: Lang)
 
 @mainBody(title = Messages("locations.view.titleStart")+ ": "  + location.name +
     location.address.map(" [" + _ + "]").getOrElse(""), hasFooter = true) {

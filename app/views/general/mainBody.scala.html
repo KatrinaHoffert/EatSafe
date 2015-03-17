@@ -21,7 +21,7 @@
  * }
  * }}}
  *@
-@(title: String, moreScripts: Html = Html(""), hasFooter: Boolean = false)(html: Html)
+@(title: String, moreScripts: Html = Html(""), hasFooter: Boolean = false)(html: Html)(implicit lang: Lang)
 
 <!DOCTYPE html>
 <html lang="en-us">
@@ -39,7 +39,7 @@
     <script src="@controllers.routes.Assets.at("javascripts/jquery.min.js")"></script>
     <script src="@controllers.routes.Assets.at("javascripts/bootstrap.min.js")"></script>
     <script src="@controllers.routes.Assets.at("javascripts/jquery.typeahead.js")"></script>
-    <script src="@controllers.routes.Application.javascriptRoutes"></script>
+    <script src="@controllers.routes.JsRoutes.javascriptRoutes"></script>
 
     <link rel="stylesheet" href="@controllers.routes.Assets.at("stylesheets/bootstrap.min.css")" />
     <link rel="stylesheet" href="@controllers.routes.Assets.at("stylesheets/jquery.typeahead.css")" />
