@@ -1,0 +1,63 @@
+# General purpose messages that appear throughout the app
+general.applicationName=EatSafe Saskatchewan
+
+# Select city page
+locations.selectCity.title=Select a city
+locations.selectCity.prompt=What city/town are you in?
+locations.selectCity.noInput=You need to enter something.
+locations.selectCity.badInput=I''m sorry, Dave, that not valid input.
+locations.selectCity.locateMeTooltip=Fills in the input with your current location
+
+# Select location page
+locations.selectLocation.title=Select a location
+locations.selectLocation.prompt=Where do you want to eat?
+locations.selectLocation.noInput=You need to enter something.
+locations.selectLocation.badInput=I''m sorry, Dave, that not valid input.
+
+# Display locations page
+locations.view.titleStart=EatSafe
+locations.view.noViolations=No violations in this time period
+locations.view.pastInspectionsHeader=Older inspections
+locations.view.pastInspectionsShow=[Show]
+locations.view.pastInspectionsHide=[Hide]
+locations.view.noRecentInspections=This location has no recent inspections.
+locations.view.reinspectionPriority=Current re-inspection priority
+locations.view.previousInspectionType=Previous inspection type
+locations.view.rha=Regional health authority
+locations.view.unknownLocation=Unknown location
+
+# Display address page
+maps.displayAddress.title=Map: {0}, {1}
+
+# About page
+about.title=About EatSafe Saskatchewan
+about.headingWho=Who we are
+about.paragraphWho=We''re a group of computer science students at the University of Saskatchewan, working together as part of our CMPT 371 class (software management).
+about.creditsList=We are the Off By One group:
+about.headingWhat=What is EatSafe Saskatchewan?
+about.paragraphWhat1=EatSafe Saskatchewan was an idea pitched by Dr. Daniel Fuller. The provincial Ministry of Health maintains a <a href="http://orii.health.gov.sk.ca/">public site</a> that allows access to health inspection records of locations in the province.
+about.paragraphWhat2=However, the site is not mobile friendly and does not seem to have been designed with usability in mind. EatSafe Saskatchewan is our attempt to use the data from that site and display it in a friendlier manner, as well as add new features to navigate the data.
+about.headingHow=How do I use EatSafe Saskatchewan?
+about.paragraphHow1=EatSafe Saskatchewan is a way to find health and safety records of restaurants in the province. From the homepage, you need to first tell us what city or town you want to look in. This lets us prune the large set of locations to those that are relevant to you.
+about.paragraphHow2=Next, we provide an input from which you can type the name of the location you're looking for (eg, "Subway"). The site will suggest specific locations with addresses and similar names. You can select the location from there and submit that to view information about the location.
+about.paragraphHow3=You must pick from the suggestion drop down below the text input. Think of it like search results. If the location you''re looking for doesn't appear, then we don't have information on it.
+about.paragraphHow4=We intended to make EatSafe Saskatchewan as easy to use as possible, so if you find anything confusing, please contact us at {0} so that we can improve!
+about.headingTechnology=What was EatSafe Saskatchewan made with?
+about.paragraphTechnology=Below is a list of other people's works that were used in this application, along with the licenses of those works:
+about.customLicense=Custom license
+about.modifiedCC=Modified CC
+
+# Footer stuff
+footer.aboutLink=About
+footer.copyright=© Off By One 2015
+
+# Error pages
+errors.error500Title=Error 500
+errors.error500Desc=Internal server error
+errors.error500Text=That means it''s (probably) us, not you. Assuming that you haven''t been trying to break our software, you seem to have encountered a bug that couldn''t be handled or wasn''t expected. The stack trace below may help us solve the bug. Send it to {0}.
+errors.stackTraceHeading=Stack trace (for nerds)
+errors.emptyCityTitle=There's no locations in this city
+errors.emptyCityDesc=Uh oh...
+errors.emptyCityText=There''s no locations in "{0}". Perhaps you''ve mistyped a URL or there''s a bug in our software.
+errors.emptyCityTryAgain=Give the city selection another try?
+errors.unknownAddress=Unknown address
