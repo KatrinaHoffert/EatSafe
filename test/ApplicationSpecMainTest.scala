@@ -168,7 +168,7 @@ class ApplicationSpecMainTest extends Specification {
       assert(browser.webDriver.findElement(By.className("mapLocation-header")).isDisplayed)
     }
     
-    "display regional health authority when link is clicked" in new WithBrowser {
+    "display regional health authority link" in new WithBrowser {
       System.out.println("10");
       //Find a place in the Saskatoon Health Region
       browser.goTo("/find/Saskatoon")
@@ -179,10 +179,8 @@ class ApplicationSpecMainTest extends Specification {
       assert(browser.url must contain("/view/"))
       
       //Find the link to the health region web page
-      val action = new Actions(browser.getDriver)
-      action.moveToElement(browser.webDriver.findElement(By.partialLinkText("Health"))).perform
-      action.click.perform
-      assert(browser.url must contain("saskatoonhealthregion"))
+      val healthlink = browser.webDriver.findElement(By.id("rhaSiteLink"))
+      assert(healthlink.getAttribute("href") must contain("saskatoonhealth"))
     }
   }
   
