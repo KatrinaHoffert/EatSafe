@@ -6,7 +6,7 @@
  *@
 @(currentLanguageCode: String)(implicit lang: Lang)
 
-<img src="@routes.Assets.at("images/language_icon.png")" class="footerImage" />
+<img src="@routes.Assets.at("images/language_icon.png")" />
 <select id="languageSelect">
   @for(language <- Language.getSupportedLanguages.getOrElse(Seq.empty[Language])) {
     <option value="@language.code" @if(language.code == currentLanguageCode) { selected }>
