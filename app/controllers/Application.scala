@@ -3,7 +3,7 @@ package controllers
 import play.api._
 import play.api.mvc._
 
-object Application extends Controller {
+object Application extends DetectLangController {
   /**
    * Displays information about how freaking cool we are.
    */
