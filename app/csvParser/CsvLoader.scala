@@ -11,12 +11,22 @@ import java.io.FileInputStream
 import au.com.bytecode.opencsv.CSVReader
 import scala.collection.JavaConversions._
 import java.nio.charset.StandardCharsets
+import scala.io.Source
+import play.api.libs.json._
+import play.api.libs.json.JsResult
+import play.api.libs.json.JsPath
+import play.api.libs.json.Reads
+import play.api.libs.functional.syntax._
+
 
 /**
  * Loads and interprets a CSV file, creating SQL ouput that can be run in the Postgres console.
  * @param writer The writer to write the SQL output to.
  */
 class CsvLoader(writer: Writer) {
+  
+  var TRANSLATION_FILE_PATH = "database/translation.txt"
+  
   // Used in Postgres's COPY syntax to symbolize a NULL
   val SQL_NULL = """\N"""
 
@@ -42,6 +52,16 @@ class CsvLoader(writer: Writer) {
 
     val allLines = new CSVReader(new InputStreamReader(new FileInputStream(csvFile),
         StandardCharsets.UTF_16)).readAll.drop(1)
+        
+    val translate = Source.fromFile(TRANSLATION_FILE_PATH)
+    
+    val jsonResult: JsValue = Json.parse(translate.mkString)
+    
+    val replaceLocation: JsResult[ReplaceLocation] = (jsonResult \ "locations")(1).validate[ReplaceLocation]
+    
+    println(replaceLocation.get.name)
+    
+    
 
     // Read this into our representation (see documentation of InternalCsvFormat for the CSV format)
     // For some reason, this goddamn CSV is so bad that libraries think it has extra rows.
@@ -240,4 +260,22 @@ class CsvLoader(writer: Writer) {
       }
     }
   }
+  
+  /**
+   * Represent a coordinate, which contains a latitude and longitude
+   * @param lat The latitude of this coordinate
+   * @param long The longitude of this coordinate
+   */
+  case class ReplaceLocation(name: String, city: String, address: String, newName: String)
+
+  /**
+   * Read a coordinate object from JSON
+   */
+  implicit val replaceLocationReads: Reads[ReplaceLocation] = (
+    (JsPath \ "name").read[String] and
+    (JsPath \ "city").read[String] and
+    (JsPath \ "address").read[String] and
+    (JsPath \ "newName").read[String]
+  )(ReplaceLocation.apply _)
+  
 }
