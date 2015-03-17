@@ -6,9 +6,11 @@
 <div class="footer">
   <span class="floatLeft">
     <a href="@routes.Application.about">@Messages("footer.aboutLink")</a>
+    &nbsp;
+    @languageSelect()
   </span>
   <span class="floatRight">
-    @Messages("footer.copyright")
-    (<a href="http://creativecommons.org/licenses/by-nd/2.0/ca/">CC-BY-ND</a>)
+    <span class="hideLowRes">@Messages("footer.copyright")</span>
+    <span class="hideLowRes">(</span><a href="http://creativecommons.org/licenses/by-nd/2.0/ca/">CC-BY-ND</a><span class="hideLowRes">)</span>
   </span>
 </div>

@@ -270,6 +270,21 @@ body {
   cursor: pointer;
 }
 
+/* We want the language picker select to fit in with the footer. */
+#languageSelect {
+  background: none;
+  border: none;
+
+  option {
+    color: black;
+    background: white;
+  }
+}
+
+.footerImage {
+  width: 14px;
+}
+
 /*******************************************************************************
  ****************************** MEDIA QUERIES **********************************
  ******************************************************************************/
@@ -282,6 +297,10 @@ body {
 
   .typeahead-container input[type="search"] {
     padding: 10px 5px;
+  }
+
+  .hideLowRes {
+    display: none;
   }
 }
 
@@ -305,6 +324,10 @@ body {
   /* Bigger footer */
   .footer {
     font-size: 1.25em;
+  }
+
+  .footerImage {
+    width: 18px;
   }
 }
 
