@@ -4,7 +4,7 @@
 @import org.apache.commons.lang3.exception.ExceptionUtils
 @import play.api.Play.current
 
-@(exception: Throwable)
+@(exception: Throwable)(implicit lang: Lang)
 
 @mainBody(title = Messages("errors.error500Title"), hasFooter = true) {
   @headingSmall(Messages("general.applicationName"))

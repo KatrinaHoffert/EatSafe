@@ -12,26 +12,13 @@ object Application extends Controller {
   }
 
   /**
-   * Returns a JavaScript file that creates a routing object with up-to-date values from the routing
-   * file. This allows us to perform reverse routing client side.
-   *
-   * This script is already included in `views.html.general.mainBody`, so you can use it directly
-   * in your HTML.
-   *
-   * Usage:
-   *
-   * {{{
-   * // Eg, to reverse route the controllers.LocationController.showLocation function:
-   * jsRoutes.controllers.LocationController.showLocation(123).url // ==> "/view/123"
-   * }}}
+   * Sets the language cookie and then redirects back to the user's previous page. Defaults to the
+   * home page if the previous page cannot be determined.
    */
-  def javascriptRoutes = Action { implicit request =>
-    import routes.javascript._
-    Ok(
-      Routes.javascriptRouter("jsRoutes")(
-        LocationController.findLocation,
-        LocationController.showLocation
-      )
-    ).as("text/javascript")
+  def setLanguage(languageCode: String) = Action { request =>
+    val prevPage = request.headers.get("referer").getOrElse("/")
+    Redirect(prevPage).withCookies(
+      Cookie("lang", languageCode)
+    )
   }
 }

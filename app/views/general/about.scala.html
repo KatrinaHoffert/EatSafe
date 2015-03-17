@@ -7,7 +7,7 @@
  * As the name implies, it displays cool information describing how kickass the project is. Also how
  * to use it, in case they're dumb.
  *@
-@()
+@()(implicit lang: Lang)
 
 @mainBody(title = Messages("about.title"), hasFooter = true) {
   @headingSmall(Messages("general.applicationName"))

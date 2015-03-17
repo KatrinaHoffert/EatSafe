@@ -1,13 +1,13 @@
 @**
  * A traditional footer for most pages.
  *@
-@()
+@()(implicit lang: Lang)
 
 <div class="footer">
   <span class="floatLeft">
     <a href="@routes.Application.about">@Messages("footer.aboutLink")</a>
     &nbsp;
-    @languageSelect()
+    @languageSelect(lang.code)
   </span>
   <span class="floatRight">
     <span class="hideLowRes">@Messages("footer.copyright")</span>
