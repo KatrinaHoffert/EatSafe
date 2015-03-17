@@ -6,6 +6,7 @@ locations.selectCity.title=Elektu urbon
 locations.selectCity.prompt=Kie estas vi?
 locations.selectCity.noInput=Vi devas eniri io.
 locations.selectCity.badInput=Enigo estas nevalida.
+locations.selectCity.locateMeTooltip=Ĉi tiu aŭtomate kompletigus vian urbon.
 
 # Select location page
 locations.selectLocation.title=Elektu restoracio
@@ -23,9 +24,30 @@ locations.view.noRecentInspections=Tiu restoracio havas ne novaj inspektoj.
 locations.view.reinspectionPriority=Inspekton prioritato
 locations.view.previousInspectionType=Tipo de la lasta inspekto.
 locations.view.rha=Regiona sano aŭtoritato
+locations.view.unknownLocation=Nekonata restoracio
 
 # Display address page
 maps.displayAddress.title=Karto: {0}, {1}
+
+# About page
+about.title=Pri EatSafe Saskaĉevano
+about.headingWho=Who we are
+about.paragraphWho=We''re a group of computer science students at the University of Saskatchewan, working together as part of our CMPT 371 class (software management).
+about.creditsList=We are the Off By One group:
+about.headingWhat=What is EatSafe Saskatchewan?
+about.paragraphWhat1=EatSafe Saskatchewan was an idea pitched by Dr. Daniel Fuller. The provincial Ministry of Health maintains a <a href="http://orii.health.gov.sk.ca/">public site</a> that allows access to health inspection records of locations in the province.
+about.paragraphWhat2=However, the site is not mobile friendly and does not seem to have been designed with usability in mind. EatSafe Saskatchewan is our attempt to use the data from that site and display it in a friendlier manner, as well as add new features to navigate the data.
+about.headingHow=How do I use EatSafe Saskatchewan?
+about.paragraphHow1=EatSafe Saskatchewan is a way to find health and safety records of restaurants in the province. From the homepage, you need to first tell us what city or town you want to look in. This lets us prune the large set of locations to those that are relevant to you.
+about.paragraphHow2=Next, we provide an input from which you can type the name of the location you're looking for (eg, "Subway"). The site will suggest specific locations with addresses and similar names. You can select the location from there and submit that to view information about the location.
+about.paragraphHow3=You must pick from the suggestion drop down below the text input. Think of it like search results. If the location you''re looking for doesn't appear, then we don't have information on it.
+about.paragraphHow4=We intended to make EatSafe Saskatchewan as easy to use as possible, so if you find anything confusing, please contact us at {0} so that we can improve!
+about.headingTechnology=Teknologia kunmeto de EatSafe
+about.paragraphTechnology=La listo de teknologio ni estis uzisti en la EatSafe kodon:
+
+# Footer stuff
+footer.aboutLink=Informdosiero
+footer.copyright=Kopirajto de Off By One 2015
 
 # Error pages
 errors.error500Title=Eraro  500
@@ -36,3 +58,4 @@ errors.emptyCityTitle=Tiu urbo havas ne restoraciojn
 errors.emptyCityDesc=Aj!
 errors.emptyCityText="{0}" havas ne restoraciojn. Ĉu la URL korekta?
 errors.emptyCityTryAgain=Provu alian serĉon?
+errors.unknownAddress=Nekonata adreso
