@@ -43,7 +43,9 @@ about.paragraphHow2=Next, we provide an input from which you can type the name o
 about.paragraphHow3=You must pick from the suggestion drop down below the text input. Think of it like search results. If the location you''re looking for doesn't appear, then we don't have information on it.
 about.paragraphHow4=We intended to make EatSafe Saskatchewan as easy to use as possible, so if you find anything confusing, please contact us at {0} so that we can improve!
 about.headingTechnology=What was EatSafe Saskatchewan made with?
-about.paragraphTechnology=Below is a list of the technologies that we used to create this application:
+about.paragraphTechnology=Below is a list of other people's works that were used in this application, along with the licenses of those works:
+about.customLicense=Custom license
+about.modifiedCC=Modified CC
 
 # Footer stuff
 footer.aboutLink=About
