@@ -31,16 +31,6 @@ class IESpecBrowserTest extends Specification {
    
 
     
-    "display choose location page when location is typed in all caps" in new WithBrowser(new InternetExplorerDriver()) {
-      browser.goTo("/")
-      val typeahead = browser.getDriver.findElement(By.id("municipality"))
-      typeahead.click
-      typeahead.sendKeys("SASKATOON")
-      typeahead.sendKeys(Keys.ENTER)
-      //browser.wait()
-      Thread.sleep(1000)//poor IE
-      assert(browser.url must contain("/find/Saskatoon"))
-    }
     
    "give error message when trying submit without input" in new WithBrowser(new InternetExplorerDriver) {
       browser.goTo("/")
@@ -51,14 +41,28 @@ class IESpecBrowserTest extends Specification {
       assert(browser.$(".topViewError").getText must contain(Messages("locations.selectCity.noInput")))
     }
      
+    
     "give error page when trying to search for invalid place" in new WithBrowser(new InternetExplorerDriver) {
       browser.goTo("/")
       val typeahead = browser.getDriver.findElement(By.id("municipality"))
       typeahead.click
       typeahead.sendKeys("asdfghjkl")
       typeahead.sendKeys(Keys.ENTER)
-      Thread.sleep(100)
+      Thread.sleep(1000)
       assert(browser.pageSource must contain(Messages("errors.emptyCityDesc")))
+    }
+    
+    
+    
+    "display choose location page when location is typed in all caps" in new WithBrowser(new InternetExplorerDriver) {
+      browser.goTo("/")
+      val typeahead = browser.getDriver.findElement(By.id("municipality"))
+      typeahead.click
+      typeahead.sendKeys("SASKATOON")
+      typeahead.sendKeys(Keys.ENTER)
+      Thread.sleep(1000)//lol ie too slow
+      assert(browser.url must contain("/find/SASKATOON"))
+      browser.pageSource must contain(Messages("locations.selectLocation.title"))//got to the next page, not error page
     }
     
     "display choose location page when location is typed in all lowercase" in new WithBrowser(new InternetExplorerDriver) {
@@ -68,7 +72,8 @@ class IESpecBrowserTest extends Specification {
       typeahead.sendKeys("saskatoon")
       typeahead.sendKeys(Keys.ENTER)
       Thread.sleep(1000)
-      assert(browser.url must contain("/find/Saskatoon"))
+      assert(browser.url must contain("/find/saskatoon"))
+      browser.pageSource must contain(Messages("locations.selectLocation.title"))//got to the next page, not error page
     }
     
     "display choose location page when location is fully typed and submitted with enter" in new WithBrowser(new InternetExplorerDriver) {
@@ -88,7 +93,7 @@ class IESpecBrowserTest extends Specification {
       typeahead.sendKeys("Saskato")
       val action = new Actions(browser.getDriver)
       action.moveToElement(typeahead).perform
-      val element = browser.webDriver.findElement(By.linkText("Saskatoon"))
+      val element = browser.webDriver.findElement(By.className("typeahead-display"))
       action.moveToElement(element)
       action.click
       action.perform
@@ -162,7 +167,7 @@ class IESpecBrowserTest extends Specification {
       typeahead.sendKeys("Saskato")
       val action = new Actions(browser.getDriver)
       action.moveToElement(typeahead).perform
-      val element = browser.webDriver.findElement(By.linkText("Saskatoon"))
+      val element = browser.webDriver.findElement(By.className("typeahead-display"))
       action.moveToElement(element)
       action.click
       action.perform
@@ -234,4 +239,6 @@ class IESpecBrowserTest extends Specification {
       Thread.sleep(1000)
       assert(browser.url must contain("/find/Saskatoon"))
     }
+     
+    
 }
