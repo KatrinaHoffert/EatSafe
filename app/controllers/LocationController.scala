@@ -30,7 +30,7 @@ object LocationController extends DetectLangController {
   def findLocation(city: String) = Action { implicit request =>
     Location.getLocationsByCity(city.toLowerCase) match {
       case Success(cityLocations) if !cityLocations.isEmpty => 
-        Ok(views.html.locations.findLocation(cityLocations))
+        Ok(views.html.locations.findLocation(city, cityLocations))
       case Success(_) =>
         Logger.warn("User found empty city ('" + city + "')")
         NotFound(views.html.errors.emptyCityError(city))
