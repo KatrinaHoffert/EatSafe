@@ -1,6 +1,7 @@
 @import general._
 @import models._
 @import controllers._
+@import org.apache.commons.lang3.StringUtils
 
 @**
  * This page is intended to allow users to get to a specific location page via a typeahead
@@ -9,7 +10,7 @@
  *
  * locations: A list of all the locations in the municipality specified.
  *@
-@(locations: Seq[SlimLocation])(implicit lang: Lang)
+@(city: String, locations: Seq[SlimLocation])(implicit lang: Lang)
 
 @scripts = {
   <script>
@@ -61,6 +62,7 @@
 
   <div class="smallPadding">
     <h2>@Messages("locations.selectLocation.prompt")</h2>
+    <h4>@Messages("locations.selectLocation.searchingIn", if(city != "Unknown city") StringUtils.capitalize(city) else Messages("locations.selectLocation.unknownCity"))</h4>
     
     <form id="form-location">
       <div class="typeahead-container">

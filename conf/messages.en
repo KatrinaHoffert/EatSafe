@@ -13,6 +13,8 @@ locations.selectLocation.title=Select a location
 locations.selectLocation.prompt=Where do you want to eat?
 locations.selectLocation.noInput=You need to enter something.
 locations.selectLocation.badInput=I''m sorry, Dave, that not valid input.
+locations.selectLocation.searchingIn=Searching in: {0}
+locations.selectLocation.unknownCity=locations not in a town or city
 
 # Display locations page
 locations.view.titleStart=EatSafe
