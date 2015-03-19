@@ -144,10 +144,14 @@ object Location {
       DB.withConnection(db.name) { implicit connection =>
         val query = SQL(
           """
-            SELECT DISTINCT city
-            FROM location
-            WHERE city IS NOT NULL
-            ORDER BY city;
+            SELECT city
+              FROM (
+                SELECT count(city), city
+                FROM location
+                GROUP BY city
+                ORDER BY count DESC
+              ) AS citiesWithNumLocations
+              WHERE city IS NOT NULL;
           """
         )
         
