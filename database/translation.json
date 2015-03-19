@@ -22,5 +22,700 @@
     "replacement": {
       "name": "7 Eleven"
     }
+  },
+  {
+    "name": "Water Front Lodge",
+    "city": "#1 Johnson Street",
+    "address": "\\N",
+    "replacement": {
+      "city": "\\N"
+    }
+  },
+  {
+    "name": "Aurora Lodge",
+    "city": "#12 Baska Street",
+    "address": "\\N",
+    "replacement": {
+      "city": "\\N"
+    }
+  },
+  {
+    "name": "Aurora Lodge",
+    "city": "#37 Gray Street",
+    "address": "\\N",
+    "replacement": {
+      "city": "\\N"
+    }
+  },
+  {
+    "name": "Al's Place",
+    "city": "126B Dene Street",
+    "address": "\\N",
+    "replacement": {
+      "city": "\\N"
+    }
+  },
+  {
+    "name": "Al's Place",
+    "city": "126B Dene Street",
+    "address": "\\N",
+    "replacement": {
+      "city": "\\N"
+    }
+  },
+  {
+    "name": "Cowtown - Kitchen",
+    "city": "\\N",
+    "address": "Maple Creek",
+    "replacement": {
+      "address": "\\N",
+      "city": "Maple Creek"
+    }
+  },
+  {
+    "name": "Rabbit Hill Teahouse",
+    "city": "\\N",
+    "address": "Excelsior",
+    "replacement": {
+      "address": "\\N",
+      "city": "Excelsior"
+    }
+  },
+  {
+    "name": "Ranch Hall - Kitchen",
+    "city": "\\N",
+    "address": "Maple Creek",
+    "replacement": {
+      "address": "\\N",
+      "city": "Maple Creek"
+    }
+  },
+  {
+    "name": "Roadside #1 Scoop",
+    "city": "\\N",
+    "address": "Gull Lake",
+    "replacement": {
+      "address": "\\N",
+      "city": "Gull Lake"
+    }
+  },
+  {
+    "name": "The Smoke Shack",
+    "city": "\\N",
+    "address": "Excelsior",
+    "replacement": {
+      "address": "\\N",
+      "city": "Excelsior"
+    }
+  },
+  {
+    "name": "North Country B & B/catering",
+    "city": "\\N",
+    "address": "Hudson Bay",
+    "replacement": {
+      "address": "\\N",
+      "city": "Hudson Bay"
+    }
+  },
+  {
+    "name": "Ridgedale Curling Club",
+    "city": "\\N",
+    "address": "Connaught",
+    "replacement": {
+      "address": "\\N",
+      "city": "Connaught"
+    }
+  },
+  {
+    "name": "Atton's Lake Park Concession",
+    "city": "\\N",
+    "address": "Ne 33/44/20/w3 Atton's Lake Regional Park",
+    "replacement": {
+      "address": "\\N",
+      "city": "Cut Knife"
+    }
+  },
+  {
+    "name": "Atton's Lake Regional Park Golf Course Club House",
+    "city": "\\N",
+    "address": "Ne 33/44/20/w3 Atton's Lake Regional Park",
+    "replacement": {
+      "address": "\\N",
+      "city": "Cut Knife"
+    }
+  },
+  {
+    "name": "Beach Side Store",
+    "city": "\\N",
+    "address": "North Battleford",
+    "replacement": {
+      "address": "\\N",
+      "city": "North Battleford"
+    }
+  },
+  {
+    "name": "Dexter Community Hall",
+    "city": "\\N",
+    "address": "Mervin",
+    "replacement": {
+      "address": "\\N",
+      "city": "\\N"
+    }
+  },
+  {
+    "name": "Dutch Treat Mini Golf",
+    "city": "\\N",
+    "address": "Parcel A Nw 17/63/18/w3 Greig Lake Mlpp",
+    "replacement": {
+      "address": "\\N",
+      "city": "Meadow Lake"
+    }
+  },
+  {
+    "name": "Frenchman Butte Tea House",
+    "city": "\\N",
+    "address": "Parcel X Plan 92b02290 Frenchman Butte Sk",
+    "replacement": {
+      "address": "\\N",
+      "city": "Frenchman Butte"
+    }
+  },
+  {
+    "name": "Graham's Gas N Grill",
+    "city": "\\N",
+    "address": "Parcel A Plan 101589745 Rm Of Parkdale No 498",
+    "replacement": {
+      "address": "\\N",
+      "city": "Glaslyn"
+    }
+  },
+  {
+    "name": "Greig Lake Store",
+    "city": "\\N",
+    "address": "Meadow Lake",
+    "replacement": {
+      "address": "\\N",
+      "city": "Meadow Lake"
+    }
+  },
+  {
+    "name": "Hillsvale Kitchen",
+    "city": "\\N",
+    "address": "Hillsdale",
+    "replacement": {
+      "address": "\\N",
+      "city": "\\N"
+    }
+  },
+  {
+    "name": "Jackfish Lodge Golf & Conference Centre Kitchen",
+    "city": "\\N",
+    "address": "Nw 11-48-17-w3  Battlefords Provincial Park",
+    "replacement": {
+      "address": "\\N",
+      "city": "North Battleford"
+    }
+  },
+  {
+    "name": "Jc's Ice Cream & Concession",
+    "city": "\\N",
+    "address": "Ne1/4 29-63-25 W3 Sandy Beach Pierce Lake Mlpp",
+    "replacement": {
+      "address": "\\N",
+      "city": "\\N"
+    }
+  },
+  {
+    "name": "Jumbo Beach Dairy Bar",
+    "city": "\\N",
+    "address": "Lot 21 Blk 1 Plan 81b15838 Jumbo Beach  Rm 561",
+    "replacement": {
+      "address": "\\N",
+      "city": "\\N"
+    }
+  },
+  {
+    "name": "Lorie's Kountry Kitchen",
+    "city": "\\N",
+    "address": "Britannia",
+    "replacement": {
+      "address": "\\N",
+      "city": "\\N"
+    }
+  },
+  {
+    "name": "Ministikwan Lake Lodge Cafe",
+    "city": "\\N",
+    "address": "Parcel A, Plan 67b1016  Ministikwan Lake Rm 561",
+    "replacement": {
+      "address": "\\N",
+      "city": "\\N"
+    }
+  },
+  {
+    "name": "O'grady's Restaurant",
+    "city": "\\N",
+    "address": "Part Of Sw 1/4 / 33 / 43 / 16 / W3 North B'ford",
+    "replacement": {
+      "address": "\\N",
+      "city": "North Battleford"
+    }
+  },
+  {
+    "name": "Puttzin' Around",
+    "city": "\\N",
+    "address": "Wilton",
+    "replacement": {
+      "address": "\\N",
+      "city": "\\N"
+    }
+  },
+  {
+    "name": "Sandy Beach Lake Regional Park Clubhouse Kitchen",
+    "city": "\\N",
+    "address": "Ne 36 - 51 - 28 W3 Sandy Beach Lake Regional Park",
+    "replacement": {
+      "address": "\\N",
+      "city": "\\N"
+    }
+  },
+  {
+    "name": "Sask Hospital Cafeteria",
+    "city": "\\N",
+    "address": "Sw 1/4 / 33 / 43 / 16 / W3 Sask Hosp Grounds",
+    "replacement": {
+      "address": "\\N",
+      "city": "\\N"
+    }
+  },
+  {
+    "name": "Silver Lake Concession",
+    "city": "\\N",
+    "address": "Nw 14/49/23/w3 Silver Lake Regional Park",
+    "replacement": {
+      "address": "\\N",
+      "city": "\\N"
+    }
+  },
+  {
+    "name": "South Bay Convenience",
+    "city": "\\N",
+    "address": "Parcel A  Plan 80b11172 Rm Of Mervin No 499",
+    "replacement": {
+      "address": "\\N",
+      "city": "\\N"
+    }
+  },
+  {
+    "name": "Spudz",
+    "city": "\\N",
+    "address": "Mobile Concession 4215-70th Ave Lloydminster Ab",
+    "replacement": {
+      "address": "Mobile Concession 4215-70th Ave",
+      "city": "Lloydminster"
+    }
+  },
+  {
+    "name": "The Lakehouse Cafe",
+    "city": "\\N",
+    "address": "Lot 12  Block 1 Plan Bq4721jumbo Beach Rm 561",
+    "replacement": {
+      "address": "\\N",
+      "city": "\\N"
+    }
+  },
+  {
+    "name": "The Scoop Concession",
+    "city": "\\N",
+    "address": "Portion Of Nw32/62/19/w3 Kimball Lake Mlpp",
+    "replacement": {
+      "address": "\\N",
+      "city": "\\N"
+    }
+  },
+  {
+    "name": "Turtle Grove Resort",
+    "city": "\\N",
+    "address": "Mervin",
+    "replacement": {
+      "address": "\\N",
+      "city": "\\N"
+    }
+  },
+  {
+    "name": "Vawn Hotel & Steak House",
+    "city": "\\N",
+    "address": "Turtle River",
+    "replacement": {
+      "address": "\\N",
+      "city": "Vawn"
+    }
+  },
+  {
+    "name": "Waters Edge Eco Lodge Kitchen",
+    "city": "\\N",
+    "address": "Meadow Lake",
+    "replacement": {
+      "address": "\\N",
+      "city": "Meadow Lake"
+    }
+  },
+  {
+    "name": "Amanda's Hot Spot",
+    "city": "\\N",
+    "address": "Miniwaka Beach - Candle Lake",
+    "replacement": {
+      "address": "\\N",
+      "city": "Candle Lake"
+    }
+  },
+  {
+    "name": "Candle Lake Curling Rink",
+    "city": "\\N",
+    "address": "#14, Hwy 265, Candle Lake",
+    "replacement": {
+      "address": "\\N",
+      "city": "Candle Lake"
+    }
+  },
+  {
+    "name": "Green Leaf Hutterite Colony",
+    "city": "\\N",
+    "address": "Leask",
+    "replacement": {
+      "address": "\\N",
+      "city": "Leask"
+    }
+  },
+  {
+    "name": "Memorial Lake Golf Course",
+    "city": "\\N",
+    "address": "Spiritwood",
+    "replacement": {
+      "address": "\\N",
+      "city": "Spiritwood"
+    }
+  },
+  {
+    "name": "Putter's Lounge & Food Service",
+    "city": "\\N",
+    "address": "Hwy 263 Christopher Lake",
+    "replacement": {
+      "address": "\\N",
+      "city": "\\N"
+    }
+  },
+  {
+    "name": "Redberry Lake Regional Park",
+    "city": "\\N",
+    "address": "R.m. Of Redberry",
+    "replacement": {
+      "address": "\\N",
+      "city": "\\N"
+    }
+  },
+  {
+    "name": "River Acres Restaurant",
+    "city": "\\N",
+    "address": "Chitek Lake",
+    "replacement": {
+      "address": "\\N",
+      "city": "\\N"
+    }
+  },
+  {
+    "name": "River Lot Orchards Bistro",
+    "city": "\\N",
+    "address": "R L 13 45 - 27 W2m Rm 431",
+    "replacement": {
+      "address": "\\N",
+      "city": "\\N"
+    }
+  },
+  {
+    "name": "River Lot Orchards Kitchen & Winery",
+    "city": "\\N",
+    "address": "R L 13 45 - 27 W2m Rm 431",
+    "replacement": {
+      "address": "\\N",
+      "city": "\\N"
+    }
+  },
+  {
+    "name": "Ron's Catering",
+    "city": "\\N",
+    "address": "Big River",
+    "replacement": {
+      "address": "\\N",
+      "city": "Big River"
+    }
+  },
+  {
+    "name": "Spruce River Market Foodservice",
+    "city": "\\N",
+    "address": "Buckland",
+    "replacement": {
+      "address": "\\N",
+      "city": "\\N"
+    }
+  },
+  {
+    "name": "The Golden Boys Chip Wagon",
+    "city": "\\N",
+    "address": "Spiritwood",
+    "replacement": {
+      "address": "\\N",
+      "city": "Spiritwood"
+    }
+  },
+  {
+    "name": "Triple S Concession",
+    "city": "\\N",
+    "address": "R.m. Of Round Hill #467",
+    "replacement": {
+      "address": "\\N",
+      "city": "\\N"
+    }
+  },
+  {
+    "name": "Williams Catering",
+    "city": "\\N",
+    "address": "Rm Of Big River",
+    "replacement": {
+      "address": "\\N",
+      "city": "\\N"
+    }
+  },
+  {
+    "name": "Arm River Hutterian Brethren Kitchen",
+    "city": "\\N",
+    "address": "Lumsden",
+    "replacement": {
+      "address": "\\N",
+      "city": "Lumsden"
+    }
+  },
+  {
+    "name": "Berry Good Farms Ltd.",
+    "city": "\\N",
+    "address": "Moosomin",
+    "replacement": {
+      "address": "\\N",
+      "city": "Moosomin"
+    }
+  },
+  {
+    "name": "K & S Accommodations Kitchen",
+    "city": "\\N",
+    "address": "Dufferin",
+    "replacement": {
+      "address": "\\N",
+      "city": "\\N"
+    }
+  },
+  {
+    "name": "Katepwa Rv & Family Nine Clubhouse",
+    "city": "\\N",
+    "address": "Abernethy",
+    "replacement": {
+      "address": "\\N",
+      "city": "Abernethy"
+    }
+  },
+  {
+    "name": "Over The Hill Orchards",
+    "city": "\\N",
+    "address": "Lumsden",
+    "replacement": {
+      "address": "\\N",
+      "city": "Lumsden"
+    }
+  },
+  {
+    "name": "Pumpkin Hollow Cafe",
+    "city": "\\N",
+    "address": "Lumsden",
+    "replacement": {
+      "address": "\\N",
+      "city": "Lumsden"
+    }
+  },
+  {
+    "name": "Pumpkin Hollow Concession",
+    "city": "\\N",
+    "address": "Lumsden",
+    "replacement": {
+      "address": "\\N",
+      "city": "Lumsden"
+    }
+  },
+  {
+    "name": "Reinhart Enterprises Hot Dog Cart ( Mobile)",
+    "city": "\\N",
+    "address": "South Qu'appelle",
+    "replacement": {
+      "address": "\\N",
+      "city": "\\N"
+    }
+  },
+  {
+    "name": "Russell Hill Artisan Foods",
+    "city": "\\N",
+    "address": "Lumsden",
+    "replacement": {
+      "address": "\\N",
+      "city": "Lumsden"
+    }
+  },
+  {
+    "name": "The Roc Church International",
+    "city": "\\N",
+    "address": "Sherwood",
+    "replacement": {
+      "address": "\\N",
+      "city": "\\N"
+    }
+  },
+  {
+    "name": "Triple R Concession (mobile)",
+    "city": "\\N",
+    "address": "Carry The Kettle First Nations",
+    "replacement": {
+      "address": "\\N",
+      "city": "\\N"
+    }
+  },
+  {
+    "name": "50's Blacktop Olive Tree Restaurant",
+    "city": "\\N",
+    "address": "Laird",
+    "replacement": {
+      "address": "\\N",
+      "city": "\\N"
+    }
+  },
+  {
+    "name": "Auto Clearing Motor Speedway",
+    "city": "\\N",
+    "address": "Corman Park",
+    "replacement": {
+      "address": "\\N",
+      "city": "\\N"
+    }
+  },
+  {
+    "name": "Champetre County Wild West Resort",
+    "city": "\\N",
+    "address": "Grant",
+    "replacement": {
+      "address": "\\N",
+      "city": "\\N"
+    }
+  },
+  {
+    "name": "Leaning Maple Meats - Catering",
+    "city": "\\N",
+    "address": "Mckillop",
+    "replacement": {
+      "address": "\\N",
+      "city": "\\N"
+    }
+  },
+  {
+    "name": "Ok Corral Pavilion Kitchen",
+    "city": "\\N",
+    "address": "Corman Park",
+    "replacement": {
+      "address": "\\N",
+      "city": "\\N"
+    }
+  },
+  {
+    "name": "Riverbend Ice Cream Parlour",
+    "city": "\\N",
+    "address": "Laird",
+    "replacement": {
+      "address": "\\N",
+      "city": "\\N"
+    }
+  },
+  {
+    "name": "Salvation Army Beaver Creek Bible Camp",
+    "city": "\\N",
+    "address": "Rm 344 Se 6-35-5 W3m",
+    "replacement": {
+      "address": "\\N",
+      "city": "\\N"
+    }
+  },
+  {
+    "name": "Solar Gardens Firestick Cafe",
+    "city": "\\N",
+    "address": "Rm 345 Sw 32-34-6 W3m",
+    "replacement": {
+      "address": "\\N",
+      "city": "\\N"
+    }
+  },
+  {
+    "name": "The Red Bull",
+    "city": "\\N",
+    "address": "Hwy 16",
+    "replacement": {
+      "address": "\\N",
+      "city": "\\N"
+    }
+  },
+  {
+    "name": "Twenty Four Seven Food Counter",
+    "city": "\\N",
+    "address": "Big Quill",
+    "replacement": {
+      "address": "\\N",
+      "city": "\\N"
+    }
+  },
+  {
+    "name": "Hidden Valley Golf Pro Shop Concession",
+    "city": "\\N",
+    "address": "Estevan",
+    "replacement": {
+      "address": "\\N",
+      "city": "Estevan"
+    }
+  },
+  {
+    "name": "A Little Taste Of Heaven Catering Inc",
+    "city": "\\N",
+    "address": "Benson",
+    "replacement": {
+      "address": "\\N",
+      "city": "Benson"
+    }
+  },
+  {
+    "name": "Ness Creek Backstage Kitchen",
+    "city": "Saskatoon",
+    "address": "C/o 718 - 10th Street East",
+    "replacement": {
+      "address": "718 10th Street East"
+    }
+  },
+  {
+    "name": "Third & Main Ness Creek Concession",
+    "city": "Saskatoon",
+    "address": "C/o 718 - 10th Street East",
+    "replacement": {
+      "address": "718 10th Street East"
+    }
+  },
+  {
+    "name": "Turtle Lake Mission Church",
+    "city": "\\N",
+    "address": "Parcel A Plan 101685034 Rm Of Mervin No 499",
+    "replacement": {
+      "address": "\\N",
+      "city": "\\N"
+    }
   }
 ]
