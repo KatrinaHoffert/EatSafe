@@ -7,6 +7,7 @@ locations.selectCity.prompt=What city/town are you in?
 locations.selectCity.noInput=You need to enter something.
 locations.selectCity.badInput=I''m sorry, Dave, that not valid input.
 locations.selectCity.locateMeTooltip=Fills in the input with your current location
+locations.selectCity.searchUnknownCity=Or search locations not in a city/town.
 
 # Select location page
 locations.selectLocation.title=Select a location
