@@ -51,17 +51,7 @@ class CsvLoader(writer: Writer) {
     var inspectionId = inspectionIdIn
 
     val allLines = new CSVReader(new InputStreamReader(new FileInputStream(csvFile),
-        StandardCharsets.UTF_16)).readAll.drop(1)
-        
-    val translate = Source.fromFile(TRANSLATION_FILE_PATH)
-    
-    val jsonResult: JsValue = Json.parse(translate.mkString)
-    
-    val replaceLocation: JsResult[ReplaceLocation] = (jsonResult \ "locations")(1).validate[ReplaceLocation]
-    
-    println(replaceLocation.get.name)
-    
-    
+        StandardCharsets.UTF_16)).readAll.drop(1)  
 
     // Read this into our representation (see documentation of InternalCsvFormat for the CSV format)
     // For some reason, this goddamn CSV is so bad that libraries think it has extra rows.
@@ -76,6 +66,9 @@ class CsvLoader(writer: Writer) {
     var locationPostalcode = allRows(0).postalCode
     var locationCity = allRows(0).city
     var locationRha = getNullable(allRows(0).locationRha)
+    
+    //check if there is a new name for this location
+    locationName = findReplacement(locationName, locationAddress, locationCity)
 
     tabDelimitedLocations.append(locationId)
     tabDelimitedLocations.append("\t")
@@ -175,6 +168,38 @@ class CsvLoader(writer: Writer) {
     val date = new SimpleDateFormat("EEEE, MMMM dd, yyyy").parse(input)
     new SimpleDateFormat("yyy-MM-dd").format(date)
   }
+  
+  
+  /**
+   * Find if there is a new name for this location in the file
+   * If find a match with name, address and city, return the new name, 
+   * so that the correct name will be stored in database
+   * @param name The old name of the location
+   * @param city The city of the location
+   * @param address The address of the location
+   * @return The new name of this location
+   */
+  def findReplacement(name: String, address: String, city: String): String = {
+    //read the translation file 
+    val translate = Source.fromFile(TRANSLATION_FILE_PATH)
+    
+    //convert the source to Json
+    val jsonResult: JsValue = Json.parse(translate.mkString)
+    
+    val replaceLocations: JsResult[Seq[ReplaceLocation]] = (jsonResult \ "locations").validate[Seq[ReplaceLocation]]
+    
+    var newName = name
+    
+    replaceLocations.get.map { 
+      replaceLocation => 
+        if(name == replaceLocation.name
+            && address == replaceLocation.address
+            && city == replaceLocation.city){
+          newName = replaceLocation.newName
+        }
+       }
+    newName
+  }
 
   /**
    * A more readable, internal representation of the CSV file, with unused fields removed. The columns
@@ -262,14 +287,16 @@ class CsvLoader(writer: Writer) {
   }
   
   /**
-   * Represent a coordinate, which contains a latitude and longitude
-   * @param lat The latitude of this coordinate
-   * @param long The longitude of this coordinate
+   * Represent a location that name need to be replaced; use name plus city plus address to guarantee unique match
+   * @param name The old name of the location
+   * @param city The city of the location
+   * @param address The address of the location
+   * @param newName The replace name for this location
    */
   case class ReplaceLocation(name: String, city: String, address: String, newName: String)
 
   /**
-   * Read a coordinate object from JSON
+   * Read a replaceLocation object from JSON
    */
   implicit val replaceLocationReads: Reads[ReplaceLocation] = (
     (JsPath \ "name").read[String] and

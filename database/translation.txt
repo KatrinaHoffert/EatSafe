@@ -1,16 +1,22 @@
 {
   "locations" : [
     {
-      "name": "11 Seven - Springfield",
+      "name": "7 Eleven - 2nd Ave. North",
       "city": "Saskatoon",
-      "address": "123 Fake St",
-      "newName": "11 Seven"
+      "address": "380 2nd Ave N",
+      "newName": "7 Eleven"
     },
     {
-      "name": "Seven - Springfield",
+      "name": "7 - Eleven Central",
       "city": "Saskatoon",
-      "address": "123 Fake St",
-      "newName": "11 Seven"
+      "address": "1100 A Central Ave",
+      "newName": "7 Eleven"
+    },
+    {
+      "name": "7 Eleven - Idylwyld",
+      "city": "Saskatoon",
+      "address": "1435 Idylwyld Dr N",
+      "newName": "7 Eleven"
     }
   ]
 }
