@@ -52,7 +52,8 @@ class FirefoxSpecBrowserTest extends Specification {
       typeahead.click
       typeahead.sendKeys("SASKATOON")
       typeahead.sendKeys(Keys.ENTER)
-      assert(browser.url must contain("/find/Saskatoon"))
+      assert(browser.url must contain("/find/SASKATOON"))
+      browser.pageSource must contain(Messages("locations.selectLocation.title"))//got to the next page, not error page
     }
     
     "display choose location page when location is typed in all lowercase" in new WithBrowser(new FirefoxDriver) {
@@ -61,7 +62,8 @@ class FirefoxSpecBrowserTest extends Specification {
       typeahead.click
       typeahead.sendKeys("saskatoon")
       typeahead.sendKeys(Keys.ENTER)
-      assert(browser.url must contain("/find/Saskatoon"))
+     assert(browser.url must contain("/find/saskatoon"))
+      browser.pageSource must contain(Messages("locations.selectLocation.title"))//got to the next page, not error page
     }
     
     "display choose location page when location is fully typed and submitted with enter" in new WithBrowser(new FirefoxDriver) {
@@ -80,7 +82,7 @@ class FirefoxSpecBrowserTest extends Specification {
       typeahead.sendKeys("Saskato")
       val action = new Actions(browser.getDriver)
       action.moveToElement(typeahead).perform
-      val element = browser.webDriver.findElement(By.linkText("Saskatoon"))
+      val element = browser.webDriver.findElement(By.className("typeahead-display"))
       action.moveToElement(element)
       action.click
       action.perform
@@ -148,7 +150,7 @@ class FirefoxSpecBrowserTest extends Specification {
       typeahead.sendKeys("Saskato")
       val action = new Actions(browser.getDriver)
       action.moveToElement(typeahead).perform
-      val element = browser.webDriver.findElement(By.linkText("Saskatoon"))
+      val element = browser.webDriver.findElement(By.className("typeahead-display"))
       action.moveToElement(element)
       action.click
       action.perform
