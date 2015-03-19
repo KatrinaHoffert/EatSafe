@@ -1,0 +1,26 @@
+[
+  {
+    "name": "7 Eleven - 2nd Ave. North",
+    "city": "Saskatoon",
+    "address": "380 2nd Ave N",
+    "replacement": {
+      "name": "7 Eleven"
+    }
+  },
+  {
+    "name": "7 - Eleven Central",
+    "city": "Saskatoon",
+    "address": "1100 A Central Ave",
+    "replacement": {
+      "name": "7 Eleven"
+    }
+  },
+  {
+    "name": "7 Eleven - Idylwyld",
+    "city": "Saskatoon",
+    "address": "1435 Idylwyld Dr N",
+    "replacement": {
+      "name": "7 Eleven"
+    }
+  }
+]

@@ -13,19 +13,15 @@ import scala.collection.JavaConversions._
 import java.nio.charset.StandardCharsets
 import scala.io.Source
 import play.api.libs.json._
-import play.api.libs.json.JsResult
-import play.api.libs.json.JsPath
-import play.api.libs.json.Reads
 import play.api.libs.functional.syntax._
-
+import scala.util.control.Breaks._
 
 /**
  * Loads and interprets a CSV file, creating SQL ouput that can be run in the Postgres console.
  * @param writer The writer to write the SQL output to.
  */
 class CsvLoader(writer: Writer) {
-  
-  var TRANSLATION_FILE_PATH = "database/translation.txt"
+  val translator = new Translator("database/translation.json")
   
   // Used in Postgres's COPY syntax to symbolize a NULL
   val SQL_NULL = """\N"""
@@ -67,8 +63,12 @@ class CsvLoader(writer: Writer) {
     var locationCity = allRows(0).city
     var locationRha = getNullable(allRows(0).locationRha)
     
-    //check if there is a new name for this location
-    locationName = findReplacement(locationName, locationAddress, locationCity)
+    // Find possible translations
+    val replacements = translator.findReplacement(locationName, locationAddress, locationCity)
+      .getOrElse(translator.identityReplacement)
+    if(replacements.name.isDefined) locationName = replacements.name.get
+    if(replacements.address.isDefined) locationAddress = replacements.address.get
+    if(replacements.city.isDefined) locationCity = replacements.city.get
 
     tabDelimitedLocations.append(locationId)
     tabDelimitedLocations.append("\t")
@@ -168,38 +168,6 @@ class CsvLoader(writer: Writer) {
     val date = new SimpleDateFormat("EEEE, MMMM dd, yyyy").parse(input)
     new SimpleDateFormat("yyy-MM-dd").format(date)
   }
-  
-  
-  /**
-   * Find if there is a new name for this location in the file
-   * If find a match with name, address and city, return the new name, 
-   * so that the correct name will be stored in database
-   * @param name The old name of the location
-   * @param city The city of the location
-   * @param address The address of the location
-   * @return The new name of this location
-   */
-  def findReplacement(name: String, address: String, city: String): String = {
-    //read the translation file 
-    val translate = Source.fromFile(TRANSLATION_FILE_PATH)
-    
-    //convert the source to Json
-    val jsonResult: JsValue = Json.parse(translate.mkString)
-    
-    val replaceLocations: JsResult[Seq[ReplaceLocation]] = (jsonResult \ "locations").validate[Seq[ReplaceLocation]]
-    
-    var newName = name
-    
-    replaceLocations.get.map { 
-      replaceLocation => 
-        if(name == replaceLocation.name
-            && address == replaceLocation.address
-            && city == replaceLocation.city){
-          newName = replaceLocation.newName
-        }
-       }
-    newName
-  }
 
   /**
    * A more readable, internal representation of the CSV file, with unused fields removed. The columns
@@ -285,24 +253,4 @@ class CsvLoader(writer: Writer) {
       }
     }
   }
-  
-  /**
-   * Represent a location that name need to be replaced; use name plus city plus address to guarantee unique match
-   * @param name The old name of the location
-   * @param city The city of the location
-   * @param address The address of the location
-   * @param newName The replace name for this location
-   */
-  case class ReplaceLocation(name: String, city: String, address: String, newName: String)
-
-  /**
-   * Read a replaceLocation object from JSON
-   */
-  implicit val replaceLocationReads: Reads[ReplaceLocation] = (
-    (JsPath \ "name").read[String] and
-    (JsPath \ "city").read[String] and
-    (JsPath \ "address").read[String] and
-    (JsPath \ "newName").read[String]
-  )(ReplaceLocation.apply _)
-  
 }
