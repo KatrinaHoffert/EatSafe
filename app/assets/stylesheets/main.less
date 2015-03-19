@@ -2,6 +2,11 @@
  * This is the custom CSS for our application.
  */
 
+@bannerTextColor: white;
+@backgroundColor: white;
+@desktopBackgroundColor: silver;
+@bannerBackgroundColor: #479432;
+
 /*******************************************************************************
  ****************************** GENERAL PURPOSE ********************************
  ******************************************************************************/
@@ -73,14 +78,14 @@ body {
 }
 
 .footer {
-  background-color: #479432;
-  color: white;
+  background-color: @bannerBackgroundColor;
+  color: @bannerTextColor;
   height: 2em;
   padding: 0.2em 0.5em;
   flex-shrink: 0;
 
   a {
-    color: white;
+    color: @bannerTextColor;
     text-decoration: underline;
   }
   a:hover {
@@ -92,19 +97,19 @@ body {
   flex-shrink: 0;
 
   a {
-    color: white;
+    color: @bannerTextColor;
     text-decoration: none;
   }
 }
 
 /* The heading for the main page, where it takes up a larger portion of the screen. */
 .largeHeading {
-  background-color: #479432;
+  background-color: @bannerBackgroundColor;
   height: 30vh;
   display: flex;
   min-height: 2em;
   font-size: 2em;
-  color: white;
+  color: @bannerTextColor;
 }
 
 /* Need to position the text inside the heading */
@@ -117,7 +122,7 @@ body {
    desktop viewers (who would otherwise see a gray background from the body). */
 .mapLocation-header {
   text-align: center;
-  background-color: white;
+  background-color: @backgroundColor;
   margin: 0;
   padding-top: 0.5em;
   padding-bottom: 0.5em;
@@ -125,10 +130,10 @@ body {
 
 /* Smaller headings for other pages */
 .smallHeading {
-  background-color: #479432;
+  background-color: @bannerBackgroundColor;
   font-size: 2em;
   padding: 0 0.25em;
-  color: white;
+  color: @bannerTextColor;
 }
 
 /* Remove the over-done boreder around typeaheads. */
@@ -140,6 +145,9 @@ body {
 /* Fix case of typeaheads. */
 .typeahead-list, .typeahead-query input {
   text-transform: capitalize;
+
+  /* And some browsers have different defaults for input background color. */
+  background-color: white;
 }
 
 /* Fix weird positioning bug where the typeahead prompt has a gap between it
@@ -308,13 +316,13 @@ body {
   /* Center everything in a block extending to the bottom */
   .smallPadding {
     max-width: 700px;
-    background-color: white;
+    background-color: @backgroundColor;
     padding: 1em;
     margin: 0 auto;
   }
 
   body {
-    background-color: silver;
+    background-color: @desktopBackgroundColor;
   }
 
   /* Bigger footer */
