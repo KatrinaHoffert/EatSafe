@@ -3320,9 +3320,9 @@ COPY location (id, name, address, postcode, city, rha) FROM STDIN;
 3300	33rd Street Cafe	1624 33rd St W	S7L 0X3	Saskatoon	Saskatoon Health Authority
 3301	3d Pizza	E-511 33rd St West	S7L 0V7	Saskatoon	Saskatoon Health Authority
 3302	7 - 11 22nd Street West	1528 22nd St W	S7M 0T1	Saskatoon	Saskatoon Health Authority
-3303	7 - Eleven Central	1100 A Central Ave	S7N 2H1	Saskatoon	Saskatoon Health Authority
-3304	7 Eleven - 2nd Ave. North	380 2nd Ave N	S7K 2B9	Saskatoon	Saskatoon Health Authority
-3305	7 Eleven - Idylwyld	1435 Idylwyld Dr N	S7L 1A5	Saskatoon	Saskatoon Health Authority
+3303	7 Eleven	1100 A Central Ave	S7N 2H1	Saskatoon	Saskatoon Health Authority
+3304	7 Eleven	380 2nd Ave N	S7K 2B9	Saskatoon	Saskatoon Health Authority
+3305	7 Eleven	1435 Idylwyld Dr N	S7L 1A5	Saskatoon	Saskatoon Health Authority
 3306	7 Eleven Food Store  #29930	1015 Mckercher Dr	S7H 5P1	Saskatoon	Saskatoon Health Authority
 3307	7 Eleven Food Store - 8th St.	1930 8th St E	S7H 0T7	Saskatoon	Saskatoon Health Authority
 3308	7 Eleven Food Store	3303 A 33rd St W	S7L 4P5	Saskatoon	Saskatoon Health Authority

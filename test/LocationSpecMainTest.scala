@@ -110,10 +110,11 @@ class LocationSpecMainTest extends Specification with Mockito {
         val listOfCities = Location.listCities();
         listOfCities.get.length must beEqualTo(6+1)//the plus 1 is for Unknown City
       }
-      "list should be in alphabetical order" in new WithApplication {
+      "list should be in location order" in new WithApplication {
         val listOfCities = Location.listCities();
         val citySeq = listOfCities.get
-        citySeq.indexOf("Space") must beLessThan(citySeq.indexOf("Town A")) // Luseland should appear before Saskatoon in the list
+        // Cities are ordered by number of locations, so big cities must be earlier in the list
+        citySeq.indexOf("Saskatoon") must beLessThan(citySeq.indexOf("Aberdeen"))
       }
       
     }
