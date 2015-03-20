@@ -19,7 +19,6 @@ import play.api.i18n.Messages
  */
 @RunWith(classOf[JUnitRunner])
 class ApplicationSpecMainTest extends Specification {
-  
   /* 
    * Basic check that all views are being rendered in html
    */
@@ -207,5 +206,124 @@ class ApplicationSpecMainTest extends Specification {
       assert(browser.webDriver.findElement(By.className("mapLocation-header")).isDisplayed)
       assert(browser.pageSource must contain("maps.googleapis.com"))
     }
+    
+  "All pages should be able to access 'About' Page" in new WithBrowser {
+   //find city
+    browser.goTo("/")
+    val action = new Actions(browser.getDriver)
+    action.moveToElement(browser.webDriver.findElement(By.linkText(Messages("footer.aboutLink")))).perform
+    action.click.perform
+    browser.pageSource must contain (Messages("about.title"))
+    
+    //find location
+    browser.goTo("/find/Saskatoon")
+    action.moveToElement(browser.webDriver.findElement(By.linkText(Messages("footer.aboutLink")))).perform
+    action.click.perform
+    browser.pageSource must contain (Messages("about.title"))
+
+    //show location page
+    browser.goTo("/view/1")
+    action.moveToElement(browser.webDriver.findElement(By.linkText(Messages("footer.aboutLink")))).perform
+    action.click.perform
+    browser.pageSource must contain (Messages("about.title"))   
+    
+    //500 error page
+    browser.goTo("/view/1000000")
+    action.moveToElement(browser.webDriver.findElement(By.linkText(Messages("footer.aboutLink")))).perform
+    action.click.perform
+    browser.pageSource must contain (Messages("about.title"))
+    
+    //find city error page
+    browser.goTo("/find/daDerpDaDerp")
+    action.moveToElement(browser.webDriver.findElement(By.linkText(Messages("footer.aboutLink")))).perform
+    action.click.perform
+    browser.pageSource must contain (Messages("about.title"))
+    
+    //TODO multimap page
+    
+  }  
+  
+  "All pages should have link to 'Creative Commons' Page" in new WithBrowser {
+    //find city
+    browser.goTo("/")
+    val action = new Actions(browser.getDriver)
+    action.moveToElement(browser.webDriver.findElement(By.linkText("CC-BY-ND"))).perform
+    
+    //find location
+    browser.goTo("/find/Saskatoon")
+    action.moveToElement(browser.webDriver.findElement(By.linkText("CC-BY-ND"))).perform
+     
+
+    //show location page
+    browser.goTo("/view/1")
+    action.moveToElement(browser.webDriver.findElement(By.linkText("CC-BY-ND"))).perform
+        
+    
+    //500 error page
+    browser.goTo("/view/1000000")
+    action.moveToElement(browser.webDriver.findElement(By.linkText("CC-BY-ND"))).perform
+     
+    
+    //find city error page
+    browser.goTo("/find/daDerpDaDerp")
+    action.moveToElement(browser.webDriver.findElement(By.linkText("CC-BY-ND"))).perform
+     
+   //TODO multimap page
+  }  
+  
+  
   }
+  "All pages should be able to access get back to First Page" in new WithBrowser {
+   //find city
+    browser.goTo("/")
+    val action = new Actions(browser.getDriver)
+    action.moveToElement(browser.webDriver.findElement(By.linkText(Messages("general.applicationName")))).perform
+    action.click.perform
+    browser.url must contain ("/")
+    
+    //find location
+    browser.goTo("/find/Saskatoon")
+    action.moveToElement(browser.webDriver.findElement(By.linkText(Messages("general.applicationName")))).perform
+    action.click.perform
+    browser.url must contain ("/")
+
+    //show location page
+    browser.goTo("/view/1")
+    action.moveToElement(browser.webDriver.findElement(By.linkText(Messages("general.applicationName")))).perform
+    action.click.perform
+    browser.url must contain ("/")   
+    
+    //500 error page
+    browser.goTo("/view/1000000")
+    action.moveToElement(browser.webDriver.findElement(By.linkText(Messages("general.applicationName")))).perform
+    action.click.perform
+    browser.url must contain ("/")
+    
+    //find city error page
+    browser.goTo("/find/daDerpDaDerp")
+    action.moveToElement(browser.webDriver.findElement(By.linkText(Messages("general.applicationName")))).perform
+    action.click.perform
+    browser.url must contain ("/")
+    
+    //find city error page there are 2 ways to get back from here
+    browser.goTo("/find/daDerpDaDerp")
+    action.moveToElement(browser.webDriver.findElement(By.linkText(Messages("errors.emptyCityTryAgain")))).perform
+    action.click.perform
+    browser.url must contain ("/")
+    
+    //display map page
+     browser.goTo("/map?address=610+2nd+Ave+N&city=Saskatoon")
+    action.moveToElement(browser.webDriver.findElement(By.linkText(Messages("general.applicationName")))).perform
+    action.click.perform
+    browser.url must contain ("/")
+    
+    //about page
+    browser.goTo("/about")
+    action.moveToElement(browser.webDriver.findElement(By.linkText(Messages("general.applicationName")))).perform
+    action.click.perform
+    browser.url must contain ("/")
+    //TODO multimap page
+     
+  }
+  
 }
