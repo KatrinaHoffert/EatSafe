@@ -9,6 +9,8 @@ import org.fluentlenium.core.filter.FilterConstructor._
 import org.openqa.selenium._
 
 import org.openqa.selenium.interactions.Actions
+import org.openqa.selenium.support.ui.Select
+
 
 import play.api.i18n.Messages
 
@@ -41,6 +43,43 @@ class ApplicationSpecMainTest extends Specification {
     "show the select city page" in new WithApplication {
       val view = route(FakeRequest(GET, "/")).get
       contentType(view) must beSome.which(_ == "text/html")
+    }
+  }
+  
+  "language selection" should {
+    "change language for other pages" in new WithBrowser {
+      browser.goTo("/")
+      val selection = new Select(browser.webDriver.findElement(By.id("languageSelect")))
+      selection.selectByValue("eo")
+      assert(browser.webDriver.findElement(By.className("largeHeading")).getText contains("EatSafe Saskaĉevano"))
+      val typeahead = browser.getDriver.findElement(By.id("municipality"))
+      typeahead.click
+      typeahead.sendKeys("saskatoon")
+      typeahead.sendKeys(Keys.ENTER)
+      assert(browser.url must contain("/find/saskatoon"))
+      assert(browser.webDriver.findElement(By.className("smallHeading")).getText contains("EatSafe Saskaĉevano"))
+    }
+  }
+  
+  "footer" should {
+    "show about page when link clicked" in new WithBrowser {
+      browser.goTo("/")
+      val link = browser.webDriver.findElement(By.linkText(Messages("footer.aboutLink")))
+      link.click()
+      assert(browser.url contains("/about"))
+    }
+    
+    "show creative commons page when link is clicked" in new WithBrowser {
+      browser.goTo("/")
+      val link = browser.webDriver.findElement(By.linkText("CC-BY-ND"))
+      assert(link.getAttribute("href").contains("creativecommons"))
+    }
+    
+    "able to select language from the drop down list" in new WithBrowser {
+      browser.goTo("/")
+      val selection = new Select(browser.webDriver.findElement(By.id("languageSelect")))
+      selection.selectByValue("eo")
+      assert(browser.webDriver.findElement(By.className("largeHeading")).getText contains("EatSafe Saskaĉevano"))
     }
   }
   
@@ -129,7 +168,18 @@ class ApplicationSpecMainTest extends Specification {
       typeahead.sendKeys(Keys.ENTER)
       assert(browser.url must contain("/find/Saskatoon"))
     }
-
+    
+    "clear text field with clear typeahead button is pressed" in new WithBrowser {
+       browser.goTo("/")
+       val typeahead = browser.getDriver.findElement(By.id("municipality"))
+       val button = browser.getDriver.findElement(By.id("reset-button"))
+       typeahead.click
+       typeahead.sendKeys("Saskatoon")
+       val input = typeahead.getAttribute("value")
+       assert(input must contain("Saskatoon"))
+       button.click
+       typeahead.getText must beEmpty
+    }
   } 
 
   "select location page" should {
@@ -154,6 +204,9 @@ class ApplicationSpecMainTest extends Specification {
       typeahead.sendKeys(Keys.ENTER)
       assert(browser.url must contain("/view/"))
     }
+    
+ 
+    
   }
   
   "display location page" should {
