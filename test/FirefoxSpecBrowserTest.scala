@@ -217,4 +217,15 @@ class FirefoxSpecBrowserTest extends Specification {
       assert(browser.url must contain("/find/Saskatoon"))
     }
   
+    "clear text field with clear typeahead button is pressed" in new WithBrowser(new FirefoxDriver) {
+       browser.goTo("/")
+       val typeahead = browser.getDriver.findElement(By.id("municipality"))
+       val button = browser.getDriver.findElement(By.id("reset-button"))
+       typeahead.click
+       typeahead.sendKeys("Saskatoon")
+       val input = typeahead.getAttribute("value")
+       assert(input must contain("Saskatoon"))
+       button.click
+       typeahead.getText must beEmpty
+    }
 }

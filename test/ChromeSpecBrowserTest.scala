@@ -28,7 +28,6 @@ class ChromeSpecBrowserTest extends Specification {
     //the chromeDriver needs to know where to look for the driver application currently its in EatSafe/chromedriver.exe
     System.setProperty("webdriver.chrome.driver", "webDrivers/chromedriver.exe");
     
-    
     "give error message when trying submit without input" in new WithBrowser(new ChromeDriver) {
       browser.goTo("/")
       val typeahead = browser.getDriver.findElement(By.id("municipality"))
@@ -216,4 +215,18 @@ class ChromeSpecBrowserTest extends Specification {
       button.click
       assert(browser.url must contain("/find/Saskatoon"))
     }
+    
+    "clear text field with clear typeahead button is pressed" in new WithBrowser(new ChromeDriver) {
+       browser.goTo("/")
+       val typeahead = browser.getDriver.findElement(By.id("municipality"))
+       val button = browser.getDriver.findElement(By.id("reset-button"))
+       typeahead.click
+       typeahead.sendKeys("Saskatoon")
+       val input = typeahead.getAttribute("value")
+       assert(input must contain("Saskatoon"))
+       button.click
+       typeahead.getText must beEmpty
+    }
+    
+    
 }
