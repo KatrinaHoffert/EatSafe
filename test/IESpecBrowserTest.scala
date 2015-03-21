@@ -13,7 +13,6 @@ import org.openqa.selenium.interactions.Actions
 import org.openqa.selenium.WebDriver
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
-import org.openqa.selenium.chrome.ChromeDriver
 import org.openqa.selenium.ie.InternetExplorerDriver
 
 import play.api.i18n.Messages
@@ -29,7 +28,129 @@ class IESpecBrowserTest extends Specification {
     //IE driver path
     System.setProperty("webdriver.ie.driver", "webDrivers/IEDriverServer.exe");
    
+    "All pages should be able to access 'About' Page" in new WithBrowser(new InternetExplorerDriver) {
+   //find city
+    browser.goTo("/")
+    val action = new Actions(browser.getDriver)
+    action.moveToElement(browser.webDriver.findElement(By.linkText(Messages("footer.aboutLink")))).perform
+    action.click.perform
+    Thread.sleep(100)
+    browser.pageSource must contain (Messages("about.title"))
+    
+    //find location
+    browser.goTo("/find/Saskatoon")
+    action.moveToElement(browser.webDriver.findElement(By.linkText(Messages("footer.aboutLink")))).perform
+    action.click.perform
+    Thread.sleep(100)
+    browser.pageSource must contain (Messages("about.title"))
 
+    //show location page
+    browser.goTo("/view/1")
+    action.moveToElement(browser.webDriver.findElement(By.linkText(Messages("footer.aboutLink")))).perform
+    action.click.perform
+    Thread.sleep(100)
+    browser.pageSource must contain (Messages("about.title"))   
+    
+    //500 error page
+    browser.goTo("/view/1000000")
+    action.moveToElement(browser.webDriver.findElement(By.linkText(Messages("footer.aboutLink")))).perform
+    action.click.perform
+    Thread.sleep(100)
+    browser.pageSource must contain (Messages("about.title"))
+    
+    //find city error page
+    browser.goTo("/find/daDerpDaDerp")
+    action.moveToElement(browser.webDriver.findElement(By.linkText(Messages("footer.aboutLink")))).perform
+    action.click.perform
+    Thread.sleep(100)
+    browser.pageSource must contain (Messages("about.title"))
+    
+    //TODO multimap page
+    
+  }  
+  
+  "All pages should have link to 'Creative Commons' Page" in new WithBrowser(new InternetExplorerDriver) {
+    //find city
+    browser.goTo("/")
+    val action = new Actions(browser.getDriver)
+    action.moveToElement(browser.webDriver.findElement(By.linkText("CC-BY-ND"))).perform
+    
+    //find location
+    browser.goTo("/find/Saskatoon")
+    action.moveToElement(browser.webDriver.findElement(By.linkText("CC-BY-ND"))).perform
+     
+
+    //show location page
+    browser.goTo("/view/1")
+    action.moveToElement(browser.webDriver.findElement(By.linkText("CC-BY-ND"))).perform
+        
+    
+    //500 error page
+    browser.goTo("/view/1000000")
+    action.moveToElement(browser.webDriver.findElement(By.linkText("CC-BY-ND"))).perform
+     
+    
+    //find city error page
+    browser.goTo("/find/daDerpDaDerp")
+    action.moveToElement(browser.webDriver.findElement(By.linkText("CC-BY-ND"))).perform
+     
+   //TODO multimap page
+  }  
+  
+  
+  
+  "All pages should be able to access get back to First Page" in new WithBrowser(new InternetExplorerDriver) {
+   //find city
+    browser.goTo("/")
+    val action = new Actions(browser.getDriver)
+    action.moveToElement(browser.webDriver.findElement(By.linkText(Messages("general.applicationName")))).perform
+    action.click.perform
+    browser.url must contain ("/")
+    
+    //find location
+    browser.goTo("/find/Saskatoon")
+    action.moveToElement(browser.webDriver.findElement(By.linkText(Messages("general.applicationName")))).perform
+    action.click.perform
+    browser.url must contain ("/")
+
+    //show location page
+    browser.goTo("/view/1")
+    action.moveToElement(browser.webDriver.findElement(By.linkText(Messages("general.applicationName")))).perform
+    action.click.perform
+    browser.url must contain ("/")   
+    
+    //500 error page
+    browser.goTo("/view/1000000")
+    action.moveToElement(browser.webDriver.findElement(By.linkText(Messages("general.applicationName")))).perform
+    action.click.perform
+    browser.url must contain ("/")
+    
+    //find city error page
+    browser.goTo("/find/daDerpDaDerp")
+    action.moveToElement(browser.webDriver.findElement(By.linkText(Messages("general.applicationName")))).perform
+    action.click.perform
+    browser.url must contain ("/")
+    
+    //find city error page there are 2 ways to get back from here
+    browser.goTo("/find/daDerpDaDerp")
+    action.moveToElement(browser.webDriver.findElement(By.linkText(Messages("errors.emptyCityTryAgain")))).perform
+    action.click.perform
+    browser.url must contain ("/")
+    
+    //display map page
+     browser.goTo("/map?address=610+2nd+Ave+N&city=Saskatoon")
+    action.moveToElement(browser.webDriver.findElement(By.linkText(Messages("general.applicationName")))).perform
+    action.click.perform
+    browser.url must contain ("/")
+    
+    //about page
+    browser.goTo("/about")
+    action.moveToElement(browser.webDriver.findElement(By.linkText(Messages("general.applicationName")))).perform
+    action.click.perform
+    browser.url must contain ("/")
+    //TODO multimap page
+     
+  }
     
     
    "give error message when trying submit without input" in new WithBrowser(new InternetExplorerDriver) {
