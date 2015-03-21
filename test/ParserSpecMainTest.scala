@@ -75,7 +75,7 @@ class ParserSpecMainTest extends Specification {
     secondLoc(1) must beEqualTo("Water Front Lodge")
     secondLoc(2) must beEqualTo("\\N")
     secondLoc(3) must beEqualTo("\\N")
-    secondLoc(4) must beEqualTo("#1 Johnson Street")
+    secondLoc(4) must beEqualTo("\\N")
     secondLoc(5) must beEqualTo("Northern Health - Mamaw/Keewa/Athab") 
   }
 
