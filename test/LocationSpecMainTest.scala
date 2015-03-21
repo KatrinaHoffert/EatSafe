@@ -114,7 +114,7 @@ class LocationSpecMainTest extends Specification with Mockito {
         val listOfCities = Location.listCities();
         val citySeq = listOfCities.get
         // Cities are ordered by number of locations, so big cities must be earlier in the list
-        citySeq.indexOf("Saskatoon") must beLessThan(citySeq.indexOf("Aberdeen"))
+        citySeq.indexOf("Town A") must beLessThan(citySeq.indexOf("Space"))
       }
       
     }
