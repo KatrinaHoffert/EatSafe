@@ -181,11 +181,9 @@ class UserEndToEndSpecMainTest extends Specification {
       (browser.url must contain("map"))
       (browser.webDriver.findElement(By.className("mapLocation-header")).isDisplayed)
      
-      // Get bored and refresh the page a bunch of times
-      var i = 0
-      for(i <- 1 to 20){
-         browser.webDriver.navigate.refresh
-      }
+      // Get bored and refresh the page
+      
+      browser.webDriver.navigate.refresh
      
       // go back to home page
       browser.webDriver.findElement(By.linkText(Messages("general.applicationName")(Lang("eo")))).click
