@@ -93,12 +93,15 @@
                 $("#municipality").val(municipality.long_name.toLowerCase());
               }
               console.log("Found good city: " + municipality.long_name);
+              $("#badGeolocation").text("");
               return;
             }
           }
 
           console.log("Found unknown city: " + municipality.long_name);
+          $("#badGeolocation").text("@Messages("locations.selectCity.badGeolocate")");
         } else {
+          $("#badGeolocation").text("@Messages("locations.selectCity.badGeolocate")");
           console.log("Bad request: " + status);
         }
       })
@@ -147,6 +150,12 @@
         </div>
       </div>
     </form>
+    
+    <br />
+    
+    <div id="badGeolocation" class="generalError">
+      
+    </div>
 
     <div class="unknownCityLink">
       <a href="@routes.LocationController.findLocation("Unknown city")">
