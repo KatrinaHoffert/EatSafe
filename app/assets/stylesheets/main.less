@@ -219,6 +219,12 @@ body {
 .rating_poor:before { background-color: red; content: "Poor"; }
 .rating_unknown:before { background-color: grey; content: "N/A"; }
 
+/* Provisional, message-friendly rating styles. */
+.msg_rating_good { font-weight: bold; color: green; }
+.msg_rating_fair { font-weight: bold; color: #fco; }
+.msg_rating_fair { font-weight: bold; color: red; }
+.msg_rating_unknown { font-weight: bold; color: grey; }
+
 /* Formatting the extra data at the bottom of the location view as a list */
 .locationExtraData {
   margin-top: 1em;
@@ -229,6 +235,11 @@ body {
 /* Extra gap between every two items (which is a pairing of bolded title and value) */
 .locationExtraData li:nth-child(2n + 1) {
   margin-top: 0.5em;
+}
+
+/* For general-purpose errors */
+.generalError {
+  color: firebrick;
 }
 
 /* Formatting for error pages. */

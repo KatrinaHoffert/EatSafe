@@ -93,12 +93,15 @@
                 $("#municipality").val(municipality.long_name.toLowerCase());
               }
               console.log("Found good city: " + municipality.long_name);
+              $("#badGeolocation").text("");
               return;
             }
           }
 
           console.log("Found unknown city: " + municipality.long_name);
+          $("#badGeolocation").text("@Messages("locations.selectCity.badGeolocate")");
         } else {
+          $("#badGeolocation").text("@Messages("locations.selectCity.badGeolocate")");
           console.log("Bad request: " + status);
         }
       })
@@ -136,7 +139,7 @@
       <div class="typeahead-container">
         <div class="typeahead-field">
           <span class="typeahead-query">
-            <input id="municipality" type="search" placeholder="Search" autocomplete="off">
+            <input id="municipality" type="search" placeholder="@Messages("locations.selectCity.searchPlaceholder")" autocomplete="off">
           </span>
           <span class="glyphicon glyphicon-remove-sign btn-lg" id="reset-button"></span>
           <span class="typeahead-button">
@@ -147,6 +150,12 @@
         </div>
       </div>
     </form>
+    
+    <br />
+    
+    <div id="badGeolocation" class="generalError">
+      
+    </div>
 
     <div class="unknownCityLink">
       <a href="@routes.LocationController.findLocation("Unknown city")">
