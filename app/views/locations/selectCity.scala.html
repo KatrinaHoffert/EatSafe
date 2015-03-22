@@ -88,7 +88,10 @@
           // city
           for(i = 0; i < cities.length; i++) {
             if(cities[i].toLowerCase() == municipality.long_name.toLowerCase()) {
-              $("#municipality").val(municipality.long_name.toLowerCase());
+              // Check to ensure they haven't already begun typing
+      	    if (($.trim($("#municipality").val())).length == 0) {
+                $("#municipality").val(municipality.long_name.toLowerCase());
+              }
               console.log("Found good city: " + municipality.long_name);
               return;
             }
@@ -104,16 +107,19 @@
     // Set the user's location when they click the locate button
     $("#typeahead-locate").on("click", function() {
       if(navigator.geolocation) {
+        resetTypeahead();
         navigator.geolocation.getCurrentPosition(populateField);
       }
     });
-
-    // Typeahead friendly clearing of the city
-    $("#reset-button").on("click", function() {
+    
+    function resetTypeahead() {
       $("#municipality").val("");
       $(".typeahead-hint").val("");
       $(".typeahead-result").remove();
-    });
+    }
+
+    // Typeahead friendly clearing of the city
+    $("#reset-button").on("click", resetTypeahead);
   </script>
 }
 
