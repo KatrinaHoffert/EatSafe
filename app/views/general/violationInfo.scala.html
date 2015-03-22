@@ -1,0 +1,24 @@
+@import general._
+@import models._
+@import controllers._
+@import play.api.Play.current
+
+@**
+ * Display more information about a violation.
+ * TODO: need more infomation about each violation
+ * TODO: title need to change: add "violation Info" to Message.
+ *@
+@(locationId: Int, violationId: Int)(implicit lang: Lang)
+
+@mainBody(title = Messages("about.title"), hasFooter = true) {
+  @headingSmall(Messages("general.applicationName"))
+
+  <div class="smallPadding">
+    <h2>This page contains more information about violation @violationId.</h2>
+    <p>Need more info!</p>
+    <button onclick="location.href='@routes.LocationController.showLocation(locationId)'">Go Back</button>
+	<p>See other violations:</p>
+	
+	
+  </div>
+}

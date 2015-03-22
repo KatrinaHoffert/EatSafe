@@ -46,8 +46,19 @@ class ApplicationSpecMainTest extends Specification {
       val view = route(FakeRequest(GET, "/")).get
       contentType(view) must beSome.which(_ == "text/html")
     }
+    
+    "not crash with repeated refreshes" in new WithBrowser {
+      browser.goTo("/")
+      var i = 0
+      for(i <- 1 to 10){
+        browser.webDriver.navigate.refresh
+      }
+      assert(browser.webDriver.findElement(By.className("largeHeading")).isDisplayed)
+      assert(browser.webDriver.findElement(By.className("footer")).isDisplayed)
+      assert(browser.webDriver.findElement(By.className("typeahead-container")).isDisplayed)
+    }
   }
-  
+
   "language selection" should {
     "change language for other pages" in new WithBrowser {
       browser.goTo("/")
@@ -335,7 +346,7 @@ class ApplicationSpecMainTest extends Specification {
       //Find a place in the Saskatoon Health Region
       browser.goTo("/find/Saskatoon")
       val typeahead = browser.getDriver.findElement(By.id("location"))
-      typeahead.click()
+      typeahead.click
       typeahead.sendKeys("2nd Avenue Grill")
       
       // Make sure that correct input is in the typeahead
@@ -351,6 +362,30 @@ class ApplicationSpecMainTest extends Specification {
     }
   }
   
+  "violation info page" should {
+    "display a page with violation info for specific violation" in new WithApplication {
+      var inspection = route(FakeRequest(GET, "/view/1/violation/1")).get
+      assert(status(inspection) == OK)
+      assert(contentAsString(inspection) contains("violation 1"))
+      
+      inspection = route(FakeRequest(GET, "/view/1/violation/11")).get
+      assert(status(inspection) == OK)
+      assert(contentAsString(inspection) contains("violation 11"))
+    }
+    
+    "returns to view when go back button is pressed" in new WithBrowser {
+      browser.goTo("/view/1/violation/8")
+      assert(browser.url.equals("/view/1/violation/8"))
+      assert(browser.pageSource contains("violation 8"))
+      
+      val button = browser.webDriver.findElement(By.tagName("button"))
+      assert(button.isDisplayed)
+      button.click
+      
+      assert(browser.url.equals("/view/1"))
+    }
+  }
+  
   //404 pages have not been implemented yet
   /*
   "404 page" should {
@@ -360,7 +395,7 @@ class ApplicationSpecMainTest extends Specification {
     }
   }
   */
-  
+ 
   "display map page" should {
     "render a map on the page with a header" in new WithBrowser {
       //Navigate to a page with a map (uses previously tested navigation)
@@ -492,5 +527,5 @@ class ApplicationSpecMainTest extends Specification {
     //TODO multimap page
      
   }
-  
+
 }
