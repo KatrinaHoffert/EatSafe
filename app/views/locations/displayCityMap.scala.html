@@ -300,6 +300,7 @@
 
 
     /**
+     *  Calculates all of the locations that are within the visual
      *  
      */
     function showMarkers(){
@@ -343,8 +344,11 @@
 
                 var marker = new google.maps.Marker({
 
-                  position: cords,                  
-                  icon: "http://chart.apis.google.com/chart?chst=d_map_pin_letter&chld=•|" + color,
+                  position: cords,
+                  name:     locations[i].name,
+                  id:       locations[i].id,
+                  colour:   locations[i].ratingColor,
+                  icon:     "http://chart.apis.google.com/chart?chst=d_map_pin_letter&chld=•|" + color,
                   map: map
 
                 });
