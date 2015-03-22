@@ -8,6 +8,7 @@ locations.selectCity.noInput=You need to enter something.
 locations.selectCity.badInput=I''m sorry, Dave, that not valid input.
 locations.selectCity.locateMeTooltip=Fills in the input with your current location
 locations.selectCity.searchUnknownCity=Or search locations not in a city/town.
+locations.selectCity.searchPlaceholder=Search
 
 # Select location page
 locations.selectLocation.title=Select a location
@@ -16,6 +17,7 @@ locations.selectLocation.noInput=You need to enter something.
 locations.selectLocation.badInput=I''m sorry, Dave, that not valid input.
 locations.selectLocation.searchingIn=Searching in {0}
 locations.selectLocation.unknownCity=locations not in a town or city
+locations.selectLocation.searchPlaceholder=Search (ex: Subway)
 
 # Display locations page
 locations.view.titleStart=EatSafe
@@ -28,6 +30,12 @@ locations.view.reinspectionPriority=Current re-inspection priority
 locations.view.previousInspectionType=Previous inspection type
 locations.view.rha=Regional health authority
 locations.view.unknownLocation=Unknown location
+locations.view.mostRecent=Most recent issues
+locations.view.ratingLabel=Rating
+locations.view.rating_good=Good
+locations.view.rating_fair=Fair
+locations.view.rating_poor=Poor
+locations.view.rating_unknown=N/A
 
 # Display address page
 maps.displayAddress.title=Map: {0}, {1}
