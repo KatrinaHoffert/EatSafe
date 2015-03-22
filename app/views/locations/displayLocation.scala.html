@@ -44,7 +44,7 @@
 
     @if(location.hasInspections) {
       Most recent issues:<span class="faded floatRight">[@location.inspections(0).date]</span>
-      @displayInspection(location.inspections(0))
+      @displayInspection(location.id, location.inspections(0))
 
       @displayPastInspections(location)
 
