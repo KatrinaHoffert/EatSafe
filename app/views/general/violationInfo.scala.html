@@ -1,0 +1,18 @@
+@import general._
+@import models._
+@import controllers._
+@import play.api.Play.current
+
+@**
+ * 
+ *@
+@(locationId: Int, violationId: Int)(implicit lang: Lang)
+
+@mainBody(title = Messages("about.title"), hasFooter = true) {
+  @headingSmall(Messages("general.applicationName"))
+
+  <div class="smallPadding">
+    <h2>This page contains more information about violation @violationId.</h2>
+
+  </div>
+}
