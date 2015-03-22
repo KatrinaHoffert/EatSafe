@@ -9,6 +9,7 @@ locations.selectCity.badInput=I''m sorry, Dave, that not valid input.
 locations.selectCity.locateMeTooltip=Fills in the input with your current location
 locations.selectCity.searchUnknownCity=Or search locations not in a city/town.
 locations.selectCity.searchPlaceholder=Search
+locations.selectCity.badGeolocate=Sorry, city could not be found automatically.
 
 # Select location page
 locations.selectLocation.title=Select a location
