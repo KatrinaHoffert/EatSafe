@@ -320,6 +320,9 @@
           var testLat = 0.0;
           var testLng = 0.0;
 
+          var infowindow = new google.maps.InfoWindow();
+
+
           for(var i = 0; i < locations.length; i += 1){
             
 
@@ -332,15 +335,17 @@
             //This tests to see if the given location is located in the current view of the map
             if(testLat < NELat && testLat > SWLat && testLng < NELng && testLng > SWLng){
                 
-                console.log('test');
+                /*
                 console.log(locations[i].name);
                 console.log(testLat);
                 console.log(testLng);
                 console.log(locations[i].id);
                 console.log(locations[i].ratingColor);
+                */
+          
+                var color = locations[i].ratingColor.slice(1);
 
                 
-                var color = locations[i].ratingColor.slice(1);
 
                 var marker = new google.maps.Marker({
 
@@ -349,14 +354,21 @@
                   id:       locations[i].id,
                   colour:   locations[i].ratingColor,
                   icon:     "http://chart.apis.google.com/chart?chst=d_map_pin_letter&chld=•|" + color,
+                  contentString:  '<div id="infoWindow">'+ 
+                                      '<h3>'+ locations[i].name + '</h3><br>'+
+                                        ' <button type="button" class="btn btn-success" '+
+                                        ' onclick="goToLocation(parseInt('+ locations[i].id +'))">Show more info</button>'+
+                                  '</div>',
                   map: map
 
                 });
 
-                markers.push(marker);
-                
-                
+                google.maps.event.addListener(marker, 'click', function () {
+                  infowindow.setContent(this.contentString);
+                  infowindow.open(map, this);
+                });
 
+                markers.push(marker);                
             }
           }
 
@@ -376,6 +388,11 @@
     function deleteMarkers(){
       setAllMap(null);
       markers = [];
+    }
+
+    /*Due to limitations of the content string, I used JS routing rather than play's standard reverse routing*/
+    function goToLocation(int){
+        window.location.assign(jsRoutes.controllers.LocationController.showLocation(parseInt(int)).url);
     }
 
 
