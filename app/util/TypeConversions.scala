@@ -58,13 +58,18 @@ object TypeConversions {
    */
   def locationsToMultiMapJson(locations: Seq[Location]): JsValue = {
     val jsObjects = locations.map { location =>
-      Json.obj(
+      val jsObj = Json.obj(
         "name" -> location.name,
         "ratingColor" -> location.rating.color,
         "latitude" -> location.latitude.get,
         "longitude" -> location.longitude.get,
         "id" -> location.id
       )
+
+      if(location.address.isDefined) {
+        jsObj ++ Json.obj("address" -> location.address.get)
+      }
+      else jsObj
     }
 
     Json.toJson(jsObjects)
