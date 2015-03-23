@@ -366,17 +366,17 @@ class ApplicationSpecMainTest extends Specification {
     "display a page with violation info for specific violation" in new WithApplication {
       var inspection = route(FakeRequest(GET, "/view/1/violation/1")).get
       assert(status(inspection) == OK)
-      assert(contentAsString(inspection) contains("violation 1"))
+      assert(contentAsString(inspection) contains(Messages("violations.content." + 1)))
       
       inspection = route(FakeRequest(GET, "/view/1/violation/11")).get
       assert(status(inspection) == OK)
-      assert(contentAsString(inspection) contains("violation 11"))
+      assert(contentAsString(inspection) contains(Messages("violations.content." + 11)))
     }
     
     "returns to view when go back button is pressed" in new WithBrowser {
       browser.goTo("/view/1/violation/8")
       assert(browser.url.equals("/view/1/violation/8"))
-      assert(browser.pageSource contains("violation 8"))
+      assert(browser.pageSource contains(Messages("violations.content." + 8)))
       
       val button = browser.webDriver.findElement(By.tagName("button"))
       assert(button.isDisplayed)
