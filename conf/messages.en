@@ -43,6 +43,7 @@ locations.view.rating_good=Good
 locations.view.rating_fair=Fair
 locations.view.rating_poor=Poor
 locations.view.rating_unknown=N/A
+locations.view.moreInfoViolation=[More info]
 
 # Display address page
 maps.displayAddress.title=Map: {0}, {1}
