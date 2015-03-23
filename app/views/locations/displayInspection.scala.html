@@ -30,7 +30,7 @@
         <div id="collapse_@(inspection.date)_@violation.id" class="panel-collapse collapse" role="tabpanel">
           <div class="panel-body">
             @Messages(violation.description)
-            <a class="violationLink" href="@routes.Application.violationInfo(locationId, violation.id)">
+            <a class="violationLink" href="@routes.LocationController.violationInfo(locationId, violation.id)">
               @Messages("locations.view.moreInfoViolation")
             </a>
           </div>

@@ -5,8 +5,6 @@
 
 @**
  * Display more information about a violation.
- * TODO: need more infomation about each violation
- * TODO: title need to change: add "violation Info" to Message.
  *@
 @(locationId: Int, violationId: Int)(implicit lang: Lang)
 
@@ -14,15 +12,11 @@
   @headingSmall(Messages("general.applicationName"))
 
   <div class="smallPadding">
-    <h2>More information about violation @violationId:</h2>
-    @displayMoreInfo(violationId)
-    <button id="goBack" onclick="location.href='@routes.LocationController.showLocation(locationId)'">Go Back</button>
-	<p>See other violations: </p>
-	<select id="selectViolation">
-		<option value = "1" onclick="location.href='@routes.Application.violationInfo(locationId, 1)'">1</option>
-		<option value = "2" onclick="location.href='@routes.Application.violationInfo(locationId, 2)'">2</option>
-	</select>
-	
-	
+    <button class="btn btn-default" onclick="location.href='@routes.LocationController.showLocation(locationId)'">
+      @Messages("violations.goBack")
+    </button>
+
+    <h2>@Messages("violations.heading." + violationId)</h2>
+    @Messages("violations.content." + violationId)
   </div>
 }

@@ -131,3 +131,6 @@ parser.name.16=Plumbing/Lighting/Ventilation
 parser.desc.16=Approved plumbing must be installed and properly maintained to prevent food contamination.  Light shields or shatterproof bulbs are to be provided in every room in which food is prepared or stored. Unless otherwise approved, every restaurant is to have a ventilation system that prevents the accumulation of odours, smoke, grease/oils and condensation.
 parser.priority.general=General Item
 parser.priority.critical=Critical Item
+
+# More info about violations
+violations.goBack=Go Back
