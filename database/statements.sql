@@ -1,27 +1,27 @@
 COPY violation_type (id, description, name, priority) FROM STDIN;
-1	Potentially hazardous foods and perishable foods must be stored at 4°C/40°F or below. Hazardous foods must be thawed in a refrigerator or under cold, running water.	Refrigeration/Cooling/Thawing (must be 4°C/40°F or lower)	Critical Item
-2	Cook foods to an internal temperature of: a) 63°C (145°F) or above for: eggs (if prepared for immediate service) medium rare beef and veal steaks and roasts b) 68°C (155°F) or above for: game farm meat products c) 70°C (158°F) for: fish d) 71°C (160°F) or above for: ground beef/pork/veal, food made with ground beef/pork/veal, e.g. sausages, meatballs, pork chops, ribs and roasts. e) 74°C (165°F) or above for: ground chicken/turkey, food made with ground chicken/turkey or mixtures containing poultry, meat, fish, or eggs. chicken and turkey breasts, legs, thighs and wings. stuffing (inside a carcass)  stuffed pasta  hot dogs  leftovers  egg dishes (if not prepared as specified in 2a)  and stuffed fish  f) 85°C (185°C) or above for: chicken and turkey, whole bird. Reheat foods rapidly to an internal temperature of 74°C (165°F) prior to serving. Hot Holding must maintain an internal temperature of 60°C (140°F) or higher.	Cooking/Reheating/Hot Holding (must be 60°C/140°F or higher)	Critical Item
-3	Foods must be stored in food grade containers, properly labelled and protected from contamination at all times.	Storage/Preparation of Foods	Critical Item
-4	Hand washing must be properly done at appropriate times and intervals. An accessible, plumbed hand basin with hot and cold running water, soap in a dispenser and single-use paper towels in wall-mounted dispensers are required in food preparation areas.Hand washing Procedure: a) Wet hands and exposed arms (at least up to wrist) with warm running water  b) Apply liquid soap  c) Vigorously rub together wet surfaces for at least 20 seconds, lathering at least up to wrist  d) Use a nailbrush under fingernails and other very dirty areas  e) Thoroughly rinse with clean, warm water running from wrists to fingertips  f) Apply soap and lather vigorously again  g) Rinse hands and wrists thoroughly  h) Dry hands with a single-use paper towel  and i) Use paper towel to turn off tap.	Hand Washing Facilities/Practices	Critical Item
-5	Good personal hygiene must be practiced at all times. Food handlers with infectious or contagious diseases (or symptoms) should not work. 	Food Handler Illness/Hygiene/Habits	Critical Item
-6	Foods must be protected from contamination at all times. 	Food Protection	Critical Item
-7	 Proper dish washing procedures must be followed. Mechanical washing: dishwashers must be National Sanitation Foundation (NSF) approved or equivalent, designed to wash at 60oC (140oF) and utilize an approved sanitizing agent. Manual washing: (wash/rinse/sanitize in a three-compartment sink): first compartment - clean hot water 44°C (111°F) with detergent  second compartment - clean hot water 44°C (111°F)  third compartment - approved sanitizing method.	Cleaning/Sanitizing of Equipment/Utensils	Critical Item
-8	Food, water and ice must be from an approved source and must also be wholesome, free from damage or spoilage and transported under proper temperatures, where applicable. 	Food Received from Approved Source	Critical Item
-9	Food, water and ice must be from an approved source and must also be wholesome, free from damage or spoilage and transported under proper temperatures, where applicable. 	Water Received from Approved Source	Critical Item
-10	Food must be protected from contamination during storage, preparation, display, service and transport. No food is to be stored on the floor unless it is in an approved container. The lowest shelf is to be high enough to allow easy cleaning of the floor.	Food Protection	General Item
-11	An accurate, metal-stemmed (food-grade) probe thermometer must be available to monitor temperatures of potentially hazardous foods.	Accurate Thermometer Available to Monitor Food Temperatures	General Item
-12	Approved dishwashing facilities must be installed and properly maintained. An adequate supply of cleaning supplies, chemicals, etc. must be available at all times. 'Clean-in-place' equipment must be washed and sanitized according to manufacturers instructions.	Construction/Storage/Cleaning of Equipment/Utensils	General Item
-13	An adequate number of approved, covered garbage containers must be provided at all food preparation areas. Containers are to be kept clean and the contents removed at least daily. Garbage storage must be of an approved design with a lid that seals. It must be kept clean and free of vermin and serviced as required. 	Garbage Storage and/or Removal	General Item
-14	All restaurants are to be free of vermin.	Insect/Rodent Control	General Item
-15	Floors, walls and ceilings of all rooms in which food is stored, prepared or served or in which dishes, utensils and equipment are washed or stored should be kept clean and in good repair.	Construction/Maintenance and/or Cleaning of Premises	General Item
-16	Approved plumbing must be installed and properly maintained to prevent food contamination.  Light shields or shatterproof bulbs are to be provided in every room in which food is prepared or stored. Unless otherwise approved, every restaurant is to have a ventilation system that prevents the accumulation of odours, smoke, grease/oils and condensation.	Plumbing/Lighting/Ventilation	General Item
+1	parser.desc.1	parser.name.1	parser.priority.critical
+2	parser.desc.2	parser.name.2	parser.priority.critical
+3	parser.desc.3	parser.name.3	parser.priority.critical
+4	parser.desc.4	parser.name.4	parser.priority.critical
+5	parser.desc.5	parser.name.5	parser.priority.critical
+6	parser.desc.6	parser.name.6	parser.priority.critical
+7	parser.desc.7	parser.name.7	parser.priority.critical
+8	parser.desc.8	parser.name.8	parser.priority.critical
+9	parser.desc.9	parser.name.9	parser.priority.critical
+10	parser.desc.10	parser.name.10	parser.priority.general
+11	parser.desc.11	parser.name.11	parser.priority.general
+12	parser.desc.12	parser.name.12	parser.priority.general
+13	parser.desc.13	parser.name.13	parser.priority.general
+14	parser.desc.14	parser.name.14	parser.priority.general
+15	parser.desc.15	parser.name.15	parser.priority.general
+16	parser.desc.16	parser.name.16	parser.priority.general
 \.
 
 COPY location (id, name, address, postcode, city, rha) FROM STDIN;
-1	Water Front Lodge	\N	\N	#1 Johnson Street	Northern Health - Mamaw/Keewa/Athab
-2	Aurora Lodge	\N	\N	#12 Baska Street	Northern Health - Mamaw/Keewa/Athab
-3	Aurora Lodge	\N	\N	#37 Gray Street	Northern Health - Mamaw/Keewa/Athab
-4	Al's Place	\N	\N	126B Dene Street	Northern Health - Mamaw/Keewa/Athab
+1	Water Front Lodge	\N	\N	\N	Northern Health - Mamaw/Keewa/Athab
+2	Aurora Lodge	\N	\N	\N	Northern Health - Mamaw/Keewa/Athab
+3	Aurora Lodge	\N	\N	\N	Northern Health - Mamaw/Keewa/Athab
+4	Al's Place	\N	\N	\N	Northern Health - Mamaw/Keewa/Athab
 5	Air Ronge Co-op Gas Bar & Convenience Store	302 Fairchild Street	\N	Air Ronge	Northern Health - Mamaw/Keewa/Athab
 6	B.p.o. Elks Lodge #554	326 Husky Avenue	S0J 3G0	Air Ronge	Northern Health - Mamaw/Keewa/Athab
 7	Cravings Late Night Food	P.o. Box 209	S0J 3G0	Air Ronge	Northern Health - Mamaw/Keewa/Athab
@@ -212,11 +212,11 @@ COPY location (id, name, address, postcode, city, rha) FROM STDIN;
 192	Morse Cafe (2007)	316 Main St	S0H 3C0	Morse	Cypress Health Authority
 193	Morse Curling Rink - Concession	324 Saskatchewan Ave	S0H 3C0	Morse	Cypress Health Authority
 194	Morse Museum & Cultural Centre - Kitchen	410 Mackenzie St	S0H 3C0	Morse	Cypress Health Authority
-195	Cowtown - Kitchen	Maple Creek	\N	\N	Cypress Health Authority
-196	Rabbit Hill Teahouse	Excelsior	\N	\N	Cypress Health Authority
-197	Ranch Hall - Kitchen	Maple Creek	\N	\N	Cypress Health Authority
-198	Roadside #1 Scoop	Gull Lake	\N	\N	Cypress Health Authority
-199	The Smoke Shack	Excelsior	\N	\N	Cypress Health Authority
+195	Cowtown - Kitchen	\N	\N	Maple Creek	Cypress Health Authority
+196	Rabbit Hill Teahouse	\N	\N	Excelsior	Cypress Health Authority
+197	Ranch Hall - Kitchen	\N	\N	Maple Creek	Cypress Health Authority
+198	Roadside #1 Scoop	\N	\N	Gull Lake	Cypress Health Authority
+199	The Smoke Shack	\N	\N	Excelsior	Cypress Health Authority
 200	Brenda'z Inn - Kitchen	194 Standard St	S0N 1X0	Pennant	Cypress Health Authority
 201	Piapot Curling Rink - Concession	200 Mcdonald St	S0N 1Y0	Piapot	Cypress Health Authority
 202	Joe Suds	256 Centre St	S0N 1Z0	Ponteix	Cypress Health Authority
@@ -825,10 +825,10 @@ COPY location (id, name, address, postcode, city, rha) FROM STDIN;
 805	Wilkie Junction Restaurant	503 - 7th Avenue West	S0K 4W0	Wilkie	Heartland Health Authority
 806	Wilkie Reddi Mart	116  Second Avenue West	S0K 4W0	Wilkie	Heartland Health Authority
 807	Micky's Place Cafe	100 Main Street	S0L 3M0	Wiseton	Heartland Health Authority
-808	Water Front Lodge	\N	\N	#1 Johnson Street	Northern Health - Mamaw/Keewa/Athab
-809	Aurora Lodge	\N	\N	#12 Baska Street	Northern Health - Mamaw/Keewa/Athab
-810	Aurora Lodge	\N	\N	#37 Gray Street	Northern Health - Mamaw/Keewa/Athab
-811	Al's Place	\N	\N	126B Dene Street	Northern Health - Mamaw/Keewa/Athab
+808	Water Front Lodge	\N	\N	\N	Northern Health - Mamaw/Keewa/Athab
+809	Aurora Lodge	\N	\N	\N	Northern Health - Mamaw/Keewa/Athab
+810	Aurora Lodge	\N	\N	\N	Northern Health - Mamaw/Keewa/Athab
+811	Al's Place	\N	\N	\N	Northern Health - Mamaw/Keewa/Athab
 812	Air Ronge Co-op Gas Bar & Convenience Store	302 Fairchild Street	\N	Air Ronge	Northern Health - Mamaw/Keewa/Athab
 813	B.p.o. Elks Lodge #554	326 Husky Avenue	S0J 3G0	Air Ronge	Northern Health - Mamaw/Keewa/Athab
 814	Cravings Late Night Food	P.o. Box 209	S0J 3G0	Air Ronge	Northern Health - Mamaw/Keewa/Athab
@@ -1047,8 +1047,8 @@ COPY location (id, name, address, postcode, city, rha) FROM STDIN;
 1027	Welcome Cafe	105 - 1st Avenue West	S0E 1E0	Nipawin	Kelsey Trail Health Authority
 1028	Wild Bill's Pizza	207 - 1st Avenue West	S0E 1E0	Nipawin	Kelsey Trail Health Authority
 1029	L & L Catering	\N	\N	\N	Kelsey Trail Health Authority
-1030	North Country B & B/catering	Hudson Bay	\N	\N	Kelsey Trail Health Authority
-1031	Ridgedale Curling Club	Connaught	\N	\N	Kelsey Trail Health Authority
+1030	North Country B & B/catering	\N	\N	Hudson Bay	Kelsey Trail Health Authority
+1031	Ridgedale Curling Club	\N	\N	Connaught	Kelsey Trail Health Authority
 1032	Tisdale Motor Speedway Concession	\N	\N	\N	Kelsey Trail Health Authority
 1033	Val's Catering	\N	\N	\N	Kelsey Trail Health Authority
 1034	Sprout Eatery	Nw-32-48-11-w2m Rm Of Arborfield No. 456	\N	Pasquia Regional Park	Kelsey Trail Health Authority
@@ -1115,10 +1115,10 @@ COPY location (id, name, address, postcode, city, rha) FROM STDIN;
 1095	Jose's Place & Cantina	700 Main Street	S0E 1W0	Zenon Park	Kelsey Trail Health Authority
 1096	Zenon Park Arena	2nd Avenue East	S0E 1W0	Zenon Park	Kelsey Trail Health Authority
 1097	Zenon Park Grocery	1 - 705 Main Street	S0E 1W0	Zenon Park	Kelsey Trail Health Authority
-1098	Water Front Lodge	\N	\N	#1 Johnson Street	Northern Health - Mamaw/Keewa/Athab
-1099	Aurora Lodge	\N	\N	#12 Baska Street	Northern Health - Mamaw/Keewa/Athab
-1100	Aurora Lodge	\N	\N	#37 Gray Street	Northern Health - Mamaw/Keewa/Athab
-1101	Al's Place	\N	\N	126B Dene Street	Northern Health - Mamaw/Keewa/Athab
+1098	Water Front Lodge	\N	\N	\N	Northern Health - Mamaw/Keewa/Athab
+1099	Aurora Lodge	\N	\N	\N	Northern Health - Mamaw/Keewa/Athab
+1100	Aurora Lodge	\N	\N	\N	Northern Health - Mamaw/Keewa/Athab
+1101	Al's Place	\N	\N	\N	Northern Health - Mamaw/Keewa/Athab
 1102	Air Ronge Co-op Gas Bar & Convenience Store	302 Fairchild Street	\N	Air Ronge	Northern Health - Mamaw/Keewa/Athab
 1103	B.p.o. Elks Lodge #554	326 Husky Avenue	S0J 3G0	Air Ronge	Northern Health - Mamaw/Keewa/Athab
 1104	Cravings Late Night Food	P.o. Box 209	S0J 3G0	Air Ronge	Northern Health - Mamaw/Keewa/Athab
@@ -1573,33 +1573,33 @@ COPY location (id, name, address, postcode, city, rha) FROM STDIN;
 1553	Western Development Museum Kitchen	Hwy 40 North East,	S9A 2Y1	North Battleford	Prairie North Health Authority
 1554	Yellow Sub	G3-9800 Territorial Drive,	S9A 3W6	North Battleford	Prairie North Health Authority
 1555	Zion Lutheran Church Kitchen	10801 Winder Cres.,	S9A 2B9	North Battleford	Prairie North Health Authority
-1556	Atton's Lake Park Concession	Ne 33/44/20/w3 Atton's Lake Regional Park	\N	\N	Prairie North Health Authority
-1557	Atton's Lake Regional Park Golf Course Club House	Ne 33/44/20/w3 Atton's Lake Regional Park	\N	\N	Prairie North Health Authority
-1558	Beach Side Store	North Battleford	S9A 1T7	\N	Prairie North Health Authority
-1559	Dexter Community Hall	Mervin	\N	\N	Prairie North Health Authority
-1560	Dutch Treat Mini Golf	Parcel A Nw 17/63/18/w3 Greig Lake Mlpp	\N	\N	Prairie North Health Authority
-1561	Frenchman Butte Tea House	Parcel X Plan 92b02290 Frenchman Butte Sk	\N	\N	Prairie North Health Authority
-1562	Graham's Gas N Grill	Parcel A Plan 101589745 Rm Of Parkdale No 498	\N	\N	Prairie North Health Authority
-1563	Greig Lake Store	Meadow Lake	\N	\N	Prairie North Health Authority
-1564	Hillsvale Kitchen	Hillsdale	\N	\N	Prairie North Health Authority
-1565	Jackfish Lodge Golf & Conference Centre Kitchen	Nw 11-48-17-w3  Battlefords Provincial Park	\N	\N	Prairie North Health Authority
-1566	Jc's Ice Cream & Concession	Ne1/4 29-63-25 W3 Sandy Beach Pierce Lake Mlpp	\N	\N	Prairie North Health Authority
-1567	Jumbo Beach Dairy Bar	Lot 21 Blk 1 Plan 81b15838 Jumbo Beach  Rm 561	\N	\N	Prairie North Health Authority
-1568	Lorie's Kountry Kitchen	Britannia	\N	\N	Prairie North Health Authority
-1569	Ministikwan Lake Lodge Cafe	Parcel A, Plan 67b1016  Ministikwan Lake Rm 561	\N	\N	Prairie North Health Authority
-1570	O'grady's Restaurant	Part Of Sw 1/4 / 33 / 43 / 16 / W3 North B'ford	\N	\N	Prairie North Health Authority
-1571	Puttzin' Around	Wilton	\N	\N	Prairie North Health Authority
-1572	Sandy Beach Lake Regional Park Clubhouse Kitchen	Ne 36 - 51 - 28 W3 Sandy Beach Lake Regional Park	\N	\N	Prairie North Health Authority
-1573	Sask Hospital Cafeteria	Sw 1/4 / 33 / 43 / 16 / W3 Sask Hosp Grounds	\N	\N	Prairie North Health Authority
-1574	Silver Lake Concession	Nw 14/49/23/w3 Silver Lake Regional Park	\N	\N	Prairie North Health Authority
-1575	South Bay Convenience	Parcel A  Plan 80b11172 Rm Of Mervin No 499	\N	\N	Prairie North Health Authority
-1576	Spudz	Mobile Concession 4215-70th Ave Lloydminster Ab	\N	\N	Prairie North Health Authority
-1577	The Lakehouse Cafe	Lot 12  Block 1 Plan Bq4721jumbo Beach Rm 561	\N	\N	Prairie North Health Authority
-1578	The Scoop Concession	Portion Of Nw32/62/19/w3 Kimball Lake Mlpp	\N	\N	Prairie North Health Authority
-1579	Turtle Grove Resort	Mervin	\N	\N	Prairie North Health Authority
-1580	Turtle Lake Mission Church	Parcel A Plan 101685034 Rm Of Mervin No 499	\N	\N	Prairie North Health Authority
-1581	Vawn Hotel & Steak House	Turtle River	\N	\N	Prairie North Health Authority
-1582	Waters Edge Eco Lodge Kitchen	Meadow Lake	\N	\N	Prairie North Health Authority
+1556	Atton's Lake Park Concession	\N	\N	Cut Knife	Prairie North Health Authority
+1557	Atton's Lake Regional Park Golf Course Club House	\N	\N	Cut Knife	Prairie North Health Authority
+1558	Beach Side Store	\N	S9A 1T7	North Battleford	Prairie North Health Authority
+1559	Dexter Community Hall	\N	\N	\N	Prairie North Health Authority
+1560	Dutch Treat Mini Golf	\N	\N	Meadow Lake	Prairie North Health Authority
+1561	Frenchman Butte Tea House	\N	\N	Frenchman Butte	Prairie North Health Authority
+1562	Graham's Gas N Grill	\N	\N	Glaslyn	Prairie North Health Authority
+1563	Greig Lake Store	\N	\N	Meadow Lake	Prairie North Health Authority
+1564	Hillsvale Kitchen	\N	\N	\N	Prairie North Health Authority
+1565	Jackfish Lodge Golf & Conference Centre Kitchen	\N	\N	North Battleford	Prairie North Health Authority
+1566	Jc's Ice Cream & Concession	\N	\N	\N	Prairie North Health Authority
+1567	Jumbo Beach Dairy Bar	\N	\N	\N	Prairie North Health Authority
+1568	Lorie's Kountry Kitchen	\N	\N	\N	Prairie North Health Authority
+1569	Ministikwan Lake Lodge Cafe	\N	\N	\N	Prairie North Health Authority
+1570	O'grady's Restaurant	\N	\N	North Battleford	Prairie North Health Authority
+1571	Puttzin' Around	\N	\N	\N	Prairie North Health Authority
+1572	Sandy Beach Lake Regional Park Clubhouse Kitchen	\N	\N	\N	Prairie North Health Authority
+1573	Sask Hospital Cafeteria	\N	\N	\N	Prairie North Health Authority
+1574	Silver Lake Concession	\N	\N	\N	Prairie North Health Authority
+1575	South Bay Convenience	\N	\N	\N	Prairie North Health Authority
+1576	Spudz	Mobile Concession 4215-70th Ave	\N	Lloydminster	Prairie North Health Authority
+1577	The Lakehouse Cafe	\N	\N	\N	Prairie North Health Authority
+1578	The Scoop Concession	\N	\N	\N	Prairie North Health Authority
+1579	Turtle Grove Resort	\N	\N	\N	Prairie North Health Authority
+1580	Turtle Lake Mission Church	\N	\N	\N	Prairie North Health Authority
+1581	Vawn Hotel & Steak House	\N	\N	Vawn	Prairie North Health Authority
+1582	Waters Edge Eco Lodge Kitchen	\N	\N	Meadow Lake	Prairie North Health Authority
 1583	Grumpy Turtle's Cafe	219 Main Street	S0M 2G0	Paradise Hill	Prairie North Health Authority
 1584	Lam's Restaurant	221 Main Street,	S0M 2G0	Paradise Hill	Prairie North Health Authority
 1585	Paradise Hill Arena Concession	502 - 1st Street West,	S0M 2G0	Paradise Hill	Prairie North Health Authority
@@ -1736,20 +1736,20 @@ COPY location (id, name, address, postcode, city, rha) FROM STDIN;
 1716	Medstead Hotel Foodservice	102 - 1st. Ave.	S0M 1W0	Medstead	PA Parkland Health Authority
 1717	Meeting Lake Regional Park Concession	Meeting Lake	S0M 2L0	Meeting Lake	PA Parkland Health Authority
 1718	Full Circle	Hwy #2 Northside	\N	Northside	PA Parkland Health Authority
-1719	Amanda's Hot Spot	Miniwaka Beach - Candle Lake	\N	\N	PA Parkland Health Authority
-1720	Candle Lake Curling Rink	#14, Hwy 265, Candle Lake	\N	\N	PA Parkland Health Authority
-1721	Green Leaf Hutterite Colony	Leask	\N	\N	PA Parkland Health Authority
-1722	Memorial Lake Golf Course	Spiritwood	\N	\N	PA Parkland Health Authority
-1723	Putter's Lounge & Food Service	Hwy 263 Christopher Lake	\N	\N	PA Parkland Health Authority
-1724	Redberry Lake Regional Park	R.m. Of Redberry	\N	\N	PA Parkland Health Authority
-1725	River Acres Restaurant	Chitek Lake	\N	\N	PA Parkland Health Authority
-1726	River Lot Orchards Bistro	R L 13 45 - 27 W2m Rm 431	\N	\N	PA Parkland Health Authority
-1727	River Lot Orchards Kitchen & Winery	R L 13 45 - 27 W2m Rm 431	\N	\N	PA Parkland Health Authority
-1728	Ron's Catering	Big River	\N	\N	PA Parkland Health Authority
-1729	Spruce River Market Foodservice	Buckland	\N	\N	PA Parkland Health Authority
-1730	The Golden Boys Chip Wagon	Spiritwood	\N	\N	PA Parkland Health Authority
-1731	Triple S Concession	R.m. Of Round Hill #467	\N	\N	PA Parkland Health Authority
-1732	Williams Catering	Rm Of Big River	\N	\N	PA Parkland Health Authority
+1719	Amanda's Hot Spot	\N	\N	Candle Lake	PA Parkland Health Authority
+1720	Candle Lake Curling Rink	\N	\N	Candle Lake	PA Parkland Health Authority
+1721	Green Leaf Hutterite Colony	\N	\N	Leask	PA Parkland Health Authority
+1722	Memorial Lake Golf Course	\N	\N	Spiritwood	PA Parkland Health Authority
+1723	Putter's Lounge & Food Service	\N	\N	\N	PA Parkland Health Authority
+1724	Redberry Lake Regional Park	\N	\N	\N	PA Parkland Health Authority
+1725	River Acres Restaurant	\N	\N	\N	PA Parkland Health Authority
+1726	River Lot Orchards Bistro	\N	\N	\N	PA Parkland Health Authority
+1727	River Lot Orchards Kitchen & Winery	\N	\N	\N	PA Parkland Health Authority
+1728	Ron's Catering	\N	\N	Big River	PA Parkland Health Authority
+1729	Spruce River Market Foodservice	\N	\N	\N	PA Parkland Health Authority
+1730	The Golden Boys Chip Wagon	\N	\N	Spiritwood	PA Parkland Health Authority
+1731	Triple S Concession	\N	\N	\N	PA Parkland Health Authority
+1732	Williams Catering	\N	\N	\N	PA Parkland Health Authority
 1733	7 - 11 (15th Street West)	215 - 15th Street West	S6V 3P9	Prince Albert	PA Parkland Health Authority
 1734	7 - 11 (branion Drive)	606 Branion Drive	S6V 2S1	Prince Albert	PA Parkland Health Authority
 1735	7th Hole Concession	900 - 22nd Street East	S6V 1P1	Prince Albert	PA Parkland Health Authority
@@ -1891,8 +1891,8 @@ COPY location (id, name, address, postcode, city, rha) FROM STDIN;
 1871	Zorba's Family Restaurant	1401 - 2nd Ave. West	S6V 5B3	Prince Albert	PA Parkland Health Authority
 1872	Rabbit Lake Hotel Foodservice	1st Avenue	S0M 2L0	Rabbit Lake	PA Parkland Health Authority
 1873	Whistle Stop Coffee Shop & Groceries	104 Main Street	S0M 2L0	Rabbit Lake	PA Parkland Health Authority
-1874	Ness Creek Backstage Kitchen	C/o 718 - 10th Street East	S7N 0H1	Saskatoon	PA Parkland Health Authority
-1875	Third & Main Ness Creek Concession	C/o 718 - 10th Street East	S7N 0H1	Saskatoon	PA Parkland Health Authority
+1874	Ness Creek Backstage Kitchen	718 10th Street East	S7N 0H1	Saskatoon	PA Parkland Health Authority
+1875	Third & Main Ness Creek Concession	718 10th Street East	S7N 0H1	Saskatoon	PA Parkland Health Authority
 1876	Gobbles Putt For Par	104 Railway Avenue	\N	Shell Lake	PA Parkland Health Authority
 1877	Shell Lake Metis Local 81 Kitchen	Shell Lake	\N	Shell Lake	PA Parkland Health Authority
 1878	Teddy Bear's Den (shell Lake Hotel)	1st Avenue	S0J 2G0	Shell Lake	PA Parkland Health Authority
@@ -2149,17 +2149,17 @@ COPY location (id, name, address, postcode, city, rha) FROM STDIN;
 2129	Odessa Community Arena Concession	Odessa, Sk	\N	Odessa	Regina QuAppelle Health Authority
 2130	Odessa Hotel	328 Railway Avenue	S0G 3S0	Odessa	Regina QuAppelle Health Authority
 2131	Renie Ann's At Odessa	401 1st Ave.	S0G 3S0	Odessa	Regina QuAppelle Health Authority
-2132	Arm River Hutterian Brethren Kitchen	Lumsden	\N	\N	Regina QuAppelle Health Authority
-2133	Berry Good Farms Ltd.	Moosomin	\N	\N	Regina QuAppelle Health Authority
-2134	K & S Accommodations Kitchen	Dufferin	\N	\N	Regina QuAppelle Health Authority
-2135	Katepwa Rv & Family Nine Clubhouse	Abernethy	\N	\N	Regina QuAppelle Health Authority
-2136	Over The Hill Orchards	Lumsden	\N	\N	Regina QuAppelle Health Authority
-2137	Pumpkin Hollow Cafe	Lumsden	\N	\N	Regina QuAppelle Health Authority
-2138	Pumpkin Hollow Concession	Lumsden	\N	\N	Regina QuAppelle Health Authority
-2139	Reinhart Enterprises Hot Dog Cart ( Mobile)	South Qu'appelle	\N	\N	Regina QuAppelle Health Authority
-2140	Russell Hill Artisan Foods	Lumsden	\N	\N	Regina QuAppelle Health Authority
-2141	The Roc Church International	Sherwood	\N	\N	Regina QuAppelle Health Authority
-2142	Triple R Concession (mobile)	Carry The Kettle First Nations	\N	\N	Regina QuAppelle Health Authority
+2132	Arm River Hutterian Brethren Kitchen	\N	\N	Lumsden	Regina QuAppelle Health Authority
+2133	Berry Good Farms Ltd.	\N	\N	Moosomin	Regina QuAppelle Health Authority
+2134	K & S Accommodations Kitchen	\N	\N	\N	Regina QuAppelle Health Authority
+2135	Katepwa Rv & Family Nine Clubhouse	\N	\N	Abernethy	Regina QuAppelle Health Authority
+2136	Over The Hill Orchards	\N	\N	Lumsden	Regina QuAppelle Health Authority
+2137	Pumpkin Hollow Cafe	\N	\N	Lumsden	Regina QuAppelle Health Authority
+2138	Pumpkin Hollow Concession	\N	\N	Lumsden	Regina QuAppelle Health Authority
+2139	Reinhart Enterprises Hot Dog Cart ( Mobile)	\N	\N	\N	Regina QuAppelle Health Authority
+2140	Russell Hill Artisan Foods	\N	\N	Lumsden	Regina QuAppelle Health Authority
+2141	The Roc Church International	\N	\N	\N	Regina QuAppelle Health Authority
+2142	Triple R Concession (mobile)	\N	\N	\N	Regina QuAppelle Health Authority
 2143	Orange Moon	334 North Front St.	S0G 3W0	Pense	Regina QuAppelle Health Authority
 2144	Pense Memorial Rink Concession	335 Manitoba Street	S0G 3W0	Pense	Regina QuAppelle Health Authority
 2145	Penzance Community Centre	Penzance, Sk	\N	Penzance	Regina QuAppelle Health Authority
@@ -3265,20 +3265,20 @@ COPY location (id, name, address, postcode, city, rha) FROM STDIN;
 3245	Osler Community Hall	508 1st St	S0K 3A0	Osler	Saskatoon Health Authority
 3246	Osler General Store Bakery And Deli	120 1st St	S0K 3A0	Osler	Saskatoon Health Authority
 3247	The Osler Restaurant	206 1st Ave	S0K 3A0	Osler	Saskatoon Health Authority
-3248	50's Blacktop Olive Tree Restaurant	Laird	\N	\N	Saskatoon Health Authority
-3249	Auto Clearing Motor Speedway	Corman Park	\N	\N	Saskatoon Health Authority
-3250	Champetre County Wild West Resort	Grant	\N	\N	Saskatoon Health Authority
+3248	50's Blacktop Olive Tree Restaurant	\N	\N	\N	Saskatoon Health Authority
+3249	Auto Clearing Motor Speedway	\N	\N	\N	Saskatoon Health Authority
+3250	Champetre County Wild West Resort	\N	\N	\N	Saskatoon Health Authority
 3251	Food For The Crew Mobile Concession	\N	\N	\N	Saskatoon Health Authority
 3252	Jigger's Lakehouse	\N	\N	\N	Saskatoon Health Authority
-3253	Leaning Maple Meats - Catering	Mckillop	\N	\N	Saskatoon Health Authority
+3253	Leaning Maple Meats - Catering	\N	\N	\N	Saskatoon Health Authority
 3254	Nata's Teahouse	\N	\N	\N	Saskatoon Health Authority
-3255	Ok Corral Pavilion Kitchen	Corman Park	\N	\N	Saskatoon Health Authority
-3256	Riverbend Ice Cream Parlour	Laird	\N	\N	Saskatoon Health Authority
-3257	Salvation Army Beaver Creek Bible Camp	Rm 344 Se 6-35-5 W3m	\N	\N	Saskatoon Health Authority
-3258	Solar Gardens Firestick Cafe	Rm 345 Sw 32-34-6 W3m	\N	\N	Saskatoon Health Authority
+3255	Ok Corral Pavilion Kitchen	\N	\N	\N	Saskatoon Health Authority
+3256	Riverbend Ice Cream Parlour	\N	\N	\N	Saskatoon Health Authority
+3257	Salvation Army Beaver Creek Bible Camp	\N	\N	\N	Saskatoon Health Authority
+3258	Solar Gardens Firestick Cafe	\N	\N	\N	Saskatoon Health Authority
 3259	The 19th Hole	\N	\N	\N	Saskatoon Health Authority
-3260	The Red Bull	Hwy 16	\N	\N	Saskatoon Health Authority
-3261	Twenty Four Seven Food Counter	Big Quill	\N	\N	Saskatoon Health Authority
+3260	The Red Bull	\N	\N	\N	Saskatoon Health Authority
+3261	Twenty Four Seven Food Counter	\N	\N	\N	Saskatoon Health Authority
 3262	Bregenser's Electric Ltd.	115 Centre St	S0K 3G0	Pilger	Saskatoon Health Authority
 3263	Pilger Community Hall Kitchen	113 Centre St	S0K 3G0	Pilger	Saskatoon Health Authority
 3264	Pilger Tavern	113 Centre St	S0K 3G0	Pilger	Saskatoon Health Authority
@@ -3320,9 +3320,9 @@ COPY location (id, name, address, postcode, city, rha) FROM STDIN;
 3300	33rd Street Cafe	1624 33rd St W	S7L 0X3	Saskatoon	Saskatoon Health Authority
 3301	3d Pizza	E-511 33rd St West	S7L 0V7	Saskatoon	Saskatoon Health Authority
 3302	7 - 11 22nd Street West	1528 22nd St W	S7M 0T1	Saskatoon	Saskatoon Health Authority
-3303	7 - Eleven Central	1100 A Central Ave	S7N 2H1	Saskatoon	Saskatoon Health Authority
-3304	7 Eleven - 2nd Ave. North	380 2nd Ave N	S7K 2B9	Saskatoon	Saskatoon Health Authority
-3305	7 Eleven - Idylwyld	1435 Idylwyld Dr N	S7L 1A5	Saskatoon	Saskatoon Health Authority
+3303	7 Eleven	1100 A Central Ave	S7N 2H1	Saskatoon	Saskatoon Health Authority
+3304	7 Eleven	380 2nd Ave N	S7K 2B9	Saskatoon	Saskatoon Health Authority
+3305	7 Eleven	1435 Idylwyld Dr N	S7L 1A5	Saskatoon	Saskatoon Health Authority
 3306	7 Eleven Food Store  #29930	1015 Mckercher Dr	S7H 5P1	Saskatoon	Saskatoon Health Authority
 3307	7 Eleven Food Store - 8th St.	1930 8th St E	S7H 0T7	Saskatoon	Saskatoon Health Authority
 3308	7 Eleven Food Store	3303 A 33rd St W	S7L 4P5	Saskatoon	Saskatoon Health Authority
@@ -4357,7 +4357,7 @@ COPY location (id, name, address, postcode, city, rha) FROM STDIN;
 4337	Wynyard Legion # 101	202 3rd Street E	S0K 4T0	Wynyard	Saskatoon Health Authority
 4338	Wynyard Memorial Arena Concession	310 Ave D E	S0A 4T0	Wynyard	Saskatoon Health Authority
 4339	Young Centennial Rink Kitchen	115 Queen St	S0K 4Y0	Young	Saskatoon Health Authority
-4340	Hidden Valley Golf Pro Shop Concession	Estevan	\N	\N	Sun Country Health Authority
+4340	Hidden Valley Golf Pro Shop Concession	\N	\N	Estevan	Sun Country Health Authority
 4341	Clean Harbors Services	26229 Township Rd 531 A Unit 216	T7X 5A4	Acheson	Sun Country Health Authority
 4342	Alameda Hotel	127 - 5th Street	S0C 0A0	Alameda	Sun Country Health Authority
 4343	Alameda Legion Branch 267	403 - 2nd Avenue	S0C 0A0	Alameda	Sun Country Health Authority
@@ -4553,7 +4553,7 @@ COPY location (id, name, address, postcode, city, rha) FROM STDIN;
 4533	The Little Amego Inn Cafe	306 Main Street	S0C 1Y0	Ogema	Sun Country Health Authority
 4534	With A Twist	114 Main St	S0C 1Y0	Ogema	Sun Country Health Authority
 4535	Young Community Hall	201 Main St	S0K 4Y0	Young	Saskatoon Health Authority
-4536	A Little Taste Of Heaven Catering Inc	Benson	\N	\N	Sun Country Health Authority
+4536	A Little Taste Of Heaven Catering Inc	\N	\N	Benson	Sun Country Health Authority
 4537	Canam Country Inn Dining Room	Hwy 35	S0C 1Z0	Oungre	Sun Country Health Authority
 4538	Souris Valley Communiplex Kitchen	Oungre	\N	Oungre	Sun Country Health Authority
 4539	C.k. Cafe	215 Main Street	S0C 2B0	Oxbow	Sun Country Health Authority
