@@ -29,7 +29,7 @@ object LocationController extends DetectLangController {
    */
   def findLocation(city: String) = Action { implicit request =>
     Location.getLocationsByCity(city.toLowerCase) match {
-      case Success(cityLocations) if !cityLocations.isEmpty => 
+      case Success(cityLocations) if !cityLocations.isEmpty =>
         Ok(views.html.locations.findLocation(city, cityLocations))
       case Success(_) =>
         Logger.warn("User found empty city ('" + city + "')")
@@ -52,5 +52,12 @@ object LocationController extends DetectLangController {
         Logger.error("Showing location failed", ex)
         InternalServerError(views.html.errors.error500(ex))
     }
+  }
+  
+  /**
+   * Displays more information about a violation.
+   */
+  def violationInfo(locationId: Int, violationId: Int) = Action { implicit request =>
+    Ok(views.html.general.violationInfo(locationId, violationId))
   }
 }

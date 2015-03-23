@@ -1,15 +1,22 @@
 # Routes
 # This file defines all application routes (Higher priority routes first)
 
-GET     /                           controllers.LocationController.selectCity
-GET     /find/:cityName             controllers.LocationController.findLocation(cityName: String)
-GET     /view/:locationId           controllers.LocationController.showLocation(locationId: Int)
-GET     /map                        controllers.MapController.showMap(address: String, city: String)
-GET     /about                      controllers.Application.about
-GET     /language                   controllers.Application.setLanguage(lang: String)
-GET     /view/:locationId/violation/:violationId controllers.Application.violationInfo(locationId: Int, violationId: Int)
+GET     /                                        controllers.LocationController.selectCity
+GET     /find/:cityName                          controllers.LocationController.findLocation(cityName: String)
+GET     /view/:locationId                        controllers.LocationController.showLocation(locationId: Int)
+GET     /map                                     controllers.MapController.showMap(address: String, city: String)
+GET     /citymap                                 controllers.MapController.showCityMap(city: String)
+GET     /about                                   controllers.Application.about
+GET     /language                                controllers.Application.setLanguage(lang: String)
+GET     /view/:locationId/violation/:violationId controllers.LocationController.violationInfo(locationId: Int, violationId: Int)
+
 # Programmatic access to resources (eg, via AJAX or for scripts)
-GET     /jsRoutes                   controllers.JsRoutes.javascriptRoutes
+GET     /jsRoutes                                controllers.JsRoutes.javascriptRoutes
+
+# Caching control
+GET     /cache                                   controllers.Application.prepopulateCache
+GET     /cache/clear                             controllers.Application.clearCache
 
 # Map static resources from the /public folder to the /assets URL path
-GET     /assets/*file               controllers.Assets.at(path="/public", file)
+GET     /assets/*file                            controllers.Assets.at(path="/public", file)
+

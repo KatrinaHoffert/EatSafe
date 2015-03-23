@@ -14,6 +14,7 @@
 /* Height 100% only works if all containers are 100% height. */
 html, body {
   height: 100%;
+  overflow-x: hidden; /* x-scrolling should never happen. */
 }
 
 /* Headings can't be too large, since restaurants can have long names */
@@ -128,6 +129,13 @@ body {
   padding-bottom: 0.5em;
 }
 
+
+#infoWindow {
+    line-height: 1.35;
+    overflow: hidden;
+    white-space: nowrap;
+}
+
 /* Smaller headings for other pages */
 .smallHeading {
   background-color: @bannerBackgroundColor;
@@ -203,7 +211,7 @@ body {
 /* Rating styles. These generate everything we need to make a "rating stamp". 
    They set the text, too, so you just need an empty span with this class. The
    class names correspond with the rating names (see the Rating enum). */
-.rating_good:before, .rating_fair:before, .rating_poor:before, .rating_unknown:before {
+.msg_rating_good, .msg_rating_fair, .msg_rating_poor, .msg_rating_unknown {
     color: white;
     text-shadow: -1px 0 black, 0 1px black, 1px 0 black, 0 -1px black,
       -1px -1px black, 1px 1px black, -1px 1px black, 1px -1px black;
@@ -214,16 +222,10 @@ body {
     font-weight: bold;
 }
 
-.rating_good:before { background-color: green; content: "Good"; }
-.rating_fair:before { background-color: #fc0; content: "Fair"; }
-.rating_poor:before { background-color: red; content: "Poor"; }
-.rating_unknown:before { background-color: grey; content: "N/A"; }
-
-/* Provisional, message-friendly rating styles. */
-.msg_rating_good { font-weight: bold; color: green; }
-.msg_rating_fair { font-weight: bold; color: #fco; }
-.msg_rating_fair { font-weight: bold; color: red; }
-.msg_rating_unknown { font-weight: bold; color: grey; }
+.msg_rating_good { background-color: green; }
+.msg_rating_fair { background-color: #fc0; }
+.msg_rating_poor { background-color: red; }
+.msg_rating_unknown { background-color: grey; }
 
 /* Formatting the extra data at the bottom of the location view as a list */
 .locationExtraData {
@@ -287,6 +289,56 @@ body {
   border-radius: 0;
   font-size: 1.25em;
   cursor: pointer;
+}
+
+/* Multi-map nearby locations sidebar heading */
+.nearbyHeading {
+  color: #ccc;
+  margin-left: 0.5em;
+}
+
+/* Wrapper used for multimap page shouldn't have grey background for desktop 
+   (which affects the background near the toggle locations button) */
+#wrapper, #page-content-wrapper {
+  background-color: white;
+}
+
+/* No body padding around the body of the multi-map. */
+#page-content-wrapper {
+  padding: 0 !important;
+}
+
+/* Slight gap below toggle button. */
+#menu-toggle {
+  margin: 0.25em;
+}
+
+/* The line height being set in the sidebar causes wrapping of long lines to
+   look weird. Use padding on the anchors to get a better effect. */
+.sidebar-nav li {
+  line-height: 1 !important;
+
+  a {
+    padding: 1em 1em;
+  }
+
+  /* Also, the text indent caused wrapped lines to indent differntly. */
+  text-indent: 0 !important;
+}
+
+/* Button to close the side bar */
+#sidebar-close {
+  background: transparent;
+  color: #ccc;
+  border: none;
+  float: right;
+  padding-right: 2em;
+}
+
+/* Formatting for the info window of the multi-map. */
+#infoWindow h3 {
+  margin-top: 0.25em;
+  margin-bottom: 0.25em;
 }
 
 /* We want the language picker select to fit in with the footer. */
