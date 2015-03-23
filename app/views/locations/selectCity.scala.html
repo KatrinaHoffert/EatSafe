@@ -9,7 +9,7 @@
  *
  * @param municipalities A list of all the municipalities the user may choose from.
  *@
-@(municipalities: Seq[String])
+@(municipalities: Seq[String])(implicit lang: Lang)
 
 @scripts = {
   <script src="http://maps.googleapis.com/maps/api/js?sensor=false"></script>
@@ -88,14 +88,20 @@
           // city
           for(i = 0; i < cities.length; i++) {
             if(cities[i].toLowerCase() == municipality.long_name.toLowerCase()) {
-              $("#municipality").val(municipality.long_name.toLowerCase());
+              // Check to ensure they haven't already begun typing
+      	    if (($.trim($("#municipality").val())).length == 0) {
+                $("#municipality").val(municipality.long_name.toLowerCase());
+              }
               console.log("Found good city: " + municipality.long_name);
+              $("#badGeolocation").text("");
               return;
             }
           }
 
           console.log("Found unknown city: " + municipality.long_name);
+          $("#badGeolocation").text("@Messages("locations.selectCity.badGeolocate")");
         } else {
+          $("#badGeolocation").text("@Messages("locations.selectCity.badGeolocate")");
           console.log("Bad request: " + status);
         }
       })
@@ -104,16 +110,19 @@
     // Set the user's location when they click the locate button
     $("#typeahead-locate").on("click", function() {
       if(navigator.geolocation) {
+        resetTypeahead();
         navigator.geolocation.getCurrentPosition(populateField);
       }
     });
-
-    // Typeahead friendly clearing of the city
-    $("#reset-button").on("click", function() {
+    
+    function resetTypeahead() {
       $("#municipality").val("");
       $(".typeahead-hint").val("");
       $(".typeahead-result").remove();
-    });
+    }
+
+    // Typeahead friendly clearing of the city
+    $("#reset-button").on("click", resetTypeahead);
   </script>
 }
 
@@ -130,7 +139,7 @@
       <div class="typeahead-container">
         <div class="typeahead-field">
           <span class="typeahead-query">
-            <input id="municipality" type="search" placeholder="Search" autocomplete="off">
+            <input id="municipality" type="search" placeholder="@Messages("locations.selectCity.searchPlaceholder")" autocomplete="off">
           </span>
           <span class="glyphicon glyphicon-remove-sign btn-lg" id="reset-button"></span>
           <span class="typeahead-button">
@@ -141,5 +150,17 @@
         </div>
       </div>
     </form>
+    
+    <br />
+    
+    <div id="badGeolocation" class="generalError">
+      
+    </div>
+
+    <div class="unknownCityLink">
+      <a href="@routes.LocationController.findLocation("Unknown city")">
+        @Messages("locations.selectCity.searchUnknownCity")
+      </a>
+    </div>
   </div>
 }

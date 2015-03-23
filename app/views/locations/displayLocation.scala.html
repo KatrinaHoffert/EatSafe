@@ -5,7 +5,7 @@
 @**
  * Displays a location with inspection data, ratings, etc.
  *@
-@(location: Location)
+@(location: Location)(implicit lang: Lang)
 
 @mainBody(title = Messages("locations.view.titleStart")+ ": "  + location.name +
     location.address.map(" [" + _ + "]").getOrElse(""), hasFooter = true) {
@@ -39,12 +39,13 @@
     }
 
     <div class="ratingSection">
-      Rating: <span class="rating_@location.rating.toString"></span>
+      @Messages("locations.view.ratingLabel"): <span class="msg_rating_@location.rating.toString">
+      									@Messages("locations.view.rating_" + location.rating.toString )</span>
     </div>
 
     @if(location.hasInspections) {
-      Most recent issues:<span class="faded floatRight">[@location.inspections(0).date]</span>
-      @displayInspection(location.inspections(0))
+      @Messages("locations.view.mostRecent"):<span class="faded floatRight">[@location.inspections(0).date]</span>
+      @displayInspection(location.id, location.inspections(0))
 
       @displayPastInspections(location)
 
