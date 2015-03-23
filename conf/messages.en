@@ -42,6 +42,7 @@ maps.multiMap.findMe=Move to me
 maps.multiMap.moveToMeInaccurate=Can't get an accurate enough position from your device.
 maps.multiMap.moveToMeFailed=Failed to get your position.
 maps.multiMap.moveToMeUnsupported=Your browser doesn't support finding your location.
+maps.multiMap.infoButton=More Info
 
 # About page
 about.title=About EatSafe Saskatchewan
