@@ -14,10 +14,14 @@
   @headingSmall(Messages("general.applicationName"))
 
   <div class="smallPadding">
-    <h2>This page contains more information about violation @violationId.</h2>
-    <p>Need more info!</p>
-    <button onclick="location.href='@routes.LocationController.showLocation(locationId)'">Go Back</button>
-	<p>See other violations:</p>
+    <h2>More information about violation @violationId:</h2>
+    @displayMoreInfo(violationId)
+    <button id="goBack" onclick="location.href='@routes.LocationController.showLocation(locationId)'">Go Back</button>
+	<p>See other violations: </p>
+	<select id="selectViolation">
+		<option value = "1" onclick="location.href='@routes.Application.violationInfo(locationId, 1)'">1</option>
+		<option value = "2" onclick="location.href='@routes.Application.violationInfo(locationId, 2)'">2</option>
+	</select>
 	
 	
   </div>
