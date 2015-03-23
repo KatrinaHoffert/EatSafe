@@ -1,0 +1,400 @@
+@import general._
+@import models._
+@import controllers._
+@import util.TypeConversions
+
+@**
+ * Displays the multi-map.
+ *
+ * @param city The name of the city to center the map over, initially.
+ * @param locations All locations to be plotted. These don't have to be complete locations. They
+ * merely must have the coordinates and location.
+ *@
+@(city: String, locations: Seq[Location])
+
+@scripts = {
+  <script src="https://maps.googleapis.com/maps/api/js?v=3.exp&signed_in=true"></script>
+  <script src="@controllers.routes.Assets.at("javascripts/spin.min.js")"></script>
+  <script>
+    /**
+     * Maximum number of nearby locations listed.
+     */
+    var MAX_NEARBY = 8;
+
+    /**
+     * Miniumum accuracy of geo-positioning in order to have nearby locations, in meters. If the
+     * location system is too inaccurate, the nearby locations will be too inaccurate.
+     */
+    var MIN_ACCURACY = 2000;
+
+    /**
+     * Default zoom level of the map and when being taken to a location. In Google Maps API's units.
+     */
+    var DEFAULT_ZOOM = 15;
+
+    /**
+     * Viewport width at which below this, the sidebar opens closed and automatically closes when a
+     * location is selected. This should be kept consistent with the sidebar CSS.
+     */
+    var SIDEBAR_AUTOCLOSE_WIDTH = 950;
+
+    var locations = @Html(TypeConversions.locationsToMultiMapJson(locations).toString);
+
+    /**
+     *  An aray that stores all of the markers about to be displayed (or are currently displayed)
+     *  on the map.
+     */
+    var markers = [];
+
+    function sizeMapCanvas() {
+      // Set the map container size to fill the remaining space
+      var canvas = $("#map-canvas");
+      var canvasHeight = $(window).height() - canvas.offset().top;
+      canvas.css("height", canvasHeight + "px");
+      canvas.css("width", "100%");
+    }
+
+    $(window).resize(sizeMapCanvas);
+    sizeMapCanvas();
+
+    // Create the map
+    var geocoder;
+    var map;
+
+    /** Initializes the map. */
+    function initialize() {
+      geocoder = new google.maps.Geocoder();
+      // Default center is Saskatoon
+      var latlng = new google.maps.LatLng(52.1333, -106.6833);
+      map = new google.maps.Map(document.getElementById("map-canvas"), {
+        zoom: DEFAULT_ZOOM,
+        center: latlng
+      });
+      positionOverCity();
+
+      google.maps.event.addListener(map, 'idle', showMarkers);
+    }
+    google.maps.event.addDomListener(window, 'load', initialize);
+
+    // Retain center when resizing map. Otherwise the resizing will retain the top left corner and
+    // we may end up hiding the marker from view, which is probably in the center of the window
+    // (although it doesn't have to be and this doesn't depend on the marker position). This
+    // helps ensure that resizing the map still looks at the same thing (assuming the thing is
+    // in fact in the center).
+    google.maps.event.addDomListener(window, "resize", function() {
+      if(map != null) {
+        var center = map.getCenter();
+        google.maps.event.trigger(map, "resize");
+        map.setCenter(center);
+      }
+    });
+
+    /**
+     * Positions the map at the city that this page is targetted on (from server side).
+     */
+    function positionOverCity() {
+      var address = "@city, Saskatchewan";
+      geocoder.geocode( { "address": address }, function(results, status) {
+        if(status == google.maps.GeocoderStatus.OK) {
+          map.setCenter(results[0].geometry.location);
+          map.setZoom(DEFAULT_ZOOM);
+        }
+        else {
+          // This would only happen if there's a city name that Google Maps can't find
+          alert("Geocoding failed: " + status);
+        }
+      });
+    }
+
+    /** Extend Number object with method to convert numeric degrees to radians */
+    if (typeof Number.prototype.toRadians == 'undefined') {
+      Number.prototype.toRadians = function() { return this * Math.PI / 180; };
+    }
+
+    /**
+     * Calculates distances between two coordinates.
+     * 
+     * Uses code from <http://www.movable-type.co.uk/scripts/latlong.html>
+     *
+     * @@return Distance between the two points in meters.
+     */
+    function calculateDistances(lat1, long1, lat2, long2) {
+        var R = 6371; // km
+        var φ1 = lat1.toRadians();
+        var φ2 = lat2.toRadians();
+        var Δφ = (lat2-lat1).toRadians();
+        var Δλ = (long2-long1).toRadians();
+        
+        var a = Math.sin(Δφ/2) * Math.sin(Δφ/2) +
+                Math.cos(φ1) * Math.cos(φ2) *
+                Math.sin(Δλ/2) * Math.sin(Δλ/2);
+        var c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1-a));
+        var d = R * c;
+        
+        return d;
+    }
+
+    /**
+     * Enum for reasons that getting the coordinates could fail.
+     *
+     *  * UNSUPPORTED: User's browser doesn't support GeoLocation
+     *  * FAILED: Miscellanious failure. Either user blocked the app or something is stopping their
+     *            device. Or a timeout.
+     *  * INNACCURATE: Coordinates successfully found, but too innaccurate (based on MIN_ACCURACY).
+     */
+    var CoordinateFailureReason = {
+      UNSUPPORTED : 0,
+      FAILED : 1,
+      INNACCURATE : 2
+    };
+
+    // Used to store user coordinates once found
+    var userCoordinates;
+
+    /**
+     * Gets the user's coordinates.
+     *
+     * @@param successCallback Called with latitude and longitude if coordinates are found.
+     * @@param failureCallback Called with a CoordinateFailureReason if we couldn't find the
+     * user's coordinates.
+     */
+    function getUserCoordinates(successCallback, failureCallback) {
+      if(userCoordinates == null) {
+        if("geolocation" in navigator) {
+          navigator.geolocation.getCurrentPosition(function(position) {
+            if(position.coords.accuracy <= MIN_ACCURACY) {
+              userCoordinates = {
+                latitude: position.coords.latitude,
+                longitude: position.coords.longitude
+              };
+
+              successCallback(position.coords.latitude, position.coords.longitude);
+            }
+            else {
+              failureCallback(CoordinateFailureReason.INNACCURATE);
+            }
+          },
+          function() {
+            failureCallback(CoordinateFailureReason.FAILED);
+          });
+        }
+        else {
+          failureCallback(CoordinateFailureReason.UNSUPPORTED);
+        }
+      }
+      else {
+        successCallback(userCoordinates.latitude, userCoordinates.longitude);
+      }
+    }
+
+    /**
+     * Populates the list of nearby locations with a list of anchors that, when clicked, scroll the
+     * map to the coordinates of the location with the default zoom level.
+     */
+    function populateNearbyList() {
+      getUserCoordinates(function(userLatitude, userLongitude) {
+        console.log("User coords: " + userLatitude + ", " + userLongitude);
+
+        var locationsWithDistance = locations.map(function(location, index, array) {
+          location.distanceFromUser = calculateDistances(userLatitude, userLongitude,
+              location.latitude, location.longitude);
+          return location;
+        });
+        var closestLocations = locationsWithDistance.sort(function(loc1, loc2) {
+          return loc1.distanceFromUser - loc2.distanceFromUser;
+        }).slice(0, MAX_NEARBY);
+
+        var sidebarHtml = closestLocations.map(function(location, index, array) {
+          // Rounded to 2 decimal places
+          var roundedDistance = Math.round(location.distanceFromUser * 100) / 100;
+          return ("<li>" +
+              "  <a href='#' onclick='goToCoords({0}, {1}, true);'>" +
+              "    {2}<br />{3} @Messages("maps.multiMap.kmAway")" +
+              "  </a>" +
+              "</li>").format(location.latitude, location.longitude, location.name, roundedDistance);
+        });
+
+        $("#nearbyList").html(sidebarHtml.join("\n"));
+      },
+      function(error) {
+        if(error === CoordinateFailureReason.INNACCURATE) {
+          $("#nearbyList a").html("@Messages("maps.multiMap.locationInaccurate")");
+        }
+        else if(error === CoordinateFailureReason.FAILED) {
+          $("#nearbyList a").html("@Messages("maps.multiMap.locationFailed")");
+        }
+        else {
+          $("#nearbyList a").html("@Messages("maps.multiMap.locationNotSupported")");
+        }
+      });
+    }
+    populateNearbyList();
+
+    // Toggles display of the sidebar
+    $("#menu-toggle, #sidebar-close").on("click", function(e) {
+      e.preventDefault();
+      $("#wrapper").toggleClass("toggled");
+    });
+
+    // Moves the map to the user's coordinates
+    $("#moveToMe").on("click", function() {
+      // See http://fgnass.github.io/spin.js
+      var spinnerOpts = {
+        lines: 13, // The number of lines to draw
+        length: 20, // The length of each line
+        width: 10, // The line thickness
+        radius: 30, // The radius of the inner circle
+        corners: 1, // Corner roundness (0..1)
+        rotate: 0, // The rotation offset
+        direction: 1, // 1: clockwise, -1: counterclockwise
+        color: '#000', // #rgb or #rrggbb or array of colors
+        speed: 1, // Rounds per second
+        trail: 60, // Afterglow percentage
+        shadow: false, // Whether to render a shadow
+        hwaccel: false, // Whether to use hardware acceleration
+        className: 'spinner', // The CSS class to assign to the spinner
+        zIndex: 2e9, // The z-index (defaults to 2000000000)
+        top: '50%', // Top position relative to parent
+        left: '50%' // Left position relative to parent
+      };
+      var spinner = new Spinner(spinnerOpts).spin($("body")[0]);
+
+      getUserCoordinates(function(latitude, longitude) {
+        goToCoords(latitude, longitude, false);
+        spinner.stop();
+      },
+      function(error) {
+        if(error === CoordinateFailureReason.INNACCURATE) {
+          alert("@Messages("maps.multiMap.moveToMeInaccurate")");
+        }
+        else if(error === CoordinateFailureReason.FAILED) {
+          alert("@Messages("maps.multiMap.moveToMeInaccurate")");
+        }
+        else {
+          alert("@Messages("maps.multiMap.moveToMeUnsupported")");
+        }
+        spinner.stop();
+      });
+    });
+
+    /**
+     * Scrolls the map to a new location and resets the zoom. If the viewport width is such that
+     * the sidebar is defaultly closed, we close the sidebar on selecting a location.
+     *
+     * @@param toggle If true, toggles the sidebar (which will close it if it's open).
+     */
+    function goToCoords(lat, long, toggle) {
+      map.panTo(new google.maps.LatLng(lat, long));
+      map.setZoom(DEFAULT_ZOOM);
+
+      if(toggle && $(window).width() < SIDEBAR_AUTOCLOSE_WIDTH) {
+         $("#wrapper").toggleClass("toggled");
+      }
+    }
+
+    /**
+     *  Calculates all of the locations that are within the viewport.
+     */
+    function showMarkers(){
+      deleteMarkers();
+
+      console.log(map.getBounds().getNorthEast().k);
+      console.log(map.getBounds().getNorthEast().D);
+      console.log(map.getBounds().getSouthWest().k);
+      console.log(map.getBounds().getSouthWest().D);
+
+      //the latlong values for Northwest and South east respectively
+      var NELat = map.getBounds().getNorthEast().k;
+      var NELng = map.getBounds().getNorthEast().D;
+      var SWLat = map.getBounds().getSouthWest().k;
+      var SWLng = map.getBounds().getSouthWest().D;
+
+      var infowindow = new google.maps.InfoWindow();
+
+      for(var i = 0; i < locations.length; ++i) {
+        var cords = new google.maps.LatLng(locations[i].latitude, locations[i].longitude);
+
+        // This tests to see if the given location is located in the current view of the map
+        if(locations[i].latitude < NELat && locations[i].latitude > SWLat
+            && locations[i].longitude < NELng && locations[i].longitude > SWLng) {
+          // Gets rid of the '#'
+          var color = locations[i].ratingColor.slice(1);
+          var url = jsRoutes.controllers.LocationController.showLocation(locations[i].id).url;
+          var infoWindowContents = "<div id='infoWindow'>"+
+             "<h3>"+ locations[i].name + "</h3>";
+
+          // It's possible that we could have something with manually set coordinates and no
+          // real address in the future
+          if(locations[i].address != null) infoWindowContents += locations[i].address + "<br />";
+          infoWindowContents += "<a href='" + url + "'>More info</a></div>";
+
+          var marker = new google.maps.Marker({
+            position: cords,
+            name:     locations[i].name,
+            id:       locations[i].id,
+            colour:   locations[i].ratingColor,
+            icon:     "http://chart.apis.google.com/chart?chst=d_map_pin_letter&chld=•|" + color,
+            contentString: infoWindowContents,
+            map: map
+          });
+
+          google.maps.event.addListener(marker, 'click', function () {
+            infowindow.setContent(this.contentString);
+            infowindow.open(map, this);
+          });
+
+          markers.push(marker);
+        }
+      }
+
+      setAllMap(map);
+    }
+
+
+
+    /** Sets all markers in the array onto the map. */
+    function setAllMap(map) {
+      for (var i = 0; i < markers.length; i++) {
+        markers[i].setMap(map);
+      }
+    }
+
+    /** Clears the markers from the map and the marker array. */
+    function deleteMarkers() {
+      setAllMap(null);
+      markers = [];
+    }
+  </script>
+}
+
+@mainBody(title = Messages("maps.multiMap.title"), moreScripts = scripts) {
+  <link rel="stylesheet" href="@controllers.routes.Assets.at("stylesheets/simple-sidebar.css")" />
+  <div id="wrapper">
+    <div id="sidebar-wrapper">
+      <ul class="sidebar-nav">
+        <h2 class="nearbyHeading">
+          @Messages("maps.multiMap.nearbyLocationsHeading")
+          <button class="btn btn-default" id="sidebar-close">
+            <span class="glyphicon glyphicon-menu-left"></span>
+          </button>
+        </h2>
+        <div id="nearbyList">
+          <li>
+            <a href="#">@Messages("maps.multiMap.sidebarLoading")</a>
+          </li>
+        </div>
+      </ul>
+    </div>
+    <div id="page-content-wrapper">
+      @headingSmall(Messages("general.applicationName"))
+      <a href="#menu-toggle" class="btn btn-default" id="menu-toggle">
+        <span class="glyphicon glyphicon-map-marker" aria-hidden="true"></span>
+        @Messages("maps.multiMap.nearbyLocationsToggle")
+      </a>
+      <button class="btn btn-default" id="moveToMe">
+        @Messages("maps.multiMap.findMe")
+      </button>
+      <div id="map-canvas"></div>
+    </div>
+  </div>
+}

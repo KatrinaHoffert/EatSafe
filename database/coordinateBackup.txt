@@ -426,6 +426,7 @@ Moose Jaw	955 Thatcher Dr. E.	50.412037	-105.526544
 Moose Jaw	28 Manitoba St E	50.389780	-105.533717
 Moose Jaw	815 Main St. N.	50.397414	-105.534595
 Moose Jaw	1105 Elgin Ave	50.401149	-105.556640
+Dinsmore	Main Street	51.332612	-107.447341
 Moose Jaw	Highway 1 East & Thatcher Drive	50.412560	-105.506063
 Moose Jaw	100 2nd Ave Ne	50.391026	-105.529684
 Moose Jaw	855 Macdonald St.	50.404834	-105.557374
@@ -511,7 +512,6 @@ Bladworth	Main Street	51.367934	-106.142052
 Broderick	Main Street	51.487935	-106.913275
 Broderick	109 King Street	51.488250	-106.919386
 Cando	Elm Street	52.373194	-108.213048
-Clearwater Lake Regional Park	Main Street	45.416833	-94.045909
 Coleville	100 Main Street	51.712574	-109.246598
 Coleville	316 - 5th Avenue West	51.713622	-109.248004
 Conquest	601 Pacific Avenue	51.529609	-107.243399
@@ -533,7 +533,6 @@ Denzil	Railway Avenue	52.167031	-109.510034
 Denzil	301 Railway Avenue	52.227901	-109.652627
 Denzil	310 Brooks Avenue	52.227608	-109.647908
 Dinsmore	Third Avenue East	51.334068	-107.445638
-Dinsmore	Main Street	51.332612	-107.447341
 Dinsmore	200 Main Street	51.332862	-107.447518
 Dinsmore	105 Main Street	51.332612	-107.447341
 Dodsland	Second Avenue	51.800626	-108.834013
@@ -745,6 +744,7 @@ Fosston	Main Street	52.190699	-103.813144
 Greenwater Provincial Park	Se-3-40-10-w2m Rm Of Bjorkdale No. 426	52.939916	-106.450864
 Greenwater Provincial Park	Se-3-41-10-w2m  Rm Of Bjorkdale No. 426	52.939916	-106.450864
 Greenwater Provincial Park	Ne-34-40-11-w2m  Rm Of Kelvington No. 366	52.939916	-106.450864
+Hepburn	314 Main St	52.525230	-106.730327
 Gronlid	Highway Junction	53.100928	-104.465241
 Gronlid	Nw-17-49-17-w2m  Rm Of Nipawin No. 487	53.100928	-104.465241
 Hudson Bay	620 Churchill Street	52.853808	-102.389726
@@ -946,6 +946,7 @@ Edam	1003 Main Street,	53.187873	-108.769079
 Edam	1219 - 1st Avenue,	53.188868	-108.771010
 Glaslyn	151 Main Street,	53.359938	-108.354888
 Glaslyn	302 - 1st Avenue,	53.359084	-108.353323
+Hepburn	600 2nd St E	52.526349	-106.727871
 Glenburn Regional Park	Mayfield	52.526097	-107.611797
 Goodsoil	207 Main Street,	54.399251	-109.230136
 Goodsoil	411 - 3rd Street Nw,	54.403656	-109.234187
@@ -1142,6 +1143,7 @@ Meadow Lake	702 - 9th Street West,	54.124391	-108.452519
 Meadow Lake	308 - 9th Street West,	54.129750	-108.452606
 Meadow Lake	102 - 9th Street Nw,	54.132979	-108.452095
 Meadow Lake	104 - 9th Street West,	54.132846	-108.452401
+Watson	115 Main St	52.128795	-104.523978
 Meadow Lake	615 - 9th Street West,	54.124684	-108.454017
 Meadow Lake	600- 3rd Street East,	54.125962	-108.427979
 Meadow Lake	805 - 5th Street West,	54.121894	-108.443088
@@ -2410,8 +2412,6 @@ Hanley	107 Lincoln St	51.627705	-106.440290
 Hanley	200 Washington Ave	51.629820	-106.439007
 Hanley	703 Lincoln Street	51.630732	-106.435346
 Hendon	5 Railway Ave	52.087686	-103.830919
-Hepburn	314 Main St	52.525230	-106.730327
-Hepburn	600 2nd St E	52.526349	-106.727871
 Hepburn	415 Main Street	52.525694	-106.731839
 Humboldt	515 14th Ave	52.212496	-105.121060
 Humboldt	740 Main St	52.201040	-105.122872
@@ -3153,7 +3153,6 @@ Watson	102 Highway 6 N	52.117041	-104.533287
 Watson	Hwy 5 & Hwy 6 Junction	52.131127	-104.530323
 Watson	Spalding	52.129100	-104.523800
 Watson	300 Main St	52.129776	-104.523279
-Watson	115 Main St	52.128795	-104.523978
 Watson	202 Pacific St	52.130915	-104.529005
 Wishart	1st St W	51.548220	-103.977165
 Wynyard	300 10th St	51.767502	-104.167510
@@ -3676,7 +3675,6 @@ Wolseley	702 Front Street	50.422821	-103.268504
 Wolseley	106 Front St.	50.426043	-103.281576
 Allan	Princess Street	51.897562	-106.051469
 Asquith	560 Main St	52.135509	-107.229459
-Bellevue	102 Church St	42.255298	-90.421674
 Borden	303 1st Avenue	52.404849	-107.240036
 Bradwell	221 2nd Ave	51.947929	-106.231128
 Clavet	10 Main St	51.996507	-106.373511
@@ -3958,7 +3956,6 @@ Redvers	Methuen Street	49.573190	-101.703371
 Redvers	13 Service Rd	49.577163	-101.692649
 Redvers	23 Meutheun St	49.572777	-101.703380
 Stoughton	600 A Government Rd	49.677516	-103.022570
-Stoughton	105 Cottonwood Rd	42.140420	-71.133899
 Torquay	301 Saskatchewan Avenue	49.140624	-103.496931
 Torquay	Miller Avenue	49.137472	-103.494648
 Torquay	Devon Street	49.140642	-103.492995

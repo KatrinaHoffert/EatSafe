@@ -19,6 +19,7 @@ locations.selectLocation.badInput=I''m sorry, Dave, that not valid input.
 locations.selectLocation.searchingIn=Searching in {0}
 locations.selectLocation.unknownCity=locations not in a town or city
 locations.selectLocation.searchPlaceholder=Search (ex: Subway)
+locations.selectLocation.linkToMap=Go to map of city.
 
 # Display locations page
 locations.view.titleStart=EatSafe
@@ -29,6 +30,11 @@ locations.view.pastInspectionsHide=[Hide]
 locations.view.noRecentInspections=This location has no recent inspections.
 locations.view.reinspectionPriority=Current re-inspection priority
 locations.view.previousInspectionType=Previous inspection type
+locations.view.type.Follow-up=Follow-up
+locations.view.type.Special=Special
+locations.view.type.Complaint=Complaint
+locations.view.type.GeneralInspection=General Inspection
+locations.view.type.Routine=Routine
 locations.view.rha=Regional health authority
 locations.view.unknownLocation=Unknown location
 locations.view.mostRecent=Most recent issues
@@ -37,9 +43,25 @@ locations.view.rating_good=Good
 locations.view.rating_fair=Fair
 locations.view.rating_poor=Poor
 locations.view.rating_unknown=N/A
+locations.view.moreInfoViolation=[More info]
 
 # Display address page
 maps.displayAddress.title=Map: {0}, {1}
+
+# Multi-map
+maps.multiMap.title=Multi-map
+maps.multiMap.nearbyLocationsHeading=Nearby:
+maps.multiMap.nearbyLocationsToggle=Toggle nearby locations
+maps.multiMap.kmAway=km away
+maps.multiMap.sidebarLoading=Loading...
+maps.multiMap.locationNotSupported=Your browser doesn''t support finding your location.
+maps.multiMap.locationFailed=Failed to get your location.
+maps.multiMap.locationInaccurate=Cannot get an accurate enough location.
+maps.multiMap.findMe=Move to me
+maps.multiMap.moveToMeInaccurate=Can't get an accurate enough position from your device.
+maps.multiMap.moveToMeFailed=Failed to get your position.
+maps.multiMap.moveToMeUnsupported=Your browser doesn't support finding your location.
+maps.multiMap.infoButton=More Info
 
 # About page
 about.title=About EatSafe Saskatchewan
@@ -61,7 +83,7 @@ about.modifiedCC=Modified CC
 
 # Footer stuff
 footer.aboutLink=About
-footer.copyright=© Off By One 2015
+footer.copyright=\A9 Off By One 2015
 
 # Error pages
 errors.error500Title=Error 500
@@ -109,3 +131,6 @@ parser.name.16=Plumbing/Lighting/Ventilation
 parser.desc.16=Approved plumbing must be installed and properly maintained to prevent food contamination.  Light shields or shatterproof bulbs are to be provided in every room in which food is prepared or stored. Unless otherwise approved, every restaurant is to have a ventilation system that prevents the accumulation of odours, smoke, grease/oils and condensation.
 parser.priority.general=General Item
 parser.priority.critical=Critical Item
+
+# More info about violations
+violations.goBack=Go Back
