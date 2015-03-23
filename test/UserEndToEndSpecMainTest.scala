@@ -74,7 +74,7 @@ class UserEndToEndSpecMainTest extends Specification {
       browser.webDriver.findElement(By.className("panel-title-text")).click
       
       // click on the inspection
-      val link = browser.webDriver.findElement(By.id("violationLink"))
+      val link = browser.webDriver.findElement(By.className("violationLink"))
       assert(link.isDisplayed)
       link.click
       
