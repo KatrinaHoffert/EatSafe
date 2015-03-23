@@ -311,18 +311,16 @@
           var NELng = map.getBounds().getNorthEast().D;
           var SWLat = map.getBounds().getSouthWest().k;
           var SWLng = map.getBounds().getSouthWest().D;
-          var testLat = 0.0;
-          var testLng = 0.0;
 
           var infowindow = new google.maps.InfoWindow();
 
           for(var i = 0; i < locations.length; i += 1) {
-            // Gets rid of the '#'
             var cords = new google.maps.LatLng(locations[i].latitude, locations[i].longitude);
 
             // This tests to see if the given location is located in the current view of the map
             if(locations[i].latitude < NELat && locations[i].latitude > SWLat
                 && locations[i].longitude < NELng && locations[i].longitude > SWLng){
+                // Gets rid of the '#'
                 var color = locations[i].ratingColor.slice(1);
                 var url = jsRoutes.controllers.LocationController.showLocation(locations[i].id).url;
 
