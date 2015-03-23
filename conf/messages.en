@@ -7,12 +7,18 @@ locations.selectCity.prompt=What city/town are you in?
 locations.selectCity.noInput=You need to enter something.
 locations.selectCity.badInput=I''m sorry, Dave, that not valid input.
 locations.selectCity.locateMeTooltip=Fills in the input with your current location
+locations.selectCity.searchUnknownCity=Or search locations not in a city/town.
+locations.selectCity.searchPlaceholder=Search
+locations.selectCity.badGeolocate=Sorry, city could not be found automatically.
 
 # Select location page
 locations.selectLocation.title=Select a location
 locations.selectLocation.prompt=Where do you want to eat?
 locations.selectLocation.noInput=You need to enter something.
 locations.selectLocation.badInput=I''m sorry, Dave, that not valid input.
+locations.selectLocation.searchingIn=Searching in {0}
+locations.selectLocation.unknownCity=locations not in a town or city
+locations.selectLocation.searchPlaceholder=Search (ex: Subway)
 
 # Display locations page
 locations.view.titleStart=EatSafe
@@ -25,6 +31,12 @@ locations.view.reinspectionPriority=Current re-inspection priority
 locations.view.previousInspectionType=Previous inspection type
 locations.view.rha=Regional health authority
 locations.view.unknownLocation=Unknown location
+locations.view.mostRecent=Most recent issues
+locations.view.ratingLabel=Rating
+locations.view.rating_good=Good
+locations.view.rating_fair=Fair
+locations.view.rating_poor=Poor
+locations.view.rating_unknown=N/A
 
 # Display address page
 maps.displayAddress.title=Map: {0}, {1}
@@ -43,11 +55,13 @@ about.paragraphHow2=Next, we provide an input from which you can type the name o
 about.paragraphHow3=You must pick from the suggestion drop down below the text input. Think of it like search results. If the location you''re looking for doesn't appear, then we don't have information on it.
 about.paragraphHow4=We intended to make EatSafe Saskatchewan as easy to use as possible, so if you find anything confusing, please contact us at {0} so that we can improve!
 about.headingTechnology=What was EatSafe Saskatchewan made with?
-about.paragraphTechnology=Below is a list of the technologies that we used to create this application:
+about.paragraphTechnology=Below is a list of other people's works that were used in this application, along with the licenses of those works:
+about.customLicense=Custom license
+about.modifiedCC=Modified CC
 
 # Footer stuff
 footer.aboutLink=About
-footer.copyright=Copyright Off By One 2015
+footer.copyright=© Off By One 2015
 
 # Error pages
 errors.error500Title=Error 500
@@ -59,3 +73,39 @@ errors.emptyCityDesc=Uh oh...
 errors.emptyCityText=There''s no locations in "{0}". Perhaps you''ve mistyped a URL or there''s a bug in our software.
 errors.emptyCityTryAgain=Give the city selection another try?
 errors.unknownAddress=Unknown address
+
+# Parser messages
+parser.name.1=Refrigeration/Cooling/Thawing (must be 4°C/40°F or lower)
+parser.desc.1=Potentially hazardous foods and perishable foods must be stored at 4°C/40°F or below. Hazardous foods must be thawed in a refrigerator or under cold, running water.
+parser.name.2=Cooking/Reheating/Hot Holding (must be 60°C/140°F or higher)
+parser.desc.2=Cook foods to an internal temperature of: a) 63°C (145°F) or above for: eggs (if prepared for immediate service) medium rare beef and veal steaks and roasts b) 68°C (155°F) or above for: game farm meat products c) 70°C (158°F) for: fish d) 71°C (160°F) or above for: ground beef/pork/veal, food made with ground beef/pork/veal, e.g. sausages, meatballs, pork chops, ribs and roasts. e) 74°C (165°F) or above for: ground chicken/turkey, food made with ground chicken/turkey or mixtures containing poultry, meat, fish, or eggs. chicken and turkey breasts, legs, thighs and wings. stuffing (inside a carcass)  stuffed pasta  hot dogs  leftovers  egg dishes (if not prepared as specified in 2a)  and stuffed fish  f) 85°C (185°C) or above for: chicken and turkey, whole bird. Reheat foods rapidly to an internal temperature of 74°C (165°F) prior to serving. Hot Holding must maintain an internal temperature of 60°C (140°F) or higher.
+parser.name.3=Storage/Preparation of Foods
+parser.desc.3=Foods must be stored in food grade containers, properly labelled and protected from contamination at all times.
+parser.name.4=Hand Washing Facilities/Practices
+parser.desc.4=Hand washing must be properly done at appropriate times and intervals. An accessible, plumbed hand basin with hot and cold running water, soap in a dispenser and single-use paper towels in wall-mounted dispensers are required in food preparation areas.Hand washing Procedure: a) Wet hands and exposed arms (at least up to wrist) with warm running water  b) Apply liquid soap  c) Vigorously rub together wet surfaces for at least 20 seconds, lathering at least up to wrist  d) Use a nailbrush under fingernails and other very dirty areas  e) Thoroughly rinse with clean, warm water running from wrists to fingertips  f) Apply soap and lather vigorously again  g) Rinse hands and wrists thoroughly  h) Dry hands with a single-use paper towel  and i) Use paper towel to turn off tap.
+parser.name.5=Food Handler Illness/Hygiene/Habits
+parser.desc.5=Good personal hygiene must be practiced at all times. Food handlers with infectious or contagious diseases (or symptoms) should not work.
+parser.name.6=Food Protection
+parser.desc.6=Foods must be protected from contamination at all times.
+parser.name.7=Cleaning/Sanitizing of Equipment/Utensils
+parser.desc.7=Proper dish washing procedures must be followed. Mechanical washing: dishwashers must be National Sanitation Foundation (NSF) approved or equivalent, designed to wash at 60°C (140°F) and utilize an approved sanitizing agent. Manual washing: (wash/rinse/sanitize in a three-compartment sink): first compartment - clean hot water 44°C (111°F) with detergent  second compartment - clean hot water 44°C (111°F)  third compartment - approved sanitizing method.
+parser.name.8=Food Received from Approved Source
+parser.desc.8=Food, water and ice must be from an approved source and must also be wholesome, free from damage or spoilage and transported under proper temperatures, where applicable.
+parser.name.9=Water Received from Approved Source
+parser.desc.9=Food, water and ice must be from an approved source and must also be wholesome, free from damage or spoilage and transported under proper temperatures, where applicable.
+parser.name.10=Food Protection
+parser.desc.10=Food must be protected from contamination during storage, preparation, display, service and transport. No food is to be stored on the floor unless it is in an approved container. The lowest shelf is to be high enough to allow easy cleaning of the floor.
+parser.name.11=Accurate Thermometer Available to Monitor Food Temperatures
+parser.desc.11=An accurate, metal-stemmed (food-grade) probe thermometer must be available to monitor temperatures of potentially hazardous foods.
+parser.name.12=Construction/Storage/Cleaning of Equipment/Utensils
+parser.desc.12=Approved dishwashing facilities must be installed and properly maintained. An adequate supply of cleaning supplies, chemicals, etc. must be available at all times. ''Clean-in-place'' equipment must be washed and sanitized according to manufacturers instructions.
+parser.name.13=Garbage Storage and/or Removal
+parser.desc.13=An adequate number of approved, covered garbage containers must be provided at all food preparation areas. Containers are to be kept clean and the contents removed at least daily. Garbage storage must be of an approved design with a lid that seals. It must be kept clean and free of vermin and serviced as required.
+parser.name.14=Insect/Rodent Control
+parser.desc.14=All restaurants are to be free of vermin.
+parser.name.15=Construction/Maintenance and/or Cleaning of Premises
+parser.desc.15=Floors, walls and ceilings of all rooms in which food is stored, prepared or served or in which dishes, utensils and equipment are washed or stored should be kept clean and in good repair.
+parser.name.16=Plumbing/Lighting/Ventilation
+parser.desc.16=Approved plumbing must be installed and properly maintained to prevent food contamination.  Light shields or shatterproof bulbs are to be provided in every room in which food is prepared or stored. Unless otherwise approved, every restaurant is to have a ventilation system that prevents the accumulation of odours, smoke, grease/oils and condensation.
+parser.priority.general=General Item
+parser.priority.critical=Critical Item

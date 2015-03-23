@@ -11,12 +11,18 @@ import java.io.FileInputStream
 import au.com.bytecode.opencsv.CSVReader
 import scala.collection.JavaConversions._
 import java.nio.charset.StandardCharsets
+import scala.io.Source
+import play.api.libs.json._
+import play.api.libs.functional.syntax._
+import scala.util.control.Breaks._
 
 /**
  * Loads and interprets a CSV file, creating SQL ouput that can be run in the Postgres console.
  * @param writer The writer to write the SQL output to.
  */
 class CsvLoader(writer: Writer) {
+  val translator = new Translator("database/translation.json")
+  
   // Used in Postgres's COPY syntax to symbolize a NULL
   val SQL_NULL = """\N"""
 
@@ -41,7 +47,7 @@ class CsvLoader(writer: Writer) {
     var inspectionId = inspectionIdIn
 
     val allLines = new CSVReader(new InputStreamReader(new FileInputStream(csvFile),
-        StandardCharsets.UTF_16)).readAll.drop(1)
+        StandardCharsets.UTF_16)).readAll.drop(1)  
 
     // Read this into our representation (see documentation of InternalCsvFormat for the CSV format)
     // For some reason, this goddamn CSV is so bad that libraries think it has extra rows.
@@ -56,6 +62,13 @@ class CsvLoader(writer: Writer) {
     var locationPostalcode = allRows(0).postalCode
     var locationCity = allRows(0).city
     var locationRha = getNullable(allRows(0).locationRha)
+    
+    // Find possible translations
+    val replacements = translator.findReplacement(locationName, locationAddress, locationCity)
+      .getOrElse(translator.identityReplacement)
+    if(replacements.name.isDefined) locationName = replacements.name.get
+    if(replacements.address.isDefined) locationAddress = replacements.address.get
+    if(replacements.city.isDefined) locationCity = replacements.city.get
 
     tabDelimitedLocations.append(locationId)
     tabDelimitedLocations.append("\t")

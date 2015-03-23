@@ -2,9 +2,11 @@
 @import models._
 
 @**
- * TODO: Document me!
+ * Display the a inspection inside a location page. 
+ * @param locationId The ID of the current location, used to redirect back to location view
+ * @param Inspection The inspection object that need to display
  *@
-@(inspection: Inspection)
+@(locationId: Int, inspection: Inspection)(implicit lang: Lang)
 
 @if(inspection.violations.size == 0) {
   <div class="panel panel-default" style="border-top: 1px solid #DDD;">
@@ -22,12 +24,12 @@
         <div class="panel-heading pointer collapsed" role="tab" data-parent="#inspection_accordion_@inspection.date" data-toggle="collapse" data-target="#collapse_@(inspection.date)_@violation.id">
           <h4 class="panel-title">
             <!-- CSS will add a [+] or [-] after this -->
-            <span class="panel-title-text">@violation.name</span>
+            <span class="panel-title-text">@Messages(violation.name)</span>
           </h4>
         </div>
         <div id="collapse_@(inspection.date)_@violation.id" class="panel-collapse collapse" role="tabpanel">
           <div class="panel-body">
-            @violation.description
+            <a id="violationLink" href="@routes.Application.violationInfo(locationId, violation.id)">@Messages(violation.description)</a>
           </div>
         </div>
       </div>

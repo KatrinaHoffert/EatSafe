@@ -26,7 +26,29 @@ class LocationSpecMainTest extends Specification with Mockito {
   this.getLocationByIdTests
   this.getLocationsByCityTests
   this.listCitiesTests
+  this.getAllLocationsWithCoordinatesTests
 
+  def getAllLocationsWithCoordinatesTests = {
+    "getAllLocationsWithCoordinates" should {
+      "get all locations that have coords" in new WithApplication {
+        val locsWithCorrds = Location.getAllLocationsWithCoordinates().get
+        locsWithCorrds.length must beEqualTo(3);
+        locsWithCorrds.foreach { x =>
+          if(x.address.get == "South Park Ave")
+          {
+            x.latitude.get must beEqualTo(26.696545)
+            x.longitude.get must beEqualTo(2.988281)
+          }
+          else
+          {
+            x.latitude.get must beEqualTo(1.0)
+            x.longitude.get must beEqualTo(1.0)
+          }
+        }
+        
+      }
+    }
+  }
   def getLocationByIdTests = {
     // Currently, this gets the default database source, in future, we can
     // easily add reference to a testing database in the play conf/application.conf
@@ -88,10 +110,11 @@ class LocationSpecMainTest extends Specification with Mockito {
         val listOfCities = Location.listCities();
         listOfCities.get.length must beEqualTo(6+1)//the plus 1 is for Unknown City
       }
-      "list should be in alphabetical order" in new WithApplication {
+      "list should be in location order" in new WithApplication {
         val listOfCities = Location.listCities();
         val citySeq = listOfCities.get
-        citySeq.indexOf("Space") must beLessThan(citySeq.indexOf("Town A")) // Luseland should appear before Saskatoon in the list
+        // Cities are ordered by number of locations, so big cities must be earlier in the list
+        citySeq.indexOf("Town A") must beLessThan(citySeq.indexOf("Space"))
       }
       
     }

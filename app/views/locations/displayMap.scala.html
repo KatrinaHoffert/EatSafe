@@ -6,7 +6,7 @@
  * Displays an address on a map. The address should be the street address (preferably minimalistic,
  * as unnecessary text in the address will break the map) and the city is obvious.
  *@
-@(address: String, city: String)
+@(address: String, city: String)(implicit lang: Lang)
 
 @scripts = {
   <script src="https://maps.googleapis.com/maps/api/js?v=3.exp&signed_in=true"></script>

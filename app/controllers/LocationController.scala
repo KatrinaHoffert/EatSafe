@@ -8,11 +8,11 @@ import models.Location
 import globals._
 import play.api.Logger
 
-object LocationController extends Controller {
+object LocationController extends DetectLangController {
   /**
    * Displays a means to select the city. This is the current index page.
    */
-  def selectCity = Action {
+  def selectCity = Action { implicit request =>
     Location.listCities() match {
       case Success(cities) =>
         Ok(views.html.locations.selectCity(cities))
@@ -27,10 +27,10 @@ object LocationController extends Controller {
    * @param city Name of the city. If invalid, we'll end up with an empty list of locations and
    * display a custom error page for that.
    */
-  def findLocation(city: String) = Action {
+  def findLocation(city: String) = Action { implicit request =>
     Location.getLocationsByCity(city.toLowerCase) match {
       case Success(cityLocations) if !cityLocations.isEmpty => 
-        Ok(views.html.locations.findLocation(cityLocations))
+        Ok(views.html.locations.findLocation(city, cityLocations))
       case Success(_) =>
         Logger.warn("User found empty city ('" + city + "')")
         NotFound(views.html.errors.emptyCityError(city))
@@ -44,7 +44,7 @@ object LocationController extends Controller {
    * Displays information about the location with the given ID.
    * @param locationId The ID of the location to show.
    */
-  def showLocation(locationId: Int) = Action {
+  def showLocation(locationId: Int) = Action { implicit request =>
     Location.getLocationById(locationId) match {
       case Success(location) =>
         Ok(views.html.locations.displayLocation(location))
