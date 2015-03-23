@@ -56,11 +56,7 @@
     });
   </script>
   <script src="https://maps.googleapis.com/maps/api/js?v=3.exp&signed_in=true"></script>
-  <script>
-      function showCityMap(){
-        window.location.assign("@routes.MapController.showCityMap(city)");
-      }
-  </script>
+  
   
 }
   
@@ -92,6 +88,7 @@
       </div>
     </form>
     <br>
-    <button class="btn btn-default" onclick="showCityMap()" >Show Map of City</button>
+    <a id="mapForCity" href="@routes.MapController.showCityMap(city)">
+    @Messages("locations.selectLocation.linkToMap")</a>
   </div>
 }
