@@ -51,7 +51,7 @@
 
       <ul class="locationExtraData">
         <li><b>@Messages("locations.view.previousInspectionType"):</b></li>
-        <li>@location.inspections(0).inspectionType</li>
+        <li>@Messages("locations.view.type." + location.inspections(0).inspectionType.replaceAll(" ", ""))</li>
 
         <li><b>@Messages("locations.view.rha"):</b></li>
         <li>@displayRhaLink(location.regionalHealthAuthority)</li>
