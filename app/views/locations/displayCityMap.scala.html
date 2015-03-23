@@ -295,26 +295,20 @@
       }
     }
 
-    
-    
-
-
     /**
-     *  Calculates all of the locations that are within the visual
-     *  
+     *  Calculates all of the locations that are within the viewport.
      */
     function showMarkers(){
           deleteMarkers();
-          console.log('Map is now idle');
 
           console.log(map.getBounds().getNorthEast().k);
-          console.log(map.getBounds().getNorthEast().D);          
+          console.log(map.getBounds().getNorthEast().D);
           console.log(map.getBounds().getSouthWest().k);
           console.log(map.getBounds().getSouthWest().D);
 
           //the latlong values for Northwest and South east respectively
           var NELat = map.getBounds().getNorthEast().k;
-          var NELng = map.getBounds().getNorthEast().D;          
+          var NELng = map.getBounds().getNorthEast().D;
           var SWLat = map.getBounds().getSouthWest().k;
           var SWLng = map.getBounds().getSouthWest().D;
           var testLat = 0.0;
@@ -322,30 +316,17 @@
 
           var infowindow = new google.maps.InfoWindow();
 
-
-          for(var i = 0; i < locations.length; i += 1){
-            
-
+          for(var i = 0; i < locations.length; i += 1) {
             testLat = parseFloat(locations[i].latitude);
             testLng = parseFloat(locations[i].longitude);
 
-            //gets rid of the '#'
+            // Gets rid of the '#'
             var cords = new google.maps.LatLng(testLat, testLng);
 
-            //This tests to see if the given location is located in the current view of the map
+            // This tests to see if the given location is located in the current view of the map
             if(testLat < NELat && testLat > SWLat && testLng < NELng && testLng > SWLng){
-                
-                /*
-                console.log(locations[i].name);
-                console.log(testLat);
-                console.log(testLng);
-                console.log(locations[i].id);
-                console.log(locations[i].ratingColor);
-                */
-          
                 var color = locations[i].ratingColor.slice(1);
-
-                
+                var url = jsRoutes.controllers.LocationController.showLocation(locations[i].id).url;
 
                 var marker = new google.maps.Marker({
 
@@ -354,10 +335,9 @@
                   id:       locations[i].id,
                   colour:   locations[i].ratingColor,
                   icon:     "http://chart.apis.google.com/chart?chst=d_map_pin_letter&chld=•|" + color,
-                  contentString:  '<div id="infoWindow">'+ 
-                                      '<h3>'+ locations[i].name + '</h3><br>'+
-                                        ' <button type="button" class="btn btn-success" '+
-                                        ' onclick="goToLocation(parseInt('+ locations[i].id +'))">@Messages("maps.multiMap.infoButton")</button>'+
+                  contentString:  "<div id='infoWindow'>"+
+                                    "<h3>"+ locations[i].name + "</h3>" +
+                                    "<a href='" + url + "'>More info</a>" +
                                   '</div>',
                   map: map
 
@@ -368,7 +348,7 @@
                   infowindow.open(map, this);
                 });
 
-                markers.push(marker);                
+                markers.push(marker);
             }
           }
 
@@ -389,13 +369,6 @@
       setAllMap(null);
       markers = [];
     }
-
-    /*Due to limitations of the content string, I used JS routing rather than play's standard reverse routing*/
-    function goToLocation(int){
-        window.location.assign(jsRoutes.controllers.LocationController.showLocation(parseInt(int)).url);
-    }
-
-
   </script>
 }
 
