@@ -25,13 +25,6 @@ object Application extends DetectLangController {
       Cookie("lang", languageCode)
     )
   }
-  
-  /**
-   * Displays more information about a violation.
-   */
-  def violationInfo(locationId: Int, violationId: Int) = Action { implicit request =>
-    Ok(views.html.general.violationInfo(locationId, violationId))
-  }
 
   def prepopulateCache = Action {
     // Call poor performing, cached pieces of code here to pre-populate the cache. Can't call too
