@@ -57,5 +57,6 @@ CREATE TABLE coordinate(
     city TEXT NOT NULL,
     address TEXT NOT NULL,
     latitude DECIMAL(10,6),
-    longitude DECIMAL(10,6)
-)
+    longitude DECIMAL(10,6),
+    unique (city, address)
+);

@@ -3,35 +3,29 @@ package controllers
 import play.api._
 import play.api.mvc._
 
-object Application extends Controller {
+object Application extends DetectLangController {
   /**
    * Displays information about how freaking cool we are.
    */
-  def about = Action {
+  def about = Action { implicit request =>
     Ok(views.html.general.about())
   }
 
   /**
-   * Returns a JavaScript file that creates a routing object with up-to-date values from the routing
-   * file. This allows us to perform reverse routing client side.
-   *
-   * This script is already included in `views.html.general.mainBody`, so you can use it directly
-   * in your HTML.
-   *
-   * Usage:
-   *
-   * {{{
-   * // Eg, to reverse route the controllers.LocationController.showLocation function:
-   * jsRoutes.controllers.LocationController.showLocation(123).url // ==> "/view/123"
-   * }}}
+   * Sets the language cookie and then redirects back to the user's previous page. Defaults to the
+   * home page if the previous page cannot be determined.
    */
-  def javascriptRoutes = Action { implicit request =>
-    import routes.javascript._
-    Ok(
-      Routes.javascriptRouter("jsRoutes")(
-        LocationController.findLocation,
-        LocationController.showLocation
-      )
-    ).as("text/javascript")
+  def setLanguage(languageCode: String) = Action { implicit request =>
+    val prevPage = request.headers.get("referer").getOrElse("/")
+    Redirect(prevPage).withCookies(
+      Cookie("lang", languageCode)
+    )
+  }
+  
+  /**
+   * Displays more information about a violation.
+   */
+  def violationInfo(locationId: Int, violationId: Int) = Action { implicit request =>
+    Ok(views.html.general.violationInfo(locationId, violationId))
   }
 }

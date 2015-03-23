@@ -1,0 +1,63 @@
+# General purpose messages that appear throughout the app
+general.applicationName=萨斯喀彻温餐饮监管
+
+# Select city page
+locations.selectCity.title=选择城市
+locations.selectCity.prompt=请输入您想要搜索的城市
+locations.selectCity.noInput=请输入您想要搜索的城市。
+locations.selectCity.badInput=输入无效。请重新输入。
+locations.selectCity.locateMeTooltip=根据定位自动填写
+
+# Select location page
+locations.selectLocation.title=选择餐厅
+locations.selectLocation.prompt=请输入您想要搜索的餐厅
+locations.selectLocation.noInput=请输入您想要搜索的餐厅。
+locations.selectLocation.badInput=输入无效。请重新输入。
+
+# Display locations page
+locations.view.titleStart=餐饮监管
+locations.view.noViolations=此次检查未发现违规。
+locations.view.pastInspectionsHeader=往期检查
+locations.view.pastInspectionsShow=[展开]
+locations.view.pastInspectionsHide=[隐藏]
+locations.view.noRecentInspections=无检查。
+locations.view.reinspectionPriority=当前再查优先等级
+locations.view.previousInspectionType=之前检查类型
+locations.view.rha=地区餐饮监管分局
+locations.view.unknownLocation=未知地点
+
+# Display address page
+maps.displayAddress.title=地图: {0}, {1}
+
+# About page
+about.title=关于萨斯喀彻温餐饮监管
+about.headingWho=关于我们
+about.paragraphWho=我们是来自萨省大学计算机系软件开发管理课CMPT371的一组学生。
+about.creditsList=我们是 Off By One 小组:
+about.headingWhat=什么是萨斯喀彻温餐饮监管网?
+about.paragraphWhat1=网站最初由 Dr. Daniel Fuller 提出。 在此之前，萨斯喀彻温省政府拥有<a href="http://orii.health.gov.sk.ca/">网站</a>保存所有餐饮单位检查报告并向大众公开。
+about.paragraphWhat2=但是这个网站匮乏实用性以及对移动设备的适应性。 所以，我们设计开发了萨斯喀彻温餐饮监管网来利用这些数据更好更快的服务大众。
+about.headingHow=怎样使用萨斯喀彻温餐饮监管网？
+about.paragraphHow1=在我们的网站，您可以查找搜索萨斯喀彻温省全部餐饮机构的健康卫生检查报告。在主页上，您只要开始键入您想要搜索的城市以及餐厅名称，我们就能帮您找到您想要的结果。
+about.paragraphHow2=然后，根据我们建议的结果，您可以选择一个餐厅，然后查看此餐厅的相应信息。
+about.paragraphHow3=您必须从建议的结果中选择一个。如果您想要的餐厅不在我们建议的搜索结果中，那么很抱歉我们没有相应的餐厅信息。
+about.paragraphHow4=我们的目标是建立一个更好更快查看健康信息的信息港。如果您有任何建议和意见，请联系我们{0}。谢谢！
+about.headingTechnology=萨斯喀彻温餐饮监管网是用什么搭建而成的？
+about.paragraphTechnology=下方列表是我们网站应用到的其他人的成果，以及他们的证书（license）
+about.customLicense=Custom license
+about.modifiedCC=Modified CC
+
+# Footer stuff
+footer.aboutLink=关于
+footer.copyright=© Off By One 2015
+
+# Error pages
+errors.error500Title=出错了！Error 500
+errors.error500Desc=出错信息：内部服务错误。
+errors.error500Text=我们的内部程序出错了。请把下方出错信息发送给我们{0}来帮助我们更好解决问题.谢谢！
+errors.stackTraceHeading=为开发者：
+errors.emptyCityTitle=这个城市里未能找到餐厅。
+errors.emptyCityDesc=不好意思...
+errors.emptyCityText=在"{0}"找不到餐厅. 这有可能是您到达了错误的链接，或者是我们内部软件的错误。
+errors.emptyCityTryAgain=再给我们一次机会？
+errors.unknownAddress=未知地址
