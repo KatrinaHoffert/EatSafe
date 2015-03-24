@@ -71,7 +71,6 @@
         center: latlng
       });
       positionOverCity();
-      //google.maps.event.addListener(map, 'idle', showMarkers);
       google.maps.event.addListenerOnce(map, 'idle', showMarkers);
     }
     google.maps.event.addDomListener(window, 'load', initialize);
@@ -314,9 +313,7 @@
       for(var i = 0; i < locations.length; ++i) {
         var cords = new google.maps.LatLng(locations[i].latitude, locations[i].longitude);
 
-        // This tests to see if the given location is located in the current view of the map
-        /*if(locations[i].latitude < NELat && locations[i].latitude > SWLat
-            && locations[i].longitude < NELng && locations[i].longitude > SWLng) {*/
+        
           // Gets rid of the '#'
           var color = locations[i].ratingColor.slice(1);
           var url = jsRoutes.controllers.LocationController.showLocation(locations[i].id).url;
@@ -344,7 +341,7 @@
           });
 
           markers.push(marker);
-        //}
+        
       }
 
       setAllMap(map);
