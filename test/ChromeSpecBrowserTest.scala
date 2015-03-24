@@ -155,7 +155,7 @@ class ChromeSpecBrowserTest extends Specification {
       browser.goTo("/")
       val selection = new Select(browser.webDriver.findElement(By.id("languageSelect")))
       selection.selectByValue("eo")
-      assert(browser.webDriver.findElement(By.className("largeHeading")).getText contains("EatSafe Saskaĉevano"))
+      assert(browser.webDriver.findElement(By.className("smallHeading")).getText contains("EatSafe Saskaĉevano"))
       val typeahead = browser.getDriver.findElement(By.id("municipality"))
       typeahead.click
       typeahead.sendKeys("saskatoon")

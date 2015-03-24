@@ -166,7 +166,7 @@ class IESpecBrowserTest extends Specification {
       
       Thread.sleep(1000)
       
-      assert(browser.webDriver.findElement(By.className("largeHeading")).getText contains("EatSafe Saskaĉevano"))
+      assert(browser.webDriver.findElement(By.className("smallHeading")).getText contains("EatSafe Saskaĉevano"))
       
       val typeahead = browser.getDriver.findElement(By.id("municipality"))
       typeahead.click
