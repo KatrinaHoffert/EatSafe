@@ -53,7 +53,7 @@ class ApplicationSpecMainTest extends Specification {
       for(i <- 1 to 10){
         browser.webDriver.navigate.refresh
       }
-      assert(browser.webDriver.findElement(By.className("largeHeading")).isDisplayed)
+      assert(browser.webDriver.findElement(By.className("smallHeading")).isDisplayed)
       assert(browser.webDriver.findElement(By.className("footer")).isDisplayed)
       assert(browser.webDriver.findElement(By.className("typeahead-container")).isDisplayed)
     }
@@ -64,7 +64,7 @@ class ApplicationSpecMainTest extends Specification {
       browser.goTo("/")
       val selection = new Select(browser.webDriver.findElement(By.id("languageSelect")))
       selection.selectByValue("eo")
-      assert(browser.webDriver.findElement(By.className("largeHeading")).getText contains("EatSafe Saskaĉevano"))
+      assert(browser.webDriver.findElement(By.className("smallHeading")).getText contains("EatSafe Saskaĉevano"))
       val typeahead = browser.getDriver.findElement(By.id("municipality"))
       typeahead.click
       typeahead.sendKeys("saskatoon")
@@ -94,7 +94,7 @@ class ApplicationSpecMainTest extends Specification {
       browser.goTo("/")
       val selection = new Select(browser.webDriver.findElement(By.id("languageSelect")))
       selection.selectByValue("eo")
-      assert(browser.webDriver.findElement(By.className("largeHeading")).getText contains("EatSafe Saskaĉevano"))
+      assert(browser.webDriver.findElement(By.className("smallHeading")).getText contains("EatSafe Saskaĉevano"))
     }
   }
   
