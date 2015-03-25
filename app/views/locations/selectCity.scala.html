@@ -28,25 +28,17 @@
       },
       callback: {
         onSubmit: function(node, form, obj, e) {
-          var municipalityFieldValue = $("#municipality").val();
-          
-          if(municipalityFieldValue == "") {
-            createPageError("@Messages("locations.selectLocation.noInput")");
-            return;
-          }
-          else if(obj == null && $.inArray(municipalityFieldValue, cities) === -1) {
+          if(!cityIsValid()) {
             createPageError("@Messages("locations.selectLocation.badInput")");
-            return;
           }
           else {
             window.location.assign(jsRoutes.controllers.LocationController.findLocation(
-                municipalityFieldValue).url);
+                $("#municipality").val()).url);
           }
         },
         onClick: function(node, a, obj, e) {
-          var municipalityFieldValue = $("#municipality").val();
           window.location.assign(jsRoutes.controllers.LocationController.findLocation(
-              municipalityFieldValue).url);
+              $("#municipality").val()).url);
         }
       }
     });
@@ -56,6 +48,17 @@
     // ask for permission (which may fail), so will take some time to reach.
     if (navigator.geolocation) {
       navigator.geolocation.getCurrentPosition(populateField);
+    }
+
+    /**
+     * Returns true if the user entered city name is valid and can be submitted.
+     */
+    function cityIsValid() {
+      var cityInput = $("#municipality").val().toLowerCase();
+      for(var i = 0; i < cities.length; i++) {
+        if(cities[i].toLowerCase() == cityInput) return true;
+      }
+      return false;
     }
     
     /**
