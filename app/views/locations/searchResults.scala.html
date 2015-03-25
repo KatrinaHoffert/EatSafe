@@ -9,7 +9,7 @@
  *
  * locations: A list of all the locations in the municipality specified.
  *@
-@(city: String, query: String, locations: Seq[SlimLocation])(implicit lang: Lang)
+@(city: String, query: String, locations: Seq[SlimLocation], lax: Boolean)(implicit lang: Lang)
 
 @scripts = {
   <script src="//cdn.datatables.net/1.10.5/js/jquery.dataTables.min.js"></script>
@@ -67,6 +67,15 @@
         }
       </tbody>
     </table>
+
+    @if(!lax) {
+      <div class="searchButtons">
+        @Messages("locations.search.weakSearch1")
+        <a href="@routes.SearchController.searchLocations(query, city, true)">
+          @Messages("locations.search.weakSearch2")
+        </a>
+      </div>
+    }
 
     <div class="searchButtons">
       <a class="btn btn-primary" role="button" href="@routes.LocationController.findLocation(city)">

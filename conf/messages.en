@@ -145,3 +145,5 @@ locations.search.noResults=No results
 locations.search.rankSymbol=#
 locations.search.name=Name
 locations.search.address=Address
+locations.search.weakSearch1=Don''t see what you''re looking for?
+locations.search.weakSearch2=Try a laxer search.
