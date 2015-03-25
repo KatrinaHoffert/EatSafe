@@ -34,7 +34,7 @@
             createPageError("@Messages("locations.selectLocation.noInput")");
             return;
           }
-          else if(obj == null && $.inArray(municipalityFieldValue, cities) !== -1) {
+          else if(obj == null && $.inArray(municipalityFieldValue, cities) === -1) {
             createPageError("@Messages("locations.selectLocation.badInput")");
             return;
           }
@@ -42,6 +42,11 @@
             window.location.assign(jsRoutes.controllers.LocationController.findLocation(
                 municipalityFieldValue).url);
           }
+        },
+        onClick: function(node, a, obj, e) {
+          var municipalityFieldValue = $("#municipality").val();
+          window.location.assign(jsRoutes.controllers.LocationController.findLocation(
+              municipalityFieldValue).url);
         }
       }
     });
