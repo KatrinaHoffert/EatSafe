@@ -78,6 +78,5 @@ object SearchEngine {
       .replace("""&""", """\&""")
       .replace("""(""", """\(""")
       .replace(""")""", """\)""")
-   //   .replace("""'""", """''""")
   }
 }
