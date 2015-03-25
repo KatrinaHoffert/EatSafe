@@ -33,7 +33,7 @@ object SearchEngine {
             SELECT id, name, address
               FROM location_search
               INNER JOIN location ON(location_id = id)
-              WHERE LOWER(city) = LOWER({city}) AND text_vector @@ to_tsquery('english', {query});
+              WHERE LOWER(city) = LOWER({city}) AND text_vector @@ to_tsquery('eatsafe_english', {query});
            """
           ).on("city" -> city, "query" -> tsQuery)
         }
@@ -43,7 +43,7 @@ object SearchEngine {
             SELECT id, name, address
               FROM location_search
               INNER JOIN location ON(location_id = id)
-              WHERE city IS NULL AND text_vector @@ to_tsquery('english', {query});
+              WHERE city IS NULL AND text_vector @@ to_tsquery('eatsafe_english', {query});
            """
           ).on("city" -> city, "query" -> tsQuery)
         }
