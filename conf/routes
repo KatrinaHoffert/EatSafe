@@ -9,6 +9,7 @@ GET     /citymap                                 controllers.MapController.showC
 GET     /about                                   controllers.Application.about
 GET     /language                                controllers.Application.setLanguage(lang: String)
 GET     /view/:locationId/violation/:violationId controllers.LocationController.violationInfo(locationId: Int, violationId: Int)
+GET     /search/:cityName                        controllers.SearchController.searchLocations(q: String, cityName: String)
 
 # Programmatic access to resources (eg, via AJAX or for scripts)
 GET     /jsRoutes                                controllers.JsRoutes.javascriptRoutes
