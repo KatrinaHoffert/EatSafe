@@ -83,7 +83,7 @@ about.modifiedCC=Modified CC
 
 # Footer stuff
 footer.aboutLink=About
-footer.copyright=\A9 Off By One 2015
+footer.copyright=© Off By One 2015
 
 # Error pages
 errors.error500Title=Error 500
