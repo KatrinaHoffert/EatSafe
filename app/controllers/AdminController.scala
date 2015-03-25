@@ -1,6 +1,6 @@
 package controllers
 
-import scala.util.{Try, Success, Failure} 
+import scala.util.{Try, Success, Failure}
 import play.api._
 import play.api.mvc._
 import models._
@@ -9,7 +9,7 @@ import play.api.Logger
 import play.api.data._
 import play.api.data.Forms._
 
-object AdminController extends DetectLangController {
+object AdminController extends DetectLangController with Secured {
   val loginForm = Form(
     tuple(
       "username" -> text,
@@ -48,13 +48,27 @@ object AdminController extends DetectLangController {
   /**
    * Displays search results.
    */
-  def listAllLocations = Action { implicit request =>
+  def listAllLocations = withAuth  { username => implicit request =>
     Location.getAdminLocations match {
       case Success(locations) =>
         Ok(views.html.admin.listAllLocations(locations))
       case Failure(ex) => 
         Logger.error("Could not get list of locations", ex)
         InternalServerError(views.html.errors.error500(ex))
+    }
+  }
+}
+
+trait Secured {
+  def username(request: RequestHeader) = request.session.get(Security.username)
+
+  def onUnauthorized(request: RequestHeader) = {
+    Results.Redirect(routes.AdminController.login)
+  }
+
+  def withAuth(f: => String => Request[AnyContent] => Result) = {
+    Security.Authenticated(username, onUnauthorized) { user =>
+      Action(request => f(user)(request))
     }
   }
 }
