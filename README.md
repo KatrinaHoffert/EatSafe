@@ -1,8 +1,14 @@
 [![Build Status](https://magnum.travis-ci.com/MikeHoffert/EatSafe.svg?token=yXznwCPJBpA9S1h8k4E4&branch=master)](https://magnum.travis-ci.com/MikeHoffert/EatSafe)
 
-# EatSafe
+# EatSafe Saskatchewan
 
-An app for avoiding botulism
+EatSafe Saskatchewan is a web application for accessing health and safety records of locations in
+Saskatchewan. It provides user and mobile friendly access to data that was previously hosted at
+the Government of Saskatchewan's online restaurant inspection report site <http://orii.health.gov.sk.ca/>.
+
+The application also boasts features such as the ability to plot all locations on a map with colored
+markers for their current rating (as determined by re-inspection priority). The intent of the
+application is to provide easier and more user-friendly access to information than the ORII.
 
 ## Installing
 
@@ -93,5 +99,5 @@ in limbo. It is not necessary to run these programs, as the data output has been
 
 ## Further resources
 
-* [Running the tests](https://github.com/MikeHoffert/EatSafe/wiki/Running-Tests-2.0).
+* [Running the tests](https://github.com/MikeHoffert/EatSafe/wiki/Running-Tests-2.0)
 * [Files and folders](https://github.com/MikeHoffert/EatSafe/wiki/Files-and-folders)
