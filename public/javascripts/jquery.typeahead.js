@@ -17,19 +17,6 @@
  */
 ;(function (window, document, $, undefined)
 {
-	// Create fake console if one doesn't exist
-	// For compatibility with packages not including console object
-	if ( typeof ( console ) !== 'undefined' && console != null) {
-		console.log("");
-	}
-	else {
-		console = {
-			log: function () {},
-			warn: function () {},
-			error: function () {}
-	    }
-	}
-
     window.Typeahead = {
         source: {}
     };
