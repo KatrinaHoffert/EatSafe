@@ -12,6 +12,8 @@ application is to provide easier and more user-friendly access to information th
 
 ## Installing
 
+See also: [abridged setup guide](https://github.com/MikeHoffert/EatSafe/wiki/Abridged-setup-guide)
+
 You must first install [Scala](http://www.scala-lang.org/download/). It's sufficient to just install
 the Scala binary, as everything related to Typesafe Activator that you may need is included with
 the repo. You'll need Scala 2.11.5 (later will probably work -- that's the current version at the
@@ -27,11 +29,6 @@ the project directory (the one this file is located in).
 The above command is for Linux systems. For Windows, use `./activator.bat` for the file (for
 Cygwin on Windows, use the Linux file -- the Linux file has been slightly modified for better
 Cygwin support).
-
-If you exclude the `~run`, you'll enter the activator console, in which you can execute commands
-such as `~run` in the context of the program (the above command is simply more direct). The `run`
-command runs the server. The `~run` command does the same, but also automatically recompiles files
-when you change them. This is the ideal way to run the server for development.
 
 Note that the first run will be considerably slower than subsequent runs because Activator (actually
 SBT under the hood) must find and download all dependencies.
