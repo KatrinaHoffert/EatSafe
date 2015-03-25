@@ -10,6 +10,7 @@ locations.selectCity.locateMeTooltip=Fills in the input with your current locati
 locations.selectCity.searchUnknownCity=Or search locations not in a city/town.
 locations.selectCity.searchPlaceholder=Search
 locations.selectCity.badGeolocate=Sorry, city could not be found automatically.
+locations.selectCity.linkToMap=View all locations on a map
 
 # Select location page
 locations.selectLocation.title=Select a location

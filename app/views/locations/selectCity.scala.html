@@ -167,5 +167,11 @@
         @Messages("locations.selectCity.searchUnknownCity")
       </a>
     </div>
+
+    <div class="unknownCityLink">
+      <a id="mapForCity" class="btn btn-default" role="button" href="@routes.MapController.showCityMap("Saskatoon")">
+        @Messages("locations.selectCity.linkToMap")
+      </a>
+    </div>
   </div>
 }
