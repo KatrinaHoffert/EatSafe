@@ -11,10 +11,10 @@ object SearchController extends DetectLangController {
   /**
    * Displays search results.
    */
-  def searchLocations(query: String, city: String) = Action { implicit request =>
-    SearchEngine.queryLocations(query, city) match {
+  def searchLocations(query: String, city: String, lax: Boolean) = Action { implicit request =>
+    SearchEngine.queryLocations(query, city, lax) match {
       case Success(cities) =>
-        Ok(views.html.locations.searchResults(city, query, cities))
+        Ok(views.html.locations.searchResults(city, query, cities, lax))
       case Failure(ex) =>
         Logger.error("Search system failed with query \"\"\"" + query + "\"\"\"", ex)
         InternalServerError(views.html.errors.error500(ex))
