@@ -25,10 +25,10 @@
       searching: false,
       dom: "rtilp",
       language: {
-        lengthMenu: "Show _MENU_",
-        info: "Showing _START_ to _END_ of _TOTAL_ results",
+        lengthMenu: "@Messages("locations.search.tableLengthMenu", "_MENU_")",
+        info: "@Messages("locations.search.numResults", "_START_", "_END_", "_TOTAL_")",
         infoEmpty: "",
-        emptyTable: "No results",
+        emptyTable: "@Messages("locations.search.noResults")",
         paginate: {
           previous: "<",
           next: ">"
@@ -48,9 +48,9 @@
     <table id="searchResultsTable">
       <thead>
         <tr>
-          <th>#</th>
-          <th>Name</th>
-          <th>Address</th>
+          <th>@Messages("locations.search.rankSymbol")</th>
+          <th>@Messages("locations.search.name")</th>
+          <th>@Messages("locations.search.address")</th>
         </tr>
       </thead>
       <tbody>
