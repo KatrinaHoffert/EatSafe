@@ -1,6 +1,7 @@
 [![Build Status](https://magnum.travis-ci.com/MikeHoffert/EatSafe.svg?token=yXznwCPJBpA9S1h8k4E4&branch=master)](https://magnum.travis-ci.com/MikeHoffert/EatSafe)
 
 # EatSafe
+
 An app for avoiding botulism
 
 ## Installing
@@ -26,9 +27,6 @@ such as `~run` in the context of the program (the above command is simply more d
 command runs the server. The `~run` command does the same, but also automatically recompiles files
 when you change them. This is the ideal way to run the server for development.
 
-You'll also find `./activator ~test` to be useful. It works like the above command, but instead just
-runs tests.
-
 Note that the first run will be considerably slower than subsequent runs because Activator (actually
 SBT under the hood) must find and download all dependencies.
 
@@ -41,17 +39,69 @@ Once SBT has compiled everything, you'll see a message like:
 This means that everything worked and the server can be viewed in any web browser at
 `http://localhost:9000/`.
 
+## Setting up the database
+
+The database is PostgreSQL and must be at least version 9.3.
+
+First of all, inside `application.conf`, you must set the database URL, username, and password. If
+you're only going to be running the application and not using the tests, you can just set the test
+database to the same credentials as the default database (it can't be blank, but it won't be used
+unless you try and run the tests).
+
+Next, you must actually populate the database. Inside the database folder (which must be the working
+directory), run the `CreateTables.sql` file, then `statements.sql` to populate it, followed by
+`RestoreCoordinates.sql` to populate the coordinates from the pre-generated data.
+
+The `eatsafe_synonyms.syn` file must be placed in the `/usr/share/postgresql/9.3/tsearch_data` folder,
+where "9.3" is your PostgreSQL version. Finally, run `CreateSearchTable.sql` to create the necessary
+tables for full text search.
+
+With this done, everything should be able to run locally.
+
+## Setting up the server for production mode
+
+For Linux servers, convenient `startServer.sh` and `stopServer.sh` scripts have been provided in the
+root project directory. The former will start the server with `nohup` so that it'll continue running
+when you exit the SSH session. The start server script will also restart the server if it's currently
+running.
+
+Note that there will be a delay from starting the server before you'll be able to see the results,
+since the script will get all necessary dependencies and compile the code, which may take a while.
+The script returns control of the console to you immediately. See the `nohup.out` and `errors.log`
+files for the normal output.
+
+By default, the start server script will start the server on port 8080. You have three choices here:
+
+1. Change this to start on port 80 (the normal HTTP port). This requires root permission.
+2. Just access the site via port 8080 (eg, with `http://example.com:8080`). Suitable for quick
+   setup.
+3. [Redirect 80 to 8080](http://www.cyberciti.biz/faq/linux-port-redirection-with-iptables/). This
+   is ideal if you don't want to have to run the server with sudo. Of course, actually redirecting
+   the port would require sudo, but the application itself will not run under that user. This is
+   the approach we used.
+
+This is all you need for the server to be able to successfully run.
+
+## Auxillary programs
+
+We've provided some additional programs that are meant for retrieving and parsing the data source.
+See [the wiki](https://github.com/MikeHoffert/EatSafe/wiki/Running-auxillary-programs) for more
+information on what these programs are and how to run them.
+
+Note that at the time of writing, the data source has been taken down, so the auxillary programs are
+in limbo. It is not necessary to run these programs, as the data output has been provided.
+
 ## Files
 
 * `app` - This is the folder where most of our development source code will be.
-* `app/assets` - These are additional resources that are processed in some way by the application.
+* `app/assets` - These are additional resources that are processed in some way by the application
+  (eg, LESS files).
 * `app/controllers` - These are the Scala [controllers](https://www.playframework.com/documentation/2.3.7/ScalaActions).
 * `app/views` - These are the Play Framework templates, which will generate HTML.
 * `app/models` - These are the Scala models (completing our MVC pattern).
 * `conf/application.conf` - Program configuration file. All conf here is globally accessible.
   See [here](https://www.playframework.com/documentation/2.3.7/Configuration) for Play Framework
-  configuration and [here](http://stackoverflow.com/a/10534049/1968462) for accessing configuration
-  values programmatically.
+  configuration.
 * `conf/routes` - The [routing file](https://www.playframework.com/documentation/2.3.7/ScalaRouting),
   which maps URL patterns to controllers.
 * `project` - Contains a few SBT configuration files, most notably the plugins file, where we ca
@@ -62,23 +112,3 @@ This means that everything worked and the server can be viewed in any web browse
 * `test` - Unit test files go here. They'll be automatically compiled and run when you run
   `./activator test`. The [CI server](https://magnum.travis-ci.com/MikeHoffert/EatSafe.svg?token=yXznwCPJBpA9S1h8k4E4&branch=master)
   will also run them.
-
-## Use with Scala IDE
-
-* Download and install [Scala IDE](http://scala-ide.org/).
-* Run `./activator ~run` in separate console. Scala IDE will be used only for editing and not
-  for building.
-* Run `./activator eclipse` before importing your project in order to generate a .classpath file 
-  that is right for you!
-* Import the project into Scala IDE with File > Import > Existing Project Into Workspace and choose
-  the folder containing this file.
-* In order to remove some compilation issues, you'll have to go to Project > Properties >
-  Java Build Path > Libraries > Add external class library and add the `target/scala-2.11/classes_managed`
-  folder. This ensures that Scala IDE can find the compiled templates.
-
-## The database
-
-* Credentials are in `conf/application.conf`.
-* Can connect to the database with `psql -h 104.131.107.139 -U eatsafe` (download the Postgres client, first).
-* Since the database is shared, avoid breaking it. Communicate with others before making large changes. Consider making personal backups.
-* Currently hosted on Mike's VPS -- to be switched to the university VPS once we have credentials for it.
