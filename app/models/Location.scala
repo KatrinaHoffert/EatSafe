@@ -163,6 +163,27 @@ object Location {
   }
 
   /**
+   * Lists all the locations, but with only the fields needed for the AdminLocation object.
+   */
+  def getAdminLocations()(implicit db:ActiveDatabase): Try[Seq[AdminLocation]] = {
+    Try {
+      DB.withConnection(db.name) { implicit connection =>
+        val query = SQL(
+           """
+             SELECT id, name, address, city
+             FROM location;
+           """
+          )
+        
+        query().map {
+          row => AdminLocation(row[Int]("id"), row[String]("name"), row[Option[String]]("address"),
+              row[Option[String]]("city"))
+        }.toList
+      }
+    }
+  }
+
+  /**
    * Converts a row from the location table into a Location object. This will query other tables
    * that contain data about the location (eg, the inspection table). The Anorm API does not provide
    * any means of static typing for database rows, so you must ensure that the row that you pass in
@@ -190,3 +211,8 @@ object Location {
  * a location.
  */
 case class SlimLocation(id: Int, name: String, address: Option[String])
+
+/**
+ * Alternative version of SlimLocation used for the admin interface.
+ */
+case class AdminLocation(id: Int, name: String, address: Option[String], city: Option[String])

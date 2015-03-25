@@ -1,0 +1,74 @@
+@import general._
+@import models._
+@import controllers._
+
+@**
+ * Lists all the locations in the database so that we can provide editing and similar features.
+ *@
+@(locations: Seq[AdminLocation])(implicit lang: Lang)
+
+@scripts = {
+  <script src="//cdn.datatables.net/1.10.5/js/jquery.dataTables.min.js"></script>
+  <script>
+    "use strict";
+
+    // See <https://datatables.net/reference/option/>
+    $('#adminLocationsTable').DataTable({
+      responsive: true,
+      pageLength: 25,
+      columnDefs: [
+        {
+          targets: 3,
+          width: "40px",
+          orderable: false
+        }
+      ],
+      language: {
+        lengthMenu: "@Messages("admin.list.tableLengthMenu", "_MENU_")",
+        info: "@Messages("admin.list.numResults", "_START_", "_END_", "_TOTAL_")",
+        infoEmpty: "",
+        emptyTable: "@Messages("admin.list.noResults")",
+        infoFiltered: "@Messages("admin.list.filteredFrom", "_MAX_")",
+        paginate: {
+          previous: "<",
+          next: ">"
+        }
+      }
+    });
+  </script>
+}
+
+@mainBody(title = Messages("admin.list.title"), moreScripts = scripts, hasFooter = true) {
+  <link rel="stylesheet" href="//cdn.datatables.net/1.10.5/css/jquery.dataTables.min.css"/>
+  @headingSmall(Messages("general.applicationName"))
+
+  <div class="smallPadding">
+    <table id="adminLocationsTable">
+      <thead>
+        <tr>
+          <th>@Messages("admin.list.name")</th>
+          <th>@Messages("admin.list.address")</th>
+          <th>@Messages("admin.list.city")</th>
+          <th></th>
+        </tr>
+      </thead>
+      <tbody>
+        @for(location <- locations) {
+          <tr>
+            <td>@location.name</td>
+            <td>@location.address</td>
+            <td>@location.city</td>
+            <td>
+              <a class="btn btn-default adminTableButton" href="TODO">
+                <i class="glyphicon glyphicon-pencil"></i>
+              </a>
+              <a class="btn btn-default adminTableButton" href="TODO">
+                <i class="glyphicon glyphicon-trash"></i>
+              </a>
+            </td>
+          </tr>
+        }
+      </tbody>
+    </table>
+  </div>
+}

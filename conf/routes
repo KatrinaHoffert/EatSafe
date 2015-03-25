@@ -11,6 +11,9 @@ GET     /language                                controllers.Application.setLang
 GET     /view/:locationId/violation/:violationId controllers.LocationController.violationInfo(locationId: Int, violationId: Int)
 GET     /search/:cityName                        controllers.SearchController.searchLocations(q: String, cityName: String, lax: Boolean ?= false)
 
+# Admin interface
+GET     /admin/list                              controllers.AdminController.listAllLocations
+
 # Programmatic access to resources (eg, via AJAX or for scripts)
 GET     /jsRoutes                                controllers.JsRoutes.javascriptRoutes
 

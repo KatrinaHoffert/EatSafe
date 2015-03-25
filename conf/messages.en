@@ -148,3 +148,13 @@ locations.search.name=Name
 locations.search.address=Address
 locations.search.weakSearch1=Don''t see what you''re looking for?
 locations.search.weakSearch2=Try a laxer search.
+
+# Admin interface
+admin.list.title=Admin - All locations
+admin.list.name=Name
+admin.list.address=Address
+admin.list.city=City
+admin.list.tableLengthMenu=Show {0} locations
+admin.list.numResults=Showing {0} to {1} of {2} locations
+admin.list.noResults=No locations
+admin.list.filteredFrom=(filtered from {0} locations)
