@@ -80,8 +80,12 @@
       </div>
     </form>
     <br>
-    <a id="mapForCity" class="btn btn-default" role="button" href="@routes.MapController.showCityMap(city)">
-    @Messages("locations.selectLocation.linkToMap")</a>
+
+    @if(city != "Unknown city") {
+      <a id="mapForCity" class="btn btn-default" role="button" href="@routes.MapController.showCityMap(city)">
+        @Messages("locations.selectLocation.linkToMap")
+      </a>
+    }
 
   </div>
 }
