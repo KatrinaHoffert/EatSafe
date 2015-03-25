@@ -4,7 +4,7 @@
 
 EatSafe Saskatchewan is a web application for accessing health and safety records of locations in
 Saskatchewan. It provides user and mobile friendly access to data that was previously hosted at
-the Government of Saskatchewan's online restaurant inspection report site <http://orii.health.gov.sk.ca/>.
+the Government of Saskatchewan's online restaurant inspection report site (http://orii.health.gov.sk.ca/).
 
 The application also boasts features such as the ability to plot all locations on a map with colored
 markers for their current rating (as determined by re-inspection priority). The intent of the
