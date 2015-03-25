@@ -37,12 +37,10 @@
             createPageError("@Messages("locations.selectLocation.noInput")");
             return;
           }
-          else if(obj == null) {
-            window.location.assign(jsRoutes.controllers.SearchController.searchLocations(query, "@city").url);
-          }
-          else {
-            window.location.assign(jsRoutes.controllers.LocationController.showLocation(obj.id).url);
-          }
+          window.location.assign(jsRoutes.controllers.SearchController.searchLocations(query, "@city").url);
+        },
+        onClick: function(node, a, obj, e) {
+          window.location.assign(jsRoutes.controllers.LocationController.showLocation(obj.id).url);
         }
       }
     });
