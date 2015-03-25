@@ -150,6 +150,15 @@ locations.search.weakSearch1=Don''t see what you''re looking for?
 locations.search.weakSearch2=Try a laxer search.
 
 # Admin interface
+admin.login.title=Admin - Login
+admin.login.username=Username
+admin.login.password=Password
+admin.login.submit=Login
+admin.login.badPassword=Invalid credentials. Note that the username and password are both case sensitive.
+admin.login.loggedOut=You have been logged out
+admin.login.heading=Admin interface
+admin.login.desc=You must be authorized to access this section of the site.
+
 admin.list.title=Admin - All locations
 admin.list.name=Name
 admin.list.address=Address
