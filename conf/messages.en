@@ -134,3 +134,8 @@ parser.priority.critical=Critical Item
 
 # More info about violations
 violations.goBack=Go Back
+
+# Search results
+locations.search.title={0} - EatSafe search
+locations.search.heading=Results for "{0}":
+locations.search.backButton=Back to search page
