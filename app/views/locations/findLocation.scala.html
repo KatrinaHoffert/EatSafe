@@ -21,7 +21,6 @@
     $("#location").typeahead({
       minLength: 1,
       maxItem: 8,
-      hint: true,
       display: "name",
       template: '<span>' +
           '<span class="locationTypeaheadName">{{name}}</span>' +
@@ -33,16 +32,17 @@
       },
       callback: {
         onSubmit: function(node, form, obj, e) {
-          if($("#location").val() == "") {
+          var query = $("#location").val();
+          if(query == "") {
             createPageError("@Messages("locations.selectLocation.noInput")");
             return;
           }
-          if(obj == null) {
-            createPageError("@Messages("locations.selectLocation.badInput")");
-            return;
+          else if(obj == null) {
+            window.location.assign(jsRoutes.controllers.SearchController.searchLocations(query, "@city").url);
           }
-
-          window.location.assign(jsRoutes.controllers.LocationController.showLocation(obj.id).url);
+          else {
+            window.location.assign(jsRoutes.controllers.LocationController.showLocation(obj.id).url);
+          }
         }
       }
     });
@@ -56,13 +56,7 @@
     });
   </script>
   <script src="https://maps.googleapis.com/maps/api/js?v=3.exp&signed_in=true"></script>
-  
-  
 }
-  
-
-
-
 
 @mainBody(title = Messages("locations.selectLocation.title"), moreScripts = scripts, hasFooter = true) {
   @headingSmall(Messages("general.applicationName"))
