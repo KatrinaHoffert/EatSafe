@@ -12,6 +12,9 @@ GET     /view/:locationId/violation/:violationId controllers.LocationController.
 GET     /search/:cityName                        controllers.SearchController.searchLocations(q: String, cityName: String, lax: Boolean ?= false)
 
 # Admin interface
+GET     /admin                                   controllers.AdminController.login
+GET     /admin/logout                            controllers.AdminController.logout
+POST    /admin/authenticate                      controllers.AdminController.authenticate
 GET     /admin/list                              controllers.AdminController.listAllLocations
 
 # Programmatic access to resources (eg, via AJAX or for scripts)

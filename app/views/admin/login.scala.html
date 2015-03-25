@@ -1,0 +1,50 @@
+@import general._
+@import models._
+@import controllers._
+@import controllers.AdminController.loginForm
+
+@**
+ * Allows the user to login to the admin interface. Just has to pass the username and password
+ * to the authentication page.
+ *@
+@()(implicit lang: Lang, flash: Flash)
+
+@mainBody(title = Messages("admin.login.title"), hasFooter = true) {
+  @headingSmall(Messages("general.applicationName"))
+
+  <div class="smallPadding">
+    @if(flash.get("badPassword").isDefined) {
+      <div class="alert alert-danger" role="alert">@Messages("admin.login.badPassword")</div>
+    }
+    @if(flash.get("loggedOut").isDefined) {
+      <div class="alert alert-success" role="alert">@Messages("admin.login.loggedOut")</div>
+    }
+    
+    <h2>@Messages("admin.login.heading")</h2>
+    <p>
+      @Messages("admin.login.desc")
+    </p>
+
+    <form action="@routes.AdminController.authenticate" method="POST">
+      <table>
+        <tr>
+          <td>
+            @Messages("admin.login.username"):
+          </td>
+          <td>
+            <input type="text" name="username">
+          </td>
+        </tr>
+        <tr>
+          <td>
+             @Messages("admin.login.password"):
+          </td>
+          <td>
+            <input type="password" name="password">
+          </td>
+        </tr>
+      </table>
+      <button class="btn btn-primary">@Messages("admin.login.submit")</button>
+    </form>
+  </div>
+}
