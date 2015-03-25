@@ -19,7 +19,7 @@ locations.selectLocation.badInput=I''m sorry, Dave, that not valid input.
 locations.selectLocation.searchingIn=Searching in {0}
 locations.selectLocation.unknownCity=locations not in a town or city
 locations.selectLocation.searchPlaceholder=Search (ex: Subway)
-locations.selectLocation.linkToMap=Go to map of city.
+locations.selectLocation.linkToMap=Go to map of city
 
 # Display locations page
 locations.view.titleStart=EatSafe
