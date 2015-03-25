@@ -14,7 +14,7 @@ object SearchController extends DetectLangController {
   def searchLocations(query: String, city: String) = Action { implicit request =>
     SearchEngine.queryLocations(query, city) match {
       case Success(cities) =>
-        Ok(cities.toString)
+        Ok(views.html.locations.searchResults(city, query, cities))
       case Failure(ex) =>
         Logger.error("Search system failed with query \"\"\"" + query + "\"\"\"", ex)
         InternalServerError(views.html.errors.error500(ex))
