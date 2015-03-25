@@ -91,24 +91,7 @@ information on what these programs are and how to run them.
 Note that at the time of writing, the data source has been taken down, so the auxillary programs are
 in limbo. It is not necessary to run these programs, as the data output has been provided.
 
-## Files
+## Further resources
 
-* `app` - This is the folder where most of our development source code will be.
-* `app/assets` - These are additional resources that are processed in some way by the application
-  (eg, LESS files).
-* `app/controllers` - These are the Scala [controllers](https://www.playframework.com/documentation/2.3.7/ScalaActions).
-* `app/views` - These are the Play Framework templates, which will generate HTML.
-* `app/models` - These are the Scala models (completing our MVC pattern).
-* `conf/application.conf` - Program configuration file. All conf here is globally accessible.
-  See [here](https://www.playframework.com/documentation/2.3.7/Configuration) for Play Framework
-  configuration.
-* `conf/routes` - The [routing file](https://www.playframework.com/documentation/2.3.7/ScalaRouting),
-  which maps URL patterns to controllers.
-* `project` - Contains a few SBT configuration files, most notably the plugins file, where we ca
-  specify libraries to include.
-* `public` - This folder will be fully accesible to the public. It's used for static resources such
-  as stylesheets, images, and JavaScript.
-* `target` - A completely automatically generated folder that contains the compiled code. Ignore it.
-* `test` - Unit test files go here. They'll be automatically compiled and run when you run
-  `./activator test`. The [CI server](https://magnum.travis-ci.com/MikeHoffert/EatSafe.svg?token=yXznwCPJBpA9S1h8k4E4&branch=master)
-  will also run them.
+* [Running the tests](https://github.com/MikeHoffert/EatSafe/wiki/Running-Tests-2.0).
+* [Files and folders](https://github.com/MikeHoffert/EatSafe/wiki/Files-and-folders)
