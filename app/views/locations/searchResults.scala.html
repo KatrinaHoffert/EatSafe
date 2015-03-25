@@ -12,22 +12,66 @@
 @(city: String, query: String, locations: Seq[SlimLocation])(implicit lang: Lang)
 
 @scripts = {
+  <script src="//cdn.datatables.net/1.10.5/js/jquery.dataTables.min.js"></script>
+  <script src="//cdn.datatables.net/plug-ins/f2c75b7247b/pagination/ellipses.js"></script>
   <script>
     "use strict";
     
-    // ...
+    // See <https://github.com/DataTables/Plugins/issues/101#issuecomment-55108765>
+    $.fn.dataTable.ext.pager.numbers_length = 5;
+
+    // See <https://datatables.net/reference/option/>
+    $('#searchResultsTable').DataTable({
+      searching: false,
+      dom: "rtilp",
+      language: {
+        lengthMenu: "Show _MENU_",
+        info: "Showing _START_ to _END_ of _TOTAL_ results",
+        infoEmpty: "",
+        emptyTable: "No results",
+        paginate: {
+          previous: "<",
+          next: ">"
+        }
+      }
+    });
   </script>
 }
 
 @mainBody(title = Messages("locations.search.title", query), moreScripts = scripts, hasFooter = true) {
+  <link rel="stylesheet" href="//cdn.datatables.net/1.10.5/css/jquery.dataTables.min.css"/>
   @headingSmall(Messages("general.applicationName"))
 
   <div class="smallPadding">
     <h2>@Messages("locations.search.heading", query)</h2>
 
-      @locations.toString
+    <table id="searchResultsTable">
+      <thead>
+        <tr>
+          <th>#</th>
+          <th>Name</th>
+          <th>Address</th>
+        </tr>
+      </thead>
+      <tbody>
+        @for(locationWithIndex <- locations.zipWithIndex) {
+          <tr>
+            <td>@locationWithIndex._2</td>
+            <td>
+              <a href="@routes.LocationController.showLocation(locationWithIndex._1.id)">
+                @locationWithIndex._1.name
+              </a>
+            </td>
+            <td>@locationWithIndex._1.address</td>
+          </tr>
+        }
+      </tbody>
+    </table>
 
-    <button type="button" class="btn btn-primary">@Messages("locations.search.backButton")</button>
-
+    <div class="searchButtons">
+      <a class="btn btn-primary" role="button" href="@routes.LocationController.findLocation(city)">
+        @Messages("locations.search.backButton")
+      </a>
+    </div>
   </div>
 }
