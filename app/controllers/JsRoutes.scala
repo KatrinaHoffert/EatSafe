@@ -24,7 +24,8 @@ object JsRoutes extends Controller {
       Routes.javascriptRouter("jsRoutes")(
         LocationController.findLocation,
         LocationController.showLocation,
-        Application.setLanguage
+        Application.setLanguage,
+        SearchController.searchLocations
       )
     ).as("text/javascript")
   }
