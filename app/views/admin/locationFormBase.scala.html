@@ -77,6 +77,14 @@
   @headingSmall(Messages("general.applicationName"))
 
   <div class="smallPadding">
+    <a class="btn btn-primary" href="@routes.AdminController.listAllLocations" style="margin-bottom: 1em;">
+      @Messages("admin.add.backToList")
+    </a>
+
+    <a class="btn btn-danger floatRight" href="@routes.AdminController.logout" style="margin-bottom: 1em;">
+      @Messages("admin.list.logout")
+    </a>
+
     @form(action = formAction) {
       @inputText(
         locationForm("name"),

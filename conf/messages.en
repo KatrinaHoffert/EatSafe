@@ -175,6 +175,7 @@ admin.list.deleteSuccess=Deletion successful.
 admin.list.deleteFailure=Deletion failed.
 admin.list.viewFailure=Cannot find the location to edit.
 admin.list.addLocation=Add location
+admin.list.logout=Log out
 
 admin.add.title=Admin - Add location
 admin.add.name=Name*
@@ -189,6 +190,7 @@ admin.add.reinspectionPriority=Reinspection priority*
 admin.add.violations=Violation IDs
 admin.add.removeInspection=Remove
 admin.add.submit=Add location
+admin.add.backToList=Back to location list
 
 admin.edit.title=Admin - Edit location
 admin.edit.submit=Save location
