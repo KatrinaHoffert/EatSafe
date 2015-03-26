@@ -206,26 +206,7 @@ object Location {
 
           // Insert each location
           for(inspection <- location.inspections) {
-            val inspectionQuery = SQL(
-              """
-                INSERT INTO inspection (location_id, inspection_date, inspection_type, reinspection_priority)
-                  VALUES({locationId}, {date}, {inspectionType}, {reinspectionPriority})
-                  RETURNING id;
-              """
-            ).on("locationId" -> locationId, "date" -> inspection.date, "inspectionType" ->
-                inspection.inspectionType, "reinspectionPriority" -> inspection.reinspectionPriority)
-
-            val inspectionId = inspectionQuery().map(_[Int]("id")).head
-
-            // And each violation
-            for(violationId <- inspection.violationIds) {
-              SQL(
-                """
-                  INSERT INTO violation (inspection_id, violation_id)
-                    VALUES({inspectionId}, {violationId});
-                """
-              ).on("inspectionId" -> inspectionId, "violationId" -> violationId).execute()
-            }
+            Inspection.add(inspection, locationId)
           }
         }
 
@@ -265,34 +246,13 @@ object Location {
               DELETE FROM inspection
                 WHERE location_id = {locationId};
             """
-          ).on("locationId" -> locationId).execute();
+          ).on("locationId" -> locationId).execute()
 
-          // Insert each location
           for(inspection <- location.inspections) {
-            val inspectionQuery = SQL(
-              """
-                INSERT INTO inspection (location_id, inspection_date, inspection_type, reinspection_priority)
-                  VALUES({locationId}, {date}, {inspectionType}, {reinspectionPriority})
-                  RETURNING id;
-              """
-            ).on("locationId" -> locationId, "date" -> inspection.date, "inspectionType" ->
-                inspection.inspectionType, "reinspectionPriority" -> inspection.reinspectionPriority)
-
-            val inspectionId = inspectionQuery().map(_[Int]("id")).head
-
-            // And each violation
-            for(violationId <- inspection.violationIds) {
-              SQL(
-                """
-                  INSERT INTO violation (inspection_id, violation_id)
-                    VALUES({inspectionId}, {violationId});
-                """
-              ).on("inspectionId" -> inspectionId, "violationId" -> violationId).execute()
-            }
+            Inspection.add(inspection, locationId)
           }
         }
 
-        // Check if the insertion was successful, and rollback if not
         attempt match {
           case Success(_) =>
             Unit

@@ -5,7 +5,7 @@ import anorm._
 import play.api.db.DB
 import play.api.Play.current
 import globals.ActiveDatabase
-
+import controllers.InspectionForm
 
 /**
  * Represents a single inspection of a location.
@@ -80,6 +80,36 @@ object Inspection {
           Inspection(row[java.util.Date]("inspection_date").toString, row[String]("inspection_type"),
             row[String]("reinspection_priority"), Seq.empty[Violation])
       ).toList
+    }
+  }
+
+  /**
+   * Adds an inspection to the database. This is meant to be used with Location.add and Location.edit,
+   * and will throw exceptions that are expected to be caught by the caller.
+   *
+   * The type of connection passed should be a transaction and callers should be prepared to rollback
+   * if this function fails.
+   */
+  def add(inspection: InspectionForm, locationId: Int)(implicit connection: java.sql.Connection) = {
+    val inspectionQuery = SQL(
+      """
+        INSERT INTO inspection (location_id, inspection_date, inspection_type, reinspection_priority)
+          VALUES({locationId}, {date}, {inspectionType}, {reinspectionPriority})
+          RETURNING id;
+      """
+    ).on("locationId" -> locationId, "date" -> inspection.date, "inspectionType" ->
+        inspection.inspectionType, "reinspectionPriority" -> inspection.reinspectionPriority)
+
+    val inspectionId = inspectionQuery().map(_[Int]("id")).head
+
+    // And each violation
+    for(violationId <- inspection.violationIds) {
+      SQL(
+        """
+          INSERT INTO violation (inspection_id, violation_id)
+            VALUES({inspectionId}, {violationId});
+        """
+      ).on("inspectionId" -> inspectionId, "violationId" -> violationId).execute()
     }
   }
 }
