@@ -10,6 +10,9 @@ import play.api.data._
 import play.api.data.Forms._
 
 object AdminController extends DetectLangController with Secured {
+  /**
+   * Represents and validates the login form displayed on the login page.
+   */
   val loginForm = Form(
     tuple(
       "username" -> text,
@@ -20,20 +23,37 @@ object AdminController extends DetectLangController with Secured {
     })
   )
 
+  /**
+   * Verifies the password to the admin page. Currently a dummy value. Will later be expanded to get
+   * a list of possible usernames and passwords from a file or something.
+   */
   def checkPassword(username: String, password: String) = {
     (username == "admin" && password == "1234")  
   }
 
+  /**
+   * Displays the login form.
+   */
   def login = Action { implicit request =>
     Ok(views.html.admin.login())
   }
 
+  /**
+   * Logs the user out and takes them back to the login form.
+   */
   def logout = Action {
+    // Note how we're using flash sessions to just pass a flag. So we only actually need to set
+    // the name of the key and the body makes no difference. On the login page, we'll check for
+    // if a particular flash session has been set and change the page accordingly.
     Redirect(routes.AdminController.login).withNewSession.flashing(
       "loggedOut" -> ""
     )
   }
 
+  /**
+   * Receives the form from the login page. Binding the form validates it. If successful, users will
+   * be taken to the location list. OTherwise they'll go back to the log in page with an error.
+   */
   def authenticate = Action { implicit request =>
     loginForm.bindFromRequest.fold(
       formWithErrors =>
@@ -48,7 +68,7 @@ object AdminController extends DetectLangController with Secured {
   /**
    * Displays search results.
    */
-  def listAllLocations = withAuth  { username => implicit request =>
+  def listAllLocations = withAuth { username => implicit request =>
     Location.getAdminLocations match {
       case Success(locations) =>
         Ok(views.html.admin.listAllLocations(locations))
@@ -59,6 +79,10 @@ object AdminController extends DetectLangController with Secured {
   }
 }
 
+/**
+ * An action that checks that the user is authenticated. Pretty much copied from
+ * <https://www.playframework.com/documentation/2.0.4/ScalaSecurity>.
+ */
 trait Secured {
   def username(request: RequestHeader) = request.session.get(Security.username)
 
