@@ -1,9 +1,23 @@
+@**
+ * A helper formatter for creating inputs that utilize Bootstrap's form styling. In addition
+ * to the regular inputs that are accepted, it also has an '_glyphIcon input, which is a class name
+ * for a glyphicon to use in an input group. If not declared, no input group is used.
+ *
+ * To use this in a form, call `@implicitFieldConstructor = @{ FieldConstructor(bootstrapField.f) }`
+ * somewhere.
+ *@
 @(elements: helper.FieldElements)
 
 <div class="form-group @if(elements.hasErrors) {has-error}">
   <label class="control-label" for="@elements.id">@elements.label</label>
-  @* See <http://stackoverflow.com/a/20523783/1968462> *@
+  @if(elements.args.get('_glyphIcon).isDefined) {
+    <div class="input-group">
+      <span class="input-group-addon"><i class=" glyphicon @elements.args('_glyphIcon)"></i></span>
+  }
   @elements.input
+  @if(elements.args.get('_glyphIcon).isDefined) {
+    </div>
+  }
   <span class="help-block">@elements.infos.mkString(", ")</span>
   <span class="errors-block">@elements.errors.mkString(", ")</span>
 </div>
