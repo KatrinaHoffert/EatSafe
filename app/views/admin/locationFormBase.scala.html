@@ -30,8 +30,11 @@
       reorderInspections();
     });
 
+    // Remove inspection button
+    $(".removeButton").on("click", removeButtonClicked);
+
     function removeButtonClicked(event) {
-      if($(".removeButton").length == 1) {
+      if($(".adminPanel").length <= 2) {
         $(".removeButton").prop("disabled", true);
       }
 
@@ -39,11 +42,6 @@
 
       reorderInspections();
     }
-
-    // Remove inspection button
-    $(".removeButton").on("click", function(e) {
-      removeButtonClicked(e);
-    });
 
     /**
      * Fixes the numbering of the names so that everything gets submitted properly. Note that the
@@ -59,16 +57,12 @@
       });
 
       // Reapply the remove button handler
-      $(".removeButton").on("click", function(e) {
-        removeButtonClicked(e);
-      });
+      $(".removeButton").off("click", removeButtonClicked);
+      $(".removeButton").on("click", removeButtonClicked);
     }
 
-    if($(".removeButton").length > 1) {
+    if($(".adminPanel").length > 1) {
       $(".removeButton").prop("disabled", false);
-    }
-    else {
-      $(".removeButton").prop("disabled", true);
     }
   </script>
 }
