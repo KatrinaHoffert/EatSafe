@@ -23,7 +23,7 @@ object MapController extends DetectLangController {
     Ok(views.html.locations.displayMap(cleanAddress, city))
   }
 
-  def showCityMap(city: String) = Action {
+  def showCityMap(city: String) = Action { implicit request =>
     Location.getAllLocationsWithCoordinates() match {
       case Success(locations) =>
         Ok(views.html.locations.displayCityMap(city, locations))
