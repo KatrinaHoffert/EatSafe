@@ -77,6 +77,23 @@ object AdminController extends DetectLangController with Secured {
         InternalServerError(views.html.errors.error500(ex))
     }
   }
+
+  /**
+   * Deletes a location with the given ID.
+   */
+  def deleteLocation(id: Int) = withAuth { username => implicit request =>
+    Location.delete(id) match {
+      case Success(_) =>
+        Redirect(routes.AdminController.listAllLocations).flashing(
+          "delete" -> "succeeded"
+        )
+      case Failure(ex) =>
+        Logger.error("Could not get list of locations", ex)
+        Redirect(routes.AdminController.listAllLocations).flashing(
+          "delete" -> "failed"
+        )
+    }
+  }
 }
 
 /**

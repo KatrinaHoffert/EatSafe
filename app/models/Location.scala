@@ -171,7 +171,7 @@ object Location {
         val query = SQL(
            """
              SELECT id, name, address, city
-             FROM location;
+              FROM location;
            """
           )
         
@@ -179,6 +179,26 @@ object Location {
           row => AdminLocation(row[Int]("id"), row[String]("name"), row[Option[String]]("address"),
               row[Option[String]]("city"))
         }.toList
+      }
+    }
+  }
+
+  /**
+   * Deletes a location by ID.
+   * @return Success if the deletion succeeded (which includes the trivial caase of there not being
+   * a location with that ID) or Failure if the DBMS complained.
+   */
+  def delete(id: Int)(implicit db:ActiveDatabase): Try[Unit] = {
+    Try {
+      DB.withConnection(db.name) { implicit connection =>
+        val query = SQL(
+           """
+             DELETE FROM location
+              WHERE id = {id};
+           """
+          ).on("id" -> id)
+        
+        query()
       }
     }
   }
