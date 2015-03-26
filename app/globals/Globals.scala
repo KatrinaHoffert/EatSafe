@@ -12,31 +12,45 @@ package object globals {
    */
   implicit lazy val defaultDb = new ActiveDatabase("default")
 
-  lazy val validRhas = Set(
+  lazy val validRhas = Seq(
     "Saskatoon Health Authority",
+    "PA Parkland Health Authority",
+    "Regina QuAppelle Health Authority",
     "Sun Country Health Authority",
     "Prairie North Health Authority",
     "Sunrise Health Authority",
     "Kelsey Trail Health Authority",
     "Five Hills Health Authority",
     "Heartland Health Authority",
-    "PA Parkland Health Authority",
     "Cypress Health Authority",
-    "Regina QuAppelle Health Authority",
     "Northern Health - Mamaw/Keewa/Athab"
   )
 
-  lazy val validInspectionTypes = Set(
+  lazy val validInspectionTypes = Seq(
+    "Routine",
     "Follow-up",
-    "Special",
-    "Complaint",
     "General Inspection",
-    "Routine"
+    "Complaint",
+    "Special"
   )
 
-  lazy val validReinspectionPriorities = Set(
+  lazy val validInspectionTypesKeys = Seq(
+    "locations.view.type.Routine",
+    "locations.view.type.Follow-up",
+    "locations.view.type.GeneralInspection",
+    "locations.view.type.Complaint",
+    "locations.view.type.Special"
+  )
+
+  lazy val validReinspectionPriorities = Seq(
     "Low",
     "Moderate",
     "High"
+  )
+
+  lazy val validReinspectionPrioritiesKeys = Seq(
+    "admin.add.lowPriority",
+    "admin.add.moderatePriority",
+    "admin.add.highPriority"
   )
 }

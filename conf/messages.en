@@ -193,6 +193,9 @@ admin.add.removeInspection=Remove
 admin.add.submit=Add location
 admin.add.backToList=Back to location list
 admin.add.globalErrors=We''ve found the following errors in your submission:
+admin.add.lowPriority=Low
+admin.add.moderatePriority=Moderate
+admin.add.highPriority=High
 
 admin.edit.title=Admin - Edit location
 admin.edit.submit=Save location
