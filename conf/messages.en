@@ -196,6 +196,7 @@ admin.add.globalErrors=We''ve found the following errors in your submission:
 admin.add.lowPriority=Low
 admin.add.moderatePriority=Moderate
 admin.add.highPriority=High
+admin.add.violationsHelp=Comma separated list of violation IDs (eg, "1, 16, 5")
 
 admin.edit.title=Admin - Edit location
 admin.edit.submit=Save location
