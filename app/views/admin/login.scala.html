@@ -28,11 +28,17 @@
     <form action="@routes.AdminController.authenticate" method="POST">
       <div class="form-group">
         <label class="control-label" for="username">@Messages("admin.login.username")</label>
-        <input class="form-control" type="text" name="username" id="username" />
+        <div class="input-group">
+          <span class="input-group-addon"><i class=" glyphicon glyphicon-user"></i></span>
+          <input class="form-control" type="text" name="username" id="username" />
+        </div>
       </div>
       <div class="form-group">
         <label class="control-label" for="username">@Messages("admin.login.password")</label>
+        <div class="input-group">
+          <span class="input-group-addon"><i class=" glyphicon glyphicon-asterisk"></i></span>
         <input class="form-control" type="password" name="password" id="password" />
+        </div>
       </div>
       <button class="btn btn-primary">@Messages("admin.login.submit")</button>
     </form>
