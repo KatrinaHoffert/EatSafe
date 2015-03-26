@@ -176,6 +176,7 @@ admin.list.deleteFailure=Deletion failed.
 admin.list.viewFailure=Cannot find the location to edit.
 admin.list.addLocation=Add location
 admin.list.logout=Log out
+admin.list.confirmDelete=Are you sure you want to delete this location? This cannot be undone!
 
 admin.add.title=Admin - Add location
 admin.add.name=Name*

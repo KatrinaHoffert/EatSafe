@@ -35,6 +35,16 @@
         }
       }
     });
+
+    /**
+     * Opens a confirmation dialogue to confirm a deletion, with the intent being to prevent
+     * misclicks from ruining the DB.
+     */
+    function deleteConfirmation(id) {
+      if(confirm("@Messages("admin.list.confirmDelete")")) {
+        window.location.assign(jsRoutes.controllers.AdminController.deleteLocation(id).url);
+      }
+    }
   </script>
 }
 
@@ -95,7 +105,7 @@
               <a class="btn btn-default adminTableButton" href="@routes.AdminController.editLocation(location.id)">
                 <i class="glyphicon glyphicon-pencil"></i>
               </a>
-              <a class="btn btn-default adminTableButton" href="@routes.AdminController.deleteLocation(location.id)">
+              <a class="btn btn-default adminTableButton" href="#" onclick="deleteConfirmation(@location.id)">
                 <i class="glyphicon glyphicon-trash"></i>
               </a>
             </td>
