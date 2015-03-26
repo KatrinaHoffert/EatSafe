@@ -11,4 +11,32 @@ package object globals {
    * Tests should use an *explicit* ActiveDatabase so that other globals could be used.
    */
   implicit lazy val defaultDb = new ActiveDatabase("default")
+
+  lazy val validRhas = Set(
+    "Saskatoon Health Authority",
+    "Sun Country Health Authority",
+    "Prairie North Health Authority",
+    "Sunrise Health Authority",
+    "Kelsey Trail Health Authority",
+    "Five Hills Health Authority",
+    "Heartland Health Authority",
+    "PA Parkland Health Authority",
+    "Cypress Health Authority",
+    "Regina QuAppelle Health Authority",
+    "Northern Health - Mamaw/Keewa/Athab"
+  )
+
+  lazy val validInspectionTypes = Set(
+    "Follow-up",
+    "Special",
+    "Complaint",
+    "General Inspection",
+    "Routine"
+  )
+
+  lazy val validReinspectionPriorities = Set(
+    "Low",
+    "Moderate",
+    "High"
+  )
 }

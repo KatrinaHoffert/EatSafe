@@ -85,6 +85,17 @@
       @Messages("admin.list.logout")
     </a>
 
+    @if(locationForm.hasGlobalErrors) {
+      <div class="alert alert-danger" role="alert">
+        <strong>@Messages("admin.add.globalErrors")</strong>
+        <ul>
+          @for(error <- locationForm.globalErrors) {
+            <li>@error.message</li>
+          }
+        </ul>
+      </div>
+    }
+
     @form(action = formAction) {
       @inputText(
         locationForm("name"),
