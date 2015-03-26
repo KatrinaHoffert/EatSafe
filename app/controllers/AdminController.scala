@@ -85,12 +85,12 @@ object AdminController extends DetectLangController with Secured {
     Location.delete(id) match {
       case Success(_) =>
         Redirect(routes.AdminController.listAllLocations).flashing(
-          "delete" -> "succeeded"
+          "delete" -> "success"
         )
       case Failure(ex) =>
-        Logger.error("Could not get list of locations", ex)
+        Logger.error("Failed (?) to delete location with ID " + id, ex)
         Redirect(routes.AdminController.listAllLocations).flashing(
-          "delete" -> "failed"
+          "delete" -> "failure"
         )
     }
   }

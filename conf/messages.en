@@ -167,3 +167,5 @@ admin.list.tableLengthMenu=Show {0} locations
 admin.list.numResults=Showing {0} to {1} of {2} locations
 admin.list.noResults=No locations
 admin.list.filteredFrom=(filtered from {0} locations)
+admin.list.deleteSuccess=Deletion successful.
+admin.list.deleteFailure=Deletion failed.
