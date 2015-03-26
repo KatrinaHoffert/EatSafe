@@ -191,6 +191,13 @@ admin.add.violations=Violation IDs
 admin.add.removeInspection=Remove
 admin.add.submit=Add location
 admin.add.backToList=Back to location list
+admin.add.globalErrors=We''ve found the following errors in your submission:
 
 admin.edit.title=Admin - Edit location
 admin.edit.submit=Save location
+
+admin.validation.invalidPostalCode=Invalid postal code
+admin.validation.invalidRha=Invalid RHA
+admin.validation.invalidInspectionType=Invalid inspection type
+admin.validation.invalidReinspectionPriority=Invalid reinspection priority
+admin.validation.invalidViolationIds=Invalid violation ID (violations must be a comma-separated list of IDs)
