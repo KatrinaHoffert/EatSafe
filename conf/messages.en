@@ -201,3 +201,4 @@ admin.validation.invalidRha=Invalid RHA
 admin.validation.invalidInspectionType=Invalid inspection type
 admin.validation.invalidReinspectionPriority=Invalid reinspection priority
 admin.validation.invalidViolationIds=Invalid violation ID (violations must be a comma-separated list of IDs)
+admin.validation.badNumberOfInspections=There must be at least one inspection

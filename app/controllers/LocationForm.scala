@@ -63,6 +63,9 @@ object LocationForm {
     verifying (Messages("admin.validation.invalidRha"), fields => {
       validRhas.contains(fields.rha)
     })
+    verifying (Messages("admin.validation.badNumberOfInspections"), fields => {
+      fields.inspections.size > 0
+    })
     // While we could do this validation at the inspectionMapping level, we won't because Play
     // won't treat the error like a global error and we'll have to do more work in displaying the
     // error to the user.
