@@ -42,7 +42,7 @@ case class InspectionForm(
 
 object LocationForm {
   val inspectionMapping = mapping(
-    "date" -> date,
+    "date" -> date("yyyy-MM-dd"),
     "inspectionType" -> nonEmptyText,
     "reinspectionPriority" -> nonEmptyText,
     "violations" -> optional(nonEmptyText)

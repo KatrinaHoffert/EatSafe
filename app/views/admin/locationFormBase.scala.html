@@ -145,7 +145,8 @@
                 locationForm(inspection.name + ".date"),
                 '_label -> Messages("admin.add.inspectionDate"),
                 '_showConstraints -> false,
-                'class -> "inspectionDateField form-control"
+                'class -> "inspectionDateField form-control",
+                'placeholder -> "YYYY-MM-DD"
               )
               @select(
                 locationForm(inspection.name + ".inspectionType"),
@@ -165,7 +166,8 @@
                 locationForm(inspection.name + ".violations"),
                 '_label -> Messages("admin.add.violations"),
                 '_showConstraints -> false,
-                'class -> "violationsField form-control"
+                'class -> "violationsField form-control",
+                '_help -> Messages("admin.add.violationsHelp")
               )
             </div>
           </div>
