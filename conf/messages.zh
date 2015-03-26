@@ -7,12 +7,20 @@ locations.selectCity.prompt=请输入您想要搜索的城市
 locations.selectCity.noInput=请输入您想要搜索的城市。
 locations.selectCity.badInput=输入无效。请重新输入。
 locations.selectCity.locateMeTooltip=根据定位自动填写
+locations.selectCity.searchUnknownCity=搜索偏远（未知）地区餐厅
+locations.selectCity.searchPlaceholder=搜索
+locations.selectCity.badGeolocate=抱歉，未能自动找到城市。
+locations.selectCity.linkToMap=在地图上查看所有地点
 
 # Select location page
 locations.selectLocation.title=选择餐厅
 locations.selectLocation.prompt=请输入您想要搜索的餐厅
 locations.selectLocation.noInput=请输入您想要搜索的餐厅。
 locations.selectLocation.badInput=输入无效。请重新输入。
+locations.selectLocation.searchingIn=当前城市： {0}
+locations.selectLocation.unknownCity=偏远（未知）城市
+locations.selectLocation.searchPlaceholder=搜索餐厅
+locations.selectLocation.linkToMap=在地图上显示当前城市
 
 # Display locations page
 locations.view.titleStart=餐饮监管
@@ -23,11 +31,38 @@ locations.view.pastInspectionsHide=[隐藏]
 locations.view.noRecentInspections=无检查。
 locations.view.reinspectionPriority=当前再查优先等级
 locations.view.previousInspectionType=之前检查类型
+locations.view.type.Follow-up=跟踪检查（Follow-up）
+locations.view.type.Special=特殊检查（Special）
+locations.view.type.Complaint=投诉检查（Complaint）
+locations.view.type.GeneralInspection=一般性检查（General Inspection）
+locations.view.type.Routine=常规检查（Routine）
 locations.view.rha=地区餐饮监管分局
 locations.view.unknownLocation=未知地点
+locations.view.mostRecent=最近一次
+locations.view.ratingLabel=评分
+locations.view.rating_good=优
+locations.view.rating_fair=良
+locations.view.rating_poor=差
+locations.view.rating_unknown=未知
+locations.view.moreInfoViolation=[更多]
 
 # Display address page
 maps.displayAddress.title=地图: {0}, {1}
+
+# Multi-map
+maps.multiMap.title=地图
+maps.multiMap.nearbyLocationsHeading=附近的餐厅:
+maps.multiMap.nearbyLocationsToggle=隐藏附近的餐厅
+maps.multiMap.kmAway=千米
+maps.multiMap.sidebarLoading=正在载入。。。
+maps.multiMap.locationNotSupported=抱歉，您的浏览器不支持定位。
+maps.multiMap.locationFailed=未能找到您的地点。
+maps.multiMap.locationInaccurate=无法精确为您定位。
+maps.multiMap.findMe=我的位置
+maps.multiMap.moveToMeInaccurate=无法精确为您定位。
+maps.multiMap.moveToMeFailed=无法精确为您定位。
+maps.multiMap.moveToMeUnsupported=抱歉，您的浏览器不支持定位。
+maps.multiMap.infoButton=更多
 
 # About page
 about.title=关于萨斯喀彻温餐饮监管
@@ -59,5 +94,57 @@ errors.stackTraceHeading=为开发者：
 errors.emptyCityTitle=这个城市里未能找到餐厅。
 errors.emptyCityDesc=不好意思...
 errors.emptyCityText=在"{0}"找不到餐厅. 这有可能是您到达了错误的链接，或者是我们内部软件的错误。
-errors.emptyCityTryAgain=再给我们一次机会？
+errors.emptyCityTryAgain=再试一次？
 errors.unknownAddress=未知地址
+
+# Parser messages
+parser.name.1=冷藏/冷冻/解冻 (必须处于4°C/40°F以下)
+parser.desc.1=易腐易烂及潜在危险性食品必须于4°C/40°F以下储存。有危险性食品必须在冷藏室或流动的冷水下解冻。
+parser.name.2=烹饪/重新加热/热保存 (必须到达60°C/140°F以上)
+parser.desc.2=烹饪食品使其内部温度到达： a) 63°C (145°F)及以上: 蛋类(如果即食)，五分熟牛肉，小牛排和烤肉 b) 68°C (155°F)及以上: 狩猎农场肉制品 c) 70°C (158°F): 鱼类 d) 71°C (160°F)及以上: 碎块牛肉，猪肉，小牛肉，及其制品，如香肠，肉丸，猪排，肋骨和烤肉. e) 74°C (165°F)及以上: 碎块鸡肉， 火鸡肉，及其制品，以及家禽家畜，鱼，蛋的混合制品。鸡胸肉，鸡腿，鸡大腿，鸡翅，内脏，肉馅，热狗，残余蛋制品（如果不符合2a的标准）和鱼肉碎 f) 85°C (185°C) 及以上: 全禽. 食用之前必须快速重新加热到内部温度74°C (165°F)。 热存储设备的内部温度必须达到60°C (140°F)及以上.
+parser.name.3=储存/预处理食物
+parser.desc.3=食品必须一直存储于食品级容器，正确标识并且避免污染。
+parser.name.4=洗手设施/习惯
+parser.desc.4=必须在正确的时间或时间段后洗手。在食品准备以及烹饪的地点，必须设有带流动热水和凉水的洗手盆，并且有洗手液和一次性卫生纸。洗手流程：a）用流动的温水沾湿双手以及裸露的手臂 （至少到手腕）b）应用洗手液 c）大力揉搓湿润表面至少二十秒，起泡至少到手腕 d）在手指或其他需要清洁的地方使用指甲刷 e）用流动的热水从手腕到指尖彻底漂洗 f）重新使用洗手液 g）彻底漂洗双手及手腕 h）用一次性纸巾擦干双手 i）用纸巾关闭水龙头
+parser.name.5=食品处理者健康/卫生/习惯
+parser.desc.5=必须一直保持良好的个人卫生。 有传染病或者症状的食品处理者应该离职。
+parser.name.6=食品保护
+parser.desc.6=食品必须一直处于保护不受污染的状态。
+parser.name.7=设备用具的清洁及消毒
+parser.desc.7=必须遵从正确的设备用具清洗标准。机器清洗：洗碗设施必须经过National Sanitation Foundation (NSF)或同等级机构批准，并且设计能在60°C (140°F)下运转和正确消毒。手工清洗： （在三隔室的水槽中分别进行清洗，漂洗，消毒）第一隔室：在44°C (111°F)的热水中清洗并应用清洁剂  第二隔室： 44°C (111°F)热水漂洗  第三隔室：用批准的方法杀菌消毒
+parser.name.8=从批准供应商获取食物
+parser.desc.8=食品，水，冰块必须从比准的供应商处获得，并且健康无害，在适宜的温度下运输。
+parser.name.9=从批准水源获取水
+parser.desc.9=食品，水，冰块必须从比准的供应商处获得，并且健康无害，在适宜的温度下运输。
+parser.name.10=食品保护
+parser.desc.10=食品在储存，准备，展示，食用和运输过程中必须避免污染。除非放在经批准的容器中，食品不能放在地板上。食品架子的最底层必须要足够高，不能妨碍清洁地板。
+parser.name.11=配备准确的温度计来监测食品温度
+parser.desc.11=必须拥有准确的，食品级的温度计来检测潜在危险食品的内部温度。
+parser.name.12=建设，储存和清洗设备以及餐具
+parser.desc.12=必须安装并且维护经过批准的洗碗装置。必须随时拥有充足的洗涤用具和清洁剂。“就地清洁”的设备必须按照说明书上的要求惊醒清洁和消毒。
+parser.name.13=废弃物存放/处理
+parser.desc.13=在食品处理以及烹饪的地点必须准备充足的经过批准的，有覆盖的垃圾收容装置。收容装置需要保持整洁并且至少每天清空一次。垃圾以及废弃物储存装置必须经过批准，并且有覆盖，可密封。必须保持整洁并且无虫害。
+parser.name.14=灭虫灭鼠
+parser.desc.14=所有餐厅必须无虫害。
+parser.name.15=建设，维护和清洁
+parser.desc.15=所有房间，如果用来储存，准备食物，进餐，清洗，储存设备和餐具，必须保持地板，墙壁和天花板的干净整洁，并及时修补。
+parser.name.16=管道，灯光及通风
+parser.desc.16=必须安装经批准的管道来避免食品污染。每间储存以及烹饪食品的房间必须安装灯罩以及抗震灯泡。除非另经批准，所有餐厅必须安装通风排气设备来避免腥味，烟雾，油气和凝结液滴的室内聚集。 
+parser.priority.general=一般（General Item）
+parser.priority.critical=重要（Critical Item）
+
+# More info about violations
+violations.goBack=返回
+
+# Search results
+locations.search.title={0} - 搜索
+locations.search.heading="{0}"的搜索结果:
+locations.search.backButton=回到搜索页
+locations.search.tableLengthMenu=显示{0}
+locations.search.numResults=当前第{0}到{1}结果；共{2}结果
+locations.search.noResults=未找到相应结果
+locations.search.rankSymbol=#
+locations.search.name=名称
+locations.search.address=地址
+locations.search.weakSearch1=没有您想要的结果?
+locations.search.weakSearch2=请尝试重新搜索.
