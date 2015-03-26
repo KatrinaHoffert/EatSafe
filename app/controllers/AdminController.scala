@@ -8,6 +8,7 @@ import globals._
 import play.api.Logger
 import play.api.data._
 import play.api.data.Forms._
+import play.api.Play.current
 
 object AdminController extends DetectLangController with Secured {
   /**
@@ -27,8 +28,14 @@ object AdminController extends DetectLangController with Secured {
    * Verifies the password to the admin page. Currently a dummy value. Will later be expanded to get
    * a list of possible usernames and passwords from a file or something.
    */
-  def checkPassword(username: String, password: String) = {
-    (username == "admin" && password == "1234")  
+  def checkPassword(username: String, password: String): Boolean = {
+    // Note that this returns a Java List. Ew.
+    val users = current.configuration.getObjectList("users").get
+    for(i <- 0 until users.size) {
+      val user = users.get(i)
+      if(user.get("username").unwrapped == username && user.get("password").unwrapped == password) return true
+    }
+    false
   }
 
   /**
