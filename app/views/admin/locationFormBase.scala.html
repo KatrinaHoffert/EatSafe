@@ -146,7 +146,8 @@
                 '_label -> Messages("admin.add.inspectionDate"),
                 '_showConstraints -> false,
                 'class -> "inspectionDateField form-control",
-                'placeholder -> "YYYY-MM-DD"
+                'placeholder -> "YYYY-MM-DD",
+                '_glyphIcon -> "glyphicon-calendar"
               )
               @select(
                 locationForm(inspection.name + ".inspectionType"),
@@ -167,7 +168,8 @@
                 '_label -> Messages("admin.add.violations"),
                 '_showConstraints -> false,
                 'class -> "violationsField form-control",
-                '_help -> Messages("admin.add.violationsHelp")
+                '_help -> Messages("admin.add.violationsHelp"),
+                '_glyphIcon -> "glyphicon-th-list"
               )
             </div>
           </div>
