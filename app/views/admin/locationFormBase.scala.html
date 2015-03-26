@@ -2,6 +2,8 @@
 @import models._
 @import controllers._
 @import helper._
+@import util.TypeConversions._
+@import globals._
 
 @**
  * A common base between the add and edit forms.
@@ -115,8 +117,9 @@
         '_showConstraints -> false,
         'class -> "form-control"
       )
-      @inputText(
+      @select(
         locationForm("rha"),
+        extendSeqToSelect(validRhas),
         '_label -> Messages("admin.add.rha"),
         '_showConstraints -> false,
         'class -> "form-control"
@@ -144,14 +147,16 @@
                 '_showConstraints -> false,
                 'class -> "inspectionDateField form-control"
               )
-              @inputText(
+              @select(
                 locationForm(inspection.name + ".inspectionType"),
+                mapValuesToDisplayed(validInspectionTypesKeys.map(Messages(_)), validInspectionTypes),
                 '_label -> Messages("admin.add.inspectionType"),
                 '_showConstraints -> false,
                 'class -> "inspectionTypeField form-control"
               )
-              @inputText(
+              @select(
                 locationForm(inspection.name + ".reinspectionPriority"),
+                mapValuesToDisplayed(validReinspectionPrioritiesKeys.map(Messages(_)), validReinspectionPriorities),
                 '_label -> Messages("admin.add.reinspectionPriority"),
                 '_showConstraints -> false,
                 'class -> "reinspectionPriorityField form-control"

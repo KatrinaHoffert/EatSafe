@@ -74,4 +74,24 @@ object TypeConversions {
 
     Json.toJson(jsObjects)
   }
+
+  /**
+   * Extends a sequence of strings to the format that selects require (in the form helpers), which
+   * is a pair of values and displayed text. This method sets the value and displayed text to be the
+   * same.
+   */
+  def extendSeqToSelect(seq: Seq[String]): Seq[(String, String)] = {
+    seq.map { value =>
+      (value, value)
+    }
+  }
+
+  /**
+   * Like extendSeqToSelect(Seq[String]), but it takes separate values and displayed text (which must
+   * be sequences of the same size).
+   */
+  def mapValuesToDisplayed(value: Seq[String], displayed: Seq[String]): Seq[(String, String)] = {
+    assert(value.size == displayed.size)
+    displayed.zip(value)
+  }
 }
