@@ -26,19 +26,14 @@ class ViolationSpecMainTest extends Specification with Mockito {
  
   def getViolationsTests = {
     "getViolationsByID " should {
-      
-        "Pool should throw error with bad db First time" in new WithApplication {
-        val violation = Violation.getViolationById(6)(new ActiveDatabase("bad"))
-        violation.isFailure must beEqualTo(true)
-      }
       "return the proper violation type for an id" in new WithApplication {
         val violation = Violation.getViolationById(6)
-        violation.get.description must beEqualTo("Foods must be protected from contamination at all times. ")
+        violation.get.description must beEqualTo("parser.desc.6")
       }
       //this will show  that the flyweight is working and the violation is not being fetched from the db again
-      "return valid data without db after filling Pool" in new WithApplication{
+      "return valid data without db after filling Pool" in new WithApplication {
         val violation = Violation.getViolationById(6)(new ActiveDatabase("badDB"))
-        violation.get.description must beEqualTo("Foods must be protected from contamination at all times. ")
+        violation.get.description must beEqualTo("parser.desc.6")
       }
     }
     "getViolations" should {
