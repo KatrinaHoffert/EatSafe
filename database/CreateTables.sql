@@ -26,7 +26,7 @@ CREATE TABLE inspection(
     FOREIGN KEY (location_id)
         REFERENCES location
             ON UPDATE NO ACTION
-            ON DELETE NO ACTION
+            ON DELETE CASCADE
 );
 
 
@@ -45,11 +45,11 @@ CREATE TABLE violation(
     FOREIGN KEY (inspection_id)
         REFERENCES inspection
             ON UPDATE NO ACTION
-            ON DELETE NO ACTION,
+            ON DELETE CASCADE,
     FOREIGN KEY (violation_Id)
         REFERENCES violation_type
             ON UPDATE NO ACTION
-            ON DELETE NO ACTION
+            ON DELETE CASCADE
 );
 
 
