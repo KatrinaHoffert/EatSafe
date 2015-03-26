@@ -19,15 +19,25 @@ case class InspectionForm(
   date: Date,
   inspectionType: String,
   reinspectionPriority: String,
-  violations: String // Actually a JSON array of violation type IDs
-)
+  violations: Option[String] // Actually a comma separate list of violation IDs
+) {
+  /** Gets the violation IDs as a sequence. */
+  def violationIds: Seq[Int] = {
+    violations.map { violationString =>
+      violationString
+        .split(",")
+        .map(_.trim.toInt)
+        .toList
+    }.getOrElse(Seq.empty[Int])
+  }
+}
 
 object LocationForm {
   val inspectionMapping = mapping(
     "date" -> date,
     "inspectionType" -> nonEmptyText,
     "reinspectionPriority" -> nonEmptyText,
-    "violations" -> nonEmptyText
+    "violations" -> optional(nonEmptyText)
   )(InspectionForm.apply)(InspectionForm.unapply)
 
   val locationForm = Form(
