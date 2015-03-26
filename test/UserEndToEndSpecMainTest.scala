@@ -50,6 +50,12 @@ class UserEndToEndSpecMainTest extends Specification {
       assert(input must contain("2nd Avenue Grill"))
       
       typeaheadLoc.sendKeys(Keys.ENTER)
+      
+      assert(browser.url must contain("/search/"))
+      assert(browser.webDriver.findElement(By.className("footer")).isDisplayed)
+      
+      browser.webDriver.findElement(By.linkText("2nd Avenue Grill")).click
+      
       assert(browser.url must contain("/view/"))
       assert(browser.webDriver.findElement(By.className("footer")).isDisplayed)
       assert(browser.pageSource contains("2nd Avenue Grill"))
@@ -66,6 +72,7 @@ class UserEndToEndSpecMainTest extends Specification {
       assert(browser.url must contain("/view/"))
       assert(browser.pageSource contains("2nd Avenue Grill"))
       assert(browser.webDriver.findElement(By.className("footer")).isDisplayed)
+      
       
       // open a past inspection
       browser.webDriver.findElement(By.id("showHideLink")).click
