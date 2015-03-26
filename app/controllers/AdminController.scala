@@ -79,6 +79,13 @@ object AdminController extends DetectLangController with Secured {
   }
 
   /**
+   * Displays a form for adding a new location.
+   */
+  def addLocation = withAuth { username => implicit request =>
+    Ok(views.html.admin.addLocation(LocationForm.locationForm))
+  }
+
+  /**
    * Deletes a location with the given ID.
    */
   def deleteLocation(id: Int) = withAuth { username => implicit request =>

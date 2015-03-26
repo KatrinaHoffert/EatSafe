@@ -169,3 +169,17 @@ admin.list.noResults=No locations
 admin.list.filteredFrom=(filtered from {0} locations)
 admin.list.deleteSuccess=Deletion successful.
 admin.list.deleteFailure=Deletion failed.
+admin.list.addLocation=Add location
+
+admin.add.title=Admin - Add location
+admin.add.name=Name*
+admin.add.address=Address
+admin.add.postalCode=Postal code
+admin.add.city=City
+admin.add.rha=Regional health authority*
+admin.add.inspections=Inspections
+admin.add.inspectionDate=Date
+admin.add.inspectionType=Type
+admin.add.reinspectionPriority=Reinspection priority
+admin.add.violations=Violation IDs
+admin.add.submit=Add location
