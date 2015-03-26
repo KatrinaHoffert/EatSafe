@@ -26,6 +26,11 @@ object Application extends DetectLangController {
     )
   }
 
+  /**
+   * Attempts to pre-populate the cache by running code that will cache data (the code that is called
+   * must do the actual caching). This way users can immediately access pages that would otherwise
+   * require a slow first load.
+   */
   def prepopulateCache = Action {
     // Call poor performing, cached pieces of code here to pre-populate the cache. Can't call too
     // many, though, as the cache filling up will result in older data being removed.
@@ -41,9 +46,15 @@ object Application extends DetectLangController {
     }
   }
 
+  /**
+   * Clears all the caches. Call this when the database changes.
+   */
   def clearCache = Action {
-    // Add cache keys here as they are used
-    Cache.remove("allLocations")
+    // Can't use Cache.clear() for some reason, since that will choke on incompatible versions of
+    // the serialized content. So we must instead do some hacky Java code to get the actual
+    // EhCache manager. Really undesirable because this doesn't use the clean, Scala API and is
+    // specific to EhCache (not that I expect to change this).
+    (new play.api.cache.EhCachePlugin(current)).manager.clearAll()
 
     Ok("All caches cleared")
   }
