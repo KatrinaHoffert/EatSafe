@@ -1,0 +1,85 @@
+@import general._
+@import models._
+@import controllers._
+@import helper._
+
+@**
+ * A form to add a location.
+ *@
+@(locationForm: Form[LocationForm])(implicit lang: Lang)
+
+@implicitFieldConstructor = @{ FieldConstructor(bootstrapField.f) }
+
+@scripts = {
+  <script>
+    "use strict";
+
+    // ...
+  </script>
+}
+
+@mainBody(title = Messages("admin.add.title"), moreScripts = scripts, hasFooter = true) {
+  @headingSmall(Messages("general.applicationName"))
+
+  <div class="smallPadding">
+    @form(action = routes.AdminController.addLocation) {
+        @inputText(
+          locationForm("name"),
+          '_label -> Messages("admin.add.name"),
+          '_showConstraints -> false
+        )
+        @inputText(
+          locationForm("address"),
+          '_label -> Messages("admin.add.address"),
+          '_showConstraints -> false
+        )
+        @inputText(
+          locationForm("postalCode"),
+          '_label -> Messages("admin.add.postalCode"),
+          '_showConstraints -> false
+        )
+        @inputText(
+          locationForm("city"),
+          '_label -> Messages("admin.add.city"),
+          '_showConstraints -> false
+        )
+        @inputText(
+          locationForm("rha"),
+          '_label -> Messages("admin.add.rha"),
+          '_showConstraints -> false
+        )
+
+        <h2>@Messages("admin.add.inspections")</h2>
+        @repeat(locationForm("inspections"), min = 1) { inspection =>
+          <div class="panel panel-default adminPanel">
+            <div class="panel-body">
+              @inputText(
+                locationForm(inspection.name + ".date"),
+                '_label -> Messages("admin.add.inspectionDate"),
+                '_showConstraints -> false
+              )
+              @inputText(
+                locationForm(inspection.name + ".inspectionType"),
+                '_label -> Messages("admin.add.inspectionType"),
+                '_showConstraints -> false
+              )
+              @inputText(
+                locationForm(inspection.name + ".reinspectionPriority"),
+                '_label -> Messages("admin.add.reinspectionPriority"),
+                '_showConstraints -> false
+              )
+              @inputText(
+                locationForm(inspection.name + ".violations"),
+                '_label -> Messages("admin.add.violations"),
+                '_showConstraints -> false
+              )
+            </div>
+          </div>
+        }
+
+        <button class="btn btn-primary">
+          @Messages("admin.add.submit")
+        </button>
+    }
+  </div>
+}

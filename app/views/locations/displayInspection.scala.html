@@ -20,7 +20,7 @@
   <!-- See: http://getbootstrap.com/javascript/#collapse -->
   <div class="panel-group" id="inspection_accordion_@inspection.date" role="tablist">
     @for(violation <- inspection.violations) {
-      <div class="panel panel-default">
+      <div class="panel panel-default inspectionAccordion">
         <div class="panel-heading pointer collapsed" role="tab" data-parent="#inspection_accordion_@inspection.date" data-toggle="collapse" data-target="#collapse_@(inspection.date)_@violation.id">
           <h4 class="panel-title">
             <!-- CSS will add a [+] or [-] after this -->
