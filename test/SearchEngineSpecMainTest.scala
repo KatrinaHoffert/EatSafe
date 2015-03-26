@@ -12,11 +12,7 @@ import org.specs2.mock._
 import globals.ActiveDatabase
 
 /**
- * Test Suite of the current model, the tests being focused on the Locations class
- * and its methods, mostly because the other classes (Inspection and Violation) are simple
- * case classes with nothing to test but prebuilt getters and setters (we will assume scala knows
- * what its doing) the sets of tests are wrapped in functions in order to make things more
- * readable and reusable in the future.
+ * Tests for the SearchEngine functionality of the database and model
  */
 @RunWith(classOf[JUnitRunner])
 class SearchEngineSpecMainTest extends Specification with Mockito {
