@@ -3,7 +3,7 @@
 <div class="form-group @if(elements.hasErrors) {has-error}">
   <label class="control-label" for="@elements.id">@elements.label</label>
   @* See <http://stackoverflow.com/a/20523783/1968462> *@
-  @Html(elements.input.body.dropRight(2)+"class='form-control'>")
+  @elements.input
   <span class="help-block">@elements.infos.mkString(", ")</span>
   <span class="errors">@elements.errors.mkString(", ")</span>
 </div>
