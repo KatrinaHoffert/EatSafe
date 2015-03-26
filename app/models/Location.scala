@@ -191,14 +191,12 @@ object Location {
   def delete(id: Int)(implicit db:ActiveDatabase): Try[Unit] = {
     Try {
       DB.withConnection(db.name) { implicit connection =>
-        val query = SQL(
+        SQL(
            """
              DELETE FROM location
               WHERE id = {id};
            """
-          ).on("id" -> id)
-        
-        query()
+          ).on("id" -> id).execute()
       }
     }
   }
