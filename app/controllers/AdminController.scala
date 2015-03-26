@@ -86,6 +86,30 @@ object AdminController extends DetectLangController with Secured {
   }
 
   /**
+   * Actually adds the location that was created in the addLocation form.
+   */
+  def performAdd = withAuth { username => implicit request =>
+    LocationForm.locationForm.bindFromRequest.fold(
+      formWithErrors => {
+        BadRequest(views.html.admin.addLocation(formWithErrors))
+      },
+      location => {
+        Location.add(location) match {
+          case Success(_) =>
+            Redirect(routes.AdminController.listAllLocations).flashing(
+              "add" -> "success"
+            )
+          case Failure(ex) =>
+            Logger.error("Failed to insert new location", ex)
+            Redirect(routes.AdminController.listAllLocations).flashing(
+              "add" -> "failure"
+            )
+        }
+      }
+    )
+  }
+
+  /**
    * Deletes a location with the given ID.
    */
   def deleteLocation(id: Int) = withAuth { username => implicit request =>

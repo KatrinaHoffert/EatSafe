@@ -2,6 +2,7 @@ package models
 
 import scala.util.{Try, Success, Failure} 
 import anorm._
+import controllers.LocationForm
 import play.api.db.DB
 import play.api.Play.current
 import globals.ActiveDatabase
@@ -184,6 +185,63 @@ object Location {
   }
 
   /**
+   * Adds a location from the LocationForm.
+   */
+  def add(location: LocationForm)(implicit db:ActiveDatabase): Try[Unit] = {
+    // The nested tries are so that we can separately handle the case of the transaction failing
+    // versus failing to even make a transaction.
+    Try {
+      DB.withTransaction(db.name) { implicit connection =>
+        val attempt = Try {
+          val locationQuery = SQL(
+            """
+              INSERT INTO location (name, address, postcode, city, rha)
+                VALUES({name}, {address}, {postcode}, {city}, {rha})
+                RETURNING id;
+            """
+          ).on("name" -> location.name, "address" -> location.address, "postcode" -> location.postalCode,
+              "city" -> location.city, "rha" -> location.rha)
+
+          val locationId = locationQuery().map(_[Int]("id")).head
+
+          // Insert each location
+          for(inspection <- location.inspections) {
+            val inspectionQuery = SQL(
+              """
+                INSERT INTO inspection (location_id, inspection_date, inspection_type, reinspection_priority)
+                  VALUES({locationId}, {date}, {inspectionType}, {reinspectionPriority})
+                  RETURNING id;
+              """
+            ).on("locationId" -> locationId, "date" -> inspection.date, "inspectionType" ->
+                inspection.inspectionType, "reinspectionPriority" -> inspection.reinspectionPriority)
+
+            val inspectionId = inspectionQuery().map(_[Int]("id")).head
+
+            // And each violation
+            for(violationId <- inspection.violationIds) {
+              SQL(
+                """
+                  INSERT INTO violation (inspection_id, violation_id)
+                    VALUES({inspectionId}, {violationId});
+                """
+              ).on("inspectionId" -> inspectionId, "violationId" -> violationId)
+            }
+          }
+        }
+
+        // Check if the insertion was successful, and rollback if not
+        attempt match {
+          case Success(_) =>
+            Unit
+          case Failure(ex) =>
+            connection.rollback()
+            throw ex
+        }
+      }
+    }
+  }
+
+  /**
    * Deletes a location by ID.
    * @return Success if the deletion succeeded (which includes the trivial caase of there not being
    * a location with that ID) or Failure if the DBMS complained.
@@ -192,11 +250,11 @@ object Location {
     Try {
       DB.withConnection(db.name) { implicit connection =>
         SQL(
-           """
-             DELETE FROM location
+          """
+            DELETE FROM location
               WHERE id = {id};
-           """
-          ).on("id" -> id).execute()
+          """
+        ).on("id" -> id).execute()
       }
     }
   }

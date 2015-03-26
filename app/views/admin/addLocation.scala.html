@@ -76,7 +76,7 @@
   @headingSmall(Messages("general.applicationName"))
 
   <div class="smallPadding">
-    @form(action = routes.AdminController.addLocation) {
+    @form(action = routes.AdminController.performAdd) {
       @inputText(
         locationForm("name"),
         '_label -> Messages("admin.add.name"),
