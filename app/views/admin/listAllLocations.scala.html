@@ -43,6 +43,13 @@
   @headingSmall(Messages("general.applicationName"))
 
   <div class="smallPadding">
+    @if(flash.get("add").isDefined) {
+      @if(flash.get("add").get == "success") {
+        <div class="alert alert-success" role="alert">@Messages("admin.list.addSuccess")</div>
+      } else {
+        <div class="alert alert-danger" role="alert">@Messages("admin.list.addFailure")</div>
+      }
+    }
     @if(flash.get("delete").isDefined) {
       @if(flash.get("delete").get == "success") {
         <div class="alert alert-success" role="alert">@Messages("admin.list.deleteSuccess")</div>
