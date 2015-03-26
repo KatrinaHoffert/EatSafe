@@ -1,0 +1,162 @@
+@import general._
+@import models._
+@import controllers._
+@import helper._
+
+@**
+ * A common base between the add and edit forms.
+ *@
+@(locationForm: Form[LocationForm], pageTitle: String, formAction: play.api.mvc.Call,
+    submitText: String)(implicit lang: Lang)
+
+@implicitFieldConstructor = @{ FieldConstructor(bootstrapField.f) }
+
+@scripts = {
+  <script>
+    "use strict";
+
+    // Add inspection button
+    $("#addInspection").on("click", function() {
+      var inspectionPanel = $("#inspections > .panel:first").clone();
+      inspectionPanel.appendTo("#inspections");
+
+      // Blank the copied fields
+      inspectionPanel.find(".inspectionDateField").val("");
+      inspectionPanel.find(".inspectionTypeField").val("");
+      inspectionPanel.find(".reinspectionPriorityField").val("");
+      inspectionPanel.find(".violationsField").val("");
+
+      $(".removeButton").prop("disabled", false);
+      reorderInspections();
+    });
+
+    function removeButtonClicked(event) {
+      if($(".removeButton").length == 1) {
+        $(".removeButton").prop("disabled", true);
+      }
+
+      $(event.target).closest(".adminPanel").remove();
+
+      reorderInspections();
+    }
+
+    // Remove inspection button
+    $(".removeButton").on("click", function(e) {
+      removeButtonClicked(e);
+    });
+
+    /**
+     * Fixes the numbering of the names so that everything gets submitted properly. Note that the
+     * ID is not updated, so it will become invalid. No sense updating it since we don't
+     * currently need it.
+     */
+    function reorderInspections() {
+      $(".adminPanel").each(function(index, element) {
+        $(element).find(".inspectionDateField").attr("name", "inspections[" + index + "].date");
+        $(element).find(".inspectionTypeField").attr("name", "inspections[" + index + "].inspectionType");
+        $(element).find(".reinspectionPriorityField").attr("name", "inspections[" + index + "].reinspectionPriority");
+        $(element).find(".violationsField").attr("name", "inspections[" + index + "].violations");
+      });
+
+      // Reapply the remove button handler
+      $(".removeButton").on("click", function(e) {
+        removeButtonClicked(e);
+      });
+    }
+
+    if($(".removeButton").length > 1) {
+      $(".removeButton").prop("disabled", false);
+    }
+    else {
+      $(".removeButton").prop("disabled", true);
+    }
+  </script>
+}
+
+@mainBody(title = pageTitle, moreScripts = scripts, hasFooter = true) {
+  @headingSmall(Messages("general.applicationName"))
+
+  <div class="smallPadding">
+    @form(action = formAction) {
+      @inputText(
+        locationForm("name"),
+        '_label -> Messages("admin.add.name"),
+        '_showConstraints -> false,
+        'class -> "form-control"
+      )
+      @inputText(
+        locationForm("address"),
+        '_label -> Messages("admin.add.address"),
+        '_showConstraints -> false,
+        'class -> "form-control"
+      )
+      @inputText(
+        locationForm("postalCode"),
+        '_label -> Messages("admin.add.postalCode"),
+        '_showConstraints -> false,
+        'class -> "form-control"
+      )
+      @inputText(
+        locationForm("city"),
+        '_label -> Messages("admin.add.city"),
+        '_showConstraints -> false,
+        'class -> "form-control"
+      )
+      @inputText(
+        locationForm("rha"),
+        '_label -> Messages("admin.add.rha"),
+        '_showConstraints -> false,
+        'class -> "form-control"
+      )
+
+      <h2>
+        @Messages("admin.add.inspections")
+        <button type="button" class="btn btn-primary" id="addInspection">
+          <i class="glyphicon glyphicon-plus"></i>
+        </button>
+      </h2>
+      <div id="inspections">
+        @repeat(locationForm("inspections"), min = 1) { inspection =>
+          <div class="panel panel-default adminPanel">
+            <div class="panel-heading">
+              <button type="button" class="btn btn-danger removeButton" disabled>
+                <i class="glyphicon glyphicon-remove"></i>
+                @Messages("admin.add.removeInspection")
+              </button>
+            </div>
+            <div class="panel-body">
+              @inputText(
+                locationForm(inspection.name + ".date"),
+                '_label -> Messages("admin.add.inspectionDate"),
+                '_showConstraints -> false,
+                'class -> "inspectionDateField form-control"
+              )
+              @inputText(
+                locationForm(inspection.name + ".inspectionType"),
+                '_label -> Messages("admin.add.inspectionType"),
+                '_showConstraints -> false,
+                'class -> "inspectionTypeField form-control"
+              )
+              @inputText(
+                locationForm(inspection.name + ".reinspectionPriority"),
+                '_label -> Messages("admin.add.reinspectionPriority"),
+                '_showConstraints -> false,
+                'class -> "reinspectionPriorityField form-control"
+              )
+              @inputText(
+                locationForm(inspection.name + ".violations"),
+                '_label -> Messages("admin.add.violations"),
+                '_showConstraints -> false,
+                'class -> "violationsField form-control"
+              )
+            </div>
+          </div>
+        }
+      </div>
+
+      <button class="btn btn-primary">
+        @submitText
+      </button>
+    }
+  </div>
+}

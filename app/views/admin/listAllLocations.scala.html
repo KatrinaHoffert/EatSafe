@@ -50,12 +50,22 @@
         <div class="alert alert-danger" role="alert">@Messages("admin.list.addFailure")</div>
       }
     }
+    @if(flash.get("edit").isDefined) {
+      @if(flash.get("edit").get == "success") {
+        <div class="alert alert-success" role="alert">@Messages("admin.list.editSuccess")</div>
+      } else {
+        <div class="alert alert-danger" role="alert">@Messages("admin.list.editFailure")</div>
+      }
+    }
     @if(flash.get("delete").isDefined) {
       @if(flash.get("delete").get == "success") {
         <div class="alert alert-success" role="alert">@Messages("admin.list.deleteSuccess")</div>
       } else {
         <div class="alert alert-danger" role="alert">@Messages("admin.list.deleteFailure")</div>
       }
+    }
+    @if(flash.get("viewFailure").isDefined) {
+      <div class="alert alert-danger" role="alert">@Messages("admin.list.viewFailure")</div>
     }
 
     <a class="btn btn-primary" href="@routes.AdminController.addLocation" style="margin-bottom: 1em;">
@@ -78,7 +88,7 @@
             <td>@location.address</td>
             <td>@location.city</td>
             <td>
-              <a class="btn btn-default adminTableButton" href="TODO">
+              <a class="btn btn-default adminTableButton" href="@routes.AdminController.editLocation(location.id)">
                 <i class="glyphicon glyphicon-pencil"></i>
               </a>
               <a class="btn btn-default adminTableButton" href="@routes.AdminController.deleteLocation(location.id)">

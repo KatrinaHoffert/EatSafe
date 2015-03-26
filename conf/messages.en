@@ -169,8 +169,11 @@ admin.list.noResults=No locations
 admin.list.filteredFrom=(filtered from {0} locations)
 admin.list.addSuccess=Successfully added a new location.
 admin.list.addFailure=Failed to add the location.
+admin.list.editSuccess=Successfully editted the location.
+admin.list.editFailure=Failed to edit the location.
 admin.list.deleteSuccess=Deletion successful.
 admin.list.deleteFailure=Deletion failed.
+admin.list.viewFailure=Cannot find the location to edit.
 admin.list.addLocation=Add location
 
 admin.add.title=Admin - Add location
@@ -186,3 +189,6 @@ admin.add.reinspectionPriority=Reinspection priority*
 admin.add.violations=Violation IDs
 admin.add.removeInspection=Remove
 admin.add.submit=Add location
+
+admin.edit.title=Admin - Edit location
+admin.edit.submit=Save location

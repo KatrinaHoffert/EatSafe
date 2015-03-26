@@ -1,0 +1,12 @@
+@import general._
+@import models._
+@import controllers._
+@import helper._
+
+@**
+ * A form to add a location.
+ *@
+@(locationForm: Form[LocationForm], locationId: Int)(implicit lang: Lang)
+
+@locationFormBase(locationForm, Messages("admin.edit.title"), routes.AdminController.performEdit(locationId),
+    Messages("admin.edit.submit"))

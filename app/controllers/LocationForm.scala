@@ -5,6 +5,8 @@ import play.api._
 import play.api.mvc._
 import play.api.data._
 import play.api.data.Forms._
+import org.apache.commons.lang3.time.DateFormatUtils
+import models.Location
 
 case class LocationForm(
   name: String,
@@ -50,4 +52,19 @@ object LocationForm {
       "inspections" -> seq(inspectionMapping)
     )(LocationForm.apply)(LocationForm.unapply)
   )
+
+  /**
+   * Converts a Location inton a LocationForm for display on the edit page.
+   */
+  def locationToForm(location: Location): LocationForm = {
+    val inspections = location.inspections.map { inspection =>
+      val violationString = inspection.violations.map(_.id).mkString(", ")
+      val optionalViolations = if(violationString != "") Some(violationString) else None
+      InspectionForm(DateFormatUtils.ISO_DATE_FORMAT.parse(inspection.date), inspection.inspectionType,
+          inspection.reinspectionPriority, optionalViolations)
+    }
+
+    LocationForm(location.name, location.address, location.postalCode, location.city,
+        location.regionalHealthAuthority, inspections)
+  }
 }
