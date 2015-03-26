@@ -20,11 +20,27 @@ import globals.ActiveDatabase
  */
 @RunWith(classOf[JUnitRunner])
 class ViolationSpecMainTest extends Specification with Mockito {
-  //implicit lazy val db = new ActiveDatabase("test")
+  implicit lazy val db = new ActiveDatabase("test")
   implicit lazy val connection = DB.getConnection("test") // Run test functions here
   this.getViolationsTests
  
   def getViolationsTests = {
+    "getViolationsByID " should {
+      
+        "Pool should throw error with bad db First time" in new WithApplication {
+        val violation = Violation.getViolationById(6)(new ActiveDatabase("bad"))
+        violation.isFailure must beEqualTo(true)
+      }
+      "return the proper violation type for an id" in new WithApplication {
+        val violation = Violation.getViolationById(6)
+        violation.get.description must beEqualTo("Foods must be protected from contamination at all times. ")
+      }
+      //this will show  that the flyweight is working and the violation is not being fetched from the db again
+      "return valid data without db after filling Pool" in new WithApplication{
+        val violation = Violation.getViolationById(6)(new ActiveDatabase("badDB"))
+        violation.get.description must beEqualTo("Foods must be protected from contamination at all times. ")
+      }
+    }
     "getViolations" should {
       "return success when given proper inputs" in new WithApplication {
         // TODO get good data
