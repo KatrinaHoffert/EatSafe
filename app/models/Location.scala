@@ -224,7 +224,7 @@ object Location {
                   INSERT INTO violation (inspection_id, violation_id)
                     VALUES({inspectionId}, {violationId});
                 """
-              ).on("inspectionId" -> inspectionId, "violationId" -> violationId)
+              ).on("inspectionId" -> inspectionId, "violationId" -> violationId).execute()
             }
           }
         }
@@ -252,12 +252,12 @@ object Location {
         val attempt = Try {
           val locationQuery = SQL(
             """
-              UPDATE location (name, address, postcode, city, rha)
-                VALUES({name}, {address}, {postcode}, {city}, {rha})
+              UPDATE location
+                SET name = {name}, address = {address}, postcode = {postcode}, city = {city}, rha = {rha}
                 WHERE id = {id};
             """
           ).on("name" -> location.name, "address" -> location.address, "postcode" -> location.postalCode,
-              "city" -> location.city, "rha" -> location.rha, "id" -> locationId)
+              "city" -> location.city, "rha" -> location.rha, "id" -> locationId).execute()
 
           // Delete all previous inspections for this location
           SQL(
@@ -287,7 +287,7 @@ object Location {
                   INSERT INTO violation (inspection_id, violation_id)
                     VALUES({inspectionId}, {violationId});
                 """
-              ).on("inspectionId" -> inspectionId, "violationId" -> violationId)
+              ).on("inspectionId" -> inspectionId, "violationId" -> violationId).execute()
             }
           }
         }

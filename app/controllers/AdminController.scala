@@ -133,7 +133,7 @@ object AdminController extends DetectLangController with Secured {
         BadRequest(views.html.admin.editLocation(formWithErrors, locationId))
       },
       location => {
-        Location.add(location) match {
+        Location.edit(location, locationId) match {
           case Success(_) =>
             Redirect(routes.AdminController.listAllLocations).flashing(
               "edit" -> "success"
