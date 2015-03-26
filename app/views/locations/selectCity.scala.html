@@ -84,16 +84,14 @@
       
       // Pass the lat/long combination to Google's Geocode API
       geocoder.geocode({'latLng': latLong}, function (results, status) {
-        if (status == google.maps.GeocoderStatus.OK) {
+        if(status == google.maps.GeocoderStatus.OK) {
           // A result has many components of many types, so we need to traverse through them to
           // get what we want.
-          for (var i = 0; i < results[0].address_components.length; i++) {
-            for (var j = 0; j < results[0].address_components[i].types.length; j++) {
+          for(var i = 0; i < results[0].address_components.length; i++) {
+            for(var j = 0; j < results[0].address_components[i].types.length; j++) {
               // In Canada the result we need is usually tagged "locality". See API docs for more info.
-              if (results[0].address_components[i].types[j] == "locality") {
+              if(results[0].address_components[i].types[j] == "locality") {
                 municipality = results[0].address_components[i];
-                
-                // Not elegant, but easier than the alternatives.
                 break;
               }
             }
@@ -104,19 +102,21 @@
           for(i = 0; i < cities.length; i++) {
             if(cities[i].toLowerCase() == municipality.long_name.toLowerCase()) {
               // Check to ensure they haven't already begun typing
-      	    if (($.trim($("#municipality").val())).length == 0) {
+              if(($.trim($("#municipality").val())).length == 0) {
                 $("#municipality").val(municipality.long_name.toLowerCase());
               }
               console.log("Found good city: " + municipality.long_name);
-              $("#badGeolocation").text("");
               return;
             }
           }
 
+          // If we reach this, we didn't find a valid match in the above for loop
           console.log("Found unknown city: " + municipality.long_name);
-          $("#badGeolocation").text("@Messages("locations.selectCity.badGeolocate")");
-        } else {
-          $("#badGeolocation").text("@Messages("locations.selectCity.badGeolocate")");
+          createPageError("@Messages("locations.selectCity.badGeolocate")");
+        }
+        else {
+          // Maps API failed us
+          createPageError("@Messages("locations.selectCity.badGeolocate")");
           console.log("Bad request: " + status);
         }
       })
