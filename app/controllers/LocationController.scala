@@ -53,11 +53,4 @@ object LocationController extends DetectLangController {
         InternalServerError(views.html.errors.error500(ex))
     }
   }
-  
-  /**
-   * Displays more information about a violation.
-   */
-  def violationInfo(locationId: Int, violationId: Int) = Action { implicit request =>
-    Ok(views.html.general.violationInfo(locationId, violationId))
-  }
 }

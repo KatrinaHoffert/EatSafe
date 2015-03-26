@@ -8,7 +8,6 @@ GET     /map                                     controllers.MapController.showM
 GET     /citymap                                 controllers.MapController.showCityMap(city: String)
 GET     /about                                   controllers.Application.about
 GET     /language                                controllers.Application.setLanguage(lang: String)
-GET     /view/:locationId/violation/:violationId controllers.LocationController.violationInfo(locationId: Int, violationId: Int)
 GET     /search/:cityName                        controllers.SearchController.searchLocations(q: String, cityName: String, lax: Boolean ?= false)
 
 # Admin interface
