@@ -18,6 +18,8 @@ POST    /admin/authenticate                      controllers.AdminController.aut
 GET     /admin/list                              controllers.AdminController.listAllLocations
 GET     /admin/list/add                          controllers.AdminController.addLocation
 POST    /admin/list/add                          controllers.AdminController.performAdd
+GET     /admin/list/:id                          controllers.AdminController.editLocation(id: Int)
+POST    /admin/list/:id                          controllers.AdminController.performEdit(id: Int)
 GET     /admin/list/:id/delete                   controllers.AdminController.deleteLocation(id: Int)
 
 # Programmatic access to resources (eg, via AJAX or for scripts)

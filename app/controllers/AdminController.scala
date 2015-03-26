@@ -110,6 +110,45 @@ object AdminController extends DetectLangController with Secured {
   }
 
   /**
+   * Displays a form for editing an existing location.
+   */
+  def editLocation(locationId: Int) = withAuth { username => implicit request =>
+    Location.getLocationById(locationId) match {
+      case Success(location) =>
+        val filledForm = LocationForm.locationForm.fill(LocationForm.locationToForm(location))
+        Ok(views.html.admin.editLocation(filledForm, locationId))
+      case Failure(ex) =>
+        Redirect(routes.AdminController.listAllLocations).flashing(
+          "viewFailure" -> ""
+        )
+    }
+  }
+
+  /**
+   * Saves a location with new data (ie, from the edit).
+   */
+  def performEdit(locationId: Int) = withAuth { username => implicit request =>
+    LocationForm.locationForm.bindFromRequest.fold(
+      formWithErrors => {
+        BadRequest(views.html.admin.editLocation(formWithErrors, locationId))
+      },
+      location => {
+        Location.add(location) match {
+          case Success(_) =>
+            Redirect(routes.AdminController.listAllLocations).flashing(
+              "edit" -> "success"
+            )
+          case Failure(ex) =>
+            Logger.error("Failed to insert new location", ex)
+            Redirect(routes.AdminController.listAllLocations).flashing(
+              "edit" -> "failure"
+            )
+        }
+      }
+    )
+  }
+
+  /**
    * Deletes a location with the given ID.
    */
   def deleteLocation(id: Int) = withAuth { username => implicit request =>
