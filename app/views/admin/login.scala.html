@@ -26,24 +26,14 @@
     </p>
 
     <form action="@routes.AdminController.authenticate" method="POST">
-      <table>
-        <tr>
-          <td>
-            @Messages("admin.login.username"):
-          </td>
-          <td>
-            <input type="text" name="username">
-          </td>
-        </tr>
-        <tr>
-          <td>
-             @Messages("admin.login.password"):
-          </td>
-          <td>
-            <input type="password" name="password">
-          </td>
-        </tr>
-      </table>
+      <div class="form-group">
+        <label class="control-label" for="username">@Messages("admin.login.username")</label>
+        <input class="form-control" type="text" name="username" id="username" />
+      </div>
+      <div class="form-group">
+        <label class="control-label" for="username">@Messages("admin.login.password")</label>
+        <input class="form-control" type="password" name="password" id="password" />
+      </div>
       <button class="btn btn-primary">@Messages("admin.login.submit")</button>
     </form>
   </div>
