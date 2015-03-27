@@ -117,7 +117,7 @@ class UserEndToEndSpecMainTest extends Specification {
       typeaheadCity.sendKeys(Keys.ENTER)
 
       // Check that error page has been reached
-      (browser.$(".topViewError").getText must contain(Messages("locations.selectCity.noInput")(Lang("eo"))))
+      (browser.$(".topViewError").getText must contain(Messages("locations.selectCity.badInput")(Lang("eo"))))
       (browser.webDriver.findElement(By.className("footer")).isDisplayed)
       
       // Send wrong thing

@@ -20,8 +20,8 @@ import util.ActiveDatabase
  */
 @RunWith(classOf[JUnitRunner])
 class InspectionSpecMainTest extends Specification with Mockito {
- implicit val connection = DB.getConnection("test") // Run test functions here
- implicit val db = new ActiveDatabase("test")
+ implicit lazy val connection = DB.getConnection("test") // Run test functions here
+ implicit lazy val db = new ActiveDatabase("test")
 
   // Run test functions here
   this.getInspectionsTests
