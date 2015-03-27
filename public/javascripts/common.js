@@ -77,3 +77,16 @@ String.prototype.format = function() {
     ;
   });
 };
+
+
+// Konami code for shits and giggles. Only for desktop users because the background makes text
+// unreadable without the extra div desktop has. Not that mobile users really have a way to
+// type this.
+cheet("↑ ↑ ↓ ↓ ← → ← → b a", function() {
+  if($(window).width() >= 700) {
+    $("body").css("background-image", "url(\"assets/images/mmm_pizza.jpg\")");
+    $("body").css("background-attachment", "fixed");
+    $("body").css("background-size", "cover");
+    $("body").css(" background-position", "center");
+  }
+});

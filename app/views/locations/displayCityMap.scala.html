@@ -15,7 +15,6 @@
 @scripts = {
   <script src="https://maps.googleapis.com/maps/api/js?v=3.exp&signed_in=true"></script>
   <script src="@controllers.routes.Assets.at("javascripts/spin.min.js")"></script>
-  <script src="//cdn.rawgit.com/namuol/cheet.js/master/cheet.min.js"></script>
   <script>
     /**
      * Maximum number of nearby locations listed.
@@ -387,18 +386,6 @@
       setAllMap(null);
       markers = [];
     }
-
-    // Konami code for shits and giggles
-    cheet("↑ ↑ ↓ ↓ ← → ← → b a", function() {
-      console.log("Konami code activated.");
-      for(var i = 0; i < markers.length; i++) {
-        // Animate random markers (too intensive to do them all)
-        if(Math.random() < 0.25) {
-          markers[i].setAnimation(google.maps.Animation.BOUNCE);
-          stopMarkerAnimation(markers[i], 5000);
-        }
-      }
-    });
   </script>
 }
 
