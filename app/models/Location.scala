@@ -57,11 +57,11 @@ object Location {
       
       DB.withConnection(db.name) { implicit connection =>
         val locationQuery = SQL(
-         """
-          SELECT id, name, address, postcode, city, rha, longitude, latitude
-          FROM location LEFT JOIN coordinate USING (address, city)
-           WHERE id = {locationId};
-         """
+          """
+          SELECT id, name, address, postcode, city, rha, latitude, longitude
+            FROM location LEFT JOIN coordinates ON (id = location_id)
+            WHERE id = {locationId};
+          """
         ).on("locationId" -> locationId)
         
         val optionalLocation = locationQuery().map(locationRowToLocation(_, false)).toList.headOption
@@ -79,10 +79,13 @@ object Location {
     Cache.getOrElse[Try[Seq[Location]]]("allLocations") {
       Try {
         DB.withConnection(db.name) { implicit connection =>
+          // Note that the coordinate setter can only make both latitude and longitude NULL or neither,
+          // so we only have to check one.
           val query = SQL(
             """
-              SELECT id, name, address, postcode, city, rha, longitude, latitude
-              FROM location INNER JOIN coordinate USING (address, city);
+            SELECT id, name, address, postcode, city, rha, latitude, longitude
+              FROM location INNER JOIN coordinates ON (id = location_id)
+              WHERE latitude IS NOT NULL;
             """
           )
 

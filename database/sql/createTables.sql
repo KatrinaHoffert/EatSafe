@@ -53,10 +53,8 @@ CREATE TABLE violation(
 );
 
 
-CREATE TABLE coordinate(
-    city TEXT NOT NULL,
-    address TEXT NOT NULL,
+CREATE TABLE coordinates(
+    location_id INT NOT NULL,
     latitude DECIMAL(10,6),
-    longitude DECIMAL(10,6),
-    unique (city, address)
+    longitude DECIMAL(10,6)
 );

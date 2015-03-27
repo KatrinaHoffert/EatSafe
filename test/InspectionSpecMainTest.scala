@@ -9,7 +9,7 @@ import play.api.db._
 import java.sql._
 import play.api.Play.current
 import org.specs2.mock._
-import globals.ActiveDatabase
+import util.ActiveDatabase
 
 /**
  * Test Suite of the current model, the tests being focused on the Locations class
@@ -20,7 +20,8 @@ import globals.ActiveDatabase
  */
 @RunWith(classOf[JUnitRunner])
 class InspectionSpecMainTest extends Specification with Mockito {
- implicit lazy val connection = DB.getConnection("test") // Run test functions here
+ implicit val connection = DB.getConnection("test") // Run test functions here
+ implicit val db = new ActiveDatabase("test")
 
   // Run test functions here
   this.getInspectionsTests
