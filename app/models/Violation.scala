@@ -4,7 +4,7 @@ import scala.util.{Try, Success, Failure}
 import anorm._
 import play.api.db.DB
 import play.api.Play.current
-import globals.ActiveDatabase
+import util.ActiveDatabase
 
 /**
  * Represents a health and safety inspection violation.
@@ -83,7 +83,8 @@ object Violation {
    * @param connection this is a implicit parameter that is used to share the database connection to improve performance
    * @return List of violation objects representing the violations for that inspection.
    */
-  def getViolations(inspectionId: Int)(implicit connection: java.sql.Connection): Try[Seq[Violation]] = {
+  def getViolations(inspectionId: Int)(implicit db: ActiveDatabase, connection: java.sql.Connection):
+      Try[Seq[Violation]] = {
     Try {
       require(inspectionId > 0, "Inspection ID must be greater than 0.")
  

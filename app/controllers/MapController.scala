@@ -5,6 +5,7 @@ import play.api.mvc._
 import models._
 import scala.util.{Try, Success, Failure}
 import scala.util.matching._
+import util.globals._
 
 object MapController extends DetectLangController {
 

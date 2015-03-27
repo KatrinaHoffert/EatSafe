@@ -4,7 +4,7 @@ import scala.util.{Try, Success, Failure}
 import play.api._
 import play.api.mvc._
 import models._
-import globals._
+import util.globals._
 import play.api.Logger
 import play.api.data._
 import play.api.data.Forms._

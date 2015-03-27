@@ -1,3 +1,5 @@
+package util
+
 package object globals {
   /**
    * Supplies a database name. Used by functions that must access a database so that they know

@@ -4,7 +4,7 @@ import scala.util.{Try, Success, Failure}
 import anorm._
 import play.api.db.DB
 import play.api.Play.current
-import globals.ActiveDatabase
+import util.ActiveDatabase
 
 /**
  * Embodies the searching functionalities of the site, which allow searching for locations.
