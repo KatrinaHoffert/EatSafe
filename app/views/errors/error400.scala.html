@@ -1,0 +1,16 @@
+@import general._
+@import models._
+@import controllers._
+@import org.apache.commons.lang3.exception.ExceptionUtils
+@import play.api.Play.current
+
+@()(implicit lang: Lang)
+
+@mainBody(title = Messages("errors.error400Title"), hasFooter = true) {
+  @headingSmall(Messages("general.applicationName"))
+  <div class="smallPadding">
+    <h2 class="errorCode">@Messages("errors.error400Title")</h2>
+    <h3 class="errorDescription">@Messages("errors.error400Desc")</h3>
+    <p>@Html(Messages("errors.error400Text"))</p>
+  </div>
+}
