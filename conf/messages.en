@@ -87,6 +87,12 @@ footer.aboutLink=About
 footer.copyright=© Off By One 2015
 
 # Error pages
+errors.error400Title=Error 400
+errors.error400Desc=Bad request
+errors.error400Text=While the page you''re trying to access exists, some aspect of the URL is incorrect and thus we cannot show you a working page. An example is a page that expects a number in the URL, but you've given us a letter. If you''ve come from an external site, the link may be wrong. Why not try again starting at <a href="/">our homepage</a>?
+errors.error404Title=Error 404
+errors.error404Desc=Page not found
+errors.error404Text=It looks like the page you''ve attempted to access does not exist. If you followed a link from an external site, the page may have moved. Why not try again starting at <a href="/">our homepage</a>?
 errors.error500Title=Error 500
 errors.error500Desc=Internal server error
 errors.error500Text=That means it''s (probably) us, not you. Assuming that you haven''t been trying to break our software, you seem to have encountered a bug that couldn''t be handled or wasn''t expected. The stack trace below may help us solve the bug. Send it to {0}.
