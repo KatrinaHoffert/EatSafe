@@ -5,7 +5,7 @@ import play.api._
 import play.api.mvc._
 import models._
 import models.Location
-import globals._
+import util.globals._
 import play.api.Logger
 
 object LocationController extends DetectLangController {

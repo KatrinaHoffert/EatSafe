@@ -7,7 +7,7 @@ import play.api.data._
 import play.api.data.Forms._
 import org.apache.commons.lang3.time.DateFormatUtils
 import models.Location
-import globals._
+import util.globals._
 import play.api.i18n.Messages
 
 /**

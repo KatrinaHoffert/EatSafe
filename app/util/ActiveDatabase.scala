@@ -1,4 +1,4 @@
-package globals
+package util
 
 /**
  * A special class to be used implicitly by any method that accesses the database

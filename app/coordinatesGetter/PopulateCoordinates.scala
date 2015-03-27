@@ -5,7 +5,7 @@ import scala.util.Failure
 import scala.util.Success
 import scala.util.Try
 import anorm.SQL
-import globals.ActiveDatabase
+import util.ActiveDatabase
 import play.api.Play.current
 import play.api.db.DB
 import play.api.libs.functional.syntax.functionalCanBuildApplicative

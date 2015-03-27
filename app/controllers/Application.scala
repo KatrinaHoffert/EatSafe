@@ -6,6 +6,7 @@ import play.api.mvc._
 import play.api.Play.current
 import play.api.cache.Cache
 import scala.util.{Try, Success, Failure}
+import util.globals._
 
 object Application extends DetectLangController {
   /**

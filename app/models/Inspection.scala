@@ -4,7 +4,7 @@ import scala.util.{Try, Success, Failure}
 import anorm._
 import play.api.db.DB
 import play.api.Play.current
-import globals.ActiveDatabase
+import util.ActiveDatabase
 import controllers.InspectionForm
 
 /**
@@ -24,7 +24,8 @@ object Inspection {
    * @param connection this is a implicit parameter that is used to share the database connection to improve performance
    * @return List of inspection objects representing the inspections for that location.
    */
-  def getInspections(locationId: Int)(implicit connection: java.sql.Connection): Try[Seq[Inspection]] = {
+  def getInspections(locationId: Int)(implicit db: ActiveDatabase, connection: java.sql.Connection):
+      Try[Seq[Inspection]] = {
     Try {
       require(locationId > 0, "Location IDs should be greater than 0.")
 

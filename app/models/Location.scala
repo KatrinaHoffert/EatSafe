@@ -5,7 +5,7 @@ import anorm._
 import controllers.LocationForm
 import play.api.db.DB
 import play.api.Play.current
-import globals.ActiveDatabase
+import util.ActiveDatabase
 import play.api.cache.Cache
 
 /**
@@ -294,8 +294,8 @@ object Location {
    * @param connection this is a implicit parameter that is used to share the database connection to improve performance
    * @return A location object created from that row, with the inspections from the database.
    */
-  private def locationRowToLocation(row: Row, firstRowOnly: Boolean)
-      (implicit connection: java.sql.Connection): Try[Location] = {
+  private def locationRowToLocation(row: Row, firstRowOnly: Boolean)(implicit db: ActiveDatabase,
+      connection: java.sql.Connection): Try[Location] = {
     for {
       inspections <- if(!firstRowOnly) Inspection.getInspections(row[Int]("id"))
         else Inspection.getFirstInspection(row[Int]("id"))
