@@ -31,3 +31,5 @@ GET     /cache/clear                             controllers.Application.clearCa
 # Map static resources from the /public folder to the /assets URL path
 GET     /assets/*file                            controllers.Assets.at(path="/public", file)
 
+# Redirecting paths with a slash at the end to the same URL without the trailing slash
+GET     /*path/                                  controllers.Application.untrail(path: String)
