@@ -289,6 +289,35 @@
       if(toggle && $(window).width() < SIDEBAR_AUTOCLOSE_WIDTH) {
          $("#wrapper").toggleClass("toggled");
       }
+
+      // Determine if there's a marker to animate
+      for(var i = 0; i < markers.length; i++) {
+        if(coordEquals(markers[i].position.k, lat) && coordEquals(markers[i].position.D, long)) {
+          // Bounce for 2000 ms
+          markers[i].setAnimation(google.maps.Animation.BOUNCE);
+          stopMarkerAnimation(markers[i]);
+          break;
+        }
+      }
+    }
+
+    /**
+     * Stops an animated marker's animation after 1s. Necessary to use setTimeout inside our
+     * loop.
+     */
+    function stopMarkerAnimation(marker) {
+      setTimeout(function() {
+        marker.setAnimation(null);
+      }, 1000);
+    }
+
+    /**
+     * Fuzzy equality for coordinates. We can't just compare the numbers due to rounding issues,
+     * but also don't want to animate the wrong marker. So this allows comparisons within a reasonable
+     * distance.
+     */
+    function coordEquals(x, y) {
+      return Math.abs(x - y) < 0.0001;
     }
 
     /**
