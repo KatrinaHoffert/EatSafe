@@ -82,17 +82,16 @@ object PopulateCoordinates{
     Try {
       val query = SQL(
          """
-           SELECT id, address, city, postcode
+           SELECT id, address, city
            FROM location WHERE id NOT IN (
             SELECT id
-              FROM location INNER JOIN coordinates ON (id = location_id)
+              FROM location JOIN coordinates ON (id = location_id)
             );
          """
       )
 
       query().map{ row =>
-        NoCoordinateLocation(row[Int]("id"), row[Option[String]]("address"), row[Option[String]]("city"),
-            row[Option[String]]("postcode"))
+        NoCoordinateLocation(row[Int]("id"), row[Option[String]]("address"), row[Option[String]]("city"))
       }.toList
     }
   }
@@ -113,10 +112,9 @@ object PopulateCoordinates{
               // Make the request
               val futureResult = request.withQueryString(
                 "countryRegion" -> "CA",
-                "adminDistrict" -> "Saskatchewan",
+                "adminDistrict" -> "SK",
                 "locality" -> location.city.getOrElse(""),
                 "addressLine" -> location.address.getOrElse(""),
-                "postalCode" -> location.postalCode.getOrElse(""),
                 "key" -> BING_MAPS_API_KEY
               ).get().map { response =>
                 response.json.as[Option[Coordinate]]
@@ -138,6 +136,7 @@ object PopulateCoordinates{
                 case Failure(ex) =>
                   println("Failed to get coordinate for location " + location.id + ": " + ex)
               }
+              Await.ready(futureResult, Duration(1000, "second"))
             }
           }
         case Failure(ex) =>
@@ -154,6 +153,5 @@ object PopulateCoordinates{
 case class NoCoordinateLocation(
   id: Int,
   address: Option[String],
-  city: Option[String],
-  postalCode: Option[String]
+  city: Option[String]
 )
