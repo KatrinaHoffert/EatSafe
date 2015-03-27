@@ -164,8 +164,11 @@ INSERT INTO violation(inspection_id, violation_id)
  INSERT INTO location(id, name, rha)
  VALUES (8, '???', 'Questionable Health Authority');
  
- INSERT INTO coordinate (city, address, latitude, longitude)
- VALUES ('Town A', 'My Place', 1.0, 1.0);
+ INSERT INTO coordinates (location_id, latitude, longitude)
+ VALUES (1, 1.0, 1.0);
  
-  INSERT INTO coordinate (city, address, latitude, longitude)
- VALUES ('South Park', 'South Park Ave', 26.696545, 2.988281)
+ INSERT INTO coordinates (location_id, latitude, longitude)
+ VALUES (2, 1.0, 1.0);
+ 
+  INSERT INTO coordinates (location_id, latitude, longitude)
+ VALUES (5, 26.696545, 2.988281)
