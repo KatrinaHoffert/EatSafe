@@ -15,6 +15,7 @@
 @scripts = {
   <script src="https://maps.googleapis.com/maps/api/js?v=3.exp&signed_in=true"></script>
   <script src="@controllers.routes.Assets.at("javascripts/spin.min.js")"></script>
+  <script src="//cdn.rawgit.com/namuol/cheet.js/master/cheet.min.js"></script>
   <script>
     /**
      * Maximum number of nearby locations listed.
@@ -293,22 +294,21 @@
       // Determine if there's a marker to animate
       for(var i = 0; i < markers.length; i++) {
         if(coordEquals(markers[i].position.k, lat) && coordEquals(markers[i].position.D, long)) {
-          // Bounce for 2000 ms
           markers[i].setAnimation(google.maps.Animation.BOUNCE);
-          stopMarkerAnimation(markers[i]);
+          stopMarkerAnimation(markers[i], 1000);
           break;
         }
       }
     }
 
     /**
-     * Stops an animated marker's animation after 1s. Necessary to use setTimeout inside our
+     * Stops an animated marker's animation after some time. Necessary to use setTimeout inside our
      * loop.
      */
-    function stopMarkerAnimation(marker) {
+    function stopMarkerAnimation(marker, timeout) {
       setTimeout(function() {
         marker.setAnimation(null);
-      }, 1000);
+      }, timeout);
     }
 
     /**
@@ -370,13 +370,10 @@
           });
 
           markers.push(marker);
-        
       }
 
       setAllMap(map);
     }
-
-
 
     /** Sets all markers in the array onto the map. */
     function setAllMap(map) {
@@ -390,6 +387,18 @@
       setAllMap(null);
       markers = [];
     }
+
+    // Konami code for shits and giggles
+    cheet("↑ ↑ ↓ ↓ ← → ← → b a", function() {
+      console.log("Konami code activated.");
+      for(var i = 0; i < markers.length; i++) {
+        // Animate random markers (too intensive to do them all)
+        if(Math.random() < 0.25) {
+          markers[i].setAnimation(google.maps.Animation.BOUNCE);
+          stopMarkerAnimation(markers[i], 5000);
+        }
+      }
+    });
   </script>
 }
 
