@@ -17,4 +17,4 @@ PASSWORD=M4PGx3zUySvMmB9j
 
 export PGPASSWORD="$PASSWORD"
 
-psql --host="$DBHOST" --dbname="$DBNAME" --username="$USERNAME" -f "backupCoordinates.sql"
+psql --host="$DBHOST" --dbname="$DBNAME" --username="$USERNAME" -f "sql/backupCoordinates.sql"
