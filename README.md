@@ -51,13 +51,12 @@ you're only going to be running the application and not using the tests, you can
 database to the same credentials as the default database (it can't be blank, but it won't be used
 unless you try and run the tests).
 
-Next, you must actually populate the database. Inside the database folder (which must be the working
-directory), run the `CreateTables.sql` file, then `statements.sql` to populate it, followed by
-`RestoreCoordinates.sql` to populate the coordinates from the pre-generated data.
-
 The `eatsafe_synonyms.syn` file must be placed in the `/usr/share/postgresql/9.3/tsearch_data` folder,
-where "9.3" is your PostgreSQL version. Finally, run `CreateSearchTable.sql` to create the necessary
-tables for full text search.
+where "9.3" is your PostgreSQL version.
+
+Next, to actually populate the database, you must run `createDatabase.sh` inside the `database`
+folder. Edit the file to add your DB credentials, first. This file can be re-run in the future to
+update the database (which will completely overwrite the existing tables).
 
 With this done, everything should be able to run locally.
 
