@@ -12,7 +12,7 @@ import org.openqa.selenium.interactions.Actions
 import org.openqa.selenium.support.ui.Select
 
 
-import globals.ActiveDatabase
+import util.ActiveDatabase
 
 import play.api.i18n.Messages
 

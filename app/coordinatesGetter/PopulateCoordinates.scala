@@ -20,149 +20,140 @@ import scala.concurrent.Await
 import scala.concurrent.duration.Duration
 
 /**
- * Represent a coordinate, which contains a latitude and longitude
- * @param lat The latitude of this coordinate
- * @param long The longitude of this coordinate
+ * Populates the coordinates table with coordinates for all locations that do not already have
+ * coordinates. The coordinates table maps location IDs to their coordinates. Uses Bing Maps to
+ * handle the 
  */
-case class Coordinate(lat: Double, long: Double)
-
-/**
- * Represent a http response, which contains a result that includes a coordinate, and a status code
- * @param coordinate The coordinate
- * @param status The status code, include: OK, ZERO_RESULTS, OVER_QUERY_LIMIT, REQUEST_DENIED, INVALID_REQUEST, UNKNOWN_ERROR
- */
-case class Response(coordinate: Coordinate, status: String)
-
-/**
- * Represent a location, that doesn't have coordinate in the database, and need to get the coordinate from Google Map API.
- * Use both address and city to find the exact coordinate
- * @param id The unique of this location
- * @param address The address of this location
- * @param city The city this location is in
- */
-case class NoCoordinateLocation(id: Int, address: Option[String], city: Option[String])
-
-
-
 object PopulateCoordinates{
+  /**
+   * Supply your own Bing Maps API key here.
+   */
+  val BING_MAPS_API_KEY = ""
 
   /**
-   * The Google Map API URL that accept HTTP get request and return a JSON object that contains 
-   * the information and coordinate of each search result.
-   * Should only use the first result.
-   * Use "address + city" as parameter
-   * eg. https://maps.googleapis.com/maps/api/geocode/json?address=101+Cumberland+Ave,+Saskatoon
+   * Bing Maps Geocoding unstructured URL. Takes in query strings for country, city, etc. See
+   * <https://msdn.microsoft.com/en-us/library/ff701714.aspx> for documentation.
    */
-  var GEOCODING_URL = "https://maps.googleapis.com/maps/api/geocode/json"
-  
-  
+  var GEOCODING_URL = "http://dev.virtualearth.net/REST/v1/Locations"
+
+
   /**
-   * Read a coordinate object from JSON
+   * Represent a coordinate, which contains a latitude and longitude.
+   */
+  case class Coordinate(lat: Double, lon: Double)
+
+  /**
+   * Read a Coordinate from JSON. Rather messy due to how complicated the output of Bing Maps
+   * Geocoding response is.
    */
   implicit val coordinateReads: Reads[Coordinate] = (
-    (JsPath \ "geometry" \\ "location" \ "lat").read[Double] and
-    (JsPath \ "geometry" \\ "location" \ "lng").read[Double]
+    (((JsPath \ "resourceSets")(0) \ "resources")(0) \ "point" \ "coordinates")(0).read[Double] and
+    (((JsPath \ "resourceSets")(0) \ "resources")(0) \ "point" \ "coordinates")(1).read[Double]
   )(Coordinate.apply _)
   
   /**
-   * Read a response from JSON
+   * Insert the coordinate, address, and city to "coordinate" table.
    */
-  implicit val responseReads: Reads[Response] = (
-    (JsPath \ "results")(0).read[Coordinate].orElse(Reads.pure(Coordinate(0,0))) and
-    (JsPath \ "status").read[String]
-  )(Response.apply _)
-    
-  
-   /**
-   * Insert the coordinate, address, and city to "coordinate" table, whenever a new coordinate 
-   * is got from Google Map API. 
-   * @param connection The database connection 
-   */
-  def insertCoordinate(address: String, city: String, coordinate: Coordinate)(implicit connection: java.sql.Connection): Boolean = {
-    
+  def insertCoordinate(locationId: Int, coordinate: Coordinate)(implicit connection: java.sql.Connection) = {
     SQL(
        """
-         INSERT INTO coordinate(address, city, latitude, longitude)
-         VALUES({address}, {city}, {latitude}, {longitude})
+         INSERT INTO coordinates(location_id, latitude, longitude)
+         VALUES({locationId}, {latitude}, {longitude})
        """
-    ).on("address" -> address, "city" -> city, "latitude" -> coordinate.lat, "longitude" -> coordinate.long).execute()
+    ).on("locationId" -> locationId, "latitude" -> coordinate.lat, "longitude" -> coordinate.lon).execute()
   }
 
   /**
-   * Get a list of locations that don't have a coordinate in coordinate table
-   * @param connection The database connection
+   * Inserts null values for when we failed to get a coordinate.
+   */
+  def insertNullCoordinate(locationId: Int)(implicit connection: java.sql.Connection) = {
+    SQL(
+       """
+         INSERT INTO coordinates(location_id, latitude, longitude)
+         VALUES({locationId}, NULL, NULL)
+       """
+    ).on("locationId" -> locationId).execute()
+  }
+
+  /**
+   * Get a list of locations that don't have a coordinate in coordinates table.
    */
   def getNoCoordinateLocations()(implicit connection: java.sql.Connection): Try[Seq[NoCoordinateLocation]] = {
-
     Try {
       val query = SQL(
          """
-           SELECT id, address, city
-           FROM location WHERE id NOT IN (SELECT id
-           FROM location INNER JOIN coordinate USING (address, city))
-           ORDER BY id;
+           SELECT id, address, city, postcode
+           FROM location WHERE id NOT IN (
+            SELECT id
+              FROM location INNER JOIN coordinates ON (id = location_id)
+            );
          """
       )
-        
-      query().map{
-        row => NoCoordinateLocation(row[Int]("id"), row[Option[String]]("address"), row[Option[String]]("city"))
+
+      query().map{ row =>
+        NoCoordinateLocation(row[Int]("id"), row[Option[String]]("address"), row[Option[String]]("city"),
+            row[Option[String]]("postcode"))
       }.toList
     }
   }
   
-  /**
-   * The main method for getting coordinates from Google Geocoding API
-   * @param db The database that connected to 
-   */
   def main()(implicit db: ActiveDatabase): Unit = {
-    DB.withConnection { implicit connection =>  
-      //Get a list of locations that don't have coordinates
+    // An execution context, required for Future.map:
+    implicit val context = scala.concurrent.ExecutionContext.Implicits.global
+
+    DB.withConnection { implicit connection =>
+      // Get a list of locations that don't have coordinates
       getNoCoordinateLocations() match {
         case Success(locations) => 
           locations.map { location =>
-            
-            //Call the web service 
-            val holder : WSRequestHolder = WS.url(GEOCODING_URL)
-        
-            //An execution context, required for Future.map:
-            implicit val context = scala.concurrent.ExecutionContext.Implicits.global
-            
-            //get the address and city
-            val address = location.address.getOrElse("Unknown")
-            val city = location.city.getOrElse("Unknown")
-            //If both address and city are not available, should not look up on Google
-            //Because it will return the coordinate of "Saskatchewan, Canada"
-            if(address!="Unknown" && city!="Unknown"){
-            
-              //The parameter for the HTTP get request
-              val parameterString = address + ", " + city + ", Saskatchewan, Canada";
-              
-              //Map the response JSON to a coordinate object
-              val futureResult : Future[Response] = holder.withQueryString("address" -> parameterString).get().map{
-                response => response.json.as[Response]
+            val request = WS.url(GEOCODING_URL)
+
+            // If both address or city are not available, there's nothing meaningful too look up
+            if(location.address.isDefined && location.city.isDefined) {
+              // Make the request
+              val futureResult = request.withQueryString(
+                "countryRegion" -> "CA",
+                "adminDistrict" -> "Saskatchewan",
+                "locality" -> location.city.getOrElse(""),
+                "addressLine" -> location.address.getOrElse(""),
+                "postalCode" -> location.postalCode.getOrElse(""),
+                "key" -> BING_MAPS_API_KEY
+              ).get().map { response =>
+                response.json.as[Option[Coordinate]]
               }
               
+              // Called when the request completes
               futureResult.onComplete{
-                case Success(coordinateResult) => 
-                  val status = coordinateResult.status
-                  val coordinate: Coordinate = coordinateResult.coordinate
-                  if(status=="OK") {
-                    println("id" + location.id + ": " + parameterString + " lat: "+ coordinate.lat + " long:" + coordinate.long)
-                    //store the coordinate
-                    insertCoordinate(address, city, coordinate)
-                  }else {
-                    //for debugging
-                    println("id" + location.id + ": " + parameterString + "status" + status)
+                case Success(optionalCoordinate) => 
+                  if(optionalCoordinate.isDefined) {
+                    println(location.id + " (" + location.address.getOrElse("NULL") + ", " +
+                        location.city.getOrElse("NULL") + ") -> " + optionalCoordinate.get)
+                    insertCoordinate(location.id, optionalCoordinate.get)
                   }
-                  
-                case Failure(ex) => println("id" + location.id + ": " + parameterString + " Failed to get coordinate: " + ex)
+                  else {
+                    println(location.id + " (" + location.address.getOrElse("NULL") + ", " +
+                        location.city.getOrElse("NULL") + ") -> NULL")
+                    insertNullCoordinate(location.id)
+                  }
+                case Failure(ex) =>
+                  println("Failed to get coordinate for location " + location.id + ": " + ex)
               }
-              Await.ready(futureResult,Duration(1000, "second"))
             }
           }
         case Failure(ex) =>
-          println("Failed to get no-coordinates-locations: " + ex)
+          println("Failed to get list of locations that need coordinates: " + ex)
       }
     }
   }  
 }
+
+/**
+ * Represent a location, that doesn't have coordinate in the database, and need to get the
+ * coordinate from Bing Maps API.
+ */
+case class NoCoordinateLocation(
+  id: Int,
+  address: Option[String],
+  city: Option[String],
+  postalCode: Option[String]
+)

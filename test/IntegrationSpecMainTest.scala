@@ -4,7 +4,7 @@ import org.junit.runner._
 
 import play.api.test._
 import play.api.test.Helpers._
-import globals.ActiveDatabase
+import util.ActiveDatabase
 
 import org.specs2.matcher._
 import org.specs2.mock._
