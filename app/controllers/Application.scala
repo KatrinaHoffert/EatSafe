@@ -59,4 +59,12 @@ object Application extends DetectLangController {
 
     Ok("All caches cleared")
   }
+
+  /**
+   * The path passed to this is without a trailing slash, but this is called (by the routing system)
+   * only when there is a trailing slash. So in other words, this removes that slash.
+   */
+  def untrail(path: String) = Action { 
+    MovedPermanently("/" + path)
+  }
 }
