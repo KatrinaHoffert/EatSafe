@@ -25,10 +25,10 @@ PASSWORD=M4PGx3zUySvMmB9j
 export PGPASSWORD="$PASSWORD"
 
 FILES_TO_RUN=(
-  "createTables.sql"
-  "statements.sql"
-  "restoreCoordinates.sql"
-  "createSearchTable.sql"
+  "sql/createTables.sql"
+  "sql/statements.sql"
+  "sql/restoreCoordinates.sql"
+  "sql/createSearchTable.sql"
 )
 
 # Contenates the files with line breaks between <http://stackoverflow.com/a/8183247/1968462>
@@ -42,6 +42,6 @@ if [ $? -eq 0 ]; then
 fi
 
 # Correct sequences is special
-psql --host="$DBHOST" --dbname="$DBNAME" --username="$USERNAME" -Atq -f "correctSequences.sql" -o tmp_seq_correct
+psql --host="$DBHOST" --dbname="$DBNAME" --username="$USERNAME" -Atq -f "sql/correctSequences.sql" -o tmp_seq_correct
 psql --host="$DBHOST" --dbname="$DBNAME" --username="$USERNAME" -f tmp_seq_correct
 rm tmp_seq_correct

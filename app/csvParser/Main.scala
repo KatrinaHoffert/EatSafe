@@ -18,7 +18,7 @@ object Main {
   /**
    * Output SQL file name.
    */
-  var FILE_NAME = "database/statements.sql"
+  var FILE_NAME = "database/sql/statements.sql"
 
   def main(args: Array[String]): Unit = {
     val writer = new OutputStreamWriter(new FileOutputStream(FILE_NAME), "utf-8")
