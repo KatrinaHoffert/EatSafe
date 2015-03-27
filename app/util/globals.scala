@@ -1,5 +1,13 @@
 package util
 
+/**
+ * A package object that contains global variables. Import with `import util.globals._` to gain
+ * access to all contents or use `import util.globals.defaultDb` to access a specific variable.
+ *
+ * Note the difference from Globals (in the root package), which is a special file where the Play
+ * Framework is concerned. It's always global, which we want to minimize (in particular, the
+ * `defaultDb` can't be imported into the tests).
+ */
 package object globals {
   /**
    * Supplies a database name. Used by functions that must access a database so that they know
@@ -36,6 +44,9 @@ package object globals {
     "Special"
   )
 
+  /**
+   * Language keys for the list of valid inspection types. Must have the same order.
+   */
   lazy val validInspectionTypesKeys = Seq(
     "locations.view.type.Routine",
     "locations.view.type.Follow-up",
