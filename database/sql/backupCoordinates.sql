@@ -2,4 +2,4 @@
 --
 -- Note: in order to ensure that the `createDatabase.sh` script can find the file, you must run
 -- this in the database folder.
-\copy coordinate TO 'coordinateBackup.txt';
+\copy coordinates TO 'coordinateBackup.txt';
