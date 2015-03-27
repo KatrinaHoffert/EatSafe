@@ -122,7 +122,7 @@ class ApplicationSpecMainTest extends Specification {
       val typeahead = browser.getDriver.findElement(By.id("municipality"))
       typeahead.click
       typeahead.sendKeys(Keys.ENTER)
-      assert(browser.$(".topViewError").getText must contain(Messages("locations.selectCity.noInput")))
+      assert(browser.$(".topViewError").getText must contain(Messages("locations.selectCity.badInput")))
     }
      
     "give error page when trying to search for invalid place" in new WithBrowser {
@@ -300,26 +300,20 @@ class ApplicationSpecMainTest extends Specification {
   }
   
   "violation info page" should {
-    "display a page with violation info for specific violation" in new WithApplication {
-      var inspection = route(FakeRequest(GET, "/view/1/violation/1")).get
-      assert(status(inspection) == OK)
-      assert(contentAsString(inspection) contains(Messages("violations.content." + 1)))
-      
-      inspection = route(FakeRequest(GET, "/view/1/violation/11")).get
-      assert(status(inspection) == OK)
-      assert(contentAsString(inspection) contains(Messages("violations.content." + 11)))
+    "display a page with violation info for specific violation" in new WithBrowser {
+      browser.goTo("/view/1/violation/1")
+      browser.url.equals("/view/1/violation/1")
+      browser.pageSource contains(Messages("violations.content." + 1))
+      browser.goTo("/view/1/violation/11")
+      browser.url.equals("/view/1/violation/11")
+      browser.pageSource contains(Messages("violations.content." + 11))
     }
     
     "returns to view when go back button is pressed" in new WithBrowser {
       browser.goTo("/view/1/violation/8")
-      assert(browser.url.equals("/view/1/violation/8"))
-      assert(browser.pageSource contains(Messages("violations.content." + 8)))
-      
-      val button = browser.webDriver.findElement(By.tagName("button"))
-      assert(button.isDisplayed)
-      button.click
-      
-      assert(browser.url.equals("/view/1"))
+      browser.url.equals("/view/1/violation/8")
+      browser.pageSource contains(Messages("violations.content." + 8))
+
     }
   }
   
