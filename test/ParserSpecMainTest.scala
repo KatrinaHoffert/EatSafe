@@ -90,7 +90,73 @@ class ParserSpecMainTest extends Specification {
   
 }
   
+/**
+ * Test the translator alone
+ */
+"Translator" should {
+  
+  val translator = new Translator("database/test/testTranslation.json")
+  
+  "Find the right name replacement" in {
+    var locationName = "Another Test"
+    var locationAddress = "1100 A Central Ave"
+    var locationCity = "Saskatoon"
+    val replacements = translator.findReplacement(locationName, locationAddress, locationCity)
+      .getOrElse(translator.identityReplacement)
+    if(replacements.name.isDefined) locationName = replacements.name.get
+    if(replacements.address.isDefined) locationAddress = replacements.address.get
+    if(replacements.city.isDefined) locationCity = replacements.city.get
+    locationName must beEqualTo("Subway")
+    locationAddress must beEqualTo("1100 A Central Ave")
+    locationCity must beEqualTo("Saskatoon")
+      
+  }
 
+  "Find the right city and address replacements" in {
+    var locationName = "Third Test"
+    var locationAddress = "1100 A Central Ave"
+    var locationCity = "Saskatoon"
+    val replacements = translator.findReplacement(locationName, locationAddress, locationCity)
+      .getOrElse(translator.identityReplacement)
+    if(replacements.name.isDefined) locationName = replacements.name.get
+    if(replacements.address.isDefined) locationAddress = replacements.address.get
+    if(replacements.city.isDefined) locationCity = replacements.city.get
+    locationName must beEqualTo("Third Test")
+    locationAddress must beEqualTo("Test Address")
+    locationCity must beEqualTo("Test City")
+      
+  }
+  
+  "Doesn't change the name, city and address if there is no replacement" in {
+    var locationName = "Correct Name"
+    var locationAddress = "1100 A Central Ave"
+    var locationCity = "Saskatoon"
+    val replacements = translator.findReplacement(locationName, locationAddress, locationCity)
+      .getOrElse(translator.identityReplacement)
+    if(replacements.name.isDefined) locationName = replacements.name.get
+    if(replacements.address.isDefined) locationAddress = replacements.address.get
+    if(replacements.city.isDefined) locationCity = replacements.city.get
+    locationName must beEqualTo("Correct Name")
+    locationAddress must beEqualTo("1100 A Central Ave")
+    locationCity must beEqualTo("Saskatoon")
+      
+  }
+  
+  "Handle name, address or city name that is null" in {
+    var locationName = ""
+    var locationAddress = ""
+    var locationCity = "Saskatoon"
+    val replacements = translator.findReplacement(locationName, locationAddress, locationCity)
+      .getOrElse(translator.identityReplacement)
+    if(replacements.name.isDefined) locationName = replacements.name.get
+    if(replacements.address.isDefined) locationAddress = replacements.address.get
+    if(replacements.city.isDefined) locationCity = replacements.city.get
+    locationName must beEqualTo("")
+    locationAddress must beEqualTo("")
+    locationCity must beEqualTo("Saskatoon")
+      
+  }
+}
 
   
 }

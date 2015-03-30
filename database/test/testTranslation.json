@@ -1,0 +1,27 @@
+[
+  {
+    "name": "7 Eleven - Test",
+    "city": "Saskatoon",
+    "address": "380 2nd Ave N",
+    "replacement": {
+      "name": "7 Eleven"
+    }
+  },
+  {
+    "name": "Another Test",
+    "city": "Saskatoon",
+    "address": "1100 A Central Ave",
+    "replacement": {
+      "name": "Subway"
+    }
+  },
+  {
+    "name": "Third Test",
+    "city": "Saskatoon",
+    "address": "1100 A Central Ave",
+    "replacement": {
+      "city": "Test City",
+      "address": "Test Address"
+    }
+  }
+]
