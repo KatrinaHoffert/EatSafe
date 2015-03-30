@@ -56,7 +56,7 @@
       <tbody>
         @for(locationWithIndex <- locations.zipWithIndex) {
           <tr>
-            <td>@locationWithIndex._2</td>
+            <td>@(locationWithIndex._2+1)</td>
             <td>
               <a href="@routes.LocationController.showLocation(locationWithIndex._1.id)">
                 @locationWithIndex._1.name
