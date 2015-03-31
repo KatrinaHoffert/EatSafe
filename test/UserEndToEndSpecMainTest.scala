@@ -156,7 +156,7 @@ class UserEndToEndSpecMainTest extends Specification {
       // Try another one
       browser.goTo("/view/99999999999999999")
       assert(browser.url.equals("/view/99999999999999999"))
-      assert(browser.pageSource must contain(Messages("errors.error400Title")))
+      assert(browser.pageSource must contain(Messages("errors.error400Title")(Lang("eo"))))
       
       // Go back to search location
       browser.webDriver.navigate.back
