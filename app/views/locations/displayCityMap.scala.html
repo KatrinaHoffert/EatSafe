@@ -202,7 +202,10 @@
         var closestLocations = locationsWithDistance.sort(function(loc1, loc2) {
           return loc1.distanceFromUser - loc2.distanceFromUser;
         }).slice(0, MAX_NEARBY);
-
+        
+        /*
+         * Generates the contents of the side bar.
+         */
         var sidebarHtml = closestLocations.map(function(location, index, array) {
           // Rounded to 2 decimal places
           var roundedDistance = Math.round(location.distanceFromUser * 100) / 100;
