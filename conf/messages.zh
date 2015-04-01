@@ -87,6 +87,12 @@ footer.aboutLink=关于
 footer.copyright=© Off By One 2015
 
 # Error pages
+errors.error400Title=出错了！Error 400
+errors.error400Desc=错误的请求
+errors.error400Text=您请求的页面可能存在，但是由于链接里存在一些错误，我们无法为您展示完整的页面。比如说，您想要到达的页面需要链接中包含数字，但是错误的包含了字母。如果您是从其他网站上点击的网址，链接可能已经失效。请尝试从<a href="/">主页</a>重新开始。
+errors.error404Title=出错了！Error 404
+errors.error404Desc=无法找到页面
+errors.error404Text=无法找到相应页面。如果您是从其他网站上点击的网址，链接可能已经失效。请尝试从<a href="/">主页</a>重新开始。
 errors.error500Title=出错了！Error 500
 errors.error500Desc=出错信息：内部服务错误。
 errors.error500Text=我们的内部程序出错了。请把下方出错信息发送给我们{0}来帮助我们更好解决问题.谢谢！
@@ -147,4 +153,63 @@ locations.search.rankSymbol=#
 locations.search.name=名称
 locations.search.address=地址
 locations.search.weakSearch1=没有您想要的结果?
-locations.search.weakSearch2=请尝试重新搜索.
+locations.search.weakSearch2=点击尝试广义搜索.
+
+# Admin interface
+admin.login.title=管理-登陆
+admin.login.username=用户名
+admin.login.password=密码
+admin.login.submit=登陆
+admin.login.badPassword=无效的用户名或密码。请注意检查大小写。
+admin.login.loggedOut=您已登出。
+admin.login.heading=管理界面
+admin.login.desc=您必须登陆来进行网站管理。
+
+admin.list.title=管理-全部地点
+admin.list.name=名称
+admin.list.address=地址
+admin.list.city=城市
+admin.list.tableLengthMenu= 显示{0}个地点
+admin.list.numResults=显示第{0}到第{1}个结果，总共{2}个结果
+admin.list.noResults=无法找到地点
+admin.list.filteredFrom=(从{0}个结果中筛选)
+admin.list.addSuccess=增加失败。
+admin.list.addFailure=添加失败。
+admin.list.editSuccess=更新成功。
+admin.list.editFailure=更新失败。
+admin.list.deleteSuccess=删除成功。
+admin.list.deleteFailure=删除失败。
+admin.list.viewFailure=无法找到相应地点。
+admin.list.addLocation=增加地点
+admin.list.logout=登出
+admin.list.confirmDelete=确定要删除这个地点么？
+
+admin.add.title=管理-增加地点
+admin.add.name=名称*
+admin.add.address=地址
+admin.add.postalCode=邮政编码
+admin.add.city=城市
+admin.add.rha=地区餐饮监管分局*
+admin.add.inspections=检查
+admin.add.inspectionDate=日期*
+admin.add.inspectionType=类型*
+admin.add.reinspectionPriority=再差优先等级*
+admin.add.violations=违规代码
+admin.add.removeInspection=删除
+admin.add.submit=增加地点
+admin.add.backToList=回到地点列表
+admin.add.globalErrors=您的提交结果存在下列错误
+admin.add.lowPriority=低
+admin.add.moderatePriority=中
+admin.add.highPriority=高
+admin.add.violationsHelp=违规代码（多个违规用逗号分隔开，例如 “1, 16, 5”)
+
+admin.edit.title=管理-编辑地点
+admin.edit.submit=保存地点
+
+admin.validation.invalidPostalCode=无效的邮政编码
+admin.validation.invalidRha=无效的地区餐饮监管分局
+admin.validation.invalidInspectionType=无效的检查类型
+admin.validation.invalidReinspectionPriority=无效的再查优先等级
+admin.validation.invalidViolationIds=无效的违规代码（多个违规代码必须用逗号分割开）
+admin.validation.badNumberOfInspections=必须有至少一次检查
