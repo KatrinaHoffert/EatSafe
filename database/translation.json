@@ -717,5 +717,111 @@
       "address": "\\N",
       "city": "\\N"
     }
-  }
+  },
+  {
+    "name": "7-11 Food Store",
+    "city": "Saskatoon",
+    "address": "234 Pendygrasse Rd",
+    "replacement": {
+      "name": "7 Eleven"
+    }
+  },
+  {
+    "name": "7 Eleven Food Store",
+    "city": "Saskatoon",
+    "address": "3303 A 33rd St W",
+    "replacement": {
+      "name": "7 Eleven"
+    }
+  },
+  {
+    "name": "7 Eleven Food Store - 8th St.",
+    "city": "Saskatoon",
+    "address": "1930 8th St E",
+    "replacement": {
+      "name": "7 Eleven"
+    }
+  },
+  {
+    "name": "7 Eleven Food Store #29930",
+    "city": "Saskatoon",
+    "address": "1015 Mckercher Dr",
+    "replacement": {
+      "name": "7 Eleven"
+    }
+  },
+  {
+    "name": "Arby's Restaurant",
+    "city": "Saskatoon",
+    "address": "415 Circle Dr E",
+    "replacement": {
+      "name": "Arby's"
+    }
+  },
+  {
+    "name": "A & W 2130",
+    "city": "Saskatoon",
+    "address": "2325 Preston Ave",
+    "replacement": {
+      "name": "A & W"
+    }
+  },
+  {
+    "name": "A & W Restaurant #2129",
+    "city": "Saskatoon",
+    "address": "290 - 3310 8th St E",
+    "replacement": {
+      "name": "A & W"
+    }
+  },
+  {
+    "name": "A & W #2221",
+    "city": "Saskatoon",
+    "address": "1607 Idylwyld Dr N",
+    "replacement": {
+      "name": "A & W"
+    }
+  },
+  {
+    "name": "A & W (51st Street)",
+    "city": "Saskatoon",
+    "address": "822 51st St E",
+    "replacement": {
+      "name": "A & W"
+    }
+  },
+  {
+    "name": "A & W Midtown Plaza #2132",
+    "city": "Saskatoon",
+    "address": "35a - 201 1st Ave S",
+    "replacement": {
+      "name": "A & W"
+    }
+  },
+  {
+    "name": "A & W  Restaurant #2218",
+    "city": "Saskatoon",
+    "address": "2222 22nd St W",
+    "replacement": {
+      "name": "A & W"
+    }
+  },
+  {
+    "name": "A & W (Store #2263)",
+    "city": "Saskatoon",
+    "address": "3005 Clarence Ave S",
+    "replacement": {
+      "name": "A & W"
+    }
+  },
+  {
+    "name": "7 - 11 22nd Street West",
+    "city": "Saskatoon",
+    "address": "1528 22nd St W",
+    "replacement": {
+      "name": "7 Eleven"
+    }
+  }  
+  
+  
 ]
