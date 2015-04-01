@@ -339,7 +339,8 @@ class ApplicationSpecMainTest extends Specification {
       assert(browser.webDriver.findElement(By.className("mapLocation-header")).isDisplayed)
       assert(browser.pageSource must contain("maps.googleapis.com"))
     }
-    
+  }
+  
   "All pages should be able to access 'About' Page" in new WithBrowser {
    //find city
     browser.goTo("/")
@@ -372,6 +373,11 @@ class ApplicationSpecMainTest extends Specification {
     action.click.perform
     browser.pageSource must contain (Messages("about.title"))
     
+    browser.goTo("/search/saskatoon?q=subway")
+    action.moveToElement(browser.webDriver.findElement(By.linkText(Messages("footer.aboutLink")))).perform
+    action.click.perform
+    browser.pageSource must contain (Messages("about.title"))
+    
     //TODO multimap page
     
   }  
@@ -400,12 +406,15 @@ class ApplicationSpecMainTest extends Specification {
     //find city error page
     browser.goTo("/find/daDerpDaDerp")
     action.moveToElement(browser.webDriver.findElement(By.linkText("CC-BY-ND"))).perform
-     
+    
+        //search results page
+    browser.goTo("/search/saskatoon?q=subway")
+    action.moveToElement(browser.webDriver.findElement(By.linkText("CC-BY-ND"))).perform
    //TODO multimap page
   }  
   
   
-  }
+  
   "All pages should be able to access get back to First Page" in new WithBrowser {
    //find city
     browser.goTo("/")
@@ -455,7 +464,12 @@ class ApplicationSpecMainTest extends Specification {
     action.moveToElement(browser.webDriver.findElement(By.linkText(Messages("general.applicationName")))).perform
     action.click.perform
     browser.url must contain ("/")
-    //TODO multimap page
+    
+    //search results page
+    browser.goTo("/search/saskatoon?q=subway")
+    action.moveToElement(browser.webDriver.findElement(By.linkText(Messages("general.applicationName")))).perform
+    action.click.perform
+    browser.url must contain ("/")
      
   }
 
