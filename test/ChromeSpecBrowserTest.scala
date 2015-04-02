@@ -156,7 +156,7 @@ class ChromeSpecBrowserTest extends Specification {
       browser.goTo("/")
       val selection = new Select(browser.webDriver.findElement(By.id("languageSelect")))
       selection.selectByValue("eo")
-      browser.webDriver.findElement(By.className("smallHeading")).getText contains("EatSafe Saskaĉevano")
+      browser.webDriver.findElement(By.className("smallHeading")).getText must contain("EatSafe Saskaĉevano")
       val typeahead = browser.getDriver.findElement(By.id("municipality"))
       typeahead.click
       typeahead.sendKeys("saskatoon")
@@ -164,7 +164,7 @@ class ChromeSpecBrowserTest extends Specification {
       input must contain("saskatoon")
       typeahead.sendKeys(Keys.ENTER)
       browser.url must contain("/find/saskatoon")
-      browser.webDriver.findElement(By.className("smallHeading")).getText contains("EatSafe Saskaĉevano")
+      browser.webDriver.findElement(By.className("smallHeading")).getText must contain("EatSafe Saskaĉevano")
     }
   }    
 
@@ -392,8 +392,8 @@ class ChromeSpecBrowserTest extends Specification {
       
       typeahead.sendKeys(Keys.ENTER)
       browser.url must contain("/search/")
-      browser.pageSource contains("Taco Time")
-      browser.title() must contain(Messages("locations.view.titleStart"))//made it to not an aerror page
+      browser.pageSource must contain("Taco Time")
+      browser.title must contain(Messages("locations.view.titleStart"))//made it to not an aerror page
     }
     
     "display location page when location is typed in all lowercase" in new WithBrowser(new ChromeDriver) {
@@ -408,8 +408,8 @@ class ChromeSpecBrowserTest extends Specification {
       
       typeahead.sendKeys(Keys.ENTER)
       browser.url must contain("/search/")
-      browser.pageSource contains("Taco Time")
-      browser.title() must contain(Messages("locations.view.titleStart"))
+      browser.pageSource must contain("Taco Time")
+      browser.title must contain(Messages("locations.view.titleStart"))
     }
     
     "display location page when location is fully typed and submitted with enter" in new WithBrowser(new ChromeDriver) {
@@ -424,8 +424,8 @@ class ChromeSpecBrowserTest extends Specification {
       
       typeahead.sendKeys(Keys.ENTER)
       browser.url must contain("/search/")
-      browser.pageSource contains("Taco Time")
-      browser.title() must contain(Messages("locations.view.titleStart"))
+      browser.pageSource must contain("Taco Time")
+      browser.title must contain(Messages("locations.view.titleStart"))
     }
     
     "display location page when location is partially typed, hint is clicked" in new WithBrowser(new ChromeDriver) {
@@ -445,8 +445,8 @@ class ChromeSpecBrowserTest extends Specification {
       action.click
       action.perform
       browser.url must contain("/view/")
-      browser.pageSource contains("Subway")
-      browser.title() must contain(Messages("locations.view.titleStart"))
+      browser.pageSource must contain("Subway")
+      browser.title must contain(Messages("locations.view.titleStart"))
     }
     
     "display location page when location is partially typed, tab is pressed and submitted with enter" in new WithBrowser(new ChromeDriver) {
@@ -462,7 +462,7 @@ class ChromeSpecBrowserTest extends Specification {
       typeahead.sendKeys(Keys.TAB)
       typeahead.sendKeys(Keys.ENTER)
       browser.url must contain("/search/")
-      browser.pageSource contains("Subway")
+      browser.pageSource must contain("Subw")
     }
 
     "display location page when location is partially typed, right is pressed and submitted with enter" in new WithBrowser(new ChromeDriver) {
@@ -478,7 +478,7 @@ class ChromeSpecBrowserTest extends Specification {
       typeahead.sendKeys(Keys.ARROW_RIGHT)
       typeahead.sendKeys(Keys.ENTER)
       browser.url must contain("/search/")
-      browser.pageSource contains("Subway")
+      browser.pageSource must contain("Subw")
     }
 
     "display location page when location is partially typed, down then tab is pressed" in new WithBrowser(new ChromeDriver) {
@@ -494,7 +494,7 @@ class ChromeSpecBrowserTest extends Specification {
       typeahead.sendKeys(Keys.ARROW_DOWN)
       typeahead.sendKeys(Keys.TAB)
       browser.url must contain("/view/")
-      browser.pageSource contains("Subway")
+      browser.pageSource must contain("Subway")
     }
 
     "display location page when location is partially typed, down then right arrow is pressed" in new WithBrowser(new ChromeDriver) {
@@ -510,7 +510,7 @@ class ChromeSpecBrowserTest extends Specification {
       typeahead.sendKeys(Keys.ARROW_DOWN)
       typeahead.sendKeys(Keys.ARROW_RIGHT)
       browser.url must contain("/view/")
-      browser.pageSource contains("Subway")
+      browser.pageSource must contain("Subway")
     }
 
     "display location page when location is partially typed, down then enter arrow is pressed" in new WithBrowser(new ChromeDriver) {
@@ -526,7 +526,7 @@ class ChromeSpecBrowserTest extends Specification {
       typeahead.sendKeys(Keys.ARROW_DOWN)
       typeahead.sendKeys(Keys.ENTER)
       browser.url must contain("/view/")
-      browser.pageSource contains("Subway")
+      browser.pageSource must contain("Subway")
     }
 
 
@@ -544,7 +544,7 @@ class ChromeSpecBrowserTest extends Specification {
       typeahead.sendKeys(Keys.TAB)
       button.click
       browser.url must contain("/search/")
-      browser.pageSource contains("Subway")
+      browser.pageSource must contain("Subw")
     }
 
     "display location page when location is partially typed, right is pressed and submitted with button" in new WithBrowser(new ChromeDriver) {
@@ -561,7 +561,7 @@ class ChromeSpecBrowserTest extends Specification {
       typeahead.sendKeys(Keys.ARROW_RIGHT)
       button.click
       browser.url must contain("/search/")
-      browser.pageSource contains("Subway")
+      browser.pageSource must contain("Subw")
     }
 
     
