@@ -69,7 +69,7 @@ class ApplicationSpecMainTest extends Specification {
       selection.selectByValue("eo")
       
       // Make sure language has been changed
-      browser.webDriver.findElement(By.className("smallHeading")).getText contains("EatSafe Saskaĉevano")
+      browser.webDriver.findElement(By.className("smallHeading")).getText must contain("EatSafe Saskaĉevano")
       
       // Type in a city
       val typeahead = browser.getDriver.findElement(By.id("municipality"))
@@ -83,7 +83,7 @@ class ApplicationSpecMainTest extends Specification {
       
       // Make sure the page is also in the selected language
       browser.url must contain("/find/saskatoon")
-      browser.webDriver.findElement(By.className("smallHeading")).getText contains("EatSafe Saskaĉevano")
+      browser.webDriver.findElement(By.className("smallHeading")).getText must contain("EatSafe Saskaĉevano")
     }
   }
   
@@ -92,20 +92,20 @@ class ApplicationSpecMainTest extends Specification {
       browser.goTo("/")
       val link = browser.webDriver.findElement(By.linkText(Messages("footer.aboutLink")))
       link.click()
-      browser.url contains("/about")
+      browser.url must contain("/about")
     }
     
     "show creative commons page when link is clicked" in new WithBrowser {
       browser.goTo("/")
       val link = browser.webDriver.findElement(By.linkText("CC-BY-ND"))
-      link.getAttribute("href").contains("creativecommons")
+      link.getAttribute("href") must contain("creativecommons")
     }
     
     "able to select language from the drop down list" in new WithBrowser {
       browser.goTo("/")
       val selection = new Select(browser.webDriver.findElement(By.id("languageSelect")))
       selection.selectByValue("eo")
-      browser.webDriver.findElement(By.className("smallHeading")).getText contains("EatSafe Saskaĉevano")
+      browser.webDriver.findElement(By.className("smallHeading")).getText must contain("EatSafe Saskaĉevano")
     }
   }
   
@@ -253,7 +253,7 @@ class ApplicationSpecMainTest extends Specification {
       action.perform
       
       browser.url must contain("/view/")
-      browser.pageSource contains("Subway")
+      browser.pageSource must contain("Subway")
       browser.title must contain(Messages("locations.view.titleStart"))
     }
     
@@ -298,7 +298,6 @@ class ApplicationSpecMainTest extends Specification {
       browser.webDriver.findElement(By.className("mapLocation-header")).isDisplayed
     }
     
-//BROKEN
     "display regional health authority link" in new WithBrowser {
       //Find a place in the Saskatoon Health Region
       browser.goTo("/view/123")
@@ -308,25 +307,6 @@ class ApplicationSpecMainTest extends Specification {
       val healthlink = browser.webDriver.findElement(By.id("rhaSiteLink"))
     }
   }
-  
-  "violation info page" should {
-    "display a page with violation info for specific violation" in new WithBrowser {
-      browser.goTo("/view/1/violation/1")
-      browser.url.equals("/view/1/violation/1")
-      browser.pageSource contains(Messages("violations.content." + 1))
-      browser.goTo("/view/1/violation/11")
-      browser.url.equals("/view/1/violation/11")
-      browser.pageSource contains(Messages("violations.content." + 11))
-    }
-    
-    "returns to view when go back button is pressed" in new WithBrowser {
-      browser.goTo("/view/1/violation/8")
-      browser.url.equals("/view/1/violation/8")
-      browser.pageSource contains(Messages("violations.content." + 8))
-
-    }
-  }
- 
  
   "display map page" should {
     "render a map on the page with a header" in new WithBrowser {
