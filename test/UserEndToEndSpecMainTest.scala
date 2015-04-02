@@ -58,7 +58,7 @@ class UserEndToEndSpecMainTest extends Specification {
       
       browser.url must contain("/view/")
       browser.webDriver.findElement(By.className("footer")).isDisplayed
-      browser.pageSource contains("2nd Avenue Grill")
+      browser.pageSource must contain("2nd Avenue Grill")
       
       // Try to go to the map page
       val action = new Actions(browser.getDriver)
@@ -70,7 +70,7 @@ class UserEndToEndSpecMainTest extends Specification {
       // go back to location page
       browser.webDriver.navigate.back
       browser.url must contain("/view/")
-      browser.pageSource contains("2nd Avenue Grill")
+      browser.pageSource must contain("2nd Avenue Grill")
       browser.webDriver.findElement(By.className("footer")).isDisplayed
       
       
@@ -85,13 +85,13 @@ class UserEndToEndSpecMainTest extends Specification {
       // go back to home page
       browser.webDriver.findElement(By.linkText("EatSafe Saskatchewan")).click
       browser.webDriver.findElement(By.className("footer")).isDisplayed
-      browser.url.equals("/")
+      browser.url must equalTo("/")
     }
     
     "change language and make many bad choices" in new WithBrowser {
       browser.goTo("/")
       browser.webDriver.findElement(By.className("footer")).isDisplayed
-      browser.url.equals("/")
+      browser.url must equalTo("/")
       
       // Change the language
       val selection = new Select(browser.webDriver.findElement(By.id("languageSelect")))
@@ -117,7 +117,7 @@ class UserEndToEndSpecMainTest extends Specification {
       browser.$(".topViewError").getText must contain(Messages("locations.selectCity.badInput")(Lang("eo")))
       
       // try again
-      browser.url.equals("/")
+      browser.url must equalTo("/")
       
       typeaheadCity = browser.getDriver.findElement(By.id("municipality"))
       
@@ -131,7 +131,7 @@ class UserEndToEndSpecMainTest extends Specification {
       typeaheadCity.getAttribute("value") must contain("Regina")   
       typeaheadCity.sendKeys(Keys.ENTER)
       
-      browser.url.equals("/find/Regina")
+      browser.url must equalTo("/find/Regina")
        
       // on find location search for random stuff
       var typeaheadLoc = browser.getDriver.findElement(By.id("location"))
@@ -145,21 +145,30 @@ class UserEndToEndSpecMainTest extends Specification {
       
       browser.url must contain("/search/")
       browser.webDriver.findElement(By.className("btn-primary")).click
-      browser.url.equals("/find/Regina")
+      browser.url must equalTo("/find/Regina")
       
       
       // Get impatient and try to guess at an id
       browser.goTo("/view/-45675")
-      browser.url.equals("/view/-45675")
+      browser.url must equalTo("/view/-45675")
       browser.pageSource must contain(Messages("errors.error500Title")(Lang("eo")))
       
       // Try another one
       browser.goTo("/view/99999999999999999")
-      browser.url.equals("/view/99999999999999999")
+      browser.url must equalTo("/view/99999999999999999")
       browser.pageSource must contain(Messages("errors.error400Title")(Lang("eo")))
       
+      // Try one last thing
+      browser.goTo("/dfgjnsddjdk")
+      browser.url must equalTo("/dfgjnsddjdk")
+      browser.pageSource must contain(Messages("errors.error404Title")(Lang("eo")))
+      
       // Go back to search location
-      browser.goTo("/find/Regina")
+      browser.webDriver.navigate.back
+      browser.webDriver.navigate.back
+      browser.webDriver.navigate.back
+      browser.webDriver.navigate.back
+      browser.webDriver.navigate.back
       
       typeaheadLoc = browser.getDriver.findElement(By.id("location"))
       // find some location containing s
@@ -192,7 +201,7 @@ class UserEndToEndSpecMainTest extends Specification {
       // go back to home page
       browser.webDriver.findElement(By.linkText(Messages("general.applicationName")(Lang("eo")))).click
       browser.webDriver.findElement(By.className("footer")).isDisplayed
-      browser.url.equals("/")
+      browser.url must equalTo("/")
       
       // Go to the about page
       browser.webDriver.findElement(By.linkText(Messages("footer.aboutLink")(Lang("eo")))).click
