@@ -26,9 +26,9 @@ class ApplicationSpecMainTest extends Specification {
   /* 
    * Basic check that all views are being rendered in html
    */
-  
+ 
   "Application" should {
-    
+   
     "send 404 on a bad request" in new WithApplication {
       route(FakeRequest(GET, "/boum")) must beNone
     }
@@ -54,26 +54,36 @@ class ApplicationSpecMainTest extends Specification {
       for(i <- 1 to 10){
         browser.webDriver.navigate.refresh
       }
-      assert(browser.webDriver.findElement(By.className("smallHeading")).isDisplayed)
-      assert(browser.webDriver.findElement(By.className("footer")).isDisplayed)
-      assert(browser.webDriver.findElement(By.className("typeahead-container")).isDisplayed)
+      browser.webDriver.findElement(By.className("smallHeading")).isDisplayed
+      browser.webDriver.findElement(By.className("footer")).isDisplayed
+      browser.webDriver.findElement(By.className("typeahead-container")).isDisplayed
     }
   }
 
   "language selection" should {
     "change language for other pages" in new WithBrowser {
       browser.goTo("/")
+      
+      // Select different language
       val selection = new Select(browser.webDriver.findElement(By.id("languageSelect")))
       selection.selectByValue("eo")
-      assert(browser.webDriver.findElement(By.className("smallHeading")).getText contains("EatSafe Saskaĉevano"))
+      
+      // Make sure language has been changed
+      browser.webDriver.findElement(By.className("smallHeading")).getText contains("EatSafe Saskaĉevano")
+      
+      // Type in a city
       val typeahead = browser.getDriver.findElement(By.id("municipality"))
       typeahead.click
       typeahead.sendKeys("saskatoon")
       val input = typeahead.getAttribute("value")
-      assert(input must contain("saskatoon"))
+      
+      // Make sure things have been typed and submit
+      input must contain("saskatoon")
       typeahead.sendKeys(Keys.ENTER)
-      assert(browser.url must contain("/find/saskatoon"))
-      assert(browser.webDriver.findElement(By.className("smallHeading")).getText contains("EatSafe Saskaĉevano"))
+      
+      // Make sure the page is also in the selected language
+      browser.url must contain("/find/saskatoon")
+      browser.webDriver.findElement(By.className("smallHeading")).getText contains("EatSafe Saskaĉevano")
     }
   }
   
@@ -82,20 +92,20 @@ class ApplicationSpecMainTest extends Specification {
       browser.goTo("/")
       val link = browser.webDriver.findElement(By.linkText(Messages("footer.aboutLink")))
       link.click()
-      assert(browser.url contains("/about"))
+      browser.url contains("/about")
     }
     
     "show creative commons page when link is clicked" in new WithBrowser {
       browser.goTo("/")
       val link = browser.webDriver.findElement(By.linkText("CC-BY-ND"))
-      assert(link.getAttribute("href").contains("creativecommons"))
+      link.getAttribute("href").contains("creativecommons")
     }
     
     "able to select language from the drop down list" in new WithBrowser {
       browser.goTo("/")
       val selection = new Select(browser.webDriver.findElement(By.id("languageSelect")))
       selection.selectByValue("eo")
-      assert(browser.webDriver.findElement(By.className("smallHeading")).getText contains("EatSafe Saskaĉevano"))
+      browser.webDriver.findElement(By.className("smallHeading")).getText contains("EatSafe Saskaĉevano")
     }
   }
   
@@ -104,8 +114,8 @@ class ApplicationSpecMainTest extends Specification {
       browser.goTo("/find/octavia")
       val link = browser.webDriver.findElement(By.linkText(Messages("errors.emptyCityTryAgain")))
       link.click
-      assert(browser.url must contain("/"))
-      assert(browser.pageSource must contain(Messages("locations.selectCity.title")))
+      browser.url must contain("/")
+      browser.pageSource must contain(Messages("locations.selectCity.title"))
     }
   }
   
@@ -113,8 +123,8 @@ class ApplicationSpecMainTest extends Specification {
     
     "give error page when an invalid city url is requested" in new WithApplication {
       val error = route(FakeRequest(GET, "/find/octavia")).get
-      assert(status(error) must equalTo(404))
-      assert(contentAsString(error) must contain(Messages("errors.emptyCityDesc")))
+      status(error) must equalTo(404)
+      contentAsString(error) must contain(Messages("errors.emptyCityDesc"))
     }
     
     "give error message when trying submit without input" in new WithBrowser {
@@ -122,7 +132,7 @@ class ApplicationSpecMainTest extends Specification {
       val typeahead = browser.getDriver.findElement(By.id("municipality"))
       typeahead.click
       typeahead.sendKeys(Keys.ENTER)
-      assert(browser.$(".topViewError").getText must contain(Messages("locations.selectCity.badInput")))
+      browser.$(".topViewError").getText must contain(Messages("locations.selectCity.badInput"))
     }
      
     "give error page when trying to search for invalid place" in new WithBrowser {
@@ -133,10 +143,10 @@ class ApplicationSpecMainTest extends Specification {
       
       // Make sure that correct input is in the typeahead
       val input = typeahead.getAttribute("value")
-      assert(input must contain("asdfghjkl"))
+      input must contain("asdfghjkl")
       
       typeahead.sendKeys(Keys.ENTER)
-       assert(browser.$(".topViewError").getText must contain(Messages("locations.selectCity.badInput")))
+      browser.$(".topViewError").getText must contain(Messages("locations.selectCity.badInput"))
     }
     
     "display choose location page when location is typed in all caps" in new WithBrowser {
@@ -147,10 +157,10 @@ class ApplicationSpecMainTest extends Specification {
       
       // Make sure that correct input is in the typeahead
       val input = typeahead.getAttribute("value")
-      assert(input must contain("SASKATOON"))
+      input must contain("SASKATOON")
       
       typeahead.sendKeys(Keys.ENTER)
-      assert(browser.url must contain("/find/SASKATOON"))
+      browser.url must contain("/find/SASKATOON")
       browser.title() must contain(Messages("locations.selectLocation.title"))//made it to not an aerror page
     }
     
@@ -162,11 +172,11 @@ class ApplicationSpecMainTest extends Specification {
       
       // Make sure that correct input is in the typeahead
       val input = typeahead.getAttribute("value")
-      assert(input must contain("saskatoon"))
+      input must contain("saskatoon")
       
       typeahead.sendKeys(Keys.ENTER)
-      assert(browser.url must contain("/find/saskatoon"))
-      browser.title() must contain(Messages("locations.selectLocation.title"))
+      browser.url must contain("/find/saskatoon")
+      browser.title must contain(Messages("locations.selectLocation.title"))
     }
     
     "display choose location page when location is fully typed and submitted with enter" in new WithBrowser {
@@ -177,17 +187,16 @@ class ApplicationSpecMainTest extends Specification {
       
       // Make sure that correct input is in the typeahead
       val input = typeahead.getAttribute("value")
-      assert(input must contain("Saskatoon"))      
-      
+      input must contain("Saskatoon")
+     
       typeahead.sendKeys(Keys.ENTER)
-      assert(browser.url must contain("/find/Saskatoon"))
+      browser.url must contain("/find/Saskatoon")
     }
    
-    //BROKEN
     "display choose location page when location is partially typed, hint is clicked and submitted with enter" in new WithBrowser {
       //There is a problem getting this test working with Selenium, it has been tested manually and 
       //is working, but the automation will have to wait
-      /* browser.goTo("/")
+      browser.goTo("/")
       val typeahead = browser.getDriver.findElement(By.id("municipality"))
       val action = new Actions(browser.getDriver)
       typeahead.click
@@ -195,15 +204,14 @@ class ApplicationSpecMainTest extends Specification {
       
       // Make sure that correct input is in the typeahead
       val input = typeahead.getAttribute("value")
-      assert(input must contain("Saskato"))
+      input must contain("Saskato")
       
       action.moveToElement(typeahead).perform
       val element = browser.webDriver.findElement(By.className("typeahead-display"))
       action.moveToElement(element)
       action.click
       action.perform
-      typeahead.sendKeys(Keys.ENTER)
-      assert(browser.url must contain("/find/Saskatoon"))*/
+      browser.url must contain("/find/Saskatoon")
     }
     
     "clear text field with clear typeahead button is pressed" in new WithBrowser {
@@ -214,7 +222,7 @@ class ApplicationSpecMainTest extends Specification {
        
        // Make sure correct information is in the typeahead
        val input = typeahead.getAttribute("value")
-       assert(input must contain("Saskatoon"))
+       input must contain("Saskatoon")
        
        val button = browser.getDriver.findElement(By.id("reset-button"))
        button.click
@@ -223,42 +231,44 @@ class ApplicationSpecMainTest extends Specification {
   } 
 
   "select location page" should {
+    
+    "display location page when location is partially typed, hint is clicked and submitted with enter" in new WithBrowser {
+    //There is a problem getting this test working with Selenium, it has been tested manually and 
+      //is working, but the automation will have to wait
+      browser.goTo("/find/Saskatoon")
+      val typeahead = browser.getDriver.findElement(By.id("location"))
+      val action = new Actions(browser.getDriver)
+      typeahead.click
+      typeahead.sendKeys("Subw")
+      
+      // Make sure that correct input is in the typeahead
+      val input = typeahead.getAttribute("value")
+      input must contain("Subw")    
+      
+      
+      action.moveToElement(typeahead).perform
+      val element = browser.webDriver.findElement(By.partialLinkText("Subway"))
+      
+      action.moveToElement(element)
+      action.click
+      action.perform
+      
+      browser.url must contain("/view/")
+      browser.pageSource contains("Subway")
+      browser.title must contain(Messages("locations.view.titleStart"))
+    }
+    
+    
     "display 500 error page for id that is not assigned to a location" in new WithApplication {
       val error = route(FakeRequest(GET, "/view/1000000")).get
-      assert(status(error) must equalTo(INTERNAL_SERVER_ERROR))
-      assert(contentAsString(error) must contain(Messages("errors.error500Desc")))
+      status(error) must equalTo(INTERNAL_SERVER_ERROR)
+      contentAsString(error) must contain(Messages("errors.error500Desc"))
     }
     
     "display 500 error page for id less than 0" in new WithApplication {
       val error = route(FakeRequest(GET, "/view/-100")).get
-      assert(status(error) must equalTo(INTERNAL_SERVER_ERROR))
-      assert(contentAsString(error) must contain(Messages("errors.error500Desc")))      
-    }
-    
-    
-    //BROKEN
-    "display location page when location is partially typed, hint is clicked and submitted with enter" in new WithBrowser {
-    //There is a problem getting this test working with Selenium, it has been tested manually and 
-      //is working, but the automation will have to wait
-      /*browser.goTo("/find/Saskatoon")
-      val typeahead = browser.getDriver.findElement(By.id("location"))
-      val action = new Actions(browser.getDriver)
-      typeahead.click
-      typeahead.sendKeys("Lakewood Subw")
-      
-      // Make sure that correct input is in the typeahead
-      val input = typeahead.getAttribute("value")
-      assert(input must contain("Lakewood Subw"))    
-      
-      action.moveToElement(typeahead).perform
-      val element = browser.webDriver.findElement(By.className("typeahead-display"))
-      action.moveToElement(element)
-      action.click
-      action.perform
-      typeahead.sendKeys(Keys.ENTER)
-      assert(browser.url must contain("/view/"))
-      assert(browser.pageSource contains("Subway"))
-      browser.title() must contain(Messages("locations.view.titleStart"))*/
+      status(error) must equalTo(INTERNAL_SERVER_ERROR)
+      contentAsString(error) must contain(Messages("errors.error500Desc"))
     }
     
     "clear text field with clear typeahead button is pressed" in new WithBrowser {
@@ -270,22 +280,23 @@ class ApplicationSpecMainTest extends Specification {
        
        // Make sure that correct input is in the typeahead
        val input = typeahead.getAttribute("value")
-       assert(input must contain("Subway"))
+       input must contain("Subway")
        
        button.click
        typeahead.getText must beEmpty
     }
     
   }
-  
+
   "display location page" should {
     "display show map page when address is clicked" in new WithBrowser {
       browser.goTo("/view/3675")
       val action = new Actions(browser.getDriver)
       action.moveToElement(browser.webDriver.findElement(By.id("mapForLocation"))).perform
       action.click.perform
-      assert(browser.url must contain("map"))
-      assert(browser.webDriver.findElement(By.className("mapLocation-header")).isDisplayed)
+      
+      browser.url must contain("map")
+      browser.webDriver.findElement(By.className("mapLocation-header")).isDisplayed
     }
     
 //BROKEN
@@ -316,16 +327,7 @@ class ApplicationSpecMainTest extends Specification {
 
     }
   }
-  
-  //404 pages have not been implemented yet
-  /*
-  "404 page" should {
-    "be loaded when an invalid url is entered" in new WithApplication {
-      val error = route(FakeRequest(GET, "/bubblzzz")).get
-      assert(status(error) must equalTo(404)) 
-    }
-  }
-  */
+ 
  
   "display map page" should {
     "render a map on the page with a header" in new WithBrowser {
@@ -335,9 +337,9 @@ class ApplicationSpecMainTest extends Specification {
       action.moveToElement(browser.webDriver.findElement(By.id("mapForLocation"))).perform
       action.click.perform
       
-      assert(browser.url must contain("map"))
-      assert(browser.webDriver.findElement(By.className("mapLocation-header")).isDisplayed)
-      assert(browser.pageSource must contain("maps.googleapis.com"))
+      browser.url must contain("map")
+      browser.webDriver.findElement(By.className("mapLocation-header")).isDisplayed
+      browser.pageSource must contain("maps.googleapis.com")
     }
   }
   
