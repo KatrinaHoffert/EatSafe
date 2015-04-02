@@ -376,8 +376,37 @@
 
           markers.push(marker);
       }
+
+      //Marker Cluster Options
+      var clusterStyles = [
+        {
+          textColor: 'white',
+          url: 'http://google-maps-utility-library-v3.googlecode.com/svn/trunk/markerclusterer/images/m1.png',
+          height: 50,
+          width: 50
+        },
+        {
+          textColor: 'white',
+          url: 'http://google-maps-utility-library-v3.googlecode.com/svn/trunk/markerclusterer/images/m1.png',
+          height: 50,
+          width: 50
+        },
+        {
+          textColor: 'white',
+          url: 'http://google-maps-utility-library-v3.googlecode.com/svn/trunk/markerclusterer/images/m1.png',
+          height: 50,
+          width: 50
+        }
+      ];
+
+      var mcOptions = {
+        gridSize: 50,
+        styles: clusterStyles,
+        maxZoom: 11
+      };
+
       minClusterZoom = 11;
-      markerCluster = new MarkerClusterer(map, markers);
+      markerCluster = new MarkerClusterer(map, markers,mcOptions);
       markerCluster.setMaxZoom(minClusterZoom);
       //setAllMap(map);
     }
