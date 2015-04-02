@@ -14,7 +14,6 @@ import org.openqa.selenium.WebDriver
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
-import org.openqa.selenium.chrome.ChromeDriver
 import org.openqa.selenium.support.ui.Select
 
 
@@ -30,8 +29,9 @@ class FirefoxSpecBrowserTest extends Specification {
   
     //Firefox drivers are build into Play I think and thus a path doesnt need to be set
 
-   "All pages should be able to access 'About' Page" in new WithBrowser(new FirefoxDriver) {
-   //find city
+    "All pages should be able to access 'About' Page" in new WithBrowser(new FirefoxDriver) {
+   //find city 
+      
     browser.goTo("/")
     val action = new Actions(browser.getDriver)
     action.moveToElement(browser.webDriver.findElement(By.linkText(Messages("footer.aboutLink")))).perform
@@ -49,7 +49,7 @@ class FirefoxSpecBrowserTest extends Specification {
     action.moveToElement(browser.webDriver.findElement(By.linkText(Messages("footer.aboutLink")))).perform
     action.click.perform
     browser.pageSource must contain (Messages("about.title"))   
-    
+   
     //500 error page
     browser.goTo("/view/1000000")
     action.moveToElement(browser.webDriver.findElement(By.linkText(Messages("footer.aboutLink")))).perform
@@ -62,10 +62,11 @@ class FirefoxSpecBrowserTest extends Specification {
     action.click.perform
     browser.pageSource must contain (Messages("about.title"))
     
-    //TODO multimap page  
-   } 
+    //TODO multimap page
+   
+  }  
   
-   "All pages should have link to 'Creative Commons' Page" in new WithBrowser(new FirefoxDriver) {
+  "All pages should have link to 'Creative Commons' Page" in new WithBrowser(new FirefoxDriver) {
     //find city
     browser.goTo("/")
     val action = new Actions(browser.getDriver)
@@ -91,7 +92,7 @@ class FirefoxSpecBrowserTest extends Specification {
     action.moveToElement(browser.webDriver.findElement(By.linkText("CC-BY-ND"))).perform
      
    //TODO multimap page
-   } 
+  }  
   
   
   
@@ -148,337 +149,236 @@ class FirefoxSpecBrowserTest extends Specification {
      
   }
     
- 
-    "give error message when trying submit without input" in new WithBrowser(new FirefoxDriver) {
-      browser.goTo("/")
-      val typeahead = browser.getDriver.findElement(By.id("municipality"))
-      typeahead.click
-      typeahead.sendKeys(Keys.ENTER)
-       Thread.sleep(100)
-      assert(browser.$(".topViewError").getText must contain(Messages("locations.selectCity.noInput")))
-    }
-     
-    "give error page when trying to search for invalid place" in new WithBrowser(new FirefoxDriver) {
-      browser.goTo("/")
-      val typeahead = browser.getDriver.findElement(By.id("municipality"))
-      typeahead.click
-      typeahead.sendKeys("asdfghjkl")
-      typeahead.sendKeys(Keys.ENTER)
-      Thread.sleep(100)
-      assert(browser.pageSource must contain(Messages("errors.emptyCityDesc")))
-    }
-    
 
-
-    //System.setProperty("webdriver.chrome.driver", "chromedriver.exe");
   "language selection" should {
     "change language for other pages" in new WithBrowser(new FirefoxDriver) {
       browser.goTo("/")
       val selection = new Select(browser.webDriver.findElement(By.id("languageSelect")))
       selection.selectByValue("eo")
-      assert(browser.webDriver.findElement(By.className("smallHeading")).getText contains("EatSafe Saskaĉevano"))
+      browser.webDriver.findElement(By.className("smallHeading")).getText contains("EatSafe Saskaĉevano")
       val typeahead = browser.getDriver.findElement(By.id("municipality"))
       typeahead.click
       typeahead.sendKeys("saskatoon")
       val input = typeahead.getAttribute("value")
-      assert(input must contain("saskatoon"))
+      input must contain("saskatoon")
       typeahead.sendKeys(Keys.ENTER)
-      assert(browser.url must contain("/find/saskatoon"))
-      assert(browser.webDriver.findElement(By.className("smallHeading")).getText contains("EatSafe Saskaĉevano"))
+      browser.url must contain("/find/saskatoon")
+      browser.webDriver.findElement(By.className("smallHeading")).getText contains("EatSafe Saskaĉevano")
     }
   }    
 
   "select city typeahead" should {
-	  "give error message when trying submit without input" in new WithBrowser(new FirefoxDriver) {
-		  browser.goTo("/")
-		  val typeahead = browser.getDriver.findElement(By.id("municipality"))
-		  typeahead.click
-		  typeahead.sendKeys(Keys.ENTER)
-		  assert(browser.$(".topViewError").getText must contain(Messages("locations.selectCity.noInput")))
-	  }
 
-	  "give error page when trying to search for invalid place" in new WithBrowser(new FirefoxDriver) {
-		  browser.goTo("/")
-		  val typeahead = browser.getDriver.findElement(By.id("municipality"))
-		  typeahead.click
-		  typeahead.sendKeys("asdfghjkl")
+    "give error message when trying submit without input" in new WithBrowser(new FirefoxDriver) {
+      browser.goTo("/")
+      val typeahead = browser.getDriver.findElement(By.id("municipality"))
+      typeahead.click
+      typeahead.sendKeys(Keys.ENTER)
+      browser.$(".topViewError").getText must contain(Messages("locations.selectCity.badInput"))
+    }
+
+    "give error page when trying to search for invalid place" in new WithBrowser(new FirefoxDriver) {
+      browser.goTo("/")
+      val typeahead = browser.getDriver.findElement(By.id("municipality"))
+      typeahead.click
+      typeahead.sendKeys("asdfghjkl")
       
       // Make sure that correct input is in the typeahead
       val input = typeahead.getAttribute("value")
-      assert(input must contain("asdfghjkl"))
+      input must contain("asdfghjkl")
       
-		  typeahead.sendKeys(Keys.ENTER)
-		  assert(browser.pageSource must contain(Messages("errors.emptyCityDesc")))
-	  }
+      typeahead.sendKeys(Keys.ENTER)
+      browser.$(".topViewError").getText must contain(Messages("locations.selectCity.badInput"))
+    }
 
-	  "display choose location page when location is typed in all caps" in new WithBrowser(new FirefoxDriver) {
-		  browser.goTo("/")
-		  val typeahead = browser.getDriver.findElement(By.id("municipality"))
-		  typeahead.click
-		  typeahead.sendKeys("SASKATOON")
+    "display choose location page when location is typed in all caps" in new WithBrowser(new FirefoxDriver) {
+      browser.goTo("/")
+      val typeahead = browser.getDriver.findElement(By.id("municipality"))
+      typeahead.click
+      typeahead.sendKeys("SASKATOON")
       
       // Make sure that correct input is in the typeahead
       val input = typeahead.getAttribute("value")
-      assert(input must contain("SASKATOON"))
+      input must contain("SASKATOON")
       
-		  typeahead.sendKeys(Keys.ENTER)
-		  assert(browser.url must contain("/find/SASKATOON"))
-		  browser.pageSource must contain(Messages("locations.selectLocation.title"))//got to the next page, not error page
-	  }
+      typeahead.sendKeys(Keys.ENTER)
+      browser.url must contain("/find/SASKATOON")
+      browser.pageSource must contain(Messages("locations.selectLocation.title"))//got to the next page, not error page
+    }
 
-	  "display choose location page when location is typed in all lowercase" in new WithBrowser(new FirefoxDriver) {
-		  browser.goTo("/")
-		  val typeahead = browser.getDriver.findElement(By.id("municipality"))
-		  typeahead.click
-		  typeahead.sendKeys("saskatoon")
+    "display choose location page when location is typed in all lowercase" in new WithBrowser(new FirefoxDriver) {
+      browser.goTo("/")
+      val typeahead = browser.getDriver.findElement(By.id("municipality"))
+      typeahead.click
+      typeahead.sendKeys("saskatoon")
       
       // Make sure that correct input is in the typeahead
       val input = typeahead.getAttribute("value")
-      assert(input must contain("saskatoon"))
+      input must contain("saskatoon")
       
-		  typeahead.sendKeys(Keys.ENTER)
-		  assert(browser.url must contain("/find/saskatoon"))
-		  browser.pageSource must contain(Messages("locations.selectLocation.title"))//got to the next page, not error page
-	  }
+      typeahead.sendKeys(Keys.ENTER)
+      browser.url must contain("/find/saskatoon")
+      browser.pageSource must contain(Messages("locations.selectLocation.title"))//got to the next page, not error page
+    }
 
-	  "display choose location page when location is fully typed and submitted with enter" in new WithBrowser(new FirefoxDriver) {
-		  browser.goTo("/")
-		  val typeahead = browser.getDriver.findElement(By.id("municipality"))
-		  typeahead.click
-		  typeahead.sendKeys("Saskatoon")
+    "display choose location page when location is fully typed and submitted with enter" in new WithBrowser(new FirefoxDriver) {
+      browser.goTo("/")
+      val typeahead = browser.getDriver.findElement(By.id("municipality"))
+      typeahead.click
+      typeahead.sendKeys("Saskatoon")
       
       // Make sure that correct input is in the typeahead
       val input = typeahead.getAttribute("value")
-      assert(input must contain("Saskatoon"))
+      input must contain("Saskatoon")
       
-		  typeahead.sendKeys(Keys.ENTER)
-		  assert(browser.url must contain("/find/Saskatoon"))
-	  }
+      typeahead.sendKeys(Keys.ENTER)
+      browser.url must contain("/find/Saskatoon")
+    }
 
-	  "display choose location page when location is partially typed, hint is clicked and submitted with enter" in new WithBrowser(new FirefoxDriver) {
-		  browser.goTo("/")
-		  val typeahead = browser.getDriver.findElement(By.id("municipality"))
-		  typeahead.click
-		  typeahead.sendKeys("Saskato")
+    "display choose location page when location is partially typed, hint is clicked" in new WithBrowser(new FirefoxDriver) {
+      browser.goTo("/")
+      val typeahead = browser.getDriver.findElement(By.id("municipality"))
+      typeahead.click
+      typeahead.sendKeys("Saskato")
       
       // Make sure that correct input is in the typeahead
       val input = typeahead.getAttribute("value")
-      assert(input must contain("Saskato"))
+      input must contain("Saskato")
       
-		  val action = new Actions(browser.getDriver)
-		  action.moveToElement(typeahead).perform
-		  val element = browser.webDriver.findElement(By.className("typeahead-display"))
-		  action.moveToElement(element)
-      action.moveByOffset(-1, 0)
+      val action = new Actions(browser.getDriver)
+      action.moveToElement(typeahead).perform
+      val element = browser.webDriver.findElement(By.className("typeahead-display"))
+      action.moveToElement(element)
+      action.click
       action.perform
-		  action.click
-		  action.perform
-		  typeahead.sendKeys(Keys.ENTER)
-		  assert(browser.url must contain("/find/Saskatoon"))
-	  }
+      browser.url must contain("/find/Saskatoon")
+    }
 
-	  "display choose location page when location is partially typed, tab is pressed and submitted with enter" in new WithBrowser(new FirefoxDriver) {
-		  browser.goTo("/")
-		  val typeahead = browser.getDriver.findElement(By.id("municipality"))
-		  typeahead.click
-		  typeahead.sendKeys("Saskato")
+    "display choose location page when location is partially typed, tab is pressed and submitted with enter" in new WithBrowser(new FirefoxDriver) {
+      browser.goTo("/")
+      val typeahead = browser.getDriver.findElement(By.id("municipality"))
+      typeahead.click
+      typeahead.sendKeys("Saskato")
       
       // Make sure that correct input is in the typeahead
       val input = typeahead.getAttribute("value")
-      assert(input must contain("Saskato"))
+      input must contain("Saskato")
       
-		  typeahead.sendKeys(Keys.TAB)
-		  typeahead.sendKeys(Keys.ENTER)
-		  assert(browser.url must contain("/find/Saskatoon"))
-	  }
+      typeahead.sendKeys(Keys.TAB)
+      typeahead.sendKeys(Keys.ENTER)
+      browser.url must contain("/find/Saskatoon")
+    }
 
-	  "display choose location page when location is partially typed, right is pressed and submitted with enter" in new WithBrowser(new FirefoxDriver) {
-		  browser.goTo("/")
-		  val typeahead = browser.getDriver.findElement(By.id("municipality"))
-		  typeahead.click
-		  typeahead.sendKeys("Saskato")
+    "display choose location page when location is partially typed, right is pressed and submitted with enter" in new WithBrowser(new FirefoxDriver) {
+      browser.goTo("/")
+      val typeahead = browser.getDriver.findElement(By.id("municipality"))
+      typeahead.click
+      typeahead.sendKeys("Saskato")
       
       // Make sure that correct input is in the typeahead
       val input = typeahead.getAttribute("value")
-      assert(input must contain("Saskato"))
+      input must contain("Saskato")
       
-		  typeahead.sendKeys(Keys.ARROW_RIGHT)
-		  typeahead.sendKeys(Keys.ENTER)
-		  assert(browser.url must contain("/find/Saskatoon"))
-	  }
+      typeahead.sendKeys(Keys.ARROW_RIGHT)
+      typeahead.sendKeys(Keys.ENTER)
+      browser.url must contain("/find/Saskatoon")
+    }
 
-	  "display choose location page when location is partially typed, down then tab is pressed and submitted with enter" in new WithBrowser(new FirefoxDriver) {
-		  browser.goTo("/")
-		  val typeahead = browser.getDriver.findElement(By.id("municipality"))
-		  typeahead.click
-		  typeahead.sendKeys("Saskato")
+    "display choose location page when location is partially typed, down then tab is pressed" in new WithBrowser(new FirefoxDriver) {
+      browser.goTo("/")
+      val typeahead = browser.getDriver.findElement(By.id("municipality"))
+      typeahead.click
+      typeahead.sendKeys("Saskato")
       
       // Make sure that correct input is in the typeahead
       val input = typeahead.getAttribute("value")
-      assert(input must contain("Saskato"))
+      input must contain("Saskato")
       
-		  typeahead.sendKeys(Keys.ARROW_DOWN)
-		  typeahead.sendKeys(Keys.TAB)
-		  typeahead.sendKeys(Keys.ENTER)
-		  assert(browser.url must contain("/find/Saskatoon"))
-	  }
+      typeahead.sendKeys(Keys.ARROW_DOWN)
+      typeahead.sendKeys(Keys.TAB)
+      browser.url must contain("/find/Saskatoon")
+    }
 
-	  "display choose location page when location is partially typed, down then right arrow is pressed and submitted with enter" in new WithBrowser(new FirefoxDriver) {
-		  browser.goTo("/")
-		  val typeahead = browser.getDriver.findElement(By.id("municipality"))
-		  typeahead.click
-		  typeahead.sendKeys("Saskato")
+    "display choose location page when location is partially typed, down then right arrow is pressed" in new WithBrowser(new FirefoxDriver) {
+      browser.goTo("/")
+      val typeahead = browser.getDriver.findElement(By.id("municipality"))
+      typeahead.click
+      typeahead.sendKeys("Saskato")
       
       // Make sure that correct input is in the typeahead
       val input = typeahead.getAttribute("value")
-      assert(input must contain("Saskato"))
+      input must contain("Saskato")
       
-		  typeahead.sendKeys(Keys.ARROW_DOWN)
-		  typeahead.sendKeys(Keys.ARROW_RIGHT)
-		  typeahead.sendKeys(Keys.ENTER)
-		  assert(browser.url must contain("/find/Saskatoon"))
-	  }
+      typeahead.sendKeys(Keys.ARROW_DOWN)
+      typeahead.sendKeys(Keys.ARROW_RIGHT)
+      browser.url must contain("/find/Saskatoon")
+    }
 
-	  "display choose location page when location is partially typed, down then enter arrow is pressed and submitted with enter" in new WithBrowser(new FirefoxDriver) {
-		  browser.goTo("/")
-		  val typeahead = browser.getDriver.findElement(By.id("municipality"))
-		  typeahead.click
-		  typeahead.sendKeys("Saskato")
+    "display choose location page when location is partially typed and down then enter arrow is pressed" in new WithBrowser(new FirefoxDriver) {
+      browser.goTo("/")
+      val typeahead = browser.getDriver.findElement(By.id("municipality"))
+      typeahead.click
+      typeahead.sendKeys("Saskato")
       
       // Make sure that correct input is in the typeahead
       val input = typeahead.getAttribute("value")
-      assert(input must contain("Saskato"))
+      input must contain("Saskato")
       
-		  typeahead.sendKeys(Keys.ARROW_DOWN)
-		  typeahead.sendKeys(Keys.ENTER)
-		  typeahead.sendKeys(Keys.ENTER)
-		  assert(browser.url must contain("/find/Saskatoon"))
-	  }
+      typeahead.sendKeys(Keys.ARROW_DOWN)
+      typeahead.sendKeys(Keys.ENTER)
+      browser.url must contain("/find/Saskatoon")
+    }
 
-	  "display choose location page when location is partially typed, hint is clicked and submitted with button" in new WithBrowser(new FirefoxDriver) {
-		  browser.goTo("/")
-		  val typeahead = browser.getDriver.findElement(By.id("municipality"))
-		  typeahead.click
-		  typeahead.sendKeys("Saskato")
+    "display choose location page when location is partially typed, tab is pressed and submitted with button" in new WithBrowser(new FirefoxDriver) {
+      browser.goTo("/")
+      val typeahead = browser.getDriver.findElement(By.id("municipality"))
+      val button = browser.getDriver.findElement(By.id("submitButton"))
+      typeahead.click
+      typeahead.sendKeys("Saskato")
       
       // Make sure that correct input is in the typeahead
       val input = typeahead.getAttribute("value")
-      assert(input must contain("Saskato"))
+      input must contain("Saskato")
       
-		  val action = new Actions(browser.getDriver)
-		  action.moveToElement(typeahead).perform
-		  val element = browser.webDriver.findElement(By.className("typeahead-display"))
-      action.perform
-      action.moveByOffset(-1, 0)
-		  action.moveToElement(element)
-		  action.click
-		  action.perform
-		  val button = browser.getDriver.findElement(By.id("submitButton"))
-		  button.click
-		  assert(browser.url must contain("/find/Saskatoon"))
-	  }
+      typeahead.sendKeys(Keys.TAB)
+      button.click
+      browser.url must contain("/find/Saskatoon")
+    }
 
-	  "display choose location page when location is partially typed, tab is pressed and submitted with button" in new WithBrowser(new FirefoxDriver) {
-		  browser.goTo("/")
-		  val typeahead = browser.getDriver.findElement(By.id("municipality"))
-		  val button = browser.getDriver.findElement(By.id("submitButton"))
-		  typeahead.click
-		  typeahead.sendKeys("Saskato")
+    "display choose location page when location is partially typed, right is pressed and submitted with button" in new WithBrowser(new FirefoxDriver) {
+      browser.goTo("/")
+      val typeahead = browser.getDriver.findElement(By.id("municipality"))
+      val button = browser.getDriver.findElement(By.id("submitButton"))
+      typeahead.click
+      typeahead.sendKeys("Saskato")
       
       // Make sure that correct input is in the typeahead
       val input = typeahead.getAttribute("value")
-      assert(input must contain("Saskato"))
+      input must contain("Saskato")
       
-		  typeahead.sendKeys(Keys.TAB)
-		  button.click
-		  assert(browser.url must contain("/find/Saskatoon"))
-	  }
+      typeahead.sendKeys(Keys.ARROW_RIGHT)
+      button.click
+      browser.url must contain("/find/Saskatoon")
+    }
 
-	  "display choose location page when location is partially typed, right is pressed and submitted with button" in new WithBrowser(new FirefoxDriver) {
-		  browser.goTo("/")
-		  val typeahead = browser.getDriver.findElement(By.id("municipality"))
-		  val button = browser.getDriver.findElement(By.id("submitButton"))
-		  typeahead.click
-		  typeahead.sendKeys("Saskato")
+    "clear text field with clear typeahead button is pressed" in new WithBrowser(new FirefoxDriver) {
+      browser.goTo("/")
+      val typeahead = browser.getDriver.findElement(By.id("municipality"))
+      val button = browser.getDriver.findElement(By.id("reset-button"))
+      typeahead.click
+      typeahead.sendKeys("Saskatoon")
       
       // Make sure that correct input is in the typeahead
       val input = typeahead.getAttribute("value")
-      assert(input must contain("Saskato"))
+      input must contain("Saskatoon")
       
-		  typeahead.sendKeys(Keys.ARROW_RIGHT)
-		  button.click
-		  assert(browser.url must contain("/find/Saskatoon"))
-	  }
-
-	  "display choose location page when location is partially typed, down then tab is pressed and submitted with button" in new WithBrowser(new FirefoxDriver) {
-		  browser.goTo("/")
-		  val typeahead = browser.getDriver.findElement(By.id("municipality"))
-		  val button = browser.getDriver.findElement(By.id("submitButton"))
-		  typeahead.click
-		  typeahead.sendKeys("Saskato")
-      
-      // Make sure that correct input is in the typeahead
-      val input = typeahead.getAttribute("value")
-      assert(input must contain("Saskato"))
-      
-		  typeahead.sendKeys(Keys.ARROW_DOWN)
-		  typeahead.sendKeys(Keys.TAB)
-		  button.click
-		  assert(browser.url must contain("/find/Saskatoon"))
-	  }
-
-	  "display choose location page when location is partially typed, down then right arrow is pressed and submitted with button" in new WithBrowser(new FirefoxDriver) {
-		  browser.goTo("/")
-		  val typeahead = browser.getDriver.findElement(By.id("municipality"))
-		  val button = browser.getDriver.findElement(By.id("submitButton"))
-		  typeahead.click
-		  typeahead.sendKeys("Saskato")
-      
-      // Make sure that correct input is in the typeahead
-      val input = typeahead.getAttribute("value")
-      assert(input must contain("Saskato"))
-      
-		  typeahead.sendKeys(Keys.ARROW_DOWN)
-		  typeahead.sendKeys(Keys.ARROW_RIGHT)
-		  button.click
-		  assert(browser.url must contain("/find/Saskatoon"))
-	  }
-
-	  "display choose location page when location is partially typed, down arrow then enter is pressed and submitted with button" in new WithBrowser(new FirefoxDriver) {
-		  browser.goTo("/")
-		  val typeahead = browser.getDriver.findElement(By.id("municipality"))
-		  val button = browser.getDriver.findElement(By.id("submitButton"))
-		  typeahead.click
-		  typeahead.sendKeys("Saskato")
-      
-      // Make sure that correct input is in the typeahead
-      val input = typeahead.getAttribute("value")
-      assert(input must contain("Saskato"))
-      
-		  typeahead.sendKeys(Keys.ARROW_DOWN)
-		  typeahead.sendKeys(Keys.ENTER)
-		  button.click
-		  assert(browser.url must contain("/find/Saskatoon"))
-	  }
-
-	  "clear text field with clear typeahead button is pressed" in new WithBrowser(new FirefoxDriver) {
-		  browser.goTo("/")
-		  val typeahead = browser.getDriver.findElement(By.id("municipality"))
-		  val button = browser.getDriver.findElement(By.id("reset-button"))
-		  typeahead.click
-		  typeahead.sendKeys("Saskatoon")
-      
-      // Make sure that correct input is in the typeahead
-      val input = typeahead.getAttribute("value")
-      assert(input must contain("Saskatoon"))
-      
-		  button.click
-		  typeahead.getText must beEmpty
-	  }
+      button.click
+      typeahead.getText must beEmpty
+    }
   }
   
   "select location page typeahead" should {
-
+    
     "display location page when place is typed in all caps" in new WithBrowser(new FirefoxDriver) {
       browser.goTo("/find/Saskatoon")
       val typeahead = browser.getDriver.findElement(By.id("location"))
@@ -487,11 +387,11 @@ class FirefoxSpecBrowserTest extends Specification {
       
       // Make sure that correct input is in the typeahead
       val input = typeahead.getAttribute("value")
-      assert(input must contain("TACO TIME"))
+      input must contain("TACO TIME")
       
       typeahead.sendKeys(Keys.ENTER)
-      assert(browser.url must contain("/view/"))
-      assert(browser.pageSource contains("Taco Time"))
+      browser.url must contain("/search/")
+      browser.pageSource contains("Taco Time")
       browser.title() must contain(Messages("locations.view.titleStart"))//made it to not an aerror page
     }
     
@@ -503,11 +403,11 @@ class FirefoxSpecBrowserTest extends Specification {
       
       // Make sure that correct input is in the typeahead
       val input = typeahead.getAttribute("value")
-      assert(input must contain("taco time"))
+      input must contain("taco time")
       
       typeahead.sendKeys(Keys.ENTER)
-      assert(browser.url must contain("/view/"))
-      assert(browser.pageSource contains("Taco Time"))
+      browser.url must contain("/search/")
+      browser.pageSource contains("Taco Time")
       browser.title() must contain(Messages("locations.view.titleStart"))
     }
     
@@ -519,15 +419,34 @@ class FirefoxSpecBrowserTest extends Specification {
       
       // Make sure that correct input is in the typeahead
       val input = typeahead.getAttribute("value")
-      assert(input must contain("Taco Time"))
+      input must contain("Taco Time")
       
       typeahead.sendKeys(Keys.ENTER)
-      assert(browser.url must contain("/view/"))
-      assert(browser.pageSource contains("Taco Time"))
+      browser.url must contain("/search/")
+      browser.pageSource contains("Taco Time")
       browser.title() must contain(Messages("locations.view.titleStart"))
     }
-
-
+ 
+    "display location page when location is partially typed, hint is clicked" in new WithBrowser(new FirefoxDriver) {
+      browser.goTo("/find/Saskatoon")
+      val typeahead = browser.getDriver.findElement(By.id("location"))
+      val action = new Actions(browser.getDriver)
+      typeahead.click
+      typeahead.sendKeys("Subw")
+      
+      // Make sure that correct input is in the typeahead
+      val input = typeahead.getAttribute("value")
+      input must contain("Subw")   
+      
+      action.moveToElement(typeahead).perform
+      val element = browser.webDriver.findElement(By.tagName("li"))
+      action.moveToElement(element).perform
+      action.click.perform
+      browser.url must contain("/view/")
+      browser.pageSource contains("Subway")
+      browser.title() must contain(Messages("locations.view.titleStart"))
+    }
+  
     "display location page when location is partially typed, tab is pressed and submitted with enter" in new WithBrowser(new FirefoxDriver) {
       browser.goTo("/find/Saskatoon")
       val typeahead = browser.getDriver.findElement(By.id("location"))
@@ -536,12 +455,12 @@ class FirefoxSpecBrowserTest extends Specification {
       
       // Make sure that correct input is in the typeahead
       val input = typeahead.getAttribute("value")
-      assert(input must contain("Subw"))
+      input must contain("Subw")
       
       typeahead.sendKeys(Keys.TAB)
       typeahead.sendKeys(Keys.ENTER)
-      assert(browser.url must contain("/view/"))
-      assert(browser.pageSource contains("Subway"))
+      browser.url must contain("/search/")
+      browser.pageSource contains("Subway")
     }
 
     "display location page when location is partially typed, right is pressed and submitted with enter" in new WithBrowser(new FirefoxDriver) {
@@ -552,15 +471,15 @@ class FirefoxSpecBrowserTest extends Specification {
       
       // Make sure that correct input is in the typeahead
       val input = typeahead.getAttribute("value")
-      assert(input must contain("Subw"))
+      input must contain("Subw")
       
       typeahead.sendKeys(Keys.ARROW_RIGHT)
       typeahead.sendKeys(Keys.ENTER)
-      assert(browser.url must contain("/view/"))
-      assert(browser.pageSource contains("Subway"))
+      browser.url must contain("/search/")
+      browser.pageSource contains("Subway")
     }
 
-    "display location page when location is partially typed, down then tab is pressed and submitted with enter" in new WithBrowser(new FirefoxDriver) {
+    "display location page when location is partially typed, down then tab is pressed" in new WithBrowser(new FirefoxDriver) {
       browser.goTo("/find/Saskatoon")
       val typeahead = browser.getDriver.findElement(By.id("location"))
       typeahead.click
@@ -568,16 +487,15 @@ class FirefoxSpecBrowserTest extends Specification {
       
       // Make sure that correct input is in the typeahead
       val input = typeahead.getAttribute("value")
-      assert(input must contain("Subw"))
+      input must contain("Subw")
       
       typeahead.sendKeys(Keys.ARROW_DOWN)
       typeahead.sendKeys(Keys.TAB)
-      typeahead.sendKeys(Keys.ENTER)
-      assert(browser.url must contain("/view/"))
-      assert(browser.pageSource contains("Subway"))
+      browser.url must contain("/view/")
+      browser.pageSource contains("Subway")
     }
 
-    "display location page when location is partially typed, down then right arrow is pressed and submitted with enter" in new WithBrowser(new FirefoxDriver) {
+    "display location page when location is partially typed, down then right arrow is pressed" in new WithBrowser(new FirefoxDriver) {
       browser.goTo("/find/Saskatoon")
       val typeahead = browser.getDriver.findElement(By.id("location"))
       typeahead.click
@@ -585,16 +503,15 @@ class FirefoxSpecBrowserTest extends Specification {
       
       // Make sure that correct input is in the typeahead
       val input = typeahead.getAttribute("value")
-      assert(input must contain("Subw"))
+      input must contain("Subw")
       
       typeahead.sendKeys(Keys.ARROW_DOWN)
       typeahead.sendKeys(Keys.ARROW_RIGHT)
-      typeahead.sendKeys(Keys.ENTER)
-      assert(browser.url must contain("/view/"))
-      assert(browser.pageSource contains("Subway"))
+      browser.url must contain("/view/")
+      browser.pageSource contains("Subway")
     }
 
-    "display location page when location is partially typed, down then enter arrow is pressed and submitted with enter" in new WithBrowser(new FirefoxDriver) {
+    "display location page when location is partially typed, down then enter arrow is pressed" in new WithBrowser(new FirefoxDriver) {
       browser.goTo("/find/Saskatoon")
       val typeahead = browser.getDriver.findElement(By.id("location"))
       typeahead.click
@@ -602,106 +519,50 @@ class FirefoxSpecBrowserTest extends Specification {
       
       // Make sure that correct input is in the typeahead
       val input = typeahead.getAttribute("value")
-      assert(input must contain("Subw"))
+      input must contain("Subw")
       
       typeahead.sendKeys(Keys.ARROW_DOWN)
       typeahead.sendKeys(Keys.ENTER)
-      typeahead.sendKeys(Keys.ENTER)
-      assert(browser.url must contain("/view/"))
-      assert(browser.pageSource contains("Subway"))
+      browser.url must contain("/view/")
+      browser.pageSource contains("Subway")
     }
 
 
     "display location page when location is partially typed, tab is pressed and submitted with button" in new WithBrowser(new FirefoxDriver) {
       browser.goTo("/find/Saskatoon")
       val typeahead = browser.getDriver.findElement(By.id("location"))
-      val button = browser.getDriver.findElement(By.tagName("button"))
+      val button = browser.getDriver.findElement(By.className("typeahead-button"))
       typeahead.click
       typeahead.sendKeys("Subw")
       
       // Make sure that correct input is in the typeahead
       val input = typeahead.getAttribute("value")
-      assert(input must contain("Subw"))
+      input must contain("Subw")
       
       typeahead.sendKeys(Keys.TAB)
       button.click
-      
-      assert(browser.url must contain("/view/"))
-      assert(browser.pageSource contains("Subway"))
+      browser.url must contain("/search/")
+      browser.pageSource contains("Subway")
     }
 
     "display location page when location is partially typed, right is pressed and submitted with button" in new WithBrowser(new FirefoxDriver) {
       browser.goTo("/find/Saskatoon")
       val typeahead = browser.getDriver.findElement(By.id("location"))
-      val button = browser.getDriver.findElement(By.tagName("button"))
+      val button = browser.getDriver.findElement(By.className("typeahead-button"))
       typeahead.click
       typeahead.sendKeys("Subw")
       
       // Make sure that correct input is in the typeahead
       val input = typeahead.getAttribute("value")
-      assert(input must contain("Subw"))
+      input must contain("Subw")
       
       typeahead.sendKeys(Keys.ARROW_RIGHT)
       button.click
-      assert(browser.url must contain("/view/"))
-      assert(browser.pageSource contains("Subway"))
+      browser.url must contain("/search/")
+      browser.pageSource contains("Subway")
     }
 
-    "display location page when location is partially typed, down then tab is pressed and submitted with button" in new WithBrowser(new FirefoxDriver) {
-      browser.goTo("/find/Saskatoon")
-      val typeahead = browser.getDriver.findElement(By.id("location"))
-      val button = browser.getDriver.findElement(By.tagName("button"))
-      typeahead.click
-      typeahead.sendKeys("Subw")
-      
-      // Make sure that correct input is in the typeahead
-      val input = typeahead.getAttribute("value")
-      assert(input must contain("Subw"))
-      
-      typeahead.sendKeys(Keys.ARROW_DOWN)
-      typeahead.sendKeys(Keys.TAB)
-      button.click
-      assert(browser.url must contain("/view/"))
-      assert(browser.pageSource contains("Subway"))
-    }
 
-    "display location page when location is partially typed, down then right arrow is pressed and submitted with button" in new WithBrowser(new FirefoxDriver) {
-      browser.goTo("/find/Saskatoon")
-      val typeahead = browser.getDriver.findElement(By.id("location"))
-      val button = browser.getDriver.findElement(By.tagName("button"))
-      typeahead.click
-      typeahead.sendKeys("Subw")
-      
-      // Make sure that correct input is in the typeahead
-      val input = typeahead.getAttribute("value")
-      assert(input must contain("Subw"))
-      
-      typeahead.sendKeys(Keys.ARROW_DOWN)
-      typeahead.sendKeys(Keys.ARROW_RIGHT)
-      button.click
-      assert(browser.url must contain("/view/"))
-      assert(browser.pageSource contains("Subway"))
-    }
-
-    "display location page when location is partially typed, down arrow then enter is pressed and submitted with button" in new WithBrowser(new FirefoxDriver) {
-      browser.goTo("/find/Saskatoon")
-      val typeahead = browser.getDriver.findElement(By.id("location"))
-      val button = browser.getDriver.findElement(By.tagName("button"))
-      typeahead.click
-      typeahead.sendKeys("Subw")
-      
-      // Make sure that correct input is in the typeahead
-      val input = typeahead.getAttribute("value")
-      assert(input must contain("Subw"))
-      
-      typeahead.sendKeys(Keys.ARROW_DOWN)
-      typeahead.sendKeys(Keys.ENTER)
-      button.click
-      assert(browser.url must contain("/view/"))
-      assert(browser.pageSource contains("Subway"))
-    }
-    
-    
     "clear text field with clear typeahead button is pressed" in new WithBrowser(new FirefoxDriver) {
        browser.goTo("/find/Saskatoon")
        val typeahead = browser.getDriver.findElement(By.id("location"))
@@ -711,7 +572,7 @@ class FirefoxSpecBrowserTest extends Specification {
        
        // Make sure that correct input is in the typeahead
        val input = typeahead.getAttribute("value")
-       assert(input must contain("Subway"))
+       input must contain("Subway")
        
        button.click
        typeahead.getText must beEmpty
