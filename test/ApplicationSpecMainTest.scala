@@ -194,8 +194,6 @@ class ApplicationSpecMainTest extends Specification {
     }
    
     "display choose location page when location is partially typed, hint is clicked and submitted with enter" in new WithBrowser {
-      //There is a problem getting this test working with Selenium, it has been tested manually and 
-      //is working, but the automation will have to wait
       browser.goTo("/")
       val typeahead = browser.getDriver.findElement(By.id("municipality"))
       val action = new Actions(browser.getDriver)
