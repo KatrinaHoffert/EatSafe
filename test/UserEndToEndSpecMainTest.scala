@@ -20,13 +20,13 @@ class UserEndToEndSpecMainTest extends Specification {
     
     "be successful for location in Saskatoon" in new WithBrowser(){
       browser.goTo("/")
-      assert(browser.webDriver.findElement(By.className("footer")).isDisplayed)
+      browser.webDriver.findElement(By.className("footer")).isDisplayed
       val typeaheadCity = browser.getDriver.findElement(By.id("municipality"))
       typeaheadCity.click
       
       // Make a mistake and clear with button
       typeaheadCity.sendKeys("Waskatoon")
-      assert(typeaheadCity.getAttribute("value") must contain("Waskatoon"))     
+      typeaheadCity.getAttribute("value") must contain("Waskatoon")
       browser.webDriver.findElement(By.id("reset-button")).click
       typeaheadCity.getText must beEmpty
       
@@ -35,11 +35,11 @@ class UserEndToEndSpecMainTest extends Specification {
       typeaheadCity.sendKeys("Saskatoon")
       
       // Make sure that correct input is in the typeahead
-      assert(typeaheadCity.getAttribute("value") must contain("Saskatoon"))      
+      typeaheadCity.getAttribute("value") must contain("Saskatoon")    
       
       typeaheadCity.sendKeys(Keys.ENTER)
-      assert(browser.url must contain("/find/Saskatoon"))
-      assert(browser.webDriver.findElement(By.className("footer")).isDisplayed)
+      browser.url must contain("/find/Saskatoon")
+      browser.webDriver.findElement(By.className("footer")).isDisplayed
       
       // on find location search for 2nd Avenue Grill
       val typeaheadLoc = browser.getDriver.findElement(By.id("location"))
@@ -47,51 +47,51 @@ class UserEndToEndSpecMainTest extends Specification {
       
       // Make sure that correct input is in the typeahead
       val input = typeaheadLoc.getAttribute("value")
-      assert(input must contain("2nd Avenue Grill"))
+      input must contain("2nd Avenue Grill")
       
       typeaheadLoc.sendKeys(Keys.ENTER)
       
-      assert(browser.url must contain("/search/"))
-      assert(browser.webDriver.findElement(By.className("footer")).isDisplayed)
+      browser.url must contain("/search/")
+      browser.webDriver.findElement(By.className("footer")).isDisplayed
       
       browser.webDriver.findElement(By.linkText("2nd Avenue Grill")).click
       
-      assert(browser.url must contain("/view/"))
-      assert(browser.webDriver.findElement(By.className("footer")).isDisplayed)
-      assert(browser.pageSource contains("2nd Avenue Grill"))
+      browser.url must contain("/view/")
+      browser.webDriver.findElement(By.className("footer")).isDisplayed
+      browser.pageSource contains("2nd Avenue Grill")
       
       // Try to go to the map page
       val action = new Actions(browser.getDriver)
       action.moveToElement(browser.webDriver.findElement(By.id("mapForLocation"))).perform
       action.click.perform
-      assert(browser.url must contain("map"))
-      assert(browser.webDriver.findElement(By.className("mapLocation-header")).isDisplayed)
+      browser.url must contain("map")
+      browser.webDriver.findElement(By.className("mapLocation-header")).isDisplayed
       
       // go back to location page
       browser.webDriver.navigate.back
-      assert(browser.url must contain("/view/"))
-      assert(browser.pageSource contains("2nd Avenue Grill"))
-      assert(browser.webDriver.findElement(By.className("footer")).isDisplayed)
+      browser.url must contain("/view/")
+      browser.pageSource contains("2nd Avenue Grill")
+      browser.webDriver.findElement(By.className("footer")).isDisplayed
       
       
       // open a past inspection
       browser.webDriver.findElement(By.id("showHideLink")).click
-      assert(browser.webDriver.findElement(By.id("pastInspections")).isDisplayed)
+      browser.webDriver.findElement(By.id("pastInspections")).isDisplayed
       
       browser.webDriver.findElement(By.className("panel-title-text")).click
       
-      assert(browser.webDriver.findElement(By.className("panel-body")).isDisplayed)
+      browser.webDriver.findElement(By.className("panel-body")).isDisplayed
       
       // go back to home page
       browser.webDriver.findElement(By.linkText("EatSafe Saskatchewan")).click
-      assert(browser.webDriver.findElement(By.className("footer")).isDisplayed)
-      assert(browser.url.equals("/"))
+      browser.webDriver.findElement(By.className("footer")).isDisplayed
+      browser.url.equals("/")
     }
     
     "change language and make many bad choices" in new WithBrowser {
       browser.goTo("/")
-      assert(browser.webDriver.findElement(By.className("footer")).isDisplayed)
-      assert(browser.url.equals("/"))
+      browser.webDriver.findElement(By.className("footer")).isDisplayed
+      browser.url.equals("/")
       
       // Change the language
       val selection = new Select(browser.webDriver.findElement(By.id("languageSelect")))
@@ -104,34 +104,34 @@ class UserEndToEndSpecMainTest extends Specification {
       typeaheadCity.sendKeys(Keys.ENTER)
 
       // Check that error page has been reached
-      assert(browser.$(".topViewError").getText must contain(Messages("locations.selectCity.badInput")(Lang("eo"))))
-      assert(browser.webDriver.findElement(By.className("footer")).isDisplayed)
+      browser.$(".topViewError").getText must contain(Messages("locations.selectCity.badInput")(Lang("eo")))
+      browser.webDriver.findElement(By.className("footer")).isDisplayed
       
       // Send wrong thing
       typeaheadCity.click
       typeaheadCity.sendKeys("Waskatoon")
-      assert(typeaheadCity.getAttribute("value") must contain("Waskatoon"))    
+      typeaheadCity.getAttribute("value") must contain("Waskatoon")
       
       typeaheadCity.sendKeys(Keys.ENTER)
       
-      assert(browser.$(".topViewError").getText must contain(Messages("locations.selectCity.badInput")(Lang("eo"))))
+      browser.$(".topViewError").getText must contain(Messages("locations.selectCity.badInput")(Lang("eo")))
       
       // try again
-      assert(browser.url.equals("/"))
+      browser.url.equals("/")
       
       typeaheadCity = browser.getDriver.findElement(By.id("municipality"))
       
       // clear typeahead
       browser.webDriver.findElement(By.id("reset-button")).click
-      assert(typeaheadCity.getText must beEmpty)
+      typeaheadCity.getText must beEmpty
       
       typeaheadCity.click
       
       typeaheadCity.sendKeys("Regina")
-      assert(typeaheadCity.getAttribute("value") must contain("Regina"))    
+      typeaheadCity.getAttribute("value") must contain("Regina")   
       typeaheadCity.sendKeys(Keys.ENTER)
       
-      assert(browser.url.equals("/find/Regina"))
+      browser.url.equals("/find/Regina")
        
       // on find location search for random stuff
       var typeaheadLoc = browser.getDriver.findElement(By.id("location"))
@@ -139,54 +139,51 @@ class UserEndToEndSpecMainTest extends Specification {
       
       // Make sure that correct input is in the typeahead
       val input = typeaheadLoc.getAttribute("value")
-      assert(input must contain("doesthisplaceexistsnookay"))
+      input must contain("doesthisplaceexistsnookay")
       
       typeaheadLoc.sendKeys(Keys.ENTER)
       
-      assert(browser.url must contain("/search/"))
+      browser.url must contain("/search/")
       browser.webDriver.findElement(By.className("btn-primary")).click
-      assert(browser.url.equals("/find/Regina"))
+      browser.url.equals("/find/Regina")
       
       
       // Get impatient and try to guess at an id
       browser.goTo("/view/-45675")
-      assert(browser.url.equals("/view/-45675"))
-      assert(browser.pageSource must contain(Messages("errors.error500Title")(Lang("eo"))))
+      browser.url.equals("/view/-45675")
+      browser.pageSource must contain(Messages("errors.error500Title")(Lang("eo")))
       
       // Try another one
       browser.goTo("/view/99999999999999999")
-      assert(browser.url.equals("/view/99999999999999999"))
-      assert(browser.pageSource must contain(Messages("errors.error400Title")(Lang("eo"))))
+      browser.url.equals("/view/99999999999999999")
+      browser.pageSource must contain(Messages("errors.error400Title")(Lang("eo")))
       
       // Go back to search location
-      browser.webDriver.navigate.back
-      browser.webDriver.navigate.back
-      browser.webDriver.navigate.back
-      browser.webDriver.navigate.back
+      browser.goTo("/find/Regina")
       
       typeaheadLoc = browser.getDriver.findElement(By.id("location"))
       // find some location containing s
       typeaheadLoc.sendKeys("Five Guys")
       
       // Make sure that correct input is in the typeahead
-      assert(typeaheadLoc.getAttribute("value") must contain("Five Guys"))
+      typeaheadLoc.getAttribute("value") must contain("Five Guys")
       
       typeaheadLoc.sendKeys(Keys.ENTER)
       
-      assert(browser.url must contain("/search/"))
-      assert(browser.webDriver.findElement(By.className("footer")).isDisplayed)
+      browser.url must contain("/search/")
+      browser.webDriver.findElement(By.className("footer")).isDisplayed
       
       browser.webDriver.findElement(By.linkText("Five Guys")).click
       
-      assert(browser.url must contain("/view/"))
-      assert(browser.webDriver.findElement(By.className("footer")).isDisplayed)
+      browser.url must contain("/view/")
+      browser.webDriver.findElement(By.className("footer")).isDisplayed
       
       // Try to go to the map page
       val action = new Actions(browser.getDriver)
       action.moveToElement(browser.webDriver.findElement(By.id("mapForLocation"))).perform
       action.click.perform
-      assert(browser.url must contain("map"))
-      assert(browser.webDriver.findElement(By.className("mapLocation-header")).isDisplayed)
+      browser.url must contain("map")
+      browser.webDriver.findElement(By.className("mapLocation-header")).isDisplayed
      
       // Get bored and refresh the page
       
@@ -194,12 +191,12 @@ class UserEndToEndSpecMainTest extends Specification {
      
       // go back to home page
       browser.webDriver.findElement(By.linkText(Messages("general.applicationName")(Lang("eo")))).click
-      assert(browser.webDriver.findElement(By.className("footer")).isDisplayed)
-      assert(browser.url.equals("/"))
+      browser.webDriver.findElement(By.className("footer")).isDisplayed
+      browser.url.equals("/")
       
       // Go to the about page
       browser.webDriver.findElement(By.linkText(Messages("footer.aboutLink")(Lang("eo")))).click
-      assert(browser.pageSource must contain (Messages("about.title")(Lang("eo"))))
+      browser.pageSource must contain (Messages("about.title")(Lang("eo")))
       
     }
   }
