@@ -31,7 +31,8 @@ class ChromeSpecBrowserTest extends Specification {
     System.setProperty("webdriver.chrome.driver", "webDrivers/ChromeDriver.exe");
     
     "All pages should be able to access 'About' Page" in new WithBrowser(new ChromeDriver) {
-   //find city
+   //find city 
+      
     browser.goTo("/")
     val action = new Actions(browser.getDriver)
     action.moveToElement(browser.webDriver.findElement(By.linkText(Messages("footer.aboutLink")))).perform
@@ -49,7 +50,7 @@ class ChromeSpecBrowserTest extends Specification {
     action.moveToElement(browser.webDriver.findElement(By.linkText(Messages("footer.aboutLink")))).perform
     action.click.perform
     browser.pageSource must contain (Messages("about.title"))   
-    
+   
     //500 error page
     browser.goTo("/view/1000000")
     action.moveToElement(browser.webDriver.findElement(By.linkText(Messages("footer.aboutLink")))).perform
@@ -63,7 +64,7 @@ class ChromeSpecBrowserTest extends Specification {
     browser.pageSource must contain (Messages("about.title"))
     
     //TODO multimap page
-    
+   
   }  
   
   "All pages should have link to 'Creative Commons' Page" in new WithBrowser(new ChromeDriver) {
@@ -155,15 +156,15 @@ class ChromeSpecBrowserTest extends Specification {
       browser.goTo("/")
       val selection = new Select(browser.webDriver.findElement(By.id("languageSelect")))
       selection.selectByValue("eo")
-      assert(browser.webDriver.findElement(By.className("smallHeading")).getText contains("EatSafe Saskaĉevano"))
+      browser.webDriver.findElement(By.className("smallHeading")).getText contains("EatSafe Saskaĉevano")
       val typeahead = browser.getDriver.findElement(By.id("municipality"))
       typeahead.click
       typeahead.sendKeys("saskatoon")
       val input = typeahead.getAttribute("value")
-      assert(input must contain("saskatoon"))
+      input must contain("saskatoon")
       typeahead.sendKeys(Keys.ENTER)
-      assert(browser.url must contain("/find/saskatoon"))
-      assert(browser.webDriver.findElement(By.className("smallHeading")).getText contains("EatSafe Saskaĉevano"))
+      browser.url must contain("/find/saskatoon")
+      browser.webDriver.findElement(By.className("smallHeading")).getText contains("EatSafe Saskaĉevano")
     }
   }    
 
@@ -174,7 +175,7 @@ class ChromeSpecBrowserTest extends Specification {
       val typeahead = browser.getDriver.findElement(By.id("municipality"))
       typeahead.click
       typeahead.sendKeys(Keys.ENTER)
-      assert(browser.$(".topViewError").getText must contain(Messages("locations.selectCity.noInput")))
+      browser.$(".topViewError").getText must contain(Messages("locations.selectCity.badInput"))
     }
 
     "give error page when trying to search for invalid place" in new WithBrowser(new ChromeDriver) {
@@ -185,10 +186,10 @@ class ChromeSpecBrowserTest extends Specification {
       
       // Make sure that correct input is in the typeahead
       val input = typeahead.getAttribute("value")
-      assert(input must contain("asdfghjkl"))
+      input must contain("asdfghjkl")
       
       typeahead.sendKeys(Keys.ENTER)
-      assert(browser.pageSource must contain(Messages("errors.emptyCityDesc")))
+      browser.$(".topViewError").getText must contain(Messages("locations.selectCity.badInput"))
     }
 
     "display choose location page when location is typed in all caps" in new WithBrowser(new ChromeDriver) {
@@ -199,10 +200,10 @@ class ChromeSpecBrowserTest extends Specification {
       
       // Make sure that correct input is in the typeahead
       val input = typeahead.getAttribute("value")
-      assert(input must contain("SASKATOON"))
+      input must contain("SASKATOON")
       
       typeahead.sendKeys(Keys.ENTER)
-      assert(browser.url must contain("/find/SASKATOON"))
+      browser.url must contain("/find/SASKATOON")
       browser.pageSource must contain(Messages("locations.selectLocation.title"))//got to the next page, not error page
     }
 
@@ -214,10 +215,10 @@ class ChromeSpecBrowserTest extends Specification {
       
       // Make sure that correct input is in the typeahead
       val input = typeahead.getAttribute("value")
-      assert(input must contain("saskatoon"))
+      input must contain("saskatoon")
       
       typeahead.sendKeys(Keys.ENTER)
-      assert(browser.url must contain("/find/saskatoon"))
+      browser.url must contain("/find/saskatoon")
       browser.pageSource must contain(Messages("locations.selectLocation.title"))//got to the next page, not error page
     }
 
@@ -229,13 +230,13 @@ class ChromeSpecBrowserTest extends Specification {
       
       // Make sure that correct input is in the typeahead
       val input = typeahead.getAttribute("value")
-      assert(input must contain("Saskatoon"))
+      input must contain("Saskatoon")
       
       typeahead.sendKeys(Keys.ENTER)
-      assert(browser.url must contain("/find/Saskatoon"))
+      browser.url must contain("/find/Saskatoon")
     }
 
-    "display choose location page when location is partially typed, hint is clicked and submitted with enter" in new WithBrowser(new ChromeDriver) {
+    "display choose location page when location is partially typed, hint is clicked" in new WithBrowser(new ChromeDriver) {
       browser.goTo("/")
       val typeahead = browser.getDriver.findElement(By.id("municipality"))
       typeahead.click
@@ -243,7 +244,7 @@ class ChromeSpecBrowserTest extends Specification {
       
       // Make sure that correct input is in the typeahead
       val input = typeahead.getAttribute("value")
-      assert(input must contain("Saskato"))
+      input must contain("Saskato")
       
       val action = new Actions(browser.getDriver)
       action.moveToElement(typeahead).perform
@@ -251,8 +252,7 @@ class ChromeSpecBrowserTest extends Specification {
       action.moveToElement(element)
       action.click
       action.perform
-      typeahead.sendKeys(Keys.ENTER)
-      assert(browser.url must contain("/find/Saskatoon"))
+      browser.url must contain("/find/Saskatoon")
     }
 
     "display choose location page when location is partially typed, tab is pressed and submitted with enter" in new WithBrowser(new ChromeDriver) {
@@ -263,11 +263,11 @@ class ChromeSpecBrowserTest extends Specification {
       
       // Make sure that correct input is in the typeahead
       val input = typeahead.getAttribute("value")
-      assert(input must contain("Saskato"))
+      input must contain("Saskato")
       
       typeahead.sendKeys(Keys.TAB)
       typeahead.sendKeys(Keys.ENTER)
-      assert(browser.url must contain("/find/Saskatoon"))
+      browser.url must contain("/find/Saskatoon")
     }
 
     "display choose location page when location is partially typed, right is pressed and submitted with enter" in new WithBrowser(new ChromeDriver) {
@@ -278,14 +278,14 @@ class ChromeSpecBrowserTest extends Specification {
       
       // Make sure that correct input is in the typeahead
       val input = typeahead.getAttribute("value")
-      assert(input must contain("Saskato"))
+      input must contain("Saskato")
       
       typeahead.sendKeys(Keys.ARROW_RIGHT)
       typeahead.sendKeys(Keys.ENTER)
-      assert(browser.url must contain("/find/Saskatoon"))
+      browser.url must contain("/find/Saskatoon")
     }
 
-    "display choose location page when location is partially typed, down then tab is pressed and submitted with enter" in new WithBrowser(new ChromeDriver) {
+    "display choose location page when location is partially typed, down then tab is pressed" in new WithBrowser(new ChromeDriver) {
       browser.goTo("/")
       val typeahead = browser.getDriver.findElement(By.id("municipality"))
       typeahead.click
@@ -293,15 +293,14 @@ class ChromeSpecBrowserTest extends Specification {
       
       // Make sure that correct input is in the typeahead
       val input = typeahead.getAttribute("value")
-      assert(input must contain("Saskato"))
+      input must contain("Saskato")
       
       typeahead.sendKeys(Keys.ARROW_DOWN)
       typeahead.sendKeys(Keys.TAB)
-      typeahead.sendKeys(Keys.ENTER)
-      assert(browser.url must contain("/find/Saskatoon"))
+      browser.url must contain("/find/Saskatoon")
     }
 
-    "display choose location page when location is partially typed, down then right arrow is pressed and submitted with enter" in new WithBrowser(new ChromeDriver) {
+    "display choose location page when location is partially typed, down then right arrow is pressed" in new WithBrowser(new ChromeDriver) {
       browser.goTo("/")
       val typeahead = browser.getDriver.findElement(By.id("municipality"))
       typeahead.click
@@ -309,15 +308,14 @@ class ChromeSpecBrowserTest extends Specification {
       
       // Make sure that correct input is in the typeahead
       val input = typeahead.getAttribute("value")
-      assert(input must contain("Saskato"))
+      input must contain("Saskato")
       
       typeahead.sendKeys(Keys.ARROW_DOWN)
       typeahead.sendKeys(Keys.ARROW_RIGHT)
-      typeahead.sendKeys(Keys.ENTER)
-      assert(browser.url must contain("/find/Saskatoon"))
+      browser.url must contain("/find/Saskatoon")
     }
 
-    "display choose location page when location is partially typed, down then enter arrow is pressed and submitted with enter" in new WithBrowser(new ChromeDriver) {
+    "display choose location page when location is partially typed and down then enter arrow is pressed" in new WithBrowser(new ChromeDriver) {
       browser.goTo("/")
       val typeahead = browser.getDriver.findElement(By.id("municipality"))
       typeahead.click
@@ -325,33 +323,11 @@ class ChromeSpecBrowserTest extends Specification {
       
       // Make sure that correct input is in the typeahead
       val input = typeahead.getAttribute("value")
-      assert(input must contain("Saskato"))
+      input must contain("Saskato")
       
       typeahead.sendKeys(Keys.ARROW_DOWN)
       typeahead.sendKeys(Keys.ENTER)
-      typeahead.sendKeys(Keys.ENTER)
-      assert(browser.url must contain("/find/Saskatoon"))
-    }
-
-    "display choose location page when location is partially typed, hint is clicked and submitted with button" in new WithBrowser(new ChromeDriver) {
-      browser.goTo("/")
-      val typeahead = browser.getDriver.findElement(By.id("municipality"))
-      typeahead.click
-      typeahead.sendKeys("Saskato")
-      
-      // Make sure that correct input is in the typeahead
-      val input = typeahead.getAttribute("value")
-      assert(input must contain("Saskato"))
-      
-      val action = new Actions(browser.getDriver)
-      action.moveToElement(typeahead).perform
-      val element = browser.webDriver.findElement(By.className("typeahead-display"))
-      action.moveToElement(element)
-      action.click
-      action.perform
-      val button = browser.getDriver.findElement(By.id("submitButton"))
-      button.click
-      assert(browser.url must contain("/find/Saskatoon"))
+      browser.url must contain("/find/Saskatoon")
     }
 
     "display choose location page when location is partially typed, tab is pressed and submitted with button" in new WithBrowser(new ChromeDriver) {
@@ -363,11 +339,11 @@ class ChromeSpecBrowserTest extends Specification {
       
       // Make sure that correct input is in the typeahead
       val input = typeahead.getAttribute("value")
-      assert(input must contain("Saskato"))
+      input must contain("Saskato")
       
       typeahead.sendKeys(Keys.TAB)
       button.click
-      assert(browser.url must contain("/find/Saskatoon"))
+      browser.url must contain("/find/Saskatoon")
     }
 
     "display choose location page when location is partially typed, right is pressed and submitted with button" in new WithBrowser(new ChromeDriver) {
@@ -379,62 +355,11 @@ class ChromeSpecBrowserTest extends Specification {
       
       // Make sure that correct input is in the typeahead
       val input = typeahead.getAttribute("value")
-      assert(input must contain("Saskato"))
+      input must contain("Saskato")
       
       typeahead.sendKeys(Keys.ARROW_RIGHT)
       button.click
-      assert(browser.url must contain("/find/Saskatoon"))
-    }
-
-    "display choose location page when location is partially typed, down then tab is pressed and submitted with button" in new WithBrowser(new ChromeDriver) {
-      browser.goTo("/")
-      val typeahead = browser.getDriver.findElement(By.id("municipality"))
-      val button = browser.getDriver.findElement(By.id("submitButton"))
-      typeahead.click
-      typeahead.sendKeys("Saskato")
-      
-      // Make sure that correct input is in the typeahead
-      val input = typeahead.getAttribute("value")
-      assert(input must contain("Saskato"))
-      
-      typeahead.sendKeys(Keys.ARROW_DOWN)
-      typeahead.sendKeys(Keys.TAB)
-      button.click
-      assert(browser.url must contain("/find/Saskatoon"))
-    }
-
-    "display choose location page when location is partially typed, down then right arrow is pressed and submitted with button" in new WithBrowser(new ChromeDriver) {
-      browser.goTo("/")
-      val typeahead = browser.getDriver.findElement(By.id("municipality"))
-      val button = browser.getDriver.findElement(By.id("submitButton"))
-      typeahead.click
-      typeahead.sendKeys("Saskato")
-      
-      // Make sure that correct input is in the typeahead
-      val input = typeahead.getAttribute("value")
-      assert(input must contain("Saskato"))
-      
-      typeahead.sendKeys(Keys.ARROW_DOWN)
-      typeahead.sendKeys(Keys.ARROW_RIGHT)
-      button.click
-      assert(browser.url must contain("/find/Saskatoon"))
-    }
-
-    "display choose location page when location is partially typed, down arrow then enter is pressed and submitted with button" in new WithBrowser(new ChromeDriver) {
-      browser.goTo("/")
-      val typeahead = browser.getDriver.findElement(By.id("municipality"))
-      val button = browser.getDriver.findElement(By.id("submitButton"))
-      typeahead.click
-      typeahead.sendKeys("Saskato")
-      
-      // Make sure that correct input is in the typeahead
-      val input = typeahead.getAttribute("value")
-      assert(input must contain("Saskato"))
-      
-      typeahead.sendKeys(Keys.ARROW_DOWN)
-      typeahead.sendKeys(Keys.ENTER)
-      button.click
-      assert(browser.url must contain("/find/Saskatoon"))
+      browser.url must contain("/find/Saskatoon")
     }
 
     "clear text field with clear typeahead button is pressed" in new WithBrowser(new ChromeDriver) {
@@ -446,7 +371,7 @@ class ChromeSpecBrowserTest extends Specification {
       
       // Make sure that correct input is in the typeahead
       val input = typeahead.getAttribute("value")
-      assert(input must contain("Saskatoon"))
+      input must contain("Saskatoon")
       
       button.click
       typeahead.getText must beEmpty
@@ -463,11 +388,11 @@ class ChromeSpecBrowserTest extends Specification {
       
       // Make sure that correct input is in the typeahead
       val input = typeahead.getAttribute("value")
-      assert(input must contain("TACO TIME"))
+      input must contain("TACO TIME")
       
       typeahead.sendKeys(Keys.ENTER)
-      assert(browser.url must contain("/view/"))
-      assert(browser.pageSource contains("Taco Time"))
+      browser.url must contain("/search/")
+      browser.pageSource contains("Taco Time")
       browser.title() must contain(Messages("locations.view.titleStart"))//made it to not an aerror page
     }
     
@@ -479,11 +404,11 @@ class ChromeSpecBrowserTest extends Specification {
       
       // Make sure that correct input is in the typeahead
       val input = typeahead.getAttribute("value")
-      assert(input must contain("taco time"))
+      input must contain("taco time")
       
       typeahead.sendKeys(Keys.ENTER)
-      assert(browser.url must contain("/view/"))
-      assert(browser.pageSource contains("Taco Time"))
+      browser.url must contain("/search/")
+      browser.pageSource contains("Taco Time")
       browser.title() must contain(Messages("locations.view.titleStart"))
     }
     
@@ -495,15 +420,15 @@ class ChromeSpecBrowserTest extends Specification {
       
       // Make sure that correct input is in the typeahead
       val input = typeahead.getAttribute("value")
-      assert(input must contain("Taco Time"))
+      input must contain("Taco Time")
       
       typeahead.sendKeys(Keys.ENTER)
-      assert(browser.url must contain("/view/"))
-      assert(browser.pageSource contains("Taco Time"))
+      browser.url must contain("/search/")
+      browser.pageSource contains("Taco Time")
       browser.title() must contain(Messages("locations.view.titleStart"))
     }
     
-    "display location page when location is partially typed, hint is clicked and submitted with enter" in new WithBrowser(new ChromeDriver) {
+    "display location page when location is partially typed, hint is clicked" in new WithBrowser(new ChromeDriver) {
       browser.goTo("/find/Saskatoon")
       val typeahead = browser.getDriver.findElement(By.id("location"))
       val action = new Actions(browser.getDriver)
@@ -512,16 +437,15 @@ class ChromeSpecBrowserTest extends Specification {
       
       // Make sure that correct input is in the typeahead
       val input = typeahead.getAttribute("value")
-      assert(input must contain("Subw"))    
+      input must contain("Subw")   
       
       action.moveToElement(typeahead).perform
       val element = browser.webDriver.findElement(By.tagName("li"))
       action.moveToElement(element)
       action.click
       action.perform
-      typeahead.sendKeys(Keys.ENTER)
-      assert(browser.url must contain("/view/"))
-      assert(browser.pageSource contains("Subway"))
+      browser.url must contain("/view/")
+      browser.pageSource contains("Subway")
       browser.title() must contain(Messages("locations.view.titleStart"))
     }
     
@@ -533,12 +457,12 @@ class ChromeSpecBrowserTest extends Specification {
       
       // Make sure that correct input is in the typeahead
       val input = typeahead.getAttribute("value")
-      assert(input must contain("Subw"))
+      input must contain("Subw")
       
       typeahead.sendKeys(Keys.TAB)
       typeahead.sendKeys(Keys.ENTER)
-      assert(browser.url must contain("/view/"))
-      assert(browser.pageSource contains("Subway"))
+      browser.url must contain("/search/")
+      browser.pageSource contains("Subway")
     }
 
     "display location page when location is partially typed, right is pressed and submitted with enter" in new WithBrowser(new ChromeDriver) {
@@ -549,15 +473,15 @@ class ChromeSpecBrowserTest extends Specification {
       
       // Make sure that correct input is in the typeahead
       val input = typeahead.getAttribute("value")
-      assert(input must contain("Subw"))
+      input must contain("Subw")
       
       typeahead.sendKeys(Keys.ARROW_RIGHT)
       typeahead.sendKeys(Keys.ENTER)
-      assert(browser.url must contain("/view/"))
-      assert(browser.pageSource contains("Subway"))
+      browser.url must contain("/search/")
+      browser.pageSource contains("Subway")
     }
 
-    "display location page when location is partially typed, down then tab is pressed and submitted with enter" in new WithBrowser(new ChromeDriver) {
+    "display location page when location is partially typed, down then tab is pressed" in new WithBrowser(new ChromeDriver) {
       browser.goTo("/find/Saskatoon")
       val typeahead = browser.getDriver.findElement(By.id("location"))
       typeahead.click
@@ -565,16 +489,15 @@ class ChromeSpecBrowserTest extends Specification {
       
       // Make sure that correct input is in the typeahead
       val input = typeahead.getAttribute("value")
-      assert(input must contain("Subw"))
+      input must contain("Subw")
       
       typeahead.sendKeys(Keys.ARROW_DOWN)
       typeahead.sendKeys(Keys.TAB)
-      typeahead.sendKeys(Keys.ENTER)
-      assert(browser.url must contain("/view/"))
-      assert(browser.pageSource contains("Subway"))
+      browser.url must contain("/view/")
+      browser.pageSource contains("Subway")
     }
 
-    "display location page when location is partially typed, down then right arrow is pressed and submitted with enter" in new WithBrowser(new ChromeDriver) {
+    "display location page when location is partially typed, down then right arrow is pressed" in new WithBrowser(new ChromeDriver) {
       browser.goTo("/find/Saskatoon")
       val typeahead = browser.getDriver.findElement(By.id("location"))
       typeahead.click
@@ -582,16 +505,15 @@ class ChromeSpecBrowserTest extends Specification {
       
       // Make sure that correct input is in the typeahead
       val input = typeahead.getAttribute("value")
-      assert(input must contain("Subw"))
+      input must contain("Subw")
       
       typeahead.sendKeys(Keys.ARROW_DOWN)
       typeahead.sendKeys(Keys.ARROW_RIGHT)
-      typeahead.sendKeys(Keys.ENTER)
-      assert(browser.url must contain("/view/"))
-      assert(browser.pageSource contains("Subway"))
+      browser.url must contain("/view/")
+      browser.pageSource contains("Subway")
     }
 
-    "display location page when location is partially typed, down then enter arrow is pressed and submitted with enter" in new WithBrowser(new ChromeDriver) {
+    "display location page when location is partially typed, down then enter arrow is pressed" in new WithBrowser(new ChromeDriver) {
       browser.goTo("/find/Saskatoon")
       val typeahead = browser.getDriver.findElement(By.id("location"))
       typeahead.click
@@ -599,36 +521,14 @@ class ChromeSpecBrowserTest extends Specification {
       
       // Make sure that correct input is in the typeahead
       val input = typeahead.getAttribute("value")
-      assert(input must contain("Subw"))
+      input must contain("Subw")
       
       typeahead.sendKeys(Keys.ARROW_DOWN)
       typeahead.sendKeys(Keys.ENTER)
-      typeahead.sendKeys(Keys.ENTER)
-      assert(browser.url must contain("/view/"))
-      assert(browser.pageSource contains("Subway"))
+      browser.url must contain("/view/")
+      browser.pageSource contains("Subway")
     }
 
-    "display location page when location is partially typed, hint is clicked and submitted with button" in new WithBrowser(new ChromeDriver) {
-      browser.goTo("/find/Saskatoon")
-      val typeahead = browser.getDriver.findElement(By.id("location"))
-      typeahead.click
-      typeahead.sendKeys("Subw")
-      
-      // Make sure that correct input is in the typeahead
-      val input = typeahead.getAttribute("value")
-      assert(input must contain("Subw"))
-      
-      val action = new Actions(browser.getDriver)
-      action.moveToElement(typeahead).perform
-      val element = browser.webDriver.findElement(By.tagName("li"))
-      action.moveToElement(element)
-      action.click
-      action.perform
-      val button = browser.getDriver.findElement(By.className("typeahead-button"))
-      button.click
-      assert(browser.url must contain("/view/"))
-      assert(browser.pageSource contains("Subway"))
-    }
 
     "display location page when location is partially typed, tab is pressed and submitted with button" in new WithBrowser(new ChromeDriver) {
       browser.goTo("/find/Saskatoon")
@@ -639,12 +539,12 @@ class ChromeSpecBrowserTest extends Specification {
       
       // Make sure that correct input is in the typeahead
       val input = typeahead.getAttribute("value")
-      assert(input must contain("Subw"))
+      input must contain("Subw")
       
       typeahead.sendKeys(Keys.TAB)
       button.click
-      assert(browser.url must contain("/view/"))
-      assert(browser.pageSource contains("Subway"))
+      browser.url must contain("/search/")
+      browser.pageSource contains("Subway")
     }
 
     "display location page when location is partially typed, right is pressed and submitted with button" in new WithBrowser(new ChromeDriver) {
@@ -656,68 +556,14 @@ class ChromeSpecBrowserTest extends Specification {
       
       // Make sure that correct input is in the typeahead
       val input = typeahead.getAttribute("value")
-      assert(input must contain("Subw"))
+      input must contain("Subw")
       
       typeahead.sendKeys(Keys.ARROW_RIGHT)
       button.click
-      assert(browser.url must contain("/view/"))
-      assert(browser.pageSource contains("Subway"))
+      browser.url must contain("/search/")
+      browser.pageSource contains("Subway")
     }
 
-    "display location page when location is partially typed, down then tab is pressed and submitted with button" in new WithBrowser(new ChromeDriver) {
-      browser.goTo("/find/Saskatoon")
-      val typeahead = browser.getDriver.findElement(By.id("location"))
-      val button = browser.getDriver.findElement(By.className("typeahead-button"))
-      typeahead.click
-      typeahead.sendKeys("Subw")
-      
-      // Make sure that correct input is in the typeahead
-      val input = typeahead.getAttribute("value")
-      assert(input must contain("Subw"))
-      
-      typeahead.sendKeys(Keys.ARROW_DOWN)
-      typeahead.sendKeys(Keys.TAB)
-      button.click
-      assert(browser.url must contain("/view/"))
-      assert(browser.pageSource contains("Subway"))
-    }
-
-    "display location page when location is partially typed, down then right arrow is pressed and submitted with button" in new WithBrowser(new ChromeDriver) {
-      browser.goTo("/find/Saskatoon")
-      val typeahead = browser.getDriver.findElement(By.id("location"))
-      val button = browser.getDriver.findElement(By.className("typeahead-button"))
-      typeahead.click
-      typeahead.sendKeys("Subw")
-      
-      // Make sure that correct input is in the typeahead
-      val input = typeahead.getAttribute("value")
-      assert(input must contain("Subw"))
-      
-      typeahead.sendKeys(Keys.ARROW_DOWN)
-      typeahead.sendKeys(Keys.ARROW_RIGHT)
-      button.click
-      assert(browser.url must contain("/view/"))
-      assert(browser.pageSource contains("Subway"))
-    }
-
-    "display location page when location is partially typed, down arrow then enter is pressed and submitted with button" in new WithBrowser(new ChromeDriver) {
-      browser.goTo("/find/Saskatoon")
-      val typeahead = browser.getDriver.findElement(By.id("location"))
-      val button = browser.getDriver.findElement(By.className("typeahead-button"))
-      typeahead.click
-      typeahead.sendKeys("Subw")
-      
-      // Make sure that correct input is in the typeahead
-      val input = typeahead.getAttribute("value")
-      assert(input must contain("Subw"))
-      
-      typeahead.sendKeys(Keys.ARROW_DOWN)
-      typeahead.sendKeys(Keys.ENTER)
-      button.click
-      assert(browser.url must contain("/view/"))
-      assert(browser.pageSource contains("Subway"))
-    }
-    
     
     "clear text field with clear typeahead button is pressed" in new WithBrowser(new ChromeDriver) {
        browser.goTo("/find/Saskatoon")
@@ -728,7 +574,7 @@ class ChromeSpecBrowserTest extends Specification {
        
        // Make sure that correct input is in the typeahead
        val input = typeahead.getAttribute("value")
-       assert(input must contain("Subway"))
+       input must contain("Subway")
        
        button.click
        typeahead.getText must beEmpty
