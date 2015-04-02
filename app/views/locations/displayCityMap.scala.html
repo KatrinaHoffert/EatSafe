@@ -14,6 +14,8 @@
 
 @scripts = {
   <script src="https://maps.googleapis.com/maps/api/js?v=3.exp&signed_in=true"></script>
+  <script src="@controllers.routes.Assets.at("javascripts/markerclusterer.js")"></script>
+  <script src="@controllers.routes.Assets.at("javascripts/oms.min.js")"></script>
   <script src="@controllers.routes.Assets.at("javascripts/spin.min.js")"></script>
   <script>
     /**
@@ -45,6 +47,7 @@
      *  on the map.
      */
     var markers = [];
+    var markerCluster;
 
     function sizeMapCanvas() {
       // Set the map container size to fill the remaining space
@@ -373,8 +376,10 @@
 
           markers.push(marker);
       }
-
-      setAllMap(map);
+      minClusterZoom = 11;
+      markerCluster = new MarkerClusterer(map, markers);
+      markerCluster.setMaxZoom(minClusterZoom);
+      //setAllMap(map);
     }
 
     /** Sets all markers in the array onto the map. */
