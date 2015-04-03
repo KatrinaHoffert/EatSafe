@@ -69,8 +69,27 @@ class IESpecBrowserTest extends Specification {
     Thread.sleep(100)
     browser.pageSource must contain (Messages("about.title"))
     
-    //TODO multimap page
-   
+        
+      //400 error page
+    browser.goTo("/view/99999999999999999")
+    action.moveToElement(browser.webDriver.findElement(By.linkText(Messages("footer.aboutLink")))).perform
+    action.click.perform
+    Thread.sleep(100)
+    browser.pageSource must contain (Messages("about.title"))
+    
+    //404 error page
+    browser.goTo("/dfgjnsddjdk")
+    action.moveToElement(browser.webDriver.findElement(By.linkText(Messages("footer.aboutLink")))).perform
+    action.click.perform
+    Thread.sleep(100)
+    browser.pageSource must contain (Messages("about.title"))
+    
+    //search page
+    browser.goTo("/search/saskatoon?q=subway")
+    action.moveToElement(browser.webDriver.findElement(By.linkText(Messages("footer.aboutLink")))).perform
+    action.click.perform
+    Thread.sleep(100)
+    browser.pageSource must contain (Messages("about.title"))
   }  
   
   "All pages should have link to 'Creative Commons' Page" in new WithBrowser(new InternetExplorerDriver) {
@@ -98,7 +117,17 @@ class IESpecBrowserTest extends Specification {
     browser.goTo("/find/daDerpDaDerp")
     action.moveToElement(browser.webDriver.findElement(By.linkText("CC-BY-ND"))).perform
      
-   //TODO multimap page
+    //400 error page
+    browser.goTo("/view/99999999999999999")
+    action.moveToElement(browser.webDriver.findElement(By.linkText("CC-BY-ND"))).perform
+    
+    //404 error page
+    browser.goTo("/dfgjnsddjdk")
+    action.moveToElement(browser.webDriver.findElement(By.linkText("CC-BY-ND"))).perform
+    
+        //search results page
+    browser.goTo("/search/saskatoon?q=subway")
+    action.moveToElement(browser.webDriver.findElement(By.linkText("CC-BY-ND"))).perform
   }  
   
   
@@ -160,8 +189,34 @@ class IESpecBrowserTest extends Specification {
     action.click.perform
     Thread.sleep(100)
     browser.url must contain ("/")
-    //TODO multimap page
-     
+    
+    //400 error page
+    browser.goTo("/view/99999999999999999")
+    action.moveToElement(browser.webDriver.findElement(By.linkText(Messages("general.applicationName")))).perform
+    action.click.perform
+    Thread.sleep(100)
+    browser.url must contain ("/")
+    
+    //404 error page
+    browser.goTo("/dfgjnsddjdk")
+    action.moveToElement(browser.webDriver.findElement(By.linkText(Messages("general.applicationName")))).perform
+    action.click.perform
+    Thread.sleep(100)
+    browser.url must contain ("/")
+    
+    //search page
+    browser.goTo("/search/saskatoon?q=subway")
+    action.moveToElement(browser.webDriver.findElement(By.linkText(Messages("general.applicationName")))).perform
+    action.click.perform
+    Thread.sleep(100)
+    browser.url must contain ("/")
+    
+    // multi-map page
+    browser.goTo("/citymap?city=Saskatoon")
+    action.moveToElement(browser.webDriver.findElement(By.linkText(Messages("general.applicationName")))).perform
+    action.click.perform
+    Thread.sleep(100)
+    browser.url must contain ("/")
   }
     
 
