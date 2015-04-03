@@ -821,7 +821,26 @@
     "replacement": {
       "name": "7 Eleven"
     }
+  },
+  {
+    "name": "Boundary Lodge Kitchen",
+    "city": "Edmonton",
+    "address": "3790 - 98th St Nw",
+    "replacement": {
+      "city": "Estevan",
+      "address": "701 Souris Avenue"
+    }
+  },
+  {
+    "name": "Eagle Creek Jamboree Concession",
+    "city": "Eagle Creek Regional Park",
+    "address": "Eagle Creek",
+    "replacement": {
+      "city": "Asquith",
+      "address": "Eagle Creek Regional Park"
+    }
   }  
+  
   
   
 ]
