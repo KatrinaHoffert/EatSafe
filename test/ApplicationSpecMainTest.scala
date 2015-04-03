@@ -226,6 +226,15 @@ class ApplicationSpecMainTest extends Specification {
        button.click
        typeahead.getText must beEmpty
     }
+    
+    "display multi-map page when button is clicked" in new WithBrowser {
+      browser.goTo("/")
+      browser.url must equalTo("/")
+      
+      browser.webDriver.findElement(By.id("mapForCity")).click
+      browser.url must contain("/citymap")
+      browser.webDriver.findElement(By.id("map-canvas"))
+    }
   } 
 
   "select location page" should {
@@ -283,6 +292,15 @@ class ApplicationSpecMainTest extends Specification {
        typeahead.getText must beEmpty
     }
     
+    "display multi-map page when button is clicked" in new WithBrowser {
+      browser.goTo("/find/Saskatoon")
+      browser.url must equalTo("/find/Saskatoon")
+      
+      browser.webDriver.findElement(By.id("mapForCity")).click
+      browser.url must contain("/citymap")
+      browser.webDriver.findElement(By.id("map-canvas"))
+    }
+    
   }
 
   "display location page" should {
@@ -320,6 +338,19 @@ class ApplicationSpecMainTest extends Specification {
     }
   }
   
+  "multi-map page" should {
+    "contain a map, sidebar and buttons" in new WithBrowser {
+      browser.goTo("/citymap?city=Saskatoon")
+       
+      browser.url must contain("/citymap")
+      browser.webDriver.findElement(By.id("map-canvas"))
+      browser.webDriver.findElement(By.id("menu-toggle"))
+      browser.webDriver.findElement(By.id("moveToMe"))
+      browser.webDriver.findElement(By.id("sidebar-close"))
+      browser.webDriver.findElement(By.id("nearbyList"))
+    }
+  }
+  
   "All pages should be able to access 'About' Page" in new WithBrowser {
    //find city
     browser.goTo("/")
@@ -346,18 +377,32 @@ class ApplicationSpecMainTest extends Specification {
     action.click.perform
     browser.pageSource must contain (Messages("about.title"))
     
+    //400 error page
+    browser.goTo("/view/99999999999999999")
+   action.moveToElement(browser.webDriver.findElement(By.linkText(Messages("footer.aboutLink")))).perform
+    action.click.perform
+    browser.pageSource must contain (Messages("about.title"))
+    
+    //404 error page
+    browser.goTo("/dfgjnsddjdk")
+    action.moveToElement(browser.webDriver.findElement(By.linkText(Messages("footer.aboutLink")))).perform
+    action.click.perform
+    browser.pageSource must contain (Messages("about.title"))
+    
+    
     //find city error page
     browser.goTo("/find/daDerpDaDerp")
     action.moveToElement(browser.webDriver.findElement(By.linkText(Messages("footer.aboutLink")))).perform
     action.click.perform
     browser.pageSource must contain (Messages("about.title"))
     
+    
+    //search page
     browser.goTo("/search/saskatoon?q=subway")
     action.moveToElement(browser.webDriver.findElement(By.linkText(Messages("footer.aboutLink")))).perform
     action.click.perform
     browser.pageSource must contain (Messages("about.title"))
     
-    //TODO multimap page
     
   }  
   
@@ -386,10 +431,17 @@ class ApplicationSpecMainTest extends Specification {
     browser.goTo("/find/daDerpDaDerp")
     action.moveToElement(browser.webDriver.findElement(By.linkText("CC-BY-ND"))).perform
     
+    //400 error page
+    browser.goTo("/view/99999999999999999")
+    action.moveToElement(browser.webDriver.findElement(By.linkText("CC-BY-ND"))).perform
+    
+    //404 error page
+    browser.goTo("/dfgjnsddjdk")
+    action.moveToElement(browser.webDriver.findElement(By.linkText("CC-BY-ND"))).perform
+    
         //search results page
     browser.goTo("/search/saskatoon?q=subway")
     action.moveToElement(browser.webDriver.findElement(By.linkText("CC-BY-ND"))).perform
-   //TODO multimap page
   }  
   
   
@@ -450,6 +502,23 @@ class ApplicationSpecMainTest extends Specification {
     action.click.perform
     browser.url must contain ("/")
      
+    //400 error page
+    browser.goTo("/view/99999999999999999")
+    action.moveToElement(browser.webDriver.findElement(By.linkText(Messages("general.applicationName")))).perform
+    action.click.perform
+    browser.url must contain ("/")
+    
+    //404 error page
+    browser.goTo("/dfgjnsddjdk")
+    action.moveToElement(browser.webDriver.findElement(By.linkText(Messages("general.applicationName")))).perform
+    action.click.perform
+    browser.url must contain ("/")
+    
+    // multi-map page
+    browser.goTo("/citymap?city=Saskatoon")
+    action.moveToElement(browser.webDriver.findElement(By.linkText(Messages("general.applicationName")))).perform
+    action.click.perform
+    browser.url must contain ("/")
   }
 
 }
