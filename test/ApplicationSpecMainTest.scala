@@ -15,6 +15,7 @@ import org.openqa.selenium.support.ui.Select
 import util.ActiveDatabase
 
 import play.api.i18n.Messages
+import play.api.i18n.Lang
 
 /**
  * Add your spec here.
@@ -66,10 +67,10 @@ class ApplicationSpecMainTest extends Specification {
       
       // Select different language
       val selection = new Select(browser.webDriver.findElement(By.id("languageSelect")))
-      selection.selectByValue("eo")
+      selection.selectByValue("zh")
       
       // Make sure language has been changed
-      browser.webDriver.findElement(By.className("smallHeading")).getText must contain("EatSafe Saskaĉevano")
+      browser.webDriver.findElement(By.className("smallHeading")).getText must contain(Messages("general.applicationName")(Lang("zh")))
       
       // Type in a city
       val typeahead = browser.getDriver.findElement(By.id("municipality"))
@@ -83,7 +84,7 @@ class ApplicationSpecMainTest extends Specification {
       
       // Make sure the page is also in the selected language
       browser.url must contain("/find/saskatoon")
-      browser.webDriver.findElement(By.className("smallHeading")).getText must contain("EatSafe Saskaĉevano")
+      browser.webDriver.findElement(By.className("smallHeading")).getText must contain(Messages("general.applicationName")(Lang("zh")))
     }
   }
   
@@ -105,7 +106,7 @@ class ApplicationSpecMainTest extends Specification {
       browser.goTo("/")
       val selection = new Select(browser.webDriver.findElement(By.id("languageSelect")))
       selection.selectByValue("eo")
-      browser.webDriver.findElement(By.className("smallHeading")).getText must contain("EatSafe Saskaĉevano")
+      browser.webDriver.findElement(By.className("smallHeading")).getText must contain(Messages("general.applicationName")(Lang("zh")))
     }
   }
   
@@ -371,15 +372,9 @@ class ApplicationSpecMainTest extends Specification {
     action.click.perform
     browser.pageSource must contain (Messages("about.title"))   
     
-    //500 error page
+    //400 error page
     browser.goTo("/view/1000000")
     action.moveToElement(browser.webDriver.findElement(By.linkText(Messages("footer.aboutLink")))).perform
-    action.click.perform
-    browser.pageSource must contain (Messages("about.title"))
-    
-    //400 error page
-    browser.goTo("/view/99999999999999999")
-   action.moveToElement(browser.webDriver.findElement(By.linkText(Messages("footer.aboutLink")))).perform
     action.click.perform
     browser.pageSource must contain (Messages("about.title"))
     
@@ -422,17 +417,13 @@ class ApplicationSpecMainTest extends Specification {
     action.moveToElement(browser.webDriver.findElement(By.linkText("CC-BY-ND"))).perform
         
     
-    //500 error page
+    //400 error page
     browser.goTo("/view/1000000")
     action.moveToElement(browser.webDriver.findElement(By.linkText("CC-BY-ND"))).perform
      
     
     //find city error page
     browser.goTo("/find/daDerpDaDerp")
-    action.moveToElement(browser.webDriver.findElement(By.linkText("CC-BY-ND"))).perform
-    
-    //400 error page
-    browser.goTo("/view/99999999999999999")
     action.moveToElement(browser.webDriver.findElement(By.linkText("CC-BY-ND"))).perform
     
     //404 error page
@@ -503,7 +494,7 @@ class ApplicationSpecMainTest extends Specification {
     browser.url must contain ("/")
      
     //400 error page
-    browser.goTo("/view/99999999999999999")
+    browser.goTo("/view/999999")
     action.moveToElement(browser.webDriver.findElement(By.linkText(Messages("general.applicationName")))).perform
     action.click.perform
     browser.url must contain ("/")
