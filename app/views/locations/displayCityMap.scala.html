@@ -331,11 +331,7 @@
     function showMarkers(){
       deleteMarkers();
 
-      console.log(map.getBounds().getNorthEast().k);
-      console.log(map.getBounds().getNorthEast().D);
-      console.log(map.getBounds().getSouthWest().k);
-      console.log(map.getBounds().getSouthWest().D);
-
+      
       //the latlong values for Northwest and South east respectively
       var NELat = map.getBounds().getNorthEast().k;
       var NELng = map.getBounds().getNorthEast().D;
@@ -343,38 +339,64 @@
       var SWLng = map.getBounds().getSouthWest().D;
 
       var infowindow = new google.maps.InfoWindow();
-
+      var concatContentString = "";
+      var makeMarker = false;
+      var passMessage = false;
       for(var i = 0; i < locations.length; ++i) {
         var cords = new google.maps.LatLng(locations[i].latitude, locations[i].longitude);
+            //create info window contents first
+        var url = jsRoutes.controllers.LocationController.showLocation(locations[i].id).url;
+        var infoWindowContents = "<div id='infoWindow'>"+
+                 "<h3>"+ locations[i].name + "</h3>";
 
+              
+            if(locations[i].address != null) {
+              infoWindowContents += locations[i].address + "<br />";
+              infoWindowContents += "<a href='" + url + "'>@Messages("maps.multiMap.infoButton")</a></div>";
+            }
+              //set colour or pass string to next marker.
+            concatContentString += infoWindowContents;
+            if(i+1 >= locations.length){
+              makeMarker = true;
+            }else{
+                if(locations[i].address == locations[i+1].address){
+                 concatContentString += " <br>";
+                 makeMarker = false;
+                 //next marker is blue
+                 passMessage = true;
+                }
+                else{
+                  makeMarker = true;            
+                }
+            }
+            if(makeMarker){
+              if(passMessage){
+                color = "0099FF";
+              }else{
+                // Gets rid of the '#'
+                color = locations[i].ratingColor.slice(1);
+              }
+
+              var marker = new google.maps.Marker({
+                position: cords,
+                title:     locations[i].name,
+                icon:     "http://chart.apis.google.com/chart?chst=d_map_pin_letter&chld=•|" + color,
+                contentString: concatContentString,
+                map: map
+              });
+
+              google.maps.event.addListener(marker, 'click', function () {
+                infowindow.setContent(this.contentString);
+                infowindow.open(map, this);
+              });
+
+              markers.push(marker);
+
+              concatContentString = "";
+              passMessage = false;
         
-          // Gets rid of the '#'
-          var color = locations[i].ratingColor.slice(1);
-          var url = jsRoutes.controllers.LocationController.showLocation(locations[i].id).url;
-          var infoWindowContents = "<div id='infoWindow'>"+
-             "<h3>"+ locations[i].name + "</h3>";
-
-          // It's possible that we could have something with manually set coordinates and no
-          // real address in the future
-          if(locations[i].address != null) infoWindowContents += locations[i].address + "<br />";
-          infoWindowContents += "<a href='" + url + "'>@Messages("maps.multiMap.infoButton")</a></div>";
-
-          var marker = new google.maps.Marker({
-            position: cords,
-            title:     locations[i].name,
-            id:       locations[i].id,
-            colour:   locations[i].ratingColor,
-            icon:     "http://chart.apis.google.com/chart?chst=d_map_pin_letter&chld=•|" + color,
-            contentString: infoWindowContents,
-            map: map
-          });
-
-          google.maps.event.addListener(marker, 'click', function () {
-            infowindow.setContent(this.contentString);
-            infowindow.open(map, this);
-          });
-
-          markers.push(marker);
+            }
+        
       }
 
       //Marker Cluster Options
