@@ -154,8 +154,8 @@ class UserEndToEndSpecMainTest extends Specification {
       browser.pageSource must contain(Messages("errors.error500Title")(Lang("zh")))
       
       // Try another one
-      browser.goTo("/view/999999")
-      browser.url must equalTo("/view/999999")
+      browser.goTo("/view/999999999999999")
+      browser.url must equalTo("/view/99999999999999")
       browser.pageSource must contain(Messages("errors.error400Title")(Lang("zh")))
       
       // Try one last thing
