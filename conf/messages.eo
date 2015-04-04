@@ -7,12 +7,20 @@ locations.selectCity.prompt=Kie estas vi?
 locations.selectCity.noInput=Vi devas eniri io.
 locations.selectCity.badInput=Enigo estas nevalida.
 locations.selectCity.locateMeTooltip=Ĉi tiu aŭtomate kompletigus vian urbon.
+locations.selectCity.searchUnknownCity=???
+locations.selectCity.searchPlaceholder=???
+locations.selectCity.badGeolocate=???
+locations.selectCity.linkToMap=???
 
 # Select location page
 locations.selectLocation.title=Elektu restoracio
 locations.selectLocation.prompt=Kie vi deziras manĝi?
 locations.selectLocation.noInput=Vi devas eniri io.
 locations.selectLocation.badInput=Enigo estas nevalida.
+locations.selectLocation.searchingIn=???
+locations.selectLocation.unknownCity=???
+locations.selectLocation.searchPlaceholder=???
+locations.selectLocation.linkToMap=???
 
 # Display locations page
 locations.view.titleStart=EatSafe
@@ -23,23 +31,68 @@ locations.view.pastInspectionsHide=[Kaŝi]
 locations.view.noRecentInspections=Tiu restoracio havas ne novaj inspektoj.
 locations.view.reinspectionPriority=Inspekton prioritato
 locations.view.previousInspectionType=Tipo de la lasta inspekto.
+locations.view.type.Follow-up=???
+locations.view.type.Special=???
+locations.view.type.Complaint=???
+locations.view.type.GeneralInspection=???
+locations.view.type.Routine=???
 locations.view.rha=Regiona sano aŭtoritato
 locations.view.unknownLocation=Nekonata restoracio
+locations.view.mostRecent=???
+locations.view.ratingLabel=???
+locations.view.rating_good=???
+locations.view.rating_fair=???
+locations.view.rating_poor=???
+locations.view.rating_unknown=???
+locations.view.moreInfoViolation=???
 
 # Display address page
 maps.displayAddress.title=Karto: {0}, {1}
 
+# Multi-map
+maps.multiMap.title=???
+maps.multiMap.nearbyLocationsHeading=???
+maps.multiMap.nearbyLocationsToggle=???
+maps.multiMap.kmAway=???
+maps.multiMap.sidebarLoading=???
+maps.multiMap.locationNotSupported=???
+maps.multiMap.locationFailed=???
+maps.multiMap.locationInaccurate=???
+maps.multiMap.findMe=???
+maps.multiMap.moveToMeInaccurate=???
+maps.multiMap.moveToMeFailed=???
+maps.multiMap.moveToMeUnsupported=???
+maps.multiMap.infoButton=???
+
 # About page (IN PROGRESS)
 about.title=Pri EatSafe Saskaĉevano
-
+about.headingWho=???
+about.paragraphWho=???
+about.creditsList=???
+about.headingWhat=???
+about.paragraphWhat1=???
+about.paragraphWhat2=???
+about.headingHow=???
+about.paragraphHow1=???
+about.paragraphHow2=???
+about.paragraphHow3=???
+about.paragraphHow4=???
 about.headingTechnology=Teknologia kunmeto de EatSafe
 about.paragraphTechnology=La listo de teknologio ni estis uzisti en la EatSafe kodon:
+about.customLicense=???
+about.modifiedCC=???
 
 # Footer stuff
 footer.aboutLink=Informdosiero
 footer.copyright=Kopirajto de Off By One 2015
 
 # Error pages
+errors.error400Title=???
+errors.error400Desc=???
+errors.error400Text=???
+errors.error404Title=???
+errors.error404Desc=???
+errors.error404Text=???
 errors.error500Title=Eraro  500
 errors.error500Desc=Servila eraro  
 errors.error500Text=Interna eraro okazis. Ĉi tiu staka puroprotokolo devus klarigi ĝin.
@@ -49,3 +102,115 @@ errors.emptyCityDesc=Aj!
 errors.emptyCityText="{0}" havas ne restoraciojn. Ĉu la URL korekta?
 errors.emptyCityTryAgain=Provu alian serĉon?
 errors.unknownAddress=Nekonata adreso
+
+# Parser messages
+parser.name.1=???
+parser.desc.1=???
+parser.name.2=???
+parser.desc.2=???
+parser.name.3=???
+parser.desc.3=???
+parser.name.4=???
+parser.desc.4=???
+parser.name.5=???
+parser.desc.5=???
+parser.name.6=???
+parser.desc.6=???
+parser.name.7=???
+parser.desc.7=???
+parser.name.8=???
+parser.desc.8=???
+parser.name.9=???
+parser.desc.9=???
+parser.name.10=???
+parser.desc.10=???
+parser.name.11=???
+parser.desc.11=???
+parser.name.12=???
+parser.desc.12=???
+parser.name.13=???
+parser.desc.13=???
+parser.name.14=???
+parser.desc.14=???
+parser.name.15=???
+parser.desc.15=???
+parser.name.16=???
+parser.desc.16=???
+parser.priority.general=???
+parser.priority.critical=???
+
+# More info about violations
+violations.goBack=???
+
+# Search results
+locations.search.title=???
+locations.search.heading=???
+locations.search.backButton=???
+locations.search.tableLengthMenu=???
+locations.search.numResults=???
+locations.search.noResults=???
+locations.search.rankSymbol=???
+locations.search.name=???
+locations.search.address=???
+locations.search.weakSearch1=???
+locations.search.weakSearch2=???
+
+# Admin interface
+admin.login.title=???
+admin.login.username=???
+admin.login.password=???
+admin.login.submit=???
+admin.login.badPassword=???
+admin.login.loggedOut=???
+admin.login.heading=???
+admin.login.desc=???
+
+admin.list.title=???
+admin.list.name=???
+admin.list.address=???
+admin.list.city=???
+admin.list.tableLengthMenu=???
+admin.list.numResults=???
+admin.list.noResults=???
+admin.list.filteredFrom=???
+admin.list.addSuccess=???
+admin.list.addFailure=???
+admin.list.editSuccess=???
+admin.list.editFailure=???
+admin.list.deleteSuccess=???
+admin.list.deleteFailure=???
+admin.list.viewFailure=???
+admin.list.addLocation=???
+admin.list.logout=???
+admin.list.confirmDelete=???
+
+admin.add.title=???
+admin.add.name=???
+admin.add.address=???
+admin.add.postalCode=???
+admin.add.city=???
+admin.add.rha=???
+admin.add.inspections=???
+admin.add.inspectionDate=???
+admin.add.inspectionType=???
+admin.add.reinspectionPriority=???
+admin.add.violations=???
+admin.add.removeInspection=???
+admin.add.submit=???
+admin.add.backToList=???
+admin.add.globalErrors=???
+admin.add.lowPriority=???
+admin.add.moderatePriority=???
+admin.add.highPriority=???
+admin.add.violationsHelp=???
+
+admin.edit.title=???
+admin.edit.submit=???
+
+admin.validation.invalidPostalCode=???
+admin.validation.invalidRha=???
+admin.validation.invalidInspectionType=???
+admin.validation.invalidReinspectionPriority=???
+admin.validation.invalidViolationIds=???
+admin.validation.badNumberOfInspections=???
+
