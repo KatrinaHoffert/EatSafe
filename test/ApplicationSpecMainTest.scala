@@ -92,7 +92,7 @@ class ApplicationSpecMainTest extends Specification {
     "show about page when link clicked" in new WithBrowser {
       browser.goTo("/")
       val link = browser.webDriver.findElement(By.linkText(Messages("footer.aboutLink")))
-      link.click()
+      link.click
       browser.url must contain("/about")
     }
     
@@ -105,7 +105,7 @@ class ApplicationSpecMainTest extends Specification {
     "able to select language from the drop down list" in new WithBrowser {
       browser.goTo("/")
       val selection = new Select(browser.webDriver.findElement(By.id("languageSelect")))
-      selection.selectByValue("eo")
+      selection.selectByValue("zh")
       browser.webDriver.findElement(By.className("smallHeading")).getText must contain(Messages("general.applicationName")(Lang("zh")))
     }
   }
