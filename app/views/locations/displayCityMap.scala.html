@@ -67,12 +67,26 @@
     /** Initializes the map. */
     function initialize() {
       geocoder = new google.maps.Geocoder();
+      var myStyles =[
+        {
+          featureType: "poi",
+          elementType: "labels",
+          stylers: [
+                { visibility: "off" }
+          ]
+        }
+      ];
+
+      var myOptions = {
+          mapTypeId: google.maps.MapTypeId.ROADMAP,
+          zoom: DEFAULT_ZOOM,
+          center: latlng,
+          styles: myStyles 
+      };
+
       // Default center is Saskatoon
       var latlng = new google.maps.LatLng(52.1333, -106.6833);
-      map = new google.maps.Map(document.getElementById("map-canvas"), {
-        zoom: DEFAULT_ZOOM,
-        center: latlng
-      });
+      map = new google.maps.Map(document.getElementById("map-canvas"),myOptions);
       positionOverCity();
       google.maps.event.addListenerOnce(map, 'idle', showMarkers);
     }
@@ -330,13 +344,6 @@
      */
     function showMarkers(){
       deleteMarkers();
-
-      
-      //the latlong values for Northwest and South east respectively
-      var NELat = map.getBounds().getNorthEast().k;
-      var NELng = map.getBounds().getNorthEast().D;
-      var SWLat = map.getBounds().getSouthWest().k;
-      var SWLng = map.getBounds().getSouthWest().D;
 
       var infowindow = new google.maps.InfoWindow();
       var concatContentString = "";
