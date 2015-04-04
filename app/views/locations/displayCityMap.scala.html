@@ -348,25 +348,27 @@
         var url = jsRoutes.controllers.LocationController.showLocation(locations[i].id).url;
         var infoWindowContents = "<div id='infoWindow'>"+
                  "<h3>"+ locations[i].name + "</h3>";
-
-              
             if(locations[i].address != null) {
               infoWindowContents += locations[i].address + "<br />";
               infoWindowContents += "<a href='" + url + "'>@Messages("maps.multiMap.infoButton")</a></div>";
             }
-              //set colour or pass string to next marker.
             concatContentString += infoWindowContents;
             if(i+1 >= locations.length){
+              //case when at the end of the array. Don't refrence out of bounds of the array
+              //and then simply create the last marker
               makeMarker = true;
             }else{
                 if(locations[i].address == locations[i+1].address){
+                  //content string is being passed
+                  //add a line break between concatonated content string
+                  //next marker created will be blue
                  concatContentString += " <br>";
                  makeMarker = false;
-                 //next marker is blue
                  passMessage = true;
                 }
                 else{
-                  makeMarker = true;            
+                  //normal path for marker creation
+                  makeMarker = true;
                 }
             }
             if(makeMarker){
@@ -384,21 +386,15 @@
                 contentString: concatContentString,
                 map: map
               });
-
               google.maps.event.addListener(marker, 'click', function () {
                 infowindow.setContent(this.contentString);
                 infowindow.open(map, this);
               });
-
               markers.push(marker);
-
               concatContentString = "";
               passMessage = false;
-        
             }
-        
       }
-
       //Marker Cluster Options
       var clusterStyles = [
         {
@@ -420,26 +416,22 @@
           width: 50
         }
       ];
-
       var mcOptions = {
         gridSize: 50,
         styles: clusterStyles,
         maxZoom: 11
       };
-
       minClusterZoom = 11;
       markerCluster = new MarkerClusterer(map, markers,mcOptions);
       markerCluster.setMaxZoom(minClusterZoom);
       //setAllMap(map);
     }
-
     /** Sets all markers in the array onto the map. */
     function setAllMap(map) {
       for (var i = 0; i < markers.length; i++) {
         markers[i].setMap(map);
       }
     }
-
     /** Clears the markers from the map and the marker array. */
     function deleteMarkers() {
       setAllMap(null);
@@ -447,7 +439,6 @@
     }
   </script>
 }
-
 @mainBody(title = Messages("maps.multiMap.title"), moreScripts = scripts) {
   <link rel="stylesheet" href="@controllers.routes.Assets.at("stylesheets/simple-sidebar.css")" />
   <div id="wrapper">
