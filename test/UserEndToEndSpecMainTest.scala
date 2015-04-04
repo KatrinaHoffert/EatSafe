@@ -19,6 +19,7 @@ class UserEndToEndSpecMainTest extends Specification {
   "basic run through from start to finish" should {
     
     "be successful for location in Saskatoon" in new WithBrowser(){
+      System.out.println("Start 1 ")
       browser.goTo("/")
       browser.webDriver.findElement(By.className("footer")).isDisplayed
       val typeaheadCity = browser.getDriver.findElement(By.id("municipality"))
@@ -30,7 +31,7 @@ class UserEndToEndSpecMainTest extends Specification {
       browser.webDriver.findElement(By.id("reset-button")).click
       typeaheadCity.getText must beEmpty
       
-      
+      System.out.println("Start 1 ")
       // Search for saskatoon
       typeaheadCity.sendKeys("Saskatoon")
       
@@ -40,11 +41,11 @@ class UserEndToEndSpecMainTest extends Specification {
       typeaheadCity.sendKeys(Keys.ENTER)
       browser.url must contain("/find/Saskatoon")
       browser.webDriver.findElement(By.className("footer")).isDisplayed
-      
+      System.out.println("Start 1 ")
       // on find location search for 2nd Avenue Grill
       val typeaheadLoc = browser.getDriver.findElement(By.id("location"))
       typeaheadLoc.sendKeys("2nd Avenue Grill")
-      
+      System.out.println("Start 1 ")
       // Make sure that correct input is in the typeahead
       val input = typeaheadLoc.getAttribute("value")
       input must contain("2nd Avenue Grill")
@@ -59,7 +60,7 @@ class UserEndToEndSpecMainTest extends Specification {
       browser.url must contain("/view/")
       browser.webDriver.findElement(By.className("footer")).isDisplayed
       browser.pageSource must contain("2nd Avenue Grill")
-      
+      System.out.println("Start 1 ")
       // Try to go to the map page
       val action = new Actions(browser.getDriver)
       action.moveToElement(browser.webDriver.findElement(By.id("mapForLocation"))).perform
@@ -73,7 +74,7 @@ class UserEndToEndSpecMainTest extends Specification {
       browser.pageSource must contain("2nd Avenue Grill")
       browser.webDriver.findElement(By.className("footer")).isDisplayed
       
-      
+      System.out.println("Start 1 ")
       // open a past inspection
       browser.webDriver.findElement(By.id("showHideLink")).click
       browser.webDriver.findElement(By.id("pastInspections")).isDisplayed
@@ -81,7 +82,7 @@ class UserEndToEndSpecMainTest extends Specification {
       browser.webDriver.findElement(By.className("panel-title-text")).click
       
       browser.webDriver.findElement(By.className("panel-body")).isDisplayed
-      
+      System.out.println("Start 1 ")
       // go back to home page
       browser.webDriver.findElement(By.linkText("EatSafe Saskatchewan")).click
       browser.webDriver.findElement(By.className("footer")).isDisplayed
@@ -89,6 +90,7 @@ class UserEndToEndSpecMainTest extends Specification {
     }
     
     "change language and make many bad choices" in new WithBrowser {
+      System.out.println("Start 2 ")
       browser.goTo("/")
       browser.webDriver.findElement(By.className("footer")).isDisplayed
       browser.url must equalTo("/")
@@ -96,7 +98,8 @@ class UserEndToEndSpecMainTest extends Specification {
       // Change the language
       val selection = new Select(browser.webDriver.findElement(By.id("languageSelect")))
       selection.selectByValue("zh")
-      
+            System.out.println("Start 2 ")
+
       // Enter a bad city
       var typeaheadCity = browser.getDriver.findElement(By.id("municipality"))
       typeaheadCity.click
@@ -106,7 +109,8 @@ class UserEndToEndSpecMainTest extends Specification {
       // Check that error page has been reached
       browser.$(".topViewError").getText must contain(Messages("locations.selectCity.badInput")(Lang("zh")))
       browser.webDriver.findElement(By.className("footer")).isDisplayed
-      
+            System.out.println("Start 2 ")
+
       // Send wrong thing
       typeaheadCity.click
       typeaheadCity.sendKeys("Waskatoon")
@@ -120,7 +124,8 @@ class UserEndToEndSpecMainTest extends Specification {
       browser.url must equalTo("/")
       
       typeaheadCity = browser.getDriver.findElement(By.id("municipality"))
-      
+            System.out.println("Start 2 ")
+
       // clear typeahead
       browser.webDriver.findElement(By.id("reset-button")).click
       typeaheadCity.getText must beEmpty
@@ -132,7 +137,8 @@ class UserEndToEndSpecMainTest extends Specification {
       typeaheadCity.sendKeys(Keys.ENTER)
       
       browser.url must equalTo("/find/Regina")
-       
+             System.out.println("Start 2 ")
+
       // on find location search for random stuff
       var typeaheadLoc = browser.getDriver.findElement(By.id("location"))
       typeaheadLoc.sendKeys("doesthisplaceexistsnookay")
@@ -146,7 +152,8 @@ class UserEndToEndSpecMainTest extends Specification {
       browser.url must contain("/search/")
       browser.webDriver.findElement(By.className("btn-primary")).click
       browser.url must equalTo("/find/Regina")
-      
+            System.out.println("Start 2 ")
+
       
       // Get impatient and try to guess at an id
       browser.goTo("/view/-45675")
@@ -162,14 +169,16 @@ class UserEndToEndSpecMainTest extends Specification {
       browser.goTo("/dfgjnsddjdk")
       browser.url must equalTo("/dfgjnsddjdk")
       browser.pageSource must contain(Messages("errors.error404Title")(Lang("zh")))
-      
+            System.out.println("Start 2 ")
+
       // Go back to search location
       browser.webDriver.navigate.back
       browser.webDriver.navigate.back
       browser.webDriver.navigate.back
       browser.webDriver.navigate.back
       browser.webDriver.navigate.back
-      
+            System.out.println("Start 2 ")
+
       typeaheadLoc = browser.getDriver.findElement(By.id("location"))
       // find some location containing s
       typeaheadLoc.sendKeys("Five Guys")
@@ -186,7 +195,8 @@ class UserEndToEndSpecMainTest extends Specification {
       
       browser.url must contain("/view/")
       browser.webDriver.findElement(By.className("footer")).isDisplayed
-      
+            System.out.println("Start 2 ")
+
       // Try to go to the map page
       val action = new Actions(browser.getDriver)
       action.moveToElement(browser.webDriver.findElement(By.id("mapForLocation"))).perform
@@ -197,7 +207,8 @@ class UserEndToEndSpecMainTest extends Specification {
       // Get bored and refresh the page
       
       browser.webDriver.navigate.refresh
-     
+           System.out.println("Start 2 ")
+
       // go back to home page
       browser.webDriver.findElement(By.linkText(Messages("general.applicationName")(Lang("zh")))).click
       browser.webDriver.findElement(By.className("footer")).isDisplayed
