@@ -314,7 +314,7 @@
       for(var i = 0; i < markers.length; i++) {
         if(coordEquals(markers[i].position.k, lat) && coordEquals(markers[i].position.D, long)) {
           markers[i].setAnimation(google.maps.Animation.BOUNCE);
-          stopMarkerAnimation(markers[i], 1000);
+          stopMarkerAnimation(markers[i], 1500);
           break;
         }
       }
@@ -343,7 +343,6 @@
      *  Calculates all of the locations that are within the viewport.
      */
     function showMarkers(){
-      deleteMarkers();
 
       var infowindow = new google.maps.InfoWindow();
       var concatContentString = "";
@@ -365,7 +364,7 @@
               //and then simply create the last marker
               makeMarker = true;
             }else{
-                if(locations[i].address == locations[i+1].address){
+                if(locations[i].latitude == locations[i+1].latitude && locations[i].longitude == locations[i+1].longitude ){
                   //content string is being passed
                   //add a line break between concatonated content string
                   //next marker created will be blue
@@ -432,17 +431,6 @@
       markerCluster = new MarkerClusterer(map, markers,mcOptions);
       markerCluster.setMaxZoom(minClusterZoom);
       //setAllMap(map);
-    }
-    /** Sets all markers in the array onto the map. */
-    function setAllMap(map) {
-      for (var i = 0; i < markers.length; i++) {
-        markers[i].setMap(map);
-      }
-    }
-    /** Clears the markers from the map and the marker array. */
-    function deleteMarkers() {
-      setAllMap(null);
-      markers = [];
     }
   </script>
 }
