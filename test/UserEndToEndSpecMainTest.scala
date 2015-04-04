@@ -95,7 +95,7 @@ class UserEndToEndSpecMainTest extends Specification {
       
       // Change the language
       val selection = new Select(browser.webDriver.findElement(By.id("languageSelect")))
-      selection.selectByValue("eo")
+      selection.selectByValue("zh")
       
       // Enter a bad city
       var typeaheadCity = browser.getDriver.findElement(By.id("municipality"))
@@ -104,7 +104,7 @@ class UserEndToEndSpecMainTest extends Specification {
       typeaheadCity.sendKeys(Keys.ENTER)
 
       // Check that error page has been reached
-      browser.$(".topViewError").getText must contain(Messages("locations.selectCity.badInput")(Lang("eo")))
+      browser.$(".topViewError").getText must contain(Messages("locations.selectCity.badInput")(Lang("zh")))
       browser.webDriver.findElement(By.className("footer")).isDisplayed
       
       // Send wrong thing
@@ -114,7 +114,7 @@ class UserEndToEndSpecMainTest extends Specification {
       
       typeaheadCity.sendKeys(Keys.ENTER)
       
-      browser.$(".topViewError").getText must contain(Messages("locations.selectCity.badInput")(Lang("eo")))
+      browser.$(".topViewError").getText must contain(Messages("locations.selectCity.badInput")(Lang("zh")))
       
       // try again
       browser.url must equalTo("/")
@@ -151,17 +151,17 @@ class UserEndToEndSpecMainTest extends Specification {
       // Get impatient and try to guess at an id
       browser.goTo("/view/-45675")
       browser.url must equalTo("/view/-45675")
-      browser.pageSource must contain(Messages("errors.error500Title")(Lang("eo")))
+      browser.pageSource must contain(Messages("errors.error500Title")(Lang("zh")))
       
       // Try another one
-      browser.goTo("/view/99999999999999999")
-      browser.url must equalTo("/view/99999999999999999")
-      browser.pageSource must contain(Messages("errors.error400Title")(Lang("eo")))
+      browser.goTo("/view/999999")
+      browser.url must equalTo("/view/999999")
+      browser.pageSource must contain(Messages("errors.error400Title")(Lang("zh")))
       
       // Try one last thing
       browser.goTo("/dfgjnsddjdk")
       browser.url must equalTo("/dfgjnsddjdk")
-      browser.pageSource must contain(Messages("errors.error404Title")(Lang("eo")))
+      browser.pageSource must contain(Messages("errors.error404Title")(Lang("zh")))
       
       // Go back to search location
       browser.webDriver.navigate.back
@@ -199,13 +199,13 @@ class UserEndToEndSpecMainTest extends Specification {
       browser.webDriver.navigate.refresh
      
       // go back to home page
-      browser.webDriver.findElement(By.linkText(Messages("general.applicationName")(Lang("eo")))).click
+      browser.webDriver.findElement(By.linkText(Messages("general.applicationName")(Lang("zh")))).click
       browser.webDriver.findElement(By.className("footer")).isDisplayed
       browser.url must equalTo("/")
       
       // Go to the about page
-      browser.webDriver.findElement(By.linkText(Messages("footer.aboutLink")(Lang("eo")))).click
-      browser.pageSource must contain (Messages("about.title")(Lang("eo")))
+      browser.webDriver.findElement(By.linkText(Messages("footer.aboutLink")(Lang("zh")))).click
+      browser.pageSource must contain (Messages("about.title")(Lang("zh")))
       
     }
   }
