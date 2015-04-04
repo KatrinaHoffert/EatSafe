@@ -379,7 +379,7 @@ class FirefoxSpecBrowserTest extends Specification {
       typeahead.sendKeys(Keys.ENTER)
       browser.url must contain("/find/Saskatoon")
     }
-
+    
     "display choose location page when location is partially typed, tab is pressed and submitted with button" in new WithBrowser(new FirefoxDriver) {
       browser.goTo("/")
       val typeahead = browser.getDriver.findElement(By.id("municipality"))
@@ -427,9 +427,9 @@ class FirefoxSpecBrowserTest extends Specification {
       typeahead.getText must beEmpty
     }
   }
-  
+
   "select location page typeahead" should {
-    
+
     "display location page when place is typed in all caps" in new WithBrowser(new FirefoxDriver) {
       browser.goTo("/find/Saskatoon")
       val typeahead = browser.getDriver.findElement(By.id("location"))
@@ -477,7 +477,7 @@ class FirefoxSpecBrowserTest extends Specification {
       browser.pageSource must contain("Taco Time")
       browser.title must contain(Messages("locations.view.titleStart"))
     }
- 
+
     "display location page when location is partially typed, hint is clicked" in new WithBrowser(new FirefoxDriver) {
       browser.goTo("/find/Saskatoon")
       val typeahead = browser.getDriver.findElement(By.id("location"))
@@ -490,14 +490,14 @@ class FirefoxSpecBrowserTest extends Specification {
       input must contain("Subw")   
       
       action.moveToElement(typeahead).perform
-      val element = browser.webDriver.findElement(By.tagName("li"))
-      action.moveToElement(element).perform
-      action.click.perform
+      val element = browser.webDriver.findElement(By.className("locationTypeaheadName"))
+      action.moveToElement(element).click.perform
+      
       browser.url must contain("/view/")
       browser.pageSource must contain("Subway")
       browser.title must contain(Messages("locations.view.titleStart"))
     }
-  
+
     "display location page when location is partially typed, tab is pressed and submitted with enter" in new WithBrowser(new FirefoxDriver) {
       browser.goTo("/find/Saskatoon")
       val typeahead = browser.getDriver.findElement(By.id("location"))
@@ -582,7 +582,7 @@ class FirefoxSpecBrowserTest extends Specification {
     "display location page when location is partially typed, tab is pressed and submitted with button" in new WithBrowser(new FirefoxDriver) {
       browser.goTo("/find/Saskatoon")
       val typeahead = browser.getDriver.findElement(By.id("location"))
-      val button = browser.getDriver.findElement(By.className("typeahead-button"))
+      val button = browser.getDriver.findElement(By.className("search-icon"))
       typeahead.click
       typeahead.sendKeys("Subw")
       
@@ -599,7 +599,7 @@ class FirefoxSpecBrowserTest extends Specification {
     "display location page when location is partially typed, right is pressed and submitted with button" in new WithBrowser(new FirefoxDriver) {
       browser.goTo("/find/Saskatoon")
       val typeahead = browser.getDriver.findElement(By.id("location"))
-      val button = browser.getDriver.findElement(By.className("typeahead-button"))
+      val button = browser.getDriver.findElement(By.className("search-icon"))
       typeahead.click
       typeahead.sendKeys("Subw")
       
