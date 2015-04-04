@@ -67,12 +67,26 @@
     /** Initializes the map. */
     function initialize() {
       geocoder = new google.maps.Geocoder();
+      var myStyles =[
+        {
+          featureType: "poi",
+          elementType: "labels",
+          stylers: [
+                { visibility: "off" }
+          ]
+        }
+      ];
+
+      var myOptions = {
+          mapTypeId: google.maps.MapTypeId.ROADMAP,
+          zoom: DEFAULT_ZOOM,
+          center: latlng,
+          styles: myStyles 
+      };
+
       // Default center is Saskatoon
       var latlng = new google.maps.LatLng(52.1333, -106.6833);
-      map = new google.maps.Map(document.getElementById("map-canvas"), {
-        zoom: DEFAULT_ZOOM,
-        center: latlng
-      });
+      map = new google.maps.Map(document.getElementById("map-canvas"),myOptions);
       positionOverCity();
       google.maps.event.addListenerOnce(map, 'idle', showMarkers);
     }
@@ -300,7 +314,7 @@
       for(var i = 0; i < markers.length; i++) {
         if(coordEquals(markers[i].position.k, lat) && coordEquals(markers[i].position.D, long)) {
           markers[i].setAnimation(google.maps.Animation.BOUNCE);
-          stopMarkerAnimation(markers[i], 1000);
+          stopMarkerAnimation(markers[i], 1500);
           break;
         }
       }
@@ -329,54 +343,64 @@
      *  Calculates all of the locations that are within the viewport.
      */
     function showMarkers(){
-      deleteMarkers();
-
-      console.log(map.getBounds().getNorthEast().k);
-      console.log(map.getBounds().getNorthEast().D);
-      console.log(map.getBounds().getSouthWest().k);
-      console.log(map.getBounds().getSouthWest().D);
-
-      //the latlong values for Northwest and South east respectively
-      var NELat = map.getBounds().getNorthEast().k;
-      var NELng = map.getBounds().getNorthEast().D;
-      var SWLat = map.getBounds().getSouthWest().k;
-      var SWLng = map.getBounds().getSouthWest().D;
 
       var infowindow = new google.maps.InfoWindow();
-
+      var concatContentString = "";
+      var makeMarker = false;
+      var passMessage = false;
       for(var i = 0; i < locations.length; ++i) {
         var cords = new google.maps.LatLng(locations[i].latitude, locations[i].longitude);
+            //create info window contents first
+        var url = jsRoutes.controllers.LocationController.showLocation(locations[i].id).url;
+        var infoWindowContents = "<div id='infoWindow'>"+
+                 "<h3>"+ locations[i].name + "</h3>";
+            if(locations[i].address != null) {
+              infoWindowContents += locations[i].address + "<br />";
+              infoWindowContents += "<a href='" + url + "'>@Messages("maps.multiMap.infoButton")</a></div>";
+            }
+            concatContentString += infoWindowContents;
+            if(i+1 >= locations.length){
+              //case when at the end of the array. Don't refrence out of bounds of the array
+              //and then simply create the last marker
+              makeMarker = true;
+            }else{
+                if(locations[i].latitude == locations[i+1].latitude && locations[i].longitude == locations[i+1].longitude ){
+                  //content string is being passed
+                  //add a line break between concatonated content string
+                  //next marker created will be blue
+                 concatContentString += " <br>";
+                 makeMarker = false;
+                 passMessage = true;
+                }
+                else{
+                  //normal path for marker creation
+                  makeMarker = true;
+                }
+            }
+            if(makeMarker){
+              if(passMessage){
+                color = "0099FF";
+              }else{
+                // Gets rid of the '#'
+                color = locations[i].ratingColor.slice(1);
+              }
 
-        
-          // Gets rid of the '#'
-          var color = locations[i].ratingColor.slice(1);
-          var url = jsRoutes.controllers.LocationController.showLocation(locations[i].id).url;
-          var infoWindowContents = "<div id='infoWindow'>"+
-             "<h3>"+ locations[i].name + "</h3>";
-
-          // It's possible that we could have something with manually set coordinates and no
-          // real address in the future
-          if(locations[i].address != null) infoWindowContents += locations[i].address + "<br />";
-          infoWindowContents += "<a href='" + url + "'>@Messages("maps.multiMap.infoButton")</a></div>";
-
-          var marker = new google.maps.Marker({
-            position: cords,
-            title:     locations[i].name,
-            id:       locations[i].id,
-            colour:   locations[i].ratingColor,
-            icon:     "http://chart.apis.google.com/chart?chst=d_map_pin_letter&chld=•|" + color,
-            contentString: infoWindowContents,
-            map: map
-          });
-
-          google.maps.event.addListener(marker, 'click', function () {
-            infowindow.setContent(this.contentString);
-            infowindow.open(map, this);
-          });
-
-          markers.push(marker);
+              var marker = new google.maps.Marker({
+                position: cords,
+                title:     locations[i].name,
+                icon:     "http://chart.apis.google.com/chart?chst=d_map_pin_letter&chld=•|" + color,
+                contentString: concatContentString,
+                map: map
+              });
+              google.maps.event.addListener(marker, 'click', function () {
+                infowindow.setContent(this.contentString);
+                infowindow.open(map, this);
+              });
+              markers.push(marker);
+              concatContentString = "";
+              passMessage = false;
+            }
       }
-
       //Marker Cluster Options
       var clusterStyles = [
         {
@@ -398,34 +422,18 @@
           width: 50
         }
       ];
-
       var mcOptions = {
         gridSize: 50,
         styles: clusterStyles,
         maxZoom: 11
       };
-
       minClusterZoom = 11;
       markerCluster = new MarkerClusterer(map, markers,mcOptions);
       markerCluster.setMaxZoom(minClusterZoom);
       //setAllMap(map);
     }
-
-    /** Sets all markers in the array onto the map. */
-    function setAllMap(map) {
-      for (var i = 0; i < markers.length; i++) {
-        markers[i].setMap(map);
-      }
-    }
-
-    /** Clears the markers from the map and the marker array. */
-    function deleteMarkers() {
-      setAllMap(null);
-      markers = [];
-    }
   </script>
 }
-
 @mainBody(title = Messages("maps.multiMap.title"), moreScripts = scripts) {
   <link rel="stylesheet" href="@controllers.routes.Assets.at("stylesheets/simple-sidebar.css")" />
   <div id="wrapper">
