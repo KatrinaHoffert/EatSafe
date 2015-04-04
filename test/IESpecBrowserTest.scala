@@ -30,7 +30,6 @@ class IESpecBrowserTest extends Specification {
     //IE driver path
     System.setProperty("webdriver.ie.driver", "webDrivers/IEDriverServer.exe");
   
-
     "All pages should be able to access 'About' Page" in new WithBrowser(new InternetExplorerDriver) {
    //find city 
       
@@ -675,4 +674,116 @@ class IESpecBrowserTest extends Specification {
     }
 
   }
+  
+  
+       "Searching" should {
+    "display search page" in new WithBrowser(new InternetExplorerDriver){
+      browser.goTo("/find/luseland")
+      val typeahead = browser.getDriver.findElement(By.id("location"))
+      typeahead.click
+      typeahead.sendKeys("Golden Dragon Palace")
+      
+      // Make sure that correct input is in the typeahead
+      val input = typeahead.getAttribute("value")
+      input must contain("Golden Dragon Palace")
+      typeahead.sendKeys(Keys.ENTER)
+      Thread.sleep(1000)
+      browser.title() must contain("EatSafe search")//I cant seem to use Messages here because they are dynamically generated
+    }
+    
+    /*
+     * There should be two results in this case, because there are two locations that have the word 'Golden' in the name
+     */
+    "display the proper results for a !lax search" in new WithBrowser(new InternetExplorerDriver){
+      //search for 'Golden' in Luseland
+      browser.goTo("/find/luseland")
+      val typeahead = browser.getDriver.findElement(By.id("location"))
+      typeahead.click
+      typeahead.sendKeys("Golden")
+      typeahead.sendKeys(Keys.ENTER)
+      Thread.sleep(1000)
+      
+      //there should be 2 results on the page
+      browser.pageSource() must contain(" of 2 results")//I cant seem to use Messages here because they are dynamically generated
+    }
+
+    "display the proper results when searching by address" in new WithBrowser(new InternetExplorerDriver){
+      //search for 'Golden' in Luseland
+      browser.goTo("/find/luseland")
+      val typeahead = browser.getDriver.findElement(By.id("location"))
+      typeahead.click
+      typeahead.sendKeys("505 Grand Avenue")
+      typeahead.sendKeys(Keys.ENTER)
+      Thread.sleep(1000)
+      
+      //there should be 2 results on the page
+      browser.pageSource() must contain(" of 1 results")//I cant seem to use Messages here because they are dynamically generated
+      
+      val locationLink = browser.getDriver.findElement(By.linkText("Golden Dragon Palace"))
+      locationLink.click
+      Thread.sleep(1000)
+      browser.title() must contain("Golden Dragon Palace [505 Grand Avenue]")
+      
+    }
+
+    "display the proper results for a lax search" in new WithBrowser(new InternetExplorerDriver){
+      browser.goTo("/find/luseland")
+      val typeahead = browser.getDriver.findElement(By.id("location"))
+      typeahead.click
+      typeahead.sendKeys("Golden Dragon")
+      typeahead.sendKeys(Keys.ENTER)
+      Thread.sleep(1000)
+      //there should be 1 results on the page because default !lax search looks for 'Golden'&'Dragon'
+      browser.pageSource() must contain(" of 1 results")//I cant seem to use Messages here because they are dynamically generated
+      val laxSearchButton = browser.getDriver.findElement(By.linkText(Messages("locations.search.weakSearch2")))
+      laxSearchButton.click
+      Thread.sleep(1000)
+      //there should be 2 results on the page because lax search looks for names containing 'Golden' OR 'Dragon'
+      browser.pageSource() must contain(" of 2 results")
+    }
+    
+    "displayed links should go to the right pages" in new WithBrowser(new InternetExplorerDriver){
+      browser.goTo("/find/luseland")
+      val typeahead = browser.getDriver.findElement(By.id("location"))
+      typeahead.click
+      typeahead.sendKeys("Golden Dragon")
+      typeahead.sendKeys(Keys.ENTER)
+      Thread.sleep(1000)
+      val locationLink = browser.getDriver.findElement(By.linkText("Golden Dragon Palace"))
+      locationLink.click
+      Thread.sleep(1000)
+      browser.title() must contain("Golden Dragon Palace [505 Grand Avenue]")
+    }
+    
+    "display no results" in new WithBrowser(new InternetExplorerDriver){
+      browser.goTo("/find/luseland")
+      val typeahead = browser.getDriver.findElement(By.id("location"))
+      typeahead.click
+      typeahead.sendKeys("Goldan Dragan Palace")
+      typeahead.sendKeys(Keys.ENTER)
+      Thread.sleep(1000)
+      val noRes = browser.getDriver.findElement(By.xpath("//tbody//tr"))
+      noRes.getText must contain(Messages("locations.search.noResults"))
+      
+      
+      
+    }
+    
+    /*
+     * Results should be the same when searching for "505 Grand Ave" and "505 Grand Avenue"(done above) 
+     */
+    "display results searching with aliases" in new WithBrowser(new InternetExplorerDriver){
+       //search for 'Golden' in Luseland
+      browser.goTo("/find/luseland")
+      val typeahead = browser.getDriver.findElement(By.id("location"))
+      typeahead.click
+      typeahead.sendKeys("505 Grand Ave")
+      typeahead.sendKeys(Keys.ENTER)
+      Thread.sleep(1000)
+      //there should be 2 results on the page
+      browser.pageSource() must contain(" of 1 results")//I cant seem to use Messages here because they are dynamically generated    
+      val locationLink = browser.getDriver.findElement(By.linkText("Golden Dragon Palace"))//make sure the link exists
+           
+    }
+   }
 }
