@@ -32,7 +32,7 @@ class ChromeSpecBrowserTest extends Specification {
     
     "All pages should be able to access 'About' Page" in new WithBrowser(new ChromeDriver) {
    //find city 
-      
+     
     browser.goTo("/")
     val action = new Actions(browser.getDriver)
     action.moveToElement(browser.webDriver.findElement(By.linkText(Messages("footer.aboutLink")))).perform
@@ -50,13 +50,16 @@ class ChromeSpecBrowserTest extends Specification {
     action.moveToElement(browser.webDriver.findElement(By.linkText(Messages("footer.aboutLink")))).perform
     action.click.perform
     browser.pageSource must contain (Messages("about.title"))   
-   
+
     //500 error page
     browser.goTo("/view/1000000")
-    action.moveToElement(browser.webDriver.findElement(By.linkText(Messages("footer.aboutLink")))).perform
-    action.click.perform
-    browser.pageSource must contain (Messages("about.title"))
     
+    val jsDriver = browser.webDriver.asInstanceOf[JavascriptExecutor]
+    var element = browser.webDriver.findElement(By.linkText(Messages("footer.aboutLink")))
+    jsDriver.executeScript("arguments[0].scrollIntoView(true);", element)
+    element.click
+    browser.pageSource must contain (Messages("about.title"))
+
     //find city error page
     browser.goTo("/find/daDerpDaDerp")
     action.moveToElement(browser.webDriver.findElement(By.linkText(Messages("footer.aboutLink")))).perform
@@ -77,11 +80,13 @@ class ChromeSpecBrowserTest extends Specification {
     
     //search page
     browser.goTo("/search/saskatoon?q=subway")
-    action.moveToElement(browser.webDriver.findElement(By.linkText(Messages("footer.aboutLink")))).perform
+    element = browser.webDriver.findElement(By.linkText(Messages("footer.aboutLink")))
+    jsDriver.executeScript("arguments[0].scrollIntoView(true);", element)
+    action.moveToElement(element).perform
     action.click.perform
     browser.pageSource must contain (Messages("about.title"))
   }  
-  
+
   "All pages should have link to 'Creative Commons' Page" in new WithBrowser(new ChromeDriver) {
     //find city
     browser.goTo("/")
@@ -118,9 +123,8 @@ class ChromeSpecBrowserTest extends Specification {
         //search results page
     browser.goTo("/search/saskatoon?q=subway")
     action.moveToElement(browser.webDriver.findElement(By.linkText("CC-BY-ND"))).perform
+
   }  
-  
-  
   
   "All pages should be able to access get back to First Page" in new WithBrowser(new ChromeDriver) {
    //find city
