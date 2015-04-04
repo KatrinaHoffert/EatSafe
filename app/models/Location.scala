@@ -85,7 +85,8 @@ object Location {
             """
             SELECT id, name, address, postcode, city, rha, latitude, longitude
               FROM location INNER JOIN coordinates ON (id = location_id)
-              WHERE latitude IS NOT NULL;
+              WHERE latitude IS NOT NULL
+              ORDER BY latitude DESC, longitude DESC;
             """
           )
 
