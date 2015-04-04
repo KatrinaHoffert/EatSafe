@@ -20,6 +20,30 @@ import play.api.i18n.Lang
 @RunWith(classOf[JUnitRunner])
 class LanguageSpecMainTest extends Specification{
   "language" should {
+    "detect the cookies" in new WithBrowser {
+      browser.goTo("/")
+      
+      // give the page a cookie for language zh
+      val cookie = new Cookie("lang","zh","localhost", "/", null)
+      browser.webDriver.manage.addCookie(cookie)
+      
+      browser.goTo("/")
+      
+      // make sure the site is now in zh
+      browser.webDriver.findElement(By.className("smallHeading")).getText must contain(Messages("general.applicationName")(Lang("zh")))
+      browser.goTo("/find/Saskatoon")
+      browser.webDriver.findElement(By.className("smallHeading")).getText must contain(Messages("general.applicationName")(Lang("zh")))
+      
+      // delete the cookie and refresh the page
+      browser.webDriver.manage.deleteCookie(cookie)
+      browser.webDriver.navigate.refresh
+      
+      // make sure the site is back in en
+      browser.webDriver.findElement(By.className("smallHeading")).getText must contain(Messages("general.applicationName")(Lang("en")))
+      browser.goTo("/")
+      browser.webDriver.findElement(By.className("smallHeading")).getText must contain(Messages("general.applicationName")(Lang("en")))
+    }
+    
     "be the same on every page after selection" in new WithBrowser {
       browser.goTo("/")
       
@@ -109,6 +133,22 @@ class LanguageSpecMainTest extends Specification{
       
       // language should now be what was selected in the other tab
       browser.webDriver.findElement(By.className("smallHeading")).getText must contain(Messages("general.applicationName")(Lang("en")))
+    }
+    
+    "does not allow bad cookies" in new WithBrowser {
+      browser.goTo("/")
+      
+      // add a bad cookie
+      val cookie = new Cookie("lang","trigedasleng","localhost", "/", null)
+      browser.webDriver.manage.addCookie(cookie)
+      
+      // try to access the site with a bad cookie
+      try{
+        browser.goTo("/") 
+      }
+      catch {
+        case e: RuntimeException => true
+      }
     }
   }
 }
