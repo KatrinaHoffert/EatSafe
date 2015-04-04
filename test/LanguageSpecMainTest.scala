@@ -63,7 +63,7 @@ class LanguageSpecMainTest extends Specification{
       browser.webDriver.findElement(By.className("smallHeading")).getText must contain(Messages("general.applicationName")(Lang("zh")))
        
       //400 error page
-      browser.goTo("/view/999999")
+      browser.goTo("/view/999999999999999")
       browser.webDriver.findElement(By.className("smallHeading")).getText must contain(Messages("general.applicationName")(Lang("zh")))
       
       //404 error page

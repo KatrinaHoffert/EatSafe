@@ -372,7 +372,7 @@ class ApplicationSpecMainTest extends Specification {
     action.click.perform
     browser.pageSource must contain (Messages("about.title"))   
     
-    //400 error page
+    //500 error page
     browser.goTo("/view/1000000")
     action.moveToElement(browser.webDriver.findElement(By.linkText(Messages("footer.aboutLink")))).perform
     action.click.perform
@@ -384,6 +384,11 @@ class ApplicationSpecMainTest extends Specification {
     action.click.perform
     browser.pageSource must contain (Messages("about.title"))
     
+    //404 error page
+    browser.goTo("/view/999999999999999")
+    action.moveToElement(browser.webDriver.findElement(By.linkText(Messages("footer.aboutLink")))).perform
+    action.click.perform
+    browser.pageSource must contain (Messages("about.title"))
     
     //find city error page
     browser.goTo("/find/daDerpDaDerp")
@@ -417,10 +422,13 @@ class ApplicationSpecMainTest extends Specification {
     action.moveToElement(browser.webDriver.findElement(By.linkText("CC-BY-ND"))).perform
         
     
-    //400 error page
+    //500 error page
     browser.goTo("/view/1000000")
     action.moveToElement(browser.webDriver.findElement(By.linkText("CC-BY-ND"))).perform
      
+    //400 error page
+    browser.goTo("/view/999999999999999")
+    action.moveToElement(browser.webDriver.findElement(By.linkText("CC-BY-ND"))).perform
     
     //find city error page
     browser.goTo("/find/daDerpDaDerp")
@@ -494,7 +502,7 @@ class ApplicationSpecMainTest extends Specification {
     browser.url must contain ("/")
      
     //400 error page
-    browser.goTo("/view/999999")
+    browser.goTo("/view/999999999999999")
     action.moveToElement(browser.webDriver.findElement(By.linkText(Messages("general.applicationName")))).perform
     action.click.perform
     browser.url must contain ("/")
