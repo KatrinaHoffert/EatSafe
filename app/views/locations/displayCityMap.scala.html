@@ -393,17 +393,17 @@
         // Otherwise we need to determine if there's multiple locations with the same coords or
         // not.
         else {
-            // When there are multiple locations with the same coordinates, we simply build up the
-            // info window until we reach the last location.
-            if(coordEquals(locations[i].latitude, locations[i + 1].latitude) &&
-                coordEquals(locations[i].longitude, locations[i + 1].longitude)) {
-             concatInfoWindow += "<br />";
-             makeMarker = false;
-             markerIsMulti = true;
-            }
-            else{
-              makeMarker = true;
-            }
+          // When there are multiple locations with the same coordinates, we simply build up the
+          // info window until we reach the last location.
+          if(coordEquals(locations[i].latitude, locations[i + 1].latitude) &&
+              coordEquals(locations[i].longitude, locations[i + 1].longitude)) {
+            concatInfoWindow += "<br />";
+            makeMarker = false;
+            markerIsMulti = true;
+          }
+          else{
+            makeMarker = true;
+          }
         }
 
         // Make the marker of the appropriate color, if we're supposed to (for either single
