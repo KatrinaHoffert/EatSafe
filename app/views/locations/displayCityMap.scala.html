@@ -378,7 +378,7 @@
         var infoWindowImageUrl = jsRoutes.controllers.Assets.at("images/" + locationColor + ".png").url;
 
         var infoWindowContents = "<div id='infoWindow'>"+
-            "<h3><img src='" + infoWindowImageUrl + "' />"+ locations[i].name + "</h3>";
+            "<h3><img class='infoWindowColor' src='" + infoWindowImageUrl + "' />"+ locations[i].name + "</h3>";
         if(locations[i].address != null) {
           infoWindowContents += locations[i].address + "<br />";
         }
