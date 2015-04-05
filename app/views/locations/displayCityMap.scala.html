@@ -433,27 +433,42 @@
           concatInfoWindow = "";
           markerIsMulti = false;
         }
-      }
-
-      // Marker clustering options
+      }  
+      clusterMarkers();    
+    }
+    function clusterMarkers(){
+    // Marker clustering options
+      
       var clusterStyles = [
         {
           textColor: 'white',
-          url: 'http://google-maps-utility-library-v3.googlecode.com/svn/trunk/markerclusterer/images/m1.png',
-          height: 50,
-          width: 50
+          url: "@controllers.routes.Assets.at("images/m1.png").url",
+          height: 53,
+          width: 52
         },
         {
           textColor: 'white',
-          url: 'http://google-maps-utility-library-v3.googlecode.com/svn/trunk/markerclusterer/images/m1.png',
-          height: 50,
-          width: 50
+          url: "@controllers.routes.Assets.at("images/m2.png").url",
+          height: 56,
+          width: 55
         },
         {
           textColor: 'white',
-          url: 'http://google-maps-utility-library-v3.googlecode.com/svn/trunk/markerclusterer/images/m1.png',
-          height: 50,
-          width: 50
+          url: "@controllers.routes.Assets.at("images/m3.png").url",
+          height: 66,
+          width: 65
+        },
+        {
+          textColor: 'white',
+          url: "@controllers.routes.Assets.at("images/m4.png").url",
+          height: 78,
+          width: 77
+        },
+        {
+          textColor: 'white',
+          url: "@controllers.routes.Assets.at("images/m5.png").url",
+          height: 90,
+          width: 89
         }
       ];
       var mcOptions = {
@@ -464,6 +479,7 @@
       minClusterZoom = 11;
       markerCluster = new MarkerClusterer(map, markers,mcOptions);
       markerCluster.setMaxZoom(minClusterZoom);
+
     }
   </script>
 }
