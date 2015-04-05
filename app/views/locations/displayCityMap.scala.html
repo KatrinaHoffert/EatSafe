@@ -13,7 +13,7 @@
 @(city: String, locations: Seq[Location])(implicit lang: Lang)
 
 @scripts = {
-  <script src="https://maps.googleapis.com/maps/api/js?v=3.exp&signed_in=true"></script>
+  <script src="https://maps.googleapis.com/maps/api/js?v=3.exp&signed_in=false"></script>
   <script src="@controllers.routes.Assets.at("javascripts/markerclusterer.js")"></script>
   <script src="@controllers.routes.Assets.at("javascripts/oms.min.js")"></script>
   <script src="@controllers.routes.Assets.at("javascripts/spin.min.js")"></script>
@@ -81,6 +81,7 @@
           mapTypeId: google.maps.MapTypeId.ROADMAP,
           zoom: DEFAULT_ZOOM,
           center: latlng,
+          disableDefaultUI: true,
           styles: myStyles 
       };
 
@@ -89,6 +90,17 @@
       map = new google.maps.Map(document.getElementById("map-canvas"),myOptions);
       positionOverCity();
       google.maps.event.addListenerOnce(map, 'idle', showMarkers);
+      var legend = document.createElement('div');
+        legend.id = 'legend';
+        var content = [];
+        content.push('<p><strong>Legend</strong></p>');
+        content.push('<p><div class="color green"></div>Good</p>');
+        content.push('<p><div class="color yellow"></div>Fair</p>');
+        content.push('<p><div class="color red"></div>Poor</p>');
+        content.push('<p><div class="color blue"></div>Multi-location</p>');
+        legend.innerHTML = content.join('');
+        legend.index = 1;
+        map.controls[google.maps.ControlPosition.RIGHT_BOTTOM].push(legend);
     }
     google.maps.event.addDomListener(window, 'load', initialize);
 
