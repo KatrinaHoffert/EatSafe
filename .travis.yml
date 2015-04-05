@@ -3,7 +3,7 @@
 language: scala
 scala: 2.11.5
 before-script: 
-script: sbt "-J-Xmx3048M -J-Xms3048M test-only *MainTest"
+script: sbt -J-Xmx3048M -J-Xms3048M "test-only *MainTest"
 # Notify on build failure. We notify only when the success status changes. So if the build was
 # succeeding and suddenly fails, we notify. If the build was failing and now succeeds, we notify.
 # The reason to notify on change is so that if multiple people are trying to resolve a failure,
