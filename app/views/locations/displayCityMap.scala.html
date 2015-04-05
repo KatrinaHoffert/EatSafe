@@ -90,17 +90,17 @@
       map = new google.maps.Map(document.getElementById("map-canvas"),myOptions);
       positionOverCity();
       google.maps.event.addListenerOnce(map, 'idle', showMarkers);
+
+      // Create the legend
       var legend = document.createElement('div');
-        legend.id = 'legend';
-        var content = [];
-        content.push('<p><strong>Legend</strong></p>');
-        content.push('<p><div class="color green"></div>Good</p>');
-        content.push('<p><div class="color yellow"></div>Fair</p>');
-        content.push('<p><div class="color red"></div>Poor</p>');
-        content.push('<p><div class="color blue"></div>Multi-Location</p>');
-        legend.innerHTML = content.join('');
-        legend.index = 1;
-        map.controls[google.maps.ControlPosition.RIGHT_BOTTOM].push(legend);
+      legend.id = 'legend';
+      legend.innerHTML = "<p><strong>@Messages("maps.multiMap.legend")</strong></p>" +
+          "<p><div class='color green'></div>@Messages("locations.view.rating_good")</p>" +
+          "<p><div class='color yellow'></div>@Messages("locations.view.rating_fair")</p>" +
+          "<p><div class='color red'></div>@Messages("locations.view.rating_poor")</p>" +
+          "<p><div class='color blue'></div>@Messages("maps.multiMap.multiLocation")</p>";
+      legend.index = 1;
+      map.controls[google.maps.ControlPosition.RIGHT_BOTTOM].push(legend);
     }
     google.maps.event.addDomListener(window, 'load', initialize);
 
