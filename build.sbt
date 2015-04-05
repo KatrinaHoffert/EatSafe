@@ -16,3 +16,5 @@ libraryDependencies ++= Seq(
   "org.apache.commons" % "commons-lang3" % "3.3.2",
   "net.sf.opencsv" % "opencsv" % "2.0"
 )
+
+fork in Test := false
