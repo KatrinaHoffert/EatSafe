@@ -97,7 +97,7 @@
         content.push('<p><div class="color green"></div>Good</p>');
         content.push('<p><div class="color yellow"></div>Fair</p>');
         content.push('<p><div class="color red"></div>Poor</p>');
-        content.push('<p><div class="color blue"></div>Multi - location</p>');
+        content.push('<p><div class="color blue"></div>Multilocation</p>');
         legend.innerHTML = content.join('');
         legend.index = 1;
         map.controls[google.maps.ControlPosition.RIGHT_BOTTOM].push(legend);
@@ -370,7 +370,7 @@
               infoWindowContents += locations[i].address + "<br />";
               infoWindowContents += "<a href='" + url + "'>@Messages("maps.multiMap.infoButton")</a></div>";
             }
-            concatContentString += infoWindowContents;
+            concatContentString += "<img src='" + jsRoutes.controllers.Assets.at("images/" + locations[i].ratingColor.slice(1) + ".png").url + "'> " + infoWindowContents;
             if(i+1 >= locations.length){
               //case when at the end of the array. Don't refrence out of bounds of the array
               //and then simply create the last marker
@@ -397,6 +397,8 @@
                 color = locations[i].ratingColor.slice(1);
               }
 
+
+              //dynamically choose an image marker based on the returned value
               var image = jsRoutes.controllers.Assets.at("images/" + color + ".png");
 
               var marker = new google.maps.Marker({
