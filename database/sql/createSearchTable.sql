@@ -15,9 +15,15 @@ CREATE TEXT SEARCH DICTIONARY eatsafe_synonyms (
   SYNONYMS = eatsafe_synonyms
 );
 
+-- See <http://stackoverflow.com/a/2227235/1968462>
+CREATE TEXT SEARCH DICTIONARY eatsafe_stem_no_stop_words (
+  Template = snowball,
+  Language = english
+);
+
 ALTER TEXT SEARCH CONFIGURATION eatsafe_english
-  ALTER MAPPING FOR asciiword
-  WITH eatsafe_synonyms, english_stem;
+  ALTER MAPPING FOR asciiword, asciihword, hword_asciipart, hword, hword_part, word
+  WITH eatsafe_synonyms, eatsafe_stem_no_stop_words;
 
 -- The location_search table maps TSVECTORS (which contain lexemes) to location IDs (so we can figure
 -- out what location we matched). The location name and address are both used in the TSVECTOR, with
