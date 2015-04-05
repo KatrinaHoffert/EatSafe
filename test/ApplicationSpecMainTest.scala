@@ -27,7 +27,8 @@ class ApplicationSpecMainTest extends Specification {
   /* 
    * Basic check that all views are being rendered in html
    */
- 
+  sequential
+  
   "Application" should {
    
     "send 404 on a bad request" in new WithApplication {
