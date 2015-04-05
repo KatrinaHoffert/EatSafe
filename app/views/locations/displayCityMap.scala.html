@@ -430,7 +430,6 @@
       minClusterZoom = 11;
       markerCluster = new MarkerClusterer(map, markers,mcOptions);
       markerCluster.setMaxZoom(minClusterZoom);
-      //setAllMap(map);
     }
   </script>
 }
@@ -461,6 +460,7 @@
       <button class="btn btn-default" id="moveToMe">
         @Messages("maps.multiMap.findMe")
       </button>
+      <image src="@routes.Assets.at("images/808080.png")">
       <div id="map-canvas"></div>
     </div>
   </div>
