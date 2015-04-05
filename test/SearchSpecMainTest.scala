@@ -125,10 +125,21 @@ class SearchSpecMainTest extends Specification {
       typeahead.click
       typeahead.sendKeys("505 Grand Ave")
       typeahead.sendKeys(Keys.ENTER)
-      //there should be 2 results on the page
+      //there should be 1 results on the page
       browser.pageSource() must contain(" of 1 results")//I cant seem to use Messages here because they are dynamically generated    
       val locationLink = browser.getDriver.findElement(By.linkText("Golden Dragon Palace"))//make sure the link exists
            
+    }
+    
+    "handle lots of spaces" in new WithBrowser {
+       browser.goTo("/find/luseland")
+      val typeahead = browser.getDriver.findElement(By.id("location"))
+      typeahead.click
+      typeahead.sendKeys("Golden       Dragon                       Palace")
+      typeahead.sendKeys(Keys.ENTER)
+      //there should be 1 results on the page
+      browser.pageSource() must contain(" of 1 results")//I cant seem to use Messages here because they are dynamically generated    
+      val locationLink = browser.getDriver.findElement(By.linkText("Golden Dragon Palace"))//make sure the link exists
     }
     
     
