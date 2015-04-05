@@ -353,6 +353,7 @@
 
     /**
      *  Calculates all of the locations that are within the viewport.
+     *  Assumes the locations JSON object is  sorted (this is done in the model)
      */
     function showMarkers(){
 
@@ -370,14 +371,15 @@
               infoWindowContents += locations[i].address + "<br />";
               infoWindowContents += "<a href='" + url + "'>@Messages("maps.multiMap.infoButton")</a></div>";
             }
-            concatContentString += "<img style='float: left; padding-top: 7px; padding-right: 5px' src='" + jsRoutes.controllers.Assets.at("images/" + locations[i].ratingColor.slice(1) + ".png").url + "'> " + infoWindowContents;
+            //this is where the coloured rating icon is being added to the info window as well as concatonating
+            //the contents of infoWindowcontents
+            concatContentString += "<img style='float: left; padding-top: 8px; padding-right: 5px' src='" + jsRoutes.controllers.Assets.at("images/" + locations[i].ratingColor.slice(1) + ".png").url + "'> " + infoWindowContents;
             if(i+1 >= locations.length){
               //case when at the end of the array. Don't refrence out of bounds of the array
-              //and then simply create the last marker
+              //but then simply create the last marker
               makeMarker = true;
             }else{
                 if(locations[i].latitude == locations[i+1].latitude && locations[i].longitude == locations[i+1].longitude ){
-                  //content string is being passed
                   //add a line break between concatonated content string
                   //next marker created will be blue
                  concatContentString += " <br>";
@@ -386,6 +388,7 @@
                 }
                 else{
                   //normal path for marker creation
+                  //colour of marker will be determined by rating color
                   makeMarker = true;
                 }
             }
