@@ -106,24 +106,48 @@
         'class -> "form-control"
       )
       @inputText(
-        locationForm("postalCode"),
-        '_label -> Messages("admin.add.postalCode"),
-        '_showConstraints -> false,
-        'class -> "form-control"
-      )
-      @inputText(
         locationForm("city"),
         '_label -> Messages("admin.add.city"),
         '_showConstraints -> false,
         'class -> "form-control"
       )
-      @select(
-        locationForm("rha"),
-        extendSeqToSelect(validRhas),
-        '_label -> Messages("admin.add.rha"),
-        '_showConstraints -> false,
-        'class -> "form-control"
-      )
+      <div class="row">
+        <div class="col-md-4">
+          @inputText(
+            locationForm("postalCode"),
+            '_label -> Messages("admin.add.postalCode"),
+            '_showConstraints -> false,
+            'class -> "form-control"
+          )
+        </div>
+        <div class="col-md-8">
+          @select(
+            locationForm("rha"),
+            extendSeqToSelect(validRhas),
+            '_label -> Messages("admin.add.rha"),
+            '_showConstraints -> false,
+            'class -> "form-control"
+          )
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-md-6">
+          @inputText(
+            locationForm("latitude"),
+            '_label -> Messages("admin.add.latitude"),
+            '_showConstraints -> false,
+            'class -> "form-control"
+          )
+        </div>
+        <div class="col-md-6">
+          @inputText(
+            locationForm("longitude"),
+            '_label -> Messages("admin.add.longitude"),
+            '_showConstraints -> false,
+            'class -> "form-control"
+          )
+        </div>
+      </div>
 
       <h2>
         @Messages("admin.add.inspections")
@@ -141,36 +165,48 @@
               </button>
             </div>
             <div class="panel-body">
-              @inputText(
-                locationForm(inspection.name + ".date"),
-                '_label -> Messages("admin.add.inspectionDate"),
-                '_showConstraints -> false,
-                'class -> "inspectionDateField form-control",
-                'placeholder -> "YYYY-MM-DD",
-                '_glyphIcon -> "glyphicon-calendar"
-              )
-              @select(
-                locationForm(inspection.name + ".inspectionType"),
-                mapValuesToDisplayed(validInspectionTypesKeys.map(Messages(_)), validInspectionTypes),
-                '_label -> Messages("admin.add.inspectionType"),
-                '_showConstraints -> false,
-                'class -> "inspectionTypeField form-control"
-              )
-              @select(
-                locationForm(inspection.name + ".reinspectionPriority"),
-                mapValuesToDisplayed(validReinspectionPrioritiesKeys.map(Messages(_)), validReinspectionPriorities),
-                '_label -> Messages("admin.add.reinspectionPriority"),
-                '_showConstraints -> false,
-                'class -> "reinspectionPriorityField form-control"
-              )
-              @inputText(
-                locationForm(inspection.name + ".violations"),
-                '_label -> Messages("admin.add.violations"),
-                '_showConstraints -> false,
-                'class -> "violationsField form-control",
-                '_help -> Messages("admin.add.violationsHelp"),
-                '_glyphIcon -> "glyphicon-th-list"
-              )
+              <div class="row">
+                <div class="col-md-6">
+                  @inputText(
+                    locationForm(inspection.name + ".date"),
+                    '_label -> Messages("admin.add.inspectionDate"),
+                    '_showConstraints -> false,
+                    'class -> "inspectionDateField form-control",
+                    'placeholder -> "YYYY-MM-DD",
+                    '_glyphIcon -> "glyphicon-calendar"
+                  )
+                </div>
+                <div class="col-md-6">
+                  @select(
+                    locationForm(inspection.name + ".inspectionType"),
+                    mapValuesToDisplayed(validInspectionTypesKeys.map(Messages(_)), validInspectionTypes),
+                    '_label -> Messages("admin.add.inspectionType"),
+                    '_showConstraints -> false,
+                    'class -> "inspectionTypeField form-control"
+                  )
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-md-4">
+                  @select(
+                    locationForm(inspection.name + ".reinspectionPriority"),
+                    mapValuesToDisplayed(validReinspectionPrioritiesKeys.map(Messages(_)), validReinspectionPriorities),
+                    '_label -> Messages("admin.add.reinspectionPriority"),
+                    '_showConstraints -> false,
+                    'class -> "reinspectionPriorityField form-control"
+                  )
+                </div>
+                <div class="col-md-8">
+                  @inputText(
+                    locationForm(inspection.name + ".violations"),
+                    '_label -> Messages("admin.add.violations"),
+                    '_showConstraints -> false,
+                    'class -> "violationsField form-control",
+                    '_help -> Messages("admin.add.violationsHelp"),
+                    '_glyphIcon -> "glyphicon-th-list"
+                  )
+                </div>
+              </div>
             </div>
           </div>
         }
