@@ -352,75 +352,90 @@
     }
 
     /**
-     *  Calculates all of the locations that are within the viewport.
-     *  Assumes the locations JSON object is  sorted (this is done in the model)
+     * Creates all the markers for the multi-map. Assumes the locations JSON list of locations is
+     * sorted.
      */
-    function showMarkers(){
+    function showMarkers() {
+      var infoWindow = new google.maps.InfoWindow();
 
-      var infowindow = new google.maps.InfoWindow();
-      var concatContentString = "";
+      // Usedfor building up the info window for stacked locations
+      var concatInfoWindow = "";
+
+      // Determines if we need to make the marker. Allows us to skip locations that have the same
+      // coordinates as an existing marker (which will list all the locations with that coordinate).
       var makeMarker = false;
-      var passMessage = false;
+
+      // Determines if the marker we created has multiple locations or not (just needed to pick
+      // the marker color).
+      var markerIsMulti = false;
+
       for(var i = 0; i < locations.length; ++i) {
         var cords = new google.maps.LatLng(locations[i].latitude, locations[i].longitude);
-            //create info window contents first
-        var url = jsRoutes.controllers.LocationController.showLocation(locations[i].id).url;
+        
+        // Create info window contents first
+        var locationUrl = jsRoutes.controllers.LocationController.showLocation(locations[i].id).url;
+        var locationColor = locations[i].ratingColor.slice(1)
+        var infoWindowImageUrl = jsRoutes.controllers.Assets.at("images/" + locationColor + ".png").url;
+
         var infoWindowContents = "<div id='infoWindow'>"+
-                 "<h3>"+ locations[i].name + "</h3>";
-            if(locations[i].address != null) {
-              infoWindowContents += locations[i].address + "<br />";
-              infoWindowContents += "<a href='" + url + "'>@Messages("maps.multiMap.infoButton")</a></div>";
+            "<h3><img src='" + infoWindowImageUrl + "' />"+ locations[i].name + "</h3>";
+        if(locations[i].address != null) {
+          infoWindowContents += locations[i].address + "<br />";
+        }
+        infoWindowContents += "<a href='" + locationUrl + "'>@Messages("maps.multiMap.infoButton")</a></div>";
+
+        concatInfoWindow += infoWindowContents;
+
+        // Special case to prevent going out of bounds.
+        if(i + 1 >= locations.length) {
+          makeMarker = true;
+        }
+        // Otherwise we need to determine if there's multiple locations with the same coords or
+        // not.
+        else {
+            // When there are multiple locations with the same coordinates, we simply build up the
+            // info window until we reach the last location.
+            if(coordEquals(locations[i].latitude, locations[i + 1].latitude) &&
+                coordEquals(locations[i].longitude, locations[i + 1].longitude)) {
+             concatInfoWindow += "<br />";
+             makeMarker = false;
+             markerIsMulti = true;
             }
-            //this is where the coloured rating icon is being added to the info window as well as concatonating
-            //the contents of infoWindowcontents
-            concatContentString += "<img style='float: left; padding-top: 8px; padding-right: 5px' src='" + jsRoutes.controllers.Assets.at("images/" + locations[i].ratingColor.slice(1) + ".png").url + "'> " + infoWindowContents;
-            if(i+1 >= locations.length){
-              //case when at the end of the array. Don't refrence out of bounds of the array
-              //but then simply create the last marker
+            else{
               makeMarker = true;
-            }else{
-                if(locations[i].latitude == locations[i+1].latitude && locations[i].longitude == locations[i+1].longitude ){
-                  //add a line break between concatonated content string
-                  //next marker created will be blue
-                 concatContentString += " <br>";
-                 makeMarker = false;
-                 passMessage = true;
-                }
-                else{
-                  //normal path for marker creation
-                  //colour of marker will be determined by rating color
-                  makeMarker = true;
-                }
             }
-            if(makeMarker){
-              if(passMessage){
-                color = "0099FF";
-              }else{
-                // Gets rid of the '#'
-                color = locations[i].ratingColor.slice(1);
-              }
+        }
 
+        // Make the marker of the appropriate color, if we're supposed to (for either single
+        // location coords or the last location with the same coords).
+        if(makeMarker) {
+          var markerColor = locationColor;
+          if(markerIsMulti) {
+            markerColor = "0099FF";
+          }
 
-              //dynamically choose an image marker based on the returned value
-              var image = jsRoutes.controllers.Assets.at("images/" + color + ".png");
+          var mapMarkerImageUrl = jsRoutes.controllers.Assets.at("images/" + markerColor + ".png");
 
-              var marker = new google.maps.Marker({
-                position:  cords,
-                title:     locations[i].name,
-                icon:      image,
-                contentString: concatContentString,
-                map: map
-              });
-              google.maps.event.addListener(marker, 'click', function () {
-                infowindow.setContent(this.contentString);
-                infowindow.open(map, this);
-              });
-              markers.push(marker);
-              concatContentString = "";
-              passMessage = false;
-            }
+          var marker = new google.maps.Marker({
+            position: cords,
+            title: locations[i].name,
+            icon: mapMarkerImageUrl,
+            contentString: concatInfoWindow,
+            map: map
+          });
+
+          google.maps.event.addListener(marker, 'click', function () {
+            infoWindow.setContent(this.contentString);
+            infoWindow.open(map, this);
+          });
+
+          markers.push(marker);
+          concatInfoWindow = "";
+          markerIsMulti = false;
+        }
       }
-      //Marker Cluster Options
+
+      // Marker clustering options
       var clusterStyles = [
         {
           textColor: 'white',
