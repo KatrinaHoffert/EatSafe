@@ -26,7 +26,8 @@ object JsRoutes extends Controller {
         LocationController.showLocation,
         Application.setLanguage,
         SearchController.searchLocations,
-        AdminController.deleteLocation
+        AdminController.deleteLocation,
+        Assets.at
       )
     ).as("text/javascript")
   }
