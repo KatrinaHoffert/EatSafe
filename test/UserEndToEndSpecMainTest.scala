@@ -111,12 +111,16 @@ class UserEndToEndSpecMainTest extends Specification {
       browser.webDriver.findElement(By.className("footer")).isDisplayed
             System.out.println("Start 2 ")
 
+      // clear typeahead
+      browser.webDriver.findElement(By.id("reset-button")).click
+      typeaheadCity.getText must beEmpty
+      
       // Send wrong thing
       typeaheadCity.click
       typeaheadCity.sendKeys("Waskatoon")
       typeaheadCity.getAttribute("value") must contain("Waskatoon")
       
-      typeaheadCity.sendKeys(Keys.ENTER)
+      typeaheadCity.submit
       
       browser.$(".topViewError").getText must contain(Messages("locations.selectCity.badInput")(Lang("zh")))
       
