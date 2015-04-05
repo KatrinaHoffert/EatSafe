@@ -208,6 +208,14 @@ object Location {
 
           val locationId = locationQuery().map(_[Int]("id")).head
 
+          val coordinateInsert = SQL(
+            """
+              INSERT INTO coordinates (location_id, latitude, longitude)
+                VALUES({locationId}, {latitude}, {longitude});
+            """
+          ).on("locationId" -> locationId, "latitude" -> location.latitude, "longitude" -> location.longitude)
+          coordinateInsert.execute();
+
           // Insert each location
           for(inspection <- location.inspections) {
             Inspection.add(inspection, locationId)
@@ -243,6 +251,27 @@ object Location {
             """
           ).on("name" -> location.name, "address" -> location.address, "postcode" -> location.postalCode,
               "city" -> location.city, "rha" -> location.rha, "id" -> locationId).execute()
+
+          val coordinateInsert = SQL(
+            """
+              UPDATE coordinates
+                SET latitude = {latitude}, longitude = {longitude}
+                WHERE location_id = {locationId};
+            """
+          ).on("locationId" -> locationId, "latitude" -> location.latitude, "longitude" -> location.longitude)
+          val rowsUpdated = coordinateInsert.executeUpdate();
+
+          // Will ocur if there's locations that we haven't run the coordinate getter on. In which case
+          // we must add the locations to the coordinates table.
+          if(rowsUpdated == 0) {
+            val coordinateInsert = SQL(
+              """
+                INSERT INTO coordinates (location_id, latitude, longitude)
+                  VALUES({locationId}, {latitude}, {longitude});
+              """
+            ).on("locationId" -> locationId, "latitude" -> location.latitude, "longitude" -> location.longitude)
+            coordinateInsert.execute();
+          }
 
           // Delete all previous inspections for this location
           SQL(

@@ -5,6 +5,7 @@ import play.api._
 import play.api.mvc._
 import play.api.data._
 import play.api.data.Forms._
+import play.api.data.format.Formats._
 import org.apache.commons.lang3.time.DateFormatUtils
 import models.Location
 import util.globals._
@@ -20,6 +21,8 @@ case class LocationForm(
   postalCode: Option[String],
   city: Option[String],
   rha: String,
+  latitude: Option[Double],
+  longitude: Option[Double],
   inspections: Seq[InspectionForm]
 )
 
@@ -55,6 +58,8 @@ object LocationForm {
       "postalCode" -> optional(nonEmptyText),
       "city" -> optional(nonEmptyText),
       "rha" -> nonEmptyText,
+      "latitude" -> optional(of(doubleFormat)),
+      "longitude" -> optional(of(doubleFormat)),
       "inspections" -> seq(inspectionMapping)
     )(LocationForm.apply)(LocationForm.unapply)
     verifying (Messages("admin.validation.invalidPostalCode"), fields => {
@@ -91,6 +96,14 @@ object LocationForm {
         }
       }.foldRight(true)(_ && _)
     })
+    verifying (Messages("admin.validation.coordinatesAllOrNothing"), fields => {
+      !(fields.latitude.isDefined ^ fields.longitude.isDefined)
+    })
+    verifying (Messages("admin.validation.invalidCoordinates"), fields => {
+      // Only checking the values are in bounds if 
+      fields.latitude.map(latitude => latitude >= -90 && latitude <= 90).getOrElse(true) &&
+          fields.longitude.map(longitude => longitude >= -180 && longitude <= 180).getOrElse(true)
+    })
   )
 
   /**
@@ -102,9 +115,9 @@ object LocationForm {
       val optionalViolations = if(violationString != "") Some(violationString) else None
       InspectionForm(DateFormatUtils.ISO_DATE_FORMAT.parse(inspection.date), inspection.inspectionType,
           inspection.reinspectionPriority, optionalViolations)
-    }
+    } 
 
     LocationForm(location.name, location.address, location.postalCode, location.city,
-        location.regionalHealthAuthority, inspections)
+        location.regionalHealthAuthority, location.latitude, location.longitude, inspections)
   }
 }
