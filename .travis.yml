@@ -2,7 +2,7 @@
 # server will check compilation and unit tests.
 language: scala
 scala: 2.11.5
-script: sbt "test-only *MainTest"
+script: sbt -mem1024 "test-only *MainTest"
 # Notify on build failure. We notify only when the success status changes. So if the build was
 # succeeding and suddenly fails, we notify. If the build was failing and now succeeds, we notify.
 # The reason to notify on change is so that if multiple people are trying to resolve a failure,
