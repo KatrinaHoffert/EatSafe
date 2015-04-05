@@ -23,6 +23,8 @@ class SearchEngineSpecMainTest extends Specification with Mockito {
       lax must beEqualTo("this|has|spaces")
       val notLax = SearchEngine.toTsQuery("this has spaces", false)
       notLax must beEqualTo("this&has&spaces")
+      val lotsSpaces = SearchEngine.toTsQuery("this      has            spaces", false)
+      lotsSpaces must beEqualTo("this&has&spaces")
     }
     
     "escapeQuery should escape illegal values" in {
