@@ -385,10 +385,12 @@
                 color = locations[i].ratingColor.slice(1);
               }
 
+              var image = jsRoutes.controllers.Assets.at("images/" + color + ".png");
+
               var marker = new google.maps.Marker({
-                position: cords,
+                position:  cords,
                 title:     locations[i].name,
-                icon:     "http://chart.apis.google.com/chart?chst=d_map_pin_letter&chld=•|" + color,
+                icon:      image,
                 contentString: concatContentString,
                 map: map
               });
@@ -448,8 +450,8 @@
           <li>
             <a href="#">@Messages("maps.multiMap.sidebarLoading")</a>
           </li>
-        </div>
-      </ul>
+        </div
+>      </ul>
     </div>
     <div id="page-content-wrapper">
       @headingSmall(Messages("general.applicationName"))
@@ -460,7 +462,8 @@
       <button class="btn btn-default" id="moveToMe">
         @Messages("maps.multiMap.findMe")
       </button>
-      <image src="@routes.Assets.at("images/808080.png")">
+
+      
       <div id="map-canvas"></div>
     </div>
   </div>
