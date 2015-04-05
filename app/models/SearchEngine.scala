@@ -61,7 +61,9 @@ object SearchEngine {
    */
   def toTsQuery(query: String, lax: Boolean): String = {
     val wordSeparator = if(lax) "|" else "&"
-    escapeQuery(query).replace(" ", wordSeparator)
+    val excaped = escapeQuery(query)
+    val pattern = "(\\s+)"//one or more whitespace is replaced with one space
+    excaped.replaceAll(pattern, " ").replace(" ", wordSeparator)
   }
 
   /** Escapes illegal values in a query that is about to be turned into a TSVALUE. */
