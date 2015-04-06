@@ -67,26 +67,32 @@
     /** Initializes the map. */
     function initialize() {
       geocoder = new google.maps.Geocoder();
-      var myStyles =[
-        {
-          featureType: "poi",
-          elementType: "labels",
-          stylers: [
-                { visibility: "off" }
-          ]
-        }
-      ];
 
-      var myOptions = {
-          mapTypeId: google.maps.MapTypeId.ROADMAP,
-          zoom: DEFAULT_ZOOM,
-          center: latlng,
-          styles: myStyles 
+      var mapOptions = {
+        mapTypeId: google.maps.MapTypeId.ROADMAP,
+        zoom: DEFAULT_ZOOM,
+        center: latlng,
+        styles: [
+          {
+            featureType: "poi",
+            elementType: "labels",
+            stylers: [
+              { visibility: "off" }
+            ]
+          },
+          {
+            featureType: "transit",
+            elementType: "labels",
+            stylers: [
+              { visibility: "off" }
+            ]
+          }
+        ]
       };
 
       // Default center is Saskatoon
       var latlng = new google.maps.LatLng(52.1333, -106.6833);
-      map = new google.maps.Map(document.getElementById("map-canvas"),myOptions);
+      map = new google.maps.Map(document.getElementById("map-canvas"), mapOptions);
       positionOverCity();
       google.maps.event.addListenerOnce(map, 'idle', showMarkers);
 
