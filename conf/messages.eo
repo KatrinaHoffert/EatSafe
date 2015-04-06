@@ -7,20 +7,20 @@ locations.selectCity.prompt=Kie estas vi?
 locations.selectCity.noInput=Vi devas eniri io.
 locations.selectCity.badInput=Enigo estas nevalida.
 locations.selectCity.locateMeTooltip=Ĉi tiu aŭtomate kompletigus vian urbon.
-locations.selectCity.searchUnknownCity=???
-locations.selectCity.searchPlaceholder=???
-locations.selectCity.badGeolocate=???
-locations.selectCity.linkToMap=???
+locations.selectCity.searchUnknownCity=Serĉi restoracio ne en urbon/vilaĝon.
+locations.selectCity.searchPlaceholder=Serĉu
+locations.selectCity.badGeolocate=Ni ne povis trovi vian lokon.
+locations.selectCity.linkToMap=Vidi lokojn en mapo
 
 # Select location page
 locations.selectLocation.title=Elektu restoracio
 locations.selectLocation.prompt=Kie vi deziras manĝi?
 locations.selectLocation.noInput=Vi devas eniri io.
 locations.selectLocation.badInput=Enigo estas nevalida.
-locations.selectLocation.searchingIn=???
-locations.selectLocation.unknownCity=???
-locations.selectLocation.searchPlaceholder=???
-locations.selectLocation.linkToMap=???
+locations.selectLocation.searchingIn=Serĉas en {0}
+locations.selectLocation.unknownCity=Restoracio ne en urbon/vilaĝon.
+locations.selectLocation.searchPlaceholder=Serĉu
+locations.selectLocation.linkToMap=Vidi mapo de la urbon
 
 # Display locations page
 locations.view.titleStart=EatSafe
@@ -31,56 +31,58 @@ locations.view.pastInspectionsHide=[Kaŝi]
 locations.view.noRecentInspections=Tiu restoracio havas ne novaj inspektoj.
 locations.view.reinspectionPriority=Inspekton prioritato
 locations.view.previousInspectionType=Tipo de la lasta inspekto.
-locations.view.type.Follow-up=???
-locations.view.type.Special=???
-locations.view.type.Complaint=???
-locations.view.type.GeneralInspection=???
-locations.view.type.Routine=???
+locations.view.type.Follow-up=Sekvada inspekton
+locations.view.type.Special=Speciala inspekton
+locations.view.type.Complaint=Plendo
+locations.view.type.GeneralInspection=Ĝenerala inspekton
+locations.view.type.Routine=Rutina inspekton
 locations.view.rha=Regiona sano aŭtoritato
 locations.view.unknownLocation=Nekonata restoracio
-locations.view.mostRecent=???
-locations.view.ratingLabel=???
-locations.view.rating_good=???
-locations.view.rating_fair=???
-locations.view.rating_poor=???
-locations.view.rating_unknown=???
-locations.view.moreInfoViolation=???
+locations.view.mostRecent=Plej freŝaj temoj
+locations.view.ratingLabel=Taksado
+locations.view.rating_good=Bona
+locations.view.rating_fair=Neutra
+locations.view.rating_poor=Malbona
+locations.view.rating_unknown=Nekonata
+locations.view.moreInfoViolation=[Pli informo]
 
 # Display address page
-maps.displayAddress.title=Karto: {0}, {1}
+maps.displayAddress.title=Mapo: {0}, {1}
 
-# Multi-map
-maps.multiMap.title=???
-maps.multiMap.nearbyLocationsHeading=???
-maps.multiMap.nearbyLocationsToggle=???
-maps.multiMap.kmAway=???
-maps.multiMap.sidebarLoading=???
-maps.multiMap.locationNotSupported=???
-maps.multiMap.locationFailed=???
-maps.multiMap.locationInaccurate=???
-maps.multiMap.findMe=???
-maps.multiMap.moveToMeInaccurate=???
-maps.multiMap.moveToMeFailed=???
-maps.multiMap.moveToMeUnsupported=???
-maps.multiMap.infoButton=???
+# La imponega mapo de multa imponegaj
+maps.multiMap.title=Mapo de la Urbon
+maps.multiMap.nearbyLocationsHeading=Proksimaj:
+maps.multiMap.nearbyLocationsToggle=Kaŝi/Montri proksimajn restoraciojn
+maps.multiMap.kmAway=km for
+maps.multiMap.sidebarLoading=Ŝargas...
+maps.multiMap.locationNotSupported=Via foliumilo ne havas geolokigo.
+maps.multiMap.locationFailed=Geolokigo estas nehavebla.
+maps.multiMap.locationInaccurate=Geolokigo ne ekzakta.
+maps.multiMap.findMe=Move to me
+maps.multiMap.moveToMeInaccurate=Geolokigo ne ekzakta.
+maps.multiMap.moveToMeFailed=Geolokigo estas nehavebla.
+maps.multiMap.moveToMeUnsupported=Via foliumilo ne havas geolokigo.
+maps.multiMap.infoButton=Pli informo
+maps.multiMap.legend=Klarigeto
+maps.multiMap.multiLocation=Multaj-lokoj
 
 # About page (IN PROGRESS)
 about.title=Pri EatSafe Saskaĉevano
-about.headingWho=???
-about.paragraphWho=???
-about.creditsList=???
-about.headingWhat=???
-about.paragraphWhat1=???
-about.paragraphWhat2=???
-about.headingHow=???
-about.paragraphHow1=???
-about.paragraphHow2=???
-about.paragraphHow3=???
-about.paragraphHow4=???
+about.headingWho=Kiuj ni estas
+about.paragraphWho=Ni estas grupo de komputikaj studentoj ĉe la Universitato de Saskaĉevano, laborante kune por nia CMPT 371 klaso (programarinĝenierado).
+about.creditsList=Ni estas la "Off By One" grupo:
+about.headingWhat=Kio estas EatSafe Saskaĉevano?
+about.paragraphWhat1=EatSafe Saskaĉevano estis ideo sugestita de Dr. Daniel Fuller. La provinca Ministerio de Sano subtenas <a href="http://orii.health.gov.sk.ca/">publika retejo</a> (en anglon) kiu permesas la aliron al sano inspección rekordojn de lokoj en la provinco.
+about.paragraphWhat2=Tamen, la retejo ne estas poŝkomputilaj amika kaj ne ŝajnas esti estinta desegnita kun usabilidad en menso. EatSafe Saskaĉevano estas nia provo uzi la datumojn de tiu retejo kaj vidigi ĝin en amika maniero, tiel kiel aldoni novajn funkciojn por navigi la datumoj.
+about.headingHow=Kiel oni uzas EatSafe Saskaĉevano?
+about.paragraphHow1=EatSafe Saskaĉevano estas maniero trovi sanon kaj sekurecon rekordoj de restoracioj en la provinco. De la hejmpaĝo, vi devas unue diri nin kiu urbo aŭ vilaĝo vi volas rigardi. Tio lasas al ni redukti la granda aro de lokoj al kiuj estas gravaj por vi.
+about.paragraphHow2=Venonta, ni ofertas tekstenigo de kiu eblas tajpi la nomon de la situo vi serĉas (ekz, "Subway"). La retejo sugestos specifaj lokoj kun adresoj kaj similaj nomoj. Vi povas elekti la loko de tie kaj opinias ke por vidi informon pri la loko.
+about.paragraphHow3=Vi devas elekti el sugesto gutigas sube la tekstenigo. Pensu pri ĝi kiel serĉrezultoj. Se la loko vi serĉas ne aperas, tiam ni ne havas informojn pri ĝi.
+about.paragraphHow4=Ni intencis fari EatSafe Saskaĉevano kiel facile uzebla ebla, do se vi trovis ion konfuza, bonvolu kontakti nin ĉe {0} tiel ke ni povas plibonigi!
 about.headingTechnology=Teknologia kunmeto de EatSafe
 about.paragraphTechnology=La listo de teknologio ni estis uzisti en la EatSafe kodon:
-about.customLicense=???
-about.modifiedCC=???
+about.customLicense=Propra permesilo
+about.modifiedCC=Propra Krea Komunaĵo
 
 # Footer stuff
 footer.aboutLink=Informdosiero
