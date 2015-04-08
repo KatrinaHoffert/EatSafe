@@ -10,6 +10,14 @@ The application also boasts features such as the ability to plot all locations o
 markers for their current rating (as determined by re-inspection priority). The intent of the
 application is to provide easier and more user-friendly access to information than the ORII.
 
+## Screenshots
+
+![Selecting a location](http://i.imgur.com/SIhzBOJ.png)
+
+![Multi-map](http://i.imgur.com/AAOsryV.png)
+
+![Viewing a location](http://i.imgur.com/jl8Lh4F.png)
+
 ## Installing
 
 See also: [abridged setup guide](https://github.com/MikeHoffert/EatSafe/wiki/Abridged-setup-guide)
