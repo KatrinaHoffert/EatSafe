@@ -84,16 +84,6 @@ By default, the start server script will start the server on port 8080. You have
 
 This is all you need for the server to be able to successfully run.
 
-## Auxillary programs
-
-We've provided some additional programs that are meant for retrieving and parsing the data source.
-See [the wiki](https://github.com/MikeHoffert/EatSafe/wiki/Running-auxillary-programs) for more
-information on what these programs are and how to run them.
-
-Note that at the time of writing, the data source has been taken down, so the auxillary programs are
-in limbo. It is not necessary to run these programs, as the data output has been provided.
-
 ## Further resources
 
-* [Running the tests](https://github.com/MikeHoffert/EatSafe/wiki/Running-Tests-2.0)
-* [Files and folders](https://github.com/MikeHoffert/EatSafe/wiki/Files-and-folders)
+See [the wiki](https://github.com/MikeHoffert/EatSafe/wiki) for more information, including info on axuillary programs, the admin interface, and running the tests.
