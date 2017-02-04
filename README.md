@@ -1,5 +1,3 @@
-[![Build Status](https://magnum.travis-ci.com/MikeHoffert/EatSafe.svg?token=yXznwCPJBpA9S1h8k4E4&branch=master)](https://magnum.travis-ci.com/MikeHoffert/EatSafe)
-
 # EatSafe Saskatchewan
 
 EatSafe Saskatchewan is a web application for accessing health and safety records of locations in
